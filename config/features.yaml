@@ -1,0 +1,29 @@
+version: "1.0"
+feature_groups:
+  overnight_market:
+    - taifex_night_return_pct
+    - sox_return_pct
+    - nasdaq_return_pct
+    - tsmc_adr_return_pct
+    - usd_twd_return_pct
+    - us10y_delta_bps
+    - oil_return_pct
+  taiwan_structure:
+    - tsmc_weight_proxy
+    - top10_weight_concentration
+    - previous_day_breadth_ratio
+    - previous_day_otc_return_pct
+  events:
+    - macro_event_count_high_impact
+    - tsmc_event_flag
+    - major_company_event_count
+    - ex_dividend_weight_points
+  decay:
+    - catalyst_age_hours
+    - previous_day_stock_return_pct
+    - previous_day_relative_volume
+
+anti_leakage:
+  cutoff_timezone: Asia/Taipei
+  latest_allowed_feature_time: "08:50:00"
+  prohibit_same_day_post_open_fields: true
