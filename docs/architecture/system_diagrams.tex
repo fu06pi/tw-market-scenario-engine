@@ -1,0 +1,72 @@
+\documentclass[UTF8,a4paper,11pt]{ctexart}
+\usepackage[margin=1.6cm]{geometry}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,fit,shapes.geometric,backgrounds}
+\usepackage{xcolor}
+
+\definecolor{blueA}{HTML}{DCEAF7}
+\definecolor{greenA}{HTML}{DDEEDB}
+\definecolor{orangeA}{HTML}{F8E1C1}
+\definecolor{grayA}{HTML}{ECECEC}
+\definecolor{redA}{HTML}{F6D2D2}
+
+\tikzset{
+  box/.style={rectangle,rounded corners=3pt,draw=black!65,minimum width=3.1cm,minimum height=1.0cm,align=center,font=\small,fill=white},
+  data/.style={box,fill=blueA}, engine/.style={box,fill=greenA},
+  store/.style={box,fill=grayA}, eval/.style={box,fill=orangeA}, risk/.style={box,fill=redA},
+  arrow/.style={-Latex,thick,draw=black!70}, dashedarrow/.style={-Latex,thick,dashed,draw=black!60}
+}
+
+\begin{document}
+\section*{V1 Quant 系統流程圖}
+\begin{center}
+\begin{tikzpicture}[node distance=0.9cm and 1.1cm]
+\node[store] (v0) {V0 文字型研究紀錄\\Google Sheets（唯讀參考）};
+\node[data,below=of v0] (collect) {開盤前資料蒐集\\全球市場、台灣市場、事件};
+\node[engine,below=of collect] (valid) {資料驗證\\freshness / timestamp / source priority};
+\node[engine,below=of valid] (features) {量化特徵工程\\overnight / breadth / concentration / event decay};
+\node[engine,below=of features] (hypo) {雙層情境引擎\\Quant models + Narrative hypotheses\\Bull / Base / Bear};
+\node[store,below=of hypo] (snapshot) {不可修改 Prediction Snapshot\\文字劇本 + 數值目標 + 版本 + cutoff + SHA-256};
+\node[data,below left=1.1cm and 1.6cm of snapshot] (open) {實際開盤};
+\node[data,below=1.1cm of snapshot] (intraday) {實際盤中};
+\node[data,below right=1.1cm and 1.6cm of snapshot] (close) {實際盤後};
+\node[eval,below=1.5cm of intraday] (eval) {量化驗證\\方向 / 幅度 / Brier / Calibration / Baseline Lift};
+\node[eval,below=of eval] (errors) {錯誤歸因\\資料 / 推論 / 權重 / regime};
+\node[risk,below=of errors] (gate) {模型修正閘門\\禁止單日過度擬合};
+\node[store,below=of gate] (registry) {Model Registry / Research Log};
+\draw[dashedarrow] (v0)--(collect);
+\draw[arrow] (collect)--(valid); \draw[arrow] (valid)--(features); \draw[arrow] (features)--(hypo);
+\draw[arrow] (hypo)--(snapshot); \draw[arrow] (snapshot)--(open); \draw[arrow] (snapshot)--(intraday); \draw[arrow] (snapshot)--(close);
+\draw[arrow] (open)--(eval); \draw[arrow] (intraday)--(eval); \draw[arrow] (close)--(eval);
+\draw[arrow] (eval)--(errors); \draw[arrow] (errors)--(gate); \draw[arrow] (gate)--(registry);
+\draw[dashedarrow] (registry.west)-|++(-3,0)|-(features.west);
+\end{tikzpicture}
+\end{center}
+
+\newpage
+\section*{V1 Quant 系統架構圖}
+\begin{center}
+\begin{tikzpicture}[node distance=1.0cm and 1.2cm]
+\node[store] (v0) {V0 Read-only Reference\\文字假說 / 覆盤 / 規則演化};
+\node[data,below left=1.1cm and 2.4cm of v0] (twse) {TWSE / TAIFEX};
+\node[data,below=1.1cm of v0] (global) {Global Markets\\SOX / Nasdaq / ADR / FX / Yield};
+\node[data,below right=1.1cm and 2.4cm of v0] (events) {Events\\Macro / Earnings / Corporate};
+\node[engine,below=1.1cm of global] (ingest) {Ingestion + Data Quality};
+\node[store,below left=1.1cm and 1.8cm of ingest] (raw) {Raw / Clean Store};
+\node[engine,below=1.1cm of ingest] (feature) {Feature Store};
+\node[store,below right=1.1cm and 1.8cm of ingest] (version) {Version / Manifest Store};
+\node[engine,below=1.3cm of feature] (scenario) {Forecast Layer\\Rule Baseline + Statistical Model + Narrative Engine};
+\node[store,below left=1.1cm and 1.7cm of scenario] (snap) {Immutable Snapshots\\Text + Quant};
+\node[engine,below=1.1cm of scenario] (delivery) {Written Daily Scenario\\Research Report / API / UI};
+\node[eval,below right=1.1cm and 1.7cm of scenario] (validator) {Post-close Evaluator};
+\node[eval,below=1.4cm of delivery] (analytics) {Walk-forward / Calibration / Error Analysis};
+\node[risk,below=of analytics] (gov) {Governance\\V0 write boundary / data rights / compliance};
+\draw[dashedarrow] (v0)--(ingest);
+\draw[arrow] (twse)--(ingest); \draw[arrow] (global)--(ingest); \draw[arrow] (events)--(ingest);
+\draw[arrow] (ingest)--(raw); \draw[arrow] (ingest)--(feature); \draw[arrow] (ingest)--(version);
+\draw[arrow] (raw)--(scenario); \draw[arrow] (feature)--(scenario); \draw[arrow] (version)--(scenario);
+\draw[arrow] (scenario)--(snap); \draw[arrow] (scenario)--(delivery); \draw[arrow] (scenario)--(validator);
+\draw[arrow] (snap)--(validator); \draw[arrow] (validator)--(analytics); \draw[arrow] (delivery)--(analytics); \draw[arrow] (analytics)--(gov);
+\end{tikzpicture}
+\end{center}
+\end{document}
