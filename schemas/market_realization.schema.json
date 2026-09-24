@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MarketRealization",
+  "type": "object",
+  "required": ["trading_date", "previous_close", "open", "high", "low", "close"],
+  "properties": {
+    "trading_date": {"type": "string", "format": "date"},
+    "previous_close": {"type": "number", "exclusiveMinimum": 0},
+    "open": {"type": "number", "exclusiveMinimum": 0},
+    "high": {"type": "number", "exclusiveMinimum": 0},
+    "low": {"type": "number", "exclusiveMinimum": 0},
+    "close": {"type": "number", "exclusiveMinimum": 0}
+  }
+}
