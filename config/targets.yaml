@@ -1,0 +1,22 @@
+version: "1.0"
+flat_threshold_bps: 5
+scenario_thresholds:
+  bull_close_return_bps: 50
+  bear_close_return_bps: -50
+
+targets:
+  - name: open_direction
+    type: classification
+    horizon: market_open
+  - name: close_direction
+    type: classification
+    horizon: market_close
+  - name: intraday_regime
+    type: multiclass
+    labels: [trend_up, trend_down, gap_fade, range]
+  - name: breadth_direction
+    type: classification
+  - name: open_gap_bps
+    type: regression
+  - name: close_return_bps
+    type: regression
