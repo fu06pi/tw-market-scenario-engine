@@ -1,0 +1,13 @@
+{
+  "trading_date": "2026-09-24",
+  "previous_close": 48157.29,
+  "open": 48240.0,
+  "high": 48420.0,
+  "low": 48090.0,
+  "close": 48310.0,
+  "turnover": 800000000000,
+  "breadth_up": 500,
+  "breadth_down": 450,
+  "otc_return_pct": 0.15,
+  "heavyweight_contribution_points": {"TSMC": 120.0}
+}
