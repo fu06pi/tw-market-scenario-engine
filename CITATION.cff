@@ -1,0 +1,6 @@
+cff-version: 1.2.0
+title: "TW Market Scenario Engine"
+message: "If you use this research software, please cite this repository."
+type: software
+version: "1.0.0-alpha"
+date-released: 2026-09-24
