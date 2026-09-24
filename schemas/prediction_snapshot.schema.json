@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PredictionSnapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "trading_date",
+    "generated_at",
+    "data_cutoff_at",
+    "model_version",
+    "feature_version",
+    "data_manifest_hash",
+    "scenarios",
+    "targets",
+    "narrative",
+    "key_drivers",
+    "invalidation_conditions"
+  ],
+  "properties": {
+    "trading_date": {"type": "string", "format": "date"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "data_cutoff_at": {"type": "string", "format": "date-time"},
+    "model_version": {"type": "string"},
+    "feature_version": {"type": "string"},
+    "prompt_version": {"type": ["string", "null"]},
+    "data_manifest_hash": {"type": "string"},
+    "snapshot_hash": {"type": ["string", "null"]},
+    "scenarios": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["bull", "base", "bear"],
+      "properties": {
+        "bull": {"type": "number", "minimum": 0, "maximum": 1},
+        "base": {"type": "number", "minimum": 0, "maximum": 1},
+        "bear": {"type": "number", "minimum": 0, "maximum": 1}
+      }
+    },
+    "targets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["open_direction", "close_direction", "intraday_regime", "breadth_direction"],
+      "properties": {
+        "open_direction": {"enum": ["up", "down", "flat"]},
+        "close_direction": {"enum": ["up", "down", "flat"]},
+        "intraday_regime": {"enum": ["trend_up", "trend_down", "gap_fade", "range"]},
+        "breadth_direction": {"enum": ["up", "down", "flat"]},
+        "expected_open_gap_bps": {"type": ["number", "null"]},
+        "expected_close_return_bps": {"type": ["number", "null"]}
+      }
+    },
+    "narrative": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "market_view",
+        "open_hypothesis",
+        "intraday_hypothesis",
+        "close_hypothesis",
+        "breadth_hypothesis",
+        "bull_script",
+        "base_script",
+        "bear_script"
+      ],
+      "properties": {
+        "market_view": {"type": "string", "minLength": 1},
+        "open_hypothesis": {"type": "string", "minLength": 1},
+        "intraday_hypothesis": {"type": "string", "minLength": 1},
+        "close_hypothesis": {"type": "string", "minLength": 1},
+        "breadth_hypothesis": {"type": "string", "minLength": 1},
+        "bull_script": {"type": "string", "minLength": 1},
+        "base_script": {"type": "string", "minLength": 1},
+        "bear_script": {"type": "string", "minLength": 1}
+      }
+    },
+    "key_drivers": {"type": "array", "items": {"type": "string"}},
+    "invalidation_conditions": {"type": "array", "items": {"type": "string"}},
+    "v0_references": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["trading_date", "item"],
+        "properties": {
+          "trading_date": {"type": "string", "format": "date"},
+          "item": {"type": "string"},
+          "note": {"type": ["string", "null"]},
+          "source_row": {"type": ["string", "null"]},
+          "extracted_at": {"type": ["string", "null"], "format": "date-time"},
+          "content_hash": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}
