@@ -177,3 +177,17 @@ Next milestones:
 ## Important
 
 This repository is a research system, not a promise of investment returns. Commercialization, advertising, and paid distribution require a separate legal/compliance review in Taiwan.
+
+
+## V0 operational continuity
+
+V0 is not an archived prototype. It remains a **live operating system** and continues to run through the existing ChatGPT scheduled tasks.
+
+The V0 operating loop includes:
+
+- the scheduled **財經事件晨報**, which creates the text-first pre-open hypotheses and writes them to the existing Google Sheet;
+- the scheduled **台股收盤預測檢討**, which reads the morning hypotheses, compares them with actual open / intraday / close outcomes, and writes the review and reusable model lessons back to the existing Google Sheet.
+
+V1 must not pause, replace, reschedule, redirect, or otherwise interfere with those V0 automations unless an explicit migration is separately approved.
+
+V1 may consume V0 outputs in read-only mode for reference, research comparison, and frozen provenance-preserving exports.
