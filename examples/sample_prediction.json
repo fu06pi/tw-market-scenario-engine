@@ -1,0 +1,38 @@
+{
+  "trading_date": "2026-09-24",
+  "generated_at": "2026-09-24T08:55:00+08:00",
+  "data_cutoff_at": "2026-09-24T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1",
+  "data_manifest_hash": "example-only-not-real-data",
+  "scenarios": {"bull": 0.3, "base": 0.5, "bear": 0.2},
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": 18.0,
+    "expected_close_return_bps": 35.0
+  },
+  "narrative": {
+    "market_view": "Example only: overnight impulse is positive, but the move may remain heavyweight-led rather than broad-based.",
+    "open_hypothesis": "The index is more likely to open above the previous close because the overnight Taiwan-futures and semiconductor signals are positive.",
+    "intraday_hypothesis": "After the opening gap, the market is expected to rotate into a range unless heavyweight participation and breadth expand together.",
+    "close_hypothesis": "The base case is a modest positive close, with lower confidence than the open-direction forecast.",
+    "breadth_hypothesis": "Breadth is expected to be mixed; a strong index print does not necessarily imply broad risk-on participation.",
+    "bull_script": "Heavyweights hold above the opening range and breadth improves, allowing the index to trend higher into the close.",
+    "base_script": "The market opens firm, then consolidates with mixed breadth and closes moderately higher.",
+    "bear_script": "The opening gap fails, heavyweights lose support, breadth deteriorates, and the index fades toward or below the prior close."
+  },
+  "key_drivers": ["TAIFEX night session", "SOX", "TSMC ADR"],
+  "invalidation_conditions": ["heavyweight weakness after open", "breadth deterioration"],
+  "v0_references": [
+    {
+      "trading_date": "2026-09-23",
+      "item": "index vs breadth distinction",
+      "note": "Example of a prior V0 model lesson referenced read-only; no V0 data was modified."
+    }
+  ],
+  "snapshot_hash": null
+}
