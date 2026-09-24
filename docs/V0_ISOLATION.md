@@ -90,3 +90,28 @@ Each V1 prediction snapshot includes written hypotheses for:
 - drivers and invalidation conditions.
 
 The numerical fields exist to make those hypotheses testable — not to replace them.
+
+
+## V0 scheduled tasks are part of the system
+
+The existing ChatGPT scheduled tasks are part of V0's production workflow and must remain enabled and operational:
+
+1. **財經事件晨報** — generates the text-first pre-open market hypotheses and writes the morning snapshot to the V0 Google Sheet.
+2. **台股收盤預測檢討** — reads that morning snapshot after the market closes, validates it against actual open / intraday / close outcomes, and writes the post-close review and reusable lessons back to V0.
+
+V1 is forbidden from changing the schedule, prompt, enabled state, destination Sheet, or write behavior of these V0 tasks unless the user separately and explicitly authorizes a migration.
+
+Operationally:
+
+```text
+V0 ChatGPT scheduled tasks
+        |
+        v
+V0 Google Sheet
+        |
+        +---- continues operating independently
+        |
+        +---- read-only reference / frozen export ----> V1 Quant
+```
+
+This means V0 is both a historical reference corpus **and** an ongoing live data-generation process.
