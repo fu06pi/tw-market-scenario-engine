@@ -1,0 +1,29 @@
+{
+  "trading_date": "2026-09-30",
+  "generated_at": "2026-09-30T08:54:00+08:00",
+  "data_cutoff_at": "2026-09-30T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "v1-live-2026-09-30",
+  "data_manifest_hash": "a6880a63a9dc00f2591e32a07e572cb8df5c25c41462cf0d5efcef7030e4264f",
+  "snapshot_hash": "416cdf091aaa8766e7302b5fa0e972128b7fbff1b946d07d58204633935251d8",
+  "scenarios": {"bull": 0.45, "base": 0.40, "bear": 0.15},
+  "targets": {"open_direction": "up", "close_direction": "up", "intraday_regime": "gap_fade", "breadth_direction": "up", "expected_open_gap_bps": 120.0, "expected_close_return_bps": 75.0},
+  "narrative": {
+    "market_view": "隔夜訊號呈現「台灣科技鏈顯著強於美股大盤」：台指期夜盤、電子期、半導體期與台積電期貨同步走強，費半亦逆勢上漲；因此開盤偏多先驗很強，但美債長端殖利率處於多年高位、Nasdaq與S&P 500收黑，限制追價與全天單邊趨勢延續。",
+    "open_hypothesis": "預期加權指數明顯開高，主要由台積電與半導體權值帶動；估計開盤相對9/29現貨收盤約+120bp。夜盤強勢主要提高開高機率，不直接等同收盤同幅上漲。",
+    "intraday_hypothesis": "主情境為開高後部分回吐、再觀察承接的gap-fade型態；若09:15–09:30仍守住開盤區/VWAP且廣度同步轉強，才升級為trend-up。",
+    "close_hypothesis": "收盤仍偏向高於前一日收盤，但漲幅小於開盤gap，估計約+75bp；高殖利率與美股大盤偏弱使午後追價延續性存在折價。",
+    "breadth_hypothesis": "預期上漲家數改善，但強度可能仍集中在半導體/大型電子；廣度方向判為up，不把權值指數上漲直接視為全面risk-on。",
+    "bull_script": "若台積電與電子權值開高後不回補大部分gap、現貨守VWAP且上漲家數擴散，則夜盤強勢被現貨確認，盤勢由gap-fade轉為trend-up，收盤漲幅可接近或超過開盤gap。",
+    "base_script": "開盤受夜盤與費半帶動明顯跳高，早盤出現獲利了結而回吐部分gap；大型半導體維持相對強勢，使指數終場仍收紅，但漲幅低於開盤。",
+    "bear_script": "若高殖利率壓力重新主導、台積電開高走低且09:15–09:30跌破開盤區/VWAP，同時廣度未跟上，則夜盤訊號視為過度反應，可能演變為大幅gap-fade甚至翻黑。"
+  },
+  "key_drivers": ["台指期夜盤收48,479，上漲698點（+1.46%），為最強的本地開盤方向訊號。", "費城半導體指數9/29上漲1.32%，相對Nasdaq -0.09%明顯強勢，支持台灣半導體鏈。", "台積電期貨盤後收2,520、上漲29點；電子期與半導體30期同步走強。", "美股大盤偏弱且美國10年期殖利率升至約5.29%，對高估值科技股與全天趨勢延續形成逆風。", "9/29台股收47,631.96、跌0.82%，因此今日夜盤大漲同時具有前一日風險釋放後反彈/價格修復成分。"],
+  "invalidation_conditions": ["09:15–09:30台積電與主要電子權值跌破開盤區且無法收復VWAP。", "台股開高但市場廣度轉負，形成權值拉指數、個股普跌的明顯背離。", "現貨快速回補大部分預估gap並跌破9/29收盤47,631.96。", "08:50後出現新的重大地緣政治、利率或公司事件；依反洩漏規則不得回寫本snapshot，只能列入事後誤差歸因。"],
+  "v0_references": [
+    {"trading_date":"2026-09-22","item":"隔夜科技強勢→台股突破力道","note":"隔夜強勢主要提高開高機率，不直接推論全天趨勢延續；現貨09:15–09:30確認。","source_row":"模型修正紀錄 row 2","extracted_at":"2026-09-30T08:53:00+08:00","content_hash":null},
+    {"trading_date":"2026-09-23","item":"TAIEX方向與市場廣度需分離","note":"指數方向與廣度分開預測，避免大型權值造成錯判。","source_row":"模型修正紀錄 row 4","extracted_at":"2026-09-30T08:53:00+08:00","content_hash":null},
+    {"trading_date":"2026-09-29","item":"事件權重應由Surprise而非事件本身決定","note":"事件先做時間對齊，再以surprise決定方向與波動權重。","source_row":"模型修正紀錄 row 11","extracted_at":"2026-09-30T08:53:00+08:00","content_hash":null}
+  ]
+}
