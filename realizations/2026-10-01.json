@@ -1,0 +1,33 @@
+{
+  "trading_date": "2026-10-01",
+  "previous_close": 47940.13,
+  "open": 47961.98,
+  "high": 48353.49,
+  "low": 47893.42,
+  "close": 48353.49,
+  "turnover": 869874080962,
+  "turnover_scope": "TWSE total securities including odd-lot/block/after-hours statistics; not regular-session-only turnover",
+  "breadth_up": 422,
+  "breadth_down": 551,
+  "breadth_flat": 107,
+  "source_manifest": [
+    {
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261001",
+      "sha256": "8627dcea29b6c3c85715ed8a140d5ba3e7cb8b565f39581069afb246c751b831",
+      "retrieved_at": "2026-10-01T15:23:30.438606+08:00"
+    },
+    {
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261001&type=ALLBUT0999",
+      "sha256": "a94fb62140963cbc88c090ca99a74251e863dc5808df1499e3536935a7f86473",
+      "retrieved_at": "2026-10-01T15:23:38.620800+08:00"
+    }
+  ],
+  "retrieved_at": "2026-10-01T15:25:03.339120+08:00",
+  "sector_returns_pct": {
+    "electronics": 1.24,
+    "semiconductor": 1.15,
+    "financial": -0.84,
+    "ex_financial_electronics": -0.68,
+    "midcap100": 0.17
+  }
+}
