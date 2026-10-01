@@ -1,0 +1,177 @@
+{
+  "trading_date": "2026-10-01",
+  "evaluation_version": "v1-postclose-2",
+  "evaluated_at": "2026-10-01T15:25:03.339120+08:00",
+  "status": "provisional_integrity_failed",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-01.json",
+    "git_blob_sha": "1478afafc1e5cedc999c9e25c6ec72c8d92a0e35",
+    "snapshot_hash": "575d5db9bbc60daa3a26a01cfd6d017e1d6a2602aef662d1ec1b6acee9174dea",
+    "computed_snapshot_hash": "5515a5afa65972f6ed097dba480688e433762505c01a74e5f40dffde3ff70362",
+    "data_manifest_hash": "c1f604cf7027eb0eee60e08f2217fde5ad44d9bbc5bc506bc8de81e78fd0fbf9",
+    "generated_at": "2026-10-01T08:55:43+08:00",
+    "data_cutoff_at": "2026-10-01T08:50:00+08:00",
+    "integrity_verified": false,
+    "immutable_snapshot_mutated": false,
+    "verification_method": "Repository PredictionSnapshot model_dump(mode=json), remove snapshot_hash, json.dumps ensure_ascii=False sort_keys=True separators=(comma,colon), SHA256",
+    "integrity_note": "Stored hash differs from canonical hash. This does not prove post-open mutation; preserve original and investigate creation/provenance. Scores are provisional."
+  },
+  "realization": {
+    "path": "realizations/2026-10-01.json",
+    "trading_date": "2026-10-01",
+    "previous_close": 47940.13,
+    "open": 47961.98,
+    "high": 48353.49,
+    "low": 47893.42,
+    "close": 48353.49,
+    "turnover": 869874080962,
+    "turnover_scope": "TWSE total securities including odd-lot/block/after-hours statistics; not regular-session-only turnover",
+    "breadth_up": 422,
+    "breadth_down": 551,
+    "breadth_flat": 107,
+    "source_manifest": [
+      {
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261001",
+        "sha256": "8627dcea29b6c3c85715ed8a140d5ba3e7cb8b565f39581069afb246c751b831",
+        "retrieved_at": "2026-10-01T15:23:30.438606+08:00"
+      },
+      {
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261001&type=ALLBUT0999",
+        "sha256": "a94fb62140963cbc88c090ca99a74251e863dc5808df1499e3536935a7f86473",
+        "retrieved_at": "2026-10-01T15:23:38.620800+08:00"
+      }
+    ],
+    "retrieved_at": "2026-10-01T15:25:03.339120+08:00",
+    "sector_returns_pct": {
+      "electronics": 1.24,
+      "semiconductor": 1.15,
+      "financial": -0.84,
+      "ex_financial_electronics": -0.68,
+      "midcap100": 0.17
+    }
+  },
+  "quantitative_evaluation": {
+    "open_direction_realized": "flat",
+    "open_direction_hit": 0,
+    "close_direction_realized": "up",
+    "close_direction_hit": 1,
+    "breadth_direction_realized": "down",
+    "breadth_direction_hit": 0,
+    "breadth_definition": "sign of listed-stock advancing minus declining counts",
+    "expected_open_gap_bps": 55.0,
+    "open_gap_bps_realized": 4.557768199628942,
+    "open_gap_mae_bps": 50.44223180037106,
+    "expected_close_return_bps": 45.0,
+    "close_return_bps_realized": 86.22421340951814,
+    "close_return_mae_bps": 41.22421340951814,
+    "mfe_bps": 86.22421340951814,
+    "mae_bps": -9.743402865198814,
+    "scenario_outcome": "bull",
+    "scenario_probabilities": {
+      "bull": 0.3,
+      "base": 0.5,
+      "bear": 0.2
+    },
+    "top_scenario_hit": false,
+    "brier_score": 0.25999999999999995,
+    "regime_hit": null,
+    "intraday_regime_realized": null,
+    "regime_note": "Daily OHLC shows close at the high after a dip below prior close. Time-resolved path unavailable; do not infer a full-day regime from OHLC alone.",
+    "calibration_error": null,
+    "baseline_lift": null,
+    "aggregate_metric_eligibility": false,
+    "limitations": "Integrity mismatch blocks admission to trusted benchmark; no frozen baseline and insufficient sample for calibration."
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "Positive close occurred, but index strength did not extend to positive stock breadth."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Opened 21.85 points above prior close, only 4.56bp: economically flat under configured 5bp threshold, versus expected +55bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "partially_evaluable",
+      "note": "Low crossed below prior close and close equaled high above 48000. Range/resistance narrative did not describe terminal strength; exact path and VWAP unavailable."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Close up 86.22bp versus expected +45bp. Non-electronics breadth proxy fell, so the conditional driver explanation remains incomplete."
+    },
+    "breadth_hypothesis": {
+      "grade": "incorrect",
+      "note": "422 advancers versus 551 decliners; ex-financial/electronics fell 0.68%."
+    },
+    "bull_script": {
+      "grade": "partially_correct",
+      "note": "Bull numeric threshold realized; electronics/semiconductors positive and close above 48000. Broad participation/VWAP conditions not established."
+    },
+    "base_script": {
+      "grade": "partially_correct",
+      "note": "Small positive raw gap occurred, but closing magnitude exceeded base threshold and breadth was negative."
+    },
+    "bear_script": {
+      "grade": "not_realized",
+      "note": "Close stayed above prior close; negative breadth alone did not realize bear outcome."
+    },
+    "key_drivers": {
+      "grade": "partially_evaluable",
+      "note": "Official cross-section supports electronic leadership and financial/non-electronic drag. Micron causal impact, overnight observations and US yield claims were not independently verified in this run."
+    },
+    "invalidation_conditions": {
+      "grade": "partially_evaluable",
+      "note": "Gap stayed within stated limits; 48000 held at close, but expanding breadth condition failed. 09:15-09:30 VWAP/sector breadth and memory response require intraday data."
+    }
+  },
+  "error_labels": [
+    "snapshot_integrity_mismatch",
+    "magnitude_overestimate",
+    "magnitude_underestimate",
+    "breadth_misclassification",
+    "weight_misspecification"
+  ],
+  "actual_driver_attribution": [
+    "Official sector returns indicate electronics/semiconductors led the positive index while financials and non-electronics detracted; causal catalyst attribution not proven."
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Enforce canonical snapshot hash verification before committing morning snapshot; preserve failed originals and record separate provenance audit.",
+      "status": "data_quality_fix_required"
+    },
+    {
+      "proposal": "Separate raw open sign from configured 5bp direction class and calibrate gap magnitude.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Model listed-stock breadth separately from electronic heavyweight returns; require current breadth confirmation rather than carry yesterday breadth forward.",
+      "status": "monitor_only"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_trading_rule_change",
+    "reason": "Single-day evidence and failed integrity gate; investigate pipeline before model tuning."
+  },
+  "source_manifest": [
+    {
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261001",
+      "sha256": "8627dcea29b6c3c85715ed8a140d5ba3e7cb8b565f39581069afb246c751b831",
+      "retrieved_at": "2026-10-01T15:23:30.438606+08:00"
+    },
+    {
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261001&type=ALLBUT0999",
+      "sha256": "a94fb62140963cbc88c090ca99a74251e863dc5808df1499e3536935a7f86473",
+      "retrieved_at": "2026-10-01T15:23:38.620800+08:00"
+    }
+  ],
+  "missing_data": [
+    "time-resolved intraday path",
+    "09:15-09:30 VWAP and breadth",
+    "frozen same-day baseline",
+    "independently validated overnight source manifest"
+  ],
+  "v0_modified": false
+}
