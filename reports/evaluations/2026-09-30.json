@@ -1,0 +1,165 @@
+{
+  "trading_date": "2026-09-30",
+  "evaluation_version": "v1-postclose-1",
+  "evaluated_at": "2026-10-01T08:58:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "v1-live-2026-09-30",
+  "prediction_snapshot": {
+    "path": "predictions/2026-09-30.json",
+    "git_blob_sha": "bcd4bfae703d178514418b4d8cb7be06912c370a",
+    "snapshot_hash": "416cdf091aaa8766e7302b5fa0e972128b7fbff1b946d07d58204633935251d8",
+    "data_manifest_hash": "a6880a63a9dc00f2591e32a07e572cb8df5c25c41462cf0d5efcef7030e4264f",
+    "generated_at": "2026-09-30T08:54:00+08:00",
+    "data_cutoff_at": "2026-09-30T08:50:00+08:00",
+    "integrity_verified": true,
+    "immutable_snapshot_mutated": false
+  },
+  "realization": {
+    "path": "realizations/2026-09-30.json",
+    "previous_close": 47631.96,
+    "open": 47767.49,
+    "high": 48379.71,
+    "low": 47767.49,
+    "close": 47940.13,
+    "change_points": 308.17,
+    "change_pct": 0.65,
+    "turnover_twd": 875672000000,
+    "breadth_up": 828,
+    "breadth_down": 187,
+    "breadth_up_ratio": 0.8157635468,
+    "realized_open_direction": "up",
+    "realized_close_direction": "up",
+    "realized_intraday_regime": "trend_up",
+    "realized_breadth_direction": "up",
+    "realized_scenario": "bull"
+  },
+  "quantitative_evaluation": {
+    "open_direction_hit": 1,
+    "close_direction_hit": 1,
+    "regime_hit": 0,
+    "breadth_direction_hit": 1,
+    "expected_open_gap_bps": 120,
+    "open_gap_bps_realized": 28.453584526,
+    "open_gap_mae_bps": 91.546415474,
+    "expected_close_return_bps": 75,
+    "close_return_bps_realized": 64.6981564479,
+    "close_return_mae_bps": 10.3018435521,
+    "mfe_bps": 156.9849319658,
+    "mae_bps": 28.453584526,
+    "open_to_high_bps": 128.1666673296,
+    "open_to_close_bps": 36.1417357286,
+    "high_to_close_bps": -90.8604040826,
+    "scenario_probabilities": {
+      "bull": 0.45,
+      "base": 0.4,
+      "bear": 0.15
+    },
+    "scenario_outcome": "bull",
+    "top_scenario_hit": true,
+    "brier_score": 0.1616666667,
+    "calibration_error": null,
+    "calibration_error_note": "Not meaningful from a single trading day; compute over a multi-day sample.",
+    "baseline_lift": null,
+    "baseline_lift_note": "No frozen same-day baseline predictions are persisted for 2026-09-30, so baseline lift is not reported."
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "The bullish Taiwan-relative-strength premise was directionally correct, but realized strength broadened beyond semiconductor/large electronics. Mid/small-cap and non-electronics participation was materially stronger than the morning narrative implied."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Open direction was correct, but the +120bp expected gap materially overshot the realized +28.45bp gap. The morning model over-translated strong night-session signals into cash-open magnitude."
+    },
+    "intraday_hypothesis": {
+      "grade": "incorrect",
+      "note": "The main forecast was gap_fade. The index instead opened at the day's low, advanced strongly to +156.98bp versus the previous close, and only faded later from the intraday high. Forced to the repository's regime labels, trend_up fits better than gap_fade."
+    },
+    "close_hypothesis": {
+      "grade": "correct",
+      "note": "The close direction was correct and the +75bp magnitude estimate was close to the realized +64.70bp. The prediction that gains would be smaller than the strongest intraday move was also consistent with the late pullback."
+    },
+    "breadth_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Breadth direction was correctly forecast up, but the concentration assumption was too narrow: listed stocks finished 828 up versus 187 down, while several non-electronics and smaller-cap segments outperformed."
+    },
+    "bull_script": {
+      "grade": "closest_realized_script",
+      "note": "Broad participation and a close return exceeding the actual opening gap aligned more closely with the bull script than the base gap-fade script, although the day ended with a substantial late fade from the high."
+    },
+    "base_script": {
+      "grade": "not_realized",
+      "note": "The predicted early profit-taking/gap fade did not occur; the opening print was the day's low."
+    },
+    "bear_script": {
+      "grade": "not_realized",
+      "note": "The market did not lose the prior close and breadth did not turn negative."
+    }
+  },
+  "error_labels": [
+    "magnitude_overestimate",
+    "regime_misclassification",
+    "weight_misspecification"
+  ],
+  "error_attribution": [
+    {
+      "label": "magnitude_overestimate",
+      "target": "open_gap_bps",
+      "detail": "Night-session strength was useful for sign but was mapped too aggressively into cash-open magnitude."
+    },
+    {
+      "label": "regime_misclassification",
+      "target": "intraday_regime",
+      "detail": "The model expected an early gap fade, but the market opened at its low and trended higher before a late-session pullback."
+    },
+    {
+      "label": "weight_misspecification",
+      "target": "breadth_and_drivers",
+      "detail": "The model placed too much narrative weight on semiconductor/large-electronics leadership; realized gains were broader across mid/small caps and non-electronics groups."
+    }
+  ],
+  "actual_driver_attribution": [
+    "Post-close reporting attributed early strength to semiconductor/AI-related sentiment and a rebound in Taiwan equities despite elevated U.S. yields.",
+    "TWSE sector and breadth data show the rally was broad rather than narrowly semiconductor-led: 828 listed stocks rose versus 187 fell; non-financial/non-electronics, mid-cap and several cyclical groups outperformed.",
+    "Late selling in selected AI hardware names and a narrowing of TSMC's gain pulled the index materially off its intraday high, consistent with the +90.86bp high-to-close fade."
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Separate open-direction conviction from cash-open magnitude calibration.",
+      "implementation_idea": "Estimate expected_open_gap_bps from a rolling mapping of TAIFEX night-session return, basis, prior-day return, ADR/SOX inputs and recent overnight-to-cash compression rather than scaling directly from night-session strength.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Add a two-stage intraday regime classifier.",
+      "implementation_idea": "First classify 09:00-09:30 acceptance versus fade using open/VWAP/breadth, then classify the full-day regime. This avoids treating late-session profit-taking as an early gap-fade forecast success.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Measure leadership concentration explicitly.",
+      "implementation_idea": "Persist large-cap contribution, equal-weight or breadth proxies, mid/small-cap relative return and non-electronics participation so 'index up' can be separated from 'semiconductor-led' and 'broad risk-on'.",
+      "status": "monitor_only"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_rule_change",
+    "reason": "The repository methodology explicitly forbids changing a rule because of one bad day. Keep these as proposed changes until the error pattern repeats or walk-forward evidence supports them."
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE MI_INDEX 2026-09-30",
+      "role": "official close, change, breadth, sector and turnover statistics",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=html&date=20260930&type=ALLBUT0999"
+    },
+    {
+      "name": "TWSE TAIEX historical OHLC",
+      "role": "official TAIEX open/high/low/close verification",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=html&date=20260930"
+    },
+    {
+      "name": "Central News Agency post-close report",
+      "role": "post-close narrative attribution and conventional market turnover cross-check",
+      "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E8%82%A1%E5%B0%BE%E7%9B%A4%E6%BC%B2%E5%8B%A2%E6%94%B6%E6%96%82%E7%B5%82%E5%A0%B4%E4%B8%8A%E6%BC%B2308%E9%BB%9E-48000%E9%BB%9E%E5%BE%97%E8%80%8C%E5%BE%A9%E5%A4%B1-055151673.html"
+    }
+  ]
+}
