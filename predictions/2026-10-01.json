@@ -1,0 +1,42 @@
+{
+  "trading_date": "2026-10-01",
+  "generated_at": "2026-10-01T08:55:43+08:00",
+  "data_cutoff_at": "2026-10-01T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "data_manifest_hash": "c1f604cf7027eb0eee60e08f2217fde5ad44d9bbc5bc506bc8de81e78fd0fbf9",
+  "snapshot_hash": "575d5db9bbc60daa3a26a01cfd6d017e1d6a2602aef662d1ec1b6acee9174dea",
+  "scenarios": {"bull": 0.30, "base": 0.50, "bear": 0.20},
+  "targets": {"open_direction": "up", "close_direction": "up", "intraday_regime": "range", "breadth_direction": "up", "expected_open_gap_bps": 55.0, "expected_close_return_bps": 45.0},
+  "narrative": {
+    "market_view": "Neutral-to-mild bullish. Overnight Taiwan futures were nearly flat despite mixed U.S. equities, while Nasdaq held positive and Micron delivered a strong earnings/guide signal for AI-memory demand. High long-end U.S. yields cap valuation expansion, so the preferred view is a modest positive open and range-to-firm session rather than a trend chase.",
+    "open_hypothesis": "Expect a modest positive opening, centered near +55 bps versus the prior TAIEX close. The local futures basis is only mildly constructive, so do not extrapolate the prior day's strong move into another large gap.",
+    "intraday_hypothesis": "Base case is range trading with positive semiconductor/memory rotation but repeated resistance near the 48,000 area. A sustained move requires heavyweight participation and breadth confirmation after 09:15-09:30.",
+    "close_hypothesis": "Close modestly above the prior close, around +45 bps, if TSMC/electronics hold VWAP and non-electronic breadth does not reverse. High U.S. yields remain the main drag on a stronger trend-up close.",
+    "breadth_hypothesis": "Breadth is expected mildly positive rather than purely heavyweight-led. The 9/30 V0 review showed broad non-electronic participation, so breadth prior is not mechanically reduced by high Treasury yields.",
+    "bull_script": "Micron's earnings beat and strong outlook ignite memory/AI hardware, TSMC and electronics hold above opening range/VWAP, 48,000 is accepted, and non-electronics remain constructive. Session transitions from range to trend-up.",
+    "base_script": "Small positive gap, early test of 48,000, then two-way trade. Semiconductor/memory strength offsets high-yield valuation pressure; index closes modestly green with positive but not extreme breadth.",
+    "bear_script": "48,000 rejects quickly, TSMC/electronics lose VWAP, and rising long-end yield concerns dominate the Micron catalyst. Breadth rolls negative and the market fades the opening, closing below the prior close."
+  },
+  "key_drivers": [
+    "TAIFEX night session closed 48,298, down 32 points (-0.07%), implying no large positive gap despite prior cash-market strength.",
+    "TSMC ADR slipped about 0.2%, limiting direct heavyweight gap support.",
+    "Nasdaq rose 0.24% while SOX was approximately flat; U.S. tech was more resilient than the broad market.",
+    "Micron beat fiscal Q4 expectations and guided above consensus, a positive catalyst for Taiwan memory/AI hardware chains.",
+    "U.S. 10-year Treasury yield near 5.29% remains a valuation headwind.",
+    "48,000 is the key nearby acceptance/rejection level after TAIEX closed 47,940.13."
+  ],
+  "invalidation_conditions": [
+    "Opening gap materially exceeds +120 bps or opens negative beyond -50 bps, invalidating the expected modest-gap prior.",
+    "By 09:15-09:30, heavyweight electronics and TSMC are below VWAP/opening range with negative breadth: invalidate bullish close prior.",
+    "TAIEX accepts above 48,000 with expanding breadth and electronics leadership: upgrade range regime toward trend_up.",
+    "Memory/AI hardware fails to respond positively to Micron earnings and sector breadth turns negative: reduce bull scenario."
+  ],
+  "v0_references": [
+    {"trading_date":"2026-09-22","item":"隔夜科技強勢主要提高開高機率，不能直接推論全天趨勢延續。","note":"Separate open signal from close signal.","source_row":"模型修正紀錄","extracted_at":"2026-10-01T08:55:43+08:00","content_hash":null},
+    {"trading_date":"2026-09-23","item":"TAIEX方向與市場廣度需分離。","note":"Breadth modeled separately from index direction.","source_row":"模型修正紀錄","extracted_at":"2026-10-01T08:55:43+08:00","content_hash":null},
+    {"trading_date":"2026-09-30","item":"市場廣度需納入非電子產業擴散因子。","note":"Do not use high yields alone to force weak breadth.","source_row":"模型修正紀錄","extracted_at":"2026-10-01T08:55:43+08:00","content_hash":null},
+    {"trading_date":"2026-09-30","item":"Gap幅度需加入台指期夜盤基差確認。","note":"Night futures calibrate gap magnitude, not close direction.","source_row":"模型修正紀錄","extracted_at":"2026-10-01T08:55:43+08:00","content_hash":null}
+  ]
+}
