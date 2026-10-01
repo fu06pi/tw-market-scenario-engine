@@ -1,0 +1,30 @@
+{
+  "trading_date": "2026-09-30",
+  "previous_close": 47631.96,
+  "open": 47767.49,
+  "high": 48379.71,
+  "low": 47767.49,
+  "close": 47940.13,
+  "turnover": 875672000000,
+  "breadth_up": 828,
+  "breadth_down": 187,
+  "otc_return_pct": 1.17,
+  "heavyweight_contribution_points": {},
+  "source_metadata": {
+    "source_priority": "official_exchange_first",
+    "notes": [
+      "TAIEX OHLC and listed-market breadth verified against TWSE 2026-09-30 reports.",
+      "Conventional reported market turnover is NT$875.672bn; TWSE report contains multiple broader aggregation definitions, so this field uses the commonly reported cash-market turnover figure."
+    ],
+    "sources": [
+      {
+        "name": "TWSE MI_INDEX 2026-09-30",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=html&date=20260930&type=ALLBUT0999"
+      },
+      {
+        "name": "TWSE TAIEX historical OHLC",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=html&date=20260930"
+      }
+    ]
+  }
+}
