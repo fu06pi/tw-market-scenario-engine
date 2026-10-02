@@ -1,0 +1,90 @@
+{
+  "trading_date": "2026-10-02",
+  "generated_at": "2026-10-02T08:54:50.891432+08:00",
+  "data_cutoff_at": "2026-10-02T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "data_manifest_hash": "0cba08205e1f3579f19a6aa7bc180e2b9e48abe94fa4c047807b25b66df87fd2",
+  "snapshot_hash": "cbf5b064a213c7d011eb90be9b1bace36d93b4484be98f0e585a30d4fda1f044",
+  "scenarios": {
+    "bull": 0.25,
+    "base": 0.5,
+    "bear": 0.25
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "flat",
+    "intraday_regime": "range",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": 25.0,
+    "expected_close_return_bps": 5.0
+  },
+  "narrative": {
+    "market_view": "中性略偏多開盤，但收盤方向信心很低。美國半導體外部訊號正向，然而本地夜盤、前一交易日偏弱的市場廣度、高油價與高殖利率共同限制追價。",
+    "open_hypothesis": "預期約 +25 bps 小幅開高，不視為強勢大幅跳空結構；SOX 與台積電 ADR 偏多，但台指期夜盤沒有提供同等強度的本地確認。",
+    "intraday_hypothesis": "歷史高檔附近以雙向震盪為主；電子權值可能撐住指數，但在市場廣度未確認前不升級為 trend_up。",
+    "close_hypothesis": "中心預估約 +5 bps，接近平盤。若台積電與大型電子守住 opening range / VWAP 且 breadth 同步改善，才有理由升級收盤偏多情境。",
+    "breadth_hypothesis": "市場廣度預測偏弱，大型權值可能再次明顯強於一般個股；前一交易日 TAIEX 創高但上漲 428 家、下跌 560 家，顯示指數強不等於全面 risk-on。",
+    "bull_script": "SOX 與台積電 ADR 的強勢完整傳導到現貨；台積電與電子權值守住 VWAP／開盤區，OTC、電子中小型與非電子同步擴散。若如此，range 轉為 trend_up，breadth 也應由 down 改善。",
+    "base_script": "小幅開高後進入高檔震盪。半導體支撐指數，但市場廣度仍偏弱，高油價與高殖利率限制估值擴張，終場接近平盤至小紅。",
+    "bear_script": "開高快速失敗，台積電與大型電子跌破 opening range，加上前一交易日弱 breadth 延續；指數回落至前一交易日收盤以下。"
+  },
+  "key_drivers": [
+    "台積電 ADR 約 +0.85%，SOX 約 +1.5%，但 Nasdaq 僅約 +0.04%，顯示半導體強於大盤。",
+    "台指期夜盤收 48,475，較開盤參考價下跌 223 點，本地夜盤未完全確認美國半導體強勢。",
+    "前一交易日 TAIEX 收 48,353.49，但上市股票僅 428 家上漲、560 家下跌，屬指數強、廣度弱。",
+    "美國 10 年債殖利率盤中曾約 5.342%，之後回落至約 5.23%–5.26%，高殖利率仍是估值壓力。",
+    "Brent 約 102.31 美元、WTI 約 92.87 美元，高油價提高宏觀壓力。",
+    "美元兌台幣約 31.9，台幣略偏弱。",
+    "美國 9 月 Employment Situation 排定於 08:30 ET 公布，發生在台股收盤後，因此列為下一交易日 gap risk，而非今日盤中催化。"
+  ],
+  "invalidation_conditions": [
+    "09:15–09:30 台積電與大型電子守住 opening range / VWAP，且 breadth 顯著轉強，則 range/down-breadth 假說失效並升級為 trend_up。",
+    "開高後權值快速跌破 opening range / VWAP 且 breadth 續弱，則小幅偏多開盤後的 base case 轉為 bear / opening fade。",
+    "若實際開盤 gap 明顯大於預期（例如 > +80 bps）或直接轉為明顯負 gap，則 expected_open_gap_bps 的幅度假說失效。",
+    "不得以 09:00 後資訊修改本 snapshot；盤中資料只能用於收盤後 evaluation。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-09-22",
+      "item": "隔夜科技強勢主要提高開高機率，不能直接推論全天趨勢延續。",
+      "note": "Separate open signal from close signal.",
+      "source_row": "模型修正紀錄",
+      "extracted_at": "2026-10-02T08:54:50.891432+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-09-23",
+      "item": "TAIEX方向與市場廣度需分離。",
+      "note": "Breadth modeled separately from index direction.",
+      "source_row": "模型修正紀錄",
+      "extracted_at": "2026-10-02T08:54:50.891432+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-09-30",
+      "item": "Gap幅度需加入台指期夜盤基差確認。",
+      "note": "Night futures calibrate gap magnitude, not close direction.",
+      "source_row": "模型修正紀錄",
+      "extracted_at": "2026-10-02T08:54:50.891432+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-01",
+      "item": "事件 Surprise 必須有 Price Response 確認。",
+      "note": "Do not promote an event surprise into a dominant driver without price confirmation.",
+      "source_row": "模型修正紀錄",
+      "extracted_at": "2026-10-02T08:54:50.891432+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-01",
+      "item": "Breadth 拆成大型權值、電子中小型、非電子三層。",
+      "note": "Distinguish heavyweight index support from broad participation.",
+      "source_row": "模型修正紀錄",
+      "extracted_at": "2026-10-02T08:54:50.891432+08:00",
+      "content_hash": null
+    }
+  ]
+}
