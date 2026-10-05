@@ -1,0 +1,85 @@
+{
+  "trading_date": "2026-10-05",
+  "generated_at": "2026-10-05T11:34:55.861105+08:00",
+  "data_cutoff_at": "2026-10-05T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "data_manifest_hash": "886802ce5b3d17fae6c6d71b683a6aa04a1c08c860fcb7f39907ff4a467b2901",
+  "scenarios": {
+    "bull": 0.55,
+    "base": 0.35,
+    "bear": 0.1
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "trend_up",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 150.0,
+    "expected_close_return_bps": 105.0
+  },
+  "narrative": {
+    "market_view": "海外半導體與台指夜盤同向，Gap confidence 顯著提高。10 年債殖利率仍約 5.27%，油價仍處高位，不能把強烈開高訊號直接等同全天單邊上漲。【補存註記】本檔於開盤後依使用者提供的已凍結文字回報重建，未使用開盤後行情、未重算預測。generated_at 為本次重建時間，原始 JSON、生成時間、來源清單及完整 hash 無法取回；不等同原始盤前快照，應在評估中單獨標記。原回報 snapshot_hash=cf11ee7e…935231、data_manifest_hash=5d3be11c…d3c8e9，均為無法驗證的縮寫。本檔新 hash 僅驗證重建內容完整性。",
+    "open_hypothesis": "明顯跳空開高；open_direction=up，expected_open_gap_bps=+150。",
+    "intraday_hypothesis": "盤中消化部分獲利了結，Gap 不完全回補；intraday_regime=trend_up。",
+    "close_hypothesis": "收盤仍顯著高於 10/2；close_direction=up，expected_close_return_bps=+105。",
+    "breadth_hypothesis": "breadth_direction=up；Bull case 要求 OTC 與中小型電子延續 10/2 的強勢，電子 breadth 拆大型權值與中小型題材。",
+    "bull_script": "台積電與大型電子在跳空後守住 opening range / VWAP，同時 OTC 與中小型電子延續 10/2 的強勢，市場接受 49,000 點以上。",
+    "base_script": "明顯跳空開高 → 盤中消化部分獲利了結 → Gap 不完全回補 → 收盤仍顯著高於 10/2。",
+    "bear_script": "夜盤與 ADR 強勢未獲現貨確認，權值快速失守 VWAP、breadth 不擴散，演變為 gap_fade。"
+  },
+  "key_drivers": [
+    "原回報數值（本次未獨立驗證）：10/2 台指期夜盤收 49,346、+677 點（+1.39%）。",
+    "原回報數值：TSMC ADR +2.96%；Nasdaq +1.19%、SOX +2.40%、S&P 500 +0.73%。",
+    "原回報：美國 9 月非農約增加 2.9 萬人，使短期升息預期下降。",
+    "原回報：10 年債殖利率約 5.27%，油價仍處高位。"
+  ],
+  "invalidation_conditions": [
+    "夜盤與 ADR 強勢未獲現貨確認。",
+    "權值快速失守 VWAP、breadth 不擴散，演變為 gap_fade。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-09-22",
+      "item": "隔夜訊號主要提高 Open 而非直接決定 Close",
+      "note": "原凍結回報聲稱唯讀引用；本次僅保留該回報，未重新查閱 V0，原始列號及引用 hash 不可得。",
+      "source_row": null,
+      "extracted_at": null,
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-09-23",
+      "item": "TAIEX 與 breadth 分離",
+      "note": "原凍結回報聲稱唯讀引用；本次僅保留該回報，未重新查閱 V0，原始列號及引用 hash 不可得。",
+      "source_row": null,
+      "extracted_at": null,
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-09-30",
+      "item": "夜盤基差校正 Gap 幅度",
+      "note": "原凍結回報聲稱唯讀引用；本次僅保留該回報，未重新查閱 V0，原始列號及引用 hash 不可得。",
+      "source_row": null,
+      "extracted_at": null,
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-02",
+      "item": "海外半導體與台指夜盤背離時降低 Gap 信心",
+      "note": "原凍結回報聲稱唯讀引用；本次僅保留該回報，未重新查閱 V0，原始列號及引用 hash 不可得。",
+      "source_row": null,
+      "extracted_at": null,
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-02",
+      "item": "電子 breadth 拆大型權值與中小型題材",
+      "note": "原凍結回報聲稱唯讀引用；本次僅保留該回報，未重新查閱 V0，原始列號及引用 hash 不可得。",
+      "source_row": null,
+      "extracted_at": null,
+      "content_hash": null
+    }
+  ],
+  "snapshot_hash": "4f6f832a58fb3c1515b8a1ff1c98ab69cfa7d21230c862b271fd3dd0d8cac3b9"
+}
