@@ -1,0 +1,39 @@
+{
+  "trading_date": "2026-10-05",
+  "previous_close": 48475.74,
+  "open": 48574.95,
+  "high": 49770.66,
+  "low": 48574.95,
+  "close": 49712.04,
+  "change_points": 1236.3,
+  "change_pct": 2.55,
+  "turnover_twd": 1203354267481,
+  "breadth_up": 364,
+  "breadth_down": 631,
+  "breadth_flat": 87,
+  "realized_open_direction": "up",
+  "realized_close_direction": "up",
+  "realized_intraday_regime": "trend_up",
+  "realized_breadth_direction": "down",
+  "realized_scenario": "bull",
+  "sector_returns_pct": {
+    "electronics": 3,
+    "semiconductor": 2.84,
+    "financial": 0.1,
+    "ex_financial_electronics": 0.98,
+    "midcap100": 1.03,
+    "smallcap300": -0.01
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261005",
+      "role": "official open/high/low/close"
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-05",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261005&type=ALLBUT0999",
+      "role": "official close, turnover, breadth and sector statistics"
+    }
+  ]
+}
