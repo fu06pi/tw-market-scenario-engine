@@ -1,0 +1,13 @@
+{
+  "type": "reconstruction_from_user_supplied_frozen_report",
+  "trading_date": "2026-10-05",
+  "claimed_data_cutoff_at": "2026-10-05T08:50:00+08:00",
+  "original_source_manifest_available": false,
+  "original_snapshot_hash_abbreviated": "cf11ee7e…935231",
+  "original_data_manifest_hash_abbreviated": "5d3be11c…d3c8e9",
+  "source": "User message in this conversation at 2026-10-05T11:33:45+08:00",
+  "market_data_independently_verified": false,
+  "post_open_market_data_used": false,
+  "forecast_recomputed": false,
+  "original_generated_at": null
+}
