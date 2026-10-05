@@ -1,0 +1,163 @@
+{
+  "trading_date": "2026-10-05",
+  "evaluation_version": "v1-postclose-2",
+  "evaluated_at": "2026-10-05T15:36:36+08:00",
+  "status": "provisional_reconstructed_baseline_integrity_failed",
+  "aggregate_metric_eligibility": false,
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-05.json",
+    "git_blob_sha": "2e29828ae828dfecf1d58940d27d330f98b5c578",
+    "snapshot_hash": "4f6f832a58fb3c1515b8a1ff1c98ab69cfa7d21230c862b271fd3dd0d8cac3b9",
+    "computed_snapshot_hash": "fd501a864eebbdd5f4caff27f2b2aafa166ee6601d0ec65696849f640d85a0c0",
+    "generated_at": "2026-10-05T11:34:55.861105+08:00",
+    "data_cutoff_at": "2026-10-05T08:50:00+08:00",
+    "integrity_verified": false,
+    "immutable_snapshot_mutated": false,
+    "provenance": "Reconstructed after market open from a user-supplied frozen pre-open narrative; original full JSON, timestamps, source manifest and hashes unavailable.",
+    "integrity_note": "The reconstructed file's stored hash does not match the repository canonical hash. Scores are provisional and excluded from trusted aggregate metrics."
+  },
+  "realization": {
+    "path": "realizations/2026-10-05.json",
+    "trading_date": "2026-10-05",
+    "previous_close": 48475.74,
+    "open": 48574.95,
+    "high": 49770.66,
+    "low": 48574.95,
+    "close": 49712.04,
+    "change_points": 1236.3,
+    "change_pct": 2.55,
+    "turnover_twd": 1203354267481,
+    "breadth_up": 364,
+    "breadth_down": 631,
+    "breadth_flat": 87,
+    "realized_open_direction": "up",
+    "realized_close_direction": "up",
+    "realized_intraday_regime": "trend_up",
+    "realized_breadth_direction": "down",
+    "realized_scenario": "bull",
+    "sector_returns_pct": {
+      "electronics": 3,
+      "semiconductor": 2.84,
+      "financial": 0.1,
+      "ex_financial_electronics": 0.98,
+      "midcap100": 1.03,
+      "smallcap300": -0.01
+    },
+    "source_manifest": [
+      {
+        "name": "TWSE TAIEX historical OHLC",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261005",
+        "role": "official open/high/low/close"
+      },
+      {
+        "name": "TWSE MI_INDEX 2026-10-05",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261005&type=ALLBUT0999",
+        "role": "official close, turnover, breadth and sector statistics"
+      }
+    ]
+  },
+  "quantitative_evaluation": {
+    "open_direction_hit": 1,
+    "close_direction_hit": 1,
+    "regime_hit": 1,
+    "breadth_direction_hit": 0,
+    "expected_open_gap_bps": 150,
+    "open_gap_bps_realized": 20.465907276505657,
+    "open_gap_mae_bps": 129.53409272349435,
+    "expected_close_return_bps": 105,
+    "close_return_bps_realized": 255.03478647257438,
+    "close_return_mae_bps": 150.03478647257438,
+    "mfe_bps": 267.1274332274254,
+    "mae_bps": 20.465907276505657,
+    "scenario_probabilities": {
+      "bull": 0.55,
+      "base": 0.35,
+      "bear": 0.1
+    },
+    "scenario_outcome": "bull",
+    "top_scenario_hit": true,
+    "brier_score": 0.11166666666666665,
+    "calibration_error": null,
+    "baseline_lift": null
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "Strong semiconductor/electronics leadership and a large positive close matched the bullish premise, but the actual close was much stronger than the cautious range-to-firm framing and stock breadth was negative."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Open direction was correct, but the expected +150bp gap greatly exceeded the realized +20.47bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "correct",
+      "note": "The index opened at its daily low, never filled the positive gap, accepted above 49,000 and closed near the high; trend_up is the best repository label."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Close direction was correct, but expected +105bp underestimated the realized +255.03bp."
+    },
+    "breadth_hypothesis": {
+      "grade": "incorrect",
+      "note": "Listed-stock breadth was negative: 364 advancers versus 631 decliners, despite the index rally."
+    },
+    "bull_script": {
+      "grade": "partially_correct",
+      "note": "49,000 acceptance and strong large electronics occurred, but the required broad OTC/mid-small-cap participation was not demonstrated; SmallCap 300 was -0.01%."
+    },
+    "base_script": {
+      "grade": "partially_correct",
+      "note": "Gap remained unfilled and close was substantially higher, but the opening gap was small rather than the forecast obvious jump."
+    },
+    "bear_script": {
+      "grade": "not_realized",
+      "note": "The market did not gap-fade; it closed near the daily high."
+    }
+  },
+  "error_labels": [
+    "snapshot_provenance_failure",
+    "snapshot_integrity_mismatch",
+    "open_gap_magnitude_overestimate",
+    "close_magnitude_underestimate",
+    "breadth_misclassification",
+    "weight_misspecification"
+  ],
+  "actual_driver_attribution": [
+    "Official cross-sectional data show heavyweight/electronic leadership: electronics +3.00% and semiconductors +2.84%, while SmallCap 300 was -0.01% and listed breadth was 364 up versus 631 down.",
+    "The index opened only modestly above the prior close, then advanced throughout the session and closed near its high, making the overnight signal more useful for direction than cash-open gap magnitude."
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Separate overnight direction conviction from cash-open magnitude calibration.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Model index direction and listed-stock breadth separately using large-cap contribution and equal-weight/breadth features.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Make canonical hash verification and pre-open GitHub persistence a hard gate; preserve reconstructed records in a separate non-benchmark class.",
+      "status": "data_quality_fix_required"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_trading_rule_change",
+    "reason": "Direction/regime evidence is useful, but one day plus reconstructed provenance is insufficient for changing model rules."
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261005",
+      "role": "official open/high/low/close"
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-05",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261005&type=ALLBUT0999",
+      "role": "official close, turnover, breadth and sector statistics"
+    }
+  ],
+  "v0_modified": false
+}
