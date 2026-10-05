@@ -1,0 +1,205 @@
+{
+  "trading_date": "2026-10-02",
+  "evaluation_version": "v1-postclose-3",
+  "evaluated_at": "2026-10-05 07:51:12 UTC",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "status": "backfilled_prediction_evaluation",
+  "aggregate_metric_eligibility": false,
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-02.json",
+    "git_blob_sha": "de41174656c0de8ef231adbe4265c1193bbbb14a",
+    "snapshot_hash": "cbf5b064a213c7d011eb90be9b1bace36d93b4484be98f0e585a30d4fda1f044",
+    "computed_snapshot_hash": "cbf5b064a213c7d011eb90be9b1bace36d93b4484be98f0e585a30d4fda1f044",
+    "integrity_verified": true,
+    "immutable_snapshot_mutated": false,
+    "data_manifest_hash": "0cba08205e1f3579f19a6aa7bc180e2b9e48abe94fa4c047807b25b66df87fd2",
+    "generated_at": "2026-10-02T08:54:50.891432+08:00",
+    "data_cutoff_at": "2026-10-02T08:50:00+08:00",
+    "persisted_commit": "5e43a2c1625649e5de948ba6114e9213a1548aba",
+    "persisted_at": "2026-10-02T15:21:38+08:00",
+    "provenance_note": "Content hash verifies current file. GitHub persistence occurred after close; original pre-open generation is asserted in the snapshot and commit message, not independently proven by the hash. Evaluate per user's backfill request; exclude from strict pre-open-persisted benchmark pending timestamp evidence."
+  },
+  "realization": {
+    "path": "realizations/2026-10-02.json",
+    "trading_date": "2026-10-02",
+    "previous_close": 48353.49,
+    "open": 48390.65,
+    "high": 48491.62,
+    "low": 48205.81,
+    "close": 48475.74,
+    "turnover": 938222196327,
+    "turnover_scope": "TWSE total market statistics, not regular-session-only",
+    "regular_session_turnover_twd": 898174000000,
+    "breadth_up": 483,
+    "breadth_down": 506,
+    "breadth_flat": 91,
+    "breadth_definition": "TWSE listed stocks, not all securities or combined TWSE/TPEx",
+    "sector_returns_pct": {
+      "electronics": 0.22,
+      "semiconductor": -0.18,
+      "financial": -0.11,
+      "midcap100": 1,
+      "smallcap300": 0.86,
+      "ex_financial_electronics": 0.79,
+      "taiwan50": -0.02,
+      "electronic_components": 2.21
+    },
+    "source_manifest": [
+      {
+        "name": "TWSE historical OHLC",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261002",
+        "selected_date": "115/10/02"
+      },
+      {
+        "name": "TWSE MI_INDEX",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261002&type=ALLBUT0999",
+        "response_date": "20261002",
+        "scope": "Listed-stock breadth; total market turnover includes odd-lot/block/after-hours and foreign-currency conversion."
+      },
+      {
+        "name": "FTV post-close report",
+        "url": "https://finance.ftvnews.com.tw/news/detail/2026A02W0341",
+        "role": "early oscillation followed by recovery; regular-session turnover 898174000000"
+      }
+    ],
+    "realized_open_direction": "up",
+    "realized_close_direction": "up",
+    "realized_breadth_direction": "down",
+    "realized_intraday_regime": "range",
+    "realized_scenario": "base"
+  },
+  "quantitative_evaluation": {
+    "open_direction_hit": 1,
+    "close_direction_hit": 0,
+    "breadth_direction_hit": 1,
+    "regime_hit": 1,
+    "regime_label_method": "Analyst-assigned from official daily OHLC and dated post-close report of early oscillation, recovery, and late strength; no fixed intraday classifier is supplied. Not a full minute-series verification.",
+    "expected_open_gap_bps": 25,
+    "open_gap_bps_realized": 7.685070922492564,
+    "open_gap_mae_bps": 17.314929077507436,
+    "expected_close_return_bps": 5,
+    "close_return_bps_realized": 25.282559749048104,
+    "close_return_mae_bps": 20.282559749048104,
+    "mfe_bps": 28.566707387616624,
+    "mae_bps": -30.541745797459562,
+    "intraday_range_bps": 59.108453185076186,
+    "scenario_probabilities": {
+      "bull": 0.25,
+      "base": 0.5,
+      "bear": 0.25
+    },
+    "scenario_outcome": "base",
+    "top_scenario_hit": true,
+    "brier_score": 0.125,
+    "flat_threshold_bps": 5,
+    "scenario_thresholds_bps": {
+      "bull": 50,
+      "bear": -50
+    },
+    "calibration_error": null,
+    "baseline_lift": null,
+    "metric_notes": "Direction is up above +5bp, down below -5bp, flat otherwise. Base scenario is close return between -50bp and +50bp. Single-day calibration error and baseline lift unavailable."
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "Small positive open and mixed session align with cautious view, but sector leadership was narrower/different than the large-cap/semiconductor framing."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Small positive open realized at +7.69bp, below forecast +25bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "correct_with_limits",
+      "note": "Early two-way movement, a low below prior close, and recovery to positive near the high fit range-with-late-strength; range label is manual, not minute-series validated."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Actual +25.28bp remained a modest positive return but exceeded the configured flat band; flat direction target missed."
+    },
+    "breadth_hypothesis": {
+      "grade": "partially_correct",
+      "note": "483 up versus 506 down validates weak aggregate breadth, but Taiwan50 -0.02% versus midcap +1.00% and smallcap +0.86% contradicts large caps outperforming ordinary stocks."
+    },
+    "bull_script": {
+      "grade": "not_fully_realized",
+      "note": "Mid/small-cap and some electronic component strength occurred, but semiconductor index fell 0.18% and aggregate listed breadth stayed negative; complete broad semiconductor-led bull conditions not demonstrated."
+    },
+    "base_script": {
+      "grade": "partially_correct",
+      "note": "Small positive open, oscillation and modest positive finish match base numeric outcome. Claim that semiconductor leadership would support index is not supported by semiconductor -0.18%."
+    },
+    "bear_script": {
+      "grade": "not_realized",
+      "note": "The market crossed below prior close intraday but recovered; a below-prior-close finish did not occur."
+    },
+    "key_drivers": {
+      "grade": "partially_evaluable",
+      "note": "Official sector returns support selective rotation, not dominant semiconductor strength. Overnight values and causal oil/yield effects not independently revalidated in this evaluation."
+    },
+    "invalidation_conditions": {
+      "grade": "partially_evaluable",
+      "note": "Opening gap neither exceeded +80bp nor became negative. 09:15-09:30 VWAP/opening-range/breadth conjunctions cannot be verified without minute-level evidence; no hindsight scenario upgrade performed."
+    }
+  },
+  "error_labels": [
+    "late_prediction_persistence",
+    "open_gap_magnitude_overestimate",
+    "close_direction_misclassification",
+    "leadership_weight_misspecification"
+  ],
+  "actual_driver_attribution": [
+    {
+      "type": "observed_structure",
+      "detail": "Electronic components +2.21%, midcaps +1.00%, smallcaps +0.86%, ex-financial/electronics +0.79%; Taiwan50 -0.02% and semiconductor -0.18%. Selective rotation rather than broad heavyweight semiconductor leadership."
+    },
+    {
+      "type": "reported_path",
+      "detail": "Dated post-close report describes early oscillation, recovery and rising close. Attribution to oil/yields is not causally established."
+    }
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Calibrate cash-open gap magnitude separately from overnight directional signals.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Separate count breadth from cap-size and sector-relative performance; weak advancing counts do not prove heavyweight leadership.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Persist and read-back-verify prediction before open; report generated versus persisted states independently and preserve delayed records as a separate benchmark cohort.",
+      "status": "workflow_fix_proposed"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_model_rule_change",
+    "reason": "One observation plus delayed-persistence provenance does not justify fitting new trading rules."
+  },
+  "missing_data": [
+    "09:15-09:30 minute-level VWAP/opening range/breadth",
+    "independent proof of original pre-open timestamp",
+    "same-day frozen baseline"
+  ],
+  "source_manifest": [
+    {
+      "name": "TWSE historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261002",
+      "selected_date": "115/10/02"
+    },
+    {
+      "name": "TWSE MI_INDEX",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261002&type=ALLBUT0999",
+      "response_date": "20261002",
+      "scope": "Listed-stock breadth; total market turnover includes odd-lot/block/after-hours and foreign-currency conversion."
+    },
+    {
+      "name": "FTV post-close report",
+      "url": "https://finance.ftvnews.com.tw/news/detail/2026A02W0341",
+      "role": "early oscillation followed by recovery; regular-session turnover 898174000000"
+    }
+  ],
+  "v0_modified": false
+}
