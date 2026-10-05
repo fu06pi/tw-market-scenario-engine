@@ -1,0 +1,43 @@
+{
+  "trading_date": "2026-10-02",
+  "previous_close": 48353.49,
+  "open": 48390.65,
+  "high": 48491.62,
+  "low": 48205.81,
+  "close": 48475.74,
+  "turnover": 938222196327,
+  "turnover_scope": "TWSE total market statistics, not regular-session-only",
+  "regular_session_turnover_twd": 898174000000,
+  "breadth_up": 483,
+  "breadth_down": 506,
+  "breadth_flat": 91,
+  "breadth_definition": "TWSE listed stocks, not all securities or combined TWSE/TPEx",
+  "sector_returns_pct": {
+    "electronics": 0.22,
+    "semiconductor": -0.18,
+    "financial": -0.11,
+    "midcap100": 1,
+    "smallcap300": 0.86,
+    "ex_financial_electronics": 0.79,
+    "taiwan50": -0.02,
+    "electronic_components": 2.21
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261002",
+      "selected_date": "115/10/02"
+    },
+    {
+      "name": "TWSE MI_INDEX",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261002&type=ALLBUT0999",
+      "response_date": "20261002",
+      "scope": "Listed-stock breadth; total market turnover includes odd-lot/block/after-hours and foreign-currency conversion."
+    },
+    {
+      "name": "FTV post-close report",
+      "url": "https://finance.ftvnews.com.tw/news/detail/2026A02W0341",
+      "role": "early oscillation followed by recovery; regular-session turnover 898174000000"
+    }
+  ]
+}
