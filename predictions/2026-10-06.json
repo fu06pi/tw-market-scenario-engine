@@ -1,0 +1,90 @@
+{
+  "trading_date": "2026-10-06",
+  "generated_at": "2026-10-06T14:09:43.455054+08:00",
+  "data_cutoff_at": "2026-10-06T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1-late-reconstruction",
+  "data_manifest_hash": "40f1232d3a77cc14d1524fc78a43fb7655e432008e01bee5c9ea14fc0948ebc8",
+  "scenarios": {
+    "bull": 0.35,
+    "base": 0.45,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": 45.0,
+    "expected_close_return_bps": 30.0
+  },
+  "narrative": {
+    "market_view": "【reconstructed/late_generated】本檔在10/6開盤後，以可驗證08:50前公開的歷史資料補建；不是原始盤前V1樣本，aggregate_metric_eligibility=false，評估須單獨標記。來源與缺值见data/manifests/2026-10-06.json，generated_at為實際生成時間。隔夜科技與本地期貨同向偏多，但前日大漲後市場集中、長債利率上行，主情境為權值支撐的高檔整理。機率與幅度是未校準研究先驗，非已訓練模型輸出。",
+    "open_hypothesis": "預期較10/5現貨收盤49,712.04開高，估計+45bps（約224點）；台積電ADR與夜盤為支持。期貨高於現貨的全部基差不等於新增現貨gap。",
+    "intraday_hypothesis": "主型態range：開高後消化前日急漲，於開盤區與VWAP附近反覆測試；尚不預設全天單邊續漲。只有權值承接與個股廣度共同擴張才符合Bull條件；條件不回寫本快照。",
+    "close_hypothesis": "收盤相對10/5小幅偏多，點估+30bps（約149點），預期小於開盤gap。Bull/Bear按repo收盤±50bps界定，Base為中間區間。",
+    "breadth_hypothesis": "breadth_direction=flat，等權家數預期中性且落後市值加權指數。分別觀察大型電子、電子中小型/OTC、金融、非電子；台積電強勢與聯電ADR弱勢提示電子內部分化，不能視為全面風險偏好上升。",
+    "bull_script": "開高後台積電與核心權值守住opening range/VWAP，電子中小型與非電子同步擴散；現貨接受50,000整數位且收盤報酬≥+50bps。",
+    "base_script": "適度開高→高檔震盪與部分獲利了結→大型權值提供支撐但個股廣度未全面擴張→收盤於前收±50bps內、偏向小漲。",
+    "bear_script": "開高缺乏現貨承接，權值失守opening range/VWAP、聯電等弱勢擴散，回補gap後跌破49,712.04；轉gap_fade或trend_down，收盤報酬≤-50bps。"
+  },
+  "key_drivers": [
+    "TX202610夜盤收50,118、+174點（+0.35%），官方夜盤列與06:22新聞互核，支持Open方向。",
+    "Nasdaq +1.05%、SOX +0.27%、台積電ADR +2.75%；SOX明顯弱於Nasdaq，半導體非全面同步強勢。",
+    "前日加權+2.55%，但下跌家數高於上漲家數、電子成交比重90.87%，提高集中型行情與獲利了結先驗。",
+    "10年美債尾盤殖利率5.307%、+3bps，估值逆風仍在；WTI -1.84%至89.43、Brent -1.89%至100.32提供部分緩解。",
+    "前日USD/TWD收31.788、台幣升0.042元；僅使用前日匯價，未使用10/6開盤後匯率。",
+    "9月營收與科技公司法說題材提供選股催化，但精確事件時程與除息點數未完整核驗，不填造數值。"
+  ],
+  "invalidation_conditions": [
+    "09:15–09:30核心權值跌破opening range與VWAP且不能收復，Base承接假設失效。",
+    "現貨回補gap並失守前收49,712.04、等權廣度同步轉弱，符合Bear路徑。",
+    "權值守住且四層廣度共同擴張、收盤報酬超過+50bps，超出Base、符合Bull。",
+    "08:50後任何新事件只能在事後歸因，不回寫預測。",
+    "資料覆蓋不全與遲生成均須在評估另列，禁止混入正式盤前命中率。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-09-22",
+      "item": "隔夜科技強勢→台股突破力道",
+      "note": "SOX/TSMC ADR/台指夜盤強勢用來提高「開高」機率；是否趨勢延續必須等現貨09:15–09:30確認。若創高後高點回撤>50%、跌破開盤區或VWAP、核心權值轉弱，切換為沖高回落/均值回歸情境。",
+      "source_row": "模型修正紀錄!A2:J2",
+      "extracted_at": "2026-10-06T14:09:43.455054+08:00",
+      "content_hash": "4661aa66accef795d1b6b9c770e99f699b8ca329901d11af71d4c8fd9a5d8dcf"
+    },
+    {
+      "trading_date": "2026-09-23",
+      "item": "TAIEX方向與市場廣度需分離",
+      "note": "晨報分別輸出「權值指數方向」與「市場廣度方向」；廣度至少納入上/下跌家數、OTC方向與核心權值集中度。",
+      "source_row": "模型修正紀錄!A4:J4",
+      "extracted_at": "2026-10-06T14:09:43.455054+08:00",
+      "content_hash": "4da607542a746b1f4a176b3c3bfc264a208cd0f89d2045f4dbbba63031e93cb9"
+    },
+    {
+      "trading_date": "2026-09-30",
+      "item": "Gap幅度需加入台指期夜盤基差確認",
+      "note": "Gap模型使用SOX/ADR判斷外部方向，再用台指期夜盤相對前一現貨收盤的基差校正Gap幅度；Close仍等待現貨廣度/VWAP確認。",
+      "source_row": "模型修正紀錄!A13:J13",
+      "extracted_at": "2026-10-06T14:09:43.455054+08:00",
+      "content_hash": "289c709f56df687b56607976cb8d31a661ef0a58a6f30ec5ccea2db44233694f"
+    },
+    {
+      "trading_date": "2026-10-02",
+      "item": "台指夜盤與海外半導體背離時需降Gap信心",
+      "note": "Gap模型新增背離狀態：海外半導體與台指夜盤同向時提高信心；反向時降低方向信心與Gap幅度。",
+      "source_row": "模型修正紀錄!A14:J14",
+      "extracted_at": "2026-10-06T14:09:43.455054+08:00",
+      "content_hash": "603fd883b031ba8ce8e8c31fdb4a5d2885691f73c80860a0c0c50a202e038002"
+    },
+    {
+      "trading_date": "2026-10-02",
+      "item": "電子Breadth需拆大型權值與中小型題材",
+      "note": "breadth固定改為四層：大型權值電子、電子中小型/OTC、金融、非電子；並標記當日主導層。",
+      "source_row": "模型修正紀錄!A15:J15",
+      "extracted_at": "2026-10-06T14:09:43.455054+08:00",
+      "content_hash": "8570939293fd888ea1864c43e38670ac95bf056b10711d794b1a661f376b0853"
+    }
+  ],
+  "snapshot_hash": "9aa4173cffa97ade3c2dff800e22c676dea928e8f0aa44f53dddf23663361414"
+}
