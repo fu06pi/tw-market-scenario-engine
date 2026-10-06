@@ -1,0 +1,45 @@
+{
+  "trading_date": "2026-10-06",
+  "previous_close": 49712.04,
+  "open": 49736.37,
+  "high": 49968.92,
+  "low": 49479.69,
+  "close": 49822.55,
+  "turnover": 1021722793978,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE total(1~15), excluding foreign-currency securities per official response notes; not regular-session turnover",
+  "regular_session_turnover_twd": 975935000000,
+  "breadth_up": 462,
+  "breadth_down": 519,
+  "breadth_flat": 100,
+  "breadth_uncompared": 2,
+  "breadth_scope": "TWSE stock column only, excluding ETFs/warrants; not combined TWSE/TPEx",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "electronics": 0.05,
+    "semiconductor": -0.26,
+    "financial": 1.29,
+    "ex_financial_electronics": 0.72,
+    "midcap100": 0.19,
+    "smallcap300": 0.08,
+    "taiwan50": 0.18
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE MI_INDEX",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261006&type=ALLBUT0999",
+      "role": "Official dated close, sectors, listed-stock breadth and turnover; totals exclude foreign-currency securities per response notes."
+    },
+    {
+      "name": "CNA 2026-10-06 13:50",
+      "url": "https://pchome.megatime.com.tw/news/cat1/20261006/17912658506624018003.html",
+      "role": "Dated OHLC and regular-session turnover; MI_5MINS_HIST currently temporarily redirects."
+    },
+    {
+      "name": "Economic Daily 2026-10-06 13:38",
+      "url": "https://money.udn.com/money/amp/story/5607/9797863",
+      "role": "Intraday order of early high, pullback below previous close, and later recovery; reported heavyweight leadership."
+    }
+  ]
+}
