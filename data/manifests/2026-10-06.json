@@ -1,0 +1,149 @@
+{
+  "trading_date": "2026-10-06",
+  "status": "reconstructed/late_generated",
+  "data_cutoff_at": "2026-10-06T08:50:00+08:00",
+  "original_v1_payload_found": false,
+  "aggregate_metric_eligibility": false,
+  "cutoff_validation": "Only article bodies published/updated before cutoff and dated overnight-session rows were used. Retrieval occurred after cutoff. Current widgets, related news, comments and 10/6 cash-session prices were excluded.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://wwwc.twse.com.tw/zh/trading/holiday.html",
+      "publisher": "TWSE",
+      "published_at": null,
+      "timing_evidence": "2026 annual calendar lists Oct 9, not Oct 6, as holiday; annual calendar is a pre-existing schedule",
+      "facts": {
+        "is_trading_day": true
+      }
+    },
+    {
+      "id": "night_official",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport",
+      "publisher": "TAIFEX",
+      "published_at": null,
+      "observation_end_at": "2026-10-06T05:00:00+08:00",
+      "timing_evidence": "Oct 5 15:00 to Oct 6 05:00 TX 202610 row; last/change independently present in 06:22 news updated 06:28",
+      "facts": {
+        "contract": "TX202610",
+        "last": 50118,
+        "change": 174,
+        "return_pct": 0.35
+      },
+      "limitations": "No archive of official page publication time; last/change admitted via timestamped corroboration; official volume excluded."
+    },
+    {
+      "id": "overnight",
+      "url": "https://www.ftvnews.com.tw/news/detail/2026A06W0066",
+      "publisher": "FTV",
+      "published_at": "2026-10-06T06:22:00+08:00",
+      "updated_at": "2026-10-06T06:28:00+08:00",
+      "facts": {
+        "nasdaq_return_pct": 1.05,
+        "sp500_return_pct": 0.66,
+        "tsmc_adr_return_pct": 2.75,
+        "umc_adr_return_pct": -8.95,
+        "night_last": 50118,
+        "night_change": 174,
+        "wti_usd": 89.43,
+        "wti_return_pct": -1.84,
+        "brent_usd": 100.32,
+        "brent_return_pct": -1.89
+      },
+      "limitations": "Secondary report; SOX rounded 0.28 differs from exact-index calculation, use exact 36.06/13136.68 from MoneyDJ."
+    },
+    {
+      "id": "us_indices",
+      "url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=4c13794d-3465-4e8b-a186-b81492275aee&c=MB020000",
+      "publisher": "MoneyDJ",
+      "published_at": "2026-10-06T07:15:34+08:00",
+      "facts": {
+        "nasdaq_close": 27477.31,
+        "nasdaq_return_pct": 1.05,
+        "sp500_close": 7773.95,
+        "sp500_return_pct": 0.66,
+        "sox_close": 13172.74,
+        "sox_change": 36.06,
+        "sox_return_pct": 0.27
+      }
+    },
+    {
+      "id": "rates",
+      "url": "https://5850web.moneydj.com/z/zf/zufzVIP_109474D3-D3CA-4B92-8CDF-62CA15C9D3A1_E_.djhtm",
+      "publisher": "MoneyDJ",
+      "published_at": "2026-10-06T07:13:38+08:00",
+      "facts": {
+        "us10y_yield_pct": 5.307,
+        "us10y_delta_bps": 3,
+        "ism_services_pmi": 54.9,
+        "ism_prices_index": 74
+      },
+      "limitations": "Secondary CNBC quote; Treasury official close not independently fetched; reported tail-session observation, not asserted official fixing."
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://money.udn.com/money/story/5607/9796962",
+      "publisher": "Economic Daily / President Securities",
+      "published_at": "2026-10-06T08:44:32+08:00",
+      "facts": {
+        "previous_cash_close": 49712.04,
+        "previous_cash_return_pct": 2.55,
+        "previous_breadth": "decliners exceed advancers",
+        "tsmc_previous_return_pct": 3,
+        "electronics_turnover_share_pct": 90.87,
+        "company_events": "September revenue releases and forthcoming major technology earnings briefings"
+      },
+      "limitations": "Broker report; event exact dates and actual 10/6 releases not verified, no event count or ex-dividend adjustment invented."
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cna.com.tw/news/afe/202610050253.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-05T18:15:00+08:00",
+      "updated_at": "2026-10-05T19:36:00+08:00",
+      "facts": {
+        "usd_twd_previous_close": 31.788,
+        "twd_appreciation": 0.042
+      },
+      "limitations": "Previous-day FX only, no 10/6 post-open quotes."
+    }
+  ],
+  "feature_values": {
+    "taifex_night_return_pct": 0.35,
+    "sox_return_pct": 0.27,
+    "nasdaq_return_pct": 1.05,
+    "tsmc_adr_return_pct": 2.75,
+    "usd_twd_return_pct": -0.13195098963241225,
+    "us10y_delta_bps": 3,
+    "oil_return_pct": -1.84,
+    "tsmc_weight_proxy": null,
+    "top10_weight_concentration": null,
+    "previous_day_breadth_ratio": null,
+    "previous_day_otc_return_pct": null,
+    "macro_event_count_high_impact": null,
+    "tsmc_event_flag": null,
+    "major_company_event_count": null,
+    "ex_dividend_weight_points": null,
+    "catalyst_age_hours": null,
+    "previous_day_stock_return_pct": 3,
+    "previous_day_relative_volume": null
+  },
+  "limitations": [
+    "Not original pre-open V1 sample; exclude from official pre-open aggregate performance.",
+    "No calibrated model coefficients or fitted probabilities in scaffold; scenario probabilities and magnitude are explicit analyst priors.",
+    "Unverified feature fields remain null; company event calendar and exact breadth counts incomplete.",
+    "After-cutoff content surfaced in searches or page chrome excluded; no 10/6 cash OHLC used."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.35,
+      "base": 0.45,
+      "bear": 0.2
+    },
+    "scenario_definition": "Repo bull close >=50bps; bear <=-50bps; base between. Probabilities are uncalibrated judgment.",
+    "gap_bps": 45,
+    "gap_reason": "Night +35bps and ADR positive support modest gap; avoid treating futures premium as full cash gap.",
+    "close_bps": 30,
+    "close_reason": "Positive overnight signal discounted for previous +2.55%, concentrated breadth, rising yields and SOX lag; base is range with modest positive close."
+  },
+  "generated_at": "2026-10-06T14:09:43.455054+08:00"
+}
