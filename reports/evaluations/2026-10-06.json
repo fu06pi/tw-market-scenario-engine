@@ -1,0 +1,306 @@
+{
+  "trading_date": "2026-10-06",
+  "evaluation_version": "v1-postclose-3",
+  "evaluated_at": "2026-10-06T15:21:19+08:00",
+  "status": "provisional_late_generated_reconstructed_baseline",
+  "aggregate_metric_eligibility": false,
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1-late-reconstruction",
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-06.json",
+    "git_blob_sha": "7417d8963ece2b1d692192cd92a5f129fdcb6f8f",
+    "snapshot_hash": "9aa4173cffa97ade3c2dff800e22c676dea928e8f0aa44f53dddf23663361414",
+    "computed_snapshot_hash": "9aa4173cffa97ade3c2dff800e22c676dea928e8f0aa44f53dddf23663361414",
+    "integrity_verified": true,
+    "immutable_snapshot_mutated": false,
+    "generated_at": "2026-10-06T14:09:43.455054+08:00",
+    "data_cutoff_at": "2026-10-06T08:50:00+08:00",
+    "provenance": "Existing reconstructed/late_generated snapshot created 14:09 after cash close; excluded from formal pre-open performance regardless of hash verification.",
+    "data_manifest_path": "data/manifests/2026-10-06.json",
+    "data_manifest_hash": "40f1232d3a77cc14d1524fc78a43fb7655e432008e01bee5c9ea14fc0948ebc8"
+  },
+  "realization": {
+    "path": "realizations/2026-10-06.json",
+    "trading_date": "2026-10-06",
+    "previous_close": 49712.04,
+    "open": 49736.37,
+    "high": 49968.92,
+    "low": 49479.69,
+    "close": 49822.55,
+    "turnover": 1021722793978,
+    "turnover_unit": "TWD",
+    "turnover_scope": "TWSE total(1~15), excluding foreign-currency securities per official response notes; not regular-session turnover",
+    "regular_session_turnover_twd": 975935000000,
+    "breadth_up": 462,
+    "breadth_down": 519,
+    "breadth_flat": 100,
+    "breadth_uncompared": 2,
+    "breadth_scope": "TWSE stock column only, excluding ETFs/warrants; not combined TWSE/TPEx",
+    "otc_return_pct": null,
+    "heavyweight_contribution_points": {},
+    "sector_returns_pct": {
+      "electronics": 0.05,
+      "semiconductor": -0.26,
+      "financial": 1.29,
+      "ex_financial_electronics": 0.72,
+      "midcap100": 0.19,
+      "smallcap300": 0.08,
+      "taiwan50": 0.18
+    },
+    "source_manifest": [
+      {
+        "name": "TWSE MI_INDEX",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261006&type=ALLBUT0999",
+        "role": "Official dated close, sectors, listed-stock breadth and turnover; totals exclude foreign-currency securities per response notes."
+      },
+      {
+        "name": "CNA 2026-10-06 13:50",
+        "url": "https://pchome.megatime.com.tw/news/cat1/20261006/17912658506624018003.html",
+        "role": "Dated OHLC and regular-session turnover; MI_5MINS_HIST currently temporarily redirects."
+      },
+      {
+        "name": "Economic Daily 2026-10-06 13:38",
+        "url": "https://money.udn.com/money/amp/story/5607/9797863",
+        "role": "Intraday order of early high, pullback below previous close, and later recovery; reported heavyweight leadership."
+      }
+    ]
+  },
+  "quantitative_evaluation": {
+    "trading_date": "2026-10-06",
+    "open_direction_realized": "flat",
+    "open_direction_hit": 0,
+    "close_direction_realized": "up",
+    "close_direction_hit": 1,
+    "expected_open_gap_bps": 45,
+    "open_gap_bps_realized": 4.894186599464501,
+    "open_gap_mae_bps": 40.105813400535496,
+    "expected_close_return_bps": 30,
+    "close_return_bps_realized": 22.230027172491784,
+    "close_return_mae_bps": 7.769972827508216,
+    "mfe_bps": 51.673598588992675,
+    "mae_bps": -46.739180287109775,
+    "intraday_range_bps": 98.41277887610244,
+    "scenario_probabilities": {
+      "bull": 0.35,
+      "base": 0.45,
+      "bear": 0.2
+    },
+    "scenario_outcome": "base",
+    "top_scenario_hit": true,
+    "brier_score": 0.15500000000000003,
+    "calibration_error": null,
+    "baseline_lift": null,
+    "realized_intraday_regime": "range",
+    "regime_hit": 1,
+    "realized_breadth_direction": "down",
+    "breadth_direction_hit": 0,
+    "classification_notes": {
+      "direction": "Repo ±5bp neutral band; positive +4.89bp open is quantitatively flat.",
+      "scenario": "metrics.py strict >50 bull, <-50 bear; otherwise base.",
+      "regime": "Manual OHLC plus dated intraday reporting label; no fixed classifier or minute series available.",
+      "breadth": "Analyst operational sign(up-down), zero=flat. Repo does not define numeric breadth-neutral band; hit is provisional and not benchmark comparable.",
+      "brier": "sum squared error / 3; no cross-day calibration conclusion from one sample."
+    }
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "High-level consolidation with a modest positive close matched. Financial/non-electronic rotation was stronger than electronics; not broad semiconductor leadership."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Raw open +24.33 points was positive, but +4.89bp is flat under repo neutral band, versus predicted up/+45bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Range and early rally/pullback/later recovery fit; exact opening-range and VWAP conditions are unverified. Low breached previous close, so support was not uninterrupted."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Up and Base close matched, +22.23bp versus +30bp. The explicit expectation that close return be smaller than open gap failed: 22.23 > 4.89bp."
+    },
+    "breadth_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Participation lagged positive weighted index, as warned, but stocks declined more than advanced (519 vs 462); discrete flat target misses analyst sign classification."
+    },
+    "bull_script": {
+      "grade": "incorrect",
+      "note": "Bull not realized: high 49,968.92 never reached 50,000 and close return remained below +50bp. VWAP and four-layer expansion unverified."
+    },
+    "base_script": {
+      "grade": "partially_correct",
+      "note": "Final Base and modest positive close correct; intraday gap was fully filled and previous close breached before recovery."
+    },
+    "bear_script": {
+      "grade": "partially_correct",
+      "note": "Gap fill and previous-close breach occurred transiently, but bearish terminal close did not: close was +22.23bp. Full conjunctive VWAP trigger unverified."
+    },
+    "key_drivers": {
+      "grade": "partially_correct",
+      "note": "Reported early heavyweight support and electronics dispersion are consistent. Official financial +1.29%, ex-financial/electronics +0.72%, electronics +0.05%, semiconductor -0.26% show rotation; overnight yields/oil/FX are candidate context, not proven causal contributions."
+    }
+  },
+  "invalidation_condition_evaluation": [
+    {
+      "condition": "09:15–09:30核心權值跌破opening range與VWAP且不能收復，Base承接假設失效。",
+      "grade": "partially_correct",
+      "note": "09:15–09:30 heavyweight OR/VWAP conjunction unverified."
+    },
+    {
+      "condition": "現貨回補gap並失守前收49,712.04、等權廣度同步轉弱，符合Bear路徑。",
+      "grade": "partially_correct",
+      "note": "Index gap fill and prior-close breach confirmed, but synchronized intraday breadth unverified; final Bear did not occur."
+    },
+    {
+      "condition": "權值守住且四層廣度共同擴張、收盤報酬超過+50bps，超出Base、符合Bull。",
+      "grade": "incorrect",
+      "note": "50bp Bull close not reached; full four-layer expansion not observed/verified."
+    },
+    {
+      "condition": "08:50後任何新事件只能在事後歸因，不回寫預測。",
+      "grade": "partially_correct",
+      "note": "Snapshot remains unchanged; post-cutoff information used only in evaluation."
+    },
+    {
+      "condition": "資料覆蓋不全與遲生成均須在評估另列，禁止混入正式盤前命中率。",
+      "grade": "partially_correct",
+      "note": "Late generation and missing coverage explicitly retained; official sample excluded."
+    }
+  ],
+  "error_labels": [
+    "missing_information",
+    "wrong_direction",
+    "magnitude_overestimate",
+    "weight_misspecification",
+    "benchmark_not_checked"
+  ],
+  "error_attribution": {
+    "data": "No original pre-open V1 payload; incomplete minute VWAP/OR and TPEx coverage; late generation.",
+    "inference": "Close-return-smaller-than-gap claim failed despite correct positive close.",
+    "weight": "Underweighted financial and non-electronic rotation relative to semiconductor premise.",
+    "magnitude": "Gap overestimated by 40.11bp; close overestimated by 7.77bp.",
+    "regime": "Range not falsified; manual assignment only, fixed classifier score unavailable."
+  },
+  "actual_driver_attribution": [
+    {
+      "claim": "Early heavyweight buying, mid-session selling, later recovery",
+      "evidence": "Economic Daily intraday reporting; OHLC corroborates prior-close breach and positive close.",
+      "causal_status": "reported path, not econometric attribution"
+    },
+    {
+      "claim": "Financial/non-electronic relative leadership with semiconductor weakness",
+      "evidence": {
+        "electronics": 0.05,
+        "semiconductor": -0.26,
+        "financial": 1.29,
+        "ex_financial_electronics": 0.72,
+        "midcap100": 0.19,
+        "smallcap300": 0.08,
+        "taiwan50": 0.18
+      },
+      "causal_status": "official cross-sectional observation; exact index contribution unavailable"
+    }
+  ],
+  "source_conflicts": [
+    {
+      "field": "breadth",
+      "official": {
+        "up": 462,
+        "down": 519,
+        "flat": 100
+      },
+      "CNA_report": {
+        "up": 465,
+        "down": 526,
+        "flat": 117
+      },
+      "resolution": "Use official TWSE stock column. News universe differs/unspecified; do not combine.",
+      "source_url": "https://pchome.megatime.com.tw/news/cat1/20261006/17912658506624018003.html"
+    },
+    {
+      "field": "turnover",
+      "official": 1021722793978,
+      "CNA_regular_session": 975935000000,
+      "resolution": "Different coverage; separately labeled, not treated as same quantity."
+    }
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Persist and verify complete immutable snapshot before market open; classify late reconstructions separately.",
+      "status": "data_quality_fix_required"
+    },
+    {
+      "proposal": "Calibrate gap size separately from overnight directional conviction, preserving ±5bp neutral band.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Add financial/non-electronic rotation and specify a pre-frozen breadth-neutral threshold; test across frozen days.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Evaluate path conjunctions separately from final scenario; gap-fill alone does not imply Bear close.",
+      "status": "monitor_only"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_trading_rule_change",
+    "reason": "Single late-generated research sample cannot justify trading-model changes; workflow integrity fix is needed."
+  },
+  "limitations": [
+    "No formal pre-open benchmark eligibility.",
+    "No minute-series/VWAP or full four-layer intraday breadth; unverified triggers remain unverified.",
+    "Calibration error and fitted-model baseline lift cannot be estimated from this day.",
+    "MI_5MINS_HIST transient redirect; dated CNA OHLC used, close corroborated official MI_INDEX."
+  ],
+  "source_manifest": [
+    {
+      "name": "TWSE MI_INDEX",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261006&type=ALLBUT0999",
+      "role": "Official dated close, sectors, listed-stock breadth and turnover; totals exclude foreign-currency securities per response notes."
+    },
+    {
+      "name": "CNA 2026-10-06 13:50",
+      "url": "https://pchome.megatime.com.tw/news/cat1/20261006/17912658506624018003.html",
+      "role": "Dated OHLC and regular-session turnover; MI_5MINS_HIST currently temporarily redirects."
+    },
+    {
+      "name": "Economic Daily 2026-10-06 13:38",
+      "url": "https://money.udn.com/money/amp/story/5607/9797863",
+      "role": "Intraday order of early high, pullback below previous close, and later recovery; reported heavyweight leadership."
+    }
+  ],
+  "v0_modified": false,
+  "key_driver_evaluation": [
+    {
+      "driver_index": 0,
+      "grade": "partially_correct",
+      "note": "Night-session positive sign consistent with raw positive gap but formal open is flat; night-to-cash magnitude transmission weaker."
+    },
+    {
+      "driver_index": 1,
+      "grade": "partially_correct",
+      "note": "TSMC +0.39% reported, while official semiconductor -0.26%; ADR cannot imply sector-wide advance."
+    },
+    {
+      "driver_index": 2,
+      "grade": "partially_correct",
+      "note": "Dated intraday report documents selling after early rise; concentrated breadth remains, precise profit-taking motive unproven."
+    },
+    {
+      "driver_index": 3,
+      "grade": "partially_correct",
+      "note": "Rates/oil are frozen overnight context; same-day causal impact unavailable, unverified."
+    },
+    {
+      "driver_index": 4,
+      "grade": "partially_correct",
+      "note": "Prior-day FX input retained; same-day FX/flow causal link unverified."
+    },
+    {
+      "driver_index": 5,
+      "grade": "partially_correct",
+      "note": "Company-event schedule incomplete in frozen input; no event-specific causal upgrade from hindsight."
+    }
+  ]
+}
