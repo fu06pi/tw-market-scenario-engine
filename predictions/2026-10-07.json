@@ -1,0 +1,89 @@
+{
+  "trading_date": "2026-10-07",
+  "generated_at": "2026-10-07T08:59:43.496148+08:00",
+  "data_cutoff_at": "2026-10-07T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1",
+  "data_manifest_hash": "91b733c8564bc3ae2ba273b3b31afecc8a610764832c031622d2d7b4d47c5471",
+  "scenarios": {
+    "bull": 0.27,
+    "base": 0.54,
+    "bear": 0.19
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": 8.0,
+    "expected_close_return_bps": 15.0
+  },
+  "narrative": {
+    "market_view": "海外大盤偏多但台灣鏈訊號分歧：Nasdaq與SOX續漲，美債殖利率回落；然而台積電ADR下跌0.72%，台指期夜盤收50,051、下跌31點。加權指數前一日於5萬點前遭拒、等權廣度偏弱，因此主情境是平盤至小幅開高後的高檔震盪，而非直接突破型趨勢日。",
+    "open_hypothesis": "預期現貨相對10/6收盤49,822.55小幅開高，點估+8bps（約40點）。台指夜盤與台積電ADR的負向訊號抵銷美股大盤利多，5萬點整數關卡繼續壓縮Gap幅度。",
+    "intraday_hypothesis": "主型態為range：先測試5萬點與開盤區，若無法有效站穩5萬，容易在高檔反覆拉鋸。電子權值、金融與題材股輪動，日內振幅可能高於收盤方向幅度。",
+    "close_hypothesis": "收盤方向中性偏多，點估相對前收+15bps（約75點），但Base仍定義在±50bps內。海外風險偏好與殖利率回落提供支撐，台積電ADR偏弱、前高供給與外資轉賣限制上行。",
+    "breadth_hypothesis": "breadth_direction=flat。市值加權指數可能優於等權家數；大型電子、電子中小型/OTC、金融、非電子需分層觀察，預期是集中型輪動而非全面risk-on。",
+    "bull_script": "開盤後大型電子守住opening range與VWAP，金融與OTC同步擴散，現貨有效突破並接受50,000點；收盤報酬≥+50bps。",
+    "base_script": "平盤至小幅開高→5萬點前拉鋸→電子與金融輪動但等權廣度普通→收盤落在前收±50bps內、偏向小漲。",
+    "bear_script": "台積電與大型電子延續ADR弱勢，夜盤低點附近承接失敗，指數跌破前收與VWAP、下跌家數擴大；轉為gap_fade或trend_down，收盤≤-50bps。"
+  },
+  "key_drivers": [
+    "TX202610夜盤收50,051、-31點（-0.06%），與美股指數上漲背離，降低開盤Gap信心。",
+    "Nasdaq +0.45%、SOX +0.34%、S&P 500 +0.58%，10年期美債殖利率降3bps至5.281%，海外風險環境偏多。",
+    "台積電ADR -0.72%、聯電ADR約-3%，台灣半導體映射弱於美股科技大盤。",
+    "10/6加權指數高點49,968.92未能突破5萬，收49,822.55、+0.22%；前高供給與心理關卡仍有效。",
+    "10/6上市465家上漲、526家下跌，金融+1.29%，支持指數與等權廣度分離及輪動假設。",
+    "RBI決議時段與台股交易重疊，只在結果相對預期出現surprise時提高方向權重；FOMC minutes屬隔夜風險。"
+  ],
+  "invalidation_conditions": [
+    "09:15–09:30有效突破並站穩50,000，且四層廣度同步擴張，Base range假設失效並轉Bull。",
+    "台積電與核心權值跌破opening range/VWAP、指數失守前收49,822.55且下跌家數擴張，轉Bear。",
+    "RBI決議相對市場預期出現顯著surprise並在台股交易時段引發跨市場同步反應。",
+    "08:50後的新事件不得回寫本快照，只能納入事後誤差歸因。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-02",
+      "item": "台指夜盤與海外半導體背離時需降Gap信心",
+      "note": "海外與本地期貨反向時，降低方向信心與Gap幅度。",
+      "source_row": "模型修正紀錄!A13:J13",
+      "extracted_at": "2026-10-07T08:59:43.496148+08:00",
+      "content_hash": "cfac7ee91454cc9e2dcbad30e9bb3d1d798be7f79c1dd49d72f3e07520a7e01f"
+    },
+    {
+      "trading_date": "2026-10-05",
+      "item": "市場廣度同時看市值加權與等權家數",
+      "note": "市值加權與等權廣度背離時，標記集中型行情。",
+      "source_row": "模型修正紀錄!A16:J16",
+      "extracted_at": "2026-10-07T08:59:43.496148+08:00",
+      "content_hash": "ac3e890e6b16f3461ea16cd8c10cf418372bd219e8d14163598c50cc5e024080"
+    },
+    {
+      "trading_date": "2026-10-06",
+      "item": "前日超大漲＋重大整數關卡會壓縮隔日Gap/Trend延續",
+      "note": "距5萬點不足1%且短期乖離偏高時，Trend prior降為高檔震盪。",
+      "source_row": "模型修正紀錄!A17:J17",
+      "extracted_at": "2026-10-07T08:59:43.496148+08:00",
+      "content_hash": "7bfc4a6e20aef7f07ed7026131ea8c952220dc2830bf01c935b9d3e2fab2017a"
+    },
+    {
+      "trading_date": "2026-10-06",
+      "item": "高beta權值前日急漲後加入隔日均值回歸懲罰",
+      "note": "高beta權值需加入擁擠與均值回歸懲罰。",
+      "source_row": "模型修正紀錄!A18:J18",
+      "extracted_at": "2026-10-07T08:59:43.496148+08:00",
+      "content_hash": "b850161aac38f72d5c751b7b9801f361d34d8e56402f2c6ecfd0d50bc1a4d24f"
+    },
+    {
+      "trading_date": "2026-10-07",
+      "item": "08:41當日V0盤前假說",
+      "note": "平盤至小幅開高、收盤中性偏多、5萬點前高檔震盪、集中型輪動。",
+      "source_row": "每日預測與覆盤!A80:Z88",
+      "extracted_at": "2026-10-07T08:59:43.496148+08:00",
+      "content_hash": "e403f3c09df28b5ea8bdf349f3f59f4823f874bdf4f1ba4fa652acc52733aebd"
+    }
+  ],
+  "snapshot_hash": "4c9f0b49a73aabc6ed75b7e67ddbac2eeb16528a5cc6b11ab26da19ad335dc7e"
+}
