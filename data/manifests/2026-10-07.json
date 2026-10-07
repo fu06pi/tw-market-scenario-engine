@@ -1,0 +1,144 @@
+{
+  "trading_date": "2026-10-07",
+  "status": "formal_preopen",
+  "generated_at": "2026-10-07T08:59:43.496148+08:00",
+  "data_cutoff_at": "2026-10-07T08:50:00+08:00",
+  "aggregate_metric_eligibility": true,
+  "cutoff_validation": "All external inputs were published, observed, or frozen by 08:50 Asia/Taipei. Same-day V0 hypotheses were frozen at 08:41. No cash-session fields were used.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://wwwc.twse.com.tw/zh/trading/holiday.html",
+      "publisher": "TWSE",
+      "published_at": null,
+      "facts": {
+        "is_trading_day": true
+      },
+      "timing_evidence": "2026 calendar lists Oct 9, not Oct 7, as the October holiday."
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport",
+      "publisher": "TAIFEX",
+      "observation_end_at": "2026-10-07T05:00:00+08:00",
+      "facts": {
+        "contract": "TX202610",
+        "open": 50109,
+        "high": 50265,
+        "low": 49950,
+        "last": 50051,
+        "change": -31,
+        "return_pct": -0.06,
+        "volume": 18643
+      },
+      "timing_evidence": "Official 2026/10/06 15:00–2026/10/07 05:00 night-session row; independently summarized at 05:12."
+    },
+    {
+      "id": "us_market",
+      "url": "https://money.udn.com/money/story/123398/9799385",
+      "publisher": "Economic Daily / Reuters",
+      "published_at": "2026-10-07T07:09:26+08:00",
+      "facts": {
+        "nasdaq_close": 27599.79,
+        "nasdaq_return_pct": 0.45,
+        "sp500_close": 7818.95,
+        "sp500_return_pct": 0.58,
+        "sox_close": 13217.82,
+        "sox_return_pct": 0.34,
+        "wti_usd": 89.44,
+        "wti_return_pct": 0.01,
+        "brent_usd": 100.58,
+        "brent_return_pct": 0.26
+      }
+    },
+    {
+      "id": "adr",
+      "url": "https://money.udn.com/money/amp/story/123398/9799387",
+      "publisher": "Economic Daily",
+      "published_at": "2026-10-07T07:20:00+08:00",
+      "facts": {
+        "tsmc_adr_close": 482.3,
+        "tsmc_adr_return_pct": -0.72,
+        "umc_adr_return_pct": -3,
+        "ase_adr_return_pct": "below -1%"
+      }
+    },
+    {
+      "id": "rates",
+      "url": "https://5850web.moneydj.com/z/zf/zufzVIP_004C1C73-FCAC-4124-BB5D-7659F0993407_E_.djhtm",
+      "publisher": "MoneyDJ / CNBC",
+      "published_at": "2026-10-07T07:14:40+08:00",
+      "facts": {
+        "us10y_yield_pct": 5.281,
+        "us10y_delta_bps": -3
+      }
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://www.cna.com.tw/news/afe/202610060131.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-06T13:50:00+08:00",
+      "facts": {
+        "previous_close": 49822.55,
+        "previous_return_pct": 0.22,
+        "previous_open": 49736.37,
+        "previous_high": 49968.92,
+        "previous_low": 49479.69,
+        "previous_turnover_twd_billion": 975.935,
+        "advancers": 465,
+        "decliners": 526,
+        "unchanged": 117,
+        "financial_return_pct": 1.29
+      }
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cnyes.com/archive/forex/TWD.aspx",
+      "publisher": "Anue / Taipei Forex reference",
+      "published_at": null,
+      "observation_end_at": "2026-10-06T16:00:00+08:00",
+      "facts": {
+        "usd_twd_close": 31.781,
+        "change": -0.007,
+        "return_pct": -0.022
+      }
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-07T08:41:00+08:00",
+      "range": "每日預測與覆盤!A80:Z88",
+      "facts": {
+        "items": 9,
+        "summary": "平盤至小幅開高；收盤中性偏多；五萬點前高檔震盪；市值加權可能優於等權廣度；類股輪動且高度分化。"
+      }
+    }
+  ],
+  "feature_values": {
+    "taifex_night_return_pct": -0.06,
+    "sox_return_pct": 0.34,
+    "nasdaq_return_pct": 0.45,
+    "tsmc_adr_return_pct": -0.72,
+    "usd_twd_return_pct": -0.022,
+    "us10y_delta_bps": -3,
+    "oil_return_pct": 0.01,
+    "previous_day_breadth_ratio": 0.8840304182509505,
+    "previous_day_otc_return_pct": null,
+    "previous_day_stock_return_pct": 0.39,
+    "previous_day_relative_volume": null,
+    "macro_event_count_high_impact": 1,
+    "tsmc_event_flag": 0,
+    "major_company_event_count": null,
+    "ex_dividend_weight_points": null
+  },
+  "event_notes": [
+    "RBI decision expected 12:30 Asia/Taipei; only surprise versus expectations should affect direction.",
+    "FOMC minutes scheduled 2026-10-08 02:00 Asia/Taipei; belongs to overnight/next-day gap risk, not 10/7 cash-session prior."
+  ],
+  "limitations": [
+    "No fitted/calibrated model coefficients are available in the alpha scaffold; probabilities and magnitudes are auditable research priors.",
+    "Previous-day OTC return, exact concentration weights, event counts, and ex-dividend points were not independently verified and remain null.",
+    "RBI expectation came from the 08:41 frozen V0 record; it is an event-risk note, not a directional fact."
+  ]
+}
