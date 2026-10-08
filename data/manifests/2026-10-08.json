@@ -1,0 +1,166 @@
+{
+  "trading_date": "2026-10-08",
+  "status": "reconstructed/late_generated",
+  "generated_at": "2026-10-08T09:02:18+08:00",
+  "data_cutoff_at": "2026-10-08T08:50:00+08:00",
+  "original_v0_frozen_content_found": true,
+  "original_v0_frozen_at": "2026-10-08T08:42:00+08:00",
+  "original_v1_payload_found": false,
+  "aggregate_metric_eligibility": false,
+  "cutoff_validation": "Today's V0 hypotheses were frozen at 08:42 Asia/Taipei. External market inputs were published or observed before 08:50. The V1 file was generated after 09:00 and is therefore marked reconstructed/late_generated. No 2026-10-08 cash-session price, opening print, post-08:50 release, or TSMC 13:30 revenue result was used.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?queryYear=115&response=html",
+      "publisher": "TWSE",
+      "published_at": null,
+      "facts": {
+        "is_trading_day": true,
+        "next_holiday": "2026-10-09"
+      },
+      "timing_evidence": "Official 2026 calendar lists Oct 9 as the National Day compensatory holiday; Oct 8 is a trading day."
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport",
+      "corroboration_url": "https://money.udn.com/money/story/11112/9801763",
+      "publisher": "TAIFEX / Economic Daily",
+      "published_at": "2026-10-08T05:09:50+08:00",
+      "observation_end_at": "2026-10-08T05:00:00+08:00",
+      "facts": {
+        "contract": "TX202610",
+        "last": 49593,
+        "reference_change": -375,
+        "reference_return_pct": -0.75,
+        "cash_previous_close": 49806.37,
+        "cash_basis_bps": -42.77,
+        "tsmc_futures_last": 2570,
+        "tsmc_futures_change": -30
+      },
+      "limitations": "Reference change is versus the report's opening reference price; cash basis is separately calculated versus the 10/7 TAIEX close."
+    },
+    {
+      "id": "us_market_adr",
+      "url": "https://money.udn.com/money/story/123398/9801831",
+      "publisher": "Economic Daily / compiled external market data",
+      "published_at": "2026-10-08T07:13:50+08:00",
+      "facts": {
+        "dow_close": 51179.87,
+        "dow_return_pct": -0.7,
+        "sp500_close": 7801.77,
+        "sp500_return_pct": -0.2,
+        "nasdaq_close": 27538.69,
+        "nasdaq_return_pct": -0.2,
+        "sox_close": 13066.15,
+        "sox_return_pct": -1.15,
+        "tsmc_adr_close": 472.2,
+        "tsmc_adr_return_pct": -2.09,
+        "umc_adr_return_pct": 0.52,
+        "ase_adr_return_pct": -2.18
+      }
+    },
+    {
+      "id": "rates_oil_fomc",
+      "url": "https://www.reuters.com/business/us-30-year-bond-yield-hits-fresh-24-year-high-2026-10-07/",
+      "publisher": "Reuters",
+      "published_at": "2026-10-08T06:01:28+08:00",
+      "facts": {
+        "us10y_intraday_high_pct": 5.364,
+        "us10y_late_pct": 5.28,
+        "brent_close_usd": 100.2,
+        "fomc_minutes_signal": "Most officials expected another rate increase in 2026, while markets still leaned toward no October move."
+      },
+      "limitations": "Yield level is a late-session observation reported by Reuters/AP, not an asserted official fixing."
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://www.cna.com.tw/news/afe/202610070141.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-07T13:44:00+08:00",
+      "facts": {
+        "previous_open": 49857.32,
+        "previous_high": 49966.89,
+        "previous_low": 49567.52,
+        "previous_close": 49806.37,
+        "previous_return_pct": -0.03,
+        "turnover_twd_billion": 925.992,
+        "advancers": 595,
+        "decliners": 394,
+        "unchanged": 114,
+        "financial_return_pct": 1.02,
+        "plastics_return_pct": 4.56
+      }
+    },
+    {
+      "id": "fx",
+      "url": "https://www.investing.com/currencies/usd-twd-historical-data",
+      "publisher": "Investing.com historical archive",
+      "published_at": null,
+      "observation_end_at": "2026-10-07T23:59:59+08:00",
+      "facts": {
+        "usd_twd_close": 31.856,
+        "usd_twd_return_pct": 0.2
+      },
+      "limitations": "Secondary historical FX archive; previous-day close only."
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-08T08:42:00+08:00",
+      "range": "每日預測與覆盤!A89:Z97",
+      "facts": {
+        "items": 9,
+        "summary": "開低0.3%–0.8%；收盤中性偏空；等權廣度可能優於加權；大型AI權值偏弱、金融與部分非電子相對抗跌；長假前偏空震盪。"
+      },
+      "limitations": "Read-only reference. No cells, ordering, formulas, schedules, or metadata were modified."
+    },
+    {
+      "id": "company_events",
+      "url": "https://investor.tsmc.com/english/financial-calendar",
+      "publisher": "TSMC Investor Relations",
+      "published_at": null,
+      "facts": {
+        "september_revenue_release_at": "2026-10-08T13:30:00+08:00",
+        "earnings_call_date": "2026-10-15"
+      },
+      "limitations": "The 13:30 revenue result was not yet available at cutoff and is explicitly excluded."
+    }
+  ],
+  "feature_values": {
+    "taifex_night_reference_return_pct": -0.75,
+    "taifex_cash_basis_bps": -42.77,
+    "sox_return_pct": -1.15,
+    "nasdaq_return_pct": -0.2,
+    "tsmc_adr_return_pct": -2.09,
+    "usd_twd_return_pct": 0.2,
+    "us10y_late_pct": 5.28,
+    "oil_brent_usd": 100.2,
+    "previous_day_close_return_pct": -0.03,
+    "previous_day_advancer_decliner_ratio": 1.5102,
+    "holiday_eve_flag": 1,
+    "tsmc_event_after_cutoff_flag": 1,
+    "previous_day_otc_return_pct": null,
+    "tsmc_weight_proxy": null,
+    "top10_weight_concentration": null
+  },
+  "limitations": [
+    "Not an original pre-open V1 sample; exclude from official pre-open aggregate performance and evaluate separately.",
+    "The source V0 narrative was frozen before cutoff, but the V1 quant layer and immutable file were generated after 09:00.",
+    "The repository remains an alpha research scaffold without fitted coefficients; scenario probabilities and magnitudes are explicit uncalibrated analyst priors.",
+    "No 2026-10-08 opening, cash-session, post-cutoff news, TSMC revenue result, or post-open FX/futures move was used.",
+    "TAIFEX report wording contains a secondary-report sign inconsistency; the official-style table and V0 frozen row both record the 49,593 close and -375 reference change."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.14,
+      "base": 0.48,
+      "bear": 0.38
+    },
+    "scenario_definition": "Repo bull close >= +50bps; bear <= -50bps; base between. Probabilities are uncalibrated judgment.",
+    "gap_bps": -55,
+    "gap_reason": "Night futures were below the prior cash close by about 43bps, while SOX and TSMC ADR fell; the estimate discounts the full night reference move and recognizes prior-day positive breadth.",
+    "close_bps": -35,
+    "close_reason": "Negative heavyweight and rate signals are partly offset by prior broad participation and expected holiday-eve de-risking that can suppress follow-through; base remains a weak range close."
+  }
+}
