@@ -1,0 +1,91 @@
+{
+  "trading_date": "2026-10-08",
+  "generated_at": "2026-10-08T09:02:18+08:00",
+  "data_cutoff_at": "2026-10-08T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1-late-reconstruction",
+  "data_manifest_hash": "c9fc52453650dc925c2dea907d7b5fc51e68d854cc1b431335adb34389af04d2",
+  "scenarios": {
+    "bull": 0.14,
+    "base": 0.48,
+    "bear": 0.38
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": -55,
+    "expected_close_return_bps": -35
+  },
+  "narrative": {
+    "market_view": "【reconstructed/late_generated】今日V0九項盤前內容已於08:42凍結，但V1量化層與GitHub檔案在09:00後生成；本檔不是正式準時盤前V1樣本，aggregate_metric_eligibility=false，評估須單獨標記。所有輸入限定08:50以前，未使用10/8現貨開盤或盤中資料。隔夜台指期、SOX與台積電ADR同向偏空，加上美債長端高檔與連假前部位調整，主情境為開低後偏弱震盪；昨日正向等權廣度可能限制跌勢擴散。",
+    "open_hypothesis": "預期相對10/7現貨收盤49,806.37開低，點估-55bps（約-274點，約49,532點）。台指夜盤相對前收約-43bps、SOX -1.15%、TSM ADR -2.09%同向；不把夜盤相對參考價-375點機械等同現貨Gap。",
+    "intraday_hypothesis": "主型態為range、偏弱震盪：早盤大型電子承壓，若金融與非電子延續相對強勢，指數可能在開低後收斂；國慶連假前追價與追空意願都可能下降。若首30分鐘權值、廣度與VWAP同步惡化，才升級為trend_down。",
+    "close_hypothesis": "收盤方向偏空，點估相對前收-35bps（約-174點，約49,632點），仍落在repo Base的±50bps區間。長端利率與半導體映射壓抑權值，但昨日595漲/394跌與金融、傳產擴散提供緩衝。",
+    "breadth_hypothesis": "breadth_direction=flat。預期Cap-weight弱於Equal-weight：大型電子偏弱，電子中小型高度分化；金融與部分非電子可能相對抗跌，但在連假前不直接外推昨日塑化等族群的大幅上漲。",
+    "bull_script": "開低後台積電與大型電子迅速收復opening range/VWAP，金融、OTC與非電子同步維持正廣度，指數收復前收49,806.37並向50,000回測；收盤報酬≥+50bps。",
+    "base_script": "開低約0.3%–0.8%→大型電子偏弱、金融與非電子相對抗跌→成交與追價受連假前效應壓抑→指數在49,500附近上下震盪，收盤介於前收±50bps且偏向小跌。",
+    "bear_script": "台積電與核心權值跌破opening range/VWAP，昨日等權強勢無法延續、下跌家數擴大；夜盤低位失守後形成trend_down，收盤報酬≤-50bps。"
+  },
+  "key_drivers": [
+    "TX202610夜盤收49,593、相對報告參考價-375點；相對10/7現貨收49,806.37約低213點（-42.8bps）。",
+    "Nasdaq -0.2%、SOX -1.15%、台積電ADR -2.09%，海外科技與台灣權值映射同向偏空。",
+    "美國10年期殖利率盤中高見5.364%、尾盤約5.28%；FOMC minutes仍顯示多數官員預期年內再升息，估值壓力未消。",
+    "USD/TWD前日收31.856、美元升約0.2%，台幣走弱對外資風險偏好偏不利。",
+    "10/7 TAIEX僅-0.03%，但595家上漲、394家下跌，金融+1.02%、塑化+4.56%，提示Equal-weight可能優於Cap-weight。",
+    "10/9休市，10/8為國慶連假前最後交易日；假前流動性因子降低日內趨勢延續先驗。",
+    "台積電9月營收預定13:30發布，晚於08:50 cutoff；結果未使用且不得回填。"
+  ],
+  "invalidation_conditions": [
+    "首30分鐘台積電與大型電子收復opening range及VWAP，指數收復49,806.37且四層廣度同步轉強，Base偏弱假設失效並轉Bull。",
+    "指數跌破夜盤49,593附近且核心權值、OTC、金融與非電子同步轉弱，下跌家數擴大，轉Bear/trend_down。",
+    "等權廣度延續強勢但大型權值弱，仍屬Cap/Equal背離，不得把指數下跌直接解讀為全面Risk-off。",
+    "08:50後的新事件、09:00後開盤與盤中行情、13:30台積電營收結果只可進入事後歸因，不得回寫本快照。",
+    "late_generated狀態不得混入正式準時盤前樣本的aggregate metrics。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-08",
+      "item": "08:42當日V0九項盤前假說",
+      "note": "開低0.3%–0.8%；收盤中性偏空；等權可能優於加權；大型AI權值偏弱、金融與非電子相對抗跌；假前偏空震盪。",
+      "source_row": "每日預測與覆盤!A89:Z97",
+      "extracted_at": "2026-10-08T09:02:18+08:00",
+      "content_hash": "1f8e6bcd9e64b5b59ff5308cb28abc275f341b7c7dff5bb74afc6c8ae2fa21a6"
+    },
+    {
+      "trading_date": "2026-09-24",
+      "item": "長假前流動性需獨立建模",
+      "note": "連假前最後交易日降低全天趨勢延續先驗，提高量縮、早盤波動後收斂與個股輪動權重。",
+      "source_row": "模型修正紀錄!A8:J8",
+      "extracted_at": "2026-10-08T09:02:18+08:00",
+      "content_hash": "d8891cdcc0f32d5ee1cabbdbb9880fc4daa42f4bd44a4bc71fe823891068c68f"
+    },
+    {
+      "trading_date": "2026-09-30",
+      "item": "Gap幅度需加入台指期夜盤基差確認",
+      "note": "SOX/ADR判斷外部方向，夜盤相對現貨前收校正Gap幅度；不直接推論Close。",
+      "source_row": "模型修正紀錄!A13:J13",
+      "extracted_at": "2026-10-08T09:02:18+08:00",
+      "content_hash": "289c709f56df687b56607976cb8d31a661ef0a58a6f30ec5ccea2db44233694f"
+    },
+    {
+      "trading_date": "2026-10-07",
+      "item": "市場廣度需判斷背離方向，不只是否背離",
+      "note": "Cap-weight與Equal-weight分開預測，不預設誰強；加入金融與非電子擴散作Equal-weight先驗。",
+      "source_row": "模型修正紀錄!A17:J17",
+      "extracted_at": "2026-10-08T09:02:18+08:00",
+      "content_hash": "924eb4da89a317597dfb6a074bef5fccec0f67b54699525c7c66733c4e7f3d4a"
+    },
+    {
+      "trading_date": "2026-10-07",
+      "item": "高beta均值回歸必須由價格確認",
+      "note": "急跌後不機械押反彈；首30分鐘相對TAIEX、VWAP與開盤區確認後才升級。",
+      "source_row": "模型修正紀錄!A19:J19",
+      "extracted_at": "2026-10-08T09:02:18+08:00",
+      "content_hash": "3ec5bd91f810079a11e0b2f51ee0ba3e92b0bfd24f1c25c1bc0509db26d8a9ed"
+    }
+  ],
+  "snapshot_hash": "c716ed86c452a656580ee30c04e5ab879a00a90553460683dd9e65aa60ed1418"
+}
