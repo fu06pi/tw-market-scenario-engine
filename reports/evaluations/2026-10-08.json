@@ -1,0 +1,323 @@
+{
+  "trading_date": "2026-10-08",
+  "evaluation_version": "v1-postclose-3",
+  "evaluated_at": "2026-10-08T15:14:15+08:00",
+  "status": "provisional_late_generated_reconstructed_baseline",
+  "aggregate_metric_eligibility": false,
+  "model_version": "v1.0.0-alpha",
+  "feature_version": "v1.0.0-alpha",
+  "prompt_version": "automation-v1-late-reconstruction",
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-08.json",
+    "git_blob_sha": "aab72ac7da62820988628a5fabcdea4eb8c0d1d7",
+    "git_commit_sha": "fb4feb917b8a0a4605c8485aede19d3f172c8795",
+    "persisted_at": "2026-10-08T09:03:32+08:00",
+    "snapshot_hash": "c716ed86c452a656580ee30c04e5ab879a00a90553460683dd9e65aa60ed1418",
+    "computed_snapshot_hash": "c716ed86c452a656580ee30c04e5ab879a00a90553460683dd9e65aa60ed1418",
+    "integrity_verified": true,
+    "immutable_snapshot_mutated": false,
+    "generated_at": "2026-10-08T09:02:18+08:00",
+    "data_cutoff_at": "2026-10-08T08:50:00+08:00",
+    "provenance": "Reconstructed after the 09:00 cash open from a frozen 08:42 V0 narrative and stated pre-08:50 sources. Excluded from formal aggregate metrics despite canonical hash verification."
+  },
+  "realization": {
+    "path": "realizations/2026-10-08.json",
+    "trading_date": "2026-10-08",
+    "previous_close": 49806.37,
+    "open": 49783.06,
+    "high": 49783.06,
+    "low": 49189.77,
+    "close": 49313.44,
+    "change_points": -492.93,
+    "change_pct": -0.99,
+    "turnover": 920171864560,
+    "turnover_unit": "TWD",
+    "turnover_scope": "TWSE total (1~15) from official MI_INDEX",
+    "regular_session_turnover_twd": 869696000000,
+    "breadth_up": 425,
+    "breadth_down": 540,
+    "breadth_flat": 109,
+    "breadth_uncompared": 5,
+    "breadth_scope": "TWSE official stock column; excludes ETFs/warrants and does not combine TPEx",
+    "otc_return_pct": null,
+    "heavyweight_contribution_points": {},
+    "sector_returns_pct": {
+      "taiwan50": -1.28,
+      "midcap100": -0.03,
+      "smallcap300": -0.25,
+      "electronics": -1.07,
+      "semiconductor": -1.18,
+      "financial": -1.68,
+      "ex_financial_electronics": 0.15,
+      "plastics": 0.5,
+      "oil_gas": 3.04
+    },
+    "source_manifest": [
+      {
+        "name": "TWSE TAIEX historical OHLC",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261008",
+        "role": "Official dated open, high, low and close."
+      },
+      {
+        "name": "TWSE MI_INDEX 2026-10-08",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261008&type=ALLBUT0999",
+        "role": "Official close, sector indices, market turnover and listed-stock breadth."
+      },
+      {
+        "name": "Central News Agency 2026-10-08",
+        "url": "https://tw.news.yahoo.com/%E9%9B%BB%E5%AD%90%E9%87%91%E8%9E%8D%E5%BC%B1%E5%8B%A2-%E5%8F%B0%E8%82%A1%E4%B8%8B%E8%B7%8C492-93%E9%BB%9E%E6%94%B649313-44%E9%BB%9E-054824942.html",
+        "role": "Dated intraday path and regular-session turnover."
+      },
+      {
+        "name": "Economic Daily 2026-10-08 13:53",
+        "url": "https://money.udn.com/money/story/12509/9802811",
+        "role": "Dated heavyweight and sector context; official values take precedence."
+      }
+    ]
+  },
+  "quantitative_evaluation": {
+    "trading_date": "2026-10-08",
+    "open_direction_realized": "flat",
+    "open_direction_hit": 0,
+    "close_direction_realized": "down",
+    "close_direction_hit": 1,
+    "expected_open_gap_bps": -55,
+    "open_gap_bps_realized": -4.680124249167861,
+    "open_gap_mae_bps": 50.31987575083214,
+    "expected_close_return_bps": -35,
+    "close_return_bps_realized": -98.96926838876219,
+    "close_return_mae_bps": 63.96926838876219,
+    "mfe_bps": -4.680124249167861,
+    "mae_bps": -123.79942565579616,
+    "intraday_range_bps": 119.11930140662749,
+    "scenario_probabilities": {
+      "bull": 0.14,
+      "base": 0.48,
+      "bear": 0.38
+    },
+    "scenario_outcome": "bear",
+    "top_scenario_hit": false,
+    "brier_score": 0.2114666666666667,
+    "calibration_error": null,
+    "baseline_lift": null,
+    "realized_intraday_regime": "trend_down",
+    "regime_hit": 0,
+    "realized_breadth_direction": "down",
+    "breadth_direction_hit": 0,
+    "classification_notes": {
+      "direction": "Repo ±5bp neutral band: open -4.68bp is flat; close -98.97bp is down.",
+      "scenario": "Repo metrics.py: strict >+50bp bull, <-50bp bear, otherwise base.",
+      "regime": "Manual label from OHLC and dated reporting: open equaled daily high, index moved lower to -123.80bp and closed -98.97bp.",
+      "breadth": "Official TWSE stock counts: 425 up vs 540 down = down. Breadth hit remains provisional because the repo lacks a frozen neutral-band formula.",
+      "brier": "Mean squared multiclass Brier score per repo."
+    }
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "Bearish direction and large-electronics pressure were correct, but the open was flat rather than a large gap down, and the session became trend_down instead of range."
+    },
+    "open_hypothesis": {
+      "grade": "incorrect",
+      "note": "Forecast -55bp versus realized -4.68bp, flat under the repo ±5bp band. Gap magnitude was overestimated by 50.32bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "incorrect",
+      "note": "The market opened at its daily high and moved lower. Realized trend_down contradicts the predicted weak range and holiday-related mean reversion."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Down direction was correct, but forecast -35bp/Base versus realized -98.97bp/Bear. Downside magnitude was underestimated by 63.97bp."
+    },
+    "breadth_hypothesis": {
+      "grade": "incorrect",
+      "note": "Official listed-stock breadth was negative, 425 advancers versus 540 decliners, while the forecast was flat. Cap-weight still underperformed equal-weight, but weakness broadened more than expected."
+    },
+    "bull_script": {
+      "grade": "not_realized",
+      "note": "The index never recovered the previous close; close return was far below +50bp."
+    },
+    "base_script": {
+      "grade": "incorrect",
+      "note": "The predicted opening gap did not occur, support was insufficient to keep the close in ±50bp, and the session trended down."
+    },
+    "bear_script": {
+      "grade": "correct",
+      "note": "Core heavyweight weakness, negative breadth and a close below -50bp aligned with Bear. VWAP and opening-range conjunctions remain unverified."
+    }
+  },
+  "key_driver_evaluation": [
+    {
+      "driver_index": 0,
+      "grade": "partially_correct",
+      "note": "Night weakness predicted daily direction but substantially overstated the cash-open gap."
+    },
+    {
+      "driver_index": 1,
+      "grade": "correct",
+      "note": "Electronics -1.07%, semiconductors -1.18%, TSMC -1.35% and other large electronics were weak."
+    },
+    {
+      "driver_index": 2,
+      "grade": "partially_correct",
+      "note": "Rates supplied plausible valuation pressure, but their exact causal contribution cannot be isolated."
+    },
+    {
+      "driver_index": 3,
+      "grade": "unverified",
+      "note": "Prior-day FX was context; its same-day causal effect was not isolated."
+    },
+    {
+      "driver_index": 4,
+      "grade": "partially_correct",
+      "note": "Equal-weight resilience relative to cap-weight persisted, but official breadth turned negative and financials fell 1.68%."
+    },
+    {
+      "driver_index": 5,
+      "grade": "incorrect",
+      "note": "The holiday prior lowered trend probability, yet the session was trend_down and regular-session turnover remained about TWD 869.7bn."
+    },
+    {
+      "driver_index": 6,
+      "grade": "satisfied_process_rule",
+      "note": "The 13:30 TSMC revenue release was excluded from the prediction and is not treated as a pre-open driver."
+    }
+  ],
+  "invalidation_condition_evaluation": [
+    {
+      "condition": "首30分鐘台積電與大型電子收復opening range及VWAP，指數收復49,806.37且四層廣度同步轉強，Base偏弱假設失效並轉Bull。",
+      "grade": "not_triggered",
+      "note": "Index did not recover the prior close and large electronics remained weak."
+    },
+    {
+      "condition": "指數跌破夜盤49,593附近且核心權值、OTC、金融與非電子同步轉弱，下跌家數擴大，轉Bear/trend_down。",
+      "grade": "partially_triggered",
+      "note": "Index breached the night reference area and breadth was negative. Core electronics and financials weakened, while some non-electronics stayed positive. VWAP and intraday OTC conditions are unverified."
+    },
+    {
+      "condition": "等權廣度延續強勢但大型權值弱，仍屬Cap/Equal背離，不得把指數下跌直接解讀為全面Risk-off。",
+      "grade": "correct_interpretation",
+      "note": "Cap-weight fell more than MidCap/SmallCap and ex-financial/electronics was +0.15%, so the move was not uniform risk-off."
+    },
+    {
+      "condition": "08:50後的新事件、09:00後開盤與盤中行情、13:30台積電營收結果只可進入事後歸因，不得回寫本快照。",
+      "grade": "satisfied",
+      "note": "Snapshot remained unchanged; post-cutoff data entered only the evaluation."
+    },
+    {
+      "condition": "late_generated狀態不得混入正式準時盤前樣本的aggregate metrics。",
+      "grade": "satisfied",
+      "note": "Aggregate eligibility is false because generation and persistence occurred after open."
+    }
+  ],
+  "error_labels": [
+    "late_prediction_generation",
+    "missing_information",
+    "wrong_direction",
+    "magnitude_overestimate",
+    "magnitude_underestimate",
+    "regime_misclassification",
+    "breadth_vs_index_confusion",
+    "weight_misspecification"
+  ],
+  "error_attribution": {
+    "data": "No formal pre-open V1 snapshot. Minute VWAP/opening-range, intraday breadth and TPEx breadth are absent.",
+    "inference": "Correct bearish terminal direction was assigned too much to the opening gap and too little to intraday continuation.",
+    "weight": "Holiday mean reversion and financial/non-electronic support were overweighted relative to large-cap, electronics and financial weakness.",
+    "magnitude": "Opening downside overestimated by 50.32bp; closing downside underestimated by 63.97bp.",
+    "regime": "Range prediction missed realized trend_down."
+  },
+  "actual_driver_attribution": [
+    {
+      "claim": "Large-cap electronics and financials pulled the weighted index lower.",
+      "evidence": "Taiwan 50 -1.28%, electronics -1.07%, semiconductor -1.18%, financial -1.68%; reported TSMC -1.35%, MediaTek -3.00% and Quanta -2.84%.",
+      "causal_status": "Strong descriptive alignment; exact point contribution unavailable."
+    },
+    {
+      "claim": "The selloff broadened but was not uniform.",
+      "evidence": "Official breadth 425 up versus 540 down; MidCap 100 -0.03%, SmallCap 300 -0.25%, ex-financial/electronics +0.15%, oil/gas +3.04%.",
+      "causal_status": "Official cross-sectional observation."
+    },
+    {
+      "claim": "Holiday positioning may have reduced risk appetite.",
+      "evidence": "Dated reports cite pre-holiday caution, while turnover remained substantial.",
+      "causal_status": "Plausible narrative, not independently causal."
+    }
+  ],
+  "source_conflicts": [
+    {
+      "field": "breadth",
+      "official": {
+        "up": 425,
+        "down": 540,
+        "flat": 109
+      },
+      "economic_daily": {
+        "up": 434,
+        "down": 629
+      },
+      "other_news": {
+        "up": 496,
+        "down": 732
+      },
+      "resolution": "Use official TWSE stock column because news universes differ or are incompletely specified."
+    },
+    {
+      "field": "turnover",
+      "official_total_twd": 920171864560,
+      "regular_session_news_twd": 869696000000,
+      "resolution": "Retain separately because coverage differs."
+    }
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Separate overnight direction from cash-open gap estimation. Aligned bearish signals may forecast intraday continuation even when the opening auction absorbs the gap.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Make the holiday effect conditional on opening-range acceptance, volume and breadth instead of automatically lowering trend probability.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Model breadth and cap-weight direction separately; do not assume prior-session financial strength persists.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Require generation and persistence before 09:00 for benchmark eligibility.",
+      "status": "data_quality_fix_required"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_trading_rule_change",
+    "reason": "The timing error is useful for monitoring, but a late-generated sample cannot justify a rule change without repeated formal observations or walk-forward evidence."
+  },
+  "limitations": [
+    "No formal pre-open benchmark eligibility.",
+    "No minute VWAP/opening-range series, intraday breadth path or TPEx breadth.",
+    "Calibration error and baseline lift require multiple eligible frozen days.",
+    "The 13:30 TSMC revenue release is post-cutoff and does not upgrade the forecast explanation."
+  ],
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261008",
+      "role": "Official dated open, high, low and close."
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-08",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261008&type=ALLBUT0999",
+      "role": "Official close, sector indices, market turnover and listed-stock breadth."
+    },
+    {
+      "name": "Central News Agency 2026-10-08",
+      "url": "https://tw.news.yahoo.com/%E9%9B%BB%E5%AD%90%E9%87%91%E8%9E%8D%E5%BC%B1%E5%8B%A2-%E5%8F%B0%E8%82%A1%E4%B8%8B%E8%B7%8C492-93%E9%BB%9E%E6%94%B649313-44%E9%BB%9E-054824942.html",
+      "role": "Dated intraday path and regular-session turnover."
+    },
+    {
+      "name": "Economic Daily 2026-10-08 13:53",
+      "url": "https://money.udn.com/money/story/12509/9802811",
+      "role": "Dated heavyweight and sector context; official values take precedence."
+    }
+  ],
+  "v0_modified": false
+}
