@@ -1,3 +1,17 @@
+# TW Market OHLC Forecast Engine — Codex handoff
+
+**Current direction (2026-10-07):** quantitative TAIEX and contract-specific TX daytime OHLC forecasts first; frozen numerical output then feeds narrative reports with news/world/financial context. TEJ access is deferred.
+
+Start with [CODEX_HANDOFF.md](CODEX_HANDOFF.md), [AGENTS.md](AGENTS.md), and the [OHLC architecture](docs/architecture/TW_OHLC_QUANT_ARCHITECTURE.md). First milestone: official-source/CSV ingestion, naive and ARIMA forecasters, reproducible walk-forward evaluation.
+
+**Status:** architecture/handoff prepared; new OHLC models and measured accuracy are not yet established. Existing live tasks and historical records continue during development.
+
+---
+
+## Legacy scenario-engine documentation
+
+The text below records the previous text-first system. New OHLC implementation follows the current direction above.
+
 # TW Market Scenario Engine (V1 Quant)
 
 A quantitative, auditable research system for generating **pre-open Taiwan equity market scenarios**, freezing them as immutable prediction snapshots, and validating them against **actual open / intraday / close** outcomes after the market closes.
