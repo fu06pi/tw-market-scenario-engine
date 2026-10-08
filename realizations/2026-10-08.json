@@ -1,0 +1,54 @@
+{
+  "trading_date": "2026-10-08",
+  "previous_close": 49806.37,
+  "open": 49783.06,
+  "high": 49783.06,
+  "low": 49189.77,
+  "close": 49313.44,
+  "change_points": -492.93,
+  "change_pct": -0.99,
+  "turnover": 920171864560,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE total (1~15) from official MI_INDEX",
+  "regular_session_turnover_twd": 869696000000,
+  "breadth_up": 425,
+  "breadth_down": 540,
+  "breadth_flat": 109,
+  "breadth_uncompared": 5,
+  "breadth_scope": "TWSE official stock column; excludes ETFs/warrants and does not combine TPEx",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "taiwan50": -1.28,
+    "midcap100": -0.03,
+    "smallcap300": -0.25,
+    "electronics": -1.07,
+    "semiconductor": -1.18,
+    "financial": -1.68,
+    "ex_financial_electronics": 0.15,
+    "plastics": 0.5,
+    "oil_gas": 3.04
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261008",
+      "role": "Official dated open, high, low and close."
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-08",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261008&type=ALLBUT0999",
+      "role": "Official close, sector indices, market turnover and listed-stock breadth."
+    },
+    {
+      "name": "Central News Agency 2026-10-08",
+      "url": "https://tw.news.yahoo.com/%E9%9B%BB%E5%AD%90%E9%87%91%E8%9E%8D%E5%BC%B1%E5%8B%A2-%E5%8F%B0%E8%82%A1%E4%B8%8B%E8%B7%8C492-93%E9%BB%9E%E6%94%B649313-44%E9%BB%9E-054824942.html",
+      "role": "Dated intraday path and regular-session turnover."
+    },
+    {
+      "name": "Economic Daily 2026-10-08 13:53",
+      "url": "https://money.udn.com/money/story/12509/9802811",
+      "role": "Dated heavyweight and sector context; official values take precedence."
+    }
+  ]
+}
