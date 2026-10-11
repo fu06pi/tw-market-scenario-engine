@@ -1,43 +1,40 @@
 # Project Status
 
-## V0
+更新：2026-10-11。
 
-Existing text-first Google Sheet workflow.
+## 架構決策已確認
+- [x] 在既有 repo 改造 V1，不另建脫節系統。
+- [x] 使用者確認持有 TEJ API，取消暫緩 TEJ 的開發順序。
+- [x] V1 數字預測 → 凍結快照 → 原本 V0／V01 晨報 → 收盤驗證。
+- [x] 兩標的：TAIEX 與指定月份 TX 日盤 OHLC；08:30 截止、08:40 前保存。
+- [x] 固定研究驗收門檻、時序驗證與有預算的迭代／停止規則。
+- [x] 改造前四份文件已備份 Google Drive，保留來源 commit 與 SHA-256。
+- [x] 更新 README、AGENTS、交接與狀態文件；舊架構保留為歷史設計參考。
 
-- remains active and valuable as a qualitative research record;
-- is not modified by V1;
-- may be consulted read-only;
-- may later be exported into frozen research snapshots with provenance.
+上述是文件／決策完成，不代表程式、模型或正式流程已完成。
 
-## V1 Quant
+## 既有骨架
+- [x] 情境預測及 realization 資料結構。
+- [x] 快照／hash 與原有方向、幅度、概率評分。
+- [x] 固定權重夜盤開盤 baseline。
+- [x] 舊情境預測、實際結果及評估檔案。
 
-Created as a separate quantitative redesign that preserves the narrative-first output philosophy.
+這些是 legacy 成果，不是 TimesFM 微調、ARIMA 實作或新模型準確率證據。
 
-### Implemented scaffold
+## 待實作與驗證
+- [ ] TEJ 憑證可用性、資料表授權、額度與歷史覆蓋。
+- [ ] TEJ／官方／CSV adapters、增量快取與資料品質報告。
+- [ ] 時段、交易日、同合約前收、換月與歷史 as-of。
+- [ ] 新版 OHLC schema、目標表示及一致性還原。
+- [ ] 基準、ARIMA／ARIMAX 與逐日回測。
+- [ ] TimesFM 3 官方可用版本、權重授權與訓練介面查核。
+- [ ] 零樣本、外部特徵、微調與獨立／聯合市場實驗。
+- [ ] 最終測試、區間校準、達標評估與固定版本前向測試。
+- [ ] 重現 CLI、最佳 checkpoint 與完整實驗紀錄。
+- [ ] 原本晨報讀取 forecast_id、消息補充與數字一致性驗證。
+- [ ] Google Sheet／收盤驗證／每日排程端到端測試與切換。
 
-- [x] Target separation: open / intraday / close / breadth
-- [x] Mandatory written narrative hypotheses in prediction model
-- [x] Bull / Base / Bear narrative scripts + probabilities
-- [x] Immutable prediction schema + hash
-- [x] Market realization schema
-- [x] Direction + magnitude evaluation
-- [x] Brier score
-- [x] Naive overnight-open baseline
-- [x] Error taxonomy
-- [x] KPI framework
-- [x] Walk-forward research design
-- [x] V0 read-only boundary / reference policy
-- [x] LaTeX flowchart + architecture diagram
+## 運作狀態
+本次未修改程式、歷史快照、Google Sheet 或既有排程；也未重新驗證排程目前是否正常觸發。開發期間須維持舊流程，完成新流程驗證後才切換。
 
-### Next
-
-- [ ] official-source ingestion adapters
-- [ ] read-only V0 reference/export adapter
-- [ ] feature-frame builder
-- [ ] dataset manifest hashing
-- [ ] logistic / tree baselines
-- [ ] narrative-to-coded-claim validator
-- [ ] 60+ day frozen live sample
-- [ ] calibration dashboard
-- [ ] model registry implementation
-- [ ] commercial/legal feasibility review
+目前沒有新模型的實測 MAE、方向命中率或區間覆蓋率；驗收門檻尚未證明達成。
