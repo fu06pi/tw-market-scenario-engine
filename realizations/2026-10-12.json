@@ -1,0 +1,59 @@
+{
+  "trading_date": "2026-10-12",
+  "previous_close": 49313.44,
+  "open": 49272.08,
+  "high": 49412.9,
+  "low": 48768.82,
+  "close": 49301.96,
+  "change_points": -11.48,
+  "change_pct": -0.02,
+  "turnover": 920172000000,
+  "turnover_unit": "TWD",
+  "turnover_scope": "Listed-market aggregate displayed by StatementDog; rounded to TWD 0.01bn",
+  "regular_session_turnover_twd": 843931000000,
+  "breadth_up": 550,
+  "breadth_down": 460,
+  "breadth_flat": 97,
+  "breadth_uncompared": null,
+  "breadth_scope": "TWSE listed stocks as reported by CNA/Economic Daily; excludes unspecified ETF/warrant universes",
+  "otc_return_pct": 0.28,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "electronics": -0.37,
+    "financial": 2.87,
+    "cement_ceramics": 1.68,
+    "food": 0.32,
+    "plastics": -1.25,
+    "textiles": 0.37,
+    "machinery_electrical": -0.35,
+    "paper": 0.27,
+    "construction": 1.03
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC endpoint",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261012",
+      "role": "Official dated OHLC endpoint; values cross-checked against dated CNA/Economic Daily reporting."
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-12",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261012&type=ALLBUT0999",
+      "role": "Official dated market-summary endpoint for close, sectors, turnover and breadth."
+    },
+    {
+      "name": "Economic Daily / CNA 2026-10-12 14:01",
+      "url": "https://money.udn.com/money/story/5607/9809367",
+      "role": "Dated OHLC, regular-session turnover, sectors and 550/460/97 listed-stock breadth."
+    },
+    {
+      "name": "StatementDog TAIEX 2026-10-12",
+      "url": "https://statementdog.com/taiex",
+      "role": "Cross-check for close, change, TPEx return and aggregate listed-market turnover."
+    },
+    {
+      "name": "Formosa News 2026-10-12",
+      "url": "https://my-formosa.com.tw/DOC_229889.htm",
+      "role": "Dated intraday path and heavyweight/sector context."
+    }
+  ]
+}
