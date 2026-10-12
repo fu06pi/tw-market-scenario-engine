@@ -1,0 +1,83 @@
+{
+  "trading_date": "2026-10-12",
+  "generated_at": "2026-10-12T08:58:07+08:00",
+  "data_cutoff_at": "2026-10-12T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-compat",
+  "feature_version": "legacy-scenario-features-v1",
+  "prompt_version": "automation-v1-legacy-compat",
+  "data_manifest_hash": "e7a4a1b96d9bc9120187e45bf189e9df92ed310c44fcc1f2d9b6224cdfc88882",
+  "scenarios": {
+    "bull": 0.13,
+    "base": 0.39,
+    "bear": 0.48
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "range",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -80,
+    "expected_close_return_bps": -90
+  },
+  "narrative": {
+    "market_view": "【legacy compatibility；非新OHLC模型輸出】本檔於開盤前生成；repo已進入TEJ＋TAIEX/TX日盤OHLC模型改造，但該模型尚未實作與切換，因此今天僅保存既有情境流程，不得列入TimesFM／ARIMA／OHLC績效。國慶連假後重開，最後台指夜盤與半導體映射偏空，Friday美股大盤反彈未獲SOX與TSM ADR確認，主情境為開低後高波動偏弱震盪。",
+    "open_hypothesis": "預期相對10/8現貨收49,313.44開低，點估-80bps（約-395點，約48,919點）。V0原始區間為開低0.4%–1.3%；台指夜盤48,705與TSM ADR累積弱勢支持方向，但不將期貨折價機械等同現貨Gap。",
+    "intraday_hypothesis": "主型態為range、偏弱且高波動。Reopen Regime可能讓累積資訊在開盤後繼續消化；若大幅低開後大型權值收復opening range與VWAP，存在反彈路徑。日OHLC無法證明高低點先後，本段只作待驗證情境。",
+    "close_hypothesis": "收盤相對10/8偏空，點估-90bps（約-444點，約48,870點）。Nasdaq與S&P週五反彈提供緩衝，但SOX、TSM ADR、最後夜盤與10/8廣度共同偏弱。",
+    "breadth_hypothesis": "breadth_direction=down。預期上市上漲家數占比低於50%，但不把權值下跌直接等同正式等權報酬；大型電子、電子中小型、金融與非電子分層驗證。",
+    "bull_script": "開低後台積電與大型電子迅速收復opening range/VWAP，SOX弱勢未進一步傳導，金融與非電子同步改善，指數收復49,313.44；收盤≥+50bps。",
+    "base_script": "開低0.4%–1.3%後出現反彈與再測低點的高波動區間，大型半導體偏弱、題材子群分化，收盤介於前收±50bps。",
+    "bear_script": "開盤後大型電子、金融與中小型同步轉弱，夜盤48,705附近缺乏承接、上市下跌家數擴大；收盤≤-50bps。"
+  },
+  "key_drivers": [
+    "最後台指期夜盤收48,705、相對參考價-652點；相對10/8現貨收盤約-1.23%。",
+    "10/9 Nasdaq +0.64%、S&P 500 +0.59%，但SOX -0.41%、TSM ADR -1.02%，大盤與半導體映射背離。",
+    "TSM ADR較10/7累積約-4%，提高台積電現貨開盤偏弱先驗。",
+    "10/8 TAIEX -0.99%，上市437漲/551跌，金融-1.68%，前日廣度與防禦層同時轉弱。",
+    "美國10年期殖利率約5.243%、Brent約104.72美元，高利率與能源價格仍是估值及通膨風險。",
+    "台積電9月營收5,118.57億元、年增54.6%，基本面正向但與海外價格反應分離；10/15法說未公布內容不得提前使用。",
+    "國慶連假後首次交易使用Reopen Regime，不以單一最後夜盤代表全部累積資訊。"
+  ],
+  "invalidation_conditions": [
+    "開低後30分鐘內台積電與大型電子收復opening range及VWAP，指數收復49,313.44且上漲家數過半，偏空主情境失效。",
+    "跌破48,705附近且大型電子、金融、OTC與非電子同步轉弱，Bear/trend_down風險上升。",
+    "Nasdaq大盤反彈不能在沒有本地價格確認時自動覆蓋SOX與TSM ADR弱勢。",
+    "08:50後資訊與09:00後現貨行情不得回寫本快照，只能納入事後歸因。",
+    "本檔不得宣稱為TEJ、ARIMA或TimesFM OHLC模型預測。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-12",
+      "item": "08:38當日V0十項盤前假說",
+      "note": "Reopen Regime；開低0.4%–1.3%；收盤偏空；上漲家數低於50%；大型半導體偏弱、子產業分化。",
+      "source_row": "每日預測與覆盤!A98:Z107",
+      "extracted_at": "2026-10-12T08:58:07+08:00",
+      "content_hash": "4413d91a8c49601554712cf041506292e97cd01b07f9d944744a107b1d640e03"
+    },
+    {
+      "trading_date": "2026-09-29",
+      "item": "連假後首次開盤需使用獨立Reopen Regime",
+      "note": "使用休市期間累積海外資訊；Close提高開盤後廣度與權值承接權重。",
+      "source_row": "模型修正紀錄!A10:J10",
+      "extracted_at": "2026-10-12T08:58:07+08:00",
+      "content_hash": "67cc04e6d4e6991cf4b1063e5ce5bb610ca14a94578b48bff68b37a11a919e46"
+    },
+    {
+      "trading_date": "2026-10-08",
+      "item": "隔夜利空須區分開盤Gap與開盤後賣壓",
+      "note": "降低負向訊號對Gap幅度的線性映射，分開估計Gap與首30分鐘下探。",
+      "source_row": "模型修正紀錄!A20:J20",
+      "extracted_at": "2026-10-12T08:58:07+08:00",
+      "content_hash": "8ff35c7154c137d1619a12becfaedff77b06e173ef4550b5514fa992e188fa14"
+    },
+    {
+      "trading_date": "2026-10-08",
+      "item": "金融輪動不等於長假前防禦",
+      "note": "金融與機電同步走弱時提高廣泛risk-off機率；Cap、家數與等權分開驗證。",
+      "source_row": "模型修正紀錄!A21:J21",
+      "extracted_at": "2026-10-12T08:58:07+08:00",
+      "content_hash": "121be714c9f6045f833c044e4a15cfd55b562661159c8108d33d76721246c051"
+    }
+  ],
+  "snapshot_hash": "e30d29ab9dd4ecf4dec291685d6599424afdb3458183e3a025c0243d95454f1e"
+}
