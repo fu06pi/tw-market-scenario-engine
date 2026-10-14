@@ -16,6 +16,7 @@
 - [x] TimesFM 獨立市場 8 個候選 validation；244/244 日全部成功，final 尚未開啟。
 - [x] 三類 validation-only 改善：模型 blend、因果 residual bias、126/252/512 視窗；未達雙市場門檻後停止盲搜。
 - [x] TAIEX+TX 八序列 joint GBUD validation；244/244 日成功。TAIEX 鎖定 joint 候選，TX 保留 independent 候選。
+- [x] TimesFM 候選的一次性 final test；兩市場均 242/242 成功，但總驗收為 `FAIL`，禁止再用該期間調參。
 - [x] CLI：config／inspect／collect／quality／reconcile／backtest／TimesFM validation/final／daily predict/freeze/review/narrative/sheet dry-run。
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
 - [x] 48 個 pytest、Ruff及 `git diff --check` 通過。
@@ -34,11 +35,13 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - TAIEX：239/242 成功，close MAE 355.61 點；三個失敗日完整保留（兩次 ARIMA nonconvergence、一次 low 還原失敗）。
 - TX：242/242 成功，close MAE 379.18 點。
 - 同一 final 期間 2025-10-09 至 2026-10-08 不得重新包裝成新的獨立 holdout。
-- TimesFM candidate final 尚未開啟；下一步只能依目前 candidate lock 執行一次。
+- TimesFM final：TAIEX close MAE 371.53，較 paired baseline **惡化 4.64%**；TX close MAE 377.46，只改善 **0.45%**。兩者皆未達 5%。
+- TAIEX close interval coverage 73.64%；TX四項 coverage 73.14%–74.38%，低於 75%下限。O/H/L degradation gate則全部通過。
+- Block bootstrap 95% CI：TAIEX close改善 `[-10.94%, 0.78%]`；TX `[-2.70%, 3.77%]`，均包含零且不支持穩定改善。
+- 完整結果摘要：`reports/quant/research-summary-final-2026-10-14.json`。該期間不得重新包裝成新的獨立 holdout。
 
 ## 尚未完成
 
-- [ ] 執行鎖定候選的一次性 TimesFM final test並記錄總 gate `PASS`／`FAIL`。
 - [ ] 自訂 output-head gradient smoke；官方 TimesFM 3 高階 API仍為 inference-only，不能把 window/calibration 稱為微調。
 - [ ] 由最佳可接受模型直接建立真實每日 snapshot body 的 orchestration。
 - [ ] Staging Google Sheet morning/post-close write/readback及 3–5 個交易日 shadow。
@@ -46,4 +49,4 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 
 ## 運作與宣稱
 
-`production_switch=false`。正式 Google Sheet、歷史預測／評估及排程未改。現階段沒有證據可宣稱雙市場 final 驗收達標或交易獲利。完整逐日研究 artifacts 因 FinMind raw-data redistribution 限制留在本機 ignored path；repo 保存可重現程式、設定、hash與不含逐日價格的彙總證據。
+`production_switch=false`。正式 Google Sheet、歷史預測／評估及排程未改。雙市場 final 驗收已確定為 `FAIL`，預設輸出政策保留各市場鎖定最強 baseline；這不代表交易獲利。完整逐日研究 artifacts 因 FinMind raw-data redistribution 限制留在本機 ignored path；repo 保存可重現程式、設定、hash與不含逐日價格的彙總證據。

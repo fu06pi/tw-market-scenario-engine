@@ -5,7 +5,7 @@ Repository：https://github.com/fu06pi/tw-market-scenario-engine
 
 本專題將既有 V1 改造成台灣加權指數（TAIEX）與指定月份台指期（TX）的日盤 OHLC 量化預測引擎。經 live 資料查核後，FinMind 成為主要增量 API，TWSE／TAIFEX 官方資料負責權威核對，TEJ 實際可得的 2025 重疊期保留作第三方交叉驗證。研究 TimesFM 3.0 零樣本推論，並與簡單基準、ARIMA／ARIMAX 比較；任何自訂梯度測試會和官方微調明確分開。盤前先保存數字，再由原本 V0 晨報流程加入截止前新聞、國際局勢及金融數據，生成文字假說；收盤後比對同一份盤前結果。
 
-**目前已完成資料品質、基準回測及 TimesFM validation candidate lock。** Certified FinMind／官方資料在 2018-01-01 至 2026-10-08 通過回溯 DQ；baseline final test 已開啟一次。TimesFM 3 CPU 零樣本單變量、多變量與 TAIEX+TX 聯合候選均已執行，joint validation 後鎖定 TAIEX 聯合 GBUD 與 TX 獨立 GBUD 候選。TimesFM final test、真實每日快照 orchestration、Sheet staging／shadow 及正式晨報切換仍未完成；`production_switch=false`。
+**目前已完成資料品質、基準回測、TimesFM validation lock及唯一一次 final test。** Certified FinMind／官方資料在 2018-01-01 至 2026-10-08 通過回溯 DQ。TimesFM final總驗收為 `FAIL`：TAIEX close MAE較 paired baseline惡化 4.64%，TX只改善 0.45%，區間 coverage亦未全部達到 75%下限；因此不再用這個 final調參，預設保留鎖定最強 baseline。真實每日快照 orchestration、Sheet staging／shadow及正式晨報切換仍未完成；`production_switch=false`。
 
 ## 文件與版本角色
 
@@ -126,7 +126,7 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-下一階段以已鎖定 TimesFM 候選執行唯一一次 final test，誠實記錄 PASS／FAIL；之後完成最佳可接受模型到真實每日 snapshot body 的 orchestration、V0 晨報／收盤復盤 staging readback 與 3–5 日 shadow。僅交付獨立模型而未接回原本晨報，不算整體目標完成。
+下一階段依失敗時的預設政策，完成鎖定最強 baseline到真實每日 snapshot body 的 orchestration、V0 晨報／收盤復盤 staging readback與 3–5 日 shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。僅交付獨立模型而未接回原本晨報，不算整體目標完成。
 
 ## 本次文件備份
 

@@ -25,28 +25,21 @@
 - validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
 - 測試：48 passed；Ruff及 diff check通過。
 
-## 下一個不可逆研究步驟
+## Final 已關閉
 
-使用目前 joint candidate lock執行唯一一次 TimesFM final：
+- 完整本機 artifact：`reports/generated/quant/experiments/5e8f5532503734ccf89b/timesfm_final.json`。
+- 公開 aggregate summary：`reports/quant/research-summary-final-2026-10-14.json`。
+- 總 gate：`FAIL`。TAIEX close MAE 371.53，較 paired baseline惡化 4.64%；TX close MAE 377.46，只改善 0.45%。
+- TAIEX close interval coverage 73.64%；TX各項 73.14%–74.38%，未達 75%下限。O/H/L degradation gate皆通過。
+- Bootstrap 95% CI均包含零。242個 TimesFM final days兩市場皆成功；TAIEX baseline的3個失敗日仍使 paired coverage為98.76%。
+- 不得重跑、調參或把 2025-10-09 至 2026-10-08稱為新 holdout。失敗時預設政策已啟動：每日輸出使用各市場鎖定最強 baseline。
 
-```bash
-UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 \
-  tw-scenario quant timesfm-final \
-  reports/generated/quant/experiments/5e8f5532503734ccf89b/timesfm_joint_validation.json \
-  --baseline reports/quant/experiments/f82462a281bc8db89146/baseline_results.json \
-  --dataset-dir data/processed/cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce \
-  --config config/quant/research.json \
-  --cache-dir data/raw/timesfm3
-```
+## 接續順序
 
-必須同時檢查：兩市場 close MAE改善至少 5%；O/H/L MAE惡化不超過 5%；四項區間 coverage皆為 75%–85%；paired coverage至少 95%；block bootstrap及所有失敗日保留。任一市場失敗即總 gate `FAIL`，並以最強 baseline作預設，不能再調這個 final。
-
-## Final 之後
-
-1. 建立不含逐日授權行情的 final summary，保存完整本機 artifact hash。
-2. 完成最佳可接受模型到真實每日 `OHLCForecastSnapshotBodyV1` 的 orchestration。
-3. 以凍結 snapshot生成 deterministic V0 晨報；新聞只能提供 cutoff前背景，不能改數字。
-4. 在 staging Sheet做 A:P header fingerprint、morning/post-close write/readback及 3–5 個交易日 shadow。
+1. 完成 baseline 到真實每日 `OHLCForecastSnapshotBodyV1` 的 orchestration。
+2. 以凍結 snapshot生成 deterministic V0 晨報；新聞只能提供 cutoff前背景，不能改數字。
+3. 在 staging Sheet做 A:P header fingerprint、morning/post-close write/readback及 3–5 個交易日 shadow。
+4. 自訂 output-head gradient smoke若執行，必須另名且不能改變已關閉 final的結論。
 5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
 
 可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。
