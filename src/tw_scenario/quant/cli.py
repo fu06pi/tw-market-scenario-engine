@@ -644,6 +644,54 @@ def daily_predict(
     _echo_json(snapshot.model_dump(mode="json"))
 
 
+@daily_app.command("build-body")
+def daily_build_body(
+    trading_date: Annotated[str, typer.Option("--date")],
+    dataset_dir: Annotated[Path, typer.Option("--dataset-dir")],
+    baseline_path: Annotated[Path, typer.Option("--baseline")],
+    final_summary_path: Annotated[Path, typer.Option("--final-summary")],
+    generated_at: Annotated[str, typer.Option("--generated-at")],
+    persisted_at: Annotated[str, typer.Option("--persisted-at")],
+    output: Annotated[Path, typer.Option("--output")],
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Build a dual-market body from validation-locked baselines after TimesFM gate failure."""
+    try:
+        config = _load_config(config_path)
+        baseline = _read_json(baseline_path)
+        final_summary = _read_json(final_summary_path)
+        if final_summary.get("status") != "FAIL":
+            raise ValueError("baseline fallback requires a recorded final acceptance failure")
+        from .backtest import _git_state, _read_manifest, load_dataset
+        from .daily_runner import build_locked_baseline_body
+
+        data, dataset_id = load_dataset(dataset_dir)
+        if baseline.get("dataset_id") != dataset_id:
+            raise ValueError("baseline lock does not match dataset")
+        body = build_locked_baseline_body(
+            data=data,
+            manifest=_read_manifest(dataset_dir),
+            baseline_lock=baseline,
+            config=config,
+            trading_date=_parse_date(trading_date, "date"),
+            generated_at=_parse_datetime(generated_at, "generated_at"),
+            persisted_at=_parse_datetime(persisted_at, "persisted_at"),
+            code_version=digest(_git_state(config_path.parent.parent.parent)),
+            final_summary_hash=digest(final_summary),
+        )
+        output, reused = _write_json_once_or_same(output, body.model_dump(mode="json"))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": "DAILY_BODY_READY_RETROSPECTIVE_SHADOW",
+        "forecast_id": body.forecast_id,
+        "timeliness": body.timeliness,
+        "output": str(output),
+        "reused": reused,
+        "production_switch": False,
+    })
+
+
 @daily_app.command("freeze")
 def daily_freeze(
     snapshot_json: Annotated[

@@ -126,7 +126,7 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-下一階段依失敗時的預設政策，完成鎖定最強 baseline到真實每日 snapshot body 的 orchestration、V0 晨報／收盤復盤 staging readback與 3–5 日 shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。僅交付獨立模型而未接回原本晨報，不算整體目標完成。
+鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。下一階段是 staging Sheet晨報／收盤復盤 readback與 3–5 日 genuine forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
 
 ## 本次文件備份
 

@@ -36,9 +36,9 @@
 
 ## 接續順序
 
-1. 完成 baseline 到真實每日 `OHLCForecastSnapshotBodyV1` 的 orchestration。
-2. 以凍結 snapshot生成 deterministic V0 晨報；新聞只能提供 cutoff前背景，不能改數字。
-3. 在 staging Sheet做 A:P header fingerprint、morning/post-close write/readback及 3–5 個交易日 shadow。
+1. 每日 baseline body orchestration已完成；2026-10-08 retrospective shadow證據在 `reports/quant/daily-shadow-summary-2026-10-08.json`。
+2. 凍結 snapshot到 deterministic V0 晨報與 A:P dry-run已驗證；新聞只能提供 cutoff前背景，不能改數字。
+3. 下一步在 staging Sheet做 morning/post-close write/readback及 3–5 個交易日 genuine forward shadow。
 4. 自訂 output-head gradient smoke若執行，必須另名且不能改變已關閉 final的結論。
 5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
 

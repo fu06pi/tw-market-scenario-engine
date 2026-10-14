@@ -1,0 +1,53 @@
+{
+  "status": "PASS_RETROSPECTIVE_SHADOW",
+  "forecast_id": "ohlc-v1-2026-10-08-2b927a68bdff6eaad7aaf8b04681b1632a5c157605a0c0c90339417a2c192172",
+  "snapshot_hash": "e6c7ca8cc192c3121de02410923903fc48ff47b1836fb90ee97017f349e6923d",
+  "trading_date": "2026-10-08",
+  "timeliness": "ON_TIME",
+  "data_quality": {
+    "status": "WARN",
+    "report_hash": "023235e251843805a4562ecc261cc3723da5ca9ac3f8349e4764b135fa6d1b2a",
+    "issues": [
+      "retrospective shadow; historical availability timestamps are assumptions"
+    ]
+  },
+  "models": {
+    "TAIEX": {
+      "model_name": "arimax",
+      "model_version": "locked-baseline-v1",
+      "checkpoint_id": "7dc98b1e4562de10d5c788028501771a972ff491f31a936a4bc5d378d8a489a8",
+      "representation": "gbud",
+      "fallback": {
+        "model_name": "timesfm3-validation-locked-candidate",
+        "reason": "single final-test acceptance gate failed"
+      }
+    },
+    "TX": {
+      "model_name": "night_regression",
+      "model_version": "locked-baseline-v1",
+      "checkpoint_id": "12c6d210c0474bfeeee4fb6f8fadeea487143f8a988a6d985c43e404fa848cf0",
+      "representation": "gbud",
+      "fallback": {
+        "model_name": "timesfm3-validation-locked-candidate",
+        "reason": "single final-test acceptance gate failed"
+      }
+    }
+  },
+  "contracts": {
+    "TAIEX": null,
+    "TX": "202610"
+  },
+  "narrative_exact_link": true,
+  "sheet_mode": "DRY_RUN_ONLY",
+  "sheet_range": "'每日預測與覆盤'!A42:P43",
+  "production_sheet_written": false,
+  "production_switch": false,
+  "runtime_seconds_approx": 83.3,
+  "sla_result": "PASS_SHADOW_RUNTIME_ONLY_NOT_PUBLICATION_EVIDENCE",
+  "artifact_hashes": {
+    "body": "50e9bed64299ac56edc39f2f66f7136575ef176883e8b6e683649c024a3c2593",
+    "snapshot": "26719eb21cd92cf373449406c0e55b2b89e1d10fbfe8214b5d839ae2ddbe4874",
+    "narrative": "e1133bd9170f6b105c97a270313960691d0aba5f44b531795651683ceeb29e2e",
+    "sheet_dry_run": "f1cb3c6de19f93c08597fd2de4eb93e80d3fb7e9c1c97d239bd9bff4a6b7b4b6"
+  }
+}

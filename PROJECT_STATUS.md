@@ -19,7 +19,8 @@
 - [x] TimesFM 候選的一次性 final test；兩市場均 242/242 成功，但總驗收為 `FAIL`，禁止再用該期間調參。
 - [x] CLI：config／inspect／collect／quality／reconcile／backtest／TimesFM validation/final／daily predict/freeze/review/narrative/sheet dry-run。
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
-- [x] 48 個 pytest、Ruff及 `git diff --check` 通過。
+- [x] 鎖定 baseline直接建立每日 body 的 CLI；2026-10-08真實資料 retrospective shadow在約83秒完成 body→freeze→narrative→A:P dry-run，同一 forecast_id/hash鏈驗證通過。
+- [x] 49 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果
 
@@ -43,7 +44,6 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 ## 尚未完成
 
 - [ ] 自訂 output-head gradient smoke；官方 TimesFM 3 高階 API仍為 inference-only，不能把 window/calibration 稱為微調。
-- [ ] 由最佳可接受模型直接建立真實每日 snapshot body 的 orchestration。
 - [ ] Staging Google Sheet morning/post-close write/readback及 3–5 個交易日 shadow。
 - [ ] 正式排程切換與 rollback 演練。
 

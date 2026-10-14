@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from datetime import date, datetime, timedelta
 
+import numpy as np
 import pytest
 from pydantic import ValidationError
 
-from tw_scenario.quant.contracts import TZ
+from tw_scenario.quant import daily_runner
+from tw_scenario.quant.contracts import TZ, Prices
 from tw_scenario.quant.daily import (
     V0_HEADER_FINGERPRINT,
     V0_HEADERS,
@@ -391,3 +393,46 @@ def test_data_quality_failure_cannot_generate_publishable_narrative():
     snapshot = seal_snapshot(_body(data_quality=failed))
     with pytest.raises(ValueError, match="DQ FAIL"):
         build_v0_narrative(snapshot)
+
+
+def test_daily_runner_uses_causal_rows_and_expands_interval_to_point(monkeypatch):
+    class Calendar:
+        def __init__(self):
+            self.days = [date(2026, 10, 6), date(2026, 10, 7), DAY]
+
+    data = type("Data", (), {"calendar": Calendar()})()
+    rows = [{
+        "status": "OK",
+        "previous_close": 100.0,
+        "actual": {"open": 101.0, "high": 103.0, "low": 99.0, "close": 102.0},
+        "predicted": {"open": 100.0, "high": 102.0, "low": 98.0, "close": 101.0},
+    }]
+    monkeypatch.setattr(daily_runner, "walk_forward", lambda *_args, **_kwargs: rows)
+    monkeypatch.setattr(
+        daily_runner,
+        "predict",
+        lambda *_args, **_kwargs: (
+            Prices(open=110.0, high=115.0, low=105.0, close=112.0),
+            np.zeros(4),
+            100.0,
+            [],
+        ),
+    )
+    monkeypatch.setattr(
+        daily_runner,
+        "calibrated_interval",
+        lambda *_args, **_kwargs: {
+            "open": [100.0, 105.0], "high": [100.0, 110.0],
+            "low": [100.0, 104.0], "close": [100.0, 108.0],
+        },
+    )
+    prices, interval, previous = daily_runner._daily_prediction(
+        data,
+        "TAIEX",
+        {"model": "zero", "representation": "relative"},
+        DAY,
+        {"calibration_window": 126, "min_calibration": 1},
+    )
+    assert previous == 100.0
+    for field in ("open", "high", "low", "close"):
+        assert interval[field][0] <= getattr(prices, field) <= interval[field][1]
