@@ -1,31 +1,52 @@
-# Codex 交接：TEJ → V1 量化 → V0 晨報
+# Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
-更新：2026-10-11。Repository：fu06pi/tw-market-scenario-engine。
+更新：2026-10-14。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
 
-## 最新需求
-使用者已持有 TEJ API。直接在本 repo 改造既有 V1，研究 TimesFM 3.0 歷史訓練與每日 TAIEX／TX 日盤 OHLC 預測，再回到原本 V0（使用者亦稱 V01）流程生成晨報。資料截止 08:30、數字 08:40 前保存，時區 Asia/Taipei。保留既有每日工作與歷史紀錄，完成端到端驗證才切換。
+## 不可改變的研究邊界
 
-先讀 README.md、AGENTS.md、PROJECT_STATUS.md。舊架構中 TEJ 暫緩、文字主導、V0 永久只讀的規則，已被本次決策取代。歷史資料不得回寫。
+1. FinMind 是主要 bounded incremental API；TWSE／TAIFEX 是權威 value reconciliation；TEJ 只保留帳戶實際可得的 2025 overlap。
+2. 固定 split：train 2018-01-01 起、validation 2024-10-09 起、final test 2025-10-09 至 2026-10-08。
+3. Baseline final 已開啟；TimesFM final 尚未開啟。不得看 final 後換模型、重調參數或把同期間稱為新 holdout。
+4. `production_switch=false`。正式 Sheet、歷史紀錄及排程保持不變，直到 staging readback與 3–5 日 shadow 通過。
+5. 不得提交憑證、FinMind raw data、完整逐日 actual rows、TimesFM 權重或 cache。
 
-## 真實現況
-已有情境資料結構、固定權重 baseline、快照、評分及歷史紀錄。models.py 是資料結構，不是學習模型。尚未在本次工作中確認 TEJ 授權、完整歷史、TimesFM 3 可用權重／微調流程、訓練績效、晨報轉接或新排程。本次只改文件。
+## 已完成證據
 
-## 執行順序
-1. 檢查環境與現有程式，跑原測試；確認 V0 晨報、Sheet 與排程的實際介面。
-2. 安全讀取 TEJ_API_KEY，查表格／欄位／額度／更新時間。沒有金鑰仍完成不依賴連線的工作，不索取對話明文金鑰。
-3. 建立 TEJ adapter、增量快取、統一 OHLC、來源／可用時間、交易日／時段／合約處理。未授權欄位用官方／CSV 補足。候選 2018 起，實際依共同覆蓋決定。
-4. 產出資料品質報告；驗證同合約前收、夜盤歸屬、換月與 08:30 as-of。預先固定時序資料切分。
-5. 完成零報酬／振幅、夜盤回歸、ARIMA／ARIMAX 的同口徑 walk-forward；比較兩種 OHLC 表示法。
-6. 核對 TimesFM 3 官方程式、權重、授權與微調介面，固定版本。量測硬體與設定預算；先零樣本，再小樣本梯度／更新驗證，最後正式微調。
-7. 比較歷史、外部特徵、獨立／聯合市場，保存最佳驗證 checkpoint。達預算或連續三輪無增益停止；禁止反覆調最終測試集。
-8. 鎖定候選與驗證最強基準，執行最終測試，分別報告八項誤差及所有失敗。沒有達標如實交付，不宣稱完成準確率目標。
-9. 建立 versioned OHLC 數字快照與 CLI；凍結後接回 V0 晨報，新聞只解釋，文字不得更改點數或編造機率／盤中路徑。
-10. 驗證數字保存、晨報、Sheet 回讀、實際行情與收盤誤差更新後才切換每日流程；保留回復設定與舊紀錄。
+- Certified dataset：`cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce`。
+- DQ：`PASS_RETROSPECTIVE`；2018-01-01 至 2026-10-08 共 2,133 個交易日，selected series missing／duplicate／scale／calendar／manifest issues 均為 0。
+- Reconciliation：6,396 paired keys OHLC mismatch 0；2,133 settlement pair mismatch 0。
+- Baseline full artifact：`reports/quant/experiments/f82462a281bc8db89146/baseline_results.json`（本機、Git ignored）。
+- Independent TimesFM validation：`reports/quant/experiments/0d411a35a522a3c37ccb/timesfm_validation.json`（本機、Git ignored）。
+- Joint TimesFM validation：`reports/generated/quant/experiments/5e8f5532503734ccf89b/timesfm_joint_validation.json`（本機、Git ignored）。
+- 可公開彙總：`reports/quant/research-summary-validation-lock-2026-10-14.json`。
+- TimesFM code `e51928e27119cb17bebc005be2696b75e0a9e688`；weights `google/timesfm-3.0-pytorch@43046b85ec22d584a13f8098c2ed39c889e129c2`。
+- CPU load peak RSS約 2.80 GiB；batch 1；獨立 validation 8/8 checkpoints完成；joint 244/244 日完成。
+- Joint lock：TAIEX = GBUD joint multivariate，validation close MAE 169.19；TX = GBUD independent multivariate，156.73。
+- validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
+- 測試：48 passed；Ruff及 diff check通過。
 
-## 驗收與交付
-兩標的最終測試 C MAE 均較各自鎖定最強基準降低至少 5%，各 O/H/L 不惡化超過 5%。80% 邊際區間目標實際覆蓋 75%～85%，同時看寬度與 interval score。詳細規則以 README／AGENTS 為準。
+## 下一個不可逆研究步驟
 
-交付可重現資料下載、訓練、回測、每日預測指令，以及資料品質、模型比較、最佳 checkpoint、實驗記錄、前向測試方案及晨報整合證據。未接回原本晨報的獨立模型不算完成整體目標。
+使用目前 joint candidate lock執行唯一一次 TimesFM final：
 
-## 環境
-沿用 pyproject.toml；先執行 python -m pip install -e '.[dev]' 及 python -m pytest -q。模型依賴於實作時核實並固定。限制網路需記錄真實錯誤並支援離線匯出檔，不能編造下載成功或模型績效。
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 \
+  tw-scenario quant timesfm-final \
+  reports/generated/quant/experiments/5e8f5532503734ccf89b/timesfm_joint_validation.json \
+  --baseline reports/quant/experiments/f82462a281bc8db89146/baseline_results.json \
+  --dataset-dir data/processed/cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce \
+  --config config/quant/research.json \
+  --cache-dir data/raw/timesfm3
+```
+
+必須同時檢查：兩市場 close MAE改善至少 5%；O/H/L MAE惡化不超過 5%；四項區間 coverage皆為 75%–85%；paired coverage至少 95%；block bootstrap及所有失敗日保留。任一市場失敗即總 gate `FAIL`，並以最強 baseline作預設，不能再調這個 final。
+
+## Final 之後
+
+1. 建立不含逐日授權行情的 final summary，保存完整本機 artifact hash。
+2. 完成最佳可接受模型到真實每日 `OHLCForecastSnapshotBodyV1` 的 orchestration。
+3. 以凍結 snapshot生成 deterministic V0 晨報；新聞只能提供 cutoff前背景，不能改數字。
+4. 在 staging Sheet做 A:P header fingerprint、morning/post-close write/readback及 3–5 個交易日 shadow。
+5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
+
+可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。

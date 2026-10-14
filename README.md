@@ -1,11 +1,11 @@
 # 台股日盤 OHLC 量化預測與晨報
 
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
-架構決策更新：2026-10-11。
+架構與實作狀態更新：2026-10-14。
 
-本專題以 TEJ API 取得歷史行情，將既有 V1 改造成台灣加權指數（TAIEX）與指定月份台指期（TX）的日盤 OHLC 量化預測引擎。研究 TimesFM 3.0 的零樣本推論與歷史微調，並與簡單基準、ARIMA／ARIMAX 比較。盤前先保存數字，再由原本 V0 晨報流程加入新聞、國際局勢及金融數據，生成文字假說；收盤後比對同一份盤前結果。
+本專題將既有 V1 改造成台灣加權指數（TAIEX）與指定月份台指期（TX）的日盤 OHLC 量化預測引擎。經 live 資料查核後，FinMind 成為主要增量 API，TWSE／TAIFEX 官方資料負責權威核對，TEJ 實際可得的 2025 重疊期保留作第三方交叉驗證。研究 TimesFM 3.0 零樣本推論，並與簡單基準、ARIMA／ARIMAX 比較；任何自訂梯度測試會和官方微調明確分開。盤前先保存數字，再由原本 V0 晨報流程加入截止前新聞、國際局勢及金融數據，生成文字假說；收盤後比對同一份盤前結果。
 
-**目前是架構改造階段。TEJ API 已由使用者確認持有，但本次沒有連線驗證授權、下載資料、訓練模型或證明達標。** 既有程式是情境、快照與評分骨架，不能當成已完成的 TimesFM／ARIMA 模型。
+**目前已完成資料品質、基準回測及 TimesFM validation candidate lock。** Certified FinMind／官方資料在 2018-01-01 至 2026-10-08 通過回溯 DQ；baseline final test 已開啟一次。TimesFM 3 CPU 零樣本單變量、多變量與 TAIEX+TX 聯合候選均已執行，joint validation 後鎖定 TAIEX 聯合 GBUD 與 TX 獨立 GBUD 候選。TimesFM final test、真實每日快照 orchestration、Sheet staging／shadow 及正式晨報切換仍未完成；`production_switch=false`。
 
 ## 文件與版本角色
 
@@ -21,7 +21,9 @@ V1 負責數值、訓練、回測與預測快照；V0 負責依快照產生晨�
 
 ```mermaid
 flowchart TD
-    A["TEJ／官方來源／匯出檔"] --> B["資料品質、時段與截止檢查"]
+    A["FinMind 主來源"] --> B["資料品質、時段與截止檢查"]
+    O["TWSE／TAIFEX 官方核對"] --> B
+    T["TEJ 2025 重疊核對"] --> B
     B --> C["V1 基準與量化模型"]
     C --> D["凍結 OHLC 數字快照"]
     D --> E["V0 晨報文字假說"]
@@ -48,15 +50,16 @@ flowchart TD
 
 加權指數不能以 ETF 替代；日 OHLC 無法判斷高低點先後、盤中趨勢型態或市場廣度。文字可以列待驗證情境，但不能宣稱它們是 OHLC 模型已預測的結果。
 
-## TEJ 與資料
+## FinMind、官方資料與 TEJ
 
-1. 從環境變數 `TEJ_API_KEY` 讀取憑證。金鑰不得進入 Git、日誌、快照或報告。
-2. 查詢帳戶實際資料表、欄位、額度、更新時間與歷史範圍；持有 API 不代表所有資料都已授權。
-3. 候選歷史起點為 2018 年，終點為最新完整交易日；依共同覆蓋及品質決定實際起點。
-4. 缺少必要欄位時，以可驗證官方 TWSE／TAIFEX 或匯出檔補足，記錄來源差異。
-5. 保存原始資料與增量快取，以及來源、交易日、時段、合約、擷取時間、歷史可用時間與其依據。今天下載舊資料的時間不能代替歷史可用時間。
-6. 檢查缺漏、重複、休市、異常尺度及 OHLC 關係；缺漏不填成零報酬，休市不建立虛構 K 棒。
-7. TX 報酬先於同合約內計算，再依固定換月規則拼接；參考前收使用被選合約自己的前一日盤收盤。
+1. FinMind 使用 `TaiwanStockPrice`／`TAIEX` 與 `TaiwanFuturesDaily`／`TX`。`position` 是日盤、`after_market` 是夜盤；保存明確 `contract_date`，不使用連續合約代替同合約參考價。
+2. `FINMIND_TOKEN` 可選；`TEJ_API_KEY` 只供 TEJ overlap。兩種憑證都不得進入 Git、日誌、快照或報告。
+3. FinMind 請求按年或更小區間增量下載，保留 raw response、request、API status、擷取時間與內容 hash；schema 或 status 異常立即失敗。
+4. 以 TWSE／TAIFEX 官方資料逐日核對 OHLC、時段、最後成交價、結算價及 open interest。FinMind Free 資料須標示來源、僅作非商業研究且不得散布 raw data。
+5. TEJ 已驗證可連線，但本帳戶的 TAIEX／TX 查詢只在 2025 有實際 rows，因此只作重疊核對，不補造 2018-2024 資料。
+6. 候選歷史起點為 2018 年，終點為最新完整交易日；保存來源、交易日、實體時段、合約、擷取時間、歷史可用時間與其依據。今天下載舊資料的時間不能代替歷史可用時間。
+7. 檢查缺漏、重複、休市、異常尺度及 OHLC 關係；缺漏不填成零報酬，休市不建立虛構 K 棒。官方／FinMind 夜盤的 `settlement=0` 表示不適用，不能當作正價格或整批資料錯誤。
+8. TX 報酬先於同合約內計算，再依固定換月規則拼接；參考前收使用被選合約自己的前一日盤收盤。
 
 已結束夜盤及最近已收盤美股，依台灣當天早上真正可取得的時間對齊到當日特徵，保留海外休市與資料距今時間。禁止用相同日曆日期直接合併跨市場日線，或輸入當日日盤、未公布實際值與事後修訂資訊。
 
@@ -75,7 +78,7 @@ flowchart TD
 
 對照至少包含：零報酬與歷史振幅、夜盤簡單回歸、ARIMA／ARIMAX、TimesFM 3 零樣本歷史版、多變量版與歷史微調版；先測市場獨立，再測聯合預測。共享外部特徵的模型使用相同資訊集。
 
-TimesFM 3 是本專題指定研究目標。實作前必須核對官方版本、權重、授權與訓練介面，固定 commit／revision；不能以舊版範例或視窗調整冒充 3.0 微調。若無法取得或驗證指定版本，記錄阻礙，完成資料與基準流程，不默默換版並宣稱完成。
+TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb17bebc005be2696b75e0a9e688` 與 weight revision `43046b85ec22d584a13f8098c2ed39c889e129c2`。官方 3.0 高階介面為 inference-only；完整 LoRA 範例仍屬 2.5。任何自訂 output-head gradient smoke 必須另名，不能冒充官方 3.0 fine-tuning。自架權重屬非商業授權，本專案維持學術研究與 shadow forward test。
 
 ## 訓練、驗證與停止
 
@@ -108,25 +111,26 @@ TimesFM 3 是本專題指定研究目標。實作前必須核對官方版本、�
 
 ## 現有程式與實作路線
 
-目前 `src/tw_scenario/` 提供情境資料結構、固定權重 baseline、快照及評分；現有 schema 屬舊情境介面。新增 OHLC schema／版本轉接，保持歷史相容，不能強行將舊記錄當新模型輸出。
+`src/tw_scenario/` 原有情境資料結構、固定權重 baseline、快照及評分仍保留。`src/tw_scenario/quant/` 已提供 contracts、providers、collection、quality、forecast、evaluation、backtest、TimesFM validation/final 及 daily integration CLI。研究結果仍是回溯證據，不能當作交易獲利或正式服務。
 
-計畫在既有 Python package 增加 providers、data/session/contract、features/asof、forecasters、training、backtest、calibration、registry 及 narrative 模組。這些是待實作設計，並非已存在的命令或功能。
+第一次官方收集的 dataset `fa3b3c0e5ddecb386b51446f0758efdff715e5b09d66ddcbe3c384b85e5be19e` 因 `settlement=0` parser 問題只留下 2,210 rows，缺 4,226 個 expected rows，資料品質結果為 `FAIL`。該資料集保留作失敗證據，禁止進入績效比較。最新執行狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)，可重播工作目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)。
 
-現有骨架驗證：
+安裝與驗證：
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e '.[dev]'
-python -m pytest -q
+UV_CACHE_DIR=/tmp/uv-cache uv sync --extra dev --extra research
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev pytest -q
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-下一階段交付：TEJ 授權與資料品質報告、基準回測，再完成 TimesFM 推論／微調比較、最佳 checkpoint、重現 CLI、晨報接回與每日流程驗證。僅交付獨立模型而未接回原本晨報，不算整體目標完成。
+下一階段以已鎖定 TimesFM 候選執行唯一一次 final test，誠實記錄 PASS／FAIL；之後完成最佳可接受模型到真實每日 snapshot body 的 orchestration、V0 晨報／收盤復盤 staging readback 與 3–5 日 shadow。僅交付獨立模型而未接回原本晨報，不算整體目標完成。
 
 ## 本次文件備份
 
 改造前 README.md、AGENTS.md、CODEX_HANDOFF.md、PROJECT_STATUS.md 已連同來源 commit 與 SHA-256 清單備份：
 [Google Drive 原始文件備份](https://drive.google.com/file/d/1UPYML3IeAbG40iw5FREPCORo-RP8f-98/view?usp=drivesdk)。
 
-本次只更新上述架構與交接文件；未執行模型訓練或切換正式排程。
+舊文件備份仍有效。自備份後已新增研究原型與 raw cache，但尚未切換正式排程。
