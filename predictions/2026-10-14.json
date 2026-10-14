@@ -1,0 +1,82 @@
+{
+  "trading_date": "2026-10-14",
+  "generated_at": "2026-10-14T08:53:36+08:00",
+  "data_cutoff_at": "2026-10-14T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-compat",
+  "feature_version": "legacy-scenario-features-v1",
+  "prompt_version": "automation-v1-legacy-compat",
+  "data_manifest_hash": "099c2bf5f0a9ce0a083f7eb02dde1c93a2a783ab21db19e0159fdb07efc14774",
+  "scenarios": {
+    "bull": 0.3,
+    "base": 0.5,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": 45,
+    "expected_close_return_bps": 25
+  },
+  "narrative": {
+    "market_view": "【legacy compatibility；非新OHLC模型輸出】台指夜盤強彈但Nasdaq與SOX小跌，台積電ADR僅近乎持平，訊號背離。主情境為跌深後小幅開高、週選結算下高波動震盪，收盤小漲但不足以確認科技股趨勢反轉。",
+    "open_hypothesis": "預期相對10/13現貨收48,341.31點開高，點估+45bps（約+218點，約48,559點）。V0凍結區間為+0.1%至+0.8%；夜盤48,755支持正Gap，但不把期貨相對現貨溢價全額映射為開盤。",
+    "intraday_hypothesis": "主型態為range且高波動。週選TXO 202610W2到期只提高波動先驗，不提供方向；首30分鐘仍可能回測開盤價下方。若大型電子站回VWAP且OTC與家數同步改善，才升級為trend_up。",
+    "close_hypothesis": "收盤點估+25bps（約+121點，約48,462點），維持Base區間。夜盤反彈及昨日超跌支持修復，但SOX連跌、台幣貶值與晚間CPI風險抑制追價。",
+    "breadth_hypothesis": "breadth_direction=flat。昨日非平盤上漲占比僅27.1%，預期今日修復但未充分確認；大型權值、電子中小型、金融與非電子分層驗證，不以指數上漲直接等同廣度轉強。",
+    "bull_script": "台積電開高並守住2,490元，指數站穩48,755附近、OTC與上漲家數同步擴張，固定AI權值池至少3檔上漲；收盤≥+50bps。",
+    "base_script": "小幅開高後在48,300至48,800附近雙向震盪，金融相對抗跌、科技跌深修復但分化；收盤介於前收±50bps。",
+    "bear_script": "夜盤反彈未獲現貨接受，開盤後大型電子再度失守、OTC與家數同步轉弱，指數跌破48,066昨日低點；收盤≤-50bps。"
+  },
+  "key_drivers": [
+    "台指期夜盤收48,755、上漲363點（+0.75%），提供本地正向開盤先驗。",
+    "Nasdaq -0.15%、SOX -0.23%，台積電ADR +0.17%，海外半導體未確認夜盤強彈。",
+    "10/13 TAIEX收48,341.31、-1.95%，上市275漲/739跌、OTC -3.18%，跌深修復與賣壓延續風險並存。",
+    "美國10年期殖利率5.216%、Brent 105.69美元，估值與通膨壓力仍高。",
+    "新台幣10/13收32.085、貶值1.9角，外資流向與權值股承接存在壓力。",
+    "10/14為週選結算日；美國CPI在台股收盤後公布，台積電法說為10/15，未公布內容未納入。"
+  ],
+  "invalidation_conditions": [
+    "若開盤低於前收且夜盤正向完全未被現貨接受，open_direction=up立即失效。",
+    "若開盤後30分鐘大型電子站回VWAP、OTC轉強且非平盤上漲家數占比超過60%，上調Bull/trend_up風險。",
+    "若跌破48,066且OTC、金融與非電子同步轉弱，上調Bear/selloff風險。",
+    "08:50後資訊與09:00後現貨行情不得回寫本快照，只能納入事後覆盤。",
+    "本檔不得宣稱為TEJ、ARIMA或TimesFM OHLC模型預測。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-14",
+      "item": "08:39當日V0十二項盤前假說",
+      "note": "夜盤+363與海外科技小跌背離；開盤0.1%–0.8%；收盤-0.2%至+0.8%；上漲家數占非平盤家數可能超過50%；週選結算提高波動。",
+      "source_row": "每日預測與覆盤!A120:Z131",
+      "extracted_at": "2026-10-14T08:53:36+08:00",
+      "content_hash": "c9b88f87c20d7c15bba33baa894eab299fece5ebbb8898f09367d4b28a71a34d"
+    },
+    {
+      "trading_date": "2026-10-02",
+      "item": "台指夜盤與海外半導體背離時需降Gap信心",
+      "note": "方向背離時降低Gap方向信心與幅度，增加本地期貨反證權重。",
+      "source_row": "模型修正紀錄!A14:J14",
+      "extracted_at": "2026-10-14T08:53:36+08:00",
+      "content_hash": "1fcdebd3f77f26d6c3a3935afff606a2beb335a39de694fce72c8ea28de1d1a5"
+    },
+    {
+      "trading_date": "2026-10-08",
+      "item": "隔夜訊號須區分Gap與開盤後傳導",
+      "note": "期現價差不得直接當現貨Gap；Gap與首30分鐘下探分開估計。",
+      "source_row": "模型修正紀錄!A20:J20",
+      "extracted_at": "2026-10-14T08:53:36+08:00",
+      "content_hash": "36dc749f1bcb8deed433592d791b9c975ecad4ef79dd8dd28eccfe4616f35e38"
+    },
+    {
+      "trading_date": "2026-10-13",
+      "item": "開盤即全日高時提高selloff評估",
+      "note": "開盤後用OTC、廣度及Open-to-Low確認Regime，但不回改盤前快照。",
+      "source_row": "模型修正紀錄!A27:J27",
+      "extracted_at": "2026-10-14T08:53:36+08:00",
+      "content_hash": "d12b5aa5bc3cd90e1ae985b09f758351f0935c7c76daba74ca72dc1c2bbace35"
+    }
+  ],
+  "snapshot_hash": "ae58eec177629f7d2ea10a2255f75c461fe852c744948ac1019c9ddb764ea39d"
+}
