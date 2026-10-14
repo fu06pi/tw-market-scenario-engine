@@ -1,0 +1,143 @@
+{
+  "trading_date": "2026-10-14",
+  "status": "formal_preopen_legacy_compatibility",
+  "generated_at": "2026-10-14T08:53:36+08:00",
+  "data_cutoff_at": "2026-10-14T08:50:00+08:00",
+  "v0_frozen_at": "2026-10-14T08:39:00+08:00",
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_validation": "All inputs were published or frozen by 08:50 Asia/Taipei. No 2026-10-14 cash-session fields were used. This legacy scenario snapshot remains operational during migration and is not a TEJ/ARIMA/TimesFM OHLC forecast.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?queryYear=115&response=html",
+      "publisher": "TWSE",
+      "facts": {
+        "is_trading_day": true
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://money.udn.com/money/story/123398/9813113",
+      "publisher": "Economic Daily / TAIFEX",
+      "published_at": "2026-10-14T07:03:31+08:00",
+      "observation_end_at": "2026-10-14T05:00:00+08:00",
+      "facts": {
+        "tx_night_last": 48755,
+        "reference_change_points": 363,
+        "reference_return_pct": 0.75,
+        "tsmc_futures_last": 2520,
+        "tsmc_futures_change": 20
+      }
+    },
+    {
+      "id": "us_market",
+      "url": "https://money.udn.com/money/story/123398/9813113",
+      "publisher": "Economic Daily / compiled US market data",
+      "published_at": "2026-10-14T07:03:31+08:00",
+      "facts": {
+        "dow_close": 51670.1,
+        "dow_return_pct": -0.35,
+        "sp500_close": 7805.45,
+        "sp500_return_pct": -0.02,
+        "nasdaq_close": 27204.38,
+        "nasdaq_return_pct": -0.15,
+        "sox_close": 12208.8,
+        "sox_return_pct": -0.23,
+        "tsmc_adr_close": 445.12,
+        "tsmc_adr_return_pct": 0.17
+      }
+    },
+    {
+      "id": "rates_oil",
+      "url": "https://www.wsj.com/finance/stocks/u-s-stocks-tick-down-as-bank-earnings-dont-excite-40b1934e",
+      "publisher": "Wall Street Journal",
+      "published_at": "2026-10-14T05:07:00+08:00",
+      "facts": {
+        "us10y_yield_pct": 5.216,
+        "brent_close_usd": 105.69,
+        "brent_return_pct": -0.9
+      }
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://www.cna.com.tw/news/afe/202610130139.aspx",
+      "publisher": "CNA / TWSE data",
+      "published_at": "2026-10-13T13:47:00+08:00",
+      "facts": {
+        "previous_open": 49126.27,
+        "previous_high": 49126.27,
+        "previous_low": 48066.36,
+        "previous_close": 48341.31,
+        "previous_return_pct": -1.95,
+        "advancers": 275,
+        "decliners": 739,
+        "unchanged": 93,
+        "otc_return_pct": -3.18
+      }
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cbc.gov.tw/tw/lp-645-1.html09/lp-645-1-154-20.html",
+      "publisher": "Central Bank of the Republic of China",
+      "facts": {
+        "usd_twd_close": 32.085,
+        "change_twd": 0.19
+      }
+    },
+    {
+      "id": "events",
+      "url": "https://www.bls.gov/schedule/2026/home.htm",
+      "publisher": "BLS / company IR calendars",
+      "facts": {
+        "us_cpi_release_at": "2026-10-14T20:30:00+08:00",
+        "tsmc_earnings_call_at": "2026-10-15T14:00:00+08:00",
+        "weekly_option_expiry": "TXO 202610W2 on 2026-10-14"
+      },
+      "limitations": "CPI, ASML results and TSMC earnings guidance were not yet published by cutoff and were used only as risk events."
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-14T08:39:00+08:00",
+      "range": "每日預測與覆盤!A120:Z131",
+      "facts": {
+        "items": 12,
+        "summary": "夜盤+363但Nasdaq/SOX小跌；開盤偏多、收盤區間偏多；廣度修復機率略高；週選結算提高波動，不推論方向。"
+      }
+    }
+  ],
+  "feature_values": {
+    "taifex_night_reference_return_pct": 0.75,
+    "taifex_vs_cash_close_bps": 85.56,
+    "nasdaq_return_pct": -0.15,
+    "sox_return_pct": -0.23,
+    "tsmc_adr_return_pct": 0.17,
+    "us10y_yield_pct": 5.216,
+    "brent_close_usd": 105.69,
+    "usd_twd_close": 32.085,
+    "previous_day_return_pct": -1.95,
+    "previous_day_advancer_decliner_ratio": 0.3721,
+    "weekly_option_expiry_flag": 1
+  },
+  "limitations": [
+    "Current repository is migrating to a TEJ-backed TAIEX/TX OHLC engine; that model is not implemented or executed, so this file preserves the live legacy scenario workflow.",
+    "Exclude this snapshot from all new OHLC/TimesFM/ARIMA performance claims.",
+    "Probabilities and bps targets are uncalibrated scenario priors, not trained-model output.",
+    "The V0 sheet was read-only; no cell, order, formula or schedule was changed."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.3,
+      "base": 0.5,
+      "bear": 0.2
+    },
+    "scenario_definition": "Legacy thresholds: bull close >=+50bps, bear <=-50bps, base between.",
+    "gap_bps": 45,
+    "gap_reason": "Night futures imply a positive cash open, but weak Nasdaq/SOX and known futures-to-cash basis uncertainty cap the estimate below the full futures premium.",
+    "close_bps": 25,
+    "close_reason": "Local futures rebound and oversold breadth favor repair, while weak semiconductor breadth, TWD depreciation, CPI/event risk and weekly-option expiry keep the close inside the base range."
+  }
+}
