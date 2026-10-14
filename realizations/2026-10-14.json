@@ -1,0 +1,59 @@
+{
+  "trading_date": "2026-10-14",
+  "previous_close": 48341.31,
+  "open": 48382.64,
+  "high": 49059.12,
+  "low": 48382.64,
+  "close": 48625.83,
+  "change_points": 284.52,
+  "change_pct": 0.59,
+  "turnover": 928624000000,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE regular-session turnover reported by CNA/Economic Daily",
+  "breadth_up": 752,
+  "breadth_down": 245,
+  "breadth_flat": 109,
+  "breadth_uncompared": null,
+  "breadth_scope": "TWSE listed stocks as reported by CNA/Economic Daily",
+  "otc_return_pct": 1.4,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "electronics": 0.31,
+    "financial": 0.14,
+    "cement_ceramics": 3.95,
+    "food": 1.14,
+    "plastics": 6.64,
+    "plastics_detailed_report": 9.27,
+    "textiles": 2.26,
+    "machinery_electrical": 0.33,
+    "paper": 1.34,
+    "construction": 0.35
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC endpoint",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261014",
+      "role": "Official dated OHLC endpoint; values cross-checked against dated CNA reporting."
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-14",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261014&type=ALLBUT0999",
+      "role": "Official dated market-summary endpoint for close, sectors, turnover and breadth."
+    },
+    {
+      "name": "CNA / Economic Daily 2026-10-14 14:01",
+      "url": "https://money.udn.com/money/story/5607/9814176",
+      "role": "Dated OHLC, turnover, eight-sector returns and 752/245/109 listed-stock breadth."
+    },
+    {
+      "name": "CNA / Economic Daily market analysis 2026-10-14",
+      "url": "https://money.udn.com/money/story/5607/9814160",
+      "role": "Dated driver context, electronics return and plastics-led rotation."
+    },
+    {
+      "name": "Yahoo Taiwan close report 2026-10-14",
+      "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E8%82%A1%E6%94%B6%E7%9B%A4-%E5%8F%B0%E8%82%A1%E5%8F%8D%E6%94%BB%E6%BC%B2284%E9%BB%9E-%E6%AB%83%E8%B2%B7%E5%8B%81%E6%8F%9A1-4-%E8%A2%AB%E5%8B%95-054900348.html",
+      "role": "Cross-check for TPEx +1.4% and small-cap/OTC strength."
+    }
+  ]
+}
