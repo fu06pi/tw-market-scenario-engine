@@ -1184,6 +1184,24 @@ def _staging_writer(staging_config_path: Path):
     )
 
 
+@daily_app.command("sheet-preflight-staging")
+def daily_sheet_preflight_staging(
+    staging_config_path: Annotated[
+        Path, typer.Option("--staging-config")
+    ] = DEFAULT_STAGING_CONFIG,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Read staging headers and next rows without writing any cell."""
+    try:
+        _load_config(config_path)
+        staging = _read_json(staging_config_path)
+        writer = _staging_writer(staging_config_path)
+        result = writer.preflight(staging["sheet_name"])
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "status": "STAGING_READ_ONLY_PREFLIGHT_VERIFIED"})
+
+
 @daily_app.command("sheet-write-staging")
 def daily_sheet_write_staging(
     batch_json: Annotated[Path, typer.Argument(help="Validated morning Sheet batch JSON.")],

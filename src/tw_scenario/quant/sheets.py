@@ -8,6 +8,7 @@ import requests
 
 from .contracts import digest, write_once
 from .daily import (
+    V0_HEADER_FINGERPRINT,
     V0_HEADERS,
     V0PostcloseSheetBatch,
     V0SheetDryRunBatch,
@@ -22,10 +23,17 @@ def authorized_session():
     """Use Application Default Credentials without reading or logging credential values."""
     try:
         import google.auth
+        from google.auth.exceptions import DefaultCredentialsError
         from google.auth.transport.requests import AuthorizedSession
     except ImportError:
         raise RuntimeError("Google Sheets support requires the project sheets extra") from None
-    credentials, _ = google.auth.default(scopes=[SHEETS_SCOPE])
+    try:
+        credentials, _ = google.auth.default(scopes=[SHEETS_SCOPE])
+    except DefaultCredentialsError:
+        raise RuntimeError(
+            "Google ADC is unavailable; configure staging-only Application Default "
+            "Credentials outside the repository"
+        ) from None
     return AuthorizedSession(credentials)
 
 
@@ -113,6 +121,22 @@ class StagingSheetWriter:
         if any(rows[start - 2]) or any(rows[start - 1]):
             raise RuntimeError("staging next-row discovery is inconsistent")
         return start
+
+    def preflight(self, sheet_name: str) -> dict:
+        """Read-only credential, access, header, and capacity check for staging."""
+        header_range = f"'{sheet_name}'!A1:P1"
+        self.verify_headers(header_range)
+        next_row = self.next_start_row(sheet_name)
+        return {
+            "operation": "STAGING_READ_ONLY_PREFLIGHT",
+            "sheet_id_hash": digest(self.sheet_id),
+            "sheet_name": sheet_name,
+            "header_fingerprint": V0_HEADER_FINGERPRINT,
+            "next_start_row": next_row,
+            "rows_reserved": [next_row, next_row + 1],
+            "cells_written": 0,
+            "production_sheet_written": False,
+        }
 
     @staticmethod
     def _row_bounds(write_range: str) -> tuple[str, int, int]:

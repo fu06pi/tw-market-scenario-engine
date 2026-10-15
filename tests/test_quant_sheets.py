@@ -129,6 +129,25 @@ def test_staging_writer_morning_and_postclose_readback_is_idempotent():
     assert session.posts == 2
 
 
+def test_staging_preflight_is_read_only_and_reports_reserved_rows():
+    session = FakeSession()
+    writer = StagingSheetWriter(
+        sheet_id="staging",
+        staging_sheet_id="staging",
+        production_sheet_id="production",
+        session=session,
+    )
+
+    result = writer.preflight("每日預測與覆盤")
+
+    assert result["operation"] == "STAGING_READ_ONLY_PREFLIGHT"
+    assert result["next_start_row"] == 2
+    assert result["rows_reserved"] == [2, 3]
+    assert result["cells_written"] == 0
+    assert result["production_sheet_written"] is False
+    assert session.posts == 0
+
+
 def test_staging_writer_rejects_production_or_unconfigured_sheet():
     with pytest.raises(ValueError, match="configured staging"):
         StagingSheetWriter(

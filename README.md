@@ -140,6 +140,7 @@ Staging Sheet自主寫入使用Google Application Default Credentials，不把�
 ```bash
 UV_CACHE_DIR=/tmp/uv-cache uv sync --extra dev --extra research --extra sheets
 export GOOGLE_APPLICATION_CREDENTIALS=/secure/path/staging-writer-service-account.json
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra sheets tw-scenario quant daily sheet-preflight-staging
 UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra research --extra sheets tw-scenario quant daily live-preopen \
   --date YYYY-MM-DD \
   --base-dataset-dir data/processed/CERTIFIED_DATASET_ID \

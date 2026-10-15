@@ -28,7 +28,7 @@
 - Forward heartbeat：`ohlc-shadow` 目前為 `PAUSED`。它曾在 live daily orchestration 完成前過早啟用；正式 Sheet與正式排程未修改。
 - Live CLI：`quant daily live-preopen`與`live-postclose`已串接cutoff capture、官方核對、快照、晨報、append-only覆盤及staging write/readback；`config/quant/staging.json`鎖定staging並拒絕production ID。
 - Legacy task audit：`財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證`仍採舊介面；遷移映射與切換門檻已寫入`docs/V1_V0_MIGRATION_CONTRACT.md`。payload已硬性拒絕08:50 cutoff與額外機率欄位。
-- 驗證：59 passed；Ruff及 `git diff --check`通過，包含盤前／盤後完整orchestration與legacy contract拒絕測試。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
+- 驗證：60 passed；Ruff及 `git diff --check`通過，包含盤前／盤後完整orchestration、legacy contract拒絕與staging唯讀preflight測試。`sheet-preflight-staging`可在live capture前驗證ADC、表頭與空白列；Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
 
 ## Final 已關閉
 
