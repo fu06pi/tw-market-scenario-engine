@@ -12,6 +12,7 @@ Repository：https://github.com/fu06pi/tw-market-scenario-engine
 - [AGENTS.md](AGENTS.md)：工程與研究執行規則。
 - [CODEX_HANDOFF.md](CODEX_HANDOFF.md)：下一階段實作順序與交接。
 - [PROJECT_STATUS.md](PROJECT_STATUS.md)：已完成與待完成項目。
+- [V1→V0／V01 遷移契約](docs/V1_V0_MIGRATION_CONTRACT.md)：已核對的外部任務、legacy 欄位處理、切換門檻與 rollback 邊界。
 - [原 OHLC 架構方案](docs/architecture/TW_OHLC_QUANT_ARCHITECTURE.md)：2026-10-07 的設計背景；其中「TEJ 暫緩」、實作順序與未固定門檻，以本文件及 AGENTS.md 的新決策為準。
 - 其他舊情境、V0 isolation、KPI 與研究文件保留作歷史參考；與新流程衝突時，以本次新決策為準。
 
@@ -106,6 +107,8 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 數字快照保存 forecast_id、交易日、合約、時段、截止／發布／持久化時間、前收、OHLC 與區間、資料品質、資料／程式／模型／設定版本及 hash。
 
 原本 V0 晨報讀取同一 forecast_id 的數字，保留開盤前假說、實際開盤、實際盤中、實際盤後的用途與格式。模型輸入與新聞背景分開描述，不編造概率或另一套點數。若表頭已是「實際盤中」，儲存格不重複加同名標籤。
+
+已核對的外部 `V1 台股劇本` 仍採 legacy 08:50 cutoff、Bull／Base／Bear 機率與盤中 regime；`財經事件晨報`、`V1 台股收盤驗證` 也尚未改讀新 OHLC 契約。這些欄位不會被當成新 V1 輸出。程式現在直接拒絕 08:50 narrative cutoff 與額外 probability 欄位；完整遷移表見 [`docs/V1_V0_MIGRATION_CONTRACT.md`](docs/V1_V0_MIGRATION_CONTRACT.md)。
 
 `quant daily sheet-postclose-dry-run` 只產生 G:N、P 更新內容，並保存 A:F、O 的列指紋。寫入端必須先比對盤前列，再只更新保留的收盤欄位；任何 forecast_id、snapshot hash、標的／合約或 realization/evaluation 關聯不符都會停止。2026-10-15 staging readback摘要見 [`reports/quant/staging-sheet-validation-2026-10-15.json`](reports/quant/staging-sheet-validation-2026-10-15.json)。
 

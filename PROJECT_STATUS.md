@@ -27,7 +27,8 @@
 - [x] Staging-only `live-postclose`：FinMind／TWSE／TAIFEX日盤核對、append realization/evaluation、G:N,P write/readback，並保護A:F,O指紋。
 - [x] Repo內Google Sheets writer只接受設定的staging ID並明確拒絕production ID；使用ADC，憑證不進repo／參數／日誌。
 - [x] 2026-10-16 connector唯讀preflight確認staging表頭fingerprint一致、最後已用列133、134–135為下一組空白列；未寫入任何儲存格。證據：`reports/quant/staging-sheet-preflight-2026-10-16.json`。
-- [x] 58 個 pytest、Ruff及 `git diff --check` 通過；包含盤前與盤後完整orchestration組合測試。
+- [x] 已核對外部 legacy 任務介面並建立 `docs/V1_V0_MIGRATION_CONTRACT.md`；V0 payload程式層拒絕08:50 cutoff與額外 probability欄位，覆盤仍綁定同一forecast_id/hash。
+- [x] 59 個 pytest、Ruff及 `git diff --check` 通過；包含盤前／盤後完整orchestration與legacy contract拒絕測試。
 
 ## 已鎖定的 validation 結果
 
@@ -53,6 +54,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - [ ] 在實際Google staging Sheet執行新writer；本機目前無Application Default Credentials，只有fake transport與既有connector retrospective readback證據。
 - [ ] 至少一個 genuine 08:40 前手動 live staging E2E；目前只有2026-10-08 retrospective shadow。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
+- [ ] 將外部 `財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證` 從 legacy 08:50／情境機率介面遷移到凍結 OHLC 契約；正式切換前不得修改現行任務。
 - [ ] 正式排程切換與 rollback 演練。
 
 ## 運作與宣稱

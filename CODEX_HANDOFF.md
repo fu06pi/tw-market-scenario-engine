@@ -27,7 +27,8 @@
 - Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
 - Forward heartbeat：`ohlc-shadow` 目前為 `PAUSED`。它曾在 live daily orchestration 完成前過早啟用；正式 Sheet與正式排程未修改。
 - Live CLI：`quant daily live-preopen`與`live-postclose`已串接cutoff capture、官方核對、快照、晨報、append-only覆盤及staging write/readback；`config/quant/staging.json`鎖定staging並拒絕production ID。
-- 驗證：58 passed；Ruff及 `git diff --check`通過，包含盤前與盤後完整orchestration組合測試。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
+- Legacy task audit：`財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證`仍採舊介面；遷移映射與切換門檻已寫入`docs/V1_V0_MIGRATION_CONTRACT.md`。payload已硬性拒絕08:50 cutoff與額外機率欄位。
+- 驗證：59 passed；Ruff及 `git diff --check`通過，包含盤前／盤後完整orchestration與legacy contract拒絕測試。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
 
 ## Final 已關閉
 
@@ -44,7 +45,8 @@
 2. 在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
 3. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
 4. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。
-5. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
-6. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改正式排程。
+5. Shadow證據通過後，依遷移契約逐一改造三個外部任務並做rollback演練；之前不得動正式prompt、Sheet或排程。
+6. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
+7. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改正式排程。
 
 可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。

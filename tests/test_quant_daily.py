@@ -354,6 +354,25 @@ def test_narrative_is_deterministic_exact_and_rejects_late_news_or_edits():
         build_v0_narrative(snapshot, [late_news])
 
 
+def test_v0_adapter_rejects_legacy_cutoff_and_probability_fields():
+    narrative = build_v0_narrative(seal_snapshot(_body()))
+
+    legacy_cutoff = narrative.model_dump(mode="python")
+    legacy_cutoff["cutoff_at"] = _at("08:50:00")
+    with pytest.raises(ValidationError, match="exactly 08:30"):
+        V0NarrativePayload.model_validate(legacy_cutoff)
+
+    legacy_probability = narrative.model_dump(mode="python")
+    legacy_probability["bull_probability"] = 0.55
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        V0NarrativePayload.model_validate(legacy_probability)
+
+    item_probability = narrative.model_dump(mode="python")
+    item_probability["items"][0]["rise_probability"] = 0.55
+    with pytest.raises(ValidationError, match="Extra inputs are not permitted"):
+        V0NarrativePayload.model_validate(item_probability)
+
+
 def test_sheet_dry_run_preserves_ap_mapping_and_is_file_only_write_once(tmp_path):
     snapshot = seal_snapshot(_body())
     narrative = build_v0_narrative(snapshot)

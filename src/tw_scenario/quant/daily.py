@@ -470,7 +470,7 @@ class V0NarrativeItem(StrictFrozenModel):
 
 class V0NarrativePayload(StrictFrozenModel):
     schema_version: Literal["v0-narrative-from-ohlc-v1"] = "v0-narrative-from-ohlc-v1"
-    forecast_id: str
+    forecast_id: str = Field(pattern=FORECAST_ID_PATTERN)
     snapshot_hash: str = Field(pattern=HASH_PATTERN)
     trading_date: date
     cutoff_at: datetime
@@ -480,6 +480,18 @@ class V0NarrativePayload(StrictFrozenModel):
     @model_validator(mode="after")
     def daily_narrative_contract(self):
         _aware(self.cutoff_at, "cutoff_at")
+        cutoff_local = self.cutoff_at.astimezone(TZ)
+        if cutoff_local.date() != self.trading_date:
+            raise ValueError("narrative cutoff date must equal trading_date")
+        if (
+            cutoff_local.hour,
+            cutoff_local.minute,
+            cutoff_local.second,
+            cutoff_local.microsecond,
+        ) != (8, 30, 0, 0):
+            raise ValueError("V0 narrative cutoff must be exactly 08:30 Asia/Taipei")
+        if self.trading_date.isoformat() not in self.forecast_id:
+            raise ValueError("narrative forecast_id must contain trading_date")
         if [item.instrument for item in self.items] != ["TAIEX", "TX"]:
             raise ValueError("narrative items must contain exactly TAIEX then TX")
         news_ids = [item.news_id for item in self.news_background]
