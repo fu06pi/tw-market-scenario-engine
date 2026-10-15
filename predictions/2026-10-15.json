@@ -1,0 +1,91 @@
+{
+  "trading_date": "2026-10-15",
+  "generated_at": "2026-10-15T09:01:30+08:00",
+  "data_cutoff_at": "2026-10-15T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-compat",
+  "feature_version": "legacy-scenario-features-v1",
+  "prompt_version": "automation-v1-legacy-compat",
+  "data_manifest_hash": "33bb4c863d3ac2f56da893f755453a472ae1d5bf37f4352ac8c4733a2361b5bf",
+  "scenarios": {
+    "bull": 0.1,
+    "base": 0.38,
+    "bear": 0.52
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "trend_down",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -90,
+    "expected_close_return_bps": -105
+  },
+  "narrative": {
+    "market_view": "【reconstructed/late_generated；legacy compatibility；非新OHLC模型輸出】今日補建嚴格只用08:50前資料。熱於預期的美國CPI引發科技與半導體同步下跌，台指夜盤、SOX及TSM ADR三訊號同向偏空；ASML財報與台積電法說前承接是主要緩衝。",
+    "open_hypothesis": "預期相對10/14現貨收48,625.83點開低，點估-90bps（約-438點，約48,188點）。V0凍結區間為-0.3%至-1.2%；夜盤47,945支持方向，但不將期貨折價全額映射為現貨Gap。",
+    "intraday_hypothesis": "主型態為trend_down但保留高波動反彈。首30分鐘仍有再下探風險；若台積電與AI權值迅速收復opening range及VWAP、OTC廣度改善，才降級為range。",
+    "close_hypothesis": "收盤相對10/14點估-105bps（約-511點，約48,115點）。海外半導體重挫及熱CPI壓過ASML正向基本面；14:00台積電法說在現貨收盤後，未公布結果不納入。",
+    "breadth_hypothesis": "breadth_direction=down。預期非平盤上市上漲家數占比低於50%，OTC與電子中小型弱於大型防禦類股；金融、塑化及能源題材另行驗證，不以相對抗跌等同絕對上漲。",
+    "bull_script": "開低後台積電守住2,490元並收復opening range，AI權值固定池至少3檔翻紅、OTC及上漲家數同步改善，指數收復48,625.83；收盤≥+50bps。",
+    "base_script": "開低0.3%–1.2%後出現反彈與再測低點，科技弱、金融與塑化相對抗跌，收盤介於前收-50bps至+50bps。",
+    "bear_script": "開盤後台積電、AI權值、OTC與上市廣度同步轉弱，夜盤47,945附近缺乏承接；收盤≤-50bps，且可能形成高波動selloff。"
+  },
+  "key_drivers": [
+    "台指期夜盤收47,945、下跌853點（-1.75%），本地期貨顯著偏空。",
+    "Nasdaq -1.88%、SOX -4.30%、TSM ADR -3.40%，海外科技與台灣權值映射同向偏空。",
+    "美國9月CPI月增0.6%、年增3.7%，核心月增0.3%、年增2.6%，強化higher-for-longer風險。",
+    "10/14 TAIEX收48,625.83、+0.59%，上市752漲/245跌；前日反彈廣度良好但今日面臨隔夜重新定價。",
+    "美國10年期殖利率約5.189%、Brent 106.06美元，能源與通膨壓力仍高。",
+    "ASML Q3營收116.62億歐元、淨利49.6億歐元並上調年度展望，提供半導體設備基本面緩衝。",
+    "台積電法說14:00在現貨收盤後；未公布財測與指引完全排除。"
+  ],
+  "invalidation_conditions": [
+    "若現貨未開低，open_direction=down立即失效，但不得用開盤後資訊修改本快照。",
+    "若開低後30分鐘台積電與大型電子站回VWAP、OTC轉強且非平盤上漲家數占比超過60%，Bear/trend_down情境失效。",
+    "若跌破夜盤47,945附近且電子、OTC、金融與非電子同步轉弱，selloff風險高於目前點估。",
+    "08:50後資料、09:00後現貨行情及14:00台積電法說結果不得回寫，只能用於事後覆盤。",
+    "本檔因09:00後生成須排除正式盤前彙總績效，且不得宣稱為TEJ、ARIMA或TimesFM OHLC模型預測。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-15",
+      "item": "08:43當日V0十四項盤前假說",
+      "note": "夜盤-853、SOX -4.30%、TSM ADR -3.40%同向偏空；開低0.3%–1.2%；收盤跌至少0.5%；廣度轉弱。",
+      "source_row": "每日預測與覆盤!A132:Z145",
+      "extracted_at": "2026-10-15T09:01:30+08:00",
+      "content_hash": "041542237f4c2156233808c38537dbe23cb57dc2de3f845f9462e2de909f12a9"
+    },
+    {
+      "trading_date": "2026-10-08",
+      "item": "隔夜利空須區分Gap與開盤後賣壓",
+      "note": "期現價差不得直接當現貨Gap；Gap與首30分鐘下探獨立估計。",
+      "source_row": "模型修正紀錄!A20:J20",
+      "extracted_at": "2026-10-15T09:01:30+08:00",
+      "content_hash": "fa3917c57605d74ae3ec0c792d85a6790efa466ecd306faaa4162a7b5d6fadbe"
+    },
+    {
+      "trading_date": "2026-10-13",
+      "item": "負向一致時增加selloff Regime評估",
+      "note": "以開盤後廣度與Open-to-Low確認強度，不回改盤前方向。",
+      "source_row": "模型修正紀錄!A27:J27",
+      "extracted_at": "2026-10-15T09:01:30+08:00",
+      "content_hash": "039c63403f1516767d2603de0a7906e1b06edf06909cf940270f26c44ac95d56"
+    },
+    {
+      "trading_date": "2026-10-14",
+      "item": "Gap、Open-to-Low及Open-to-High嚴格分離",
+      "note": "方向正確不代表幅度命中；前日急跌不機械推論先跌。",
+      "source_row": "模型修正紀錄!A29:J29",
+      "extracted_at": "2026-10-15T09:01:30+08:00",
+      "content_hash": "99b03b64948664feac434c54dfbb25ebed1172f56970b306368e2e3ba845e891"
+    },
+    {
+      "trading_date": "2026-10-14",
+      "item": "盤中衝高與收盤集合競價分離",
+      "note": "降低隔夜ADR/夜盤對Close的直接權重，High-to-Close與尾盤量價另行追蹤。",
+      "source_row": "模型修正紀錄!A30:J30",
+      "extracted_at": "2026-10-15T09:01:30+08:00",
+      "content_hash": "718337158511a107f8dff9ee70e351150a45049baf3c36cb80606dc2353c42dc"
+    }
+  ],
+  "snapshot_hash": "2f8ffdf35b1f8ed93f3740023a485e7214e48d6ce48eac746ba88184d43d71d2"
+}
