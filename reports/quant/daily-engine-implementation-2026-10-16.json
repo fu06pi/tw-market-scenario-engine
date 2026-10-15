@@ -1,0 +1,61 @@
+{
+  "status": "IMPLEMENTED_NOT_FORWARD_VERIFIED",
+  "as_of": "2026-10-16T00:54:00+08:00",
+  "preopen": {
+    "entrypoint": "tw-scenario quant daily live-preopen",
+    "capture_window": "08:20-08:29 Asia/Taipei",
+    "cutoff": "08:30 Asia/Taipei",
+    "deadline": "08:40 Asia/Taipei",
+    "steps": [
+      "write-once FinMind incremental capture",
+      "completed-increment reconciliation against TWSE/TAIFEX",
+      "current TX night reconciliation against TAIFEX with official fallback",
+      "cutoff and data-quality audit",
+      "locked-baseline forecast after failed TimesFM final gate",
+      "seal and write-once freeze",
+      "deterministic V0 narrative",
+      "staging A:F,O write and exact readback"
+    ]
+  },
+  "postclose": {
+    "entrypoint": "tw-scenario quant daily live-postclose",
+    "not_before": "18:00 Asia/Taipei",
+    "steps": [
+      "FinMind current-day TAIEX/TX capture",
+      "TWSE/TAIFEX OHLC reconciliation",
+      "append-only realizations and evaluations",
+      "pre-open A:F,O fingerprint verification",
+      "staging G:N,P write and exact readback"
+    ]
+  },
+  "sheet_safety": {
+    "staging_only": true,
+    "production_sheet_id_rejected": true,
+    "credential_mode": "Google Application Default Credentials",
+    "credential_value_persisted": false,
+    "current_host_adc_available": false
+  },
+  "verification": {
+    "pytest": "57 passed",
+    "ruff": "PASS",
+    "git_diff_check": "PASS",
+    "google_sheet_transport": "fake transport morning/post-close readback and idempotency PASS",
+    "genuine_forward_preopen": false,
+    "genuine_forward_postclose": false
+  },
+  "provider_probe": {
+    "observed_at": "2026-10-16T00:52:15+08:00",
+    "scope": "FinMind non-production availability probe",
+    "taiex_latest_complete_date": "2026-10-15",
+    "tx_day_latest_complete_date": "2026-10-15",
+    "tx_night_latest_complete_date": "2026-10-15",
+    "tx_2026_10_16_rows_at_probe": 0,
+    "interpretation": "expected while the 2026-10-16 physical night session was still open; not an 08:20 availability result"
+  },
+  "operations": {
+    "heartbeat": "PAUSED",
+    "production_switch": false,
+    "production_sheet_written": false,
+    "next_gate": "configure staging-only ADC and complete one manual genuine live preopen plus postclose E2E"
+  }
+}

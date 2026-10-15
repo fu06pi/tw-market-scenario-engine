@@ -15,6 +15,7 @@ from pydantic import ValidationError
 from .contracts import TZ, digest, write_once
 
 DEFAULT_CONFIG = Path("config/quant/research.json")
+DEFAULT_STAGING_CONFIG = Path("config/quant/staging.json")
 DEFAULT_REPORT_ROOT = Path("reports/generated/quant")
 SENSITIVE_CONFIG_KEYS = {"api_key", "credential", "password", "secret", "token"}
 
@@ -104,8 +105,10 @@ def _load_config(path: Path) -> dict:
         "validation_start",
         "test_start",
         "test_end",
+        "capture_not_before",
         "cutoff",
         "deadline",
+        "postclose_not_before",
         "timezone",
         "budget_cpu_seconds",
         "timesfm_code_commit",
@@ -123,6 +126,8 @@ def _load_config(path: Path) -> dict:
         "Asia/Taipei",
     ):
         raise ValueError("cutoff, deadline, and timezone must remain 08:30/08:40/Asia-Taipei")
+    if raw["capture_not_before"] != "08:20" or raw["postclose_not_before"] != "18:00":
+        raise ValueError("daily live windows must remain 08:20 pre-open and 18:00 post-close")
     train = _parse_date(str(raw["train_start"]), "train_start")
     validation = _parse_date(str(raw["validation_start"]), "validation_start")
     test = _parse_date(str(raw["test_start"]), "test_start")
@@ -148,7 +153,9 @@ def _config_summary(path: Path, config: dict) -> dict:
             "test_end": config["test_end"],
         },
         "cutoff": config["cutoff"],
+        "capture_not_before": config["capture_not_before"],
         "deadline": config["deadline"],
+        "postclose_not_before": config["postclose_not_before"],
         "timezone": config["timezone"],
         "budget_cpu_seconds": config["budget_cpu_seconds"],
         "timesfm_code_commit": config["timesfm_code_commit"],
@@ -733,6 +740,142 @@ def daily_build_body(
     })
 
 
+@daily_app.command("capture-preopen")
+def daily_capture_preopen(
+    trading_date: Annotated[str, typer.Option("--date")],
+    base_dataset_dir: Annotated[Path, typer.Option("--base-dataset-dir")],
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Capture the FinMind increment before 08:30 and produce an immutable input audit."""
+    try:
+        config = _load_config(config_path)
+        day = _parse_date(trading_date, "date")
+        cutoff = datetime.combine(
+            day, datetime.strptime(config["cutoff"], "%H:%M").time(), TZ
+        )
+        from .daily_input import capture_preopen_dataset
+
+        output, report = capture_preopen_dataset(
+            base_dataset_dir=base_dataset_dir,
+            trading_date=day,
+            cutoff_at=cutoff,
+            root=data_root,
+        )
+        report_path = (
+            DEFAULT_REPORT_ROOT
+            / "daily"
+            / "input-audits"
+            / str(day)
+            / f"{output.name}.json"
+        )
+        report_path, reused = _write_json_once_or_same(report_path, report)
+        if report["status"] != "PASS":
+            raise ValueError(f"pre-open capture failed input audit; evidence={report_path}")
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": "PREOPEN_INPUT_CAPTURED",
+        "trading_date": str(day),
+        "daily_dataset_dir": str(output),
+        "input_audit": str(report_path),
+        "audit_reused": reused,
+        "production_switch": False,
+    })
+
+
+@daily_app.command("run-preopen")
+def daily_run_preopen(
+    trading_date: Annotated[str, typer.Option("--date")],
+    daily_dataset_dir: Annotated[Path, typer.Option("--daily-dataset-dir")],
+    baseline_path: Annotated[Path, typer.Option("--baseline")],
+    final_summary_path: Annotated[Path, typer.Option("--final-summary")],
+    observed_headers_json: Annotated[Path, typer.Option("--observed-headers")],
+    start_row: Annotated[int, typer.Option("--start-row", min=2)],
+    news_json: Annotated[Path | None, typer.Option("--news")] = None,
+    started_at: Annotated[str | None, typer.Option("--started-at")] = None,
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_REPORT_ROOT / "daily",
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Build, freeze and narrate one cutoff-certified staging forecast; never write Sheets."""
+    from .daily_orchestration import DailyRunFailed, run_preopen_staging
+
+    try:
+        config = _load_config(config_path)
+        headers = _read_json(observed_headers_json)
+        if not isinstance(headers, list) or not all(isinstance(item, str) for item in headers):
+            raise TypeError("observed headers JSON must be a list of strings")
+        news = [] if news_json is None else _read_json(news_json)
+        if not isinstance(news, list):
+            raise TypeError("news JSON must be a list")
+        evidence_path = run_preopen_staging(
+            daily_dataset_dir=daily_dataset_dir,
+            baseline_path=baseline_path,
+            final_summary_path=final_summary_path,
+            config=config,
+            config_path=config_path,
+            trading_date=_parse_date(trading_date, "date"),
+            started_at=_parse_datetime(started_at, "started_at"),
+            output_root=output_root,
+            start_row=start_row,
+            observed_headers=tuple(headers),
+            news=news,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})
+
+
+@daily_app.command("live-preopen")
+def daily_live_preopen(
+    trading_date: Annotated[str, typer.Option("--date")],
+    base_dataset_dir: Annotated[Path, typer.Option("--base-dataset-dir")],
+    baseline_path: Annotated[Path, typer.Option("--baseline")],
+    final_summary_path: Annotated[Path, typer.Option("--final-summary")],
+    news_json: Annotated[Path | None, typer.Option("--news")] = None,
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_REPORT_ROOT / "daily",
+    staging_config_path: Annotated[
+        Path, typer.Option("--staging-config")
+    ] = DEFAULT_STAGING_CONFIG,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Run the single staging-only live path from pre-cutoff capture through Sheet readback."""
+    from .daily_orchestration import DailyRunFailed, run_live_preopen
+
+    try:
+        config = _load_config(config_path)
+        news = [] if news_json is None else _read_json(news_json)
+        if not isinstance(news, list):
+            raise TypeError("news JSON must be a list")
+        writer = _staging_writer(staging_config_path)
+        evidence_path = run_live_preopen(
+            trading_date=_parse_date(trading_date, "date"),
+            base_dataset_dir=base_dataset_dir,
+            baseline_path=baseline_path,
+            final_summary_path=final_summary_path,
+            config=config,
+            config_path=config_path,
+            data_root=data_root,
+            output_root=output_root,
+            writer=writer,
+            news=news,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})
+
+
 @daily_app.command("freeze")
 def daily_freeze(
     snapshot_json: Annotated[
@@ -1023,3 +1166,116 @@ def daily_sheet_postclose_dry_run(
             "production_sheet_written": False,
         }
     )
+
+
+def _staging_writer(staging_config_path: Path):
+    staging = _read_json(staging_config_path)
+    if not isinstance(staging, dict) or staging.get("production_switch") is not False:
+        raise ValueError("staging config must keep production_switch=false")
+    required = {"staging_sheet_id", "production_sheet_id", "sheet_name"}
+    if not all(isinstance(staging.get(key), str) and staging[key] for key in required):
+        raise ValueError("staging config is incomplete")
+    from .sheets import StagingSheetWriter
+
+    return StagingSheetWriter(
+        sheet_id=staging["staging_sheet_id"],
+        staging_sheet_id=staging["staging_sheet_id"],
+        production_sheet_id=staging["production_sheet_id"],
+    )
+
+
+@daily_app.command("sheet-write-staging")
+def daily_sheet_write_staging(
+    batch_json: Annotated[Path, typer.Argument(help="Validated morning Sheet batch JSON.")],
+    receipt: Annotated[Path | None, typer.Option("--receipt")] = None,
+    staging_config_path: Annotated[
+        Path, typer.Option("--staging-config")
+    ] = DEFAULT_STAGING_CONFIG,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Write A:F,O to the configured staging Sheet and verify exact readback."""
+    try:
+        _load_config(config_path)
+        from .daily import V0SheetDryRunBatch
+        from .sheets import save_receipt
+
+        batch = V0SheetDryRunBatch.model_validate(_read_json(batch_json))
+        writer = _staging_writer(staging_config_path)
+        result = writer.write_morning(batch)
+        receipt = receipt or (
+            DEFAULT_REPORT_ROOT
+            / "daily"
+            / "sheet-receipts"
+            / f"{batch.forecast_id}-morning.json"
+        )
+        receipt = save_receipt(result, receipt)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "status": "STAGING_WRITE_VERIFIED", "receipt": str(receipt)})
+
+
+@daily_app.command("sheet-postclose-write-staging")
+def daily_sheet_postclose_write_staging(
+    batch_json: Annotated[Path, typer.Argument(help="Validated post-close batch JSON.")],
+    receipt: Annotated[Path | None, typer.Option("--receipt")] = None,
+    staging_config_path: Annotated[
+        Path, typer.Option("--staging-config")
+    ] = DEFAULT_STAGING_CONFIG,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Write G:N,P to staging after verifying the immutable morning cells."""
+    try:
+        _load_config(config_path)
+        from .daily import V0PostcloseSheetBatch
+        from .sheets import save_receipt
+
+        batch = V0PostcloseSheetBatch.model_validate(_read_json(batch_json))
+        writer = _staging_writer(staging_config_path)
+        result = writer.write_postclose(batch)
+        receipt = receipt or (
+            DEFAULT_REPORT_ROOT
+            / "daily"
+            / "sheet-receipts"
+            / f"{batch.forecast_id}-postclose.json"
+        )
+        receipt = save_receipt(result, receipt)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "status": "STAGING_POSTCLOSE_VERIFIED", "receipt": str(receipt)})
+
+
+@daily_app.command("live-postclose")
+def daily_live_postclose(
+    snapshot_json: Annotated[Path, typer.Argument(help="Frozen morning snapshot JSON.")],
+    daily_dataset_dir: Annotated[Path, typer.Option("--daily-dataset-dir")],
+    morning_batch_json: Annotated[Path, typer.Option("--morning-batch")],
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_REPORT_ROOT / "daily",
+    staging_config_path: Annotated[
+        Path, typer.Option("--staging-config")
+    ] = DEFAULT_STAGING_CONFIG,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Capture closing OHLC, append errors, and verify the staging G:N,P update."""
+    from .daily_orchestration import DailyRunFailed, run_live_postclose
+
+    try:
+        config = _load_config(config_path)
+        writer = _staging_writer(staging_config_path)
+        evidence_path = run_live_postclose(
+            snapshot_path=snapshot_json,
+            daily_dataset_dir=daily_dataset_dir,
+            morning_batch_path=morning_batch_json,
+            data_root=data_root,
+            output_root=output_root,
+            writer=writer,
+            config=config,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})

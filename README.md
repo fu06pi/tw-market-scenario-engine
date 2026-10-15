@@ -109,6 +109,8 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 
 `quant daily sheet-postclose-dry-run` 只產生 G:N、P 更新內容，並保存 A:F、O 的列指紋。寫入端必須先比對盤前列，再只更新保留的收盤欄位；任何 forecast_id、snapshot hash、標的／合約或 realization/evaluation 關聯不符都會停止。2026-10-15 staging readback摘要見 [`reports/quant/staging-sheet-validation-2026-10-15.json`](reports/quant/staging-sheet-validation-2026-10-15.json)。
 
+目前 repo 另提供真正的 staging-only live 入口：`quant daily live-preopen` 只允許在08:20–08:29開始，先建立不可變FinMind capture並以TAIFEX當日夜盤核對，08:30後才預測、凍結、生成晨報及寫入staging A:F、O；`quant daily live-postclose` 在18:00後重新抓取FinMind實際日盤並以TWSE／TAIFEX核對，append realization/evaluation後只更新G:N、P。兩者皆逐欄readback、保存receipt，且 [`config/quant/staging.json`](config/quant/staging.json) 會拒絕正式Sheet ID。若資料晚於截止、官方核對不一致、Google憑證不存在、列非空或讀回不同，流程fail-closed並保存失敗attempt。
+
 既有排程、Google Sheet 與歷史快照在開發期間保持運作。新資料、模型、數字保存、晨報及收盤更新通過端到端驗證後，才切換資料流；保留恢復版本。舊紀錄不回寫成新模型績效，新舊成績分開統計。
 
 Codex heartbeat `ohlc-shadow` 目前為 `PAUSED`。先前在只有 retrospective staging 證據、尚未完成 live daily orchestration 時就啟用 heartbeat，順序不正確，因此已停用。重新啟用前必須先由單一 staging-only 執行入口完成 08:30 增量資料與 availability/cutoff 認證、DQ、body、seal/freeze、V0 narrative、Sheet write/readback，以及收盤 realization/evaluation；並至少手動完成一次 genuine live 交易日端到端驗證。失敗日必須保留，不能事後補成 forward PASS。正式 V0 排程仍獨立運作。
@@ -130,7 +132,23 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。獨立 staging Sheet亦已完成晨報與收盤復盤逐欄 readback，確認收盤更新沒有改寫盤前 A:F、O；這仍是回溯演練，不是 08:40 前向發布證據。目前尚缺單一 live daily orchestration、自主 staging Sheet writer、live cutoff/DQ認證與 genuine forward日。完成手動 live staging E2E後，才可重新啟用 heartbeat並累積3–5日 forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
+Staging Sheet自主寫入使用Google Application Default Credentials，不把憑證放入repo或命令列：
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv sync --extra dev --extra research --extra sheets
+export GOOGLE_APPLICATION_CREDENTIALS=/secure/path/staging-writer-service-account.json
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra research --extra sheets tw-scenario quant daily live-preopen \
+  --date YYYY-MM-DD \
+  --base-dataset-dir data/processed/CERTIFIED_DATASET_ID \
+  --baseline reports/quant/experiments/EXPERIMENT_ID/baseline_results.json \
+  --final-summary reports/quant/research-summary-final-2026-10-14.json
+```
+
+服務帳號只需分享獨立staging Sheet；不得授權正式Sheet。目前本機ADC尚未設定，因此writer程式已驗證但尚未完成genuine live Sheet寫入。
+
+本階段可公開的實作／未執行邊界見 [`reports/quant/daily-engine-implementation-2026-10-16.json`](reports/quant/daily-engine-implementation-2026-10-16.json)。
+
+鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。獨立 staging Sheet亦已完成晨報與收盤復盤逐欄 readback，確認收盤更新沒有改寫盤前 A:F、O；這仍是回溯演練，不是 08:40 前向發布證據。單一 live pre-open/post-close orchestration、自主 staging writer、cutoff/DQ與官方核對已實作並以fake transport測試；尚未執行genuine forward日，且本機ADC未設定。完成手動live staging E2E後，才可重新啟用heartbeat並累積3–5日forward shadow。TimesFM只保留研究結果，不因final失敗反覆調整同一測試集。
 
 ## 本次文件備份
 

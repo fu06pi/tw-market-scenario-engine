@@ -76,12 +76,19 @@ def build_locked_baseline_body(
     config: dict,
     trading_date: date,
     generated_at: datetime,
-    persisted_at: datetime,
+    persisted_at: datetime | None,
     code_version: str,
     final_summary_hash: str,
+    data_quality: DataQualityEvidence | None = None,
 ) -> OHLCForecastSnapshotBodyV1:
     cutoff = at(trading_date, config["cutoff"])
-    for timestamp, name in ((generated_at, "generated_at"), (persisted_at, "persisted_at")):
+    if generated_at.utcoffset() is None:
+        raise ValueError("generated_at must be timezone-aware")
+    if persisted_at is not None and persisted_at.utcoffset() is None:
+        raise ValueError("persisted_at must be timezone-aware")
+    if generated_at < cutoff:
+        raise ValueError("daily forecast generation cannot begin before the 08:30 cutoff")
+    for timestamp, name in ((generated_at, "generated_at"),):
         if timestamp.utcoffset() is None:
             raise ValueError(f"{name} must be timezone-aware")
     forecasts = []
@@ -126,13 +133,16 @@ def build_locked_baseline_body(
         SourceEvidence(source_id=source_id, content_hash=bar.source_hash, available_at=bar.available_at)
         for source_id, bar in sorted(sources.items())
     )
-    quality = DataQualityEvidence(
+    quality = data_quality or DataQualityEvidence(
         status="WARN",
         report_hash=final_summary_hash,
         issues=("retrospective shadow; historical availability timestamps are assumptions",),
     )
     manifest_hash = digest(manifest)
     config_hash = digest(config)
+    persisted_at = persisted_at or datetime.now(TZ)
+    if persisted_at < generated_at:
+        raise ValueError("persisted_at must not precede generated_at")
     forecast_id = deterministic_forecast_id(
         trading_date=trading_date,
         cutoff_at=cutoff,

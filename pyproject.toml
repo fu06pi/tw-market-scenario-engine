@@ -29,6 +29,7 @@ timesfm3 = [
   "timesfm[torch] @ git+https://github.com/google-research/timesfm.git@e51928e27119cb17bebc005be2696b75e0a9e688",
   "torch==2.9.1+cpu",
 ]
+sheets = ["google-auth>=2.35,<3"]
 
 [project.scripts]
 tw-scenario = "tw_scenario.cli:app"

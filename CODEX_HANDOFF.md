@@ -26,7 +26,8 @@
 - Staging Sheet retrospective E2E：2026-10-08兩市場列完成 A:F、O盤前寫入、G:N、P收盤回填與逐欄 readback；A:F、O未被改寫。摘要：`reports/quant/staging-sheet-validation-2026-10-15.json`。
 - Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
 - Forward heartbeat：`ohlc-shadow` 目前為 `PAUSED`。它曾在 live daily orchestration 完成前過早啟用；正式 Sheet與正式排程未修改。
-- 驗證：51 passed；Ruff及 `git diff --check`通過。
+- Live CLI：`quant daily live-preopen`與`live-postclose`已串接cutoff capture、官方核對、快照、晨報、append-only覆盤及staging write/readback；`config/quant/staging.json`鎖定staging並拒絕production ID。
+- 驗證：57 passed；Ruff及 `git diff --check`通過。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
 
 ## Final 已關閉
 
@@ -39,10 +40,10 @@
 
 ## 接續順序
 
-1. 現有 CLI可從 certified retrospective資料建立 locked-baseline body，但尚未完成 live daily orchestration；不得稱為每日引擎完成。
-2. 建立單一 staging-only入口，串接08:30增量收集、live availability/cutoff認證、DQ、body、seal/freeze、deterministic V0晨報與Sheet write/readback；任何步驟失敗都要保存失敗紀錄並停止。
-3. 建立收盤 realization/evaluation與G:N、P回填，先驗證A:F、O列指紋未改寫。
-4. 手動完成至少一個 genuine 08:40前 live staging E2E，才可重新啟用 `ohlc-shadow`；再累積3–5個交易日 genuine forward shadow。
+1. Live pre-open/post-close orchestration與staging writer已實作，但不得在genuine forward執行前稱為每日引擎完成。
+2. 在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
+3. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
+4. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。
 5. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
 6. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改正式排程。
 
