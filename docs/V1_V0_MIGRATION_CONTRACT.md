@@ -56,3 +56,5 @@ V0 不得直接呼叫模型、重新計算 OHLC、改寫區間或另建方向機
 5. 回復點是目前仍在運作的 legacy 任務與正式 Sheet；切換不得刪除或重寫其歷史資料。
 
 目前第 1–4 項均未完成，因此新流程不得宣稱 production ready，也不得恢復 `ohlc-shadow`。
+
+三個外部任務的逐項 prompt 草案、依賴順序與 rollback 步驟已整理於 [`V0_EXTERNAL_TASK_CUTOVER_PACKET.md`](V0_EXTERNAL_TASK_CUTOVER_PACKET.md)。該套件狀態為 `NOT_AUTHORIZED`，只能用於審查與 staging 演練。

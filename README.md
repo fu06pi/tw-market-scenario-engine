@@ -13,6 +13,7 @@ Repository：https://github.com/fu06pi/tw-market-scenario-engine
 - [CODEX_HANDOFF.md](CODEX_HANDOFF.md)：下一階段實作順序與交接。
 - [PROJECT_STATUS.md](PROJECT_STATUS.md)：已完成與待完成項目。
 - [V1→V0／V01 遷移契約](docs/V1_V0_MIGRATION_CONTRACT.md)：已核對的外部任務、legacy 欄位處理、切換門檻與 rollback 邊界。
+- [外部任務切換套件](docs/V0_EXTERNAL_TASK_CUTOVER_PACKET.md)：三個既有任務的待審查 prompt、依賴順序、失敗處理與 rollback；目前為 `NOT_AUTHORIZED`。
 - [原 OHLC 架構方案](docs/architecture/TW_OHLC_QUANT_ARCHITECTURE.md)：2026-10-07 的設計背景；其中「TEJ 暫緩」、實作順序與未固定門檻，以本文件及 AGENTS.md 的新決策為準。
 - 其他舊情境、V0 isolation、KPI 與研究文件保留作歷史參考；與新流程衝突時，以本次新決策為準。
 

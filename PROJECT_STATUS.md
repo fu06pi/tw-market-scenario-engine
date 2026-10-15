@@ -28,6 +28,7 @@
 - [x] Repo內Google Sheets writer只接受設定的staging ID並明確拒絕production ID；使用ADC，憑證不進repo／參數／日誌。
 - [x] 2026-10-16 connector唯讀preflight確認staging表頭fingerprint一致、最後已用列133、134–135為下一組空白列；未寫入任何儲存格。證據：`reports/quant/staging-sheet-preflight-2026-10-16.json`。
 - [x] 已核對外部 legacy 任務介面並建立 `docs/V1_V0_MIGRATION_CONTRACT.md`；V0 payload程式層拒絕08:50 cutoff與額外 probability欄位，覆盤仍綁定同一forecast_id/hash。
+- [x] 已依實際外部任務輸出建立`V0_EXTERNAL_TASK_CUTOVER_PACKET.md`，含三份待審查prompt、receipt依賴、fail-closed條件與rollback；狀態保持`NOT_AUTHORIZED`，未修改任何任務。
 - [x] Staging唯讀preflight CLI可在live capture前驗證ADC、最小讀取權、A:P表頭與下一組空白列；回報只含Sheet ID hash且不寫入儲存格。
 - [x] 60 個 pytest、Ruff及 `git diff --check` 通過；包含盤前／盤後完整orchestration、legacy contract拒絕與唯讀preflight測試。
 
