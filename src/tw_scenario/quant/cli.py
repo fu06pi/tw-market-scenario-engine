@@ -630,6 +630,46 @@ def timesfm_final(
     })
 
 
+@app.command("final-stability")
+def final_stability(
+    baseline_json: Annotated[Path, typer.Argument(help="Locked baseline final artifact.")],
+    candidate_json: Annotated[Path, typer.Argument(help="Locked candidate final artifact.")],
+    output: Annotated[Path, typer.Option("--output")],
+    events_json: Annotated[
+        Path | None,
+        typer.Option("--events", help="Optional frozen date-to-event-label JSON."),
+    ] = None,
+) -> None:
+    """Describe closed final stability without selecting or retuning a model."""
+    try:
+        from .evaluation import build_final_stability_audit
+
+        baseline = _read_json(baseline_json)
+        candidate = _read_json(candidate_json)
+        events = None if events_json is None else _read_json(events_json)
+        if events is not None and (
+            not isinstance(events, dict)
+            or not all(isinstance(k, str) and isinstance(v, str) for k, v in events.items())
+        ):
+            raise TypeError("events JSON must map ISO dates to non-empty labels")
+        result = build_final_stability_audit(
+            baseline,
+            candidate,
+            event_labels=events,
+        )
+        output, reused = _write_json_once_or_same(output, result)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json(
+        {
+            "status": result["status"],
+            "candidate_acceptance_status": result["candidate_acceptance_status"],
+            "output": str(output),
+            "reused": reused,
+        }
+    )
+
+
 @app.command("timesfm-joint-validate")
 def timesfm_joint_validate(
     independent_validation_path: Annotated[

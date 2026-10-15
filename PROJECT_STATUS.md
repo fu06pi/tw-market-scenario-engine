@@ -30,7 +30,8 @@
 - [x] 已核對外部 legacy 任務介面並建立 `docs/V1_V0_MIGRATION_CONTRACT.md`；V0 payload程式層拒絕08:50 cutoff與額外 probability欄位，覆盤仍綁定同一forecast_id/hash。
 - [x] 已依實際外部任務輸出建立`V0_EXTERNAL_TASK_CUTOVER_PACKET.md`，含三份待審查prompt、receipt依賴、fail-closed條件與rollback；狀態保持`NOT_AUTHORIZED`，未修改任何任務。
 - [x] Staging唯讀preflight CLI可在live capture前驗證ADC、最小讀取權、A:P表頭與下一組空白列；回報只含Sheet ID hash且不寫入儲存格。
-- [x] 60 個 pytest、Ruff及 `git diff --check` 通過；包含盤前／盤後完整orchestration、legacy contract拒絕與唯讀preflight測試。
+- [x] 已對關閉 final 做年度、固定實際振幅狀態及TX換月日的事後穩定性診斷；保留全部失敗日。重大事件因沒有凍結的point-in-time事件日曆而明確未評估。
+- [x] 62 個 pytest、Ruff及 `git diff --check` 通過；包含盤前／盤後完整orchestration、legacy contract拒絕、唯讀preflight與穩定性分組測試。
 
 ## 已鎖定的 validation 結果
 
@@ -49,6 +50,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - TimesFM final：TAIEX close MAE 371.53，較 paired baseline **惡化 4.64%**；TX close MAE 377.46，只改善 **0.45%**。兩者皆未達 5%。
 - TAIEX close interval coverage 73.64%；TX四項 coverage 73.14%–74.38%，低於 75%下限。O/H/L degradation gate則全部通過。
 - Block bootstrap 95% CI：TAIEX close改善 `[-10.94%, 0.78%]`；TX `[-2.70%, 3.77%]`，均包含零且不支持穩定改善。
+- 事後穩定性：TAIEX低／中／高實際振幅組close改善分別為`+5.39%`／`-4.21%`／`-6.30%`；TX為`+2.15%`／`+1.94%`／`-1.05%`。TX換月日`+8.14%`，非換月日`-0.06%`；這不是預先selection gate。
 - 完整結果摘要：`reports/quant/research-summary-final-2026-10-14.json`。該期間不得重新包裝成新的獨立 holdout。
 
 ## 尚未完成
@@ -56,6 +58,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - [ ] 在實際Google staging Sheet執行新writer；本機目前無Application Default Credentials，只有fake transport與既有connector retrospective readback證據。
 - [ ] 至少一個 genuine 08:40 前手動 live staging E2E；目前只有2026-10-08 retrospective shadow。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
+- [ ] 經歷史時間戳核實的重大事件日曆與海外市場特徵；目前不把新聞加入數值訓練，未平倉量亦尚未進入模型特徵。
 - [ ] 將外部 `財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證` 從 legacy 08:50／情境機率介面遷移到凍結 OHLC 契約；正式切換前不得修改現行任務。
 - [ ] 正式排程切換與 rollback 演練。
 

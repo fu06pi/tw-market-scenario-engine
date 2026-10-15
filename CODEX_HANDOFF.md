@@ -29,7 +29,8 @@
 - Live CLI：`quant daily live-preopen`與`live-postclose`已串接cutoff capture、官方核對、快照、晨報、append-only覆盤及staging write/readback；`config/quant/staging.json`鎖定staging並拒絕production ID。
 - Legacy task audit：`財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證`仍採舊介面；遷移映射與切換門檻已寫入`docs/V1_V0_MIGRATION_CONTRACT.md`。payload已硬性拒絕08:50 cutoff與額外機率欄位。
 - External task cutover packet：`docs/V0_EXTERNAL_TASK_CUTOVER_PACKET.md`保存三份待審查prompt、receipt依賴、失敗處理與rollback；狀態`NOT_AUTHORIZED`，不得在forward gates前套用。
-- 驗證：60 passed；Ruff及 `git diff --check`通過，包含盤前／盤後完整orchestration、legacy contract拒絕與staging唯讀preflight測試。`sheet-preflight-staging`可在live capture前驗證ADC、表頭與空白列；Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
+- Final stability：`reports/quant/final-stability-diagnostics-2026-10-16.json`只作關閉final的事後描述。TAIEX在中／高波動組惡化；TX非換月日近零改善。重大事件因缺少凍結事件日曆未評估。
+- 驗證：62 passed；Ruff及 `git diff --check`通過，包含盤前／盤後完整orchestration、legacy contract拒絕、staging唯讀preflight與穩定性分組測試。`sheet-preflight-staging`可在live capture前驗證ADC、表頭與空白列；Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
 
 ## Final 已關閉
 

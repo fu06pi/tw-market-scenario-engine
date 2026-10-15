@@ -103,6 +103,8 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 5. 時間區塊抽樣估計改善不確定性，按年度、波動、換月與重大事件檢查。報告全部應預測日、失敗日及覆蓋率。
 6. 未達標仍交付最佳候選與完整結果，以最佳基準作預設候選輸出。預測達標不等於交易獲利。
 
+已關閉 final 的事後穩定性診斷見 [`reports/quant/final-stability-diagnostics-2026-10-16.json`](reports/quant/final-stability-diagnostics-2026-10-16.json)。TAIEX 候選在低波動組改善 5.39%，但在中／高波動組分別惡化 4.21%／6.30%；TX 在2025改善7.54%，2026則惡化0.54%，非換月日近乎沒有改善。這些分組是 final 關閉後的描述性分析，不能拿來重選模型。重大事件分組因缺少凍結的歷史時間戳事件日曆而標示未評估。逐項完成／失敗／阻擋矩陣見 [`reports/quant/acceptance-audit-2026-10-16.json`](reports/quant/acceptance-audit-2026-10-16.json)。
+
 ## 晨報與每日作業整合
 
 數字快照保存 forecast_id、交易日、合約、時段、截止／發布／持久化時間、前收、OHLC 與區間、資料品質、資料／程式／模型／設定版本及 hash。
