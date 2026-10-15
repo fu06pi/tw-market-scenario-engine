@@ -78,7 +78,7 @@ flowchart TD
 
 對照至少包含：零報酬與歷史振幅、夜盤簡單回歸、ARIMA／ARIMAX、TimesFM 3 零樣本歷史版、多變量版與歷史微調版；先測市場獨立，再測聯合預測。共享外部特徵的模型使用相同資訊集。
 
-TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb17bebc005be2696b75e0a9e688` 與 weight revision `43046b85ec22d584a13f8098c2ed39c889e129c2`。官方 3.0 高階介面為 inference-only；完整 LoRA 範例仍屬 2.5。任何自訂 output-head gradient smoke 必須另名，不能冒充官方 3.0 fine-tuning。自架權重屬非商業授權，本專案維持學術研究與 shadow forward test。
+TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb17bebc005be2696b75e0a9e688` 與 weight revision `43046b85ec22d584a13f8098c2ed39c889e129c2`。官方 3.0 高階介面為 inference-only；完整 LoRA 範例仍屬 2.5。自訂 `custom_output_head_gradient_smoke` 已在單一 train-period樣本執行一個 SGD step，證實 loss有限、output-head梯度／參數／預測改變及 checkpoint重載等價；這不是官方 fine-tuning、不證明改善，也不是 production candidate。公開摘要見 [`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`](reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json)。自架權重屬非商業授權，本專案維持學術研究與 shadow forward test。
 
 ## 訓練、驗證與停止
 

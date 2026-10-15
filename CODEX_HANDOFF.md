@@ -24,7 +24,8 @@
 - Joint lock：TAIEX = GBUD joint multivariate，validation close MAE 169.19；TX = GBUD independent multivariate，156.73。
 - validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
 - Staging Sheet retrospective E2E：2026-10-08兩市場列完成 A:F、O盤前寫入、G:N、P收盤回填與逐欄 readback；A:F、O未被改寫。摘要：`reports/quant/staging-sheet-validation-2026-10-15.json`。
-- 驗證：50 passed；Ruff及 `git diff --check`通過。
+- Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
+- 驗證：51 passed；Ruff及 `git diff --check`通過。
 
 ## Final 已關閉
 
@@ -40,7 +41,7 @@
 1. 每日 baseline body orchestration已完成；2026-10-08 retrospective shadow證據在 `reports/quant/daily-shadow-summary-2026-10-08.json`。
 2. 凍結 snapshot到 deterministic V0 晨報與 A:P dry-run已驗證；新聞只能提供 cutoff前背景，不能改數字。
 3. Retrospective staging morning/post-close write/readback已完成；下一步累積 3–5 個交易日 genuine forward shadow。
-4. 自訂 output-head gradient smoke若執行，必須另名且不能改變已關閉 final的結論。
+4. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
 5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
 
 可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。

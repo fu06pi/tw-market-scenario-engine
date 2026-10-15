@@ -516,6 +516,47 @@ def timesfm_preflight(
         raise typer.Exit(code=2)
 
 
+@app.command("timesfm-gradient-smoke")
+def timesfm_gradient_smoke(
+    dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+    output_root: Annotated[
+        Path, typer.Option("--output-root", help="Ignored local experiment root.")
+    ] = DEFAULT_REPORT_ROOT / "experiments",
+    cache_dir: Annotated[
+        Path, typer.Option("--cache-dir", help="Pinned local TimesFM weight cache.")
+    ] = Path("data/raw/timesfm3"),
+) -> None:
+    """Run one custom output-head-only gradient step on a train-period sample."""
+    try:
+        config = _load_config(config_path)
+        from .timesfm3 import CODE_COMMIT, WEIGHT_REVISION
+        from .timesfm_gradient_smoke import run_output_head_gradient_smoke
+
+        if config["timesfm_code_commit"] != CODE_COMMIT:
+            raise ValueError("config TimesFM code commit does not match the adapter")
+        if config["timesfm_weight_revision"] != WEIGHT_REVISION:
+            raise ValueError("config TimesFM weight revision does not match the adapter")
+        output = run_output_head_gradient_smoke(
+            dataset_dir, config_path, cache_dir, output_root
+        )
+        result = _read_json(output)
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json(
+        {
+            "status": result["status"],
+            "name": result["name"],
+            "official_timesfm3_finetuning": False,
+            "production_candidate": False,
+            "gradient_norm_l2": result["gradient_norm_l2"],
+            "parameter_delta_l2": result["parameter_delta_l2"],
+            "forecast_delta_l2": result["forecast_delta_l2"],
+            "output": str(output),
+        }
+    )
+
+
 @app.command("timesfm-validate")
 def timesfm_validate(
     dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],

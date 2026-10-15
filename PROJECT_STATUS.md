@@ -13,6 +13,7 @@
 - [x] 固定 split、08:30 cutoff、08:40 persistence、5-session roll、5bp neutral threshold、2-hour CPU budget及 coverage gate。
 - [x] Baseline validation 選模與一次性 final test。TAIEX 鎖定 GBUD+ARIMAX；TX 鎖定 GBUD+night regression。
 - [x] TimesFM 3 code／weight revision、非商業授權、CPU batch=1 load probe與真實資料 smoke。
+- [x] 自訂 output-head gradient smoke：只解凍 `output_head.weight/bias`，單一 train-period樣本、單一步驟；梯度、參數差、預測差皆非零，checkpoint重載差為0。明確不是官方 TimesFM 3 fine-tuning或 production candidate。
 - [x] TimesFM 獨立市場 8 個候選 validation；244/244 日全部成功，final 尚未開啟。
 - [x] 三類 validation-only 改善：模型 blend、因果 residual bias、126/252/512 視窗；未達雙市場門檻後停止盲搜。
 - [x] TAIEX+TX 八序列 joint GBUD validation；244/244 日成功。TAIEX 鎖定 joint 候選，TX 保留 independent 候選。
@@ -21,7 +22,7 @@
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
 - [x] 鎖定 baseline直接建立每日 body 的 CLI；2026-10-08真實資料 retrospective shadow在約83秒完成 body→freeze→narrative→A:P dry-run，同一 forecast_id/hash鏈驗證通過。
 - [x] 獨立 staging Sheet第132–133列完成盤前 A:F、O與收盤 G:N、P寫入及逐欄 readback；收盤更新後盤前欄位完全不變。證據：`reports/quant/staging-sheet-validation-2026-10-15.json`。這是 retrospective shadow，不是 genuine forward。
-- [x] 50 個 pytest、Ruff及 `git diff --check` 通過。
+- [x] 51 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果
 
@@ -44,7 +45,6 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 
 ## 尚未完成
 
-- [ ] 自訂 output-head gradient smoke；官方 TimesFM 3 高階 API仍為 inference-only，不能把 window/calibration 稱為微調。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
 - [ ] 正式排程切換與 rollback 演練。
 

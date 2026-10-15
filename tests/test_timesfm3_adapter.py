@@ -7,6 +7,7 @@ import pytest
 
 from tw_scenario.quant.timesfm3 import TimesFM3Adapter, gradient_smoke_contract
 from tw_scenario.quant.timesfm_backtest import _acceptance, _joint_history
+from tw_scenario.quant.timesfm_gradient_smoke import _training_inputs
 
 
 class FakeForecaster:
@@ -103,6 +104,22 @@ def test_gradient_smoke_is_not_mislabelled_as_official_finetuning():
     assert contract["status"] == "NOT_RUN"
     assert contract["official_timesfm3_finetuning"] is False
     assert "nonzero_output_head_gradient" in contract["required_evidence"]
+
+
+def test_gradient_smoke_inputs_use_context_then_masked_horizon_patches():
+    model = SimpleNamespace(input_patch_len=32, output_patch_len=64)
+    inputs, cpm_mask, context_patches = _training_inputs(
+        model, np.arange(256, dtype=np.float32).reshape(64, 4)
+    )
+    assert inputs["values"].shape == (1, 4, 4, 32)
+    assert inputs["masks"].shape == (1, 4, 4, 32)
+    assert context_patches == 2
+    assert not inputs["masks"][:, :, :2].any()
+    assert inputs["masks"][:, :, 2:].all()
+    assert not cpm_mask[:, :2].any()
+    assert cpm_mask[:, 2:].all()
+    with pytest.raises(ValueError, match="align to input patches"):
+        _training_inputs(model, np.ones((63, 4), dtype=np.float32))
 
 
 def _acceptance_rows(error: float):
