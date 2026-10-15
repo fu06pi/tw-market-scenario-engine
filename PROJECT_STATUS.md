@@ -22,6 +22,7 @@
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
 - [x] 鎖定 baseline直接建立每日 body 的 CLI；2026-10-08真實資料 retrospective shadow在約83秒完成 body→freeze→narrative→A:P dry-run，同一 forecast_id/hash鏈驗證通過。
 - [x] 獨立 staging Sheet第132–133列完成盤前 A:F、O與收盤 G:N、P寫入及逐欄 readback；收盤更新後盤前欄位完全不變。證據：`reports/quant/staging-sheet-validation-2026-10-15.json`。這是 retrospective shadow，不是 genuine forward。
+- [x] Codex heartbeat `ohlc-shadow` 已啟用：平日08:31盤前、18:31收盤，只寫 staging；缺準時快照或資料的交易日保留為失敗。
 - [x] 51 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果

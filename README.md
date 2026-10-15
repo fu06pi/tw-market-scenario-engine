@@ -111,6 +111,8 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 
 既有排程、Google Sheet 與歷史快照在開發期間保持運作。新資料、模型、數字保存、晨報及收盤更新通過端到端驗證後，才切換資料流；保留恢復版本。舊紀錄不回寫成新模型績效，新舊成績分開統計。
 
+Codex heartbeat `ohlc-shadow` 已啟用，平日台北時間 08:31 執行盤前 shadow、18:31 執行收盤覆盤；它只允許寫入獨立 staging Sheet。交易日若缺少準時快照或必要資料，必須保留失敗日，不能事後補成 forward PASS。正式 V0 排程仍獨立運作。
+
 ## 現有程式與實作路線
 
 `src/tw_scenario/` 原有情境資料結構、固定權重 baseline、快照及評分仍保留。`src/tw_scenario/quant/` 已提供 contracts、providers、collection、quality、forecast、evaluation、backtest、TimesFM validation/final 及 daily integration CLI。研究結果仍是回溯證據，不能當作交易獲利或正式服務。

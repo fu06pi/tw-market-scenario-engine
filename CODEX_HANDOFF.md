@@ -25,6 +25,7 @@
 - validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
 - Staging Sheet retrospective E2E：2026-10-08兩市場列完成 A:F、O盤前寫入、G:N、P收盤回填與逐欄 readback；A:F、O未被改寫。摘要：`reports/quant/staging-sheet-validation-2026-10-15.json`。
 - Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
+- Forward heartbeat：`ohlc-shadow`，平日 Asia/Taipei 08:31／18:31 喚醒同一任務；僅寫 staging，正式 Sheet與正式排程禁止修改。
 - 驗證：51 passed；Ruff及 `git diff --check`通過。
 
 ## Final 已關閉
