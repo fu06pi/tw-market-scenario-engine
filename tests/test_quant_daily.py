@@ -25,12 +25,14 @@ from tw_scenario.quant.daily import (
     append_evaluation,
     append_realization,
     build_v0_narrative,
+    build_v0_postclose_sheet_batch,
     build_v0_sheet_dry_run,
     deterministic_forecast_id,
     evaluate_realization,
     freeze_snapshot,
     header_fingerprint,
     load_snapshot,
+    preopen_row_fingerprint,
     save_sheet_dry_run,
     seal_snapshot,
     verify_narrative_snapshot_link,
@@ -386,6 +388,64 @@ def test_sheet_dry_run_preserves_ap_mapping_and_is_file_only_write_once(tmp_path
     edited = V0NarrativePayload.model_validate(edited_payload)
     with pytest.raises(ValueError, match="does not quote"):
         build_v0_sheet_dry_run(snapshot, edited, V0_HEADERS, start_row=42)
+
+
+def test_postclose_sheet_batch_only_targets_reserved_cells_and_binds_morning_rows():
+    snapshot = seal_snapshot(_body())
+    narrative = build_v0_narrative(snapshot)
+    morning = build_v0_sheet_dry_run(snapshot, narrative, V0_HEADERS, start_row=42)
+    taiex_realization = OHLCRealizationV1(
+        realization_id="taiex-20261014-official-v1",
+        forecast_id=snapshot.forecast_id,
+        snapshot_hash=snapshot.snapshot_hash,
+        trading_date=DAY,
+        instrument="TAIEX",
+        contract=None,
+        actual=OHLCValues(
+            open=27_050.0,
+            high=27_450.0,
+            low=26_850.0,
+            close=27_300.0,
+        ),
+        source_id="twse-official-20261014",
+        source_hash=ONE_HASH,
+        observed_at=_at("13:30:00"),
+        recorded_at=_at("14:15:00"),
+    )
+    tx_realization = _realization(snapshot)
+    realizations = (taiex_realization, tx_realization)
+    evaluations = tuple(
+        evaluate_realization(snapshot, realization, _at("14:20:00"))
+        for realization in realizations
+    )
+
+    batch = build_v0_postclose_sheet_batch(
+        snapshot,
+        morning,
+        realizations,
+        evaluations,
+        _at("14:30:00"),
+    )
+
+    assert batch.update_columns == "G:N,P"
+    assert [row.row_number for row in batch.rows] == [42, 43]
+    assert [row.instrument for row in batch.rows] == ["TAIEX", "TX"]
+    assert all(len(row.values) == 9 and all(row.values) for row in batch.rows)
+    assert [row.preopen_fingerprint for row in batch.rows] == [
+        preopen_row_fingerprint(row.values) for row in morning.rows
+    ]
+    assert "日 OHLC 無法驗證高低點先後" in batch.rows[0].values[1]
+    assert "未以結算價替代收盤" in batch.rows[1].values[5]
+
+    mismatched = evaluations[0].model_copy(update={"realization_id": "other"})
+    with pytest.raises(ValueError, match="realization_id does not match"):
+        build_v0_postclose_sheet_batch(
+            snapshot,
+            morning,
+            realizations,
+            (mismatched, evaluations[1]),
+            _at("14:30:00"),
+        )
 
 
 def test_data_quality_failure_cannot_generate_publishable_narrative():

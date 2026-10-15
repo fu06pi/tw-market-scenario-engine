@@ -1,6 +1,6 @@
 # Project Status
 
-更新：2026-10-14。
+更新：2026-10-15。
 
 ## 已完成並有執行證據
 
@@ -17,10 +17,11 @@
 - [x] 三類 validation-only 改善：模型 blend、因果 residual bias、126/252/512 視窗；未達雙市場門檻後停止盲搜。
 - [x] TAIEX+TX 八序列 joint GBUD validation；244/244 日成功。TAIEX 鎖定 joint 候選，TX 保留 independent 候選。
 - [x] TimesFM 候選的一次性 final test；兩市場均 242/242 成功，但總驗收為 `FAIL`，禁止再用該期間調參。
-- [x] CLI：config／inspect／collect／quality／reconcile／backtest／TimesFM validation/final／daily predict/freeze/review/narrative/sheet dry-run。
+- [x] CLI：config／inspect／collect／quality／reconcile／backtest／TimesFM validation/final／daily predict/freeze/review/narrative/morning及post-close Sheet dry-run。
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
 - [x] 鎖定 baseline直接建立每日 body 的 CLI；2026-10-08真實資料 retrospective shadow在約83秒完成 body→freeze→narrative→A:P dry-run，同一 forecast_id/hash鏈驗證通過。
-- [x] 49 個 pytest、Ruff及 `git diff --check` 通過。
+- [x] 獨立 staging Sheet第132–133列完成盤前 A:F、O與收盤 G:N、P寫入及逐欄 readback；收盤更新後盤前欄位完全不變。證據：`reports/quant/staging-sheet-validation-2026-10-15.json`。這是 retrospective shadow，不是 genuine forward。
+- [x] 50 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果
 
@@ -44,7 +45,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 ## 尚未完成
 
 - [ ] 自訂 output-head gradient smoke；官方 TimesFM 3 高階 API仍為 inference-only，不能把 window/calibration 稱為微調。
-- [ ] Staging Google Sheet morning/post-close write/readback及 3–5 個交易日 shadow。
+- [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
 - [ ] 正式排程切換與 rollback 演練。
 
 ## 運作與宣稱

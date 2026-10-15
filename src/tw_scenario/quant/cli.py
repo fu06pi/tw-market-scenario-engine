@@ -905,3 +905,80 @@ def daily_sheet_dry_run(
             "production_sheet_written": False,
         }
     )
+
+
+@daily_app.command("sheet-postclose-dry-run")
+def daily_sheet_postclose_dry_run(
+    snapshot_json: Annotated[
+        Path, typer.Argument(help="Frozen OHLCForecastSnapshotV1 JSON.")
+    ],
+    morning_batch_json: Annotated[
+        Path, typer.Argument(help="Morning V0SheetDryRunBatch written to staging.")
+    ],
+    taiex_realization_json: Annotated[Path, typer.Argument()],
+    taiex_evaluation_json: Annotated[Path, typer.Argument()],
+    tx_realization_json: Annotated[Path, typer.Argument()],
+    tx_evaluation_json: Annotated[Path, typer.Argument()],
+    reviewed_at: Annotated[str, typer.Option("--reviewed-at")],
+    output: Annotated[
+        Path | None, typer.Option("--output", help="Immutable post-close batch JSON.")
+    ] = None,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Build a local G:N,P-only update bound to immutable morning cells."""
+    try:
+        _load_config(config_path)
+        from .daily import (
+            OHLCEvaluationV1,
+            OHLCRealizationV1,
+            V0SheetDryRunBatch,
+            build_v0_postclose_sheet_batch,
+            load_snapshot,
+            save_postclose_sheet_dry_run,
+        )
+
+        snapshot = load_snapshot(snapshot_json)
+        morning_batch = V0SheetDryRunBatch.model_validate(_read_json(morning_batch_json))
+        realizations = (
+            OHLCRealizationV1.model_validate(_read_json(taiex_realization_json)),
+            OHLCRealizationV1.model_validate(_read_json(tx_realization_json)),
+        )
+        evaluations = (
+            OHLCEvaluationV1.model_validate(_read_json(taiex_evaluation_json)),
+            OHLCEvaluationV1.model_validate(_read_json(tx_evaluation_json)),
+        )
+        batch = build_v0_postclose_sheet_batch(
+            snapshot,
+            morning_batch,
+            realizations,
+            evaluations,
+            _parse_datetime(reviewed_at, "reviewed_at"),
+        )
+        output = output or (
+            DEFAULT_REPORT_ROOT
+            / "daily"
+            / "sheet-postclose-dry-runs"
+            / f"{snapshot.forecast_id}.json"
+        )
+        reused = False
+        if output.exists():
+            if _read_json(output) != batch.model_dump(mode="json"):
+                raise FileExistsError(
+                    f"refusing to replace different post-close Sheet batch: {output}"
+                )
+            reused = True
+        else:
+            save_postclose_sheet_dry_run(batch, output)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json(
+        {
+            "status": "SHEET_POSTCLOSE_DRY_RUN_ONLY",
+            "forecast_id": snapshot.forecast_id,
+            "update_columns": batch.update_columns,
+            "rows": [row.row_number for row in batch.rows],
+            "output": str(output),
+            "reused": reused,
+            "production_sheet_written": False,
+        }
+    )

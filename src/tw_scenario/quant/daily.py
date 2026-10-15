@@ -611,6 +611,50 @@ class V0SheetDryRunBatch(StrictFrozenModel):
         return self
 
 
+def preopen_row_fingerprint(values: Sequence[str]) -> str:
+    """Fingerprint immutable morning columns A:F and O from one A:P row."""
+    if len(values) != 16:
+        raise ValueError("Sheet row fingerprint requires exactly 16 A:P values")
+    return header_fingerprint(tuple(values[:6]) + (values[14],))
+
+
+class V0PostcloseSheetRow(StrictFrozenModel):
+    row_number: int = Field(ge=2)
+    instrument: Literal["TAIEX", "TX"]
+    contract: str | None
+    preopen_fingerprint: str = Field(pattern=HASH_PATTERN)
+    values: tuple[str, ...] = Field(min_length=9, max_length=9)
+
+    @model_validator(mode="after")
+    def valid_update(self):
+        if not all(self.values):
+            raise ValueError("post-close G:N and P values must all be populated")
+        if self.instrument == "TAIEX" and self.contract is not None:
+            raise ValueError("TAIEX post-close row must not carry a contract")
+        if self.instrument == "TX" and (
+            self.contract is None or len(self.contract) != 6 or not self.contract.isdigit()
+        ):
+            raise ValueError("TX post-close row requires YYYYMM contract")
+        return self
+
+
+class V0PostcloseSheetBatch(StrictFrozenModel):
+    mode: Literal["DRY_RUN_ONLY"] = "DRY_RUN_ONLY"
+    sheet_name: Literal["每日預測與覆盤"] = V0_SHEET_NAME
+    forecast_id: str = Field(pattern=FORECAST_ID_PATTERN)
+    snapshot_hash: str = Field(pattern=HASH_PATTERN)
+    update_columns: Literal["G:N,P"] = "G:N,P"
+    rows: tuple[V0PostcloseSheetRow, ...] = Field(min_length=2, max_length=2)
+
+    @model_validator(mode="after")
+    def fixed_order(self):
+        if [row.instrument for row in self.rows] != ["TAIEX", "TX"]:
+            raise ValueError("post-close rows must contain exactly TAIEX then TX")
+        if self.rows[1].row_number != self.rows[0].row_number + 1:
+            raise ValueError("post-close rows must be consecutive")
+        return self
+
+
 def _direction(value: float, reference: float) -> str:
     if value > reference:
         return "偏多"
@@ -691,7 +735,134 @@ def build_v0_sheet_dry_run(
     )
 
 
+def _postclose_values(
+    forecast: InstrumentOHLCForecast,
+    realization: OHLCRealizationV1,
+    evaluation: OHLCEvaluationV1,
+    reviewed_at: datetime,
+) -> tuple[str, ...]:
+    actual = realization.actual
+    absolute = evaluation.absolute_error_points
+    interval_hits = {
+        field: getattr(forecast.intervals, field).lower
+        <= getattr(actual, field)
+        <= getattr(forecast.intervals, field).upper
+        for field in ("open", "high", "low", "close")
+    }
+    predicted_direction = _direction(forecast.point.close, forecast.previous_close)
+    actual_direction = _direction(actual.close, forecast.previous_close)
+    direction_result = "一致" if predicted_direction == actual_direction else "不一致"
+    contract_note = (
+        "；收盤價與結算價分開，本列未以結算價替代收盤"
+        if forecast.instrument == "TX"
+        else ""
+    )
+    return (
+        _number(actual.open),
+        (
+            f"最高 {_number(actual.high)}；最低 {_number(actual.low)}；"
+            f"實際振幅 {_number(actual.high - actual.low)} 點。"
+            "日 OHLC 無法驗證高低點先後。"
+        ),
+        _number(actual.close),
+        (
+            "絕對誤差點數 "
+            f"O={_number(absolute.open)}, H={_number(absolute.high)}, "
+            f"L={_number(absolute.low)}, C={_number(absolute.close)}；"
+            f"收盤方向{direction_result}（預測{predicted_direction}／"
+            f"實際{actual_direction}）；80%邊際區間命中 "
+            + ", ".join(
+                f"{field.upper()}={'Y' if interval_hits[field] else 'N'}"
+                for field in ("open", "high", "low", "close")
+            )
+            + "。"
+        ),
+        (
+            f"gap_error={_number(evaluation.gap_error_bps)}bp；"
+            f"close_return_error={_number(evaluation.close_return_error_bps)}bp；"
+            f"range_error={_number(evaluation.range_error_points)}點"
+        ),
+        (
+            f"實際 OHLC 來源={realization.source_id}{contract_note}；"
+            "未由日 OHLC 推論單一新聞因果。"
+        ),
+        "盤中先後路徑仍是未驗證情境；四價邊際區間不得拼成聯合路徑。",
+        "保留鎖定模型與預先規則；單日誤差只加入評估，不據此反覆調整 final test。",
+        reviewed_at.isoformat(),
+    )
+
+
+def build_v0_postclose_sheet_batch(
+    snapshot: OHLCForecastSnapshotV1,
+    morning_batch: V0SheetDryRunBatch,
+    realizations: Sequence[OHLCRealizationV1],
+    evaluations: Sequence[OHLCEvaluationV1],
+    reviewed_at: datetime,
+) -> V0PostcloseSheetBatch:
+    """Build a G:N,P-only update bound to the exact frozen morning rows."""
+    _aware(reviewed_at, "reviewed_at")
+    if morning_batch.forecast_id != snapshot.forecast_id:
+        raise ValueError("morning batch forecast_id does not match snapshot")
+    if morning_batch.snapshot_hash != snapshot.snapshot_hash:
+        raise ValueError("morning batch snapshot_hash does not match snapshot")
+    if len(realizations) != 2 or len(evaluations) != 2:
+        raise ValueError("post-close batch requires two realizations and two evaluations")
+
+    start_token = morning_batch.write_range.rsplit("!A", 1)[-1].split(":", 1)[0]
+    try:
+        start_row = int(start_token)
+    except ValueError as exc:
+        raise ValueError("morning batch write_range has invalid start row") from exc
+
+    rows = []
+    for index, (forecast, realization, evaluation, morning_row) in enumerate(
+        zip(snapshot.forecasts, realizations, evaluations, morning_batch.rows, strict=True)
+    ):
+        if realization.forecast_id != snapshot.forecast_id:
+            raise ValueError("realization forecast_id does not match snapshot")
+        if realization.snapshot_hash != snapshot.snapshot_hash:
+            raise ValueError("realization snapshot_hash does not match snapshot")
+        if (
+            realization.instrument != forecast.instrument
+            or realization.contract != forecast.contract
+        ):
+            raise ValueError("realization instrument or contract does not match frozen forecast")
+        if evaluation.realization_id != realization.realization_id:
+            raise ValueError("evaluation realization_id does not match realization")
+        if evaluation.forecast_id != snapshot.forecast_id:
+            raise ValueError("evaluation forecast_id does not match snapshot")
+        if evaluation.snapshot_hash != snapshot.snapshot_hash:
+            raise ValueError("evaluation snapshot_hash does not match snapshot")
+        if (
+            evaluation.instrument != forecast.instrument
+            or evaluation.contract != forecast.contract
+        ):
+            raise ValueError("evaluation instrument or contract does not match frozen forecast")
+        if reviewed_at < evaluation.evaluated_at:
+            raise ValueError("reviewed_at cannot precede evaluation")
+        rows.append(
+            V0PostcloseSheetRow(
+                row_number=start_row + index,
+                instrument=forecast.instrument,
+                contract=forecast.contract,
+                preopen_fingerprint=preopen_row_fingerprint(morning_row.values),
+                values=_postclose_values(forecast, realization, evaluation, reviewed_at),
+            )
+        )
+    return V0PostcloseSheetBatch(
+        forecast_id=snapshot.forecast_id,
+        snapshot_hash=snapshot.snapshot_hash,
+        rows=tuple(rows),
+    )
+
+
 def save_sheet_dry_run(batch: V0SheetDryRunBatch, path: str | Path) -> Path:
+    path = Path(path)
+    write_once(path, batch.model_dump(mode="json"))
+    return path
+
+
+def save_postclose_sheet_dry_run(batch: V0PostcloseSheetBatch, path: str | Path) -> Path:
     path = Path(path)
     write_once(path, batch.model_dump(mode="json"))
     return path

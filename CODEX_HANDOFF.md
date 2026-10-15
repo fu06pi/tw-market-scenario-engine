@@ -1,12 +1,12 @@
 # Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
-更新：2026-10-14。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
+更新：2026-10-15。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
 
 ## 不可改變的研究邊界
 
 1. FinMind 是主要 bounded incremental API；TWSE／TAIFEX 是權威 value reconciliation；TEJ 只保留帳戶實際可得的 2025 overlap。
 2. 固定 split：train 2018-01-01 起、validation 2024-10-09 起、final test 2025-10-09 至 2026-10-08。
-3. Baseline final 已開啟；TimesFM final 尚未開啟。不得看 final 後換模型、重調參數或把同期間稱為新 holdout。
+3. Baseline與TimesFM final皆已各開啟一次並永久關閉；總 gate為 `FAIL`。不得看 final 後換模型、重調參數或把同期間稱為新 holdout。
 4. `production_switch=false`。正式 Sheet、歷史紀錄及排程保持不變，直到 staging readback與 3–5 日 shadow 通過。
 5. 不得提交憑證、FinMind raw data、完整逐日 actual rows、TimesFM 權重或 cache。
 
@@ -23,7 +23,8 @@
 - CPU load peak RSS約 2.80 GiB；batch 1；獨立 validation 8/8 checkpoints完成；joint 244/244 日完成。
 - Joint lock：TAIEX = GBUD joint multivariate，validation close MAE 169.19；TX = GBUD independent multivariate，156.73。
 - validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
-- 測試：48 passed；Ruff及 diff check通過。
+- Staging Sheet retrospective E2E：2026-10-08兩市場列完成 A:F、O盤前寫入、G:N、P收盤回填與逐欄 readback；A:F、O未被改寫。摘要：`reports/quant/staging-sheet-validation-2026-10-15.json`。
+- 驗證：50 passed；Ruff及 `git diff --check`通過。
 
 ## Final 已關閉
 
@@ -38,7 +39,7 @@
 
 1. 每日 baseline body orchestration已完成；2026-10-08 retrospective shadow證據在 `reports/quant/daily-shadow-summary-2026-10-08.json`。
 2. 凍結 snapshot到 deterministic V0 晨報與 A:P dry-run已驗證；新聞只能提供 cutoff前背景，不能改數字。
-3. 下一步在 staging Sheet做 morning/post-close write/readback及 3–5 個交易日 genuine forward shadow。
+3. Retrospective staging morning/post-close write/readback已完成；下一步累積 3–5 個交易日 genuine forward shadow。
 4. 自訂 output-head gradient smoke若執行，必須另名且不能改變已關閉 final的結論。
 5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
 

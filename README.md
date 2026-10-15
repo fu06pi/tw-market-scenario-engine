@@ -1,11 +1,11 @@
 # 台股日盤 OHLC 量化預測與晨報
 
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
-架構與實作狀態更新：2026-10-14。
+架構與實作狀態更新：2026-10-15。
 
 本專題將既有 V1 改造成台灣加權指數（TAIEX）與指定月份台指期（TX）的日盤 OHLC 量化預測引擎。經 live 資料查核後，FinMind 成為主要增量 API，TWSE／TAIFEX 官方資料負責權威核對，TEJ 實際可得的 2025 重疊期保留作第三方交叉驗證。研究 TimesFM 3.0 零樣本推論，並與簡單基準、ARIMA／ARIMAX 比較；任何自訂梯度測試會和官方微調明確分開。盤前先保存數字，再由原本 V0 晨報流程加入截止前新聞、國際局勢及金融數據，生成文字假說；收盤後比對同一份盤前結果。
 
-**目前已完成資料品質、基準回測、TimesFM validation lock及唯一一次 final test。** Certified FinMind／官方資料在 2018-01-01 至 2026-10-08 通過回溯 DQ。TimesFM final總驗收為 `FAIL`：TAIEX close MAE較 paired baseline惡化 4.64%，TX只改善 0.45%，區間 coverage亦未全部達到 75%下限；因此不再用這個 final調參，預設保留鎖定最強 baseline。真實每日快照 orchestration、Sheet staging／shadow及正式晨報切換仍未完成；`production_switch=false`。
+**目前已完成資料品質、基準回測、TimesFM validation lock、唯一一次 final test，以及一次 retrospective Sheet staging端到端驗證。** Certified FinMind／官方資料在 2018-01-01 至 2026-10-08 通過回溯 DQ。TimesFM final總驗收為 `FAIL`：TAIEX close MAE較 paired baseline惡化 4.64%，TX只改善 0.45%，區間 coverage亦未全部達到 75%下限；因此不再用這個 final調參，預設保留鎖定最強 baseline。2026-10-08 shadow已在獨立 staging Sheet驗證 A:F、O盤前寫入、G:N、P收盤回填與盤前欄位不變；仍須 3–5 個交易日 genuine forward shadow，正式晨報切換尚未進行，`production_switch=false`。
 
 ## 文件與版本角色
 
@@ -107,6 +107,8 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 
 原本 V0 晨報讀取同一 forecast_id 的數字，保留開盤前假說、實際開盤、實際盤中、實際盤後的用途與格式。模型輸入與新聞背景分開描述，不編造概率或另一套點數。若表頭已是「實際盤中」，儲存格不重複加同名標籤。
 
+`quant daily sheet-postclose-dry-run` 只產生 G:N、P 更新內容，並保存 A:F、O 的列指紋。寫入端必須先比對盤前列，再只更新保留的收盤欄位；任何 forecast_id、snapshot hash、標的／合約或 realization/evaluation 關聯不符都會停止。2026-10-15 staging readback摘要見 [`reports/quant/staging-sheet-validation-2026-10-15.json`](reports/quant/staging-sheet-validation-2026-10-15.json)。
+
 既有排程、Google Sheet 與歷史快照在開發期間保持運作。新資料、模型、數字保存、晨報及收盤更新通過端到端驗證後，才切換資料流；保留恢復版本。舊紀錄不回寫成新模型績效，新舊成績分開統計。
 
 ## 現有程式與實作路線
@@ -126,7 +128,7 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。下一階段是 staging Sheet晨報／收盤復盤 readback與 3–5 日 genuine forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
+鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。獨立 staging Sheet亦已完成晨報與收盤復盤逐欄 readback，確認收盤更新沒有改寫盤前 A:F、O；這仍是回溯演練，不是 08:40 前向發布證據。下一階段是 3–5 日 genuine forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
 
 ## 本次文件備份
 
