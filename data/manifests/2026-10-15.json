@@ -1,0 +1,169 @@
+{
+  "trading_date": "2026-10-15",
+  "status": "reconstructed/late_generated",
+  "generated_at": "2026-10-15T09:01:30+08:00",
+  "data_cutoff_at": "2026-10-15T08:50:00+08:00",
+  "v0_frozen_at": "2026-10-15T08:43:00+08:00",
+  "aggregate_metric_eligibility": false,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_validation": "Reconstructed after 09:00 from the V0 hypothesis frozen at 08:43 and sources published by 08:50 Asia/Taipei. No 2026-10-15 cash-session price, opening, intraday, close, or post-08:50 publication was used. Evaluate separately from formal preopen samples.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?queryYear=115&response=html",
+      "publisher": "TWSE",
+      "facts": {
+        "is_trading_day": true
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://money.udn.com/money/story/11112/9815509",
+      "publisher": "Economic Daily / TAIFEX",
+      "published_at": "2026-10-15T05:24:09+08:00",
+      "observation_end_at": "2026-10-15T05:00:00+08:00",
+      "facts": {
+        "tx_night_last": 47945,
+        "reference_change_points": -853,
+        "reference_return_pct": -1.75,
+        "tsmc_futures_last": 2474,
+        "tsmc_futures_change": -31
+      }
+    },
+    {
+      "id": "us_market",
+      "url": "https://www.ftvnews.com.tw/news/detail/2026A15W0045",
+      "publisher": "FTV / compiled US market data",
+      "published_at": "2026-10-15T06:20:00+08:00",
+      "facts": {
+        "dow_close": 51621.48,
+        "dow_return_pct": -0.09,
+        "sp500_close": 7718.94,
+        "sp500_return_pct": -1.11,
+        "nasdaq_close": 26692.87,
+        "nasdaq_return_pct": -1.88,
+        "sox_return_pct": -4.3,
+        "tsmc_adr_close": 430,
+        "tsmc_adr_return_pct": -3.4,
+        "ase_adr_return_pct": -6.87,
+        "umc_adr_return_pct": -4.42
+      }
+    },
+    {
+      "id": "us_cpi",
+      "url": "https://www.bls.gov/cpi/",
+      "publisher": "U.S. Bureau of Labor Statistics",
+      "published_at": "2026-10-14T20:30:00+08:00",
+      "facts": {
+        "headline_mom_pct": 0.6,
+        "headline_yoy_pct": 3.7,
+        "core_mom_pct": 0.3,
+        "core_yoy_pct": 2.6
+      },
+      "timing_evidence": "Official release published on 2026-10-14, before the 2026-10-15 cutoff."
+    },
+    {
+      "id": "rates_oil",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-10-14/",
+      "publisher": "Reuters",
+      "published_at": "2026-10-15T05:53:05+08:00",
+      "facts": {
+        "us10y_yield_pct": 5.189,
+        "brent_close_usd": 106.06,
+        "brent_return_pct": 0.35
+      }
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E8%82%A1%E6%94%B6%E7%B4%85%E5%A4%96%E8%B3%87%E8%B3%A3%E5%A3%93%E6%94%B6%E6%96%82-%E6%96%B0%E5%8F%B0%E5%B9%A3%E7%94%B1%E8%B2%B6%E7%BF%BB%E5%8D%87%E7%B5%82%E6%AD%A2%E9%80%A34%E9%BB%91-100014617.html",
+      "publisher": "CNA / TWSE data",
+      "published_at": "2026-10-14T18:00:00+08:00",
+      "facts": {
+        "previous_high": 49059.12,
+        "previous_low": 48382.64,
+        "previous_close": 48625.83,
+        "previous_return_pct": 0.59,
+        "advancers": 752,
+        "decliners": 245,
+        "financial_return_pct": 0.14,
+        "plastics_return_pct": 6.64
+      }
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cna.com.tw/news/afe/202610140204.aspx",
+      "publisher": "CNA / Taipei Forex",
+      "published_at": "2026-10-14T16:04:00+08:00",
+      "facts": {
+        "usd_twd_close": 32.073,
+        "twd_change": 0.012
+      }
+    },
+    {
+      "id": "asml_q3",
+      "url": "https://www.investor.asml.com/news-releases/news-release-details/asml-reports-eu11.7-billion-total-net-sales-and-eu5.0-billion-net-income-q3-2026",
+      "publisher": "ASML Investor Relations",
+      "published_at": "2026-10-14T13:00:00+08:00",
+      "facts": {
+        "q3_sales_eur_billion": 11.662,
+        "q3_net_income_eur_billion": 4.96,
+        "fy2026_sales_guidance_eur_billion_low": 44,
+        "fy2026_sales_guidance_eur_billion_high": 45
+      }
+    },
+    {
+      "id": "tsmc_event",
+      "url": "https://investor.tsmc.com/english/quarterly-results/2026/q3",
+      "publisher": "TSMC Investor Relations",
+      "facts": {
+        "earnings_call_at": "2026-10-15T14:00:00+08:00"
+      },
+      "limitations": "The event occurs after cash close; no earnings-call result or guidance was included."
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-15T08:43:00+08:00",
+      "range": "每日預測與覆盤!A132:Z145",
+      "facts": {
+        "items": 14,
+        "summary": "夜盤、SOX與TSM ADR同向偏空；開低0.3%–1.2%；收盤至少跌0.5%；上市廣度低於50%；台積電法說前不使用未公布結果。"
+      }
+    }
+  ],
+  "feature_values": {
+    "taifex_night_reference_return_pct": -1.75,
+    "taifex_vs_cash_close_bps": -140.02,
+    "nasdaq_return_pct": -1.88,
+    "sox_return_pct": -4.3,
+    "tsmc_adr_return_pct": -3.4,
+    "us10y_yield_pct": 5.189,
+    "brent_close_usd": 106.06,
+    "usd_twd_close": 32.073,
+    "previous_day_return_pct": 0.59,
+    "previous_day_advancer_decliner_ratio": 3.0694,
+    "hot_cpi_flag": 1,
+    "tsmc_event_after_close_flag": 1
+  },
+  "limitations": [
+    "This was generated after 09:00 and is excluded from formal preopen aggregate metrics even though every input is restricted to the 08:50 cutoff.",
+    "Current repository is migrating to a TEJ-backed TAIEX/TX OHLC engine; the new model is not implemented or executed.",
+    "Exclude this snapshot from all new OHLC/TimesFM/ARIMA performance claims.",
+    "Probabilities and bps targets are uncalibrated scenario priors, not trained-model output.",
+    "No 2026-10-15 cash-session data and no TSMC earnings-call result were used."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.1,
+      "base": 0.38,
+      "bear": 0.52
+    },
+    "scenario_definition": "Legacy thresholds: bull close >=+50bps, bear <=-50bps, base between.",
+    "gap_bps": -90,
+    "gap_reason": "Night futures, SOX, Nasdaq and TSM ADR are all negative after hotter CPI; the estimate remains inside V0's -0.3% to -1.2% cash-gap range and does not map the full futures discount mechanically.",
+    "close_bps": -105,
+    "close_reason": "Broad semiconductor stress and higher-for-longer inflation risk dominate; ASML results and pre-earnings positioning provide partial support but TSMC guidance is unavailable before cash close."
+  }
+}
