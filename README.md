@@ -1,7 +1,7 @@
 # 台股日盤 OHLC 量化預測與晨報
 
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
-架構與實作狀態更新：2026-10-15。
+架構與實作狀態更新：2026-10-16。
 
 本專題將既有 V1 改造成台灣加權指數（TAIEX）與指定月份台指期（TX）的日盤 OHLC 量化預測引擎。經 live 資料查核後，FinMind 成為主要增量 API，TWSE／TAIFEX 官方資料負責權威核對，TEJ 實際可得的 2025 重疊期保留作第三方交叉驗證。研究 TimesFM 3.0 零樣本推論，並與簡單基準、ARIMA／ARIMAX 比較；任何自訂梯度測試會和官方微調明確分開。盤前先保存數字，再由原本 V0 晨報流程加入截止前新聞、國際局勢及金融數據，生成文字假說；收盤後比對同一份盤前結果。
 
@@ -111,7 +111,7 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 
 既有排程、Google Sheet 與歷史快照在開發期間保持運作。新資料、模型、數字保存、晨報及收盤更新通過端到端驗證後，才切換資料流；保留恢復版本。舊紀錄不回寫成新模型績效，新舊成績分開統計。
 
-Codex heartbeat `ohlc-shadow` 已啟用，平日台北時間 08:31 執行盤前 shadow、18:31 執行收盤覆盤；它只允許寫入獨立 staging Sheet。交易日若缺少準時快照或必要資料，必須保留失敗日，不能事後補成 forward PASS。正式 V0 排程仍獨立運作。
+Codex heartbeat `ohlc-shadow` 目前為 `PAUSED`。先前在只有 retrospective staging 證據、尚未完成 live daily orchestration 時就啟用 heartbeat，順序不正確，因此已停用。重新啟用前必須先由單一 staging-only 執行入口完成 08:30 增量資料與 availability/cutoff 認證、DQ、body、seal/freeze、V0 narrative、Sheet write/readback，以及收盤 realization/evaluation；並至少手動完成一次 genuine live 交易日端到端驗證。失敗日必須保留，不能事後補成 forward PASS。正式 V0 排程仍獨立運作。
 
 ## 現有程式與實作路線
 
@@ -130,7 +130,7 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra dev ruff check .
 python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/sample_realization.json
 ```
 
-鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。獨立 staging Sheet亦已完成晨報與收盤復盤逐欄 readback，確認收盤更新沒有改寫盤前 A:F、O；這仍是回溯演練，不是 08:40 前向發布證據。下一階段是 3–5 日 genuine forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
+鎖定最強 baseline已可直接建立真實資料 snapshot body；2026-10-08 retrospective shadow在約83秒完成 body→freeze→V0 narrative→A:P Sheet dry-run，且保持同一 forecast_id/hash。獨立 staging Sheet亦已完成晨報與收盤復盤逐欄 readback，確認收盤更新沒有改寫盤前 A:F、O；這仍是回溯演練，不是 08:40 前向發布證據。目前尚缺單一 live daily orchestration、自主 staging Sheet writer、live cutoff/DQ認證與 genuine forward日。完成手動 live staging E2E後，才可重新啟用 heartbeat並累積3–5日 forward shadow。TimesFM只保留研究結果，不因 final失敗反覆調整同一測試集。
 
 ## 本次文件備份
 

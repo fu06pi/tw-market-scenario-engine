@@ -1,6 +1,6 @@
 # Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
-更新：2026-10-15。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
+更新：2026-10-16。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
 
 ## 不可改變的研究邊界
 
@@ -25,7 +25,7 @@
 - validation 對相同基準 paired dates：TAIEX改善 3.69%（未達 5%），TX改善 6.34%。
 - Staging Sheet retrospective E2E：2026-10-08兩市場列完成 A:F、O盤前寫入、G:N、P收盤回填與逐欄 readback；A:F、O未被改寫。摘要：`reports/quant/staging-sheet-validation-2026-10-15.json`。
 - Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
-- Forward heartbeat：`ohlc-shadow`，平日 Asia/Taipei 08:31／18:31 喚醒同一任務；僅寫 staging，正式 Sheet與正式排程禁止修改。
+- Forward heartbeat：`ohlc-shadow` 目前為 `PAUSED`。它曾在 live daily orchestration 完成前過早啟用；正式 Sheet與正式排程未修改。
 - 驗證：51 passed；Ruff及 `git diff --check`通過。
 
 ## Final 已關閉
@@ -39,10 +39,11 @@
 
 ## 接續順序
 
-1. 每日 baseline body orchestration已完成；2026-10-08 retrospective shadow證據在 `reports/quant/daily-shadow-summary-2026-10-08.json`。
-2. 凍結 snapshot到 deterministic V0 晨報與 A:P dry-run已驗證；新聞只能提供 cutoff前背景，不能改數字。
-3. Retrospective staging morning/post-close write/readback已完成；下一步累積 3–5 個交易日 genuine forward shadow。
-4. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
-5. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改排程。
+1. 現有 CLI可從 certified retrospective資料建立 locked-baseline body，但尚未完成 live daily orchestration；不得稱為每日引擎完成。
+2. 建立單一 staging-only入口，串接08:30增量收集、live availability/cutoff認證、DQ、body、seal/freeze、deterministic V0晨報與Sheet write/readback；任何步驟失敗都要保存失敗紀錄並停止。
+3. 建立收盤 realization/evaluation與G:N、P回填，先驗證A:F、O列指紋未改寫。
+4. 手動完成至少一個 genuine 08:40前 live staging E2E，才可重新啟用 `ohlc-shadow`；再累積3–5個交易日 genuine forward shadow。
+5. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
+6. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改正式排程。
 
 可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。

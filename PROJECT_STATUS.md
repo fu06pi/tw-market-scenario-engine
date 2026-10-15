@@ -1,6 +1,6 @@
 # Project Status
 
-更新：2026-10-15。
+更新：2026-10-16。
 
 ## 已完成並有執行證據
 
@@ -22,7 +22,7 @@
 - [x] Write-once 雙標的 snapshot、hash/tamper check、append-only realization/evaluation、新聞 cutoff、待驗證盤中情境及 Sheet header fingerprint dry-run。
 - [x] 鎖定 baseline直接建立每日 body 的 CLI；2026-10-08真實資料 retrospective shadow在約83秒完成 body→freeze→narrative→A:P dry-run，同一 forecast_id/hash鏈驗證通過。
 - [x] 獨立 staging Sheet第132–133列完成盤前 A:F、O與收盤 G:N、P寫入及逐欄 readback；收盤更新後盤前欄位完全不變。證據：`reports/quant/staging-sheet-validation-2026-10-15.json`。這是 retrospective shadow，不是 genuine forward。
-- [x] Codex heartbeat `ohlc-shadow` 已啟用：平日08:31盤前、18:31收盤，只寫 staging；缺準時快照或資料的交易日保留為失敗。
+- [x] 發現 heartbeat 在 live daily orchestration 完成前過早啟用；`ohlc-shadow` 已改為 `PAUSED`，正式 V0 排程未動。
 - [x] 51 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果
@@ -46,6 +46,10 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 
 ## 尚未完成
 
+- [ ] 單一、可重跑且 fail-closed 的 live daily orchestration：08:30增量抓取與 availability/cutoff認證 → DQ → baseline body → seal/freeze → narrative → staging write/readback。
+- [ ] Repo內可自主執行的 staging Sheet writer；現有 CLI只產生 dry-run batch，既有 staging 寫入證據來自對話中的 connector 操作。
+- [ ] 收盤 realization/evaluation 的 live orchestration與同一盤前列指紋保護。
+- [ ] 至少一個 genuine 08:40 前手動 live staging E2E；目前只有2026-10-08 retrospective shadow。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
 - [ ] 正式排程切換與 rollback 演練。
 
