@@ -1,0 +1,58 @@
+{
+  "trading_date": "2026-10-15",
+  "previous_close": 48625.83,
+  "open": 48382.75,
+  "high": 48382.75,
+  "low": 46795.38,
+  "close": 46969.87,
+  "change_points": -1655.96,
+  "change_pct": -3.41,
+  "turnover": 1319770000000,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE regular-session turnover reported by CNA",
+  "breadth_up": 204,
+  "breadth_down": 818,
+  "breadth_flat": 82,
+  "breadth_uncompared": null,
+  "breadth_scope": "TWSE listed stocks as reported by CNA",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "cement_ceramics": -2.22,
+    "food": 0.96,
+    "plastics": -6.74,
+    "textiles": -0.61,
+    "machinery_electrical": -3.84,
+    "paper": 0.99,
+    "construction": -0.38,
+    "financial": 0.73,
+    "electronics": -3.84
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE TAIEX historical OHLC endpoint",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261015",
+      "role": "Official dated OHLC endpoint; values cross-checked against CNA."
+    },
+    {
+      "name": "TWSE MI_INDEX 2026-10-15",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261015&type=ALLBUT0999",
+      "role": "Official dated close, sectors, turnover and listed-stock breadth endpoint."
+    },
+    {
+      "name": "CNA 2026-10-15 13:52",
+      "url": "https://www.cna.com.tw/news/afe/202610150125.aspx",
+      "role": "Dated OHLC, turnover, eight-sector returns and 204/818/82 breadth."
+    },
+    {
+      "name": "Economic Daily 2026-10-15 13:39",
+      "url": "https://money.udn.com/money/story/5607/9816503",
+      "role": "Dated close, turnover and heavyweight context."
+    },
+    {
+      "name": "Formosa News 2026-10-15",
+      "url": "https://my-formosa.com.tw/DOC_230031.htm",
+      "role": "Dated intraday path, heavyweight and sector attribution."
+    }
+  ]
+}
