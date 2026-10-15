@@ -26,6 +26,7 @@
 - [x] Staging-only `live-preopen`：08:20–08:29 capture、FinMind／TAIFEX夜盤核對、08:30後forecast→freeze→narrative→A:F,O write/readback；失敗attempt不可變留痕。
 - [x] Staging-only `live-postclose`：FinMind／TWSE／TAIFEX日盤核對、append realization/evaluation、G:N,P write/readback，並保護A:F,O指紋。
 - [x] Repo內Google Sheets writer只接受設定的staging ID並明確拒絕production ID；使用ADC，憑證不進repo／參數／日誌。
+- [x] 2026-10-16 connector唯讀preflight確認staging表頭fingerprint一致、最後已用列133、134–135為下一組空白列；未寫入任何儲存格。證據：`reports/quant/staging-sheet-preflight-2026-10-16.json`。
 - [x] 57 個 pytest、Ruff及 `git diff --check` 通過。
 
 ## 已鎖定的 validation 結果
