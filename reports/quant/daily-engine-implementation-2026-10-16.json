@@ -36,7 +36,7 @@
     "current_host_adc_available": false
   },
   "verification": {
-    "pytest": "57 passed",
+    "pytest": "58 passed, including composed pre-open and post-close orchestration",
     "ruff": "PASS",
     "git_diff_check": "PASS",
     "google_sheet_transport": "fake transport morning/post-close readback and idempotency PASS",

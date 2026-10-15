@@ -27,7 +27,7 @@
 - Custom output-head gradient smoke：單一 train-period樣本、output head only、1 SGD step；五項必要證據皆通過。摘要：`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`。不是官方 fine-tuning或候選模型。
 - Forward heartbeat：`ohlc-shadow` 目前為 `PAUSED`。它曾在 live daily orchestration 完成前過早啟用；正式 Sheet與正式排程未修改。
 - Live CLI：`quant daily live-preopen`與`live-postclose`已串接cutoff capture、官方核對、快照、晨報、append-only覆盤及staging write/readback；`config/quant/staging.json`鎖定staging並拒絕production ID。
-- 驗證：57 passed；Ruff及 `git diff --check`通過。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
+- 驗證：58 passed；Ruff及 `git diff --check`通過，包含盤前與盤後完整orchestration組合測試。Google ADC在本機尚未設定，因此新writer尚無genuine live執行證據。
 
 ## Final 已關閉
 
