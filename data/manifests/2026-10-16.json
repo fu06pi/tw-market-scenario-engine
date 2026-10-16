@@ -1,0 +1,152 @@
+{
+  "trading_date": "2026-10-16",
+  "status": "formal_preopen_legacy_compatibility",
+  "generated_at": "2026-10-16T08:55:42+08:00",
+  "data_cutoff_at": "2026-10-16T08:50:00+08:00",
+  "v0_frozen_at": "2026-10-16T08:40:00+08:00",
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_validation": "All inputs were published or frozen by 08:50 Asia/Taipei. No 2026-10-16 cash-session fields were used. This legacy scenario snapshot remains operational during migration and is not a TEJ/ARIMA/TimesFM OHLC forecast.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?queryYear=115&response=html",
+      "publisher": "TWSE",
+      "facts": {
+        "is_trading_day": true
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://money.udn.com/money/story/11112/9818066",
+      "publisher": "Economic Daily / TAIFEX",
+      "published_at": "2026-10-16T05:18:13+08:00",
+      "observation_end_at": "2026-10-16T05:00:00+08:00",
+      "facts": {
+        "tx_night_last": 47366,
+        "reference_change_points": 435,
+        "reference_return_pct": 0.93,
+        "tsmc_futures_last": 2453,
+        "tsmc_futures_change": 19
+      }
+    },
+    {
+      "id": "us_market",
+      "url": "https://finance.ftvnews.com.tw/news/detail/2026A16W0067",
+      "publisher": "FTV / compiled US market data",
+      "published_at": "2026-10-16T06:22:50+08:00",
+      "facts": {
+        "dow_close": 52177.69,
+        "dow_return_pct": 1.08,
+        "sp500_close": 7744.06,
+        "sp500_return_pct": 0.33,
+        "nasdaq_close": 26713.03,
+        "nasdaq_return_pct": 0.08,
+        "sox_return_pct": -0.88,
+        "tsmc_adr_close": 422.25,
+        "tsmc_adr_return_pct": -1.8,
+        "ase_adr_return_pct": -5.5,
+        "umc_adr_return_pct": -2.24
+      }
+    },
+    {
+      "id": "rates_oil_macro",
+      "url": "https://www.reuters.com/world/china/global-markets-wrapup-1-2026-10-15/",
+      "publisher": "Reuters",
+      "published_at": "2026-10-16T04:51:34+08:00",
+      "facts": {
+        "us10y_yield_pct": 5.087,
+        "brent_close_usd": 105.92,
+        "brent_return_pct": -0.13,
+        "ppi_mom_pct": 1.3,
+        "fed_hold_probability_pct": 73
+      }
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://www.cna.com.tw/news/afe/202610150126.aspx",
+      "publisher": "CNA / TWSE data",
+      "published_at": "2026-10-15T13:52:00+08:00",
+      "facts": {
+        "previous_close": 46969.87,
+        "previous_return_pct": -3.41,
+        "previous_range_points": 1587.37,
+        "advancers": 204,
+        "decliners": 818,
+        "unchanged": 82,
+        "otc_return_pct": -5.53,
+        "financial_return_pct": 0.73,
+        "plastics_return_pct": -6.74
+      }
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cna.com.tw/news/afe/202610150200.aspx",
+      "publisher": "CNA / Taipei Forex",
+      "published_at": "2026-10-15T16:06:00+08:00",
+      "facts": {
+        "usd_twd_close": 32.265,
+        "twd_change": -0.192
+      }
+    },
+    {
+      "id": "tsmc_q3",
+      "url": "https://investor.tsmc.com/english/quarterly-results/2026/q3",
+      "publisher": "TSMC Investor Relations",
+      "published_at": "2026-10-15T14:00:00+08:00",
+      "facts": {
+        "q3_revenue_twd_trillion": 1.494,
+        "q3_net_income_twd_billion": 763.06,
+        "q3_eps_twd": 29.43,
+        "q4_revenue_guidance_usd_billion_low": 52.3,
+        "q4_revenue_guidance_usd_billion_high": 54.3,
+        "two_nm_wafer_revenue_share_pct": 8
+      },
+      "timing_evidence": "Published after the 2026-10-15 cash close and available before the 2026-10-16 cutoff."
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-16T08:40:00+08:00",
+      "range": "每日預測與覆盤!A146:Z160",
+      "facts": {
+        "items": 15,
+        "summary": "夜盤+435但SOX與TSM ADR續跌；開盤及收盤略偏正；首30分鐘仍有下探風險；上市廣度修復、OTC可能續弱。"
+      }
+    }
+  ],
+  "feature_values": {
+    "taifex_night_reference_return_pct": 0.93,
+    "taifex_vs_cash_close_bps": 84.34,
+    "nasdaq_return_pct": 0.08,
+    "sox_return_pct": -0.88,
+    "tsmc_adr_return_pct": -1.8,
+    "us10y_yield_pct": 5.087,
+    "brent_close_usd": 105.92,
+    "usd_twd_close": 32.265,
+    "previous_day_return_pct": -3.41,
+    "previous_day_advancer_decliner_ratio": 0.2494,
+    "previous_otc_return_pct": -5.53,
+    "tsmc_positive_guidance_flag": 1
+  },
+  "limitations": [
+    "Current repository is migrating to a TEJ-backed TAIEX/TX OHLC engine; that model is not implemented or executed, so this file preserves the live legacy scenario workflow.",
+    "Exclude this snapshot from all new OHLC/TimesFM/ARIMA performance claims.",
+    "Probabilities and bps targets are uncalibrated scenario priors, not trained-model output.",
+    "Night futures and US broad indexes were positive while SOX and Taiwan ADRs were negative; this cross-market divergence materially lowers directional confidence."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.27,
+      "base": 0.5,
+      "bear": 0.23
+    },
+    "scenario_definition": "Legacy thresholds: bull close >=+50bps, bear <=-50bps, base between.",
+    "gap_bps": 45,
+    "gap_reason": "Positive night futures and TSMC futures favor a rebound open, but SOX/TSM ADR weakness and TWD depreciation cap the estimate well below the full futures premium.",
+    "close_bps": 30,
+    "close_reason": "TSMC guidance, falling Treasury yields and night-session stabilization support repair; persistent semiconductor weakness and Friday risk reduction keep the close within the base band."
+  }
+}
