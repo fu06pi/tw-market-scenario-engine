@@ -1,0 +1,69 @@
+{
+  "trading_date": "2026-10-16",
+  "previous_close": 46969.87,
+  "open": 46995.03,
+  "high": 47520.6,
+  "low": 46995.03,
+  "close": 47111.26,
+  "change_points": 141.39,
+  "change_pct": 0.3,
+  "turnover": 986430123055,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE MI_INDEX total (1~15), not regular-session-only turnover",
+  "regular_session_turnover_twd": 935959000000,
+  "regular_session_turnover_source": "CNA daily summary",
+  "breadth_up": 684,
+  "breadth_down": 286,
+  "breadth_flat": 106,
+  "breadth_unmatched": 5,
+  "breadth_uncompared": 1,
+  "breadth_scope": "Official TWSE MI_INDEX stock column; do not combine with ETFs, warrants or TPEx",
+  "otc_return_pct": 0.85,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "taiwan50": -0.02,
+    "midcap100": 1.39,
+    "smallcap300": 0.74,
+    "electronics": 0.09,
+    "semiconductor": -0.32,
+    "financial": 1.1,
+    "ex_financial_electronics": 1.13,
+    "oil_gas": 8.91,
+    "plastics": -1.3,
+    "plastics_chemical_aggregate": -0.34,
+    "shipping": 1.98,
+    "computer_peripheral": 1.67
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE official TAIEX OHLC",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261016",
+      "retrieval_method": "Direct HTTP JSON; stat=OK; date=20261016; row=115/10/16",
+      "role": "Trading-day confirmation, OHLC and previous-session reference"
+    },
+    {
+      "name": "TWSE official MI_INDEX",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261016&type=ALLBUT0999",
+      "retrieval_method": "Direct HTTP JSON; stat=OK; date=20261016",
+      "role": "Official index close, sectors, total market turnover and stock-column breadth"
+    },
+    {
+      "name": "CNA daily market summary",
+      "url": "https://www.cna.com.tw/news/afe/202610160147.aspx",
+      "published_at": "2026-10-16T13:51:00+08:00",
+      "role": "OHLC cross-check; separately scoped session turnover and news breadth"
+    },
+    {
+      "name": "CNA close analysis",
+      "url": "https://www.cna.com.tw/news/afe/202610160166.aspx",
+      "published_at": "2026-10-16T14:36:00+08:00",
+      "role": "Dated intraday path, TPEx return and driver evidence"
+    },
+    {
+      "name": "FTV corrected close report",
+      "url": "https://finance.ftvnews.com.tw/news/detail/2026A16W0403",
+      "updated_at": "2026-10-16T14:40:16+08:00",
+      "role": "Shows correction from stale 47182.52 to official 47111.26"
+    }
+  ]
+}
