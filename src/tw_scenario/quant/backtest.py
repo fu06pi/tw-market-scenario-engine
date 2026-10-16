@@ -11,6 +11,8 @@ from collections import Counter
 from datetime import date, datetime
 from pathlib import Path
 
+import numpy as np
+
 from .contracts import OHLC, TZ, Calendar, at, digest, encode, write_once
 from .evaluation import metrics
 from .forecast import Dataset, calibrated_interval, predict
@@ -132,6 +134,7 @@ def _select_baseline(
     expected_dates: list[str],
     min_coverage: float,
     neutral_bps: float,
+    stability_rules: dict | None = None,
 ) -> tuple[dict, dict]:
     if not 0 < min_coverage <= 1:
         raise ValueError("min_validation_coverage must be in (0, 1]")
@@ -158,11 +161,43 @@ def _select_baseline(
             reason = "below_min_validation_coverage"
         elif not result["metrics"].get("ohlc"):
             reason = "no_validation_metrics"
+        successful_metrics = (
+            metrics(list(successful.values()), neutral_bps) if successful else {}
+        )
+        width_bps = []
+        for row in successful.values():
+            if not row.get("interval") or not row.get("previous_close"):
+                continue
+            for field in OHLC:
+                lower, upper = row["interval"][field]
+                width_bps.append((upper - lower) / row["previous_close"] * 10_000)
+        maximum_width_bps = max(width_bps, default=None)
+        maximum_ohlc_mae_bps = max(
+            (
+                item["mae_bps"]
+                for item in successful_metrics.get("ohlc", {}).values()
+            ),
+            default=None,
+        )
+        rules = stability_rules or {}
+        if reason is None and rules:
+            if maximum_width_bps is None or not np.isfinite(maximum_width_bps):
+                reason = "missing_or_nonfinite_interval_width"
+            elif maximum_width_bps > float(rules["max_interval_width_bps"]):
+                reason = "interval_width_exceeds_stability_limit"
+            elif maximum_ohlc_mae_bps is None or not np.isfinite(maximum_ohlc_mae_bps):
+                reason = "missing_or_nonfinite_ohlc_error"
+            elif maximum_ohlc_mae_bps > float(rules["max_ohlc_mae_bps"]):
+                reason = "ohlc_error_exceeds_stability_limit"
+            elif (1.0 - coverage) > float(rules["max_failure_rate"]):
+                reason = "failure_rate_exceeds_stability_limit"
         audit[key] = {
             "expected_days": len(expected),
             "success_days": len(successful),
             "coverage": coverage,
             "duplicate_dates": duplicate_dates,
+            "maximum_interval_width_bps": maximum_width_bps,
+            "maximum_ohlc_mae_bps": maximum_ohlc_mae_bps,
             "eligible": reason is None,
             "ineligible_reason": reason,
         }

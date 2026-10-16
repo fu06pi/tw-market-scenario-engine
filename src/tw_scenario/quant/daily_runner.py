@@ -6,7 +6,6 @@ from .backtest import walk_forward
 from .contracts import OHLC, TZ, Prices, at, digest, encode
 from .daily import (
     DataQualityEvidence,
-    FallbackInfo,
     InstrumentOHLCForecast,
     MarginalInterval,
     ModelIdentity,
@@ -121,10 +120,9 @@ def build_locked_baseline_body(
                 model_version="locked-baseline-v1",
                 checkpoint_id=digest(choice),
                 representation=choice["representation"],
-                fallback=FallbackInfo(
-                    model_name="timesfm3-validation-locked-candidate",
-                    reason="single final-test acceptance gate failed",
-                ),
+                selection_reason="locked TimesFM final acceptance gate failed",
+                runtime_fallback_chain=(choice["model"],),
+                fallback_used=False,
             ),
         ))
     night = data.get("TX", data.contract("TX", trading_date), "night", trading_date, cutoff)

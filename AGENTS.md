@@ -1,7 +1,7 @@
 # Codex project instructions
 
 ## Current decision and scope — 2026-10-13
-Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 zero-shot variants and only a separately labelled custom gradient smoke against naive, night-session regression and ARIMA/ARIMAX baselines. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; the actual interface is the external ChatGPT tasks `財經事件晨報` and `台股收盤預測檢討`, plus their existing Google Sheet.
+Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 zero-shot variants and a separately labelled custom output-head-only training path against stable naive, night-session regression and ARIMA/ARIMAX baselines. The custom path freezes the TimesFM backbone and is never described as the official fine-tuning API. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; the actual interface is the external ChatGPT tasks `財經事件晨報` and `台股收盤預測檢討`, plus their existing Google Sheet.
 
 The verified source order is now FinMind as the primary resumable API, official TWSE/TAIFEX downloads as authoritative reconciliation evidence, and TEJ as a 2025 overlap cross-check. The user authorized this change after TEJ trial coverage proved insufficient for the requested 2018+ study. Do not discard TEJ evidence or relabel FinMind/official data as TEJ.
 
@@ -42,6 +42,8 @@ Read README.md, CODEX_HANDOFF.md and PROJECT_STATUS.md first. The 2026-10-07 arc
 - Target 80% marginal interval coverage 75–85%; also compare interval score and width. Marginal quantiles cannot be directly combined into OHLC joint quantiles. Validate reconstruction, dependence and calibration.
 - Use time-block uncertainty estimates and annual/volatility/rollover/event breakdowns. Pretraining overlap makes historical results retrospective; add fixed-version genuine pre-open forward evidence.
 - Early stop and retain validation-best checkpoint. Stop after three successive rounds without validation improvement or when budget is exhausted; report best candidate, failure to meet targets and bottlenecks. Keep the strongest baseline as default candidate when no model clears the gate.
+- The failed 2025-10-09 through 2026-10-08 final remains permanently closed. A redesign informed by it may treat all data through 2026-10-08 as development-only, but must use expanding folds, a buffered 7.5% close-MAE promotion gate and a new future holdout before any new acceptance claim.
+- Model work has priority over cards, report styling and schedule changes. Do not resume shadow scheduling until the redesigned model is locked and a manual genuine live staging day passes.
 - Accuracy is a research target, never a guaranteed outcome or a claim of trading profitability.
 
 ## Narrative, snapshots and migration

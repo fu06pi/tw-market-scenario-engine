@@ -82,6 +82,10 @@ flowchart TD
 
 TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb17bebc005be2696b75e0a9e688` 與 weight revision `43046b85ec22d584a13f8098c2ed39c889e129c2`。官方 3.0 高階介面為 inference-only；完整 LoRA 範例仍屬 2.5。自訂 `custom_output_head_gradient_smoke` 已在單一 train-period樣本執行一個 SGD step，證實 loss有限、output-head梯度／參數／預測改變及 checkpoint重載等價；這不是官方 fine-tuning、不證明改善，也不是 production candidate。公開摘要見 [`reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json`](reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json)。自架權重屬非商業授權，本專案維持學術研究與 shadow forward test。
 
+新版模型優先研究另提供 `timesfm-head-train` 與 `timesfm-head-walk-forward`。它們凍結完整 TimesFM 3 backbone，只允許 `output_head` 更新，使用 GBUD Huber／close-return／pinball／quantile-crossing loss、train-only feature scaling、early stopping、write-once fold結果與可續跑checkpoint。設定固定八個有編號候選，比較256／512 context、`1e-4`／`3e-4` learning rate及0／`1e-4` weight decay，不能在執行後匿名改參數。新增的27項盤前特徵包含夜盤結構、前日OI、基差、換月／到期、日曆及5／20／60日量價狀態；舊五特徵介面保持不變，以保存已關閉實驗的程式口徑。開發gate要求close MAE至少改善7.5%、fold多數改善、block-bootstrap下界非負、O/H/L不劣化、區間及99%成功率同時通過。所有2026-10-08以前資料只作開發，不能重標為新final。
+
+目前新訓練尚未產生checkpoint或成績。2026-10-16實際preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於鎖定的3,072 MiB門檻；套件、commit、權重cache與磁碟皆已就緒。證據見 [`reports/quant/timesfm3-output-head-preflight-2026-10-16.json`](reports/quant/timesfm3-output-head-preflight-2026-10-16.json)。不得降低門檻後把OOM風險包裝成有效實驗。
+
 ## 訓練、驗證與停止
 
 - 時間順序切分訓練、驗證及最終測試；資料充足時保留最近約一年作最終測試，選模前固定日期。

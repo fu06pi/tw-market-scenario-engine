@@ -564,6 +564,140 @@ def timesfm_gradient_smoke(
     )
 
 
+@app.command("timesfm-head-train")
+def timesfm_head_train(
+    dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],
+    instrument: Annotated[
+        str, typer.Option("--instrument", help="TAIEX or TX market-specific head.")
+    ],
+    candidate_index: Annotated[
+        int, typer.Option("--candidate-index", help="Zero-based frozen training-grid index.")
+    ] = 0,
+    config_path: Annotated[
+        Path, typer.Option("--config", help="Output-head development config.")
+    ] = Path("config/quant/timesfm_output_head.json"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root", help="Ignored local experiment root.")
+    ] = DEFAULT_REPORT_ROOT / "experiments",
+    cache_dir: Annotated[
+        Path, typer.Option("--cache-dir", help="Pinned local TimesFM weight cache.")
+    ] = Path("data/raw/timesfm3"),
+) -> None:
+    """Train a custom TimesFM 3 output head without opening a final test."""
+    try:
+        config = _load_config(config_path)
+        from .timesfm3 import CODE_COMMIT, WEIGHT_REVISION
+        from .timesfm_head_training import run_output_head_training
+
+        if config["timesfm_code_commit"] != CODE_COMMIT:
+            raise ValueError("config TimesFM code commit does not match the adapter")
+        if config["timesfm_weight_revision"] != WEIGHT_REVISION:
+            raise ValueError("config TimesFM weight revision does not match the adapter")
+        output = run_output_head_training(
+            dataset_dir,
+            config_path,
+            cache_dir,
+            output_root,
+            instrument.upper(),
+            candidate_index,
+        )
+        result = _read_json(output)
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": result["status"],
+        "instrument": result["identity"]["instrument"],
+        "candidate_index": result["identity"]["candidate_index"],
+        "official_timesfm3_finetuning": False,
+        "final_test_opened": False,
+        "production_candidate": False,
+        "checkpoint_sha256": result["checkpoint"]["sha256"],
+        "output": str(output),
+    })
+
+
+@app.command("timesfm-head-walk-forward")
+def timesfm_head_walk_forward(
+    dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],
+    instrument: Annotated[
+        str, typer.Option("--instrument", help="TAIEX or TX market-specific head.")
+    ],
+    candidate_index: Annotated[
+        int, typer.Option("--candidate-index", help="Zero-based frozen training-grid index.")
+    ] = 0,
+    config_path: Annotated[
+        Path, typer.Option("--config", help="Output-head development config.")
+    ] = Path("config/quant/timesfm_output_head.json"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root", help="Ignored local experiment root.")
+    ] = DEFAULT_REPORT_ROOT / "experiments",
+    cache_dir: Annotated[
+        Path, typer.Option("--cache-dir", help="Pinned local TimesFM weight cache.")
+    ] = Path("data/raw/timesfm3"),
+) -> None:
+    """Run expanding development folds for the custom TimesFM output head."""
+    try:
+        config = _load_config(config_path)
+        from .timesfm3 import CODE_COMMIT, WEIGHT_REVISION
+        from .timesfm_head_training import run_output_head_walk_forward
+
+        if config["timesfm_code_commit"] != CODE_COMMIT:
+            raise ValueError("config TimesFM code commit does not match the adapter")
+        if config["timesfm_weight_revision"] != WEIGHT_REVISION:
+            raise ValueError("config TimesFM weight revision does not match the adapter")
+        output = run_output_head_walk_forward(
+            dataset_dir,
+            config_path,
+            cache_dir,
+            output_root,
+            instrument.upper(),
+            candidate_index,
+        )
+        result = _read_json(output)
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": result["status"],
+        "instrument": result["identity"]["instrument"],
+        "candidate_index": result["identity"]["candidate_index"],
+        "official_timesfm3_finetuning": False,
+        "final_test_opened": False,
+        "production_candidate": False,
+        "development_gate": result["development_gate"]["status"],
+        "output": str(output),
+    })
+
+
+@app.command("timesfm-head-select")
+def timesfm_head_select(
+    results: Annotated[
+        list[Path], typer.Argument(help="Completed indexed walk-forward results.")
+    ],
+    output: Annotated[Path, typer.Option("--output", help="Immutable selection JSON.")],
+    max_no_gain_rounds: Annotated[
+        int, typer.Option("--max-no-gain-rounds", help="Bounded search stop rule.")
+    ] = 3,
+) -> None:
+    """Select a development candidate without opening a historical final test."""
+    try:
+        from .timesfm_head_training import select_output_head_candidate
+
+        candidates = [_read_json(path) for path in results]
+        result = select_output_head_candidate(candidates, max_no_gain_rounds)
+        output, reused = _write_json_once_or_same(output, result)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": result["status"],
+        "instrument": result["instrument"],
+        "selected": result["selected"],
+        "final_test_opened": False,
+        "production_candidate": False,
+        "output": str(output),
+        "reused": reused,
+    })
+
+
 @app.command("timesfm-validate")
 def timesfm_validate(
     dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],

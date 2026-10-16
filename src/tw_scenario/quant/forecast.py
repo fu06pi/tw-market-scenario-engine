@@ -11,6 +11,7 @@ class Dataset:
     def __init__(self, bars: list[Bar], calendar: Calendar):
         self.bars, self.calendar = bars, calendar
         self.index = {}
+        self._research_feature_cache = {}
         for b in bars:
             key = (b.instrument, b.contract, b.session, b.trading_date)
             if key in self.index:
@@ -41,6 +42,7 @@ class Dataset:
                       representation)
 
     def features(self, day):
+        """Legacy five-feature contract used by the already-closed experiments."""
         contract = self.contract('TX', day)
         night = self.get('TX', contract, 'night', day, at(day))
         tx_prev = self.reference('TX', day)
@@ -49,6 +51,135 @@ class Dataset:
                          np.log1p(night.volume) if night.volume is not None else np.nan,
                          np.log(tx_prev.close/cash_prev.close),
                          (at(day)-night.session_end_at).total_seconds()/3600])
+
+    @staticmethod
+    def research_feature_names():
+        """Names for the expanded, pre-open-only output-head research features."""
+        names = [
+            "tx_night_close_return", "tx_night_range", "tx_night_body",
+            "tx_night_upper_extension", "tx_night_lower_extension",
+            "tx_night_log_volume", "prior_tx_taiex_basis", "night_staleness_hours",
+            "prior_tx_log_open_interest", "prior_tx_open_interest_change",
+            "roll_session", "sessions_to_expiry", "weekday_sin", "weekday_cos",
+            "month_end_session",
+        ]
+        for window in (5, 20, 60):
+            names.extend((
+                f"self_return_{window}", f"self_volatility_{window}",
+                f"self_range_{window}", f"self_log_volume_{window}",
+            ))
+        return tuple(names)
+
+    def research_features(self, instrument, day):
+        """Expanded causal features whose source bars were available by D 08:30.
+
+        This deliberately lives beside, rather than replacing, ``features`` so the
+        closed historical experiments retain their exact information contract.
+        """
+        cache_key = (instrument, day)
+        if cache_key in self._research_feature_cache:
+            return self._research_feature_cache[cache_key].copy()
+        cutoff = at(day)
+        contract = self.contract('TX', day)
+        night = self.get('TX', contract, 'night', day, cutoff)
+        tx_prev = self.reference('TX', day)
+        cash_prev = self.reference('TAIEX', day)
+        night_body = np.log(night.close / night.open)
+        night_upper = np.log(night.high / max(night.open, night.close))
+        night_lower = np.log(min(night.open, night.close) / night.low)
+
+        calendar_index = self.calendar.days.index(day)
+        previous_day = self.calendar.previous(day)
+        prior_contract = self.contract('TX', previous_day)
+        roll_session = float(prior_contract != contract)
+        expiry = self.calendar.expiries.get(contract)
+        if expiry is None or expiry not in self.calendar.days:
+            sessions_to_expiry = np.nan
+        else:
+            sessions_to_expiry = float(self.calendar.days.index(expiry) - calendar_index)
+
+        prior_prior_day = self.calendar.previous(previous_day)
+        prior_tx = self.index.get(('TX', contract, 'day', prior_prior_day))
+        if (
+            tx_prev.open_interest is None
+            or prior_tx is None
+            or prior_tx.open_interest is None
+            or prior_tx.available_at > cutoff
+        ):
+            oi_level = oi_change = np.nan
+        else:
+            oi_level = np.log1p(tx_prev.open_interest)
+            oi_change = np.log1p(tx_prev.open_interest) - np.log1p(prior_tx.open_interest)
+
+        history_days = self.calendar.days[max(0, calendar_index - 60):calendar_index]
+        returns, ranges, volumes = [], [], []
+        for history_day in history_days:
+            actual = self.actual(instrument, history_day)
+            reference = self.reference(instrument, history_day)
+            if actual.available_at > cutoff:
+                raise ValueError('unpublished feature history')
+            returns.append(np.log(actual.close / reference.close))
+            ranges.append(np.log(actual.high / actual.low))
+            volumes.append(
+                np.log1p(actual.volume) if actual.volume is not None else np.nan
+            )
+        if len(returns) < 60 or not np.all(np.isfinite(volumes)):
+            raise ValueError('insufficient causal feature history')
+
+        next_day = (
+            self.calendar.days[calendar_index + 1]
+            if calendar_index + 1 < len(self.calendar.days)
+            else None
+        )
+        weekday_angle = 2 * np.pi * day.weekday() / 5
+        values = [
+            np.log(night.close / tx_prev.close), np.log(night.high / night.low),
+            night_body, night_upper, night_lower,
+            np.log1p(night.volume) if night.volume is not None else np.nan,
+            np.log(tx_prev.close / cash_prev.close),
+            (cutoff - night.session_end_at).total_seconds() / 3600,
+            oi_level, oi_change, roll_session, sessions_to_expiry,
+            np.sin(weekday_angle), np.cos(weekday_angle),
+            float(next_day is None or next_day.month != day.month),
+        ]
+        for window in (5, 20, 60):
+            window_returns = np.asarray(returns[-window:])
+            values.extend((
+                float(window_returns.sum()),
+                float(window_returns.std(ddof=1)) if window > 1 else 0.0,
+                float(np.median(ranges[-window:])),
+                float(np.mean(volumes[-window:])),
+            ))
+        result = np.asarray(values, dtype=float)
+        if result.shape != (len(self.research_feature_names()),):
+            raise RuntimeError('expanded research feature schema mismatch')
+        if not np.all(np.isfinite(result)):
+            raise ValueError('missing expanded research feature')
+        result.setflags(write=False)
+        self._research_feature_cache[cache_key] = result
+        return result.copy()
+
+    def research_history(self, instrument, day, representation, window, minimum):
+        """Return aligned targets/features using only information known before D."""
+        dates = self.calendar.days[:self.calendar.days.index(day)]
+        ys, xs, used = [], [], []
+        for history_day in reversed(dates[-window:]):
+            try:
+                actual = self.actual(instrument, history_day)
+                if actual.available_at > at(day):
+                    raise ValueError('unpublished training label')
+                y = self.target(instrument, history_day, representation)
+                x = self.research_features(instrument, history_day)
+            except ValueError:
+                break
+            ys.append(y)
+            xs.append(x)
+            used.append(history_day)
+        if len(ys) < minimum:
+            raise ValueError(
+                f'insufficient contiguous expanded history: {len(ys)} < {minimum}'
+            )
+        return np.asarray(ys[::-1]), np.asarray(xs[::-1]), used[::-1]
 
     def history(self, instrument, day, representation, window, minimum, with_features):
         dates = self.calendar.days[:self.calendar.days.index(day)]

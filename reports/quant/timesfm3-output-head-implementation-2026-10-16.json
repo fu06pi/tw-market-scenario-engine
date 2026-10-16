@@ -1,0 +1,56 @@
+{
+  "schema_version": "timesfm3-output-head-implementation-v1",
+  "status": "IMPLEMENTED_EXECUTION_BLOCKED",
+  "date": "2026-10-16",
+  "scope": "development_only_after_closed_final_failure",
+  "official_timesfm3_finetuning": false,
+  "production_candidate": false,
+  "production_switch": false,
+  "implemented": [
+    "market-specific output-head-only training with frozen TimesFM 3 backbone",
+    "GBUD robust point, close-return, quantile and crossing losses",
+    "eight indexed context, learning-rate and weight-decay candidates",
+    "bounded candidate selection that stops after three consecutive no-gain rounds",
+    "train-only causal feature scaling and early stopping",
+    "27-feature causal pre-open contract with legacy feature preservation",
+    "three-fold expanding development walk-forward with resumable write-once folds",
+    "stable baseline selection limits for failures, OHLC error and interval width",
+    "7.5 percent buffered promotion gate with fold, bootstrap, OHL, interval and coverage requirements",
+    "explicit selected-model and runtime-fallback metadata"
+  ],
+  "executed": [
+    "certified dataset feature extraction for both markets across all three validation folds",
+    "TimesFM package, commit, weight cache, disk and memory preflight",
+    "unit and integration test suite",
+    "Ruff and git diff whitespace checks"
+  ],
+  "validation": {
+    "tests": "71 passed",
+    "ruff": "PASS",
+    "git_diff_check": "PASS",
+    "fold_feature_samples": {
+      "TAIEX": [80, 80, 80],
+      "TX": [80, 80, 80],
+      "feature_count": 27
+    }
+  },
+  "execution_blocker": {
+    "status": "BLOCKED_INSUFFICIENT_MEMORY",
+    "available_ram_mb": 2762,
+    "swap_free_mb": 0,
+    "required_available_ram_mb": 3072,
+    "weights_loaded": false
+  },
+  "not_executed": [
+    "TAIEX output-head training",
+    "TX output-head training",
+    "three-fold model predictions and promotion gate",
+    "new future holdout"
+  ],
+  "claims_prohibited": [
+    "the redesigned model improved accuracy",
+    "the redesigned model passed development validation",
+    "the old final was reopened or replaced",
+    "the model is ready for report scheduling or production"
+  ]
+}

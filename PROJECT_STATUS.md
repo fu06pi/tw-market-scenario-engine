@@ -31,7 +31,10 @@
 - [x] 已依實際外部任務輸出建立`V0_EXTERNAL_TASK_CUTOVER_PACKET.md`，含三份待審查prompt、receipt依賴、fail-closed條件與rollback；狀態保持`NOT_AUTHORIZED`，未修改任何任務。
 - [x] Staging唯讀preflight CLI可在live capture前驗證ADC、最小讀取權、A:P表頭與下一組空白列；回報只含Sheet ID hash且不寫入儲存格。
 - [x] 已對關閉 final 做年度、固定實際振幅狀態及TX換月日的事後穩定性診斷；保留全部失敗日。重大事件因沒有凍結的point-in-time事件日曆而明確未評估。
-- [x] 62 個 pytest、Ruff及 `git diff --check` 通過；包含盤前／盤後完整orchestration、legacy contract拒絕、唯讀preflight與穩定性分組測試。
+- [x] 新增TimesFM 3 output-head-only訓練與expanding walk-forward CLI；強制凍結backbone、train-only scaling、early stopping、write-once fold checkpoint及7.5%開發晉級gate。這是自訂研究訓練，不是官方fine-tuning。
+- [x] 新增27項盤前因果特徵：夜盤結構、前日OI、基差、換月／到期、日曆及5／20／60日量價狀態；保留舊五特徵介面供封存實驗重現。
+- [x] 基準選擇可套用失敗率、OHLC bp誤差及區間寬度穩定門檻；每日模型metadata已分開selection reason、runtime fallback chain與fallback used，移除把失敗TimesFM誤寫成runtime fallback的語意。
+- [x] 71 個 pytest、Ruff及 `git diff --check` 通過；新增output-head凍結、loss、時間fold、固定候選grid、三輪無增益停止、開發gate、基準穩定性及fallback語意測試。
 
 ## 已鎖定的 validation 結果
 
@@ -59,6 +62,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - [ ] 至少一個 genuine 08:40 前手動 live staging E2E；目前只有2026-10-08 retrospective shadow。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
 - [ ] 經歷史時間戳核實的重大事件日曆與海外市場特徵；目前不把新聞加入數值訓練，未平倉量亦尚未進入模型特徵。
+- [ ] 實際執行新版TimesFM output-head訓練與三段walk-forward。2026-10-16 preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於3,072 MiB門檻；尚無新checkpoint或準確度結果。
 - [ ] 將外部 `財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證` 從 legacy 08:50／情境機率介面遷移到凍結 OHLC 契約；正式切換前不得修改現行任務。
 - [ ] 正式排程切換與 rollback 演練。
 

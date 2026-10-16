@@ -43,12 +43,12 @@
 
 ## 接續順序
 
-1. Live pre-open/post-close orchestration與staging writer已實作，但不得在genuine forward執行前稱為每日引擎完成。
-2. 在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
-3. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
-4. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。
-5. Shadow證據通過後，依遷移契約逐一改造三個外部任務並做rollback演練；之前不得動正式prompt、Sheet或排程。
-6. 自訂 output-head gradient smoke已完成且另名；不能改變已關閉 final的結論。
-7. 只有端到端證據通過後，另行評估正式切換與 rollback；目前不修改正式排程。
+1. 優先執行新版TimesFM output-head-only研究。程式、三段expanding walk-forward與7.5%開發gate已完成；目前preflight因可用RAM低於3,072 MiB且free swap為0而阻擋，尚無新checkpoint或成績。
+2. 資源恢復後先跑TAIEX與TX的`timesfm-head-walk-forward`；所有2026-10-08以前結果只作development，不得改稱新final。未通過雙市場gate時保留baseline預設並停止晨報呈現工作。
+3. 模型鎖定後，才在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
+4. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
+5. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。
+6. Shadow證據通過後，依遷移契約逐一改造三個外部任務並做rollback演練；之前不得動正式prompt、Sheet或排程。
+7. 只有模型與端到端證據均通過後，另行評估正式切換與 rollback；目前不修改正式排程。
 
 可重播目標見 [CURRENT_GOAL.md](CURRENT_GOAL.md)，逐項狀態見 [PROJECT_STATUS.md](PROJECT_STATUS.md)。

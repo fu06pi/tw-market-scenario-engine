@@ -279,6 +279,40 @@ def test_baseline_selection_scores_candidates_on_same_paired_dates():
     assert audit["TAIEX/relative/b"]["paired_close_mae"] == 1.0
 
 
+def test_baseline_selection_rejects_exploding_intervals_before_pairing():
+    expected = [f"2026-01-{day:02d}" for day in range(5, 9)]
+    stable = _result(expected, {day: 5.0 for day in expected})
+    unstable = _result(expected, {day: 1.0 for day in expected})
+    for result, width in ((stable, 100.0), (unstable, 20_000.0)):
+        for row in result["rows"]:
+            row["interval"] = {
+                field: [10_000.0 - width / 2, 10_000.0 + width / 2]
+                for field in ("open", "high", "low", "close")
+            }
+        result["metrics"] = metrics(result["rows"])
+
+    selected, audit = _select_baseline(
+        {
+            "TAIEX/relative/stable": stable,
+            "TAIEX/relative/unstable": unstable,
+        },
+        "TAIEX",
+        expected,
+        0.95,
+        5.0,
+        {
+            "max_failure_rate": 0.01,
+            "max_interval_width_bps": 1000.0,
+            "max_ohlc_mae_bps": 500.0,
+        },
+    )
+
+    assert selected["model"] == "stable"
+    assert audit["TAIEX/relative/unstable"]["ineligible_reason"] == (
+        "interval_width_exceeds_stability_limit"
+    )
+
+
 def test_backtest_stops_at_manifest_and_data_quality_gate(tmp_path, monkeypatch):
     start, end = date(2026, 1, 1), date(2026, 1, 31)
     dataset_dir = tmp_path / "dataset"

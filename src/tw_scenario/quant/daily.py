@@ -109,7 +109,21 @@ class ModelIdentity(StrictFrozenModel):
     model_version: str = Field(min_length=1)
     checkpoint_id: str = Field(min_length=1)
     representation: Literal["relative", "gbud"]
+    selection_reason: str | None = None
+    runtime_fallback_chain: tuple[str, ...] = ()
+    fallback_used: bool = False
+    fallback_reason: str | None = None
     fallback: FallbackInfo | None = None
+
+    @model_validator(mode="after")
+    def fallback_contract(self):
+        if self.fallback_used and not self.fallback_reason:
+            raise ValueError("fallback_used requires fallback_reason")
+        if not self.fallback_used and self.fallback_reason is not None:
+            raise ValueError("fallback_reason requires fallback_used")
+        if self.runtime_fallback_chain and self.model_name not in self.runtime_fallback_chain:
+            raise ValueError("selected model must be present in runtime_fallback_chain")
+        return self
 
 
 class InstrumentOHLCForecast(StrictFrozenModel):

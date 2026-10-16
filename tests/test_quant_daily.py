@@ -373,6 +373,29 @@ def test_v0_adapter_rejects_legacy_cutoff_and_probability_fields():
         V0NarrativePayload.model_validate(item_probability)
 
 
+def test_model_identity_distinguishes_selection_from_runtime_fallback():
+    selected = ModelIdentity(
+        model_name="range",
+        model_version="locked-baseline-v1",
+        checkpoint_id="baseline-lock",
+        representation="gbud",
+        selection_reason="TimesFM development gate failed",
+        runtime_fallback_chain=("range", "zero"),
+        fallback_used=False,
+    )
+    assert selected.selection_reason == "TimesFM development gate failed"
+    assert not selected.fallback_used
+    with pytest.raises(ValidationError, match="fallback_used requires fallback_reason"):
+        ModelIdentity(
+            model_name="zero",
+            model_version="1",
+            checkpoint_id="fallback",
+            representation="gbud",
+            runtime_fallback_chain=("range", "zero"),
+            fallback_used=True,
+        )
+
+
 def test_sheet_dry_run_preserves_ap_mapping_and_is_file_only_write_once(tmp_path):
     snapshot = seal_snapshot(_body())
     narrative = build_v0_narrative(snapshot)
