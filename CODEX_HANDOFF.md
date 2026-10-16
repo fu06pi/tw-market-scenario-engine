@@ -43,8 +43,8 @@
 
 ## 接續順序
 
-1. 優先執行新版TimesFM output-head-only研究。程式、三段expanding walk-forward與7.5%開發gate已完成；目前preflight因可用RAM低於3,072 MiB且free swap為0而阻擋，尚無新checkpoint或成績。
-2. 資源恢復後先跑TAIEX與TX的`timesfm-head-walk-forward`；所有2026-10-08以前結果只作development，不得改稱新final。未通過雙市場gate時保留baseline預設並停止晨報呈現工作。
+1. 優先執行新版TimesFM output-head-only研究。TAIEX、TX及JOINT八目標程式、三段expanding walk-forward與7.5%雙市場開發gate已完成；本機preflight因可用RAM低於3,072 MiB且free swap為0而阻擋，尚無新checkpoint或成績。2026-10-17已建立ChatGPT雲端訓練工作，雲端結果仍須回寫repo可重現artifact並通過相同gate。
+2. 先跑JOINT的`timesfm-head-walk-forward`，再跑TAIEX與TX獨立頭作相同資訊集對照；所有2026-10-08以前結果只作development，不得改稱新final。未通過雙市場gate時保留baseline預設並停止晨報呈現工作。
 3. 模型鎖定後，才在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
 4. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
 5. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。

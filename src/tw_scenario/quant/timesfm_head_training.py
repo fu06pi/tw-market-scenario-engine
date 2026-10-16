@@ -30,9 +30,9 @@ class HeadSample:
     past_features: np.ndarray
     forecast_features: np.ndarray
     target: np.ndarray
-    previous_close: float
-    actual: dict[str, float]
-    contract: str
+    previous_close: float | tuple[float, float]
+    actual: dict[str, float] | dict[str, dict[str, float]]
+    contract: str | dict[str, str]
 
 
 @dataclass(frozen=True)
@@ -139,6 +139,52 @@ def build_head_samples(data, instrument: str, days: list[date], context: int) ->
     return samples
 
 
+def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadSample]:
+    """Materialize aligned eight-target TAIEX/TX samples and market-specific features."""
+    samples = []
+    for day in days:
+        taiex_history, taiex_features, taiex_dates = data.research_history(
+            "TAIEX", day, "gbud", context, context
+        )
+        tx_history, tx_features, tx_dates = data.research_history(
+            "TX", day, "gbud", context, context
+        )
+        if taiex_dates != tx_dates:
+            raise ValueError("joint output-head histories are not aligned")
+        references = (
+            float(data.reference("TAIEX", day).close),
+            float(data.reference("TX", day).close),
+        )
+        actual_bars = {
+            instrument: data.actual(instrument, day)
+            for instrument in ("TAIEX", "TX")
+        }
+        targets = np.concatenate([
+            encode(actual_bars["TAIEX"], references[0], "gbud"),
+            encode(actual_bars["TX"], references[1], "gbud"),
+        ]).astype(np.float32)
+        samples.append(HeadSample(
+            day=day,
+            history=np.column_stack([taiex_history, tx_history]).astype(np.float32),
+            past_features=np.column_stack([taiex_features, tx_features]).astype(np.float32),
+            forecast_features=np.concatenate([
+                data.research_features("TAIEX", day),
+                data.research_features("TX", day),
+            ]).astype(np.float32),
+            target=targets,
+            previous_close=references,
+            actual={
+                instrument: {
+                    field: float(getattr(actual_bars[instrument], field))
+                    for field in OHLC
+                }
+                for instrument in ("TAIEX", "TX")
+            },
+            contract={"TAIEX": "", "TX": data.contract("TX", day)},
+        ))
+    return samples
+
+
 def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.ndarray):
     import torch
 
@@ -147,11 +193,15 @@ def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.
     context = samples[0].history.shape[0]
     if context % model.input_patch_len:
         raise ValueError("TimesFM training context must align to input patches")
+    target_count = samples[0].history.shape[1]
+    if target_count not in {4, 8}:
+        raise ValueError("TimesFM head supports four or eight GBUD targets")
     feature_count = samples[0].past_features.shape[1]
     if any(
-        sample.history.shape != (context, 4)
+        sample.history.shape != (context, target_count)
         or sample.past_features.shape != (context, feature_count)
         or sample.forecast_features.shape != (feature_count,)
+        or sample.target.shape != (target_count,)
         for sample in samples
     ):
         raise ValueError("inconsistent TimesFM head sample shapes")
@@ -166,8 +216,8 @@ def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.
     horizon = model.output_patch_len
     horizon_values = torch.zeros((batch, variates, horizon), dtype=torch.float32)
     horizon_masks = torch.ones((batch, variates, horizon), dtype=torch.bool)
-    horizon_values[:, 4:, 0] = torch.tensor(future, dtype=torch.float32)
-    horizon_masks[:, 4:, 0] = False
+    horizon_values[:, target_count:, 0] = torch.tensor(future, dtype=torch.float32)
+    horizon_masks[:, target_count:, 0] = False
 
     all_values = torch.cat([context_values, horizon_values], dim=-1)
     all_masks = torch.cat(
@@ -176,7 +226,7 @@ def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.
     values = all_values.reshape(batch, variates, -1, model.input_patch_len)
     masks = all_masks.reshape(batch, variates, -1, model.input_patch_len)
     target_flags = torch.zeros((batch, variates, values.shape[2]), dtype=torch.bool)
-    target_flags[:, :4, :] = True
+    target_flags[:, :target_count, :] = True
     context_patches = context // model.input_patch_len
     cpm_mask = torch.zeros((batch, values.shape[2]), dtype=torch.bool)
     cpm_mask[:, context_patches:] = True
@@ -184,20 +234,20 @@ def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.
         "values": values,
         "masks": masks,
         "patch_is_target": target_flags,
-    }, cpm_mask, context_patches
+    }, cpm_mask, context_patches, target_count
 
 
-def _one_step_logits(model, inputs, cpm_mask, context_patches):
+def _one_step_logits(model, inputs, cpm_mask, context_patches, target_count):
     output = model.forward(inputs, patch_cpm_mask=cpm_mask)
-    return output["logits"][:, :4, context_patches - 1, 0, :]
+    return output["logits"][:, :target_count, context_patches - 1, 0, :]
 
 
 def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
     """Robust point, close-return, quantile and crossing losses for GBUD."""
     import torch
 
-    if logits.ndim != 3 or logits.shape[1] != 4:
-        raise ValueError("TimesFM head logits must have shape (batch, 4, quantiles)")
+    if logits.ndim != 3 or logits.shape[1] not in {4, 8}:
+        raise ValueError("TimesFM head logits must contain four or eight targets")
     if target.shape != logits.shape[:2]:
         raise ValueError("TimesFM head target shape mismatch")
     q = torch.as_tensor(quantiles, dtype=logits.dtype, device=logits.device)
@@ -206,9 +256,10 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
     median_index = int(torch.argmin(torch.abs(q - 0.5)))
     point = logits[:, :, median_index]
     point_loss = torch.nn.functional.smooth_l1_loss(point, target)
-    close_loss = torch.nn.functional.smooth_l1_loss(
-        point[:, 0] + point[:, 1], target[:, 0] + target[:, 1]
-    )
+    close_indexes = [(index, index + 1) for index in range(0, point.shape[1], 4)]
+    predicted_close = torch.stack([point[:, g] + point[:, b] for g, b in close_indexes], 1)
+    actual_close = torch.stack([target[:, g] + target[:, b] for g, b in close_indexes], 1)
+    close_loss = torch.nn.functional.smooth_l1_loss(predicted_close, actual_close)
     errors = target[:, :, None] - logits
     pinball = torch.maximum(q * errors, (q - 1) * errors).mean()
     crossing = torch.relu(logits[:, :, :-1] - logits[:, :, 1:]).mean()
@@ -228,9 +279,11 @@ def _evaluate_loss(model, samples, mean, scale, spec):
     with torch.no_grad():
         for start in range(0, len(samples), spec.batch_size):
             batch = samples[start : start + spec.batch_size]
-            inputs, mask, patches = _batch_inputs(model, batch, mean, scale)
+            inputs, mask, patches, target_count = _batch_inputs(
+                model, batch, mean, scale
+            )
             target = torch.tensor(np.stack([item.target for item in batch]))
-            logits = _one_step_logits(model, inputs, mask, patches)
+            logits = _one_step_logits(model, inputs, mask, patches, target_count)
             losses.append(float(output_head_loss(logits, target, model.quantiles, spec)))
     return float(np.mean(losses))
 
@@ -283,10 +336,12 @@ def train_output_head(
             if time.monotonic() >= deadline:
                 break
             batch = [train_samples[index] for index in order[offset : offset + spec.batch_size]]
-            inputs, mask, patches = _batch_inputs(model, batch, mean, scale)
+            inputs, mask, patches, target_count = _batch_inputs(
+                model, batch, mean, scale
+            )
             target = torch.tensor(np.stack([item.target for item in batch]))
             optimizer.zero_grad(set_to_none=True)
-            logits = _one_step_logits(model, inputs, mask, patches)
+            logits = _one_step_logits(model, inputs, mask, patches, target_count)
             loss = output_head_loss(logits, target, model.quantiles, spec)
             if not torch.isfinite(loss):
                 raise RuntimeError("non-finite output-head training loss")
@@ -338,8 +393,14 @@ def predict_head(model, sample: HeadSample, mean: np.ndarray, scale: np.ndarray)
 
     model.eval()
     with torch.no_grad():
-        inputs, mask, patches = _batch_inputs(model, [sample], mean, scale)
-        logits = _one_step_logits(model, inputs, mask, patches)[0].cpu().numpy()
+        inputs, mask, patches, target_count = _batch_inputs(
+            model, [sample], mean, scale
+        )
+        if target_count != 4:
+            raise ValueError("predict_head requires a market-specific four-target sample")
+        logits = _one_step_logits(
+            model, inputs, mask, patches, target_count
+        )[0].cpu().numpy()
     ordered = np.sort(logits, axis=1)
     median = ordered[:, len(model.quantiles) // 2]
     point = decode(median, sample.previous_close, "gbud")
@@ -357,6 +418,52 @@ def predict_head(model, sample: HeadSample, mean: np.ndarray, scale: np.ndarray)
         for index, field in enumerate(OHLC)
     }
     return point, interval, ordered
+
+
+def _decode_quantile_block(values: np.ndarray, previous_close: float):
+    ordered = np.sort(values, axis=1)
+    median = ordered[:, ordered.shape[1] // 2]
+    point = decode(median, previous_close, "gbud")
+    coherent_paths = np.stack([
+        decode(ordered[:, index], previous_close, "gbud").array()
+        for index in range(ordered.shape[1])
+    ])
+    lower = coherent_paths.min(axis=0)
+    upper = coherent_paths.max(axis=0)
+    interval = {
+        field: [
+            float(min(lower[index], getattr(point, field))),
+            float(max(upper[index], getattr(point, field))),
+        ]
+        for index, field in enumerate(OHLC)
+    }
+    return point, interval, ordered
+
+
+def predict_joint_head(
+    model, sample: HeadSample, mean: np.ndarray, scale: np.ndarray
+) -> dict[str, tuple]:
+    """Decode one eight-target head with market-specific reference prices."""
+    import torch
+
+    if not isinstance(sample.previous_close, tuple) or len(sample.previous_close) != 2:
+        raise ValueError("joint head requires separate TAIEX and TX reference prices")
+    model.eval()
+    with torch.no_grad():
+        inputs, mask, patches, target_count = _batch_inputs(
+            model, [sample], mean, scale
+        )
+        if target_count != 8:
+            raise ValueError("predict_joint_head requires an eight-target sample")
+        logits = _one_step_logits(
+            model, inputs, mask, patches, target_count
+        )[0].cpu().numpy()
+    return {
+        instrument: _decode_quantile_block(
+            logits[offset : offset + 4], sample.previous_close[index]
+        )
+        for index, (instrument, offset) in enumerate((("TAIEX", 0), ("TX", 4)))
+    }
 
 
 def development_acceptance(
@@ -432,6 +539,26 @@ def development_acceptance(
         "requirements": requirements,
         "candidate_metrics": candidate_metrics,
         "baseline_metrics": baseline_metrics,
+    }
+
+
+def joint_development_acceptance(instrument_gates: dict[str, dict]) -> dict:
+    """Require both market gates; expose their worst close improvement for selection."""
+    if set(instrument_gates) != {"TAIEX", "TX"}:
+        raise ValueError("joint development gate requires TAIEX and TX")
+    improvements = {
+        instrument: gate.get("close_relative_improvement")
+        for instrument, gate in instrument_gates.items()
+    }
+    if any(value is None for value in improvements.values()):
+        raise ValueError("joint instrument gate lacks close improvement")
+    both_pass = all(gate.get("status") == "PASS" for gate in instrument_gates.values())
+    return {
+        "status": "PASS" if both_pass else "FAIL",
+        "close_relative_improvement": min(float(value) for value in improvements.values()),
+        "instrument_close_relative_improvement": improvements,
+        "instrument_gates": instrument_gates,
+        "requirements": {"both_markets_pass": both_pass},
     }
 
 
@@ -515,11 +642,11 @@ def run_output_head_training(
     instrument: str,
     candidate_index: int = 0,
 ) -> Path:
-    """Train one market-specific TimesFM output head without opening a final test."""
+    """Train one market-specific or joint TimesFM head without opening a final test."""
     from safetensors.torch import save_file
 
-    if instrument not in {"TAIEX", "TX"}:
-        raise ValueError("instrument must be TAIEX or TX")
+    if instrument not in {"TAIEX", "TX", "JOINT"}:
+        raise ValueError("instrument must be TAIEX, TX, or JOINT")
     config = json.loads(config_path.read_text(encoding="utf-8"))
     probe = runtime_probe(cache_dir, int(config["memory_probe_limit_mb"]))
     if probe.status != "READY_TO_LOAD":
@@ -541,12 +668,21 @@ def run_output_head_training(
     stride = int(config["training_stride"])
     if stride < 1:
         raise ValueError("training_stride must be positive")
-    train_samples = build_head_samples(
-        data, instrument, training_days[::stride], context
-    )
-    early_stop_samples = build_head_samples(
-        data, instrument, early_stop_days, context
-    )
+    if instrument == "JOINT":
+        train_samples = build_joint_head_samples(data, training_days[::stride], context)
+        early_stop_samples = build_joint_head_samples(data, early_stop_days, context)
+        feature_names = {
+            market: [f"{market.lower()}__{name}" for name in data.research_feature_names()]
+            for market in ("TAIEX", "TX")
+        }
+    else:
+        train_samples = build_head_samples(
+            data, instrument, training_days[::stride], context
+        )
+        early_stop_samples = build_head_samples(
+            data, instrument, early_stop_days, context
+        )
+        feature_names = data.research_feature_names()
     identity = {
         "name": "custom_timesfm3_output_head_training",
         "instrument": instrument,
@@ -557,7 +693,7 @@ def run_output_head_training(
         "timesfm_weight_revision": WEIGHT_REVISION,
         "train_end": str(train_samples[-1].day),
         "early_stop_split": [str(early_stop_samples[0].day), str(early_stop_samples[-1].day)],
-        "feature_names": data.research_feature_names(),
+        "feature_names": feature_names,
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
     }
@@ -640,6 +776,28 @@ def _prediction_row(model, sample, mean, scale, instrument):
     }
 
 
+def _joint_prediction_rows(model, sample, mean, scale) -> list[dict]:
+    predictions = predict_joint_head(model, sample, mean, scale)
+    if not isinstance(sample.contract, dict) or not isinstance(sample.actual, dict):
+        raise TypeError("joint head sample lacks market metadata")
+    rows = []
+    for instrument in ("TAIEX", "TX"):
+        point, interval, quantiles = predictions[instrument]
+        rows.append({
+            "date": str(sample.day),
+            "instrument": instrument,
+            "contract": sample.contract[instrument],
+            "status": "OK",
+            "previous_close": sample.previous_close[0 if instrument == "TAIEX" else 1],
+            "predicted": point.model_dump(),
+            "actual": sample.actual[instrument],
+            "interval": interval,
+            "interval_method": "market-block rank-aligned TimesFM transformed quantiles",
+            "raw_transformed_quantiles": quantiles.tolist(),
+        })
+    return rows
+
+
 def run_output_head_walk_forward(
     dataset_dir: Path,
     config_path: Path,
@@ -651,8 +809,8 @@ def run_output_head_walk_forward(
     """Run the fixed custom head through expanding development folds."""
     from safetensors.torch import save_file
 
-    if instrument not in {"TAIEX", "TX"}:
-        raise ValueError("instrument must be TAIEX or TX")
+    if instrument not in {"TAIEX", "TX", "JOINT"}:
+        raise ValueError("instrument must be TAIEX, TX, or JOINT")
     config = json.loads(config_path.read_text(encoding="utf-8"))
     probe = runtime_probe(cache_dir, int(config["memory_probe_limit_mb"]))
     if probe.status != "READY_TO_LOAD":
@@ -685,7 +843,14 @@ def run_output_head_walk_forward(
             }
             for train, validation in folds
         ],
-        "feature_names": data.research_feature_names(),
+        "feature_names": (
+            {
+                market: [f"{market.lower()}__{name}" for name in data.research_feature_names()]
+                for market in ("TAIEX", "TX")
+            }
+            if instrument == "JOINT"
+            else data.research_feature_names()
+        ),
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
     }
@@ -703,9 +868,10 @@ def run_output_head_walk_forward(
         for name, value in model.output_head.state_dict().items()
     }
     fold_results = []
-    candidate_rows = []
-    baseline_rows = []
-    fold_improvements = []
+    instruments = ("TAIEX", "TX") if instrument == "JOINT" else (instrument,)
+    candidate_rows = {market: [] for market in instruments}
+    baseline_rows = {market: [] for market in instruments}
+    fold_improvements = {market: [] for market in instruments}
     try:
         for fold_index, (train_days, validation_days) in enumerate(folds, start=1):
             if time.monotonic() >= deadline:
@@ -720,9 +886,23 @@ def run_output_head_walk_forward(
                     raise ValueError(f"output-head fold identity mismatch: {fold_result_path}")
                 reused_summary = {**saved["summary"], "reused": True}
                 fold_results.append(reused_summary)
-                candidate_rows.extend(saved["candidate_rows"])
-                baseline_rows.extend(saved["baseline_rows"])
-                fold_improvements.append(reused_summary["close_relative_improvement"])
+                saved_candidates = saved["candidate_rows"]
+                saved_baselines = saved["baseline_rows"]
+                if instrument == "JOINT":
+                    for market in instruments:
+                        candidate_rows[market].extend(saved_candidates[market])
+                        baseline_rows[market].extend(saved_baselines[market])
+                        fold_improvements[market].append(
+                            reused_summary["instrument_results"][market][
+                                "close_relative_improvement"
+                            ]
+                        )
+                else:
+                    candidate_rows[instrument].extend(saved_candidates)
+                    baseline_rows[instrument].extend(saved_baselines)
+                    fold_improvements[instrument].append(
+                        reused_summary["close_relative_improvement"]
+                    )
                 continue
             model.output_head.load_state_dict(original_head)
             early_stop_sessions = int(config["early_stop_sessions"])
@@ -734,12 +914,20 @@ def run_output_head_walk_forward(
                 raise ValueError("training_stride must be positive")
             training_days = usable_train_days[:-early_stop_sessions:stride]
             early_stop_days = usable_train_days[-early_stop_sessions:]
-            training_samples = build_head_samples(
-                data, instrument, training_days, spec.context
-            )
-            early_stop_samples = build_head_samples(
-                data, instrument, early_stop_days, spec.context
-            )
+            if instrument == "JOINT":
+                training_samples = build_joint_head_samples(
+                    data, training_days, spec.context
+                )
+                early_stop_samples = build_joint_head_samples(
+                    data, early_stop_days, spec.context
+                )
+            else:
+                training_samples = build_head_samples(
+                    data, instrument, training_days, spec.context
+                )
+                early_stop_samples = build_head_samples(
+                    data, instrument, early_stop_days, spec.context
+                )
             training = train_output_head(
                 model,
                 training_samples,
@@ -758,62 +946,88 @@ def run_output_head_walk_forward(
             )
             mean = np.asarray(training["feature_mean"], dtype=np.float32)
             scale = np.asarray(training["feature_scale"], dtype=np.float32)
-            fold_candidate = []
+            fold_candidate = {market: [] for market in instruments}
             for validation_day in validation_days:
                 try:
-                    sample = build_head_samples(
-                        data, instrument, [validation_day], spec.context
-                    )[0]
-                    fold_candidate.append(
-                        _prediction_row(model, sample, mean, scale, instrument)
-                    )
+                    if instrument == "JOINT":
+                        sample = build_joint_head_samples(
+                            data, [validation_day], spec.context
+                        )[0]
+                        for row in _joint_prediction_rows(model, sample, mean, scale):
+                            fold_candidate[row["instrument"]].append(row)
+                    else:
+                        sample = build_head_samples(
+                            data, instrument, [validation_day], spec.context
+                        )[0]
+                        fold_candidate[instrument].append(
+                            _prediction_row(model, sample, mean, scale, instrument)
+                        )
                 except Exception as exc:  # noqa: BLE001 - preserve every expected day
-                    fold_candidate.append({
-                        "date": str(validation_day),
-                        "instrument": instrument,
-                        "contract": data.contract(instrument, validation_day),
-                        "status": "FAILED",
-                        "error": f"{type(exc).__name__}: {exc}",
-                    })
+                    for market in instruments:
+                        try:
+                            contract = data.contract(market, validation_day)
+                        except Exception:  # noqa: BLE001 - failure row must survive metadata errors
+                            contract = None
+                        fold_candidate[market].append({
+                            "date": str(validation_day),
+                            "instrument": market,
+                            "contract": contract,
+                            "status": "FAILED",
+                            "error": f"{type(exc).__name__}: {exc}",
+                        })
 
-            baseline_validation = {}
             expected_dates = [str(day) for day in validation_days]
-            for baseline_model in config["stable_baselines"]:
-                rows = walk_forward(
-                    data,
-                    instrument,
-                    baseline_model,
-                    "gbud",
-                    validation_days[0],
-                    validation_days[-1],
-                    config,
+            instrument_results = {}
+            fold_baseline = {}
+            for market in instruments:
+                baseline_validation = {}
+                for baseline_model in config["stable_baselines"]:
+                    rows = walk_forward(
+                        data,
+                        market,
+                        baseline_model,
+                        "gbud",
+                        validation_days[0],
+                        validation_days[-1],
+                        config,
+                    )
+                    baseline_validation[f"{market}/gbud/{baseline_model}"] = {
+                        "rows": rows,
+                        "metrics": metrics(rows, config["neutral_bps"]),
+                    }
+                selected_baseline, selection_audit = _select_baseline(
+                    baseline_validation,
+                    market,
+                    expected_dates,
+                    float(config["promotion_min_coverage"]),
+                    float(config["neutral_bps"]),
+                    config["baseline_stability"],
                 )
-                baseline_validation[f"{instrument}/gbud/{baseline_model}"] = {
-                    "rows": rows,
-                    "metrics": metrics(rows, config["neutral_bps"]),
+                baseline_key = (
+                    f"{market}/{selected_baseline['representation']}/"
+                    f"{selected_baseline['model']}"
+                )
+                fold_baseline[market] = baseline_validation[baseline_key]["rows"]
+                candidate_metrics = metrics(
+                    fold_candidate[market], config["neutral_bps"]
+                )
+                baseline_metrics = metrics(
+                    fold_baseline[market], config["neutral_bps"]
+                )
+                improvement = 1 - (
+                    candidate_metrics["ohlc"]["close"]["mae_points"]
+                    / baseline_metrics["ohlc"]["close"]["mae_points"]
+                )
+                fold_improvements[market].append(improvement)
+                candidate_rows[market].extend(fold_candidate[market])
+                baseline_rows[market].extend(fold_baseline[market])
+                instrument_results[market] = {
+                    "selected_baseline": selected_baseline,
+                    "baseline_selection_audit": selection_audit,
+                    "candidate_metrics": candidate_metrics,
+                    "baseline_metrics": baseline_metrics,
+                    "close_relative_improvement": improvement,
                 }
-            selected_baseline, selection_audit = _select_baseline(
-                baseline_validation,
-                instrument,
-                expected_dates,
-                float(config["promotion_min_coverage"]),
-                float(config["neutral_bps"]),
-                config["baseline_stability"],
-            )
-            baseline_key = (
-                f"{instrument}/{selected_baseline['representation']}/"
-                f"{selected_baseline['model']}"
-            )
-            fold_baseline = baseline_validation[baseline_key]["rows"]
-            candidate_metrics = metrics(fold_candidate, config["neutral_bps"])
-            baseline_metrics = metrics(fold_baseline, config["neutral_bps"])
-            improvement = 1 - (
-                candidate_metrics["ohlc"]["close"]["mae_points"]
-                / baseline_metrics["ohlc"]["close"]["mae_points"]
-            )
-            fold_improvements.append(improvement)
-            candidate_rows.extend(fold_candidate)
-            baseline_rows.extend(fold_baseline)
             fold_summary = {
                 "fold": fold_index,
                 "train_split": [str(train_days[0]), str(train_days[-1])],
@@ -823,26 +1037,41 @@ def run_output_head_walk_forward(
                     "path": str(checkpoint_path),
                     "sha256": _sha256(checkpoint_path),
                 },
-                "selected_baseline": selected_baseline,
-                "baseline_selection_audit": selection_audit,
-                "candidate_metrics": candidate_metrics,
-                "baseline_metrics": baseline_metrics,
-                "close_relative_improvement": improvement,
+                "close_relative_improvement": min(
+                    result["close_relative_improvement"]
+                    for result in instrument_results.values()
+                ),
                 "reused": False,
             }
+            if instrument == "JOINT":
+                fold_summary["instrument_results"] = instrument_results
+            else:
+                fold_summary.update(instrument_results[instrument])
             write_once(fold_result_path, {
                 "identity_hash": digest(identity),
                 "fold": fold_index,
                 "summary": fold_summary,
-                "candidate_rows": fold_candidate,
-                "baseline_rows": fold_baseline,
+                "candidate_rows": (
+                    fold_candidate if instrument == "JOINT" else fold_candidate[instrument]
+                ),
+                "baseline_rows": (
+                    fold_baseline if instrument == "JOINT" else fold_baseline[instrument]
+                ),
             })
             fold_results.append(fold_summary)
-        gate = development_acceptance(
-            candidate_rows,
-            baseline_rows,
-            config,
-            fold_improvements=fold_improvements,
+        instrument_gates = {
+            market: development_acceptance(
+                candidate_rows[market],
+                baseline_rows[market],
+                config,
+                fold_improvements=fold_improvements[market],
+            )
+            for market in instruments
+        }
+        gate = (
+            joint_development_acceptance(instrument_gates)
+            if instrument == "JOINT"
+            else instrument_gates[instrument]
         )
         result = {
             "schema_version": "timesfm3-output-head-walk-forward-v1",

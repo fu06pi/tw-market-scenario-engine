@@ -2,17 +2,22 @@ from __future__ import annotations
 
 import time
 from datetime import date, timedelta
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
 
+from tw_scenario.quant.contracts import Prices
 from tw_scenario.quant.timesfm_head_training import (
     HeadSample,
     HeadTrainingSpec,
     _batch_inputs,
+    _decode_quantile_block,
     _spec_from_config,
+    build_joint_head_samples,
     development_acceptance,
     expanding_folds,
+    joint_development_acceptance,
     output_head_loss,
     select_output_head_candidate,
     train_output_head,
@@ -67,10 +72,11 @@ def test_training_grid_selection_is_explicit_and_bounded():
 def test_training_inputs_keep_future_features_known_but_targets_masked():
     model = type("Model", (), {"input_patch_len": 32, "output_patch_len": 64})()
     sample = _sample(date(2026, 1, 2))
-    inputs, cpm_mask, patches = _batch_inputs(
+    inputs, cpm_mask, patches, target_count = _batch_inputs(
         model, [sample], np.zeros(2, dtype=np.float32), np.ones(2, dtype=np.float32)
     )
     assert patches == 1
+    assert target_count == 4
     assert inputs["values"].shape == (1, 6, 3, 32)
     assert inputs["masks"][:, :4, 1:].all()
     assert not inputs["masks"][:, 4:, 1, 0].any()
@@ -79,6 +85,55 @@ def test_training_inputs_keep_future_features_known_but_targets_masked():
     assert not inputs["patch_is_target"][:, 4:].any()
     assert not cpm_mask[:, :1].any()
     assert cpm_mask[:, 1:].all()
+
+
+def test_joint_samples_align_markets_and_keep_separate_references():
+    class Data:
+        misalign = False
+
+        def research_history(self, instrument, day, representation, context, window):
+            del day, representation, window
+            dates = [date(2025, 12, 30), date(2025, 12, 31)]
+            if instrument == "TX" and self.misalign:
+                dates[-1] = date(2026, 1, 1)
+            offset = 0.0 if instrument == "TAIEX" else 1.0
+            return (
+                np.full((context, 4), offset, dtype=np.float32),
+                np.full((context, 2), offset, dtype=np.float32),
+                dates,
+            )
+
+        def reference(self, instrument, day):
+            del day
+            return SimpleNamespace(close=100.0 if instrument == "TAIEX" else 200.0)
+
+        def actual(self, instrument, day):
+            del day
+            close = 100.0 if instrument == "TAIEX" else 200.0
+            return Prices(open=close, high=close, low=close, close=close)
+
+        def research_features(self, instrument, day):
+            del day
+            return np.array([0.0, 1.0], dtype=np.float32) + (
+                0.0 if instrument == "TAIEX" else 2.0
+            )
+
+        def contract(self, instrument, day):
+            del day
+            return "" if instrument == "TAIEX" else "202601"
+
+    data = Data()
+    sample = build_joint_head_samples(data, [date(2026, 1, 2)], 2)[0]
+    assert sample.history.shape == (2, 8)
+    assert sample.past_features.shape == (2, 4)
+    assert sample.forecast_features.shape == (4,)
+    assert sample.target.shape == (8,)
+    assert sample.previous_close == (100.0, 200.0)
+    assert sample.contract == {"TAIEX": "", "TX": "202601"}
+
+    data.misalign = True
+    with pytest.raises(ValueError, match="not aligned"):
+        build_joint_head_samples(data, [date(2026, 1, 2)], 2)
 
 
 def test_output_head_loss_penalizes_bad_point_and_crossing():
@@ -91,6 +146,48 @@ def test_output_head_loss_penalizes_bad_point_and_crossing():
     assert output_head_loss(good, target, quantiles, spec) < output_head_loss(
         bad, target, quantiles, spec
     )
+
+
+def test_joint_training_inputs_and_close_loss_cover_both_markets():
+    torch = pytest.importorskip("torch")
+    model = type("Model", (), {"input_patch_len": 32, "output_patch_len": 64})()
+    base = _sample(date(2026, 1, 2))
+    sample = HeadSample(
+        day=base.day,
+        history=np.column_stack([base.history, base.history + 1]),
+        past_features=np.column_stack([base.past_features, base.past_features + 1]),
+        forecast_features=np.concatenate([base.forecast_features, base.forecast_features + 1]),
+        target=np.zeros(8, dtype=np.float32),
+        previous_close=(100.0, 200.0),
+        actual={"TAIEX": base.actual, "TX": base.actual},
+        contract={"TAIEX": "", "TX": "202601"},
+    )
+    inputs, _, _, target_count = _batch_inputs(
+        model, [sample], np.zeros(4, dtype=np.float32), np.ones(4, dtype=np.float32)
+    )
+    assert target_count == 8
+    assert inputs["values"].shape == (1, 12, 3, 32)
+    assert inputs["masks"][:, :8, 1:].all()
+    assert not inputs["masks"][:, 8:, 1, 0].any()
+
+    quantiles = [0.1, 0.5, 0.9]
+    spec = HeadTrainingSpec(context=32, learning_rate=1e-3, weight_decay=0)
+    good = torch.zeros((1, 8, 3))
+    bad_second_close = good.clone()
+    bad_second_close[:, 4:6, :] = 2.0
+    assert output_head_loss(good, torch.zeros((1, 8)), quantiles, spec) < output_head_loss(
+        bad_second_close, torch.zeros((1, 8)), quantiles, spec
+    )
+
+
+def test_joint_decoding_uses_separate_reference_prices():
+    transformed = np.zeros((4, 3), dtype=np.float32)
+    taiex, _, _ = _decode_quantile_block(transformed, 100.0)
+    tx, _, _ = _decode_quantile_block(transformed, 200.0)
+    assert taiex.close == pytest.approx(100.0)
+    assert tx.close == pytest.approx(200.0)
+    assert taiex.high >= max(taiex.open, taiex.close)
+    assert tx.low <= min(tx.open, tx.close)
 
 
 def test_training_freezes_backbone_and_updates_only_output_head():
@@ -183,6 +280,15 @@ def test_development_gate_requires_buffer_folds_uncertainty_and_intervals():
     assert not failed["requirements"]["fold_majority"]
 
 
+def test_joint_gate_fails_if_either_market_fails():
+    passed = {"status": "PASS", "close_relative_improvement": 0.10}
+    failed = {"status": "FAIL", "close_relative_improvement": 0.02}
+    gate = joint_development_acceptance({"TAIEX": passed, "TX": failed})
+    assert gate["status"] == "FAIL"
+    assert gate["close_relative_improvement"] == pytest.approx(0.02)
+    assert not gate["requirements"]["both_markets_pass"]
+
+
 def test_candidate_selection_stops_after_three_no_gain_rounds():
     def result(index, improvement, status="FAIL"):
         return {
@@ -214,3 +320,24 @@ def test_candidate_selection_stops_after_three_no_gain_rounds():
     assert selection["selected"]["candidate_index"] == 1
     assert selection["stopped_after_no_gain"]
     assert [item["candidate_index"] for item in selection["evaluated"]] == [0, 1, 2, 3, 4]
+
+
+def test_candidate_selection_accepts_joint_worst_market_score():
+    result = {
+        "status": "DEVELOPMENT_GATE_FAIL",
+        "identity": {
+            "dataset_id": "dataset",
+            "instrument": "JOINT",
+            "config_hash": "config",
+            "candidate_index": 0,
+        },
+        "development_gate": {
+            "status": "FAIL",
+            "close_relative_improvement": 0.03,
+            "instrument_close_relative_improvement": {"TAIEX": 0.08, "TX": 0.03},
+        },
+    }
+    selection = select_output_head_candidate([result], 3)
+    assert selection["instrument"] == "JOINT"
+    assert selection["selected"]["close_relative_improvement"] == pytest.approx(0.03)
+    assert selection["status"] == "DEVELOPMENT_SEARCH_STOPPED_NO_PASS"

@@ -568,7 +568,7 @@ def timesfm_gradient_smoke(
 def timesfm_head_train(
     dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],
     instrument: Annotated[
-        str, typer.Option("--instrument", help="TAIEX or TX market-specific head.")
+        str, typer.Option("--instrument", help="TAIEX, TX, or JOINT output head.")
     ],
     candidate_index: Annotated[
         int, typer.Option("--candidate-index", help="Zero-based frozen training-grid index.")
@@ -620,7 +620,7 @@ def timesfm_head_train(
 def timesfm_head_walk_forward(
     dataset_dir: Annotated[Path, typer.Argument(help="Certified immutable dataset.")],
     instrument: Annotated[
-        str, typer.Option("--instrument", help="TAIEX or TX market-specific head.")
+        str, typer.Option("--instrument", help="TAIEX, TX, or JOINT output head.")
     ],
     candidate_index: Annotated[
         int, typer.Option("--candidate-index", help="Zero-based frozen training-grid index.")

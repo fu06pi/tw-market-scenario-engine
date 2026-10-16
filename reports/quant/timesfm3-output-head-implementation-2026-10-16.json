@@ -2,12 +2,14 @@
   "schema_version": "timesfm3-output-head-implementation-v1",
   "status": "IMPLEMENTED_EXECUTION_BLOCKED",
   "date": "2026-10-16",
+  "updated_at": "2026-10-17",
   "scope": "development_only_after_closed_final_failure",
   "official_timesfm3_finetuning": false,
   "production_candidate": false,
   "production_switch": false,
   "implemented": [
-    "market-specific output-head-only training with frozen TimesFM 3 backbone",
+    "market-specific and joint eight-target output-head-only training with frozen TimesFM 3 backbone",
+    "market-specific reference-price decoding and per-market joint promotion gates",
     "GBUD robust point, close-return, quantile and crossing losses",
     "eight indexed context, learning-rate and weight-decay candidates",
     "bounded candidate selection that stops after three consecutive no-gain rounds",
@@ -25,7 +27,7 @@
     "Ruff and git diff whitespace checks"
   ],
   "validation": {
-    "tests": "71 passed",
+    "tests": "76 passed",
     "ruff": "PASS",
     "git_diff_check": "PASS",
     "fold_feature_samples": {
@@ -44,6 +46,7 @@
   "not_executed": [
     "TAIEX output-head training",
     "TX output-head training",
+    "joint TAIEX and TX eight-target output-head training",
     "three-fold model predictions and promotion gate",
     "new future holdout"
   ],
