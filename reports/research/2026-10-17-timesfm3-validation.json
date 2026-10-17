@@ -1,0 +1,718 @@
+{
+  "run_id": "20261017T104415-cf07864e",
+  "model": "google/timesfm-3.0-pytorch",
+  "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "official_code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "packages": {
+    "timesfm": "3.0.2",
+    "torch": "2.8.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "statsmodels": "0.14.6"
+  },
+  "config_hash": "76142c42d2df3c42aaff8147ca3b4cf9d02a39786ff88ea11e77c913dd160a2f",
+  "scope": "retrospective validation; NOT final-test acceptance",
+  "acceptance_passed": false,
+  "markets": {
+    "TAIEX": {
+      "market": "TAIEX",
+      "contract": null,
+      "dataset_checksum": "b1f7512d436519a79d079d02d67b2cbaf1c67af3290833d17ed4712ecd352e44",
+      "train_count": 148,
+      "validation_count": 40,
+      "validation_dates": [
+        "2025-10-01",
+        "2025-10-02",
+        "2025-10-03",
+        "2025-10-07",
+        "2025-10-08",
+        "2025-10-09",
+        "2025-10-13",
+        "2025-10-14",
+        "2025-10-15",
+        "2025-10-16",
+        "2025-10-17",
+        "2025-10-20",
+        "2025-10-21",
+        "2025-10-22",
+        "2025-10-23",
+        "2025-10-27",
+        "2025-10-28",
+        "2025-10-29",
+        "2025-10-30",
+        "2025-10-31",
+        "2025-11-03",
+        "2025-11-04",
+        "2025-11-05",
+        "2025-11-06",
+        "2025-11-07",
+        "2025-11-10",
+        "2025-11-11",
+        "2025-11-12",
+        "2025-11-13",
+        "2025-11-14",
+        "2025-11-17",
+        "2025-11-18",
+        "2025-11-19",
+        "2025-11-20",
+        "2025-11-21",
+        "2025-11-24",
+        "2025-11-25",
+        "2025-11-26",
+        "2025-11-27",
+        "2025-11-28"
+      ],
+      "locked_baseline": "zero_return",
+      "baseline_results": {
+        "zero_return": {
+          "open": {
+            "mae_points": 197.4204999999999,
+            "rmse_points": 257.32113482961336,
+            "mae_bps": 72.69373866987198
+          },
+          "high": {
+            "mae_points": 332.4645000000002,
+            "rmse_points": 384.92927834863406,
+            "mae_bps": 122.36486668849038
+          },
+          "low": {
+            "mae_points": 246.41450000000015,
+            "rmse_points": 344.61241057164534,
+            "mae_bps": 89.98201327162714
+          },
+          "close": {
+            "mae_points": 279.4950000000002,
+            "rmse_points": 356.48605339480014,
+            "mae_bps": 102.65592776338121
+          },
+          "n": 40
+        },
+        "historical_shape_20": {
+          "open": {
+            "mae_points": 190.0721817534587,
+            "rmse_points": 254.9449086239529,
+            "mae_bps": 69.76565076013496
+          },
+          "high": {
+            "mae_points": 258.97511946583575,
+            "rmse_points": 317.5822568110258,
+            "mae_bps": 95.22266469798258
+          },
+          "low": {
+            "mae_points": 256.93310316040777,
+            "rmse_points": 354.8390882603384,
+            "mae_bps": 93.72457482835114
+          },
+          "close": {
+            "mae_points": 292.1132617227892,
+            "rmse_points": 363.71412867406264,
+            "mae_bps": 106.90754994066837
+          },
+          "n": 40
+        },
+        "arima_1_0_0": {
+          "open": {
+            "mae_points": 188.00811934068696,
+            "rmse_points": 243.5545261688395,
+            "mae_bps": 69.10208618292876
+          },
+          "high": {
+            "mae_points": 256.2216039619094,
+            "rmse_points": 310.8535146372663,
+            "mae_bps": 94.31415841458673
+          },
+          "low": {
+            "mae_points": 252.51425187638142,
+            "rmse_points": 338.52005653682596,
+            "mae_bps": 92.33575086841097
+          },
+          "close": {
+            "mae_points": 286.3417613402938,
+            "rmse_points": 357.3164218875868,
+            "mae_bps": 105.09591658314335
+          },
+          "n": 40
+        }
+      },
+      "baseline_failures": {},
+      "best_eligible_timesfm": "TAIEX-trial0-gbud",
+      "best_eligible_metrics": {
+        "open": {
+          "mae_points": 198.10259080690375,
+          "rmse_points": 249.47877102565275,
+          "mae_bps": 72.73713107663465
+        },
+        "high": {
+          "mae_points": 266.4680852370523,
+          "rmse_points": 318.3559631548872,
+          "mae_bps": 97.96716938142052
+        },
+        "low": {
+          "mae_points": 254.21800594145725,
+          "rmse_points": 344.63327403821734,
+          "mae_bps": 92.8093908106216
+        },
+        "close": {
+          "mae_points": 284.0320611266969,
+          "rmse_points": 361.8171603224681,
+          "mae_bps": 104.1102288083703
+        },
+        "n": 40
+      },
+      "default_candidate": "zero_return",
+      "validation_point_gate_pass": false,
+      "acceptance_blockers": [
+        "final test not evaluated",
+        "historical availability not verified",
+        "independent trading calendar not verified",
+        "80% OHLC coverage not calibrated",
+        "night-regression and ARIMAX not evaluated",
+        "live feed stale",
+        "V0 integration not verified"
+      ],
+      "elapsed_seconds": 81.10756552699968,
+      "peak_process_rss_mib": 2803.52734375,
+      "trials": [
+        {
+          "name": "TAIEX-trial0-gbud",
+          "representation": "gbud",
+          "learning_rate": 1e-05,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 0,
+          "steps": 38,
+          "max_gradient": 0.46848300099372864,
+          "last_parameter_delta_l2": 0.010310636805478031,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 198.10259080690375,
+              "rmse_points": 249.47877102565275,
+              "mae_bps": 72.73713107663465
+            },
+            "high": {
+              "mae_points": 266.4680852370523,
+              "rmse_points": 318.3559631548872,
+              "mae_bps": 97.96716938142052
+            },
+            "low": {
+              "mae_points": 254.21800594145725,
+              "rmse_points": 344.63327403821734,
+              "mae_bps": 92.8093908106216
+            },
+            "close": {
+              "mae_points": 284.0320611266969,
+              "rmse_points": 361.8171603224681,
+              "mae_bps": 104.1102288083703
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": true,
+          "validation_point_gate_pass": false
+        },
+        {
+          "name": "TAIEX-trial1-gbud",
+          "representation": "gbud",
+          "learning_rate": 0.0001,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 0,
+          "steps": 38,
+          "max_gradient": 0.45022568106651306,
+          "last_parameter_delta_l2": 0.09209699013035935,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 198.10259080690375,
+              "rmse_points": 249.47877102565275,
+              "mae_bps": 72.73713107663465
+            },
+            "high": {
+              "mae_points": 266.4680852370523,
+              "rmse_points": 318.3559631548872,
+              "mae_bps": 97.96716938142052
+            },
+            "low": {
+              "mae_points": 254.21800594145725,
+              "rmse_points": 344.63327403821734,
+              "mae_bps": 92.8093908106216
+            },
+            "close": {
+              "mae_points": 284.0320611266969,
+              "rmse_points": 361.8171603224681,
+              "mae_bps": 104.1102288083703
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": true,
+          "validation_point_gate_pass": false
+        },
+        {
+          "name": "TAIEX-trial2-relative",
+          "representation": "relative",
+          "learning_rate": 0.0001,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 3,
+          "steps": 57,
+          "max_gradient": 0.8769145607948303,
+          "last_parameter_delta_l2": 0.1237196617698465,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 197.13717765024867,
+              "rmse_points": 248.33721476236693,
+              "mae_bps": 72.32024794787051
+            },
+            "high": {
+              "mae_points": 241.12881250483989,
+              "rmse_points": 310.52240658468025,
+              "mae_bps": 88.33899037915982
+            },
+            "low": {
+              "mae_points": 257.577527535305,
+              "rmse_points": 343.5196533532704,
+              "mae_bps": 94.25146687671756
+            },
+            "close": {
+              "mae_points": 291.65482585333274,
+              "rmse_points": 371.2494063962149,
+              "mae_bps": 106.8762317335719
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": true,
+          "validation_point_gate_pass": false
+        }
+      ]
+    },
+    "TX": {
+      "market": "TX",
+      "contract": "TX202603",
+      "dataset_checksum": "380ee4a900ba0eb8ee370869f4de838daa7362c96509776a564c5d6c0d0c5413",
+      "train_count": 29,
+      "validation_count": 40,
+      "validation_dates": [
+        "2025-10-01",
+        "2025-10-02",
+        "2025-10-03",
+        "2025-10-07",
+        "2025-10-08",
+        "2025-10-09",
+        "2025-10-13",
+        "2025-10-14",
+        "2025-10-15",
+        "2025-10-16",
+        "2025-10-17",
+        "2025-10-20",
+        "2025-10-21",
+        "2025-10-22",
+        "2025-10-23",
+        "2025-10-27",
+        "2025-10-28",
+        "2025-10-29",
+        "2025-10-30",
+        "2025-10-31",
+        "2025-11-03",
+        "2025-11-04",
+        "2025-11-05",
+        "2025-11-06",
+        "2025-11-07",
+        "2025-11-10",
+        "2025-11-11",
+        "2025-11-12",
+        "2025-11-13",
+        "2025-11-14",
+        "2025-11-17",
+        "2025-11-18",
+        "2025-11-19",
+        "2025-11-20",
+        "2025-11-21",
+        "2025-11-24",
+        "2025-11-25",
+        "2025-11-26",
+        "2025-11-27",
+        "2025-11-28"
+      ],
+      "locked_baseline": "zero_return",
+      "baseline_results": {
+        "zero_return": {
+          "open": {
+            "mae_points": 265.075,
+            "rmse_points": 331.3336309522473,
+            "mae_bps": 96.9393450327333
+          },
+          "high": {
+            "mae_points": 311.075,
+            "rmse_points": 367.01399837063434,
+            "mae_bps": 114.10668693108155
+          },
+          "low": {
+            "mae_points": 271.85,
+            "rmse_points": 360.5347417378802,
+            "mae_bps": 99.00901375716708
+          },
+          "close": {
+            "mae_points": 297.3,
+            "rmse_points": 370.40113390755164,
+            "mae_bps": 108.75766537345035
+          },
+          "n": 40
+        },
+        "historical_shape_20": {
+          "open": {
+            "mae_points": 246.28716494746604,
+            "rmse_points": 337.1678752260169,
+            "mae_bps": 89.72504956027402
+          },
+          "high": {
+            "mae_points": 280.7547369936331,
+            "rmse_points": 336.95431474262256,
+            "mae_bps": 102.50112202934915
+          },
+          "low": {
+            "mae_points": 296.740552894449,
+            "rmse_points": 394.34168870353096,
+            "mae_bps": 107.69027341101449
+          },
+          "close": {
+            "mae_points": 324.3685652494261,
+            "rmse_points": 386.01556093755096,
+            "mae_bps": 118.04080527004012
+          },
+          "n": 40
+        },
+        "arima_1_0_0": {
+          "open": {
+            "mae_points": 240.5886917709172,
+            "rmse_points": 320.04853630601735,
+            "mae_bps": 87.95721995449898
+          },
+          "high": {
+            "mae_points": 266.1777410137073,
+            "rmse_points": 323.928984350635,
+            "mae_bps": 97.60193744622538
+          },
+          "low": {
+            "mae_points": 286.2492267251916,
+            "rmse_points": 365.9201016564158,
+            "mae_bps": 104.37717947642147
+          },
+          "close": {
+            "mae_points": 303.80076748803685,
+            "rmse_points": 368.20418015654457,
+            "mae_bps": 111.04633807331079
+          },
+          "n": 40
+        }
+      },
+      "baseline_failures": {},
+      "best_eligible_timesfm": "TX-trial2-relative",
+      "best_eligible_metrics": {
+        "open": {
+          "mae_points": 260.7473952675995,
+          "rmse_points": 336.17088063252066,
+          "mae_bps": 95.05891865420251
+        },
+        "high": {
+          "mae_points": 285.05382979710123,
+          "rmse_points": 347.87885195009164,
+          "mae_bps": 103.998303814662
+        },
+        "low": {
+          "mae_points": 282.9965418474079,
+          "rmse_points": 369.9992510992735,
+          "mae_bps": 103.15785445050787
+        },
+        "close": {
+          "mae_points": 314.6797536516591,
+          "rmse_points": 394.0022970370815,
+          "mae_bps": 114.78307332840764
+        },
+        "n": 40
+      },
+      "default_candidate": "zero_return",
+      "validation_point_gate_pass": false,
+      "acceptance_blockers": [
+        "final test not evaluated",
+        "historical availability not verified",
+        "independent trading calendar not verified",
+        "80% OHLC coverage not calibrated",
+        "night-regression and ARIMAX not evaluated",
+        "live feed stale",
+        "V0 integration not verified"
+      ],
+      "elapsed_seconds": 39.982486058001086,
+      "peak_process_rss_mib": 2803.52734375,
+      "trials": [
+        {
+          "name": "TX-trial0-gbud",
+          "representation": "gbud",
+          "learning_rate": 1e-05,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 0,
+          "steps": 8,
+          "max_gradient": 0.5245922803878784,
+          "last_parameter_delta_l2": 0.004372538707159964,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 263.5160310600396,
+              "rmse_points": 345.5002525813116,
+              "mae_bps": 96.20341791529658
+            },
+            "high": {
+              "mae_points": 284.90570589690395,
+              "rmse_points": 349.88096677780123,
+              "mae_bps": 104.31139811956459
+            },
+            "low": {
+              "mae_points": 290.07819601309996,
+              "rmse_points": 384.5292733206684,
+              "mae_bps": 105.59491786014273
+            },
+            "close": {
+              "mae_points": 306.2319386912048,
+              "rmse_points": 385.44492437005766,
+              "mae_bps": 111.75089871739874
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": false,
+          "validation_point_gate_pass": false
+        },
+        {
+          "name": "TX-trial1-gbud",
+          "representation": "gbud",
+          "learning_rate": 0.0001,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 0,
+          "steps": 8,
+          "max_gradient": 0.5245922803878784,
+          "last_parameter_delta_l2": 0.03998570736267691,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 263.5160310600396,
+              "rmse_points": 345.5002525813116,
+              "mae_bps": 96.20341791529658
+            },
+            "high": {
+              "mae_points": 284.90570589690395,
+              "rmse_points": 349.88096677780123,
+              "mae_bps": 104.31139811956459
+            },
+            "low": {
+              "mae_points": 290.07819601309996,
+              "rmse_points": 384.5292733206684,
+              "mae_bps": 105.59491786014273
+            },
+            "close": {
+              "mae_points": 306.2319386912048,
+              "rmse_points": 385.44492437005766,
+              "mae_bps": 111.75089871739874
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": false,
+          "validation_point_gate_pass": false
+        },
+        {
+          "name": "TX-trial2-relative",
+          "representation": "relative",
+          "learning_rate": 0.0001,
+          "inference_parity": {
+            "official_vs_autograd_decode": "exact_equal",
+            "public_evaluator_max_abs_error": 0.0,
+            "shape": [
+              1,
+              4,
+              9
+            ],
+            "finite": true
+          },
+          "best_epoch": 3,
+          "steps": 12,
+          "max_gradient": 0.9531263709068298,
+          "last_parameter_delta_l2": 0.055857564193186646,
+          "checkpoint_readback": "exact_prediction_match",
+          "best_validation_metrics": {
+            "open": {
+              "mae_points": 260.7473952675995,
+              "rmse_points": 336.17088063252066,
+              "mae_bps": 95.05891865420251
+            },
+            "high": {
+              "mae_points": 285.05382979710123,
+              "rmse_points": 347.87885195009164,
+              "mae_bps": 103.998303814662
+            },
+            "low": {
+              "mae_points": 282.9965418474079,
+              "rmse_points": 369.9992510992735,
+              "mae_bps": 103.15785445050787
+            },
+            "close": {
+              "mae_points": 314.6797536516591,
+              "rmse_points": 394.0022970370815,
+              "mae_bps": 114.78307332840764
+            },
+            "n": 40
+          },
+          "selection_ohl_constraints_pass": true,
+          "validation_point_gate_pass": false
+        }
+      ]
+    }
+  },
+  "implementation_source_hashes": {
+    "src/tw_scenario/research/__init__.py": "aad762fca37c1be63b4cffcdfcae9ea3918f20dc7fb55aa08c73d74df254422e",
+    "src/tw_scenario/research/baselines.py": "ab211a0df1049852e212c79d877237b6f1d3386861b5dfb2d9cfb99d3625b2c5",
+    "src/tw_scenario/research/data.py": "bb4678e952206efda377be9736e919565c466ff0342fe43edf6f2f5625c04811",
+    "src/tw_scenario/research/experiment.py": "57b65dcb3c9febe2e2b50d022eb40777605e7e9d89d94058b0eb1aabf88d5e3d",
+    "src/tw_scenario/research/model.py": "6ffa4dd4d003040adbf778b006884221377ce2e5105e16a1f9869f81c7e93d36",
+    "src/tw_scenario/research/night.py": "d9ef760e9ecbf16b593bfc20349925835ae5205876ea2d2566adfa351140a929",
+    "src/tw_scenario/research/taifex.py": "1665397c8c1edbfd6f15a2e1c8b9f3d540ede94abbe6ec219e447de918ee9a88",
+    "src/tw_scenario/research/tej.py": "a9841aeae5743a3c1f55dacb289fee8f591768708f92a5a336576871562e98cf"
+  },
+  "validation_replay_and_uncertainty": {
+    "TAIEX": {
+      "checkpoint_replay": "matched",
+      "metrics": {
+        "open": {
+          "mae_points": 198.10259080690375,
+          "rmse_points": 249.47877102565275,
+          "mae_bps": 72.73713107663465
+        },
+        "high": {
+          "mae_points": 266.4680852370523,
+          "rmse_points": 318.3559631548872,
+          "mae_bps": 97.96716938142052
+        },
+        "low": {
+          "mae_points": 254.21800594145725,
+          "rmse_points": 344.63327403821734,
+          "mae_bps": 92.8093908106216
+        },
+        "close": {
+          "mae_points": 284.0320611266969,
+          "rmse_points": 361.8171603224681,
+          "mae_bps": 104.1102288083703
+        },
+        "n": 40
+      },
+      "best_epoch": 0,
+      "selected_model": "TAIEX-trial0-gbud",
+      "baseline": "zero_return",
+      "close_mae_ratio": 1.0162330672344646,
+      "moving_block_bootstrap": {
+        "block_observations": 5,
+        "replicates": 2000,
+        "seed": 1729,
+        "ratio_95ci": [
+          0.9274997326542442,
+          1.1213613133580687
+        ]
+      },
+      "rows": 40,
+      "final_test_evaluated": false
+    },
+    "TX": {
+      "checkpoint_replay": "matched",
+      "metrics": {
+        "open": {
+          "mae_points": 260.7473952675995,
+          "rmse_points": 336.17088063252066,
+          "mae_bps": 95.05891865420251
+        },
+        "high": {
+          "mae_points": 285.05382979710123,
+          "rmse_points": 347.87885195009164,
+          "mae_bps": 103.998303814662
+        },
+        "low": {
+          "mae_points": 282.9965418474079,
+          "rmse_points": 369.9992510992735,
+          "mae_bps": 103.15785445050787
+        },
+        "close": {
+          "mae_points": 314.6797536516591,
+          "rmse_points": 394.0022970370815,
+          "mae_bps": 114.78307332840764
+        },
+        "n": 40
+      },
+      "best_epoch": 3,
+      "selected_model": "TX-trial2-relative",
+      "baseline": "zero_return",
+      "close_mae_ratio": 1.0584586399315812,
+      "moving_block_bootstrap": {
+        "block_observations": 5,
+        "replicates": 2000,
+        "seed": 1729,
+        "ratio_95ci": [
+          0.9856731659234873,
+          1.2043067595065624
+        ]
+      },
+      "rows": 40,
+      "final_test_evaluated": false
+    }
+  },
+  "night_phase": {
+    "status": "blocked_before_training",
+    "official_quote_cache_days": 51,
+    "expected_dates": 174,
+    "blocker": "official TAIFEX HTTP 429 persisted after bounded Retry-After backoff; bulk-download page timed out",
+    "partial_data_used_for_training": false,
+    "proxy_bypass": false
+  },
+  "formal_tej_permissions": {
+    "TWN/AFUTR": "PDB003",
+    "TWN/AFUTRSTD": "PDB003",
+    "TWN/AFUT_T1": "PDB003"
+  },
+  "previous_session_checkpoint_restoration": "not recovered; official base redownloaded and experiments rerun"
+}

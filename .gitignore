@@ -12,3 +12,7 @@ __pycache__/
 /data/raw/
 /data/processed/
 /reports/generated/
+
+# Local research packages and caches
+*.egg-info/
+/.cache/

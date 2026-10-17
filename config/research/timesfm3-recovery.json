@@ -1,0 +1,27 @@
+{
+  "experiment_version": "recovery-20261017-v1",
+  "purpose": "academic retrospective research; not production",
+  "seed": 1729,
+  "model": "google/timesfm-3.0-pytorch",
+  "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "timesfm_version": "3.0.2",
+  "context": 32,
+  "train_end": "2025-09-30",
+  "validation_start": "2025-10-01",
+  "validation_end": "2025-11-30",
+  "final_test_start": "2025-12-01",
+  "final_test_policy": "sealed; do not evaluate during development",
+  "batch_size": 8,
+  "max_epochs": 3,
+  "early_stop_epochs": 2,
+  "max_seconds": 900,
+  "max_non_improving_rounds": 3,
+  "trials": [
+    {"representation": "gbud", "learning_rate": 0.00001},
+    {"representation": "gbud", "learning_rate": 0.0001},
+    {"representation": "relative", "learning_rate": 0.0001}
+  ],
+  "selection": "lowest validation close MAE among models with each O/H/L <=1.05 times locked strongest baseline",
+  "acceptance": {"close_mae_ratio_max": 0.95, "ohl_mae_ratio_max": 1.05},
+  "limitations": ["trial data stale", "historical availability unverified", "no fixed rollover policy", "not a complete acceptance test"]
+}

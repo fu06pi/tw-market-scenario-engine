@@ -1,5 +1,7 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+> 2026-10-17 研究分支實測：TimesFM 3、TEJ 與完整驗證比較已重新建立，**尚未達標或接管正式流程**；見 [目前模型成果與重跑方式](docs/research/TIMESFM3_STATUS.md)。下方原架構文件及歷史紀錄保留。
+
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
 架構決策更新：2026-10-11。
 
