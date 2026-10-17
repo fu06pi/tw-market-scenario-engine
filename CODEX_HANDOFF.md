@@ -1,5 +1,9 @@
 # Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
+## 2026-10-18 模型優先執行目標
+
+以 [CURRENT_GOAL.md](CURRENT_GOAL.md) 為本階段可重播目標。先完成真實訓練 checkpoint、三折驗證與每日 OHLC 推論；模型交付前暫緩卡片、晨報排版、Sheet及排程。派送任務與 active 狀態不得視為訓練進度；需以日誌、參數更新、checkpoint與fold結果佐證。先獨立市場再比較聯合；已執行中的有效實驗先完成，不重啟。原 final 永久 FAIL，後續 V0 整合仍保留，但不得搶占本階段模型工作。
+
 更新：2026-10-16。Repository：`fu06pi/tw-market-scenario-engine`。分支：`feat/tej-ohlc-research`，起點 commit `b2984f5`。
 
 ## 不可改變的研究邊界
@@ -44,7 +48,7 @@
 ## 接續順序
 
 1. 優先執行新版TimesFM output-head-only研究。TAIEX、TX及JOINT八目標程式、三段expanding walk-forward與7.5%雙市場開發gate已完成；本機preflight因可用RAM低於3,072 MiB且free swap為0而阻擋，尚無新checkpoint或成績。2026-10-17已建立ChatGPT雲端訓練工作，雲端結果仍須回寫repo可重現artifact並通過相同gate。
-2. 先跑JOINT的`timesfm-head-walk-forward`，再跑TAIEX與TX獨立頭作相同資訊集對照；所有2026-10-08以前結果只作development，不得改稱新final。未通過雙市場gate時保留baseline預設並停止晨報呈現工作。
+2. 依CURRENT_GOAL先完成64日獨立市場三折實驗，再比較JOINT；已有有效實驗執行中先完成保存。所有2026-10-08以前結果只作development，不得改稱新final。未通過雙市場gate時保留baseline預設並停止晨報呈現工作。
 3. 模型鎖定後，才在安全位置設定具有staging Sheet最小權限的Google ADC；不得把JSON內容貼入對話或提交Git，且不得分享正式Sheet給該服務帳號。
 4. 交易日08:20–08:29手動執行`live-preopen`，驗證08:40前snapshot與staging readback；18:00後執行`live-postclose`並驗證同一forecast_id及A:F,O指紋。
 5. 手動完成至少一個genuine live staging E2E，才可重新啟用`ohlc-shadow`；再累積3–5個交易日genuine forward shadow。
