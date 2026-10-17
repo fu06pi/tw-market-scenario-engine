@@ -1,17 +1,27 @@
 # Codex project instructions
 
-## Current decision and scope — 2026-10-11
-Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TEJ-backed TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 historical fine-tuning and zero-shot variants against naive, night-session regression and ARIMA/ARIMAX baselines. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; inspect the real interface before mapping it to a module.
+## 2026-10-18 模型優先執行目標
 
-The user confirms possessing TEJ API access. This supersedes “TEJ deferred” in older documents. Actual credentials, table permissions, coverage and quotas still require verification. Do not invent connections, downloads, training or accuracy.
+以 [CURRENT_GOAL.md](CURRENT_GOAL.md) 為本階段可重播目標。先完成真實訓練 checkpoint、三折驗證與每日 OHLC 推論；模型交付前暫緩卡片、晨報排版、Sheet及排程。派送任務與 active 狀態不得視為訓練進度；需以日誌、參數更新、checkpoint與fold結果佐證。先獨立市場再比較聯合；已執行中的有效實驗先完成，不重啟。原 final 永久 FAIL，後續 V0 整合仍保留，但不得搶占本階段模型工作。
+
+## Current decision and scope — 2026-10-13
+Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 zero-shot variants and a separately labelled custom output-head-only training path against stable naive, night-session regression and ARIMA/ARIMAX baselines. The custom path freezes the TimesFM backbone and is never described as the official fine-tuning API. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; the actual interface is the external ChatGPT tasks `財經事件晨報` and `台股收盤預測檢討`, plus their existing Google Sheet.
+
+The verified source order is now FinMind as the primary resumable API, official TWSE/TAIFEX downloads as authoritative reconciliation evidence, and TEJ as a 2025 overlap cross-check. The user authorized this change after TEJ trial coverage proved insufficient for the requested 2018+ study. Do not discard TEJ evidence or relabel FinMind/official data as TEJ.
+
+Verified constraints as of 2026-10-13:
+- `TEJ_API_KEY` works, but the account returns `TRAIL/TAPRCD` TAIEX and explicit-contract `TRAIL/TAFUTR` rows only for 2025. The observed account limits are 500 requests/day and 50,000 rows/day.
+- FinMind live probes return `TaiwanStockPrice`/`TAIEX` and `TaiwanFuturesDaily`/`TX` in both 2018 and 2025. TX uses `position` for day and `after_market` for night and contains explicit contract month, OHLC, volume, settlement and open interest. A token is optional; never print or persist `FINMIND_TOKEN`.
+- FinMind Free is non-commercial, requires attribution, forbids raw-data redistribution, and documents 300 requests/hour without a token or 600/hour with a registered token. The repository's Apache license covers its code, not broader data-service rights.
+- TimesFM 3.0 code is pinned to `e51928e27119cb17bebc005be2696b75e0a9e688`; weights are pinned to `google/timesfm-3.0-pytorch@43046b85ec22d584a13f8098c2ed39c889e129c2`. Self-hosted weights use the TimesFM non-commercial license. Keep the project academic and `production_switch=false`.
 
 Read README.md, CODEX_HANDOFF.md and PROJECT_STATUS.md first. The 2026-10-07 architecture remains design background; older isolation/scenario documents do not prohibit the now-authorized V1-to-V0 integration. Resolve conflicts using this current user decision. Preserve old records and live operation during development.
 
 ## Data and prediction contract
 - Timezone Asia/Taipei; trading-day cutoff 08:30, numerical persistence before 08:40. Never reuse legacy 08:50 for a TX pre-open forecast. Late output is a failure/late sample, not an on-time prediction.
 - Forecast same-day daytime O/H/L/C for official TAIEX and an explicitly selected TX contract. Separate day/night sessions, last trade/settlement, contract month and exchange trading date.
-- Read TEJ_API_KEY from environment. Never print credentials or include them in Git, logs, snapshots or reports. When absent, continue independent engineering and explain safe environment setup; do not request a key in chat.
-- Inspect available TEJ tables, fields, quotas, publication timing and history. Aim for 2018 onward, but use actual common coverage. Use verified official TWSE/TAIFEX or CSV where necessary; log differences.
+- Read `FINMIND_TOKEN` and `TEJ_API_KEY` from the environment or a private ignored `.env`. Never print credentials or include them in Git, logs, snapshots or reports. Both providers must support credential-free engineering and cached/offline verification.
+- Use bounded, immutable, incrementally cached FinMind requests and record API status/schema. Use official TWSE/TAIFEX records to reconcile values and source definitions; use TEJ only over its observed authorized overlap. Aim for 2018 onward, but use actual common coverage and report source differences.
 - Preserve provenance, raw cache, fetched_at, available_at and availability_basis. Current download time is not historical availability evidence.
 - Reject/report missing, duplicate, invalid-scale and incoherent OHLC data. Do not fill missing days with zero returns or fabricate holiday bars.
 - Calculate returns within the same TX contract and use its own previous daytime close. Fix rollover rules before final testing; avoid future-adjusted continuous series leakage.
@@ -20,7 +30,7 @@ Read README.md, CODEX_HANDOFF.md and PROJECT_STATUS.md first. The 2026-10-07 arc
 - Compare direct relative OHLC plus constraints with g=ln(O/P), b=ln(C/O), u=ln(H/max(O,C)), d=ln(min(O,C)/L). Validate reversible nonnegative transforms for u,d and positive coherent reconstruction.
 
 ## Model implementation
-- Verify official TimesFM 3.0 code, weights, license, interfaces and training support before use. Pin package versions, code commit and weight revision. Do not substitute 2.5 tutorials or silently use another version.
+- Verify official TimesFM 3.0 code, weights, license, interfaces and training support before use. Pin package versions, code commit and weight revision. Do not substitute 2.5 tutorials or silently use another version. The verified 3.0 high-level model is inference-only; a custom output-head gradient smoke is not an official fine-tuning API and must not be reported as one.
 - Establish zero-shot inference before fine-tuning. Fine-tuning requires actual parameter updates through verified forward/loss/gradient paths; tuning windows or residual calibration is not fine-tuning.
 - If no official fine-tuning interface exists, validate any custom training path with a small gradient/update/checkpoint test. Report unavailable capabilities honestly.
 - Compare naive/volatility, night regression, ARIMA/ARIMAX, TimesFM historical zero-shot, multivariate zero-shot and historical fine-tuning. First independent markets, then joint models. Match dates, targets, cutoff and information sets.
@@ -36,6 +46,8 @@ Read README.md, CODEX_HANDOFF.md and PROJECT_STATUS.md first. The 2026-10-07 arc
 - Target 80% marginal interval coverage 75–85%; also compare interval score and width. Marginal quantiles cannot be directly combined into OHLC joint quantiles. Validate reconstruction, dependence and calibration.
 - Use time-block uncertainty estimates and annual/volatility/rollover/event breakdowns. Pretraining overlap makes historical results retrospective; add fixed-version genuine pre-open forward evidence.
 - Early stop and retain validation-best checkpoint. Stop after three successive rounds without validation improvement or when budget is exhausted; report best candidate, failure to meet targets and bottlenecks. Keep the strongest baseline as default candidate when no model clears the gate.
+- The failed 2025-10-09 through 2026-10-08 final remains permanently closed. A redesign informed by it may treat all data through 2026-10-08 as development-only, but must use expanding folds, a buffered 7.5% close-MAE promotion gate and a new future holdout before any new acceptance claim.
+- Model work has priority over cards, report styling and schedule changes. Do not resume shadow scheduling until the redesigned model is locked and a manual genuine live staging day passes.
 - Accuracy is a research target, never a guaranteed outcome or a claim of trading profitability.
 
 ## Narrative, snapshots and migration
@@ -50,6 +62,8 @@ Read README.md, CODEX_HANDOFF.md and PROJECT_STATUS.md first. The 2026-10-07 arc
 
 ## Engineering and delivery
 Use the existing Python package and pyproject.toml. Run existing tests before code changes and meaningful checks for cutoff, night-session dates, same-contract returns, rollovers, OHLC coherence, chronological isolation, snapshot/narrative consistency and failure handling. For documentation-only changes, review links/contracts and avoid adding implementation-mirroring tests.
+
+The first official-data collection produced dataset `fa3b3c0e5ddecb386b51446f0758efdff715e5b09d66ddcbe3c384b85e5be19e`, but it is rejected for research: a parser treated official `settlement=0` as a positive price validation error, dropping TX for 2018-2025 and most of 2026. Its DQ result is `FAIL` with 4,226 missing expected rows. Do not use that dataset for model claims. Also fix the weekend night-session end time (Friday 15:00 to Saturday 05:00, attributed to Monday trading date), empty/observed-only calendar false passes, calibration-label availability, low-coverage model selection, and dirty/untracked code identity before running selection.
 
 Keep credentials, full licensed datasets and large weights out of Git. Label fixtures synthetic. Respect verified code/weight/data licenses and keep the work academic; do not deploy a trading service automatically.
 

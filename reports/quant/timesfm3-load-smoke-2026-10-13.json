@@ -1,0 +1,35 @@
+{
+  "status": "LOADED_PINNED_WEIGHTS",
+  "loaded_at": "2026-10-13 22:36:42.504901+08:00",
+  "elapsed_seconds": 132.3558807950467,
+  "before": {
+    "status": "READY_TO_LOAD",
+    "available_ram_mb": 4669,
+    "swap_free_mb": 0,
+    "disk_free_mb": 128435,
+    "timesfm3_installed": true,
+    "torch_installed": true,
+    "device": "cpu",
+    "per_core_batch_size": 1
+  },
+  "after": {
+    "status": "READY_TO_LOAD",
+    "available_ram_mb": 3316,
+    "swap_free_mb": 0,
+    "disk_free_mb": 127164,
+    "timesfm3_installed": true,
+    "torch_installed": true,
+    "device": "cpu",
+    "per_core_batch_size": 1
+  },
+  "provenance": {
+    "package_version": "3.0.2",
+    "direct_url": "https://github.com/google-research/timesfm.git",
+    "vcs_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+    "version_matches": true,
+    "commit_matches": true
+  },
+  "forecaster_class": "timesfm3.torch.timesfm3_forecaster.TimesFM3Forecaster",
+  "max_rss_mb": 2796.0390625,
+  "prediction_run": false
+}
