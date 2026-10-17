@@ -1,21 +1,51 @@
-# Current `/goal` prompt
+# Current /goal prompt — 完成 TimesFM 3 台股 OHLC 量化模型
 
-Updated 2026-10-16 from verified execution evidence. This file is the replayable project goal because the Codex goal API cannot replace the text of an unfinished goal.
+更新：2026-10-18。依使用者確認的模型優先計畫修訂。本檔是可重播的專案工作目標；目前工具無法改寫尚未完成的 /goal objective，不得將舊目標標成完成來繞過限制。
 
-Use the existing `fu06pi/tw-market-scenario-engine` V1 to deliver a reproducible, backtestable, daily TAIEX/TX daytime OHLC research system and reconnect its frozen output to the existing V0/V01 morning-report and post-close-review flow.
+## 本階段目標
 
-Use FinMind (`TaiwanStockPrice` with `data_id=TAIEX`, and `TaiwanFuturesDaily` with `data_id=TX`) as the primary bounded incremental API. Reconcile it day by day against official TWSE/TAIFEX files and retain TEJ's actually authorized 2025 overlap as an independent cross-check. Preserve source, request, content hash, fetched time, assumed historical availability, trading date, session and explicit TX contract. Never log `FINMIND_TOKEN` or `TEJ_API_KEY`, redistribute raw licensed data, or infer point-in-time verification from today's download time.
+在 fu06pi/tw-market-scenario-engine 既有 V1 與 feat/tej-ohlc-research 分支內，完成可重現、可回測、可每日推論的 TAIEX／指定 TX 合約 OHLC 量化模型。本階段唯一優先目標是真實訓練 checkpoint、完整驗證結果與可執行推論。晨報卡片、文字排版、Google Sheet、排程及正式切換全部延後。原始 V0/V01 晨報與復盤整合仍是後續整體交付，不得因此宣稱整個專案已完成。
 
-Before model selection, fix and test the known blockers: official zero settlement values must be missing rather than invalid prices; `after_market` belongs to the next exchange trading day while its physical weekend span ends on the next calendar morning; calendar and requested-range gaps must not pass silently; rollover uses the predeclared five-exchange-session rule; TX references the previous daytime close of the same contract; residual calibration uses only labels published by that forecast cutoff; model selection requires comparable predeclared coverage; and experiment identity includes dirty/untracked source content.
+## 執行方式
 
-Freeze the split at train start 2018-01-01, validation start 2024-10-09 and one-shot final test 2025-10-09 through 2026-10-08. Compare relative-OHLC and GBUD representations using zero-return/historical-range, night regression and ARIMA/ARIMAX baselines first. Lock each market's strongest sufficiently covered validation baseline before opening the final test. Preserve every expected, successful and failed day and report point/bp MAE, RMSE, gap/close-return/range errors, fixed-5bp direction confusion matrices, marginal 80% coverage/width/interval score and time-block bootstrap uncertainty.
+- 開始先核對本機、GitHub 與雲端實際程式、資料及實驗狀態，整合已有修復，避免重複工作或覆蓋他人修改。
+- 自行完成可逆工程修復、測試、提交及研究分支同步，不因例行工程選擇反覆要求許可。
+- 訓練使用已有可用雲端；先核實硬體與實際執行能力，不購買算力，不降低記憶體安全門檻。
+- 任務建立、訊息派送、對話 active、工程測試通過都不算訓練成果。以執行日誌、參數更新、checkpoint、已完成 fold 與驗證數字佐證進度。
+- 不以「已交給雲端」結束實作。持續推進到本階段交付完成、既定預算耗盡，或提出已核實且無法自行排除的外部阻擋。
 
-Then run TimesFM 3.0 with code commit `e51928e27119cb17bebc005be2696b75e0a9e688` and weight revision `43046b85ec22d584a13f8098c2ed39c889e129c2`, CPU batch one, after a memory/runtime probe. Distinguish zero-shot univariate, zero-shot multivariate and any custom output-head gradient smoke. Do not call the latter official fine-tuning, do not use 2.5 examples as 3.0 evidence, and stop after the fixed budget or three no-gain rounds. Historical performance may overlap pretraining and must be labelled retrospective.
+## 必須依序完成
 
-Success requires both TAIEX and TX final-test close MAE to improve at least 5% over their locked baseline, no O/H/L MAE to worsen over 5%, and useful nominal-80% intervals with 75%-85% coverage rather than excessive width. If the gate fails, deliver the best baseline, best candidate, full experiments and reasons without retuning the final test or hiding failures.
+1. 解除樣本阻擋：區分暖機不足、資料缺漏、官方無夜盤與程式錯誤，保存全部預定日期及原因。可排除不可用訓練樣本，不能刪除驗證日期或吞掉未知例外。審計須在 optimizer 執行前持久保存，包含 early-stop 集與最低可用樣本檢查。
+2. 驗證真實訓練路徑：固定 TimesFM 3 程式與權重，核對 forward、遮罩、分位數、梯度及預測期已知夜盤特徵的作用。完成小批次參數更新、checkpoint 保存與重載。明確標示為自訂 output-head 訓練，凍結 backbone。
+3. 完成第一個完整實驗：使用 config/quant/timesfm_output_head_short.json 的 64 交易日候選，完成三折 expanding walk-forward，先獨立市場再比較聯合八目標。已有有效實驗執行中則先完成保存，不因新指令反覆重啟。
+4. 按驗證證據改善：依序比較 96／128 日、特徵組合、GBUD／相對 OHLC、因果基準殘差修正及區間校準。每輪只改一類問題，完成一個候選再擴大搜尋。殘差必須來自當時可用資料產生的 walk-forward 基準；所有轉換與校準只用預測日前可用資料。
+5. 完成推論交付：保存最佳候選、設定、scaler、校準資訊、checkpoint hash；提供資料下載、訓練、回測及每日推論 CLI。輸出兩市場 OHLC、區間、合約、截止時間、資料品質及模型版本，保存不可回寫數字快照。
 
-Deliver a write-once two-instrument `OHLCForecastSnapshotV1`, append-only realizations/evaluations, deterministic narrative that quotes the exact snapshot numbers, marks intraday order/path as `待驗證情境假說`, rejects news published after 08:30, and never invents probability. Validate the existing A:P Sheet mapping through header fingerprints and a staging copy, perform morning and post-close write/readback, then shadow 3-5 trading days. Keep `production_switch=false`; do not alter production Sheet history or schedules until end-to-end evidence and license constraints permit a separately reviewed switch.
+## 資料與研究邊界
 
-Current evidence: TEJ authentication works but TAIEX/TX coverage is effectively 2025 only. The certified FinMind/official dataset covers 2018-01-01 through 2026-10-08 and passes retrospective DQ; the original parser-failed dataset remains preserved. Baseline selection/final and the single locked TimesFM final are complete. Overall acceptance is `FAIL`: TAIEX close MAE worsened 4.64% and TX improved only 0.45%; interval coverage also missed the lower bound. This final period is closed to tuning, so the locked strongest baselines remain the default. Post-hoc annual, fixed realized-range and TX rollover diagnostics are recorded without reopening selection; major-event stability remains unevaluated because no frozen point-in-time event calendar exists. The sealed historical models use the legacy five-feature set; the new development-only path adds prior published open interest and other causal state features, while verified overseas features remain pending. Locked-baseline body generation, freeze, V0 narrative, append-only review and a retrospective staging Sheet morning/post-close write/readback are complete. A single fail-closed live path is now implemented: pre-open capture must start 08:20–08:29, reconcile current TX night against TAIFEX, then forecast/freeze after 08:30 and write/read back staging A:F,O; post-close captures FinMind actuals, reconciles TWSE/TAIFEX, appends realizations/evaluations and writes/read backs only G:N,P. The writer rejects the production Sheet ID and uses ADC. This is implemented and covered by 76 tests, including composed pre-open/post-close flows, explicit rejection of legacy 08:50 cutoff or added probability fields, read-only staging preflight, stability grouping, output-head freezing, joint eight-target handling and development promotion gates. It is not yet genuine forward evidence: the current host has no Google ADC and no 08:40 live day has run. The verified external tasks `財經事件晨報`, `V1 台股劇本`, and `V1 台股收盤驗證` still use the legacy interface; their mapping and cutover gates are recorded in `docs/V1_V0_MIGRATION_CONTRACT.md`, but formal prompts and schedules remain unchanged. A separately named custom output-head gradient smoke passed its five mechanical evidence checks but is neither official TimesFM 3 fine-tuning nor a model candidate. Heartbeat `ohlc-shadow` is `PAUSED` and must remain paused until at least one manual genuine live staging E2E passes; only then may it collect three to five trading days of forward evidence. Production switching remains incomplete and `production_switch=false`. The machine-readable acceptance matrix is `reports/quant/acceptance-audit-2026-10-16.json`.
+- FinMind 為主、官方 TWSE／TAIFEX 核對、TEJ 保留授權 overlap；資料來源與歷史可用時間依據要留存。憑證及授權限制的原始資料不進 Git。
+- 交易日台北 08:30 截止資訊，08:40 前保存當日日盤預測；TX 依固定換月規則及同合約前收計算。日夜盤、收盤與結算分開；休市與缺漏不補成虛構 K 棒。
+- 64 日是主序列視窗。rolling 特徵若引用更早資料，揭露實際最早原始資料日期，不宣稱嚴格只使用三個月資料。
+- 固定 TimesFM code e51928e27119cb17bebc005be2696b75e0a9e688、weights google/timesfm-3.0-pytorch@43046b85ec22d584a13f8098c2ed39c889e129c2；遵守非商業限制，維持學術研究。
+- 舊 final（2025-10-09～2026-10-08）永久 FAIL；截至 2026-10-08 僅作新版開發資料，不能重新包裝為獨立驗收。
+- 開發晉級：兩市場各自對固定強基準 close MAE 改善至少 7.5%；O/H/L 惡化不超過 5%；多數 folds 改善；區塊 bootstrap 改善下界非負；80% 區間覆蓋 75%～85%；interval score 不劣；配對覆蓋至少 99%。
+- 比較鎖定相同日期與資訊集；報告八項 OHLC 點數／bp MAE、RMSE、跳空／收盤報酬／振幅誤差、方向混淆矩陣、區間寬度及全部失敗日期。兩市場可各選最佳獨立或聯合來源；聯合整體 PASS 必須兩市場都通過。
+- 新最終驗收用另行固定的未來 holdout，兩市場 close MAE 至少改善 5%，其餘原始驗收條件保留。開發 PASS 不等於最終 PASS 或交易獲利。
+- 先測速再執行，沿用既定預算（目前單次 7200 秒）；執行候選搜尋前記錄本輪總預算與累積用量，續跑不得藉新進程重置預算。連續三輪沒有驗證增益或預算耗盡即停止搜尋，完整交付原因，不製造 PASS。
 
-Model-first revision: the repository now implements pinned TimesFM 3 market-specific and joint eight-target output-head-only training paths with three-fold expanding development walk-forward. It preserves the legacy five-feature contract and adds a separate cached 27-feature causal contract per market using night structure, prior published OI, basis, roll/expiry/calendar and prior 5/20/60-session states. The custom loss combines GBUD robust point error, both markets' close-return error, pinball loss and crossing penalty; only `output_head` may be trainable. Promotion evaluates each market against its own stable baseline and requires both to pass 7.5% close-MAE improvement, majority-positive folds, nonnegative block-bootstrap lower bound, O/H/L noninferiority, interval-score/coverage and 99% paired coverage. All dates through 2026-10-08 are development-only after the old final failure. No new checkpoint or performance claim exists yet: the 2026-10-16 local preflight recorded `BLOCKED_INSUFFICIENT_MEMORY` with 2,762 MiB available RAM and no free swap versus the frozen 3,072 MiB load threshold. A ChatGPT cloud training task was created on 2026-10-17, but its results remain unverified until reproducible artifacts return and pass the same gate. Reporting/card work and all schedules remain deferred.
+## 完成條件與回報
+
+本階段交付必須具備：
+- 真實訓練產生、可重載的最佳 checkpoint。
+- 完整三折驗證、基準比較、全部失敗日期與明確 PASS／FAIL。
+- checkpoint 驅動的雙市場每日 OHLC 推論與凍結快照。
+- 重現命令、資料／程式／模型版本、實驗紀錄、資源用量、測試及研究分支提交。
+
+每次進度只說明實際完成項目、證據位置、目前結果及正在執行步驟。區分「工程完成」「訓練完成」「開發達標」「最終達標」。未達門檻仍交付最佳候選與穩定基準；若根本未產生 checkpoint，標示訓練未完成與阻擋，不能稱本階段完成。模型交付前不轉做晨報呈現或排程；production_switch=false。
+
+## 既有證據入口
+
+- 原 final 與歷史成績見 PROJECT_STATUS.md、reports/quant/research-summary-final-2026-10-14.json。
+- 真實三折樣本重建見 reports/quant/local-training-materialization-audit-2026-10-17.json：可用 271／287／303，各折 49 個不可用日期留痕。這是樣本準備證據，不是訓練成果。
+- 短視窗設定已版本化；不得以設定存在推論實驗已完成。雲端狀態必須查驗最新日誌與 artifacts。
