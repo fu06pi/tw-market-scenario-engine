@@ -1,5 +1,9 @@
 # Codex project instructions
 
+## 2026-10-18 模型優先執行目標
+
+以 [CURRENT_GOAL.md](CURRENT_GOAL.md) 為本階段可重播目標。先完成真實訓練 checkpoint、三折驗證與每日 OHLC 推論；模型交付前暫緩卡片、晨報排版、Sheet及排程。派送任務與 active 狀態不得視為訓練進度；需以日誌、參數更新、checkpoint與fold結果佐證。先獨立市場再比較聯合；已執行中的有效實驗先完成，不重啟。原 final 永久 FAIL，後續 V0 整合仍保留，但不得搶占本階段模型工作。
+
 ## Current decision and scope — 2026-10-13
 Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 zero-shot variants and a separately labelled custom output-head-only training path against stable naive, night-session regression and ARIMA/ARIMAX baselines. The custom path freezes the TimesFM backbone and is never described as the official fine-tuning API. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; the actual interface is the external ChatGPT tasks `財經事件晨報` and `台股收盤預測檢討`, plus their existing Google Sheet.
 
