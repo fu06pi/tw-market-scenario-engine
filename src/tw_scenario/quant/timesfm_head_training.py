@@ -185,6 +185,67 @@ def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadS
     return samples
 
 
+def audited_head_samples(data, instrument: str, days: list[date], context: int):
+    """Preserve every requested day while excluding unavailable optimization inputs.
+
+    Each builder still requires its full contiguous, as-of history. No missing
+    history is imputed, compressed, or replaced with another requested date.
+    ValueError denotes unavailable/invalid data; unexpected code errors propagate.
+    Evaluation continues to use the separate all-date prediction loop.
+    """
+    if instrument not in {"TAIEX", "TX", "JOINT"}:
+        raise ValueError("instrument must be TAIEX, TX, or JOINT")
+    samples, rows = [], []
+    for day in days:
+        try:
+            sample = (
+                build_joint_head_samples(data, [day], context)[0]
+                if instrument == "JOINT"
+                else build_head_samples(data, instrument, [day], context)[0]
+            )
+        except ValueError as exc:
+            rows.append({
+                "date": str(day), "status": "FAILED",
+                "error_type": type(exc).__name__, "error": str(exc),
+            })
+        else:
+            samples.append(sample)
+            rows.append({"date": str(day), "status": "OK"})
+    return samples, {
+        "requested": len(days), "usable": len(samples),
+        "failed": len(days) - len(samples), "rows": rows,
+    }
+
+
+def _persist_sample_audit(path: Path, identity: dict, training: dict, early_stop: dict):
+    """Persist data exclusions before any optimizer step, including empty splits."""
+    audit = {
+        "schema_version": "timesfm3-head-sample-audit-v1",
+        "identity_hash": digest(identity),
+        "instrument": identity["instrument"],
+        "policy": "audited_optimization_exclusions_no_imputation_no_gap_compression",
+        "training": training,
+        "early_stop": early_stop,
+        "validation_dates_filtered": False,
+    }
+    if path.exists():
+        if json.loads(path.read_text(encoding="utf-8")) != audit:
+            raise ValueError(f"sample audit changed during resume: {path}")
+    else:
+        write_once(path, audit)
+    if not training["usable"] or not early_stop["usable"]:
+        raise ValueError(f"no usable training or early-stop samples; audit: {path}")
+    return {
+        "path": str(path), "sha256": _sha256(path),
+        "training_requested": training["requested"],
+        "training_usable": training["usable"],
+        "training_failed": training["failed"],
+        "early_stop_requested": early_stop["requested"],
+        "early_stop_usable": early_stop["usable"],
+        "early_stop_failed": early_stop["failed"],
+    }
+
+
 def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.ndarray):
     import torch
 
@@ -669,19 +730,11 @@ def run_output_head_training(
     if stride < 1:
         raise ValueError("training_stride must be positive")
     if instrument == "JOINT":
-        train_samples = build_joint_head_samples(data, training_days[::stride], context)
-        early_stop_samples = build_joint_head_samples(data, early_stop_days, context)
         feature_names = {
             market: [f"{market.lower()}__{name}" for name in data.research_feature_names()]
             for market in ("TAIEX", "TX")
         }
     else:
-        train_samples = build_head_samples(
-            data, instrument, training_days[::stride], context
-        )
-        early_stop_samples = build_head_samples(
-            data, instrument, early_stop_days, context
-        )
         feature_names = data.research_feature_names()
     identity = {
         "name": "custom_timesfm3_output_head_training",
@@ -691,8 +744,9 @@ def run_output_head_training(
         "code_version": _git_state(config_path.parent.parent.parent),
         "timesfm_code_commit": CODE_COMMIT,
         "timesfm_weight_revision": WEIGHT_REVISION,
-        "train_end": str(train_samples[-1].day),
-        "early_stop_split": [str(early_stop_samples[0].day), str(early_stop_samples[-1].day)],
+        "train_end": str(training_days[::stride][-1]),
+        "early_stop_split": [str(early_stop_days[0]), str(early_stop_days[-1])],
+        "sample_policy": "audited_optimization_exclusions_v1",
         "feature_names": feature_names,
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
@@ -704,6 +758,15 @@ def run_output_head_training(
         return result_path
     experiment_dir.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
+    train_samples, training_audit = audited_head_samples(
+        data, instrument, training_days[::stride], context
+    )
+    early_stop_samples, early_stop_audit = audited_head_samples(
+        data, instrument, early_stop_days, context
+    )
+    sample_audit = _persist_sample_audit(
+        experiment_dir / "sample-audit.json", identity, training_audit, early_stop_audit
+    )
     forecaster = load_pinned_forecaster(cache_dir, local_files_only=True)
     model = forecaster.model
     original_head = {
@@ -738,6 +801,7 @@ def run_output_head_training(
             "weight_repo": WEIGHT_REPO,
             "train_samples": len(train_samples),
             "early_stop_samples": len(early_stop_samples),
+            "sample_audit": sample_audit,
             "training": training,
             "checkpoint": {
                 "path": str(checkpoint_path),
@@ -830,6 +894,7 @@ def run_output_head_walk_forward(
     spec = _spec_from_config(config, candidate_index)
     identity = {
         "name": "custom_timesfm3_output_head_expanding_walk_forward",
+        "sample_policy": "audited_optimization_exclusions_v1",
         "instrument": instrument,
         "dataset_id": dataset_id,
         "config_hash": digest(config),
@@ -914,20 +979,16 @@ def run_output_head_walk_forward(
                 raise ValueError("training_stride must be positive")
             training_days = usable_train_days[:-early_stop_sessions:stride]
             early_stop_days = usable_train_days[-early_stop_sessions:]
-            if instrument == "JOINT":
-                training_samples = build_joint_head_samples(
-                    data, training_days, spec.context
-                )
-                early_stop_samples = build_joint_head_samples(
-                    data, early_stop_days, spec.context
-                )
-            else:
-                training_samples = build_head_samples(
-                    data, instrument, training_days, spec.context
-                )
-                early_stop_samples = build_head_samples(
-                    data, instrument, early_stop_days, spec.context
-                )
+            training_samples, training_audit = audited_head_samples(
+                data, instrument, training_days, spec.context
+            )
+            early_stop_samples, early_stop_audit = audited_head_samples(
+                data, instrument, early_stop_days, spec.context
+            )
+            sample_audit = _persist_sample_audit(
+                experiment_dir / f"fold-{fold_index}-sample-audit.json",
+                {**identity, "fold": fold_index}, training_audit, early_stop_audit,
+            )
             training = train_output_head(
                 model,
                 training_samples,
@@ -1030,6 +1091,7 @@ def run_output_head_walk_forward(
                 }
             fold_summary = {
                 "fold": fold_index,
+                "sample_audit": sample_audit,
                 "train_split": [str(train_days[0]), str(train_days[-1])],
                 "validation_split": [str(validation_days[0]), str(validation_days[-1])],
                 "training": training,

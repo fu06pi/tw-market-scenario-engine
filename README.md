@@ -1,5 +1,14 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+2026-10-17 失敗樣本處理修正：`timesfm-head-train` 與
+`timesfm-head-walk-forward` 會在 optimizer 執行前保存不可變的 sample audit，
+逐日記錄 training／early-stop 的成功與失敗原因，只使用具完整連續資訊集的樣本。
+不補值、不跨缺口拼接、不移動 split 或縮短 context；驗證日期不刪除，失敗仍計入
+coverage。整個 training 或 early-stop 集合無可用樣本時，先保存 audit 再停止。
+續跑時 audit 必須完全一致；舊 cloud NO_GO 證據保留在
+[`reports/quant/cloud-2026-10-17`](reports/quant/cloud-2026-10-17/README.md)。
+這項工程修正本身不代表模型訓練完成或 development gate 通過。
+
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
 架構與實作狀態更新：2026-10-16。
 
