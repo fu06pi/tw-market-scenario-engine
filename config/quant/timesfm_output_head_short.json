@@ -69,5 +69,7 @@
   "old_final_policy": "development_only_never_independent_retest",
   "production_switch": false,
   "input_scope": "64-session primary target context; 96/128 controls. Historical rolling features require earlier raw observations. Not a strict three-calendar-month raw-data bound.",
-  "experiment_policy": "Run candidate 0 first; compare contexts on unchanged folds before optimizer search. Preserve original long-context configuration."
+  "experiment_policy": "Run candidate 0 first; compare contexts on unchanged folds before optimizer search. Preserve original long-context configuration.",
+  "search_budget_seconds": 21600,
+  "budget_policy": "6h cumulative elapsed wall time per output-root search ledger; 2h cumulative per candidate operation including resumes. Unclean exit charges reserved allowance; no cloud purchase."
 }
