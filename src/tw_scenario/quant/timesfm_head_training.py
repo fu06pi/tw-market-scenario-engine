@@ -116,6 +116,78 @@ def _feature_scaler(samples: list[HeadSample]) -> tuple[np.ndarray, np.ndarray]:
     return mean.astype(np.float32), scale.astype(np.float32)
 
 
+def build_head_inference_sample(data, instrument: str, day: date, context: int):
+    """Build pre-open inputs without accessing D's daytime labels."""
+    if instrument not in {"TAIEX", "TX", "JOINT"}:
+        raise ValueError("instrument must be TAIEX, TX, or JOINT")
+    markets = ("TAIEX", "TX") if instrument == "JOINT" else (instrument,)
+    histories, features, future, references, contracts, dates = [], [], [], [], {}, []
+    for market in markets:
+        history, past, used = data.research_history(market, day, "gbud", context, context)
+        histories.append(history)
+        features.append(past)
+        dates.append(used)
+        future.append(data.research_features(market, day))
+        references.append(float(data.reference(market, day).close))
+        contracts[market] = data.contract(market, day)
+    if any(used != dates[0] for used in dates):
+        raise ValueError("joint output-head histories are not aligned")
+    return HeadSample(
+        day=day,
+        history=np.column_stack(histories).astype(np.float32),
+        past_features=np.column_stack(features).astype(np.float32),
+        forecast_features=np.concatenate(future).astype(np.float32),
+        # Targets are absent at inference; NaNs prevent accidental training reuse.
+        target=np.full(4 * len(markets), np.nan, dtype=np.float32),
+        previous_close=tuple(references) if instrument == "JOINT" else references[0],
+        actual={},
+        contract=contracts if instrument == "JOINT" else contracts[instrument],
+    )
+
+
+def restore_output_head(model, checkpoint_path: Path, result: dict, *, forecast_day: date):
+    """Validate a standalone trained artifact before mutating the pinned model."""
+    import torch
+    from safetensors.torch import load_file
+
+    if result.get("schema_version") != "timesfm3-custom-output-head-training-v1":
+        raise ValueError("requires standalone trained output-head result")
+    identity = result["identity"]
+    if (identity.get("timesfm_code_commit") != CODE_COMMIT
+            or identity.get("timesfm_weight_revision") != WEIGHT_REVISION
+            or result.get("weight_repo") != WEIGHT_REPO):
+        raise ValueError("checkpoint model revision mismatch")
+    # Early-stop labels selected this head and must precede the forecast too.
+    last_label = max(identity["train_end"], identity["early_stop_split"][1])
+    if date.fromisoformat(last_label) >= forecast_day:
+        raise ValueError("checkpoint contains forecast-day or future labels")
+    if _sha256(checkpoint_path) != result["checkpoint"]["sha256"]:
+        raise ValueError("checkpoint hash mismatch")
+    training = result["training"]
+    if training.get("epochs_completed", 0) < 1:
+        raise ValueError("checkpoint has no completed training epoch")
+    mean = np.asarray(training["feature_mean"], dtype=np.float32)
+    scale = np.asarray(training["feature_scale"], dtype=np.float32)
+    names = identity["feature_names"]
+    feature_count = sum(len(values) for values in names.values()) if isinstance(names, dict) else len(names)
+    if (mean.shape != (feature_count,) or scale.shape != mean.shape
+            or not np.all(np.isfinite(mean)) or not np.all(np.isfinite(scale))
+            or np.any(scale <= 0)):
+        raise ValueError("invalid checkpoint feature scaler")
+    state = load_file(str(checkpoint_path), device="cpu")
+    expected = model.output_head.state_dict()
+    if state.keys() != expected.keys() or any(
+        state[name].shape != expected[name].shape
+        or state[name].dtype != expected[name].dtype
+        or not torch.isfinite(state[name]).all()
+        for name in expected
+    ):
+        raise ValueError("checkpoint head schema or finite-value mismatch")
+    model.output_head.load_state_dict(state, strict=True)
+    model.eval()
+    return mean, scale
+
+
 def build_head_samples(data, instrument: str, days: list[date], context: int) -> list[HeadSample]:
     """Materialize causal samples; failed dates remain explicit at the caller."""
     samples = []
