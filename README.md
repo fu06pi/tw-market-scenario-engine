@@ -200,3 +200,10 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra research --extra sheets tw-sc
 [Google Drive 原始文件備份](https://drive.google.com/file/d/1UPYML3IeAbG40iw5FREPCORo-RP8f-98/view?usp=drivesdk)。
 
 舊文件備份仍有效。自備份後已新增研究原型與 raw cache，但尚未切換正式排程。
+
+
+### Output-head 運算預算與續跑
+
+新一輪研究先凍結總上限 `search_budget_seconds=21600`（6小時），每個 candidate／market／train或walk-forward操作累積最多7200秒。優先完成64日 TAIEX、TX，再考慮JOINT；96／128日僅在剩餘預算容許時執行。這是已宣告的新輪次上限，不表示已花費6小時，也不抹除舊實驗成本。
+
+兩個訓練 CLI 共用 `--output-root/output-head-search-budget.json`。相同候選重啟沿用已花時間，程式版本變更不會替相同設定重置額度；所有設定與市場共用總額。不得刪除ledger或換output-root規避上限。記帳採elapsed wall time（舊設定欄位名`budget_cpu_seconds`保留相容），包含載入、樣本、訓練及評估；單一運算步驟可能超過截止，實際超時仍全額記錄。程序持有獨佔鎖，執行前先預留剩餘額度；正常退出按實際時間結算，非正常退出保守地把整筆預留額度計為已花費，不自動重設。資源preflight失敗不算啟動訓練。未完成epoch不算完整epoch，因預算中止的驗證日期仍留在validation audit。此機制不建立任何排程或購買算力。
