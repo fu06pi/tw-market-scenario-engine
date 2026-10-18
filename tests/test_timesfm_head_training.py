@@ -53,66 +53,6 @@ def test_expanding_folds_are_chronological_and_disjoint():
         expanding_folds(days[:30], folds=3, validation_sessions=5, minimum_train=20)
 
 
-@pytest.mark.parametrize("instrument", ["TAIEX", "TX", "JOINT"])
-def test_bad_training_days_remain_in_audit_without_compressing_context(monkeypatch, instrument):
-    import tw_scenario.quant.timesfm_head_training as training
-
-    days = [date(2020, 1, day) for day in (2, 3, 6, 7)]
-    calls = []
-
-    def build(data, requested, context):
-        calls.append((requested, context))
-        if requested[0] in days[:2]:
-            raise ValueError("insufficient contiguous expanded history")
-        return [_sample(requested[0])]
-
-    monkeypatch.setattr(training, "build_joint_head_samples", build)
-    monkeypatch.setattr(
-        training, "build_head_samples",
-        lambda data, market, requested, context: build(data, requested, context),
-    )
-    samples, audit = audited_head_samples(None, instrument, days, 256)
-    assert [sample.day for sample in samples] == days[2:]
-    assert (audit["requested"], audit["usable"], audit["failed"]) == (4, 2, 2)
-    assert [row["date"] for row in audit["rows"]] == list(map(str, days))
-    assert [row["status"] for row in audit["rows"]] == ["FAILED", "FAILED", "OK", "OK"]
-    assert audit["rows"][0]["error"] == "insufficient contiguous expanded history"
-    assert calls == [([day], 256) for day in days]
-
-
-def test_unexpected_sample_code_error_is_not_silently_excluded(monkeypatch):
-    import tw_scenario.quant.timesfm_head_training as training
-
-    def broken(*args):
-        raise TypeError("unexpected sample schema")
-
-    monkeypatch.setattr(training, "build_joint_head_samples", broken)
-    with pytest.raises(TypeError, match="unexpected sample schema"):
-        audited_head_samples(None, "JOINT", [date(2020, 1, 2)], 256)
-
-
-def test_sample_audit_is_immutable_and_empty_split_failure_is_persisted(tmp_path):
-    identity = {"instrument": "JOINT", "fold": 1}
-    good = {"requested": 1, "usable": 1, "failed": 0,
-            "rows": [{"date": "2020-01-02", "status": "OK"}]}
-    path = tmp_path / "samples.json"
-    first = _persist_sample_audit(path, identity, good, good)
-    raw = path.read_bytes()
-    assert _persist_sample_audit(path, identity, good, good) == first
-    assert path.read_bytes() == raw
-    with pytest.raises(ValueError, match="changed during resume"):
-        _persist_sample_audit(path, {**identity, "fold": 2}, good, good)
-    assert path.read_bytes() == raw
-
-    bad = {"requested": 1, "usable": 0, "failed": 1,
-           "rows": [{"date": "2020-01-02", "status": "FAILED", "error": "gap"}]}
-    empty_path = tmp_path / "empty.json"
-    with pytest.raises(ValueError, match="no usable training or early-stop"):
-        _persist_sample_audit(empty_path, identity, bad, good)
-    assert json.loads(empty_path.read_text())["training"]["rows"] == bad["rows"]
-    assert json.loads(empty_path.read_text())["validation_dates_filtered"] is False
-
-
 def test_training_grid_selection_is_explicit_and_bounded():
     config = {
         "training_grid": [
@@ -343,26 +283,6 @@ def test_development_gate_requires_buffer_folds_uncertainty_and_intervals():
     assert not failed["requirements"]["fold_majority"]
 
 
-def test_failed_evaluation_dates_still_count_against_paired_coverage():
-    config = {
-        "neutral_bps": 5.0, "promotion_close_improvement": 0.075,
-        "promotion_min_coverage": 0.99, "bootstrap_block": 20,
-        "bootstrap_draws": 100, "seed": 4655,
-    }
-    candidate = _rows(8.0)
-    for index in (98, 99):
-        candidate[index] = {
-            "date": candidate[index]["date"], "status": "FAILED", "error": "context gap"
-        }
-    gate = development_acceptance(
-        candidate, _rows(10.0), config, fold_improvements=[0.2, 0.1, 0.1]
-    )
-    assert gate["paired_days"] == 98
-    assert gate["paired_coverage"] == pytest.approx(0.98)
-    assert not gate["requirements"]["forecast_coverage"]
-    assert gate["status"] == "FAIL"
-
-
 def test_joint_gate_fails_if_either_market_fails():
     passed = {"status": "PASS", "close_relative_improvement": 0.10}
     failed = {"status": "FAIL", "close_relative_improvement": 0.02}
@@ -424,3 +344,158 @@ def test_candidate_selection_accepts_joint_worst_market_score():
     assert selection["instrument"] == "JOINT"
     assert selection["selected"]["close_relative_improvement"] == pytest.approx(0.03)
     assert selection["status"] == "DEVELOPMENT_SEARCH_STOPPED_NO_PASS"
+
+
+def test_training_materialization_audits_history_and_propagates_unknown_error(monkeypatch):
+    import tw_scenario.quant.timesfm_head_training as module
+
+    days = [date(2026, 1, 1), date(2026, 1, 2)]
+
+    def builder(data, instrument, requested, context):
+        if requested[0] == days[0]:
+            raise ValueError('insufficient contiguous expanded history: 12 < 32')
+        return [_sample(requested[0])]
+
+    monkeypatch.setattr(module, 'build_head_samples', builder)
+    samples, audit = module.materialize_training_samples(None, 'TAIEX', days, 32)
+    assert [sample.day for sample in samples] == days[1:]
+    assert audit['requested'] == 2
+    assert audit['ineligible'] == 1
+    assert audit['dates'][0]['status'] == 'INELIGIBLE_HISTORY'
+
+    def broken(*args):
+        raise ValueError('unexpected shape bug')
+
+    monkeypatch.setattr(module, 'build_head_samples', broken)
+    with pytest.raises(ValueError, match='unexpected shape bug'):
+        module.materialize_training_samples(None, 'TAIEX', days, 32)
+
+
+def test_candidate_selection_does_not_promote_close_only_winner():
+    def candidate(index, improvement, gate):
+        return {
+            "identity": {
+                "dataset_id": "dataset",
+                "instrument": "TAIEX",
+                "config_hash": "config",
+                "candidate_index": index,
+            },
+            "development_gate": {
+                "status": gate,
+                "close_relative_improvement": improvement,
+            },
+        }
+
+    selection = select_output_head_candidate(
+        [candidate(0, 0.20, "FAIL"), candidate(1, 0.08, "PASS")], 3
+    )
+    assert selection["selected"]["candidate_index"] == 1
+    assert selection["best_close_only_research_candidate"]["candidate_index"] == 0
+    assert selection["status"] == "LOCKED_AWAITING_NEW_FORWARD_HOLDOUT"
+    assert selection["production_candidate"] is False
+
+
+def test_paired_validation_preserves_failures_and_uses_identical_dates():
+    from tw_scenario.quant.timesfm_head_training import paired_validation_metrics
+
+    candidate = _rows(8, 2)
+    baseline = _rows(10, 2)
+    candidate[1] = {"date": candidate[1]["date"], "status": "FAILED", "error": "missing"}
+    baseline[1]["predicted"]["close"] = 1000
+    comparison = paired_validation_metrics(candidate, baseline, 5)
+    assert comparison["close_relative_improvement"] == pytest.approx(0.2)
+    assert comparison["paired_coverage"] == 0.5
+    assert comparison["candidate_all_dates_metrics"]["failed_days"] == [
+        {"date": candidate[1]["date"], "reason": "missing"}
+    ]
+    with pytest.raises(ValueError, match="duplicate"):
+        paired_validation_metrics(candidate + candidate[:1], baseline, 5)
+    baseline[0]["actual"]["close"] = 101
+    with pytest.raises(ValueError, match="truth/reference mismatch"):
+        paired_validation_metrics(candidate, baseline, 5)
+
+
+def test_all_failed_validation_is_a_persistable_rejection():
+    import json
+
+    config = {"neutral_bps": 5}
+    failed = [{"date": "2025-01-01", "status": "FAILED", "error": "inference"}]
+    gate = development_acceptance(failed, _rows(10, 1), config, fold_improvements=[None])
+    assert gate["status"] == "FAIL_NO_PAIRED_DAYS"
+    assert gate["close_relative_improvement"] is None
+    joint = joint_development_acceptance({"TAIEX": gate, "TX": gate})
+    assert joint["status"] == "FAIL"
+    selection = select_output_head_candidate([{
+        "identity": {"dataset_id": "d", "instrument": "JOINT", "config_hash": "c",
+                     "candidate_index": 0},
+        "development_gate": joint,
+    }], 3)
+    assert selection["status"] == "DEVELOPMENT_SEARCH_STOPPED_NO_PASS"
+    json.dumps(selection, allow_nan=False)
+
+
+def test_zero_error_baseline_fails_comparison_without_division_by_zero():
+    gate = development_acceptance(_rows(1, 2), _rows(0, 2), {"neutral_bps": 5},
+                                  fold_improvements=[None])
+    assert gate["status"] == "FAIL_ZERO_BASELINE_ERROR"
+
+
+@pytest.mark.parametrize("instrument", ["TAIEX", "TX", "JOINT"])
+def test_bad_training_days_remain_in_audit_without_compressing_context(monkeypatch, instrument):
+    import tw_scenario.quant.timesfm_head_training as training
+
+    days = [date(2020, 1, day) for day in (2, 3, 6, 7)]
+    calls = []
+
+    def build(data, requested, context):
+        calls.append((requested, context))
+        if requested[0] in days[:2]:
+            raise ValueError("insufficient contiguous expanded history: 12 < 256")
+        return [_sample(requested[0])]
+
+    monkeypatch.setattr(training, "build_joint_head_samples", build)
+    monkeypatch.setattr(
+        training, "build_head_samples",
+        lambda data, market, requested, context: build(data, requested, context),
+    )
+    samples, audit = audited_head_samples(None, instrument, days, 256)
+    assert [sample.day for sample in samples] == days[2:]
+    assert (audit["requested"], audit["usable"], audit["failed"]) == (4, 2, 2)
+    assert [row["date"] for row in audit["rows"]] == list(map(str, days))
+    assert [row["status"] for row in audit["rows"]] == ["INELIGIBLE_HISTORY", "INELIGIBLE_HISTORY", "OK", "OK"]
+    assert audit["rows"][0]["reason"] == "insufficient contiguous expanded history: 12 < 256"
+    assert calls == [([day], 256) for day in days]
+
+
+def test_unexpected_sample_code_error_is_not_silently_excluded(monkeypatch):
+    import tw_scenario.quant.timesfm_head_training as training
+
+    def broken(*args):
+        raise TypeError("unexpected sample schema")
+
+    monkeypatch.setattr(training, "build_joint_head_samples", broken)
+    with pytest.raises(TypeError, match="unexpected sample schema"):
+        audited_head_samples(None, "JOINT", [date(2020, 1, 2)], 256)
+
+
+def test_sample_audit_is_immutable_and_empty_split_failure_is_persisted(tmp_path):
+    identity = {"instrument": "JOINT", "fold": 1}
+    good = {"requested": 60, "usable": 60, "failed": 0,
+            "rows": [{"date": str(date(2020, 1, 2) + timedelta(days=i)),
+                      "status": "OK"} for i in range(60)]}
+    path = tmp_path / "samples.json"
+    first = _persist_sample_audit(path, identity, good, good)
+    raw = path.read_bytes()
+    assert _persist_sample_audit(path, identity, good, good) == first
+    assert path.read_bytes() == raw
+    with pytest.raises(ValueError, match="changed during resume"):
+        _persist_sample_audit(path, {**identity, "fold": 2}, good, good)
+    assert path.read_bytes() == raw
+
+    bad = {"requested": 1, "usable": 0, "failed": 1,
+           "rows": [{"date": "2020-01-02", "status": "FAILED", "error": "gap"}]}
+    empty_path = tmp_path / "empty.json"
+    with pytest.raises(ValueError, match="fewer than 60 training samples"):
+        _persist_sample_audit(empty_path, identity, bad, good)
+    assert json.loads(empty_path.read_text())["training"]["rows"] == bad["rows"]
+    assert json.loads(empty_path.read_text())["validation_dates_filtered"] is False
