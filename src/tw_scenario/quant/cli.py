@@ -668,6 +668,28 @@ def timesfm_head_walk_forward(
     })
 
 
+@app.command("timesfm-head-daily")
+def timesfm_head_daily(
+    dataset_dir: Annotated[Path, typer.Argument(help="Immutable pre-open dataset.")],
+    bundle: Annotated[Path, typer.Option("--bundle", help="Result/checkpoint paths for both markets.")],
+    trading_date: Annotated[str, typer.Option("--date", help="Exchange trading date YYYY-MM-DD.")],
+    output: Annotated[Path, typer.Option("--output", help="Write-once research snapshot JSON.")],
+    cache_dir: Annotated[Path, typer.Option("--cache-dir")] = Path("data/raw/timesfm3"),
+) -> None:
+    """Reload trained heads and freeze research OHLC; never switches production."""
+    try:
+        from .head_daily import run_head_daily
+
+        path = run_head_daily(dataset_dir, bundle, date.fromisoformat(trading_date), output, cache_dir)
+        frozen = _read_json(path)
+    except (OSError, KeyError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({"status": "RESEARCH_SNAPSHOT_FROZEN", "output": str(path),
+                "forecast_id": frozen["forecast_id"], "snapshot_hash": frozen["snapshot_hash"],
+                "timeliness": frozen["timeliness"], "production_switch": False,
+                "interval_calibration": "UNVERIFIED"})
+
+
 @app.command("timesfm-head-select")
 def timesfm_head_select(
     results: Annotated[
