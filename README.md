@@ -4,7 +4,7 @@
 `timesfm-head-walk-forward` 會在 optimizer 執行前保存不可變的 sample audit，
 逐日記錄 training／early-stop 的成功與失敗原因，只使用具完整連續資訊集的樣本。
 不補值、不跨缺口拼接、不移動 split 或縮短 context；驗證日期不刪除，失敗仍計入
-coverage。整個 training 或 early-stop 集合無可用樣本時，先保存 audit 再停止。
+coverage。training 少於60個可用樣本或 early-stop 集合無可用樣本時，先保存 audit 再停止。
 續跑時 audit 必須完全一致；舊 cloud NO_GO 證據保留在
 [`reports/quant/cloud-2026-10-17`](reports/quant/cloud-2026-10-17/README.md)。
 這項工程修正本身不代表模型訓練完成或 development gate 通過。
@@ -94,6 +94,30 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 新版模型優先研究另提供 `timesfm-head-train` 與 `timesfm-head-walk-forward`。`--instrument` 可指定 `TAIEX`、`TX` 或 `JOINT`；`JOINT` 以同一個head聯合預測兩市場八個GBUD目標，並以各市場自己的前收還原。它們凍結完整 TimesFM 3 backbone，只允許 `output_head` 更新，使用 GBUD Huber／close-return／pinball／quantile-crossing loss、train-only feature scaling、early stopping、write-once fold結果與可續跑checkpoint。設定固定八個有編號候選，比較256／512 context、`1e-4`／`3e-4` learning rate及0／`1e-4` weight decay，不能在執行後匿名改參數。新增的27項盤前特徵包含夜盤結構、前日OI、基差、換月／到期、日曆及5／20／60日量價狀態；聯合模式保留兩市場各自的27項特徵，舊五特徵介面保持不變，以保存已關閉實驗的程式口徑。開發gate對TAIEX與TX分別選穩定baseline並分別要求close MAE至少改善7.5%、fold多數改善、block-bootstrap下界非負、O/H/L不劣化、區間及99%成功率同時通過；聯合候選只有兩市場都通過才通過，候選排序使用兩市場中較低的close改善率。所有2026-10-08以前資料只作開發，不能重標為新final。
 
 目前新訓練尚未產生checkpoint或成績。2026-10-16實際preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於鎖定的3,072 MiB門檻；套件、commit、權重cache與磁碟皆已就緒。證據見 [`reports/quant/timesfm3-output-head-preflight-2026-10-16.json`](reports/quant/timesfm3-output-head-preflight-2026-10-16.json)。不得降低門檻後把OOM風險包裝成有效實驗。
+
+Checkpoint 每日推論入口為 `timesfm-head-daily`。它接受 standalone `timesfm-head-train` 的 `result.json` 及 head safetensors；三折結果本身不是可部署 checkpoint。先鎖定開發候選，再依固定訓練截止日產生 standalone head。每個預測日必須晚於 training 與 early-stop 最後標籤日。模型尚未達標時，此命令僅供顯式研究，原預設 baseline 不變。
+
+建立私有 bundle JSON（路徑相對於 bundle 所在目錄；不可提交大型 checkpoint）：
+
+```json
+{
+  "TAIEX": {"result": "taiex/result.json", "checkpoint": "taiex/output_head.safetensors"},
+  "TX": {"result": "tx/result.json", "checkpoint": "tx/output_head.safetensors"}
+}
+```
+
+聯合模型改用單一 `JOINT` entry。以已包含指定交易日曆、同合約前收及已結束夜盤的 immutable dataset 執行：
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 tw-scenario quant timesfm-head-daily \
+  data/processed/<dataset-id> --bundle reports/generated/quant/head-bundle.json \
+  --date YYYY-MM-DD --output reports/generated/quant/snapshots/YYYY-MM-DD-head.json
+```
+
+命令不接受回填生成時間；08:30 前拒絕，08:40 後如實標示 LATE。先核對 checkpoint hash、模型 revision、feature 順序、scaler及標籤截止日，再使用不含當日日盤答案的輸入推論。輸出沿用 `ohlc-forecast-v1`，包含雙市場 OHLC、指定 TX 合約、同合約前收、區間、來源與模型雜湊；檔案不可覆寫並執行 readback。區間目前是未校準的轉換分位數包絡，名義80%並不代表已達到實際覆蓋率，快照固定 WARN 並揭露限制；不會修改正式排程。
+
+2026-10-18 工程驗證：獨立與聯合 synthetic 小模型各完成 optimizer → safetensors → 重載 → CLI 推論 → 凍結快照及 readback，並驗證竄改拒絕、不可覆寫、盤前不讀實際值。全套92項測試通過。這不是 pinned TimesFM 真實訓練、三折成績或 genuine forward 完成證據。
+
 
 ## 訓練、驗證與停止
 
