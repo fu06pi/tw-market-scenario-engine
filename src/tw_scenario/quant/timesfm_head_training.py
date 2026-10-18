@@ -14,6 +14,7 @@ import numpy as np
 from .backtest import _git_state, _select_baseline, load_dataset, walk_forward
 from .contracts import OHLC, decode, digest, encode, write_once
 from .evaluation import block_improvement, metrics
+from .head_budget import bounded_head_run, budget_deadline
 from .timesfm3 import (
     CODE_COMMIT,
     WEIGHT_REPO,
@@ -410,13 +411,15 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
     )
 
 
-def _evaluate_loss(model, samples, mean, scale, spec):
+def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf):
     import torch
 
     losses = []
     model.eval()
     with torch.no_grad():
         for start in range(0, len(samples), spec.batch_size):
+            if time.monotonic() >= deadline:
+                raise TimeoutError("early-stop evaluation budget exhausted")
             batch = samples[start : start + spec.batch_size]
             inputs, mask, patches, target_count = _batch_inputs(
                 model, batch, mean, scale
@@ -487,9 +490,14 @@ def train_output_head(
             loss.backward()
             optimizer.step()
             epoch_losses.append(float(loss.detach()))
-        validation_loss = _evaluate_loss(
-            model, early_stop_samples, mean, scale, spec
-        )
+        if len(epoch_losses) != math.ceil(len(order) / spec.batch_size):
+            break
+        try:
+            validation_loss = _evaluate_loss(
+                model, early_stop_samples, mean, scale, spec, deadline=deadline
+            )
+        except TimeoutError:
+            break
         history.append({
             "epoch": epoch,
             "train_loss": float(np.mean(epoch_losses)) if epoch_losses else None,
@@ -828,6 +836,7 @@ def _sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+@bounded_head_run
 def run_output_head_training(
     dataset_dir: Path,
     config_path: Path,
@@ -913,7 +922,7 @@ def run_output_head_training(
             early_stop_samples,
             spec,
             seed=int(config["seed"]),
-            deadline=started + float(config["budget_cpu_seconds"]),
+            deadline=budget_deadline(started + float(config["budget_cpu_seconds"])),
         )
         save_file(
             {
@@ -995,6 +1004,7 @@ def _joint_prediction_rows(model, sample, mean, scale) -> list[dict]:
     return rows
 
 
+@bounded_head_run
 def run_output_head_walk_forward(
     dataset_dir: Path,
     config_path: Path,
@@ -1059,7 +1069,7 @@ def run_output_head_walk_forward(
         return result_path
     experiment_dir.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
-    deadline = started + float(config["budget_cpu_seconds"])
+    deadline = budget_deadline(started + float(config["budget_cpu_seconds"]))
     forecaster = load_pinned_forecaster(cache_dir, local_files_only=True)
     model = forecaster.model
     original_head = {
@@ -1144,6 +1154,8 @@ def run_output_head_walk_forward(
             fold_candidate = {market: [] for market in instruments}
             for validation_day in validation_days:
                 try:
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError("validation budget exhausted")
                     if instrument == "JOINT":
                         sample = build_joint_head_samples(
                             data, [validation_day], spec.context
@@ -1172,11 +1184,18 @@ def run_output_head_walk_forward(
                         })
 
             expected_dates = [str(day) for day in validation_days]
+            validation_audit_path = experiment_dir / (
+                f"fold-{fold_index}-validation-{digest(fold_candidate)[:20]}.json"
+            )
+            if not validation_audit_path.exists():
+                write_once(validation_audit_path, fold_candidate)
             instrument_results = {}
             fold_baseline = {}
             for market in instruments:
                 baseline_validation = {}
                 for baseline_model in config["stable_baselines"]:
+                    if time.monotonic() >= deadline:
+                        raise TimeoutError("baseline evaluation budget exhausted")
                     rows = walk_forward(
                         data,
                         market,
