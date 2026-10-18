@@ -185,35 +185,41 @@ def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadS
     return samples
 
 
-def audited_head_samples(data, instrument: str, days: list[date], context: int):
-    """Preserve every requested day while excluding unavailable optimization inputs.
-
-    Each builder still requires its full contiguous, as-of history. No missing
-    history is imputed, compressed, or replaced with another requested date.
-    ValueError denotes unavailable/invalid data; unexpected code errors propagate.
-    Evaluation continues to use the separate all-date prediction loop.
-    """
-    if instrument not in {"TAIEX", "TX", "JOINT"}:
-        raise ValueError("instrument must be TAIEX, TX, or JOINT")
-    samples, rows = [], []
+def materialize_training_samples(data, instrument, days, context):
+    """Audit expected history failures without swallowing unrelated programming errors."""
+    samples, records = [], []
     for day in days:
         try:
-            sample = (
-                build_joint_head_samples(data, [day], context)[0]
+            batch = (
+                build_joint_head_samples(data, [day], context)
                 if instrument == "JOINT"
-                else build_head_samples(data, instrument, [day], context)[0]
+                else build_head_samples(data, instrument, [day], context)
             )
         except ValueError as exc:
-            rows.append({
-                "date": str(day), "status": "FAILED",
-                "error_type": type(exc).__name__, "error": str(exc),
+            if not str(exc).startswith("insufficient contiguous expanded history:"):
+                raise
+            records.append({
+                "date": str(day), "status": "INELIGIBLE_HISTORY",
+                "reason": str(exc),
             })
         else:
-            samples.append(sample)
-            rows.append({"date": str(day), "status": "OK"})
+            samples.extend(batch)
+            records.append({"date": str(day), "status": "OK"})
     return samples, {
         "requested": len(days), "usable": len(samples),
-        "failed": len(days) - len(samples), "rows": rows,
+        "ineligible": len(days) - len(samples), "dates": records,
+        "policy": "training_only; validation dates never filtered",
+    }
+
+
+def audited_head_samples(data, instrument: str, days: list[date], context: int):
+    """Cloud-compatible audit using only classified history exclusions."""
+    if instrument not in {"TAIEX", "TX", "JOINT"}:
+        raise ValueError("instrument must be TAIEX, TX, or JOINT")
+    samples, audit = materialize_training_samples(data, instrument, days, context)
+    return samples, {
+        "requested": audit["requested"], "usable": audit["usable"],
+        "failed": audit["ineligible"], "rows": audit["dates"],
     }
 
 
@@ -233,8 +239,8 @@ def _persist_sample_audit(path: Path, identity: dict, training: dict, early_stop
             raise ValueError(f"sample audit changed during resume: {path}")
     else:
         write_once(path, audit)
-    if not training["usable"] or not early_stop["usable"]:
-        raise ValueError(f"no usable training or early-stop samples; audit: {path}")
+    if training["usable"] < 60 or not early_stop["usable"]:
+        raise ValueError(f"fewer than 60 training samples or empty early-stop split; audit: {path}")
     return {
         "path": str(path), "sha256": _sha256(path),
         "training_requested": training["requested"],
@@ -527,12 +533,47 @@ def predict_joint_head(
     }
 
 
+def paired_validation_metrics(candidate_rows, baseline_rows, threshold):
+    """Compare the same dates, retaining full-population failure accounting."""
+    indexes = []
+    for rows in (candidate_rows, baseline_rows):
+        if len({row["date"] for row in rows}) != len(rows):
+            raise ValueError("duplicate validation date")
+        indexes.append({row["date"]: row for row in rows if row["status"] == "OK"})
+    candidate, baseline = indexes
+    dates = sorted(candidate.keys() & baseline.keys())
+    for day in dates:
+        if (candidate[day]["actual"] != baseline[day]["actual"]
+                or candidate[day]["previous_close"] != baseline[day]["previous_close"]):
+            raise ValueError(f"validation truth/reference mismatch: {day}")
+    cm = metrics([candidate[day] for day in dates], threshold)
+    bm = metrics([baseline[day] for day in dates], threshold)
+    denominator = bm.get("ohlc", {}).get("close", {}).get("mae_points", 0)
+    improvement = (
+        1 - cm["ohlc"]["close"]["mae_points"] / denominator
+        if dates and denominator > 0 else None
+    )
+    expected = {row["date"] for row in candidate_rows + baseline_rows}
+    return {
+        "status": ("OK" if improvement is not None else
+                   "FAIL_NO_PAIRED_DAYS" if not dates else "FAIL_ZERO_BASELINE_ERROR"),
+        "paired_days": len(dates),
+        "paired_dates": dates,
+        "paired_coverage": len(dates) / len(expected) if expected else 0.0,
+        "close_relative_improvement": improvement,
+        "candidate_metrics": cm,
+        "baseline_metrics": bm,
+        "candidate_all_dates_metrics": metrics(candidate_rows, threshold),
+        "baseline_all_dates_metrics": metrics(baseline_rows, threshold),
+    }
+
+
 def development_acceptance(
     candidate_rows: list[dict],
     baseline_rows: list[dict],
     config: dict,
     *,
-    fold_improvements: list[float],
+    fold_improvements: list[float | None],
 ) -> dict:
     """Stricter pre-forward gate; this never opens or relabels the old final."""
     candidate = {row["date"]: row for row in candidate_rows if row["status"] == "OK"}
@@ -540,19 +581,21 @@ def development_acceptance(
     paired_dates = sorted(candidate.keys() & baseline.keys())
     candidate_paired = [candidate[day] for day in paired_dates]
     baseline_paired = [baseline[day] for day in paired_dates]
-    if not paired_dates:
-        return {"status": "FAIL_NO_PAIRED_DAYS", "paired_days": 0}
-    candidate_metrics = metrics(candidate_paired, config["neutral_bps"])
-    baseline_metrics = metrics(baseline_paired, config["neutral_bps"])
-    close_improvement = 1 - (
-        candidate_metrics["ohlc"]["close"]["mae_points"]
-        / baseline_metrics["ohlc"]["close"]["mae_points"]
+    comparison = paired_validation_metrics(
+        candidate_rows, baseline_rows, config["neutral_bps"]
     )
+    if comparison["status"] != "OK":
+        return {**comparison, "fold_improvements": fold_improvements}
+    candidate_metrics = comparison["candidate_metrics"]
+    baseline_metrics = comparison["baseline_metrics"]
+    close_improvement = comparison["close_relative_improvement"]
     ohl_degradation = {
         field: (
             candidate_metrics["ohlc"][field]["mae_points"]
             / baseline_metrics["ohlc"][field]["mae_points"]
             - 1
+            if baseline_metrics["ohlc"][field]["mae_points"] > 0
+            else (0.0 if candidate_metrics["ohlc"][field]["mae_points"] == 0 else None)
         )
         for field in ("open", "high", "low")
     }
@@ -575,13 +618,15 @@ def development_acceptance(
         config["seed"],
     )
     ci = uncertainty.get("close_relative_improvement_ci95")
-    paired_coverage = len(paired_dates) / max(len(candidate_rows), len(baseline_rows))
+    paired_coverage = comparison["paired_coverage"]
     requirements = {
         "close_buffer": close_improvement >= float(config["promotion_close_improvement"]),
-        "fold_majority": sum(value > 0 for value in fold_improvements)
+        "fold_majority": sum(value is not None and value > 0 for value in fold_improvements)
         > len(fold_improvements) / 2,
         "bootstrap_lower_nonnegative": ci is not None and ci[0] >= 0,
-        "ohl_noninferiority": all(value <= 0.05 for value in ohl_degradation.values()),
+        "ohl_noninferiority": all(
+            value is not None and value <= 0.05 for value in ohl_degradation.values()
+        ),
         "interval_coverage": all(
             value is not None and 0.75 <= value <= 0.85 for value in coverage.values()
         ),
@@ -589,6 +634,7 @@ def development_acceptance(
         "forecast_coverage": paired_coverage >= float(config["promotion_min_coverage"]),
     }
     return {
+        **comparison,
         "status": "PASS" if all(requirements.values()) else "FAIL",
         "paired_days": len(paired_dates),
         "paired_coverage": paired_coverage,
@@ -611,12 +657,13 @@ def joint_development_acceptance(instrument_gates: dict[str, dict]) -> dict:
         instrument: gate.get("close_relative_improvement")
         for instrument, gate in instrument_gates.items()
     }
-    if any(value is None for value in improvements.values()):
-        raise ValueError("joint instrument gate lacks close improvement")
+    comparable = all(value is not None for value in improvements.values())
     both_pass = all(gate.get("status") == "PASS" for gate in instrument_gates.values())
     return {
         "status": "PASS" if both_pass else "FAIL",
-        "close_relative_improvement": min(float(value) for value in improvements.values()),
+        "close_relative_improvement": (
+            min(float(value) for value in improvements.values()) if comparable else None
+        ),
         "instrument_close_relative_improvement": improvements,
         "instrument_gates": instrument_gates,
         "requirements": {"both_markets_pass": both_pass},
@@ -641,6 +688,7 @@ def select_output_head_candidate(results: list[dict], max_no_gain_rounds: int) -
         raise ValueError("candidate indexes must be unique integers")
 
     best = None
+    best_passing = None
     best_improvement = -math.inf
     no_gain = 0
     evaluated = []
@@ -649,16 +697,26 @@ def select_output_head_candidate(results: list[dict], max_no_gain_rounds: int) -
         gate = result.get("development_gate")
         if not isinstance(gate, dict) or "close_relative_improvement" not in gate:
             raise ValueError("candidate result lacks a development gate")
-        improvement = float(gate["close_relative_improvement"])
+        raw_improvement = gate["close_relative_improvement"]
+        improvement = float(raw_improvement) if raw_improvement is not None else -math.inf
+        if gate.get("status") == "PASS" and not math.isfinite(improvement):
+            raise ValueError("passing gate requires a finite improvement")
         entry = {
             "candidate_index": result["identity"]["candidate_index"],
             "status": result.get("status"),
             "development_gate": gate.get("status"),
-            "close_relative_improvement": improvement,
+            "close_relative_improvement": raw_improvement,
             "result_hash": digest(result),
         }
         evaluated.append(entry)
-        if improvement > best_improvement + 1e-12:
+        # Promotion requires every gate, even when a rejected candidate has
+        # a larger close-only improvement. Keep the search stop rule separate.
+        if gate.get("status") == "PASS" and (
+            best_passing is None
+            or improvement > best_passing["close_relative_improvement"]
+        ):
+            best_passing = entry
+        if best is None or improvement > best_improvement + 1e-12:
             best = entry
             best_improvement = improvement
             no_gain = 0
@@ -669,7 +727,9 @@ def select_output_head_candidate(results: list[dict], max_no_gain_rounds: int) -
                 break
     if best is None:
         raise RuntimeError("no output-head candidate could be selected")
-    passed = best["development_gate"] == "PASS"
+    best_research = best
+    best = best_passing if best_passing is not None else best_research
+    passed = best_passing is not None
     dataset_id, instrument, config_hash = next(iter(common))
     return {
         "schema_version": "timesfm3-output-head-selection-v1",
@@ -682,6 +742,7 @@ def select_output_head_candidate(results: list[dict], max_no_gain_rounds: int) -
         "instrument": instrument,
         "config_hash": config_hash,
         "selected": best,
+        "best_close_only_research_candidate": best_research,
         "evaluated": evaluated,
         "stopped_after_no_gain": stopped_early,
         "max_no_gain_rounds": max_no_gain_rounds,
@@ -746,7 +807,7 @@ def run_output_head_training(
         "timesfm_weight_revision": WEIGHT_REVISION,
         "train_end": str(training_days[::stride][-1]),
         "early_stop_split": [str(early_stop_days[0]), str(early_stop_days[-1])],
-        "sample_policy": "audited_optimization_exclusions_v1",
+        "sample_policy": "classified_history_exclusions_v2",
         "feature_names": feature_names,
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
@@ -894,7 +955,8 @@ def run_output_head_walk_forward(
     spec = _spec_from_config(config, candidate_index)
     identity = {
         "name": "custom_timesfm3_output_head_expanding_walk_forward",
-        "sample_policy": "audited_optimization_exclusions_v1",
+        "sample_policy": "classified_history_exclusions_v2",
+        "evaluation_policy": "paired_dates_failures_preserved_v2",
         "instrument": instrument,
         "dataset_id": dataset_id,
         "config_hash": digest(config),
@@ -1069,39 +1131,33 @@ def run_output_head_walk_forward(
                     f"{selected_baseline['model']}"
                 )
                 fold_baseline[market] = baseline_validation[baseline_key]["rows"]
-                candidate_metrics = metrics(
-                    fold_candidate[market], config["neutral_bps"]
+                comparison = paired_validation_metrics(
+                    fold_candidate[market], fold_baseline[market], config["neutral_bps"]
                 )
-                baseline_metrics = metrics(
-                    fold_baseline[market], config["neutral_bps"]
-                )
-                improvement = 1 - (
-                    candidate_metrics["ohlc"]["close"]["mae_points"]
-                    / baseline_metrics["ohlc"]["close"]["mae_points"]
-                )
+                improvement = comparison["close_relative_improvement"]
                 fold_improvements[market].append(improvement)
                 candidate_rows[market].extend(fold_candidate[market])
                 baseline_rows[market].extend(fold_baseline[market])
                 instrument_results[market] = {
                     "selected_baseline": selected_baseline,
                     "baseline_selection_audit": selection_audit,
-                    "candidate_metrics": candidate_metrics,
-                    "baseline_metrics": baseline_metrics,
-                    "close_relative_improvement": improvement,
+                    **comparison,
                 }
             fold_summary = {
                 "fold": fold_index,
-                "sample_audit": sample_audit,
                 "train_split": [str(train_days[0]), str(train_days[-1])],
                 "validation_split": [str(validation_days[0]), str(validation_days[-1])],
+                "sample_audit": sample_audit,
                 "training": training,
                 "checkpoint": {
                     "path": str(checkpoint_path),
                     "sha256": _sha256(checkpoint_path),
                 },
-                "close_relative_improvement": min(
-                    result["close_relative_improvement"]
-                    for result in instrument_results.values()
+                "close_relative_improvement": (
+                    min(result["close_relative_improvement"]
+                        for result in instrument_results.values())
+                    if all(result["close_relative_improvement"] is not None
+                           for result in instrument_results.values()) else None
                 ),
                 "reused": False,
             }
