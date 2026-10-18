@@ -15,14 +15,46 @@
   "training_stride": 5,
   "early_stop_sessions": 40,
   "training_grid": [
-    {"context": 256, "learning_rate": 0.0001, "weight_decay": 0.0},
-    {"context": 256, "learning_rate": 0.0001, "weight_decay": 0.0001},
-    {"context": 256, "learning_rate": 0.0003, "weight_decay": 0.0},
-    {"context": 256, "learning_rate": 0.0003, "weight_decay": 0.0001},
-    {"context": 512, "learning_rate": 0.0001, "weight_decay": 0.0},
-    {"context": 512, "learning_rate": 0.0001, "weight_decay": 0.0001},
-    {"context": 512, "learning_rate": 0.0003, "weight_decay": 0.0},
-    {"context": 512, "learning_rate": 0.0003, "weight_decay": 0.0001}
+    {
+      "context": 256,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0
+    },
+    {
+      "context": 256,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001
+    },
+    {
+      "context": 256,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0
+    },
+    {
+      "context": 256,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001
+    },
+    {
+      "context": 512,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0
+    },
+    {
+      "context": 512,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001
+    },
+    {
+      "context": 512,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0
+    },
+    {
+      "context": 512,
+      "learning_rate": 0.0003,
+      "weight_decay": 0.0001
+    }
   ],
   "max_epochs": 5,
   "patience": 2,
@@ -37,7 +69,11 @@
   "neutral_bps": 5.0,
   "promotion_close_improvement": 0.075,
   "promotion_min_coverage": 0.99,
-  "stable_baselines": ["zero", "range", "night_regression"],
+  "stable_baselines": [
+    "zero",
+    "range",
+    "night_regression"
+  ],
   "window": 252,
   "min_history": 60,
   "calibration_window": 126,
@@ -56,5 +92,7 @@
   "timesfm_weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
   "timesfm_weight_repo": "google/timesfm-3.0-pytorch",
   "old_final_policy": "development_only_never_independent_retest",
-  "production_switch": false
+  "production_switch": false,
+  "search_budget_seconds": 21600,
+  "budget_policy": "6h cumulative elapsed wall time per output-root search ledger; 2h cumulative per candidate operation including resumes. Unclean exit charges reserved allowance; no cloud purchase."
 }
