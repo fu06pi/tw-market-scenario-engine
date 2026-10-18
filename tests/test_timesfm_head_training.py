@@ -499,3 +499,79 @@ def test_sample_audit_is_immutable_and_empty_split_failure_is_persisted(tmp_path
         _persist_sample_audit(empty_path, identity, bad, good)
     assert json.loads(empty_path.read_text())["training"]["rows"] == bad["rows"]
     assert json.loads(empty_path.read_text())["validation_dates_filtered"] is False
+
+
+@pytest.mark.parametrize("instrument", ["TAIEX", "TX", "JOINT"])
+def test_preopen_head_inputs_never_read_forecast_day_actual(instrument):
+    from tw_scenario.quant.timesfm_head_training import build_head_inference_sample
+
+    day = date(2026, 1, 5)
+
+    class PreopenData:
+        def research_history(self, market, requested, representation, window, minimum):
+            assert requested == day
+            return np.ones((32, 4)), np.ones((32, 2)), [date(2026, 1, 2)]
+
+        def research_features(self, market, requested):
+            return np.array([1.0, 2.0])
+
+        def reference(self, market, requested):
+            return SimpleNamespace(close=100 if market == "TAIEX" else 200)
+
+        def contract(self, market, requested):
+            return "202601" if market == "TX" else ""
+
+        def actual(self, *args):
+            raise AssertionError("pre-open attempted to read actual labels")
+
+    sample = build_head_inference_sample(PreopenData(), instrument, day, 32)
+    assert sample.actual == {}
+    assert np.isnan(sample.target).all()
+    assert sample.history.shape == (32, 8 if instrument == "JOINT" else 4)
+    if instrument == "JOINT":
+        assert sample.previous_close == (100, 200)
+
+
+def test_checkpoint_reload_rejects_tampering_future_labels_and_bad_scaler(tmp_path):
+    import copy
+    import hashlib
+
+    from tw_scenario.quant.timesfm_head_training import (
+        CODE_COMMIT,
+        WEIGHT_REPO,
+        WEIGHT_REVISION,
+        restore_output_head,
+    )
+
+    torch = pytest.importorskip("torch")
+    save_file = pytest.importorskip("safetensors.torch").save_file
+    model = torch.nn.Module()
+    model.output_head = torch.nn.Linear(2, 3)
+    original = {k: v.clone() for k, v in model.output_head.state_dict().items()}
+    path = tmp_path / "head.safetensors"
+    save_file(original, str(path))
+    result = {
+        "schema_version": "timesfm3-custom-output-head-training-v1",
+        "weight_repo": WEIGHT_REPO,
+        "identity": {"timesfm_code_commit": CODE_COMMIT,
+                     "timesfm_weight_revision": WEIGHT_REVISION,
+                     "train_end": "2025-12-01", "early_stop_split": ["2025-12-02", "2025-12-31"],
+                     "feature_names": ["a", "b"]},
+        "checkpoint": {"sha256": hashlib.sha256(path.read_bytes()).hexdigest()},
+        "training": {"epochs_completed": 1, "feature_mean": [0, 0], "feature_scale": [1, 1]},
+    }
+    with torch.no_grad():
+        model.output_head.weight.add_(5)
+    restore_output_head(model, path, result, forecast_day=date(2026, 1, 2))
+    for name, value in model.output_head.state_dict().items():
+        torch.testing.assert_close(value, original[name], rtol=0, atol=0)
+    assert not model.training
+    with pytest.raises(ValueError, match="future labels"):
+        restore_output_head(model, path, result, forecast_day=date(2025, 12, 31))
+    bad = copy.deepcopy(result)
+    bad["training"]["feature_scale"][0] = 0
+    with pytest.raises(ValueError, match="scaler"):
+        restore_output_head(model, path, bad, forecast_day=date(2026, 1, 2))
+    path.write_bytes(path.read_bytes() + b"tampered")
+    with pytest.raises(ValueError, match="hash"):
+        restore_output_head(model, path, result, forecast_day=date(2026, 1, 2))
