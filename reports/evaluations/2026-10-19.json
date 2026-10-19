@@ -1,0 +1,380 @@
+{
+  "trading_date": "2026-10-19",
+  "evaluation_version": "v1-postclose-5",
+  "evaluated_at": "2026-10-19T15:54:32+08:00",
+  "status": "provisional_late_preopen_legacy_compat",
+  "aggregate_metric_eligibility": false,
+  "model_version": "v1.0.0-alpha-legacy-compat",
+  "feature_version": "legacy-scenario-features-v1",
+  "prompt_version": "automation-v1-legacy-compat",
+  "prediction_snapshot": {
+    "path": "predictions/2026-10-19.json",
+    "trading_date": "2026-10-19",
+    "git_blob_sha": "4d617a4c500ca1556e002a87894354db26f387d6",
+    "git_commit_sha": "d585f77017eeb3d846d9923da5bdcfaf09560b88",
+    "generated_at": "2026-10-19T08:57:17+08:00",
+    "data_cutoff_at": "2026-10-19T08:50:00+08:00",
+    "persisted_at": "2026-10-19T08:57:18+08:00",
+    "data_manifest_hash": "d7f877506e65b8eaf04f67f8212e5567a5738e1dbb866dc8b4c89ee1a9fbbd3e",
+    "snapshot_hash": "e99150241163da63fcb5556066e2ad43ceef8faacbf27cd79cecc756f0d94468",
+    "computed_snapshot_hash": "e99150241163da63fcb5556066e2ad43ceef8faacbf27cd79cecc756f0d94468",
+    "integrity_verified": true,
+    "immutable_snapshot_mutated": false,
+    "hash_method": "Python json.dumps after schema-compatible float coercion of expected gap/return; ensure_ascii=False, sort_keys=True, compact separators, SHA256",
+    "eligibility_note": "Published before cash open but after current 08:30 cutoff and 08:40 persistence deadlines. Evaluate as legacy diagnostic only, not TEJ/ARIMA/TimesFM OHLC model performance."
+  },
+  "realization": {
+    "trading_date": "2026-10-19",
+    "previous_close": 47111.26,
+    "open": 46844.64,
+    "high": 46844.64,
+    "low": 46170,
+    "close": 46822.08,
+    "change_points": -289.18,
+    "change_pct": -0.61,
+    "turnover": 864444044683,
+    "turnover_unit": "TWD",
+    "turnover_scope": "TWSE MI_INDEX total (1~15); broader scope than session turnover",
+    "regular_session_turnover_twd": 825100000000,
+    "regular_session_turnover_source": "CNA",
+    "breadth_up": 163,
+    "breadth_down": 849,
+    "breadth_flat": 61,
+    "breadth_unmatched": 5,
+    "breadth_uncompared": 5,
+    "breadth_scope": "TWSE MI_INDEX stock column, excludes ETF/warrant and TPEx universes",
+    "otc_return_pct": null,
+    "heavyweight_contribution_points": {},
+    "sector_returns_pct": {
+      "taiwan50": -0.34,
+      "midcap100": -1.48,
+      "smallcap300": -1.54,
+      "electronics": -0.41,
+      "semiconductor": -0.24,
+      "financial": -0.94,
+      "ex_financial_electronics": -1.77,
+      "plastics": -2.09,
+      "plastics_chemical_aggregate": -2.41,
+      "shipping": -1.89,
+      "oil_gas": -4.95,
+      "communication_network": 0.28,
+      "retail": 1.06
+    },
+    "source_manifest": [
+      {
+        "name": "TWSE MI_INDEX official 2026-10-19",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261019&type=ALLBUT0999",
+        "retrieval_method": "Direct HTTP JSON; stat=OK; date=20261019",
+        "role": "Official close, sector indices, total turnover and stock-column breadth"
+      },
+      {
+        "name": "CNA daily summary 2026-10-19",
+        "url": "https://www.cna.com.tw/news/afe/202610190116.aspx",
+        "published_at": "2026-10-19T13:58:00+08:00",
+        "role": "Dated open/high/low, session turnover and news breadth; close cross-check"
+      },
+      {
+        "name": "CNA close analysis 2026-10-19",
+        "url": "https://www.cna.com.tw/news/afe/202610190112.aspx",
+        "updated_at": "2026-10-19T14:01:00+08:00",
+        "role": "Dated selloff/recovery path, TSMC closing auction and technology driver evidence"
+      },
+      {
+        "name": "CNA intraday 2026-10-19",
+        "url": "https://www.cna.com.tw/news/afe/202610190039.aspx",
+        "role": "Intraday OTC underperformance; not used as a closing OTC return"
+      },
+      {
+        "name": "TWSE OHLC endpoint retrieval failure",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261019",
+        "retrieval_status": "One timeout and one explicit security-block HTML response; no further attempts",
+        "role": "No OHLC values attributed to this inaccessible endpoint; dated CNA OHLC used instead"
+      }
+    ],
+    "path": "realizations/2026-10-19.json",
+    "git_blob_sha": "64fc00565b26ba79670d6f5bb6de128a2b4e5b5f"
+  },
+  "quantitative_evaluation": {
+    "trading_date": "2026-10-19",
+    "open_direction_realized": "down",
+    "open_direction_hit": 1,
+    "close_direction_realized": "down",
+    "close_direction_hit": 1,
+    "expected_open_gap_bps": -120,
+    "open_gap_bps_realized": -56.593689067114816,
+    "open_gap_mae_bps": 63.406310932885184,
+    "expected_close_return_bps": -115,
+    "close_return_bps_realized": -61.3823531784119,
+    "close_return_mae_bps": 53.6176468215881,
+    "mfe_bps": -56.593689067114816,
+    "mae_bps": -199.7951232889972,
+    "intraday_range_bps": 143.20143422188227,
+    "open_to_low_bps": -144.0164765915586,
+    "open_to_high_bps": 0,
+    "low_to_close_recovery_points": 652.08,
+    "close_minus_open_points": -22.56,
+    "scenario_probabilities": {
+      "bull": 0.11,
+      "base": 0.39,
+      "bear": 0.5
+    },
+    "scenario_outcome": "bear",
+    "top_scenario_hit": true,
+    "brier_score": 0.13806666666666667,
+    "scenario_log_loss": 0.6931471805599453,
+    "calibration_error": null,
+    "baseline_lift": null,
+    "realized_intraday_regime": "selloff_then_recovery",
+    "regime_hit": null,
+    "regime_scoring_status": "Descriptive manual label; no frozen minute-based classifier. Trend_down only partially supported by path, so not counted as a formal hit.",
+    "realized_breadth_direction": "down",
+    "breadth_direction_hit": 1,
+    "breadth_up_share_nonflat": 0.16106719367588934,
+    "breadth_scoring_status": "Diagnostic stock-count dominance only; no frozen breadth flat-band formula.",
+    "classification_notes": {
+      "direction": "±5bp neutral band per metrics.py; both open and close down.",
+      "scenario": "Close < -50bp is Bear, >+50bp Bull, otherwise Base.",
+      "brier": "Mean of three squared probability errors; not single-day calibration evidence.",
+      "intraday": "CNA timed reports support an early selloff and later recovery; OHLC alone does not establish minute order/VWAP. Daily high=open rules out the forecast +0.4% above-open path at any time."
+    },
+    "formulas": {
+      "open_gap": "(open/previous_close-1)*10000",
+      "close_return": "(close/previous_close-1)*10000",
+      "absolute_error": "abs(expected-realized)",
+      "range": "(high-low)/previous_close*10000",
+      "brier": "sum((p_k-1[k=outcome])^2)/3"
+    }
+  },
+  "narrative_evaluation": {
+    "market_view": {
+      "grade": "partially_correct",
+      "note": "Aligned overnight weakness identified negative direction and broad repricing, but the recovery counter-path mattered more than the dominant trend-down framing."
+    },
+    "open_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Down direction and stated -0.5% to -2% interval hit; forecast -120bp versus -56.59bp overestimated downside by 63.41bp."
+    },
+    "intraday_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Early follow-through below open occurred, then the index recovered much of the drawdown. Forecast +0.4% above open is contradicted by daily high=open; formal trend_down hit is withheld."
+    },
+    "close_hypothesis": {
+      "grade": "partially_correct",
+      "note": "Down direction and Bear class hit, but -115bp forecast versus -61.38bp actual overestimated downside by 53.62bp."
+    },
+    "breadth_hypothesis": {
+      "grade": "correct",
+      "note": "Official stock-count breadth strongly negative: 163 up versus 849 down. Dated intraday coverage supports OTC underperformance, but exact closing OTC return was not retrieved."
+    },
+    "bull_script": {
+      "grade": "not_realized",
+      "note": "Index high remained below 46900 and previous close; no +50bp close."
+    },
+    "base_script": {
+      "grade": "partially_correct",
+      "note": "Opening range and recovery path partially occurred, but close remained below the -50bp Base boundary. Financials did not provide broad closing support."
+    },
+    "bear_script": {
+      "grade": "partially_correct",
+      "note": "Terminal Bear return and negative breadth occurred, but the low 46170 stayed above 46140 and the large recovery prevents treating all selloff clauses as confirmed."
+    }
+  },
+  "key_driver_evaluation": [
+    {
+      "driver_index": 0,
+      "driver": "台指期最後夜盤收46,140、相對參考價下跌1,144點（-2.42%）。",
+      "grade": "partially_correct",
+      "note": "Night-futures weakness correctly indicated direction but exaggerated cash-gap and terminal magnitude."
+    },
+    {
+      "driver_index": 1,
+      "driver": "Nasdaq -2.15%、SOX -3.83%、TSM ADR -2.28%，海外科技與本地夜盤同向偏空。",
+      "grade": "correct",
+      "note": "Negative overseas technology mapping aligned with local electronics weakness and negative breadth; exact causal share not isolated."
+    },
+    {
+      "driver_index": 2,
+      "driver": "週一08:50前Nasdaq期貨約+0.8%、S&P期貨約+0.5%，提供開低後修復反證。",
+      "grade": "partially_correct",
+      "note": "Recovery counterevidence was useful directionally, but the later bounce cannot be causally assigned to NQ futures without an aligned series."
+    },
+    {
+      "driver_index": 3,
+      "driver": "10/16 TAIEX收47,111.26、+0.30%，上市696漲/293跌、OTC +0.85%，前日廣度良好。",
+      "grade": "partially_correct",
+      "note": "Prior positive breadth did not persist. Snapshot used news 696/293 universe rather than official stock-column 684/286; retained as an input-quality issue, not corrected in prediction."
+    },
+    {
+      "driver_index": 4,
+      "driver": "美國10年期殖利率約5.0645%；Brent約108.06美元、早盤下跌1.6%，利率略緩但能源仍高。",
+      "grade": "unverified",
+      "note": "Rates and energy are context; no independently measured same-day causal contribution."
+    },
+    {
+      "driver_index": 5,
+      "driver": "台積電法說基本面正向，但10/16現貨收2,420且ADR續跌，價格接受度偏弱。",
+      "grade": "partially_correct",
+      "note": "TSMC traded weak intraday but returned to flat at the close; forecast gave insufficient weight to its closing-auction support."
+    },
+    {
+      "driver_index": 6,
+      "driver": "中國GDP、工業生產與零售資料預定10:00發布，實際值未納入。",
+      "grade": "satisfied_process_rule",
+      "note": "Unreleased 10:00 China data were excluded from the snapshot; no causal attribution to that release is made without evidence."
+    }
+  ],
+  "invalidation_condition_evaluation": [
+    {
+      "condition": "若現貨未開低，open_direction=down立即失效，但不得回寫本快照。",
+      "grade": "not_triggered",
+      "note": "Market opened down."
+    },
+    {
+      "condition": "若開低後30分鐘台積電收復2,420、指數站回前收且上漲家數超過60%，Bear/trend_down情境失效。",
+      "grade": "not_triggered",
+      "note": "Index never returned to previous close; full conjunction failed irrespective of the missing 30-minute breadth series."
+    },
+    {
+      "condition": "若跌破46,140且OTC、AI權值、金融與非電子同步轉弱，selloff尾端風險高於點估。",
+      "grade": "not_triggered",
+      "note": "Reported low 46170 remained above 46140; no confirmed break of that reference."
+    },
+    {
+      "condition": "10:00中國數據、08:50後消息及09:00後現貨行情只能用於覆盤。",
+      "grade": "satisfied",
+      "note": "Post-cutoff observations were used only in evaluation; original snapshot unchanged."
+    },
+    {
+      "condition": "本檔不得宣稱為TEJ、ARIMA或TimesFM OHLC模型預測。",
+      "grade": "satisfied",
+      "note": "Legacy forecast not represented as a TEJ/ARIMA/TimesFM OHLC prediction."
+    }
+  ],
+  "error_labels": [
+    "late_prediction_persistence",
+    "legacy_model_output",
+    "gap_magnitude_overestimate",
+    "close_downside_overestimate",
+    "intraday_path_error",
+    "regime_inference_overstatement",
+    "weight_misspecification",
+    "missing_intraday_data",
+    "breadth_universe_mismatch_in_input"
+  ],
+  "error_attribution": {
+    "data": "Official MI_INDEX was retrieved successfully. OHLC endpoint first timed out then returned an explicit security block; no further attempts, using dated CNA OHLC instead. Minute VWAP, intraday breadth path and official OTC closing return unavailable.",
+    "inference": "Correct negative daily sign did not imply persistent one-way trend; first selloff then 652.08-point recovery should be separated.",
+    "weight": "Overnight risk-off over-weighted versus recovery/closing-auction support; financial relative resilience did not hold at the close (-0.94% versus TAIEX -0.61%).",
+    "magnitude": "Opening downside overestimated 63.41bp; terminal downside overestimated 53.62bp.",
+    "regime": "Trend_down framing partly correct early but incomplete for a session ending only 22.56 points below open; no formal regime accuracy awarded."
+  },
+  "actual_driver_attribution": [
+    {
+      "claim": "Technology pressure and broad risk reduction were visible.",
+      "evidence": "Official 849 decliners versus 163 advancers; midcap100 -1.48%, smallcap300 -1.54%, ex-financial/electronics -1.77%.",
+      "causal_status": "Observed cross-sectional evidence; not an exact causal decomposition."
+    },
+    {
+      "claim": "A later recovery, including TSMC closing-auction support, limited the index loss.",
+      "evidence": "CNA dated report identifies late buying and TSMC returning to flat; low 46170 to close 46822.08 recovered 652.08 points.",
+      "causal_status": "Observed path plus reported mechanism; exact index-point contribution unavailable."
+    },
+    {
+      "claim": "Defensive rotation did not uniformly protect non-technology sectors.",
+      "evidence": "Financial -0.94%, plastics -2.09%, shipping -1.89%, oil/gas -4.95%; communication network +0.28% and retail +1.06% were exceptions.",
+      "causal_status": "Official sector observations."
+    }
+  ],
+  "source_conflicts": [
+    {
+      "field": "breadth",
+      "official": {
+        "up": 163,
+        "down": 849,
+        "flat": 61
+      },
+      "cna": {
+        "up": 167,
+        "down": 864,
+        "flat": 72
+      },
+      "resolution": "Use official MI_INDEX stock column; news population is incompletely specified."
+    },
+    {
+      "field": "turnover",
+      "official_total_twd": 864444044683,
+      "cna_session_twd": 825100000000,
+      "resolution": "Store separately; different coverage, not the same metric."
+    },
+    {
+      "field": "opening_point_vs_early_drop",
+      "resolution": "Use CNA dedicated opening report and daily summary O=46844.64. Headlines quoting >800-point 'opening' drops refer to later early trading, not the first index print."
+    },
+    {
+      "field": "official_OHLC_access",
+      "resolution": "MI_INDEX verified close. Failed/security-blocked OHLC endpoint was not used as evidence; CNA supplied O/H/L."
+    }
+  ],
+  "proposed_model_changes": [
+    {
+      "proposal": "Separate cash-auction gap from first-30-minute drawdown and closing-auction recovery, especially when overseas risk-off meets positive morning futures counterevidence.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Treat financial defense as a separately tested sector hypothesis; do not equate relative intraday resilience with closing outperformance.",
+      "status": "monitor_only"
+    },
+    {
+      "proposal": "Freeze breadth universe to official stock column and retain news-universe values separately; never revise a frozen prediction to fix its input.",
+      "status": "data_quality_fix_required"
+    },
+    {
+      "proposal": "Enforce 08:30 cutoff/08:40 persistence for new OHLC cohort and freeze minute-regime scoring before formal aggregate use.",
+      "status": "methodology_fix_required"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_model_logic_change",
+    "reason": "Retain proposals for prospective/walk-forward testing; late legacy sample does not establish a validated new-model improvement."
+  },
+  "limitations": [
+    "Legacy output misses current cutoff and persistence contract despite pre-cash-open publication.",
+    "No eight-target TAIEX/TX OHLC forecast exists in this snapshot; no new-model OHLC metrics inferred.",
+    "No formal minute-based regime scoring or exact closing OTC return.",
+    "Single-day Brier does not measure probability calibration across days.",
+    "China-data and central-bank-news causal effects not assigned without aligned evidence."
+  ],
+  "source_manifest": [
+    {
+      "name": "TWSE MI_INDEX official 2026-10-19",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261019&type=ALLBUT0999",
+      "retrieval_method": "Direct HTTP JSON; stat=OK; date=20261019",
+      "role": "Official close, sector indices, total turnover and stock-column breadth"
+    },
+    {
+      "name": "CNA daily summary 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190116.aspx",
+      "published_at": "2026-10-19T13:58:00+08:00",
+      "role": "Dated open/high/low, session turnover and news breadth; close cross-check"
+    },
+    {
+      "name": "CNA close analysis 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190112.aspx",
+      "updated_at": "2026-10-19T14:01:00+08:00",
+      "role": "Dated selloff/recovery path, TSMC closing auction and technology driver evidence"
+    },
+    {
+      "name": "CNA intraday 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190039.aspx",
+      "role": "Intraday OTC underperformance; not used as a closing OTC return"
+    },
+    {
+      "name": "TWSE OHLC endpoint retrieval failure",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261019",
+      "retrieval_status": "One timeout and one explicit security-block HTML response; no further attempts",
+      "role": "No OHLC values attributed to this inaccessible endpoint; dated CNA OHLC used instead"
+    }
+  ],
+  "v0_modified": false,
+  "model_logic_modified": false
+}
