@@ -1,0 +1,69 @@
+{
+  "trading_date": "2026-10-19",
+  "previous_close": 47111.26,
+  "open": 46844.64,
+  "high": 46844.64,
+  "low": 46170,
+  "close": 46822.08,
+  "change_points": -289.18,
+  "change_pct": -0.61,
+  "turnover": 864444044683,
+  "turnover_unit": "TWD",
+  "turnover_scope": "TWSE MI_INDEX total (1~15); broader scope than session turnover",
+  "regular_session_turnover_twd": 825100000000,
+  "regular_session_turnover_source": "CNA",
+  "breadth_up": 163,
+  "breadth_down": 849,
+  "breadth_flat": 61,
+  "breadth_unmatched": 5,
+  "breadth_uncompared": 5,
+  "breadth_scope": "TWSE MI_INDEX stock column, excludes ETF/warrant and TPEx universes",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "sector_returns_pct": {
+    "taiwan50": -0.34,
+    "midcap100": -1.48,
+    "smallcap300": -1.54,
+    "electronics": -0.41,
+    "semiconductor": -0.24,
+    "financial": -0.94,
+    "ex_financial_electronics": -1.77,
+    "plastics": -2.09,
+    "plastics_chemical_aggregate": -2.41,
+    "shipping": -1.89,
+    "oil_gas": -4.95,
+    "communication_network": 0.28,
+    "retail": 1.06
+  },
+  "source_manifest": [
+    {
+      "name": "TWSE MI_INDEX official 2026-10-19",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261019&type=ALLBUT0999",
+      "retrieval_method": "Direct HTTP JSON; stat=OK; date=20261019",
+      "role": "Official close, sector indices, total turnover and stock-column breadth"
+    },
+    {
+      "name": "CNA daily summary 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190116.aspx",
+      "published_at": "2026-10-19T13:58:00+08:00",
+      "role": "Dated open/high/low, session turnover and news breadth; close cross-check"
+    },
+    {
+      "name": "CNA close analysis 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190112.aspx",
+      "updated_at": "2026-10-19T14:01:00+08:00",
+      "role": "Dated selloff/recovery path, TSMC closing auction and technology driver evidence"
+    },
+    {
+      "name": "CNA intraday 2026-10-19",
+      "url": "https://www.cna.com.tw/news/afe/202610190039.aspx",
+      "role": "Intraday OTC underperformance; not used as a closing OTC return"
+    },
+    {
+      "name": "TWSE OHLC endpoint retrieval failure",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=json&date=20261019",
+      "retrieval_status": "One timeout and one explicit security-block HTML response; no further attempts",
+      "role": "No OHLC values attributed to this inaccessible endpoint; dated CNA OHLC used instead"
+    }
+  ]
+}
