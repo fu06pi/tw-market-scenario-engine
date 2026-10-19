@@ -1,0 +1,134 @@
+{
+  "trading_date": "2026-10-19",
+  "status": "formal_preopen_legacy_compatibility",
+  "generated_at": "2026-10-19T08:57:17+08:00",
+  "data_cutoff_at": "2026-10-19T08:50:00+08:00",
+  "v0_frozen_at": "2026-10-19T08:42:16+08:00",
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_validation": "Generated before cash open from the V0 hypothesis frozen at 08:42:16 and sources available by 08:50. No 2026-10-19 cash-session data or 10:00 China data release was used. This is not a TEJ/ARIMA/TimesFM OHLC forecast.",
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?queryYear=115&response=html",
+      "publisher": "TWSE",
+      "facts": {
+        "is_trading_day": true
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://tw.stock.yahoo.com/future",
+      "publisher": "Yahoo Taiwan / TAIFEX",
+      "observation_end_at": "2026-10-17T05:00:00+08:00",
+      "facts": {
+        "tx_night_last": 46140,
+        "reference_change_points": -1144,
+        "reference_return_pct": -2.42
+      }
+    },
+    {
+      "id": "us_market",
+      "url": "https://apnews.com/article/c27809783ae3230b44c26e5ee4bea056",
+      "publisher": "AP / compiled market data",
+      "facts": {
+        "nasdaq_return_pct": -2.15,
+        "sox_return_pct": -3.83,
+        "tsmc_adr_return_pct": -2.28
+      }
+    },
+    {
+      "id": "monday_futures",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-10-19/",
+      "publisher": "Reuters",
+      "published_at": "2026-10-19T08:38:32+08:00",
+      "facts": {
+        "nasdaq_futures_return_pct": 0.8,
+        "sp500_futures_return_pct": 0.5,
+        "us10y_yield_pct": 5.0645,
+        "brent_usd": 108.06,
+        "brent_return_pct": -1.6
+      }
+    },
+    {
+      "id": "taiwan_structure",
+      "url": "https://www.twse.com.tw/zh/trading/historical/mi-index.html",
+      "publisher": "TWSE / V0 frozen record",
+      "facts": {
+        "previous_close": 47111.26,
+        "previous_return_pct": 0.3,
+        "advancers": 696,
+        "decliners": 293,
+        "otc_return_pct": 0.85,
+        "financial_return_pct": 1.1,
+        "previous_range_pct": 1.12
+      }
+    },
+    {
+      "id": "tsmc",
+      "url": "https://investor.tsmc.com/english/quarterly-results/2026/q3",
+      "publisher": "TSMC Investor Relations",
+      "facts": {
+        "previous_close": 2420,
+        "q3_eps_twd": 29.43,
+        "q4_revenue_guidance_usd_billion_low": 52.3,
+        "q4_revenue_guidance_usd_billion_high": 54.3
+      }
+    },
+    {
+      "id": "china_event",
+      "url": "https://www.stats.gov.cn/szst/",
+      "publisher": "National Bureau of Statistics of China",
+      "facts": {
+        "release_at": "2026-10-19T10:00:00+08:00",
+        "market_expected_gdp_yoy_pct": 4.4
+      },
+      "limitations": "Actual GDP, industrial production and retail sales were not published by cutoff and were excluded."
+    },
+    {
+      "id": "v0_frozen",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "publisher": "V0 財金晨報預測與覆盤資料庫",
+      "frozen_at": "2026-10-19T08:42:16+08:00",
+      "range": "每日預測與覆盤!A161:Z176",
+      "facts": {
+        "items": 16,
+        "summary": "夜盤-2.42%、SOX -3.83%、Nasdaq -2.15%、TSM ADR -2.28%同向偏空；開低0.5%–2.0%；收盤偏空；廣度低於50%；NQ期貨早盤反彈為反證。"
+      }
+    }
+  ],
+  "feature_values": {
+    "taifex_night_reference_return_pct": -2.42,
+    "taifex_vs_cash_close_bps": -206.17,
+    "nasdaq_return_pct": -2.15,
+    "sox_return_pct": -3.83,
+    "tsmc_adr_return_pct": -2.28,
+    "nasdaq_futures_return_pct": 0.8,
+    "us10y_yield_pct": 5.0645,
+    "brent_usd": 108.06,
+    "previous_day_return_pct": 0.3,
+    "previous_day_advancer_decliner_ratio": 2.3754,
+    "previous_otc_return_pct": 0.85,
+    "monday_reopen_flag": 1
+  },
+  "limitations": [
+    "Current main-branch README still states that the TEJ-backed OHLC engine is under architecture migration and has not been formally switched into this daily workflow.",
+    "Exclude this snapshot from TimesFM/ARIMA/new OHLC performance claims.",
+    "Probabilities and bps are uncalibrated legacy scenario priors.",
+    "The final Friday night session is mapped into Monday Reopen Regime; same-calendar-date merging is not used.",
+    "China 10:00 actual data and all post-08:50 information are excluded."
+  ],
+  "forecast_method": {
+    "probabilities": {
+      "bull": 0.11,
+      "base": 0.39,
+      "bear": 0.5
+    },
+    "scenario_definition": "Legacy thresholds: bull close >=+50bps, bear <=-50bps, base between.",
+    "gap_bps": -120,
+    "gap_reason": "Night futures, SOX, Nasdaq and TSM ADR are consistently negative. Monday Nasdaq futures rebound prevents mapping the full futures discount into cash gap.",
+    "close_bps": -115,
+    "close_reason": "External semiconductor weakness and de-risking dominate; strong prior-day breadth and positive Monday futures leave a meaningful intraday rebound path."
+  }
+}
