@@ -1,0 +1,62 @@
+{
+  "trading_date": "2026-10-20",
+  "generated_at": "2026-10-20T08:53:15+08:00",
+  "data_cutoff_at": "2026-10-20T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "af46908f12712e0a74f953e3cb8fe3b2acf1fd246eb47cdac0c32a190bb57f7e",
+  "scenarios": {
+    "bull": 0.32,
+    "base": 0.5,
+    "bear": 0.18
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "range",
+    "breadth_direction": "flat",
+    "expected_open_gap_bps": 8,
+    "expected_close_return_bps": 25
+  },
+  "narrative": {
+    "market_view": "海外科技跌深反彈，但台指期夜盤及台幣未確認；偏向高波動震盪修復，非新上升趨勢。量化機率為未校準研究先驗。",
+    "open_hypothesis": "以昨日46822.08為基準，預期接近平盤小幅開高約8bps、37.46點至46859.54；海外半導體向上而夜盤-0.17%背離，方向低信心，另觀察±40bps區間。",
+    "intraday_hypothesis": "預期range而非單向趨勢；首30分鐘可先測承接或先反彈，兩者不預設順序。昨日期貨折價及明日月結算增加雙向波動；盤中路徑僅未驗證情境。",
+    "close_hypothesis": "預期小幅收高25bps、117.06點至46939.14；隔夜科技反彈與昨日低點修復支持，但台幣弱、殖利率高及前日廣度惡化抑制幅度。",
+    "breadth_hypothesis": "預期flat：前日僅16.20%上漲可能修復，但不足以高信心預測全面普漲；OTC/ABF/金融需獨立判讀。",
+    "bull_script": "台積電守穩2420並收復開盤區，指數站穩47000、上漲家數占非平盤逾60%，期貨折價收斂，反彈擴散，收盤報酬≥50bps。",
+    "base_script": "平盤至小幅開高，科技權值修復但期貨與匯率限制追價，反覆測試46822與47000，收盤落在-50至+50bps，以小漲為中心。",
+    "bear_script": "海外反彈未獲現貨接受，台積電失守2420且跌破2390、上漲家數占比低於35%，跌破前收後持續弱勢，收盤≤-50bps。"
+  },
+  "key_drivers": [
+    "TX202610已結束夜盤46691、-78點，非結算價；與海外科技背離",
+    "Nasdaq +1.11%、SOX約+1.6%、TSM ADR +1.84%",
+    "新台幣前收32.445、貶0.107，外資承接壓力",
+    "美10年債息盤中逾5.14%、油價高檔：限制估值修復",
+    "昨日廣度16.20%與CLV96.66%背離，不能從指數修復推普漲",
+    "09:00 LPR尚未公布、15:00鴻海會議及美國晚間數據不納入結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換，不列其績效"
+  ],
+  "invalidation_conditions": [
+    "開高後首30分鐘跌破46822並持續低於VWAP，廣度<35%，小漲range主情境失效",
+    "台積電低於2390且權值與OTC同步惡化，轉向Bear情境",
+    "指數站穩47000、廣度>60%且期貨折價收斂，range主情境可能被Bull趨勢取代",
+    "以上只供事後驗證，凍結後不修改晨間機率與數字"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-20",
+      "item": "08:44凍結17項今日盤前假說",
+      "source_row": "每日預測與覆盤!A177:P193",
+      "note": "原樣保存於manifest。採用隔夜背離、開盤/收盤分離及固定池；未修改Sheet。"
+    },
+    {
+      "trading_date": "2026-10-19",
+      "item": "海外科技利空對Open與Close分開；ABF獨立催化；金融非必然避險；中性帶保留硬門檻",
+      "source_row": "模型修正紀錄!A37:J40",
+      "note": "僅候選規則，未宣稱單日教訓已通過統計驗證。"
+    }
+  ],
+  "snapshot_hash": "5658df02dc49df3b7f5b856898fef3c915edb1416a83b9772cc93b53826555a3"
+}
