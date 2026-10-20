@@ -1,0 +1,97 @@
+{
+  "trading_date": "2026-10-20",
+  "previous_close": 46822.08,
+  "open": 46712.57,
+  "high": 46967.91,
+  "low": 46163.03,
+  "close": 46292.93,
+  "turnover": 758684000000,
+  "breadth_up": 269,
+  "breadth_down": 701,
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261020&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-10-20",
+      "retrieved_at": "2026-10-20T15:19:40+08:00",
+      "role": "Official stock-only breadth and all-session turnover; date=20261020,stat=OK",
+      "extracted": {
+        "trading_date": "2026-10-20",
+        "stat": "OK",
+        "stock_breadth": {
+          "up": 269,
+          "down": 701,
+          "flat": 104,
+          "no_trade": 3,
+          "no_comparison": 7
+        },
+        "turnover_all_sessions": 798690781399,
+        "turnover_stock": 716640291753
+      }
+    },
+    {
+      "id": "cna_daily",
+      "url": "https://www.cna.com.tw/news/afe/202610200151.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T13:59:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "OHLC, change, regular-session turnover; breadth 276/713/117 is a differing pool, not used"
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202610200145.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T13:43:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Intraday reversal, heavyweight weakness, OTC qualitative decline"
+    },
+    {
+      "id": "cna_intraday",
+      "url": "https://www.cna.com.tw/news/afe/202610200055.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T10:43:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Early selloff then rebound, sector divergence; not minute-bar classifier"
+    },
+    {
+      "id": "cna_fx",
+      "url": "https://www.cna.com.tw/news/afe/202610200058.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T10:55:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Intraday NTD depreciation beyond32.6; not closing FX"
+    },
+    {
+      "id": "cna_preopen",
+      "url": "https://www.cna.com.tw/news/afe/202610200016.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T08:27:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Overseas rebound and local night divergence"
+    },
+    {
+      "id": "udn_tsmc",
+      "url": "https://money.udn.com/money/story/12509/9826296",
+      "publisher": "Economic Daily AI-assisted",
+      "published_at": "2026-10-20T14:41:59+08:00",
+      "trading_date": "2026-10-20",
+      "role": "TSMC daily low2395,secondary confidence only; breadth conflicts official so excluded"
+    }
+  ],
+  "recorded_at": "2026-10-20T07:20:37Z",
+  "turnover_unit": "TWD",
+  "turnover_scope": "regular session, rounded CNA 7586.84億元",
+  "turnover_all_sessions": 798690781399,
+  "turnover_all_sessions_scope": "TWSE MI_INDEX all securities including odd-lot/after-hours; not interchangeable with regular-session turnover",
+  "breadth_flat": 104,
+  "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+  "data_quality": {
+    "official_daily_ohlc_endpoint": "blocked with explicit security message; no bypass attempted",
+    "ohlc_source": "dated CNA, crosschecked with TWSE-sourced MoneyLink",
+    "otc_return_pct": "unavailable; null not zero",
+    "heavyweight_contribution_points": "unavailable; empty not estimated"
+  }
+}
