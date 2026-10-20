@@ -1,0 +1,449 @@
+{
+  "trading_date": "2026-10-20",
+  "target_date": "2026-10-20",
+  "evaluated_at": "2026-10-20T07:20:37Z",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "status": "completed_legacy_diagnostic_with_data_quality_caveats",
+  "market_status": "trading_day_confirmed_by_dated_official_MI_INDEX",
+  "prediction_path": "predictions/2026-10-20.json",
+  "prediction_snapshot_hash": "5658df02dc49df3b7f5b856898fef3c915edb1416a83b9772cc93b53826555a3",
+  "prediction_blob_sha": "c376af42996cef6bbafa3659114e5b78e4715016",
+  "prediction_commit_sha": "d59f891ed53e1146765f1560378b75b7f334d964",
+  "prediction_persisted_at": "2026-10-20T08:53:45+08:00",
+  "snapshot_integrity": {
+    "raw_json_canonical_sha256": "5658df02dc49df3b7f5b856898fef3c915edb1416a83b9772cc93b53826555a3",
+    "raw_hash_matches": true,
+    "repo_pydantic_canonical_sha256": "e497ef78d2ecc2974298fcdf048be0e32ee5ebffd7990bf92fe357a0b9dab423",
+    "repo_verify_snapshot": false,
+    "reason": "Stored hash uses raw JSON; repo canonicalization coerces integer targets to floats and fills V0 optional null fields. Do not overwrite historical snapshot. Anchor evaluation to immutable Git blob and commit.",
+    "integrity_claim": "exact Git object reference, not standard repo hash verification"
+  },
+  "realization_path": "realizations/2026-10-20.json",
+  "realization": {
+    "trading_date": "2026-10-20",
+    "previous_close": 46822.08,
+    "open": 46712.57,
+    "high": 46967.91,
+    "low": 46163.03,
+    "close": 46292.93,
+    "turnover": 758684000000,
+    "breadth_up": 269,
+    "breadth_down": 701,
+    "otc_return_pct": null,
+    "heavyweight_contribution_points": {},
+    "source_manifest": [
+      {
+        "id": "twse_mi_index",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261020&type=ALLBUT0999",
+        "publisher": "TWSE",
+        "trading_date": "2026-10-20",
+        "retrieved_at": "2026-10-20T15:19:40+08:00",
+        "role": "Official stock-only breadth and all-session turnover; date=20261020,stat=OK",
+        "extracted": {
+          "trading_date": "2026-10-20",
+          "stat": "OK",
+          "stock_breadth": {
+            "up": 269,
+            "down": 701,
+            "flat": 104,
+            "no_trade": 3,
+            "no_comparison": 7
+          },
+          "turnover_all_sessions": 798690781399,
+          "turnover_stock": 716640291753
+        }
+      },
+      {
+        "id": "cna_daily",
+        "url": "https://www.cna.com.tw/news/afe/202610200151.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-10-20T13:59:00+08:00",
+        "trading_date": "2026-10-20",
+        "role": "OHLC, change, regular-session turnover; breadth 276/713/117 is a differing pool, not used"
+      },
+      {
+        "id": "cna_close",
+        "url": "https://www.cna.com.tw/news/afe/202610200145.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-10-20T13:43:00+08:00",
+        "trading_date": "2026-10-20",
+        "role": "Intraday reversal, heavyweight weakness, OTC qualitative decline"
+      },
+      {
+        "id": "cna_intraday",
+        "url": "https://www.cna.com.tw/news/afe/202610200055.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-10-20T10:43:00+08:00",
+        "trading_date": "2026-10-20",
+        "role": "Early selloff then rebound, sector divergence; not minute-bar classifier"
+      },
+      {
+        "id": "cna_fx",
+        "url": "https://www.cna.com.tw/news/afe/202610200058.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-10-20T10:55:00+08:00",
+        "trading_date": "2026-10-20",
+        "role": "Intraday NTD depreciation beyond32.6; not closing FX"
+      },
+      {
+        "id": "cna_preopen",
+        "url": "https://www.cna.com.tw/news/afe/202610200016.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-10-20T08:27:00+08:00",
+        "trading_date": "2026-10-20",
+        "role": "Overseas rebound and local night divergence"
+      },
+      {
+        "id": "udn_tsmc",
+        "url": "https://money.udn.com/money/story/12509/9826296",
+        "publisher": "Economic Daily AI-assisted",
+        "published_at": "2026-10-20T14:41:59+08:00",
+        "trading_date": "2026-10-20",
+        "role": "TSMC daily low2395,secondary confidence only; breadth conflicts official so excluded"
+      }
+    ],
+    "recorded_at": "2026-10-20T07:20:37Z",
+    "turnover_unit": "TWD",
+    "turnover_scope": "regular session, rounded CNA 7586.84億元",
+    "turnover_all_sessions": 798690781399,
+    "turnover_all_sessions_scope": "TWSE MI_INDEX all securities including odd-lot/after-hours; not interchangeable with regular-session turnover",
+    "breadth_flat": 104,
+    "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+    "data_quality": {
+      "official_daily_ohlc_endpoint": "blocked with explicit security message; no bypass attempted",
+      "ohlc_source": "dated CNA, crosschecked with TWSE-sourced MoneyLink",
+      "otc_return_pct": "unavailable; null not zero",
+      "heavyweight_contribution_points": "unavailable; empty not estimated"
+    }
+  },
+  "evaluation_method": {
+    "implementation": "src/tw_scenario/metrics.py",
+    "metrics_blob_sha": "cd798032b7da4dd7b2757f85367a486dd611e865",
+    "config": "config/targets.yaml",
+    "direction_flat_threshold_bps": 5,
+    "scenario_thresholds_bps": {
+      "bull": 50,
+      "bear": -50
+    },
+    "brier_definition": "sum((p-onehot)^2)/3; outcome based only on close return, not full conjunctive script",
+    "regime_and_breadth": "Manual diagnostic only: missing frozen minute classifier and breadth neutral rule; exclude from aggregate hit rate"
+  },
+  "quantitative_evaluation": {
+    "trading_date": "2026-10-20",
+    "open_direction_realized": "down",
+    "open_direction_hit": 0,
+    "close_direction_realized": "down",
+    "close_direction_hit": 0,
+    "open_gap_bps_realized": -23.38853805725849,
+    "open_gap_mae_bps": 31.38853805725849,
+    "close_return_bps_realized": -113.0129203999486,
+    "close_return_mae_bps": 138.0129203999486,
+    "mfe_bps": 31.14556209378172,
+    "mae_bps": -140.75624149973765,
+    "scenario_outcome": "bear",
+    "brier_score": 0.34160000000000007,
+    "direction_hits": 0,
+    "direction_targets_scored": 2,
+    "direction_accuracy": 0,
+    "open_gap_signed_error_bps": 31.38853805725849,
+    "close_return_signed_error_bps": 138.0129203999486,
+    "expected_open_points": 46859.537663999996,
+    "open_absolute_error_points": 146.96766399999615,
+    "expected_close_points": 46939.1352,
+    "close_absolute_error_points": 646.2051999999967,
+    "top_scenario": "base",
+    "top_scenario_hit": false,
+    "bear_probability": 0.18,
+    "multiclass_log_loss": 1.7147984280919266,
+    "calibration_error": null,
+    "calibration_note": "Single-day proper scoring is not multi-day calibration evidence",
+    "breadth_up": 269,
+    "breadth_down": 701,
+    "advancer_share_nonflat": 0.277319587628866,
+    "advance_decline_net": -432,
+    "breadth_direction_diagnostic": "down",
+    "breadth_direction_hit": null,
+    "intraday_regime_diagnostic": "two_sided_rebound_then_selloff",
+    "intraday_regime_hit": null,
+    "intraday_range_points": 804.88,
+    "close_location_value": 0.16139051784116976,
+    "baseline_lift": null,
+    "baseline_note": "No frozen same-day numeric baseline; do not fabricate lift"
+  },
+  "narrative_evaluation": [
+    {
+      "field": "market_view",
+      "grade": "partially_correct",
+      "note": "High volatility and overseas/local divergence correct; repair-biased center underestimated downside.",
+      "error_types": [
+        "weight_misestimation",
+        "inference_error"
+      ]
+    },
+    {
+      "field": "open_hypothesis",
+      "grade": "incorrect",
+      "note": "Predicted +8bp/up, realized -23.39bp/down. Within exploratory ±40bp band does not rescue wrong point direction.",
+      "error_types": [
+        "magnitude_error",
+        "weight_misestimation"
+      ]
+    },
+    {
+      "field": "intraday_hypothesis",
+      "grade": "partially_correct",
+      "note": "Early fall and recovery then renewed afternoon selloff confirmed two-sided volatility; neutral range failed to capture weak close. No formal minute classifier.",
+      "error_types": [
+        "regime_error",
+        "data_missing"
+      ]
+    },
+    {
+      "field": "close_hypothesis",
+      "grade": "incorrect",
+      "note": "Predicted +25bp versus -113.01bp, error138.01bp; local selling overwhelmed overnight rebound.",
+      "error_types": [
+        "magnitude_error",
+        "inference_error",
+        "weight_misestimation"
+      ]
+    },
+    {
+      "field": "breadth_hypothesis",
+      "grade": "partially_correct",
+      "note": "Avoiding broad rally was appropriate; breadth improved relative to cited prior16.20% but remained weak at27.73% nonflat. flat label not supported; no frozen neutral band.",
+      "error_types": [
+        "inference_error",
+        "data_missing"
+      ]
+    },
+    {
+      "field": "bull_script",
+      "grade": "incorrect",
+      "note": "Not realized: index high46967.91 never reached47000; TSMC remained under2420; close negative and official breadth27.73%.",
+      "error_types": []
+    },
+    {
+      "field": "base_script",
+      "grade": "incorrect",
+      "note": "Modal50% scenario failed: open negative, close below -50bp and no test of47000.",
+      "error_types": [
+        "weight_misestimation"
+      ]
+    },
+    {
+      "field": "bear_script",
+      "grade": "partially_correct",
+      "note": "Return/breadth bearish branches realized, but strict TSMC<2390 conjunction not confirmed (secondary reported daily low2395). Bear numeric outcome is not full-script hit.",
+      "error_types": [
+        "inference_error"
+      ]
+    }
+  ],
+  "key_driver_evaluation": [
+    {
+      "index": 0,
+      "claim": "TX202610已結束夜盤46691、-78點，非結算價；與海外科技背離",
+      "grade": "correct",
+      "note": "Preopen negative local futures sign was consistent with cash open; overweighting overseas rebound was the inference error."
+    },
+    {
+      "index": 1,
+      "claim": "Nasdaq +1.11%、SOX約+1.6%、TSM ADR +1.84%",
+      "grade": "partially_correct",
+      "note": "Overseas rebound verified as prior fact and some early rotation; failed to dominate local close."
+    },
+    {
+      "index": 2,
+      "claim": "新台幣前收32.445、貶0.107，外資承接壓力",
+      "grade": "correct",
+      "note": "NTD weakness persisted intraday beyond32.6, consistent with domestic selling pressure; no final-flow causal estimate."
+    },
+    {
+      "index": 3,
+      "claim": "美10年債息盤中逾5.14%、油價高檔：限制估值修復",
+      "grade": "partially_correct",
+      "note": "Valuation risk plausible, but independent same-day rate/oil contributions not measured; causality unproven."
+    },
+    {
+      "index": 4,
+      "claim": "昨日廣度16.20%與CLV96.66%背離，不能從指數修復推普漲",
+      "grade": "correct",
+      "note": "No broad rally:269 up/701 down. Do not infer breadth from index rebound."
+    },
+    {
+      "index": 5,
+      "claim": "09:00 LPR尚未公布、15:00鴻海會議及美國晚間數據不納入結果",
+      "grade": "partially_correct",
+      "note": "Temporal exclusion appropriate; later LPR/meeting values not independently collected or attributed."
+    },
+    {
+      "index": 6,
+      "claim": "formal_preopen_legacy_compatibility；新OHLC模型尚未切換，不列其績效",
+      "grade": "correct",
+      "note": "Legacy compatibility label retained; not TEJ/TimesFM/ARIMA performance."
+    }
+  ],
+  "invalidation_evaluation": [
+    {
+      "index": 0,
+      "status": "not_triggered_as_written",
+      "note": "Opening was down, so 'after up open' prerequisite failed; first30minute VWAP data absent. Do not retroactively rewrite trigger.",
+      "error_type": "inference_error"
+    },
+    {
+      "index": 1,
+      "status": "not_confirmed",
+      "note": "TSMC daily low2395 in secondary source, not below2390; official minute path absent. Bear return occurred without full trigger.",
+      "error_type": "inference_error"
+    },
+    {
+      "index": 2,
+      "status": "not_triggered",
+      "note": "Index never touched47000; official breadth below60%."
+    },
+    {
+      "index": 3,
+      "status": "complied",
+      "note": "All frozen numbers/probabilities retained."
+    }
+  ],
+  "error_attribution": {
+    "data_missing": [
+      "Minute bars/VWAP,OTC exact return,heavyweight contribution points,final FX/flow attribution",
+      "Repo-normalized snapshot hash mismatch",
+      "No frozen breadth neutral/regime label rules"
+    ],
+    "inference_error": [
+      "Overseas rebound converted into positive local open/close despite night/FX divergence",
+      "Bear conjunction too restrictive; invalidation0 excludes actual down-open case"
+    ],
+    "weight_misestimation": [
+      "Too much overnight tech rebound, too little domestic liquidity/FX/financial/ABF weakness"
+    ],
+    "magnitude_error": {
+      "open_bp": 31.38853805725849,
+      "close_bp": 138.0129203999486
+    },
+    "regime_error": "Repair/range framing missed afternoon downside; diagnostic not formal classifier"
+  },
+  "observed_market_drivers": [
+    "TSMC and electronics weights weakened; afternoon selling followed morning rebound",
+    "Financial sector -2.36%; ABF names weak, OEM resilience insufficient",
+    "NTD depreciation beyond32.6 intraday; local liquidity risk persisted"
+  ],
+  "causal_caveat": "These are source-supported co-movements and plausible interpretation, not measured causal contributions; do not use yesterday institutional flows as today's data.",
+  "proposed_model_changes": [
+    {
+      "proposal": "Use repo canonical_payload/model_dump for future freezing; fill defaults consistently and verify after write. Never repair hash by editing historical snapshot.",
+      "status": "data_quality_fix_required"
+    },
+    {
+      "proposal": "Compare separate open/close models emphasizing local night/FX disagreement against overseas rebound using walk-forward validation.",
+      "status": "research_candidate_not_implemented"
+    },
+    {
+      "proposal": "Make future invalidations cover down-open cases and separately score each conjunct; do not retrofit today's rules.",
+      "status": "research_candidate_not_implemented"
+    },
+    {
+      "proposal": "Freeze breadth pool/neutral band and minute-regime method before formal scoring.",
+      "status": "methodology_fix_required"
+    },
+    {
+      "proposal": "Enforce08:30 data cutoff and08:40 persistence for new OHLC cohort; retain this late legacy record excluded.",
+      "status": "pipeline_quality_required"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_model_logic_change",
+    "reason": "One day insufficient for predictive rule change; data quality defect warrants future pipeline fix. No dedicated correction structure found; proposals stored here only."
+  },
+  "sample_eligibility": {
+    "legacy_diagnostic": true,
+    "formal_hash_verified_aggregate": false,
+    "new_ohlc_model_performance": false,
+    "reason": "Legacy scenario,08:50 cutoff/08:53:45 persistence exceed08:30/08:40 requirements; normalized hash fails."
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261020&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-10-20",
+      "retrieved_at": "2026-10-20T15:19:40+08:00",
+      "role": "Official stock-only breadth and all-session turnover; date=20261020,stat=OK",
+      "extracted": {
+        "trading_date": "2026-10-20",
+        "stat": "OK",
+        "stock_breadth": {
+          "up": 269,
+          "down": 701,
+          "flat": 104,
+          "no_trade": 3,
+          "no_comparison": 7
+        },
+        "turnover_all_sessions": 798690781399,
+        "turnover_stock": 716640291753
+      }
+    },
+    {
+      "id": "cna_daily",
+      "url": "https://www.cna.com.tw/news/afe/202610200151.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T13:59:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "OHLC, change, regular-session turnover; breadth 276/713/117 is a differing pool, not used"
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202610200145.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T13:43:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Intraday reversal, heavyweight weakness, OTC qualitative decline"
+    },
+    {
+      "id": "cna_intraday",
+      "url": "https://www.cna.com.tw/news/afe/202610200055.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T10:43:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Early selloff then rebound, sector divergence; not minute-bar classifier"
+    },
+    {
+      "id": "cna_fx",
+      "url": "https://www.cna.com.tw/news/afe/202610200058.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T10:55:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Intraday NTD depreciation beyond32.6; not closing FX"
+    },
+    {
+      "id": "cna_preopen",
+      "url": "https://www.cna.com.tw/news/afe/202610200016.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-10-20T08:27:00+08:00",
+      "trading_date": "2026-10-20",
+      "role": "Overseas rebound and local night divergence"
+    },
+    {
+      "id": "udn_tsmc",
+      "url": "https://money.udn.com/money/story/12509/9826296",
+      "publisher": "Economic Daily AI-assisted",
+      "published_at": "2026-10-20T14:41:59+08:00",
+      "trading_date": "2026-10-20",
+      "role": "TSMC daily low2395,secondary confidence only; breadth conflicts official so excluded"
+    }
+  ],
+  "v0_modified": false,
+  "prediction_modified": false,
+  "model_logic_modified": false,
+  "date_checks": {
+    "prediction": true,
+    "realization": true,
+    "evaluation": true,
+    "no_historical_fallback": true
+  },
+  "readback_required": true
+}
