@@ -1493,3 +1493,50 @@ def daily_live_postclose(
     except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
         _abort(_safe_error(exc))
     _echo_json({**result, "evidence": str(evidence_path)})
+
+
+@app.command('timesfm-head-calibrate')
+def timesfm_head_calibrate(
+    dataset_dir: Path,
+    experiment_dir: Path,
+    output_dir: Path,
+    config: Path = Path('config/quant/timesfm_output_head_short.json'),
+    calibration_config: Path = Path('config/quant/head_interval_recalibration.json'),
+):
+    """Evaluate frozen causal marginal calibration on saved development folds."""
+    from .head_calibration import evaluate_saved_head_intervals
+
+    report, rows = evaluate_saved_head_intervals(
+        dataset_dir, experiment_dir, json.loads(config.read_text()),
+        json.loads(calibration_config.read_text()))
+    write_once(output_dir / 'result.json', report)
+    write_once(output_dir / 'predictions.json', rows)
+    typer.echo(json.dumps({'result': str(output_dir / 'result.json'),
+                           'status': report['development_gate']['status'],
+                           'coverage': report['development_gate']['interval_coverage']}))
+
+
+@app.command('timesfm-head-replay')
+def timesfm_head_replay(
+    dataset_dir: Path,
+    bundle: Path,
+    trading_date: str,
+    output_dir: Path,
+    config: Path = Path('config/quant/timesfm_output_head_short.json'),
+    cache_dir: Path = Path('data/raw/timesfm3'),
+    budget_root: Path = Path('reports/generated/quant/experiments'),
+):
+    """Verify real checkpoint daily replay within the existing cumulative budget."""
+    from .head_budget import HeadBudget
+    from .head_daily import verify_head_replay
+
+    settings = _read_json(config)
+    with HeadBudget(budget_root / 'output-head-search-budget.json',
+                    digest({'operation': 'daily_replay', 'bundle': _read_json(bundle),
+                            'date': trading_date}), settings['search_budget_seconds'],
+                    settings['budget_cpu_seconds']) as budget:
+        report_path = output_dir / 'replay-result.json'
+        report = verify_head_replay(dataset_dir, bundle, date.fromisoformat(trading_date),
+                                   output_dir / 'snapshot.json', cache_dir, report_path)
+        budget.result_path = report_path
+    _echo_json(report)
