@@ -1,5 +1,16 @@
 # Project Status
 
+## 2026-10-21 後續訓練與替代路線
+
+64、96 日視窗已完成兩市場共 12 個真實 fold checkpoint。64 日收盤 MAE 改善為 TAIEX 7.98%、TX 12.59%；96 日分別為 -2.42%、3.92%，未改善最佳候選。這些是 development 結果，完整 gate 均 FAIL；比較集合限於 zero/range/night_regression，不包含本輪 ARIMA/ARIMAX。
+
+已執行固定 126 日、至少 40 個已公布殘差的因果邊際區間校準，兩市場各保留全部 240 日（40 暖機、200 校準），點預測完全不變。全樣本 O/H/L/C 覆蓋：TAIEX 83.75%/77.08%/75.83%/73.75%；TX 74.58%/76.67%/72.92%/77.08%。完整 gate 仍 FAIL，TAIEX bootstrap 下界亦未過。部分區間 score 比原模型惡化，不能只報 H/L 改善。詳見 reports/quant/output-head-calibration-{taiex,tx}-2026-10-21.json 與 output-head-context-comparison-2026-10-21.json。
+
+128 日候選 TAIEX 已啟動、TX 等待同一運算鎖；尚無完成結果，不能把啟動視為訓練完成。此前四次訓練實用 10,839.78 秒／總上限 21,600 秒；目前 reservation 不等於實際完成用量，權威紀錄為 reports/generated/quant/experiments/output-head-search-budget.json。
+
+每日推論已增加原生 walk-forward fold bundle，驗證來源 identity、fold summary、時間邊界與 checkpoint hash；不把 fold 假裝成 standalone refit。新增 timesfm-head-replay 可用同一預算將真實 checkpoint 經每日快照路徑重算，再對保存 fold 預測以 0.001 點容差比對。真實大型模型 replay 尚待資源鎖釋出；合成測試不算真實執行證據。production_switch=false，正式排程未變。
+
+
 ## 2026-10-21 真實 output-head 訓練進度
 
 64交易日候選已完成 TAIEX、TX 各三折 expanding validation，兩市場各240/240日成功，六個fold checkpoint均已保存並核對SHA256。這是自訂 frozen-backbone/output-head 訓練，非官方微調API；不是新的獨立final驗收。
