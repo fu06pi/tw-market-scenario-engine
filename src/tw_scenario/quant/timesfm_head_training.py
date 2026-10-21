@@ -151,15 +151,25 @@ def restore_output_head(model, checkpoint_path: Path, result: dict, *, forecast_
     import torch
     from safetensors.torch import load_file
 
-    if result.get("schema_version") != "timesfm3-custom-output-head-training-v1":
-        raise ValueError("requires standalone trained output-head result")
+    schema = result.get("schema_version")
+    if schema not in ("timesfm3-custom-output-head-training-v1",
+                      "timesfm3-walk-forward-fold-inference-v1"):
+        raise ValueError("requires standalone or provenance-checked walk-forward head result")
     identity = result["identity"]
     if (identity.get("timesfm_code_commit") != CODE_COMMIT
             or identity.get("timesfm_weight_revision") != WEIGHT_REVISION
             or result.get("weight_repo") != WEIGHT_REPO):
         raise ValueError("checkpoint model revision mismatch")
     # Early-stop labels selected this head and must precede the forecast too.
-    last_label = max(identity["train_end"], identity["early_stop_split"][1])
+    if schema == "timesfm3-walk-forward-fold-inference-v1":
+        if result.get("research_only") is not True or result.get("production_candidate") is not False:
+            raise ValueError("walk-forward head is research only")
+        declared_end = identity["folds"][result["source_fold"] - 1]["train"][1]
+        if result["training_label_end"] != declared_end:
+            raise ValueError("fold label boundary mismatch")
+        last_label = declared_end
+    else:
+        last_label = max(identity["train_end"], identity["early_stop_split"][1])
     if date.fromisoformat(last_label) >= forecast_day:
         raise ValueError("checkpoint contains forecast-day or future labels")
     if _sha256(checkpoint_path) != result["checkpoint"]["sha256"]:
