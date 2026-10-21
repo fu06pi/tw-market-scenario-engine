@@ -1,0 +1,264 @@
+{
+  "trading_date": "2026-10-21",
+  "generated_at": "2026-10-21T08:57:00+08:00",
+  "data_cutoff_at": "2026-10-21T08:50:00+08:00",
+  "snapshot_status": "formal_preopen_legacy_compatibility",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_scope": "Legacy TAIEX scenario only. All model inputs were public or frozen by 08:50 Asia/Taipei. The repository's new OHLC pipeline requires an 08:30 cutoff/08:40 persistence and is not switched; this snapshot is excluded from that pipeline's metrics.",
+  "recovery": "Today's GitHub prediction and manifest both returned 404. Recovered today's V0 hypotheses frozen at 08:36 verbatim and generated an independent V1 compatibility quantification. No prior-day V1 probabilities or targets were reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash excluded from manifest hash; snapshot_hash excluded from prediction hash.",
+  "calendar": {
+    "is_trading_day": true,
+    "basis": "Wednesday; TWSE official pages carried trading-day dated 2026/10/21 announcements, ex-right records and disposition periods; no holiday closure was listed.",
+    "urls": [
+      "https://www.twse.com.tw/",
+      "https://www.twse.com.tw/en/announcement/ex-right/twt48u.html"
+    ]
+  },
+  "sources": [
+    {
+      "id": "v0_google_sheet",
+      "title": "財金晨報預測與覆盤資料庫",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "sheet_range": "每日預測與覆盤!A194:P211",
+      "frozen_at": "2026-10-21T08:36:00+08:00",
+      "access_mode": "read_only",
+      "raw_rows_markdown": [
+        "| 194 | 2026/10/21 | TAIEX開盤Gap | 10/20現貨收46292.93；台指夜盤46975、TSM ADR+1.16%、SOX約-2.3%，結算日開盤可能反彈但外資賣超。 | 09:00開盤>46292.93；幅度+0.2%至+1.1%另計 | 開高68%；幅度53% | 夜盤+634，ADR+1.16%；SOX-2.3%及外資賣超795.3億元為反證。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 195 | 2026/10/21 | 首30分鐘下探 | 10/20開高走低、外資大賣，今日月結算可能再有開盤後賣壓；夜盤上漲是反證。 | 09:00–09:30分鐘K最低價/當日開盤價-1≤-0.30% | 55% | 前日尾盤弱、SOX約-2.3%；不可用全日低點代替首30分鐘。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 196 | 2026/10/21 | 首30分鐘反彈 | 台指夜盤+634及台積電期貨+17，結算日可能短線回補；SOX下跌限制追價。 | 09:00–09:30分鐘K最高價/當日開盤價-1≥+0.30% | 56% | 夜盤與ADR反彈，但結算不代表必然拉高。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 197 | 2026/10/21 | TAIEX收盤方向 | 10/20收46292.93(-1.13%)；道瓊+1.02%、Nasdaq約-0.02%、SOX約-2.3%，本地外資連賣。 | 10/21正式收盤>46292.93；盤中漲不算命中 | 56% | 夜盤反彈支持修復；10/20海外科技反彈卻收跌的修正規則降低信心。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 198 | 2026/10/21 | TAIEX開盤至收盤 | 夜盤反彈可能帶來開高，但10/20開46712.57收46292.93，賣壓可能延續。 | 10/21正式收盤<當日開盤價；與前收方向獨立計分 | 54% | 月結算、SOX弱、外資賣超；不把開高當全天多頭。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 199 | 2026/10/21 | 上市市場廣度 | 10/20上市276漲713跌，非平盤上漲比率27.91%；隔夜道瓊上漲不保證全面回穩。 | 上市上漲家數/(上漲+下跌)<50%，平盤不計 | 59% | 前日廣度弱、SOX跌約2.3%，禁止單靠超跌推均值回歸。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 200 | 2026/10/21 | OTC相對TAIEX | 10/20 OTC 387.88(-1.566%)弱於TAIEX -1.130%，海外半導體續跌。 | 10/21 OTC收盤報酬<TAIEX收盤報酬，均以前收計 | 58% | 電子中小型承壓，前日超跌不保證反彈。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 201 | 2026/10/21 | 台積電2330開盤與收盤 | 10/20收2405；ADR 425.08(+1.16%)、台積電期夜盤2425(+17)，但SOX-2.3%且前日ADR反彈未傳導。 | 10/21開盤>2405；13:30收盤>2405，分開計分 | 開盤69%；收盤59% | ADR與台積電期貨偏多；海外SOX弱、ADR溢價不可線性映射。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 202 | 2026/10/21 | 聯發科2454收盤 | 10/20收4150，當日開4260後走低；SOX約-2.3%，IC設計短線承接弱。 | 10/21聯發科正式收盤≤4150；另記相對TAIEX | 57% | 昨日開高走低、海外晶片弱；夜盤反彈為反證。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 203 | 2026/10/21 | AI大型權值固定四檔 | 固定2330、2317、2382、2308；10/20四檔等權約-0.003%，2漲2跌；SOX下跌而ADR上漲。 | 四檔以前收計等權報酬≤0；另記上漲檔數 | 54% | 族群分化，海外半導體續跌；夜盤反彈降低信心。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 204 | 2026/10/21 | ABF載板三雄 | 固定3037欣興、8046南電、3189景碩；10/20等權-5.002%，海外SOX再跌，超跌反彈是反證。 | 三檔以前收計等權報酬≤0 | 56% | 前日三雄齊跌、SOX-2.3%；不機械延續跌幅。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 205 | 2026/10/21 | CCL材料雙股 | 固定2383台光電、6274台燿；10/20等權-4.210%，海外科技弱但可能技術回補。 | 兩檔等權報酬≤0；另記事前±0.20%中性帶，不改硬門檻 | 56% | 前日高檔獲利了結、SOX弱，保留個股分化。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 206 | 2026/10/21 | DRAM南亞科2408相對強度 | 10/20南亞科收422(-3.211%)，弱於大盤約2.08pp；美光台灣桃園工會擬10/22一日罷工，尚無生產中斷證據。 | 南亞科10/21收盤報酬<TAIEX收盤報酬 | 55% | DRAM相對弱、SOX跌；工會事件非已實現供給衝擊。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 207 | 2026/10/21 | 金融類股相對強度 | 10/20金融-2.36%，弱於大盤-1.13%；昨夜道瓊+1.02%強於Nasdaq，可能出現金融相對修復。 | 10/21金融類指數收盤報酬>TAIEX收盤報酬 | 57% | 前日金融超跌、海外價值股強；金融不必然防禦，低信心。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 208 | 2026/10/21 | 塑膠類股相對強度 | 中國需求不明朗，Brent約108.8美元，塑化輪動不穩；油價回落可能改善成本亦可能壓低產品報價。 | 10/21塑膠類指數收盤報酬<TAIEX收盤報酬 | 53% | 中國需求與油價高波動；傳產相對方向低信心。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 209 | 2026/10/21 | 半導體設備固定三檔 | 固定帆宣6196、漢唐2404、弘塑3131；台積電資本支出基本面強，但SOX約-2.3%、本地設備股承壓。 | 三檔等權收盤報酬<TAIEX收盤報酬 | 54% | 海外晶片弱、短線資金撤出；台積電資本支出正向為反證。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 210 | 2026/10/21 | 鴻海2317相對強度 | 10/20鴻海約+0.835%，相對TAIEX抗跌；10/20 15:00投資人會議結果尚未獨立核實，不把未知內容當利多。 | 10/21鴻海收盤報酬>TAIEX收盤報酬 | 56% | 前日相對強、夜盤回升；海外AI分化及未知會議內容限制信心。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |",
+        "| 211 | 2026/10/21 | TAIEX全日振幅 | 10/20最高46967.91、最低46163.03，振幅約1.72%以前收計；今日月契約結算，外資連賣且夜盤反彈。 | 10/21(全日最高-最低)/46292.93≥1.10%；另記CLV | 67% | 前日高波動、月結算與海外晶片/夜盤背離，不預設結算方向。 |  |  |  |  |  |  |  |  | 2026/10/21 08:36 Asia/Taipei盤前快照；已參考模型修正至10/20。10/20現貨、美股、台指夜盤為截止資訊；今日月結算、今晚美股財報及EIA尚未發生，不得前視。原始A:F/O不回改；G:N/P留收盤覆盤。來源：期交所夜盤(經濟日報10/21 05:25)、AP美股10/20、中央社TSM ADR10/21、經濟日報外資10/21、Reuters美光工會10/20。 |  |"
+      ]
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketExcel?marketCode=1",
+      "available_at": "2026-10-21T05:00:00+08:00",
+      "availability_basis": "Official completed 2026/10/20 15:00 to 2026/10/21 05:00 after-hours session.",
+      "values": {
+        "contract": "TX202610",
+        "open": 46490,
+        "high": 47098,
+        "low": 46136,
+        "last": 46975,
+        "change_points": 634,
+        "change_pct": 1.37,
+        "volume": 30400,
+        "settlement": null
+      }
+    },
+    {
+      "id": "us_equities",
+      "url": "https://www.reuters.com/world/asia-pacific/nasdaq-futures-dip-oil-prices-climb-earnings-loom-2026-10-20/",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-10-20",
+        "dow_close": 52495.88,
+        "dow_return_pct": 1.02,
+        "sp500_close": 7712.57,
+        "sp500_return_pct": 0.28,
+        "nasdaq_close": 26424.82,
+        "nasdaq_return_pct": -0.02,
+        "sox_return_pct_approx": -2.3
+      },
+      "quality_note": "SOX is approximate from the 08:36 V0 frozen snapshot/market report; the final broad-index closes are from Reuters/AP."
+    },
+    {
+      "id": "tsmc_adr",
+      "url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E7%A9%8D%E9%9B%BBadr20%E6%97%A5%E4%B8%8A%E6%BC%B24-86%E7%BE%8E%E5%85%83%E6%BC%B2%E5%B9%851-16-%E6%8A%98%E5%8F%B0%E8%82%A12772-97%E5%85%83-214141152.html",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-10-20",
+        "close_usd": 425.08,
+        "change_usd": 4.86,
+        "return_pct": 1.16,
+        "adr_conversion_usd_twd": 32.617,
+        "implied_twd_price": 2772.97
+      }
+    },
+    {
+      "id": "taiwan_previous_close",
+      "url": "https://www.yuanta.com.tw/eYuanta/Securities/News/GetAPItem?Type=StockHotNews&id=202610200161813",
+      "published_at": "2026-10-20",
+      "values": {
+        "taiex_close": 46292.93,
+        "taiex_change_points": -529.15,
+        "taiex_return_pct": -1.13,
+        "turnover_twd_billion": 798.691
+      }
+    },
+    {
+      "id": "foreign_flow",
+      "url": "https://www.cna.com.tw/news/afe/202610200242.aspx",
+      "published_at": "2026-10-20T17:13:00+08:00",
+      "updated_at": "2026-10-20T18:36:00+08:00",
+      "values": {
+        "foreign_net_sell_twd_billion": 79.54,
+        "total_institutions_net_sell_twd_billion": 96.804,
+        "foreign_tx_net_short_contracts": 89748,
+        "foreign_tx_net_short_change_contracts": -1397,
+        "tsmc_foreign_net_sell_shares": 9365000
+      }
+    },
+    {
+      "id": "rates_fx_oil",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-10-20/",
+      "published_at": "2026-10-20T10:09:00+08:00",
+      "available_before_cutoff": true,
+      "values": {
+        "us10y_yield_pct": 5.121,
+        "us10y_change_bps": -1.5,
+        "dollar_index": 101.71,
+        "dollar_index_return_pct": -0.25,
+        "brent_close_usd": 108.79,
+        "brent_return_pct": -0.69,
+        "wti_november_close_usd": 101.79,
+        "wti_return_pct": -1.8
+      },
+      "quality_note": "USD/TWD exact official close was not independently verified before cutoff; TSM ADR conversion used 32.617 only as an indicative cross-check, not a standalone FX close."
+    },
+    {
+      "id": "events",
+      "available_before_cutoff": true,
+      "events": [
+        {
+          "event": "TX October monthly settlement",
+          "scheduled_at": "2026-10-21",
+          "status_at_cutoff": "pending"
+        },
+        {
+          "event": "Meta and Tesla earnings",
+          "scheduled_at": "2026-10-21 US time",
+          "status_at_cutoff": "pending"
+        },
+        {
+          "event": "EIA petroleum report",
+          "scheduled_at": "2026-10-21 US time",
+          "status_at_cutoff": "pending"
+        },
+        {
+          "event": "SpaceX earnings",
+          "status_at_cutoff": "reported_after US close; shares +4% late"
+        },
+        {
+          "event": "Netflix outlook",
+          "status_at_cutoff": "reported after US close; shares -6% late"
+        }
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "'模型修正紀錄'!A37:J50",
+    "values": [
+      [
+        "2026/10/19",
+        "海外科技利空對開盤有效、對Close須加入日內修復",
+        "10/19盤前SOX-3.83%、台指夜盤-1144，預測開低及收黑；偏空Close信心66%。",
+        "10/19 TAIEX開-0.566%、09:24前再下探≥1.283%、收-0.614%；CLV 96.66%。",
+        "開低及收黑方向命中，但開盤即全天最高、低點回升652.08點；收盤在日高附近，風險偏好修復不可忽略。",
+        "收盤型態權重錯估（非方向錯誤）",
+        "隔夜訊號主要估Open；Close獨立加入盤中回升比例、CLV、權值尾盤集合競價；盤初急殺不自動推導全天收最低。",
+        "提高盤中現貨與尾盤價格接受度權重；保留開盤Gap獨立模型。",
+        "海外科技/夜盤負向一致且現貨盤初急殺後出現低接買盤時。",
+        "候選規則；禁止用當日盤後資訊回寫10/19盤前快照；跨日walk-forward驗證。"
+      ],
+      [
+        "2026/10/19",
+        "ABF固定池不能由SOX弱勢直接推負報酬",
+        "10/19盤前SOX-3.83%，預測欣興/南電/景碩等權<0。",
+        "10/19欣興+2.752%、南電+1.845%、景碩-1.800%，等權+0.932%。",
+        "固定池反向收紅；欣興與南電外資目標價調升、擴產題材提供相對獨立的支撐，但景碩仍跌。",
+        "海外產業映射推論錯誤＋個股催化權重低估",
+        "ABF等權預測加入個股事件、券商目標價調整與當日價格接受度；固定池不因結果而變更。",
+        "降低SOX單因子對ABF等權方向的直接權重。",
+        "海外半導體弱但台灣ABF有獨立公司/研究催化。",
+        "僅候選規則；需更多事件樣本及公告時間驗證。"
+      ],
+      [
+        "2026/10/19",
+        "科技risk-off不保證金融相對抗跌",
+        "10/16金融相對TAIEX+0.80pp，10/19盤前預測金融繼續跑贏。",
+        "10/19金融-0.94%、TAIEX-0.614%，金融超額-0.326pp。",
+        "前日金融相對強勢未延續；指數急殺後金融亦收黑且落後大盤。",
+        "輪動持續性權重錯估",
+        "金融獨立建相對強弱，不把科技risk-off等同金融必然避險；納入利率/信用風險與輪動衰減。",
+        "下修前日金融超額對隔日的機械外推權重。",
+        "全球風險偏好惡化、金融前日已相對強勢時。",
+        "候選規則；多日回測再決定權重。"
+      ],
+      [
+        "2026/10/19",
+        "接近零的等權預測需同時保留硬門檻與中性帶",
+        "10/19 CCL雙股預測等權<0，並事先註明±0.2%中性帶敏感度。",
+        "10/19台光電-0.774%、台燿+0.929%，等權+0.077%。",
+        "依原硬門檻判錯；但落在事前註明的±0.2%中性帶，屬近零而非強烈反向。",
+        "微幅方向推論錯誤；個股分化",
+        "所有近零等權預測保留原門檻計分，另列中性帶敏感度；禁止事後更改勝負定義。",
+        "硬方向分數不調整；新增校準/容忍帶統計。",
+        "固定股票池等權報酬接近零、成分股方向互相抵銷。",
+        "候選評分規則；避免因0.077pp符號反轉誇大錯誤嚴重度。"
+      ],
+      [
+        "2026/10/20",
+        "海外半導體反彈與台灣現貨方向可持續背離",
+        "10/20盤前SOX+1.60%、TSM ADR+1.84%，預測台股開高/收紅與TSMC開收高。",
+        "TAIEX開-0.234%、收-1.130%；TSMC開2400、收2405均低於昨收2420；OTC收387.88，較昨收394.05約-1.566%，弱於TAIEX。",
+        "隔夜海外反彈沒有傳導至台股收盤；台指夜盤折價、台幣走弱及亞洲科技風險仍在。",
+        "海外映射推論錯誤＋本地資金/期貨權重錯估",
+        "隔夜SOX/ADR只作開盤候選訊號，加入台指基差、台幣/外資流向及亞洲半導體現貨確認；Close獨立評估。",
+        "下修海外單因子對台股開收盤方向的權重，提高本地資金訊號。",
+        "海外科技反彈但台指夜盤仍折價、前日廣度極弱。",
+        "候選規則，須跨日walk-forward；不得回改10/20盤前快照。"
+      ],
+      [
+        "2026/10/20",
+        "AI/ABF/CCL/DRAM分產品池與尾盤價格接受度",
+        "盤前預測AI四檔、ABF三雄、CCL雙股等權>0，南亞科跑贏大盤。",
+        "AI四檔等權約-0.003%且2漲2跌；ABF等權約-5.00%；CCL等權約-4.21%；南亞科-3.21%弱於TAIEX。",
+        "海外科技反彈及前日ABF強勢未阻止本地獲利了結，個股分化且收盤明顯弱。",
+        "產業beta推論錯誤＋動能延續權重錯估",
+        "固定股票池計算個股收盤與等權；對前日大漲、開高走低、台幣/資金面加入擁擠及價格接受度懲罰。",
+        "降低SOX與前日單日強弱直接映射次日Close的權重；增加產品級風險。",
+        "前日ABF逆勢強勢、海外SOX反彈但台股廣度疲弱。",
+        "候選規則；AI等權近零必須按事前硬門檻判錯，不得改判中性命中。"
+      ],
+      [
+        "2026/10/20",
+        "首30分鐘極值須時間戳證實，與全日極值隔離",
+        "10/20預測首30分鐘Open-to-Low≤-0.30%、Open-to-High≥+0.30%。",
+        "09:18前已跌至約46397（較開盤-0.676%）足以證明Low門檻；全日高46967.91但首30分鐘高點尚未核實。",
+        "低點門檻可證實；全日高點不能用來判首30分鐘High門檻，應保留待核。",
+        "資料時間粒度不足（非方向判斷失誤）",
+        "分開儲存有時戳09:00–09:30分鐘K極值、全天極值與門檻判定；資料缺口不得當作命中或失敗。",
+        "提高可稽核分鐘資料優先級，不允許以全天數值代替早盤時窗。",
+        "含開盤區突破、首30分鐘上下探的日內預測。",
+        "資料品質規則；取得正式分鐘K後才可解除待核狀態。"
+      ]
+    ],
+    "application_note": "Applied only as candidate rules: separate Open from Close; reduce mechanical SOX/ADR mapping; weight local FX/foreign flow/futures basis and acceptance; keep breadth and product pools independent. No Sheet cells were changed."
+  },
+  "missing_or_qualified": [
+    "Exact official USD/TWD 2026/10/20 close was not independently verified before 08:50; the 32.617 ADR conversion rate is an indicative cross-check only.",
+    "SOX -2.3% is approximate in the V0 frozen snapshot; no false precision is introduced.",
+    "No same-day 09:00 onward price, settlement result, breadth, earnings outcome after cutoff, or EIA outcome is included."
+  ]
+}
+
