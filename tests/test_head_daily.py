@@ -11,7 +11,7 @@ from typer.testing import CliRunner
 
 from tw_scenario.quant import head_daily
 from tw_scenario.quant.cli import app
-from tw_scenario.quant.contracts import TZ
+from tw_scenario.quant.contracts import TZ, digest
 from tw_scenario.quant.daily import load_snapshot
 from tw_scenario.quant.timesfm_head_training import (
     CODE_COMMIT,
@@ -23,8 +23,9 @@ from tw_scenario.quant.timesfm_head_training import (
 )
 
 
+@pytest.mark.parametrize("fold_artifact", [False, True])
 @pytest.mark.parametrize("joint", [False, True])
-def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, monkeypatch, joint):
+def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, monkeypatch, joint, fold_artifact):
     torch = pytest.importorskip("torch")
     save_file = pytest.importorskip("safetensors.torch").save_file
 
@@ -65,8 +66,25 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
     bundle = {}
     for market in (("JOINT",) if joint else ("TAIEX", "TX")):
         market_result = {**result, "identity": {**result["identity"], "instrument": market}}
-        (tmp_path / f"{market}.json").write_text(json.dumps(market_result))
-        bundle[market] = {"result": f"{market}.json", "checkpoint": checkpoint.name}
+        folder = tmp_path / market
+        folder.mkdir()
+        if fold_artifact:
+            split = {"train": ["2025-01-01", "2025-01-02"],
+                     "validation": ["2025-01-03", "2025-01-06"]}
+            identity = {k: v for k, v in market_result["identity"].items()
+                        if k not in ("train_end", "early_stop_split")}
+            identity["folds"] = [split]
+            summary = {"train_split": split["train"], "validation_split": split["validation"],
+                       "training": training, "checkpoint": {"sha256": checkpoint_hash}}
+            market_result = {"schema_version": "timesfm3-output-head-walk-forward-v1",
+                             "weight_repo": WEIGHT_REPO, "identity": identity,
+                             "fold_results": [summary], "status": "DEVELOPMENT_GATE_FAIL"}
+            (folder / 'fold-1.json').write_text(json.dumps({
+                "identity_hash": digest(identity), "fold": 1, "summary": summary}))
+        (folder / 'result.json').write_text(json.dumps(market_result))
+        bundle[market] = {"result": f"{market}/result.json", "checkpoint": checkpoint.name}
+        if fold_artifact:
+            bundle[market]["fold"] = 1
     bundle_path = tmp_path / "bundle.json"
     bundle_path.write_text(json.dumps(bundle))
     (tmp_path / "manifest.json").write_text('{"dataset_id":"synthetic"}')
