@@ -93,7 +93,7 @@ TimesFM 3 是本專題指定研究目標。已固定 code commit `e51928e27119cb
 
 新版模型優先研究另提供 `timesfm-head-train` 與 `timesfm-head-walk-forward`。`--instrument` 可指定 `TAIEX`、`TX` 或 `JOINT`；`JOINT` 以同一個head聯合預測兩市場八個GBUD目標，並以各市場自己的前收還原。它們凍結完整 TimesFM 3 backbone，只允許 `output_head` 更新，使用 GBUD Huber／close-return／pinball／quantile-crossing loss、train-only feature scaling、early stopping、write-once fold結果與可續跑checkpoint。設定固定八個有編號候選，比較256／512 context、`1e-4`／`3e-4` learning rate及0／`1e-4` weight decay，不能在執行後匿名改參數。新增的27項盤前特徵包含夜盤結構、前日OI、基差、換月／到期、日曆及5／20／60日量價狀態；聯合模式保留兩市場各自的27項特徵，舊五特徵介面保持不變，以保存已關閉實驗的程式口徑。開發gate對TAIEX與TX分別選穩定baseline並分別要求close MAE至少改善7.5%、fold多數改善、block-bootstrap下界非負、O/H/L不劣化、區間及99%成功率同時通過；聯合候選只有兩市場都通過才通過，候選排序使用兩市場中較低的close改善率。所有2026-10-08以前資料只作開發，不能重標為新final。
 
-目前新訓練尚未產生checkpoint或成績。2026-10-16實際preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於鎖定的3,072 MiB門檻；套件、commit、權重cache與磁碟皆已就緒。證據見 [`reports/quant/timesfm3-output-head-preflight-2026-10-16.json`](reports/quant/timesfm3-output-head-preflight-2026-10-16.json)。不得降低門檻後把OOM風險包裝成有效實驗。
+歷史阻擋記錄（截至2026-10-16）：當時新訓練尚未產生checkpoint或成績。2026-10-20已完成64日候選兩市場各三折，保存6個checkpoint，但完整開發gate仍為FAIL；見[最新結果](reports/quant/output-head-context64-development-2026-10-20.json)。2026-10-16實際preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於鎖定的3,072 MiB門檻；套件、commit、權重cache與磁碟皆已就緒。證據見 [`reports/quant/timesfm3-output-head-preflight-2026-10-16.json`](reports/quant/timesfm3-output-head-preflight-2026-10-16.json)。不得降低門檻後把OOM風險包裝成有效實驗。
 
 Checkpoint 每日推論入口為 `timesfm-head-daily`。它接受 standalone `timesfm-head-train` 的 `result.json` 及 head safetensors；三折結果本身不是可部署 checkpoint。先鎖定開發候選，再依固定訓練截止日產生 standalone head。每個預測日必須晚於 training 與 early-stop 最後標籤日。模型尚未達標時，此命令僅供顯式研究，原預設 baseline 不變。
 
