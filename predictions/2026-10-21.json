@@ -1,0 +1,63 @@
+{
+  "trading_date": "2026-10-21",
+  "generated_at": "2026-10-21T08:57:00+08:00",
+  "data_cutoff_at": "2026-10-21T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "32d685b5502147a424c8f35096df302b3599662ece415f420d5a40ae544d5c7a",
+  "scenarios": {
+    "bull": 0.28,
+    "base": 0.5,
+    "bear": 0.22
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": 65,
+    "expected_close_return_bps": 20
+  },
+  "narrative": {
+    "market_view": "夜盤強彈與TSM ADR上漲支持開高，但SOX約跌2.3%、外資連10賣且昨日現貨弱勢，主情境是開高後震盪回吐；收盤仍略高於前收，但方向信心低於開盤。",
+    "open_hypothesis": "以10/20 TAIEX收盤46292.93為基準，預期開高約65bps、300.90點至46593.83；V0事前區間為+0.2%至+1.1%。夜盤46975為強正向訊號，但月結算、基差與SOX背離使現貨不直接外推至夜盤最後價。",
+    "intraday_hypothesis": "預期gap_fade：開盤反映夜盤與ADR後，首30分鐘較容易出現至少0.30%的回測，之後在前收與夜盤高檔間雙向震盪。若高開獲廣度與台積電同步接受，才轉為趨勢延伸。",
+    "close_hypothesis": "預期收盤較前收上漲約20bps、92.59點至46385.52，但低於預期開盤；隔夜正向訊號被外資賣超、SOX弱勢與昨日尾盤賣壓抵銷，故Close只給小幅正報酬。",
+    "breadth_hypothesis": "預期breadth down，上漲家數占非平盤家數低於50%；權值可能優於中小型股，OTC與AI/ABF/CCL固定池不因指數開高而自動轉多。",
+    "bull_script": "開高後台積電守穩2405並續強、TAIEX站穩46975附近且上漲家數占比逾60%，期現貨正基差未快速收斂，收盤報酬≥50bps。",
+    "base_script": "開高約20至110bps後回吐，前收46292.93上方反覆震盪；權值撐盤但廣度不足，收盤落在-50至+50bps，以+20bps為中心。",
+    "bear_script": "開高未獲現貨接受，首30分鐘失守前收、台積電跌破2405且廣度低於35%，外資與月結算賣壓擴大，收盤報酬≤-50bps。"
+  },
+  "key_drivers": [
+    "TAIFEX官方TX202610夜盤最後46975、+634點（+1.37%），為最強開盤正向訊號",
+    "TSM ADR收425.08美元、+1.16%，但SOX約-2.3%，半導體訊號分歧",
+    "Dow +1.02%、S&P 500 +0.28%、Nasdaq -0.02%，美股呈價值/防禦勝科技輪動",
+    "10/20 TAIEX收46292.93、-1.13%，外資賣超795.4億元且連10賣",
+    "美10年債息5.121%、Brent 108.79美元、WTI 101.79美元，估值與輸入成本仍偏高",
+    "今日TX月結算提高開盤與盤中基差噪音；晚間Meta/Tesla財報及EIA結果不前視",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換，不列入新模型績效"
+  ],
+  "invalidation_conditions": [
+    "開盤未達前收+20bps或開高後首30分鐘跌破46292.93且持續低於VWAP，預期開高/小漲主情境失效",
+    "TAIEX站穩46975附近、台積電與OTC同步上漲且廣度>60%，gap_fade主情境轉Bull",
+    "台積電跌破2405、廣度<35%且外資/期貨賣壓延續，Close轉Bear",
+    "以上條件只供盤後驗證；凍結後不修改今日晨間機率、方向與點位"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-21",
+      "item": "08:36凍結18項今日盤前假說",
+      "source_row": "每日預測與覆盤!A194:P211",
+      "note": "原樣保存於data manifest；採用開收盤分離、月結算風險、固定池與廣度假說。Google Sheet唯讀、未修改。"
+    },
+    {
+      "trading_date": "2026-10-20",
+      "item": "海外映射下修、本地資金與期貨加權、固定池產品級風險、首30分鐘時間戳規則",
+      "source_row": "模型修正紀錄!A41:J43",
+      "note": "僅候選規則；未宣稱已通過樣本外統計驗證。"
+    }
+  ],
+  "snapshot_hash": "068b8168bb1cb453c91253dc01633bb2df25a10df3576432168d9e813f75f08c"
+}
+
