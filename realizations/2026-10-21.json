@@ -1,0 +1,93 @@
+{
+  "trading_date": "2026-10-21",
+  "previous_close": 46292.93,
+  "open": 46454.33,
+  "high": 47254.93,
+  "low": 46454.33,
+  "close": 46887.77,
+  "turnover": 833191000000,
+  "breadth_up": 600,
+  "breadth_down": 380,
+  "otc_return_pct": 1.94,
+  "heavyweight_contribution_points": {
+    "TSMC": 119
+  },
+  "recorded_at": "2026-10-21T15:19:19+08:00",
+  "turnover_unit": "TWD",
+  "turnover_scope": "regular-session value reported by CNA",
+  "turnover_all_sessions": 862828961216,
+  "turnover_all_sessions_scope": "TWSE MI_INDEX total across listed securities/session scopes; not interchangeable with CNA regular-session value",
+  "breadth_flat": 101,
+  "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+  "session_change_points": 594.84,
+  "session_return_pct": 1.28,
+  "data_quality": {
+    "ohlc_source": "Dated CNA close bulletin, crosschecked with TWSE close and secondary TWSE-sourced reports",
+    "official_mi_index_status": "OK",
+    "otc_source": "nStock/InfoTimes secondary source",
+    "breadth_pool_note": "Official stock-only 600/380/101 used; CNA broader 610/384/113 retained only in source manifest",
+    "intraday_order_note": "Open equals daily low and high preceded close, but no frozen minute series; regime is diagnostic only",
+    "heavyweight_contribution_note": "TSMC 119 points from secondary close report; other contributions unavailable and not estimated"
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261021&type=ALLBUT0999",
+      "trading_date": "2026-10-21",
+      "retrieved_at": "2026-10-21T15:19:19+08:00",
+      "role": "Official trading-day confirmation, close, sectors, stock-only breadth and all-session turnover",
+      "facts": {
+        "date": "20261021",
+        "stat": "OK",
+        "close": 46887.77,
+        "change_points": 594.84,
+        "return_pct": 1.28,
+        "stock_up": 600,
+        "stock_down": 380,
+        "stock_flat": 101,
+        "all_securities_turnover_twd": 862828961216
+      }
+    },
+    {
+      "id": "cna_ohlc",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610210125.aspx",
+      "published_at": "2026-10-21T13:57:00+08:00",
+      "trading_date": "2026-10-21",
+      "role": "Dated TAIEX OHLC, regular-session turnover and broader listed-security counts"
+    },
+    {
+      "id": "cna_close",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610210150.aspx",
+      "published_at": "2026-10-21T14:40:00+08:00",
+      "trading_date": "2026-10-21",
+      "role": "Intraday rally/giveback, AI/ABF/plastics and heavyweight close context"
+    },
+    {
+      "id": "cna_close_quick",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610210122.aspx",
+      "published_at": "2026-10-21T14:16:00+08:00",
+      "trading_date": "2026-10-21",
+      "role": "47000 lost by close and three heavyweight behavior"
+    },
+    {
+      "id": "cnyes_close",
+      "publisher": "Anue Cnyes",
+      "url": "https://news.cnyes.com/news/id/6634947",
+      "published_at": "2026-10-21T14:33:00+08:00",
+      "trading_date": "2026-10-21",
+      "role": "Secondary confirmation of final-auction effect, TSMC contribution, FX and OTC/sector context"
+    },
+    {
+      "id": "nstock_close",
+      "publisher": "nStock/InfoTimes",
+      "url": "https://www.nstock.tw/news/article_c?id=20261021-083908390000",
+      "published_at": "2026-10-21T14:38:56+08:00",
+      "trading_date": "2026-10-21",
+      "role": "Secondary OTC close and turnover; not used for TAIEX OHLC"
+    }
+  ]
+}
