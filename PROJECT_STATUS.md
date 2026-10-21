@@ -1,5 +1,19 @@
 # Project Status
 
+## 2026-10-21 真實 output-head 訓練進度
+
+64交易日候選已完成 TAIEX、TX 各三折 expanding validation，兩市場各240/240日成功，六個fold checkpoint均已保存並核對SHA256。這是自訂 frozen-backbone/output-head 訓練，非官方微調API；不是新的獨立final驗收。
+
+| 市場 | 基準 close MAE | head close MAE | 改善 | 完整開發gate |
+|---|---:|---:|---:|---|
+| TAIEX | 456.47 | 420.06 | 7.98% | FAIL：區間覆蓋、bootstrap下界 |
+| TX | 449.30 | 392.75 | 12.59% | FAIL：區間覆蓋 |
+
+TAIEX改善95% block-bootstrap CI為[-2.74%,15.57%]，TX為[1.47%,21.79%]。High覆蓋兩市場均92.5%，Low為TAIEX66.25%、TX65%，不符合75%～85%。八項點預測誤差、方向、區間score/width、全部fold訓練紀錄及版本見 [完整彙總](reports/quant/output-head-context64-development-2026-10-20.json)。此輪基準集合依凍結設定為zero/range/night_regression，不能宣稱已勝過所有ARIMA/ARIMAX。
+
+已用累積運算5,141.95秒（85.70分鐘），6小時上限剩16,458.05秒。下一輪只改為預定candidate 1／96日context，沿用相同fold、特徵、optimizer及gate，先TAIEX再TX。沒有模型通過完整gate，正式預設仍是鎖定基準，production_switch=false。單機checkpoint真實重載／每日推論驗證與區間校準仍待完成；不以合成測試代替真實模型交付。
+
+
 更新：2026-10-16。
 
 ## 已完成並有執行證據
