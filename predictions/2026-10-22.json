@@ -1,0 +1,66 @@
+{
+  "trading_date": "2026-10-22",
+  "generated_at": "2026-10-22T08:53:04+08:00",
+  "data_cutoff_at": "2026-10-22T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "a078673e3b1cffc41dff23a19dbbb8dd973b51ed4bb5fa115d30fd4b5ea84574",
+  "scenarios": {
+    "bull": 0.29,
+    "base": 0.51,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 35,
+    "expected_close_return_bps": 15
+  },
+  "narrative": {
+    "market_view": "海外科技與半導體反彈、台幣升值及外資終止連10賣支持偏多開盤；但昨日TAIEX已急彈1.28%且高點回吐367點，期貨換月夜盤未核實，因此主情境為小幅開高後震盪回吐，而非高信心趨勢上漲。",
+    "open_hypothesis": "以10/21收盤46887.77為基準，預期開高約35bps、164.11點至47051.88；V0事前區間為0至+0.9%。Nasdaq與SOX正向，但未驗證換月夜盤使Gap幅度下修。",
+    "intraday_hypothesis": "預期gap_fade：開盤後30分鐘可能同時測試+0.30%上探與-0.30%回測。若台積電、OTC和廣度同步接受開高，才由回吐情境轉為trend_up。",
+    "close_hypothesis": "預期收盤較前收上漲約15bps、70.33點至46958.10，但低於預期開盤。隔夜科技利多被昨日急彈後獲利了結、財報分化及換月資料缺口部分抵銷。",
+    "breadth_hypothesis": "預期breadth up但優勢有限，上漲家數占非平盤家數略高於50%；科技擴散可能優於前一日金融與塑化輪動，固定產業池仍需獨立驗證。",
+    "bull_script": "台積電站穩2420上方、指數接受47000至47255區間、OTC同步轉強且廣度>60%，收盤報酬≥50bps。",
+    "base_script": "小幅開高後在46888至47255間震盪，高點回吐但前收有支撐，收盤落在-50至+50bps，以+15bps為中心。",
+    "bear_script": "開高失敗且首30分鐘跌破46887.77，台積電失守2420、廣度<40%，財報分化與連假前降部位主導，收盤報酬≤-50bps。"
+  },
+  "key_drivers": [
+    "Nasdaq +1.05%、SOX +2.15%，海外科技beta正向",
+    "TSM ADR V0凍結值約429美元、+0.92%，但跨來源值有差異，降低權重",
+    "10/21 TAIEX +1.28%但高點回吐367.16點；610漲、384跌",
+    "外資買超9.6億元終止連10賣，新台幣升至32.488",
+    "美10年債息5.111%、Brent 108.82美元、WTI 97.15美元",
+    "期貨換月夜盤最終價未核實，明確不納入硬訊號",
+    "Meta/Tesla盤後偏強與Lam/Netflix等分歧，使科技財報不是單向訊號",
+    "formal_preopen_legacy_compatibility；新OHLC模型未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未高於前收或開高後首30分鐘持續低於46887.77與VWAP，open-up/base失效",
+    "站穩47254.93、台積電與OTC同步上漲且廣度>60%，gap_fade轉Bull/trend_up",
+    "台積電失守2420、廣度<40%且新台幣轉弱，Close轉Bear",
+    "凍結後不以今日盤中或收盤結果修改機率、方向或點位"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-22",
+      "item": "08:38凍結18項盤前假說",
+      "source_row": "每日預測與覆盤!A212:P229",
+      "extracted_at": "2026-10-22T08:53:04+08:00",
+      "note": "原樣保存於data manifest；Google Sheet唯讀且未修改。"
+    },
+    {
+      "trading_date": "2026-10-21",
+      "item": "SOX收盤校驗、極端弱勢隔日雙情境、產業池獨立建模",
+      "source_row": "模型修正紀錄!A44:J46",
+      "extracted_at": "2026-10-22T08:53:04+08:00",
+      "note": "僅候選規則，未宣稱單日樣本已通過walk-forward。"
+    }
+  ],
+  "snapshot_hash": "9738711281fcab689e82752b460972ff852d592204364974e112c9c9be0c628f"
+}
+
