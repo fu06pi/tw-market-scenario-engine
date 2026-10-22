@@ -1,0 +1,174 @@
+{
+  "trading_date": "2026-10-22",
+  "generated_at": "2026-10-22T08:53:04+08:00",
+  "data_cutoff_at": "2026-10-22T08:50:00+08:00",
+  "snapshot_status": "formal_preopen_legacy_compatibility",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_scope": "Legacy TAIEX scenario only. Inputs public or frozen by 08:50 Asia/Taipei. New OHLC pipeline requires 08:30 cutoff/08:40 persistence and has not switched; exclude from new-model metrics.",
+  "recovery": "Today's GitHub prediction and manifest both returned 404. Recovered today's V0 08:38 frozen hypotheses verbatim and independently generated V1 compatibility targets. No prior-day probabilities or targets reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash excluded from manifest hash; snapshot_hash excluded from prediction hash.",
+  "calendar": {
+    "is_trading_day": true,
+    "basis": "Thursday and not a 2026 TWSE/TAIFEX holiday; current official market calendar shows no closure.",
+    "url": "https://www.taifex.com.tw/file/taifex/CHINESE/4/2026Calendar.pdf"
+  },
+  "sources": [
+    {
+      "id": "v0_google_sheet",
+      "title": "財金晨報預測與覆盤資料庫",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "sheet_range": "每日預測與覆盤!A212:P229",
+      "frozen_at": "2026-10-22T08:38:00+08:00",
+      "access_mode": "read_only",
+      "raw_rows_markdown": [
+        "| 212 | 2026/10/22 | TAIEX開盤Gap | 10/21加權指數收46887.77；美股Nasdaq+1.05%、SOX+2.15%、台積電ADR+0.92%；期貨換月需重新核實夜盤。 | 10/22開盤>46887.77；另記Gap介於0%至+0.9% | 開高63%；幅度52% | 海外科技反彈支持開高，但期貨換月且前日已上漲1.28%，故降低信心。 | 2026/10/22 08:38 台灣時間盤前鎖定；參考模型修正紀錄至10/21。SOX使用10/21正式收盤，期貨換月後夜盤未核實不作硬訊號。原始A:F/O不事後修改；G:N/P收盤填。來源：中央社2026/10/21台股收盤、AP 2026/10/21美股收盤、SOX歷史行情。 |  |",
+        "| 213 | 2026/10/22 | 首30分鐘下探 | 昨日開盤即低點、強彈後高點回吐；連續反彈可能引發獲利了結。 | 10/22 09:00–09:30有時間戳分鐘K最低價/開盤價-1≤-0.30% | 55% | 昨日高波動，隔夜美股走強但不保證盤初無賣壓。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 214 | 2026/10/22 | 首30分鐘反彈 | 昨日09:25前已上探逾1%，海外科技反彈可能延續，但不可機械沿用昨日強勢。 | 10/22 09:00–09:30有時間戳分鐘K最高價/開盤價-1≥+0.30% | 56% | Nasdaq+1.05%、SOX+2.15%；昨日早盤承接強。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 215 | 2026/10/22 | TAIEX收盤方向 | 10/21收46887.77，+1.28%，廣度610漲384跌；海外科技上漲但盤後財報反應分歧。 | 10/22正式13:30收盤>46887.77；另記CLV | 55% | Meta盤後偏強、Tesla與Lam偏弱；隔夜訊號不可直接推全天。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 216 | 2026/10/22 | TAIEX開盤至收盤 | 10/21最高47254.93、收46887.77，日高回吐367.16點；開高後可能獲利了結。 | 10/22正式收盤<當日09:00開盤價；獨立於昨收方向 | 52% | 前日高點回落、科技財報分化；多空訊號互抵。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 217 | 2026/10/22 | 上市市場廣度 | 10/21上市610漲384跌，非平盤上漲比率61.37%，但金融塑化漲幅集中。 | 10/22上市上漲家數/(上漲+下跌)>50%，平盤不計 | 54% | 海外科技反彈可能擴散；前日類股輪動未必持續。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 218 | 2026/10/22 | OTC相對TAIEX | 美股半導體上漲利於中小型電子，但前日OTC正式數值尚未雙源確認。 | 10/22 OTC正式收盤報酬>TAIEX收盤報酬，均以前收計 | 52% | SOX+2.15%；資料與產業分化使信心偏低。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21。美股/台股前收已核實；期貨換月後夜盤最終價未核實。原始A:F/O不可事後改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.investing.com/indices/phlx-semiconductor-historical-data |  |",
+        "| 219 | 2026/10/22 | 台積電2330開盤與收盤 | 10/21台積電收2420，10/21美股ADR收429(+0.92%)；10/21公布南部新廠工安事故、部分施工暫停，不能推論晶圓停產。 | 10/22開盤>2420、13:30收盤>2420，分開計分 | 開盤64%；收盤55% | ADR及SOX正式收盤上漲；工地事件與海外價格分歧，降低收盤信心。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 220 | 2026/10/22 | 聯發科2454收盤 | 10/21聯發科收4140(-10)弱於大盤；海外半導體反彈，類比IC財報改善。 | 10/22聯發科正式收盤>4140；另記相對TAIEX | 54% | SOX+2.15%、TI財報營收展望較強；前日個股未跟漲。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 221 | 2026/10/22 | AI大型權值固定四檔 | 固定台積電2330、鴻海2317、廣達2382、台達電2308；海外AI股反彈，Meta財報偏強，但其他科技財報分歧。 | 四檔各以前收計10/22等權報酬>0；另記上漲檔數≥3，分開計分 | 等權56%；家數54% | Nasdaq+1.05%、SOX+2.15%，不得用台積電單股代表四檔。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 222 | 2026/10/22 | ABF載板三雄 | 固定欣興3037、南電8046、景碩3189；10/21等權約+4.609%，可能出現短線獲利了結。 | 三檔各以前收計10/22等權報酬≤0；±0.20%中性帶僅敏感度 | 53% | 前日ABF大幅反彈與SOX+2.15%相互抵銷，微弱偏空。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 223 | 2026/10/22 | CCL材料雙股 | 固定台光電2383、台燿6274；AI材料需求正向，但前期高波動與估值壓力仍在。 | 兩檔各以前收計10/22等權報酬>0；±0.20%中性帶僅敏感度 | 53% | SOX+2.15%、AI需求題材；過去海外反彈未必傳導至CCL。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 224 | 2026/10/22 | DRAM南亞科2408相對強度 | 美光桃園工會宣布10/22上午發動一日罷工，台中工會已達協議；目前無已確認產量損失，不可推論供給立即減少。 | 10/22南亞科收盤報酬>TAIEX當日報酬；另記絕對報酬 | 53% | DRAM事件可能提高關注，但短期供應影響不明、法說利多過去未必轉為股價上漲。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池及硬門檻。盤後財報已公布可納入，今日事件未發生不得前視。原始A:F/O不改；G:N/P收盤填。來源：https://stockanalysis.com/stocks/tsm/history/ ; https://www.reuters.com/business/world-at-work/micron-says-it-has-reached-agreement-with-taiwan-union-2026-10-21/ |  |",
+        "| 225 | 2026/10/22 | 金融類股相對強度 | 10/21金融類+2.55%跑贏TAIEX+1.28%，前日輪動未必延續；美股科技領漲。 | 10/22金融類指數收盤報酬<TAIEX當日收盤報酬 | 54% | 前日金融大漲可能獲利了結；不能把金融當固定避險族群。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池、硬門檻及中性帶。前日輪動不機械延續；今日盤中事件不得倒填。原始A:F/O不改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/ |  |",
+        "| 226 | 2026/10/22 | 塑膠類股相對強度 | 10/21塑膠類+4.58%大幅跑贏TAIEX，前期已有急漲後反轉案例。 | 10/22塑膠類指數收盤報酬<TAIEX當日收盤報酬 | 56% | 前日塑化大漲後獲利了結風險；中國需求及油價不確定。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池、硬門檻及中性帶。前日輪動不機械延續；今日盤中事件不得倒填。原始A:F/O不改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/ |  |",
+        "| 227 | 2026/10/22 | 半導體設備固定三檔 | 固定帆宣6196、漢唐2404、弘塑3131；擴產基本面仍強，但Lam Research盤後價格反應偏弱。 | 三檔各以前收計10/22等權報酬<TAIEX當日收盤報酬 | 54% | Lam盤後指引價格反應弱；基本面正向不保證當日股價。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池、硬門檻及中性帶。前日輪動不機械延續；今日盤中事件不得倒填。原始A:F/O不改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/ |  |",
+        "| 228 | 2026/10/22 | 鴻海2317相對強度 | 10/21鴻海收250、上漲8.5；海外AI伺服器股反彈、Meta AI資本支出強。 | 10/22鴻海2317收盤報酬>TAIEX當日收盤報酬 | 55% | AI伺服器需求支撐，但前日已漲、Tesla財報偏弱。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池、硬門檻及中性帶。前日輪動不機械延續；今日盤中事件不得倒填。原始A:F/O不改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/ |  |",
+        "| 229 | 2026/10/22 | TAIEX全日振幅 | 10/21高47254.93、低46454.33，振幅800.60/46292.93=1.729%；10/22科技財報分化與期貨換月。 | 10/22(全日最高-最低)/46887.77≥1.00%；另記CLV與High-to-Close | 63% | 前日高振幅、海外科技財報與記憶體事件；波動與方向獨立計分。 | 2026/10/22 08:38 Asia/Taipei盤前鎖定；參考模型修正至10/21；固定股票池、硬門檻及中性帶。前日輪動不機械延續；今日盤中事件不得倒填。原始A:F/O不改；G:N/P收盤填。來源：https://www.cna.com.tw/news/afe/202610210125.aspx ; https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/ |  |"
+      ]
+    },
+    {
+      "id": "taiwan_previous_close",
+      "url": "https://www.cna.com.tw/news/afe/202610210125.aspx",
+      "published_at": "2026-10-21",
+      "values": {
+        "taiex_close": 46887.77,
+        "change_points": 594.84,
+        "return_pct": 1.28,
+        "high": 47254.93,
+        "low": 46454.33,
+        "advancers": 610,
+        "decliners": 384,
+        "tsmc_close": 2420
+      }
+    },
+    {
+      "id": "foreign_flow",
+      "url": "https://www.cna.com.tw/news/afe/202610210212.aspx",
+      "published_at": "2026-10-21T16:40:00+08:00",
+      "values": {
+        "foreign_net_buy_twd_billion": 0.96,
+        "streak": "ended 10-session net selling",
+        "turnover_twd_billion": 834.8
+      }
+    },
+    {
+      "id": "us_equities",
+      "url": "https://www.reuters.com/legal/transactional/nasdaq-futures-lead-gains-spacex-super-micro-results-lift-ai-trade-2026-10-21/",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-10-21",
+        "dow_close": 52856.09,
+        "dow_return_pct": 0.69,
+        "sp500_close": 7757.17,
+        "sp500_return_pct": 0.58,
+        "nasdaq_close": 26702.86,
+        "nasdaq_return_pct": 1.05,
+        "sox_return_pct": 2.15
+      }
+    },
+    {
+      "id": "tsmc_adr",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-10-21",
+        "close_usd_v0": 429,
+        "return_pct_v0": 0.92
+      },
+      "quality_note": "V0 froze 429/+0.92%. Public historical pages returned conflicting values (429.89/+1.13% and 431.77/+1.57%); retained the time-frozen V0 value, lowered confidence, and did not use false precision."
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cna.com.tw/news/afe/202610210256.aspx",
+      "published_at": "2026-10-21",
+      "values": {
+        "usd_twd_close": 32.488,
+        "twd_change": 0.129,
+        "twd_return_pct_approx": 0.4,
+        "direction": "TWD appreciation"
+      }
+    },
+    {
+      "id": "rates_oil",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-10-21/",
+      "available_before_cutoff": true,
+      "values": {
+        "us10y_yield_pct": 5.111,
+        "us10y_change_bps": -0.6,
+        "dollar_index": 101.65,
+        "dollar_index_return_pct": -0.14,
+        "brent_close_usd": 108.82,
+        "brent_change_usd": 0.03,
+        "wti_close_usd": 97.15,
+        "wti_return_pct": -0.7
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport",
+      "available_before_cutoff": false,
+      "values": null,
+      "quality_note": "October contract expired/rolled. The completed 2026/10/21 15:00–2026/10/22 05:00 November-contract night-session final was not independently verifiable before cutoff. No hard feature or inferred number used."
+    },
+    {
+      "id": "company_events",
+      "available_before_cutoff": true,
+      "events": [
+        {
+          "event": "Meta quarterly results",
+          "status": "reported after US close; shares about +3% late"
+        },
+        {
+          "event": "Tesla quarterly results",
+          "status": "reported after US close; shares about +1.6% late"
+        },
+        {
+          "event": "Lam Research post-market reaction",
+          "status": "V0 classified as weak/negative"
+        },
+        {
+          "event": "Micron Taoyuan union one-day strike",
+          "scheduled_at": "2026-10-22 morning",
+          "status_at_cutoff": "announced; no confirmed production loss"
+        },
+        {
+          "event": "TSMC southern fab construction-site safety incident",
+          "status_at_cutoff": "some construction suspended; no verified wafer-production halt"
+        }
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "模型修正紀錄!A44:J46",
+    "raw_rows_markdown": [
+      "| 44 | 2026/10/21 | 盤前海外指數資料校驗：SOX盤中跌幅誤當收盤 | 10/21 08:36盤前快照多列記SOX約-2.3% | 10/20 SOX正式收11,283.81、-32.53點(-0.29%)；盤中一度-2.3% | 盤前資料把盤中波動幅度視作前日最終收盤，對AI/ABF/DRAM方向判斷造成偏空權重偏差；原始快照不改。 | 資訊錯置＋權重錯估 | 所有海外市場因子必記交易日期、時區、最後成交時間、close/last類型；跨兩個可靠來源校驗後才入模型。 | 暫停未驗證SOX負向加權；正式收盤-0.29%取代衍生特徵-2.3%，但不得改寫當日原始預測。 | 盤前跨市場訊號、尤其美股盤中報價與亞洲盤前資料混用時 | 候選修正，須回測；來源：Yahoo SOX歷史與HiStock 10/20；美股盤中曾-2.3%。 |",
+      "| 45 | 2026/10/21 | 前日急跌後的早盤下探/反彈雙情境 | 前日開高走低與外資連賣使首30分鐘下探機率55% | 10/21開盤即全日低點46,454.33，09:25前最高至少47,118.64(+1.43%)；廣度610漲384跌 | 早盤下探失敗、反彈成功；前日弱勢被過度延續，市場廣度由27.91%反彈至61.37%。 | 推論錯誤＋權重錯估 | 對極端弱勢隔日並列續跌與開盤即低點反彈兩情境；使用隔夜期貨、09:00–09:15價格接受度判斷，廣度獨立建模。 | 降低前日弱勢對隔日首30分鐘下探的單向權重；增加期貨確認與現貨首15分鐘條件訊號。 | 前日指數下跌且夜盤反彈、海外訊號不一致 | 候選規則；不得以全天高點替代首30分鐘高點；09:25前高點有時間戳。 |",
+      "| 46 | 2026/10/21 | 科技beta與非電子輪動/產業超跌反彈獨立 | SOX偏弱推ABF、AI、DRAM延續負報酬；塑化預期弱於TAIEX | ABF三雄等權+4.609%；AI四檔+1.971%；DRAM南亞科+3.436%；塑化+4.58%；金融+2.55% | 科技多池反彈、塑化及金融大幅跑贏，單一海外科技beta及前日動能延續失靈。 | 推論錯誤＋權重錯估 | AI拆晶圓代工/ODM/電源，ABF、CCL、DRAM各獨立評估；金融塑化分開建模，納入前日超跌與當日相對強弱。 | 降低單一SOX映射及前日跌幅的線性權重，候選加入sector rotation/mean reversion特徵。 | 海外科技訊號不一致、前日個股或類股大跌後 | 候選修正；須walk-forward驗證，避免由單日樣本宣稱有效。 |"
+    ],
+    "application_note": "Verified SOX close replaces intraday extreme; separate early continuation from gap-low rebound; model technology pools and non-electronics rotation independently. Candidate rules only; Sheet unchanged."
+  },
+  "missing_or_qualified": [
+    "TAIFEX post-roll night-session final was not verified by 08:50 and therefore receives zero hard weight.",
+    "TSM ADR public historical pages conflict; V0's 08:38 frozen value retained with reduced weight.",
+    "No 09:00 onward cash-market, breadth, strike outcome, intraday acceptance or closing data is used."
+  ]
+}
+
