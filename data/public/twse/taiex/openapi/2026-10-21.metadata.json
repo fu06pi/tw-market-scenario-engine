@@ -1,0 +1,7 @@
+{
+  "source_url": "https://openapi.twse.com.tw/v1/indicesReport/MI_5MINS_HIST",
+  "retrieved_at": "2026-10-22T11:53:29.144248+08:00",
+  "cutoff": "2026-10-21",
+  "sha256": "66b871d0f772fb7134701d7234092121396d07406d9a5bcd9e6e5c8118050fcc",
+  "historical_publication_time_verified": false
+}

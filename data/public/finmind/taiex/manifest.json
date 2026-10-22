@@ -1,0 +1,200 @@
+{
+  "source": "FinMind TaiwanStockPrice TAIEX",
+  "cutoff": "2026-10-21",
+  "requested_start_year": 1990,
+  "outcomes": [
+    {
+      "year": 1990,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1991,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1992,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1993,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1994,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1995,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1996,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1997,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1998,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 1999,
+      "status": "downloaded",
+      "rows": 266
+    },
+    {
+      "year": 2000,
+      "status": "downloaded",
+      "rows": 271
+    },
+    {
+      "year": 2001,
+      "status": "downloaded",
+      "rows": 244
+    },
+    {
+      "year": 2002,
+      "status": "downloaded",
+      "rows": 248
+    },
+    {
+      "year": 2003,
+      "status": "downloaded",
+      "rows": 249
+    },
+    {
+      "year": 2004,
+      "status": "downloaded",
+      "rows": 250
+    },
+    {
+      "year": 2005,
+      "status": "downloaded",
+      "rows": 247
+    },
+    {
+      "year": 2006,
+      "status": "downloaded",
+      "rows": 248
+    },
+    {
+      "year": 2007,
+      "status": "downloaded",
+      "rows": 247
+    },
+    {
+      "year": 2008,
+      "status": "downloaded",
+      "rows": 249
+    },
+    {
+      "year": 2009,
+      "status": "downloaded",
+      "rows": 251
+    },
+    {
+      "year": 2010,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2011,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2012,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2013,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2014,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2015,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2016,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2017,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2018,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2019,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2020,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2021,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2022,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2023,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2024,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2025,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    },
+    {
+      "year": 2026,
+      "status": "not_downloaded",
+      "reason": "quota_exhausted_before_completion"
+    }
+  ],
+  "rows": 2770,
+  "first_date": "1999-01-05",
+  "last_date": "2009-12-31",
+  "status": "partial",
+  "units": "index points",
+  "volume_included": false,
+  "historical_publication_time_verified": false,
+  "daily_csv_sha256": "546f0c1348891a1eb19ecb2b94e855444a8420f76a2a9a3c2c94f1a30dcc6143"
+}

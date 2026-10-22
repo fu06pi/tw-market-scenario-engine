@@ -1,0 +1,7 @@
+{
+  "source_url": "https://api.finmindtrade.com/api/v4/data?dataset=TaiwanStockPrice&data_id=TAIEX&start_date=2001-01-01&end_date=2001-12-31",
+  "retrieved_at": "2026-10-22T11:52:12.519627+08:00",
+  "cutoff": "2001-12-31",
+  "sha256": "0041af8e61e39659ae43d0b3ba5ce47ba84195c5a71b6544c82cb9ded155e5b3",
+  "historical_publication_time_verified": false
+}

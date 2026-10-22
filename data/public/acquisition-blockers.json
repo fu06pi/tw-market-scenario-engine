@@ -1,0 +1,17 @@
+{
+  "cutoff": "2026-10-21",
+  "twse": {
+    "http_status": 307,
+    "reason": "FOR SECURITY REASONS, THIS PAGE CAN NOT BE ACCESSED",
+    "tested_months": [
+      "1999-03",
+      "1999-04"
+    ]
+  },
+  "finmind": {
+    "http_status": 402,
+    "message": "Requests reach the upper limit",
+    "action": "Stopped network acquisition; resume only after quota recovery"
+  },
+  "model_training_executed": false
+}
