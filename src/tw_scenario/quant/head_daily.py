@@ -103,7 +103,7 @@ def build_head_body(data, manifest, artifacts, model, day, generated_at, code_ve
         expected_names = (
             {market: [f"{market.lower()}__{name}" for name in data.research_feature_names()]
              for market in ("TAIEX", "TX")}
-            if instrument == "JOINT" else data.research_feature_names()
+            if instrument == "JOINT" else list(data.research_feature_names())
         )
         if identity["feature_names"] != expected_names:
             raise ValueError("checkpoint feature schema/order mismatch")
