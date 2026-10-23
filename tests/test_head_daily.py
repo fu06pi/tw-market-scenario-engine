@@ -93,7 +93,7 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
         calendar = SimpleNamespace(previous=lambda day: date(2025, 1, 3))
 
         def research_feature_names(self):
-            return ["a", "b"]
+            return ("a", "b")
 
         def research_history(self, *args):
             return sample.history[:, :4], sample.past_features[:, :2], [date(2025, 1, 3)]
