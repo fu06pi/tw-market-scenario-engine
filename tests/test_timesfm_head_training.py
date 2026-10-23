@@ -193,7 +193,8 @@ def test_joint_decoding_uses_separate_reference_prices():
     assert tx.low <= min(tx.open, tx.close)
 
 
-def test_training_freezes_backbone_and_updates_only_output_head():
+@pytest.mark.parametrize("normalization", ["none", "train_std"])
+def test_training_freezes_backbone_and_updates_only_output_head(normalization):
     torch = pytest.importorskip("torch")
 
     class TinyModel(torch.nn.Module):
@@ -220,6 +221,7 @@ def test_training_freezes_backbone_and_updates_only_output_head():
         learning_rate=1e-2,
         weight_decay=0,
         max_epochs=3,
+        loss_normalization=normalization,
         patience=2,
         batch_size=2,
     )
@@ -232,6 +234,10 @@ def test_training_freezes_backbone_and_updates_only_output_head():
         deadline=time.monotonic() + 10,
     )
     assert result["epochs_completed"] >= 1
+    if normalization == "train_std":
+        from tw_scenario.quant.timesfm_head_training import training_loss_scales
+        assert result["loss_scales"] == training_loss_scales(samples[:6])
+        assert result["loss_scales"] != training_loss_scales(samples)
     torch.testing.assert_close(model.backbone, original_backbone)
     assert not torch.equal(model.output_head.weight, original_head)
     assert result["trainable_parameter_names"] == [
@@ -575,3 +581,26 @@ def test_checkpoint_reload_rejects_tampering_future_labels_and_bad_scaler(tmp_pa
     path.write_bytes(path.read_bytes() + b"tampered")
     with pytest.raises(ValueError, match="hash"):
         restore_output_head(model, path, result, forecast_day=date(2026, 1, 2))
+
+
+def test_normalized_loss_is_unit_invariant_and_rejects_missing_scales():
+    torch = pytest.importorskip('torch')
+    from dataclasses import replace
+
+    spec = HeadTrainingSpec(32, 1e-4, 0, loss_normalization='train_std')
+    logits = torch.arange(36, dtype=torch.float32).reshape(1, 4, 9) / 100
+    target = torch.tensor([[.01, -.02, -5., -6.]])
+    scales = {'target': [.01, .02, 2., 3.], 'close': [.03]}
+    q = tuple(i / 10 for i in range(1, 10))
+    reference = output_head_loss(logits, target, q, spec, scales)
+    factors = torch.tensor([10., 10., 100., 100.])
+    changed_scales = {'target': (torch.tensor(scales['target']) * factors).tolist(),
+                      'close': [.3]}
+    changed = output_head_loss(logits * factors[None, :, None], target * factors,
+                               q, spec, changed_scales)
+    torch.testing.assert_close(reference, changed)
+    with pytest.raises(ValueError, match='requires frozen'):
+        output_head_loss(logits, target, q, spec)
+    with pytest.raises(ValueError, match='invalid frozen'):
+        output_head_loss(logits, target, q, spec, {'target':[0]*4, 'close':[1]})
+    assert torch.isfinite(output_head_loss(logits, target, q, replace(spec, loss_normalization='none')))
