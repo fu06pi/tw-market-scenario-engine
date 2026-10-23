@@ -14,3 +14,6 @@ __pycache__/
 /data/processed/
 /reports/generated/
 /reports/quant/experiments/
+
+# Daily caches contain licensed market data and must remain local.
+/data/daily/
