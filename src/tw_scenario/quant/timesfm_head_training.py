@@ -48,8 +48,11 @@ class HeadTrainingSpec:
     close_weight: float = 2.0
     quantile_weight: float = 0.5
     crossing_weight: float = 0.1
+    loss_normalization: str = "none"
 
     def validate(self, input_patch_len: int = 32) -> None:
+        if self.loss_normalization not in {"none", "train_std"}:
+            raise ValueError("unsupported loss normalization")
         if self.context < input_patch_len or self.context % input_patch_len:
             raise ValueError("TimesFM head context must be a positive patch multiple")
         if self.learning_rate <= 0 or self.weight_decay < 0:
@@ -80,6 +83,7 @@ def _spec_from_config(config: dict, candidate_index: int) -> HeadTrainingSpec:
         close_weight=float(config["close_weight"]),
         quantile_weight=float(config["quantile_weight"]),
         crossing_weight=float(config["crossing_weight"]),
+        loss_normalization=config.get("loss_normalization", "none"),
     )
 
 
@@ -392,7 +396,22 @@ def _one_step_logits(model, inputs, cpm_mask, context_patches, target_count):
     return output["logits"][:, :target_count, context_patches - 1, 0, :]
 
 
-def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
+def training_loss_scales(samples):
+    """Fit loss units from optimization labels only, never early-stop/validation."""
+    if not samples:
+        raise ValueError("loss scales require training samples")
+    targets = np.stack([s.target for s in samples]).astype(np.float64)
+    if targets.ndim != 2 or targets.shape[1] not in (4, 8) or not np.isfinite(targets).all():
+        raise ValueError("invalid training labels for loss scaling")
+    scales = np.maximum(targets.std(axis=0), 1e-6)
+    closes = targets[:, 0::4] + targets[:, 1::4]
+    close_scales = np.maximum(closes.std(axis=0), 1e-6)
+    return {"target": scales.tolist(), "close": close_scales.tolist(),
+            "fit_samples": len(samples), "fit_source": "optimization_training_labels_only",
+            "minimum_scale": 1e-6}
+
+
+def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec, loss_scales=None):
     """Robust point, close-return, quantile and crossing losses for GBUD."""
     import torch
 
@@ -405,14 +424,29 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
         raise ValueError("TimesFM quantile schema mismatch")
     median_index = int(torch.argmin(torch.abs(q - 0.5)))
     point = logits[:, :, median_index]
-    point_loss = torch.nn.functional.smooth_l1_loss(point, target)
+    if spec.loss_normalization == "train_std":
+        if loss_scales is None:
+            raise ValueError("train_std loss requires frozen training scales")
+        units = torch.as_tensor(loss_scales["target"], dtype=logits.dtype, device=logits.device)
+        close_units = torch.as_tensor(loss_scales["close"], dtype=logits.dtype, device=logits.device)
+        if (units.shape != (target.shape[1],) or close_units.shape != (target.shape[1] // 4,)
+                or not torch.isfinite(units).all() or not torch.isfinite(close_units).all()
+                or (units <= 0).any() or (close_units <= 0).any()):
+            raise ValueError("invalid frozen loss scales")
+    elif spec.loss_normalization == "none":
+        units, close_units = 1.0, 1.0
+    else:
+        raise ValueError("unsupported loss normalization")
+    point_loss = torch.nn.functional.smooth_l1_loss(point / units, target / units)
     close_indexes = [(index, index + 1) for index in range(0, point.shape[1], 4)]
     predicted_close = torch.stack([point[:, g] + point[:, b] for g, b in close_indexes], 1)
     actual_close = torch.stack([target[:, g] + target[:, b] for g, b in close_indexes], 1)
-    close_loss = torch.nn.functional.smooth_l1_loss(predicted_close, actual_close)
-    errors = target[:, :, None] - logits
+    close_loss = torch.nn.functional.smooth_l1_loss(
+        predicted_close / close_units, actual_close / close_units)
+    normalized_logits = logits / (units[None, :, None] if torch.is_tensor(units) else units)
+    errors = (target / units)[:, :, None] - normalized_logits
     pinball = torch.maximum(q * errors, (q - 1) * errors).mean()
-    crossing = torch.relu(logits[:, :, :-1] - logits[:, :, 1:]).mean()
+    crossing = torch.relu(normalized_logits[:, :, :-1] - normalized_logits[:, :, 1:]).mean()
     return (
         spec.point_weight * point_loss
         + spec.close_weight * close_loss
@@ -421,7 +455,7 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec):
     )
 
 
-def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf):
+def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf, loss_scales=None):
     import torch
 
     losses = []
@@ -436,7 +470,7 @@ def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf):
             )
             target = torch.tensor(np.stack([item.target for item in batch]))
             logits = _one_step_logits(model, inputs, mask, patches, target_count)
-            losses.append(float(output_head_loss(logits, target, model.quantiles, spec)))
+            losses.append(float(output_head_loss(logits, target, model.quantiles, spec, loss_scales)))
     return float(np.mean(losses))
 
 
@@ -466,6 +500,7 @@ def train_output_head(
         raise RuntimeError("custom training must update only output_head parameters")
 
     mean, scale = _feature_scaler(train_samples)
+    loss_scales = training_loss_scales(train_samples) if spec.loss_normalization == "train_std" else None
     optimizer = torch.optim.AdamW(
         model.output_head.parameters(),
         lr=spec.learning_rate,
@@ -494,7 +529,7 @@ def train_output_head(
             target = torch.tensor(np.stack([item.target for item in batch]))
             optimizer.zero_grad(set_to_none=True)
             logits = _one_step_logits(model, inputs, mask, patches, target_count)
-            loss = output_head_loss(logits, target, model.quantiles, spec)
+            loss = output_head_loss(logits, target, model.quantiles, spec, loss_scales)
             if not torch.isfinite(loss):
                 raise RuntimeError("non-finite output-head training loss")
             loss.backward()
@@ -504,7 +539,7 @@ def train_output_head(
             break
         try:
             validation_loss = _evaluate_loss(
-                model, early_stop_samples, mean, scale, spec, deadline=deadline
+                model, early_stop_samples, mean, scale, spec, deadline=deadline, loss_scales=loss_scales
             )
         except TimeoutError:
             break
@@ -530,6 +565,8 @@ def train_output_head(
     model.output_head.load_state_dict(best_state)
     model.eval()
     return {
+        "loss_normalization": spec.loss_normalization,
+        "loss_scales": loss_scales,
         "best_epoch": best_epoch,
         "best_early_stop_loss": best_loss,
         "epochs_completed": len(history),
