@@ -1,5 +1,16 @@
 # Project Status
 
+## 2026-10-23 保持盤前模型與損失尺度修正
+
+使用者確認 10/22 中午試算是模擬真實盤前流程；不使用當日日盤資訊符合任務，不能列為模型缺陷。本階段不轉做盤中更新模型，保留原數字快照與失敗結果。
+
+新增僅用第一折 optimization training labels 的尺度審計，見 reports/quant/head-training-loss-scale-audit-2026-10-23.json。g/b 與 log_u/log_d 尺度差異很大；同為一個標準差誤差時，舊 point Huber 的延伸目標輸出梯度約為 g/b 的119–143倍。這只是 point term 診斷，不等於總梯度歸因或10/22失準的唯一原因。
+
+新增 loss_normalization=train_std 候選，按各折 training labels 計算 target 與 close-return std，early-stop 與 validation 不參與尺度擬合；僅改 loss 單位，保留64日context、特徵、folds、seed、optimizer、epochs、解碼與gate。既有none版本保持可重現，尚未有新模型改善結論。
+
+本輪沿用總計21600秒的累積帳本，啟動前已用17442.54秒，剩4157.46秒（69.29分鐘）。先跑TAIEX完整三折；完成後才依剩餘預算決定TX，不為第二市場重置預算、不購買算力。
+
+
 ## 2026-10-21 後續訓練與替代路線
 
 64、96 日視窗已完成兩市場共 12 個真實 fold checkpoint。64 日收盤 MAE 改善為 TAIEX 7.98%、TX 12.59%；96 日分別為 -2.42%、3.92%，未改善最佳候選。這些是 development 結果，完整 gate 均 FAIL；比較集合限於 zero/range/night_regression，不包含本輪 ARIMA/ARIMAX。
