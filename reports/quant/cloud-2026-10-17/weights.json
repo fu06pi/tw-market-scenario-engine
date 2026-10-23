@@ -1,0 +1,11 @@
+{
+  "status": "DOWNLOADED_NOT_LOADED",
+  "revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "files": {
+    "model.safetensors": 1322898824,
+    "config.json": 1273,
+    "LICENSE": 7270
+  },
+  "elapsed_seconds": 41.73159103900002,
+  "peak_rss_kib": 609920
+}

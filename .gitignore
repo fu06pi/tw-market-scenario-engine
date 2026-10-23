@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 .ruff_cache/
+*.egg-info/
 .DS_Store
 .env
 .env.*
@@ -12,3 +13,7 @@ __pycache__/
 /data/raw/
 /data/processed/
 /reports/generated/
+/reports/quant/experiments/
+
+# Daily caches contain licensed market data and must remain local.
+/data/daily/
