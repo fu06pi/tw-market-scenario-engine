@@ -13,6 +13,7 @@ from tw_scenario.quant import head_daily
 from tw_scenario.quant.cli import app
 from tw_scenario.quant.contracts import TZ, digest
 from tw_scenario.quant.daily import load_snapshot
+from tw_scenario.quant.head_calibration import build_head_calibration_artifact
 from tw_scenario.quant.timesfm_head_training import (
     CODE_COMMIT,
     WEIGHT_REPO,
@@ -21,6 +22,23 @@ from tw_scenario.quant.timesfm_head_training import (
     HeadTrainingSpec,
     train_output_head,
 )
+
+
+def test_raw_replay_rejects_calibrated_bundle_before_model_load(tmp_path):
+    bundle = tmp_path / "bundle.json"
+    bundle.write_text(json.dumps({
+        "TAIEX": {"result": "a", "checkpoint": "b", "fold": 1, "calibration": "c"},
+        "TX": {"result": "d", "checkpoint": "e", "fold": 1, "calibration": "f"},
+    }))
+    with pytest.raises(ValueError, match="without calibration"):
+        head_daily.verify_head_replay(
+            tmp_path,
+            bundle,
+            date(2026, 1, 2),
+            tmp_path / "snapshot.json",
+            tmp_path / "cache",
+            tmp_path / "report.json",
+        )
 
 
 @pytest.mark.parametrize("fold_artifact", [False, True])
@@ -69,8 +87,8 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
         folder = tmp_path / market
         folder.mkdir()
         if fold_artifact:
-            split = {"train": ["2025-01-01", "2025-01-02"],
-                     "validation": ["2025-01-03", "2025-01-06"]}
+            split = {"train": ["2024-12-27", "2024-12-29"],
+                     "validation": ["2024-12-30", "2025-01-06"]}
             identity = {k: v for k, v in market_result["identity"].items()
                         if k not in ("train_end", "early_stop_split")}
             identity["folds"] = [split]
@@ -85,6 +103,61 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
         bundle[market] = {"result": f"{market}/result.json", "checkpoint": checkpoint.name}
         if fold_artifact:
             bundle[market]["fold"] = 1
+        if fold_artifact and not joint:
+            calibration_config = {
+                'version': 'causal-head-marginal-residual-v1',
+                'candidate_context': 32,
+                'window': 4,
+                'minimum': 4,
+                'lower_quantile': 0.1,
+                'upper_quantile': 0.9,
+                'normalization': 'prediction_day_same_contract_previous_close',
+                'update_policy': 'previous_walk_forward_residuals_available_by_0830_only',
+                'point_policy': 'unchanged',
+                'interval_policy': 'marginal_only_not_joint_OHLC_quantiles',
+            }
+            residual_days = [
+                date(2024, 12, 30), date(2024, 12, 31),
+                date(2025, 1, 2), date(2025, 1, 3),
+            ]
+            reference = 100. if market == 'TAIEX' else 200.
+            rows = [
+                {
+                    'date': str(day),
+                    'instrument': market,
+                    'status': 'OK',
+                    'previous_close': reference,
+                    'predicted': {field: reference for field in ('open', 'high', 'low', 'close')},
+                    'actual': {
+                        field: reference + index for field in ('open', 'high', 'low', 'close')
+                    },
+                }
+                for index, day in enumerate(residual_days, 1)
+            ]
+            availability = {
+                str(day): datetime(day.year, day.month, day.day, 14, tzinfo=TZ)
+                for day in residual_days
+            }
+            result_path = folder / 'result.json'
+            fold_path = folder / 'fold-1.json'
+            fold_payload = json.loads(fold_path.read_text())
+            fold_payload['candidate_rows'] = rows
+            fold_path.write_text(json.dumps(fold_payload))
+            calibration_artifact = build_head_calibration_artifact(
+                rows,
+                availability,
+                instrument=market,
+                source_identity=market_result['identity'],
+                source_result_sha256=hashlib.sha256(result_path.read_bytes()).hexdigest(),
+                source_fold_sha256={
+                    'fold-1.json': hashlib.sha256(fold_path.read_bytes()).hexdigest()
+                },
+                calibration=calibration_config,
+            )
+            (folder / 'calibration-artifact.json').write_text(
+                json.dumps(calibration_artifact)
+            )
+            bundle[market]['calibration'] = f'{market}/calibration-artifact.json'
     bundle_path = tmp_path / "bundle.json"
     bundle_path.write_text(json.dumps(bundle))
     (tmp_path / "manifest.json").write_text('{"dataset_id":"synthetic"}')
@@ -112,8 +185,12 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
             return SimpleNamespace(source_hash="b" * 64,
                                    available_at=datetime(2025, 1, 6, 5, tzinfo=TZ))
 
-        def actual(self, *args):
-            pytest.fail("forecast must not read day labels")
+        def actual(self, market, day):
+            if day >= date(2025, 1, 6):
+                pytest.fail("forecast must not read same-day/future labels")
+            return SimpleNamespace(
+                available_at=datetime(day.year, day.month, day.day, 14, tzinfo=TZ)
+            )
 
     monkeypatch.setattr(head_daily, "load_dataset", lambda path: (Preopen(), "synthetic"))
     monkeypatch.setattr(head_daily, "runtime_probe", lambda path: SimpleNamespace(status="READY_TO_LOAD"))
@@ -130,10 +207,31 @@ def test_synthetic_trained_checkpoint_to_dual_market_frozen_snapshot(tmp_path, m
     assert all(f.model.checkpoint_id == checkpoint_hash for f in snapshot.forecasts)
     assert snapshot.timeliness == "LATE"
     assert snapshot.data_quality.status == "WARN"
-    assert "uncalibrated" in snapshot.forecasts[0].intervals.method
+    if fold_artifact and not joint:
+        assert "causal signed price residual" in snapshot.forecasts[0].intervals.method
+        assert json.loads(response.output)['interval_calibration'] == 'CAUSAL_ARTIFACT'
+    else:
+        assert "uncalibrated" in snapshot.forecasts[0].intervals.method
     original = output.read_bytes()
     assert CliRunner().invoke(app, args).exit_code != 0
     assert output.read_bytes() == original
+    if fold_artifact and not joint:
+        partial_bundle = json.loads(bundle_path.read_text())
+        partial_bundle['TX'].pop('calibration')
+        partial_bundle_path = tmp_path / 'partial-bundle.json'
+        partial_bundle_path.write_text(json.dumps(partial_bundle))
+        partial_output = tmp_path / 'partial.json'
+        partial_response = CliRunner().invoke(
+            app,
+            [
+                "timesfm-head-daily", str(tmp_path),
+                "--bundle", str(partial_bundle_path),
+                "--date", "2025-01-06", "--output", str(partial_output),
+            ],
+        )
+        assert partial_response.exit_code != 0
+        assert "requires calibration artifacts for both markets" in partial_response.output
+        assert not partial_output.exists()
     checkpoint.write_bytes(checkpoint.read_bytes() + b"tampered")
     failed_output = tmp_path / "failed.json"
     response = CliRunner().invoke(app, [*args[:-1], str(failed_output)])

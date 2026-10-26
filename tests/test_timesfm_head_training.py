@@ -14,6 +14,9 @@ from tw_scenario.quant.timesfm_head_training import (
     HeadTrainingSpec,
     _batch_inputs,
     _decode_quantile_block,
+    _frozen_head_features,
+    _one_step_logits,
+    _one_step_logits_from_features,
     _persist_sample_audit,
     _spec_from_config,
     audited_head_samples,
@@ -90,6 +93,71 @@ def test_training_inputs_keep_future_features_known_but_targets_masked():
     assert cpm_mask[:, 1:].all()
 
 
+def test_frozen_backbone_cache_matches_full_forward_and_keeps_head_gradient():
+    torch = pytest.importorskip("torch")
+
+    class TransformerStack(torch.nn.Module):
+        def forward(self, values, mask):
+            del mask
+            return values, None, None
+
+    class CacheableModel(torch.nn.Module):
+        input_patch_len = 32
+        output_patch_len = 64
+        quantiles = (0.1, 0.5, 0.9)
+        value_clip = 1e6
+
+        def __init__(self):
+            super().__init__()
+            self.transformer_stack = TransformerStack()
+            self.output_head = torch.nn.Linear(2, self.output_patch_len * len(self.quantiles))
+
+        def _preprocess(
+            self, values, masks, patch_is_target, freeze_after=None, patch_cpm_mask=None
+        ):
+            del patch_is_target, freeze_after, patch_cpm_mask
+            transformer_input = torch.stack(
+                [values.mean(dim=-1), masks.float().mean(dim=-1)], dim=-1
+            )
+            patch_mask = masks.all(dim=-1)
+            shape = values.shape[:3]
+            mean = torch.zeros(shape)
+            std = torch.ones(shape)
+            count = torch.ones(shape)
+            return values, transformer_input, patch_mask, (mean, std), count
+
+        def forward(self, inputs, patch_cpm_mask):
+            _, hidden, patch_mask, (mean, std), _ = self._preprocess(
+                inputs["values"],
+                inputs["masks"].bool(),
+                inputs["patch_is_target"],
+                patch_cpm_mask=patch_cpm_mask,
+            )
+            hidden, _, _ = self.transformer_stack(
+                hidden, torch.cumprod(patch_mask.int(), dim=2).bool()
+            )
+            logits = self.output_head(hidden) * std.unsqueeze(-1) + mean.unsqueeze(-1)
+            return {"logits": logits.view(
+                *logits.shape[:3], self.output_patch_len, len(self.quantiles)
+            )}
+
+    # The optimized path is deliberately restricted to the verified official
+    # module name; this lightweight double exercises the same interface.
+    CacheableModel.__module__ = "timesfm3.torch.model"
+    model = CacheableModel()
+    sample = _sample(date(2026, 1, 2))
+    inputs, cpm_mask, patches, target_count = _batch_inputs(
+        model, [sample], np.zeros(2, dtype=np.float32), np.ones(2, dtype=np.float32)
+    )
+    features = _frozen_head_features(model, inputs, cpm_mask, patches, target_count)
+    expected = _one_step_logits(model, inputs, cpm_mask, patches, target_count)
+    actual = _one_step_logits_from_features(model, features)
+    torch.testing.assert_close(actual, expected, rtol=0, atol=0)
+    actual.sum().backward()
+    assert model.output_head.weight.grad is not None
+    assert features.hidden.grad is None
+
+
 def test_joint_samples_align_markets_and_keep_separate_references():
     class Data:
         misalign = False
@@ -149,6 +217,37 @@ def test_output_head_loss_penalizes_bad_point_and_crossing():
     assert output_head_loss(good, target, quantiles, spec) < output_head_loss(
         bad, target, quantiles, spec
     )
+
+
+def test_wick_loss_penalizes_underpredicted_gbud_extensions():
+    torch = pytest.importorskip("torch")
+    quantiles = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+    target = torch.tensor([[0.0, 0.02, -5.0, -5.2]])
+    good = target[:, :, None].repeat(1, 1, 9)
+    narrow = good.clone()
+    narrow[:, 1, :] = 0.0
+    narrow[:, 2:, :] = -13.815510557964274
+    scales = {
+        "target": [0.01, 0.02, 2.0, 2.0],
+        "close": [0.02],
+        "wick": [0.5],
+    }
+    spec = HeadTrainingSpec(
+        context=32,
+        learning_rate=1e-3,
+        weight_decay=0,
+        point_weight=0,
+        close_weight=0,
+        quantile_weight=0,
+        crossing_weight=0,
+        wick_weight=0.25,
+        loss_normalization="train_std",
+    )
+    assert output_head_loss(good, target, quantiles, spec, scales) < output_head_loss(
+        narrow, target, quantiles, spec, scales
+    )
+    with pytest.raises(ValueError, match="wick loss scales"):
+        output_head_loss(good, target, quantiles, spec, {**scales, "wick": []})
 
 
 def test_joint_training_inputs_and_close_loss_cover_both_markets():
@@ -234,6 +333,8 @@ def test_training_freezes_backbone_and_updates_only_output_head(normalization):
         deadline=time.monotonic() + 10,
     )
     assert result["epochs_completed"] >= 1
+    assert result["numeric_runtime"]["schema_version"] == "torch-cpu-numeric-runtime-v1"
+    assert result["numeric_runtime"]["device"] == "cpu"
     if normalization == "train_std":
         from tw_scenario.quant.timesfm_head_training import training_loss_scales
         assert result["loss_scales"] == training_loss_scales(samples[:6])

@@ -1,5 +1,38 @@
 # Project Status
 
+## 2026-10-26 量化模型交付狀態
+
+- 八個獨立市場output-head候選完成完整三折，共24個checkpoint；全部240/240日成功。TAIEX最佳研究候選為`88b26bf3d30c9ded6d0d`，Close MAE 415.00點、改善9.09%，但bootstrap CI95下界-1.11%且第一折惡化20.52%。TX最佳為`d635e40df84cdfad4cde`，Close MAE 392.75點、改善12.59%，CI95 `[1.47%,21.79%]`。
+- 固定126日／40日暖機的因果校準保留每市場240日與所有失敗。TAIEX O/H/L/C coverage 82.92%/76.25%/77.08%/75.83%；TX 74.58%/76.67%/72.92%/77.08%。TAIEX仍敗在改善穩定性，TX仍敗在區間coverage，完整gate皆`FAIL`。
+- 校準artifact已接入每日推論，綁定source result SHA、完整fold SHA、逐筆prediction residual及certified `available_at`；雙市場不能只提供單邊校準，暖機不足fail-closed，raw checkpoint replay明確拒絕calibrated bundle。
+- 2026-10-12雙市場真實checkpoint late retrospective快照已完成載入、因果校準、封存與readback：forecast ID `ohlc-v1-2026-10-12-ebee7b6b6aa03af350bf874510ca856a1b9d029173531a81053c4a04643d3178`，snapshot hash `62e90965ab347c55f1335d7f34ec688382126a4586bd5cf952b8c8cb9253db77`。此證據不是08:40前或genuine forward。
+- wick候選`d77dbc4223777b1f104e`中止於第一折sample audit後，沒有checkpoint或成績。共享head參數審計已推翻原先的結構性不可能判斷；仍沒有實際增益證據。
+- 研究帳本依既定unclean-exit規則扣滿21600/21600秒；最後1476.91秒是full reservation而非實測compute。舊checkpoint缺少數值runtime metadata，真實0.001點replay仍`FAIL`；未來訓練新增CPU runtime identity及重載一致性檢查。
+- 公開證據：`reports/quant/output-head-delivery-2026-10-26.{json,md}`、`reports/quant/head-wick-parameter-coupling-2026-10-25.json`。正式預設維持baseline，`production_switch=false`。
+
+## 2026-10-25 凍結 backbone 快取
+
+output-head 訓練現在每個樣本只執行一次凍結 TimesFM 3 backbone，後續 epoch 重用固定表示並只更新 output head。真實 pinned 權重比對逐位元相同（最大差異0）；單樣本 cached head 約比完整 forward 快409倍。102項測試通過。這只是等價的訓練效率修復，尚未改變既有模型成績；量測見 `reports/quant/frozen-backbone-cache-benchmark-2026-10-25.json`。
+
+## 2026-10-24 第一折失效與推論輸入核對
+
+已完成240日新舊TAIEX配對診斷：第一折開盤誤差優於基準，日盤body誤差較差；三折都低估振幅，正規化加劇range低估。詳見 reports/quant/head-fold-diagnostic-2026-10-24.md。TAIEX/TX各240日每日輸入與驗證輸入逐元素一致，僅排除輸入建構差異，原數值replay仍FAIL。全套101測試通過。未啟動新訓練、未改正式排程；續接見RESUME_HANDOFF.md。
+
+## 2026-10-24 正規化損失與固定因果校準完成
+
+TAIEX train_std/context64 真實 output-head 訓練完成三折、240/240 日，耗時 2026.76 秒，三個 checkpoint 已核對。O/H/L/C MAE 為 99.54/299.39/315.45/415.00 點；收盤比固定基準改善 9.09%，比舊64日候選改善1.21%，方向正確161/240（67.08%，中性±5bp）。這是 development 回溯比較，非新 final。
+
+沿用事前固定126日視窗、40日暖機的因果校準，全部240日保留、點預測不變。O/H/L/C 邊際80%區間覆蓋由83.33/93.33/61.67/84.17%變成82.92/76.25/77.08/75.83%，四項均落在75–85%；interval score皆優於固定基準。但close score由原模型1895.39惡化為2067.57，不能只報coverage改善。
+
+完整gate仍FAIL：改善95% block-bootstrap CI為[-1.11%,15.20%]；第一折收盤較基準惡化20.52%，後兩折改善15.53%、11.94%。尚不能宣稱穩定泛化或正式採用。證據與checkpoint hashes見 reports/quant/output-head-normalized-taiex-2026-10-24.json。
+
+累積模型預算已用19469.30/21600秒，剩2130.70秒（35.51分鐘）。TX train_std未啟動：既有TX64三折耗時2728.66秒，高於剩餘額度；不重置帳本、不縮減fold冒充完整結果。現在沒有訓練進程。下一步先診斷第一折失效來源、完成既有checkpoint每日重播精度及校準推論一致性，再訂有根據的後續訓練方案。正式預設保留基準，production_switch=false；CURRENT_GOAL.md既有修改未動。
+
+重現本輪校準：
+```bash
+.venv/bin/tw-scenario quant timesfm-head-calibrate data/processed/cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce reports/generated/quant/experiments/timesfm3-output-head-walk-forward/88b26bf3d30c9ded6d0d reports/generated/quant/experiments/head-normalized-calibration-2026-10-24-replay --config config/quant/timesfm_output_head_loss_normalized.json
+```
+
 ## 2026-10-23 保持盤前模型與損失尺度修正
 
 使用者確認 10/22 中午試算是模擬真實盤前流程；不使用當日日盤資訊符合任務，不能列為模型缺陷。本階段不轉做盤中更新模型，保留原數字快照與失敗結果。

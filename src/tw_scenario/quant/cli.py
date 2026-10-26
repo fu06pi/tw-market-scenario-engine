@@ -687,7 +687,16 @@ def timesfm_head_daily(
     _echo_json({"status": "RESEARCH_SNAPSHOT_FROZEN", "output": str(path),
                 "forecast_id": frozen["forecast_id"], "snapshot_hash": frozen["snapshot_hash"],
                 "timeliness": frozen["timeliness"], "production_switch": False,
-                "interval_calibration": "UNVERIFIED"})
+                "interval_calibration": (
+                    "CAUSAL_ARTIFACT"
+                    if all(
+                        forecast["intervals"]["method"].startswith(
+                            "causal signed price residual marginals v1"
+                        )
+                        for forecast in frozen["forecasts"]
+                    )
+                    else "UNVERIFIED"
+                )})
 
 
 @app.command("timesfm-head-select")
@@ -1506,12 +1515,15 @@ def timesfm_head_calibrate(
     """Evaluate frozen causal marginal calibration on saved development folds."""
     from .head_calibration import evaluate_saved_head_intervals
 
-    report, rows = evaluate_saved_head_intervals(
+    report, rows, artifact = evaluate_saved_head_intervals(
         dataset_dir, experiment_dir, json.loads(config.read_text()),
         json.loads(calibration_config.read_text()))
     write_once(output_dir / 'result.json', report)
     write_once(output_dir / 'predictions.json', rows)
+    write_once(output_dir / 'calibration-artifact.json', artifact)
     typer.echo(json.dumps({'result': str(output_dir / 'result.json'),
+                           'calibration_artifact': str(
+                               output_dir / 'calibration-artifact.json'),
                            'status': report['development_gate']['status'],
                            'coverage': report['development_gate']['interval_coverage']}))
 

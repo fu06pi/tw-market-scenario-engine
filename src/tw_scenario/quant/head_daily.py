@@ -23,6 +23,11 @@ from .daily import (
     freeze_snapshot,
     seal_snapshot,
 )
+from .head_calibration import (
+    apply_head_calibration,
+    load_head_calibration_artifact,
+    verify_head_calibration_availability,
+)
 from .timesfm3 import load_pinned_forecaster, runtime_probe
 from .timesfm_head_training import (
     build_head_inference_sample,
@@ -39,16 +44,46 @@ def read_head_bundle(path: Path) -> dict:
         raise ValueError("bundle requires TAIEX and TX artifacts, or one JOINT artifact")
     artifacts = {}
     for instrument, entry in bundle.items():
-        if set(entry) not in ({"result", "checkpoint"}, {"result", "checkpoint", "fold"}):
-            raise ValueError("artifact requires result/checkpoint paths and optional walk-forward fold")
+        required = {"result", "checkpoint"}
+        optional = {"fold", "calibration"}
+        if not required <= set(entry) <= required | optional:
+            raise ValueError(
+                "artifact requires result/checkpoint paths and optional fold/calibration"
+            )
         result_path = path.parent / entry["result"]
         checkpoint = path.parent / entry["checkpoint"]
-        result = json.loads(result_path.read_text(encoding="utf-8"))
+        source_result = json.loads(result_path.read_text(encoding="utf-8"))
+        source_result_sha256 = hashlib.sha256(result_path.read_bytes()).hexdigest()
+        result = source_result
         if "fold" in entry:
             result = read_walk_forward_fold(result_path, result, checkpoint, entry["fold"])
         if result.get("identity", {}).get("instrument") != instrument:
             raise ValueError("artifact instrument does not match bundle")
-        artifacts[instrument] = {"result": result, "checkpoint": checkpoint}
+        calibration = None
+        if "calibration" in entry:
+            if instrument == "JOINT":
+                raise ValueError("joint daily calibration artifacts are not implemented")
+            calibration_path = path.parent / entry["calibration"]
+            calibration_artifact, calibration_sha256 = load_head_calibration_artifact(
+                calibration_path,
+                instrument=instrument,
+                source_identity=source_result["identity"],
+                source_result_sha256=source_result_sha256,
+                source_dir=result_path.parent,
+                source_fold_results=source_result.get("fold_results"),
+            )
+            calibration = {
+                "artifact": calibration_artifact,
+                "sha256": calibration_sha256,
+            }
+        artifacts[instrument] = {
+            "result": result,
+            "checkpoint": checkpoint,
+            "calibration": calibration,
+        }
+    calibration_flags = [artifact["calibration"] is not None for artifact in artifacts.values()]
+    if any(calibration_flags) and not all(calibration_flags):
+        raise ValueError("dual-market bundle requires calibration artifacts for both markets")
     return artifacts
 
 
@@ -95,6 +130,7 @@ def build_head_body(data, manifest, artifacts, model, day, generated_at, code_ve
         raise ValueError("unexpected TimesFM quantile grid")
     forecasts = {}
     artifact_ids = {}
+    calibration_usage = {}
     for instrument, artifact in artifacts.items():
         result = artifact["result"]
         identity = result["identity"]
@@ -114,18 +150,48 @@ def build_head_body(data, manifest, artifacts, model, day, generated_at, code_ve
         predictions = (predict_joint_head(model, sample, mean, scale)
                        if instrument == "JOINT" else
                        {instrument: predict_head(model, sample, mean, scale)})
-        artifact_ids[instrument] = digest(result)
+        artifact_ids[instrument] = {
+            "model_result": digest(result),
+            "calibration_artifact": (
+                artifact["calibration"]["sha256"] if artifact["calibration"] else None
+            ),
+        }
         for market, (point, interval, _) in predictions.items():
             contract = data.contract(market, day) or None
+            previous_close = float(data.reference(market, day).close)
+            interval_method = (
+                "uncalibrated transformed marginal quantile envelope; coverage unverified"
+            )
+            if artifact["calibration"] is not None:
+                verify_head_calibration_availability(
+                    data,
+                    market,
+                    artifact["calibration"]["artifact"],
+                    day,
+                )
+                interval, usage = apply_head_calibration(
+                    point.model_dump(),
+                    previous_close,
+                    artifact["calibration"]["artifact"],
+                    day,
+                )
+                usage["artifact_sha256"] = artifact["calibration"]["sha256"]
+                calibration_usage[market] = usage
+                interval_method = (
+                    "causal signed price residual marginals v1; "
+                    f"{usage['samples']} labels through {usage['latest_label_date']}; "
+                    "marginal not joint OHLC; "
+                    f"artifact sha256 {usage['artifact_sha256']}"
+                )
             forecasts[market] = InstrumentOHLCForecast(
                 instrument=market, contract=contract, reference_contract=contract,
                 reference_date=data.calendar.previous(day),
-                previous_close=float(data.reference(market, day).close),
+                previous_close=previous_close,
                 point=OHLCValues(**point.model_dump()),
                 intervals=OHLCMarginalIntervals80(
                     **{field: MarginalInterval(lower=interval[field][0], upper=interval[field][1])
                        for field in OHLC},
-                    method="uncalibrated transformed marginal quantile envelope; coverage unverified",
+                    method=interval_method,
                 ),
                 model=ModelIdentity(
                     model_name="timesfm3-custom-output-head",
@@ -143,10 +209,20 @@ def build_head_body(data, manifest, artifacts, model, day, generated_at, code_ve
     night = data.get("TX", data.contract("TX", day), "night", day, cutoff)
     sources.append(SourceEvidence(source_id="TX-completed-night", content_hash=night.source_hash,
                                   available_at=night.available_at))
+    interval_issue = (
+        "Nominal 80% marginal intervals use timestamp-filtered causal residual artifacts; "
+        "historical coverage does not establish forward acceptance."
+        if calibration_usage else
+        "Nominal 80% intervals are uncalibrated; actual coverage is unverified."
+    )
     quality = DataQualityEvidence(
         status="WARN", report_hash=digest({"manifest": manifest, "artifacts": artifact_ids}),
         issues=("Research checkpoint; development/forward acceptance not established.",
-                "Nominal 80% intervals are uncalibrated; actual coverage is unverified.",
+                "Checkpoint replay remains a separate verification; runtime metadata alone is insufficient.",
+                *(('Legacy head lacks recorded numeric runtime; exact replay is unverified.',)
+                  if any('numeric_runtime' not in a['result']['training']
+                         for a in artifacts.values()) else ()),
+                interval_issue,
                 "Historical availability assumptions require separate point-in-time verification.",
                 "Context sessions exclude the additional rolling-feature raw-data lookback."),
     )
@@ -187,6 +263,8 @@ def verify_head_replay(dataset_dir, bundle_path, day, output, cache_dir, report_
     from .daily import load_snapshot
 
     bundle = json.loads(bundle_path.read_text())
+    if any('calibration' in entry for entry in bundle.values()):
+        raise ValueError('raw checkpoint replay requires a bundle without calibration')
     expected = {}
     for market, entry in bundle.items():
         if market not in ('TAIEX', 'TX') or 'fold' not in entry:

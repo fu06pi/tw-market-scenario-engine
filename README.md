@@ -1,5 +1,13 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+## 2026-10-26 output-head 研究交付
+
+TAIEX／TX 各完成四個三折 expanding walk-forward 候選，共24個真實 fold checkpoint；八個候選皆保留240/240日，完整開發 gate 全部 `FAIL`。目前最低 Close MAE 為 TAIEX train-std 64日模型415.00點（改善9.09%，CI95 `[-1.11%,15.20%]`）及 TX 原64日模型392.75點（改善12.59%，CI95 `[1.47%,21.79%]`）。TAIEX欠缺穩定改善證據；TX固定因果校準後 Open／Low coverage為74.58%／72.92%，未達75%下限。公開彙總見 [`reports/quant/output-head-delivery-2026-10-26.md`](reports/quant/output-head-delivery-2026-10-26.md)。
+
+`timesfm-head-calibrate` 現在會輸出綁定 result、完整 fold hash及逐筆殘差的因果校準artifact；每日推論逐一核對來源殘差與certified公布時間，暖機不足即失敗。2026-10-12已完成一次雙市場真實checkpoint late retrospective推論、校準、封存及readback，hash為`62e90965ab347c55f1335d7f34ec688382126a4586bd5cf952b8c8cb9253db77`。這不是genuine forward證據；舊checkpoint的0.001點replay仍FAIL，未來訓練會保存CPU數值執行環境供fail-closed重播。
+
+wick-loss候選在第一折完成前中止，沒有checkpoint或準確率結果。後續共享參數審計推翻「wick output梯度不直接作用於g/b，所以Close不可能改變」的判斷：官方head的參數跨GBUD variates共用；此更正只說候選仍需實測，不表示候選有效。累積研究帳本依既定unclean-exit規則已扣滿21600秒；最後1476.91秒是全額reservation，並非實測運算時間。正式輸出仍使用鎖定baseline，`production_switch=false`。
+
 2026-10-17 失敗樣本處理修正：`timesfm-head-train` 與
 `timesfm-head-walk-forward` 會在 optimizer 執行前保存不可變的 sample audit，
 逐日記錄 training／early-stop 的成功與失敗原因，只使用具完整連續資訊集的樣本。

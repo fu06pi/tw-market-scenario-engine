@@ -12,9 +12,10 @@ from pathlib import Path
 import numpy as np
 
 from .backtest import _git_state, _select_baseline, load_dataset, walk_forward
-from .contracts import OHLC, decode, digest, encode, write_once
+from .contracts import EPS, OHLC, decode, digest, encode, write_once
 from .evaluation import block_improvement, metrics
 from .head_budget import bounded_head_run, budget_deadline
+from .numeric_runtime import capture_torch_cpu_runtime, require_matching_torch_cpu_runtime
 from .timesfm3 import (
     CODE_COMMIT,
     WEIGHT_REPO,
@@ -37,6 +38,19 @@ class HeadSample:
 
 
 @dataclass(frozen=True)
+class FrozenHeadFeatures:
+    """Output-head inputs whose frozen TimesFM backbone need not be rerun."""
+
+    hidden: object
+    revin_mean: object
+    revin_std: object
+    total_variates: int
+    total_patches: int
+    selected_patch: int
+    target_count: int
+
+
+@dataclass(frozen=True)
 class HeadTrainingSpec:
     context: int
     learning_rate: float
@@ -48,6 +62,7 @@ class HeadTrainingSpec:
     close_weight: float = 2.0
     quantile_weight: float = 0.5
     crossing_weight: float = 0.1
+    wick_weight: float = 0.0
     loss_normalization: str = "none"
 
     def validate(self, input_patch_len: int = 32) -> None:
@@ -59,6 +74,14 @@ class HeadTrainingSpec:
             raise ValueError("invalid optimizer parameters")
         if self.max_epochs < 1 or self.patience < 1 or self.batch_size < 1:
             raise ValueError("invalid training limits")
+        if min(
+            self.point_weight,
+            self.close_weight,
+            self.quantile_weight,
+            self.crossing_weight,
+            self.wick_weight,
+        ) < 0:
+            raise ValueError("loss weights must be nonnegative")
 
 
 def _spec_from_config(config: dict, candidate_index: int) -> HeadTrainingSpec:
@@ -83,6 +106,7 @@ def _spec_from_config(config: dict, candidate_index: int) -> HeadTrainingSpec:
         close_weight=float(config["close_weight"]),
         quantile_weight=float(config["quantile_weight"]),
         crossing_weight=float(config["crossing_weight"]),
+        wick_weight=float(config.get("wick_weight", 0.0)),
         loss_normalization=config.get("loss_normalization", "none"),
     )
 
@@ -179,6 +203,8 @@ def restore_output_head(model, checkpoint_path: Path, result: dict, *, forecast_
     if _sha256(checkpoint_path) != result["checkpoint"]["sha256"]:
         raise ValueError("checkpoint hash mismatch")
     training = result["training"]
+    if "numeric_runtime" in training:
+        require_matching_torch_cpu_runtime(training["numeric_runtime"])
     if training.get("epochs_completed", 0) < 1:
         raise ValueError("checkpoint has no completed training epoch")
     mean = np.asarray(training["feature_mean"], dtype=np.float32)
@@ -396,6 +422,146 @@ def _one_step_logits(model, inputs, cpm_mask, context_patches, target_count):
     return output["logits"][:, :target_count, context_patches - 1, 0, :]
 
 
+def _supports_frozen_head_cache(model) -> bool:
+    """Restrict the optimized path to the verified TimesFM 3 forward structure."""
+    return (
+        model.__class__.__module__ == "timesfm3.torch.model"
+        and hasattr(model, "_preprocess")
+        and hasattr(model, "transformer_stack")
+        and hasattr(model, "output_head")
+    )
+
+
+def _frozen_head_features(model, inputs, cpm_mask, context_patches, target_count):
+    """Run the frozen official backbone once and retain the selected head inputs.
+
+    The custom trainer predicts step zero from the last observed context patch.
+    That patch is outside the CPM region, so its reverse-RevIN statistics do not
+    depend on the trainable output head. This mirrors TimesFM3Torch.forward up to
+    (but excluding) output_head and keeps gradients only through output_head.
+    """
+    import torch
+
+    if not _supports_frozen_head_cache(model):
+        raise TypeError("frozen head cache requires the pinned TimesFM 3 torch model")
+    selected_patch = context_patches - 1
+    if selected_patch < 0 or cpm_mask[:, selected_patch].any():
+        raise ValueError("cached head patch must be the last observed non-CPM patch")
+    with torch.no_grad():
+        values = torch.nan_to_num(inputs["values"], nan=0.0)
+        values = torch.clamp(values, -model.value_clip, model.value_clip)
+        masks = inputs["masks"].bool()
+        patch_is_target = inputs["patch_is_target"]
+        if values.shape[-1] != model.input_patch_len:
+            raise ValueError("cached TimesFM input patch length mismatch")
+        (
+            _, transformer_input, transformer_patch_mask, revin_stats, _,
+        ) = model._preprocess(
+            values,
+            masks,
+            patch_is_target,
+            freeze_after=None,
+            patch_cpm_mask=cpm_mask,
+        )
+        effective_patch_mask = torch.cumprod(
+            transformer_patch_mask.int(), dim=2
+        ).bool()
+        transformer_output, _, _ = model.transformer_stack(
+            transformer_input, effective_patch_mask
+        )
+        revin_mean, revin_std = revin_stats
+        return FrozenHeadFeatures(
+            hidden=transformer_output[:, :target_count, selected_patch].detach().clone(),
+            revin_mean=revin_mean[:, :target_count, selected_patch].detach().clone(),
+            revin_std=revin_std[:, :target_count, selected_patch].detach().clone(),
+            total_variates=transformer_output.shape[1],
+            total_patches=transformer_output.shape[2],
+            selected_patch=selected_patch,
+            target_count=target_count,
+        )
+
+
+def _one_step_logits_from_features(model, features: FrozenHeadFeatures):
+    """Apply the trainable head and exact reverse-RevIN for cached features."""
+    import torch
+
+    # Preserve the same Linear input matrix shape used by TimesFM3Torch.forward.
+    # A smaller target-only matmul can differ by a few float32 ulps on CPU and
+    # is enough to break strict checkpoint replay after price reconstruction.
+    batch, _, hidden_dims = features.hidden.shape
+    full_hidden = torch.zeros(
+        (batch, features.total_variates, features.total_patches, hidden_dims),
+        dtype=features.hidden.dtype,
+        device=features.hidden.device,
+    )
+    full_hidden[:, : features.target_count, features.selected_patch] = features.hidden
+    raw = model.output_head(full_hidden)
+    full_mean = torch.zeros(
+        raw.shape[:3], dtype=features.revin_mean.dtype, device=features.revin_mean.device
+    )
+    full_std = torch.ones(
+        raw.shape[:3], dtype=features.revin_std.dtype, device=features.revin_std.device
+    )
+    full_mean[:, : features.target_count, features.selected_patch] = features.revin_mean
+    full_std[:, : features.target_count, features.selected_patch] = features.revin_std
+    logits = raw * full_std.unsqueeze(-1) + full_mean.unsqueeze(-1)
+    logits = torch.clamp(logits, -model.value_clip, model.value_clip)
+    return logits.view(
+        logits.shape[0],
+        logits.shape[1],
+        logits.shape[2],
+        model.output_patch_len,
+        len(model.quantiles),
+    )[:, : features.target_count, features.selected_patch, 0, :]
+
+
+def _stack_frozen_head_features(features: list[FrozenHeadFeatures]):
+    import torch
+
+    if not features:
+        raise ValueError("cannot stack empty frozen head feature cache")
+    metadata = {
+        (item.total_variates, item.total_patches, item.selected_patch, item.target_count)
+        for item in features
+    }
+    if len(metadata) != 1:
+        raise ValueError("frozen head cache shapes differ within a batch")
+    total_variates, total_patches, selected_patch, target_count = metadata.pop()
+    return FrozenHeadFeatures(
+        hidden=torch.cat([item.hidden for item in features], dim=0),
+        revin_mean=torch.cat([item.revin_mean for item in features], dim=0),
+        revin_std=torch.cat([item.revin_std for item in features], dim=0),
+        total_variates=total_variates,
+        total_patches=total_patches,
+        selected_patch=selected_patch,
+        target_count=target_count,
+    )
+
+
+def _cache_frozen_head_features(model, samples, mean, scale, *, deadline):
+    """Cache one-sample backbone results and verify the optimized math once."""
+    import torch
+
+    cached = []
+    parity_max_abs = 0.0
+    for index, sample in enumerate(samples):
+        if time.monotonic() >= deadline:
+            raise TimeoutError("training budget expired while caching frozen backbone")
+        inputs, mask, patches, target_count = _batch_inputs(model, [sample], mean, scale)
+        features = _frozen_head_features(model, inputs, mask, patches, target_count)
+        if index == 0:
+            with torch.no_grad():
+                expected = _one_step_logits(model, inputs, mask, patches, target_count)
+                actual = _one_step_logits_from_features(model, features)
+                parity_max_abs = float(torch.max(torch.abs(expected - actual)))
+            if parity_max_abs > 1e-6:
+                raise RuntimeError(
+                    f"cached frozen-backbone logits differ from full forward: {parity_max_abs}"
+                )
+        cached.append(features)
+    return cached, parity_max_abs
+
+
 def training_loss_scales(samples):
     """Fit loss units from optimization labels only, never early-stop/validation."""
     if not samples:
@@ -406,7 +572,13 @@ def training_loss_scales(samples):
     scales = np.maximum(targets.std(axis=0), 1e-6)
     closes = targets[:, 0::4] + targets[:, 1::4]
     close_scales = np.maximum(closes.std(axis=0), 1e-6)
+    extensions_up = np.maximum(np.exp(targets[:, 2::4]) - EPS, 0.0)
+    extensions_down = np.maximum(np.exp(targets[:, 3::4]) - EPS, 0.0)
+    wick_spans = extensions_up + extensions_down
+    log_wick_spans = np.log(np.maximum(wick_spans, EPS))
+    wick_scales = np.maximum(log_wick_spans.std(axis=0), 1e-6)
     return {"target": scales.tolist(), "close": close_scales.tolist(),
+            "wick": wick_scales.tolist(),
             "fit_samples": len(samples), "fit_source": "optimization_training_labels_only",
             "minimum_scale": 1e-6}
 
@@ -429,12 +601,21 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec, loss_sca
             raise ValueError("train_std loss requires frozen training scales")
         units = torch.as_tensor(loss_scales["target"], dtype=logits.dtype, device=logits.device)
         close_units = torch.as_tensor(loss_scales["close"], dtype=logits.dtype, device=logits.device)
+        wick_units = torch.as_tensor(
+            loss_scales.get("wick", []), dtype=logits.dtype, device=logits.device
+        )
         if (units.shape != (target.shape[1],) or close_units.shape != (target.shape[1] // 4,)
                 or not torch.isfinite(units).all() or not torch.isfinite(close_units).all()
                 or (units <= 0).any() or (close_units <= 0).any()):
             raise ValueError("invalid frozen loss scales")
+        if spec.wick_weight and (
+            wick_units.shape != (target.shape[1] // 4,)
+            or not torch.isfinite(wick_units).all()
+            or (wick_units <= 0).any()
+        ):
+            raise ValueError("invalid frozen wick loss scales")
     elif spec.loss_normalization == "none":
-        units, close_units = 1.0, 1.0
+        units, close_units, wick_units = 1.0, 1.0, 1.0
     else:
         raise ValueError("unsupported loss normalization")
     point_loss = torch.nn.functional.smooth_l1_loss(point / units, target / units)
@@ -447,15 +628,47 @@ def output_head_loss(logits, target, quantiles, spec: HeadTrainingSpec, loss_sca
     errors = (target / units)[:, :, None] - normalized_logits
     pinball = torch.maximum(q * errors, (q - 1) * errors).mean()
     crossing = torch.relu(normalized_logits[:, :, :-1] - normalized_logits[:, :, 1:]).mean()
+    wick_loss = torch.zeros((), dtype=logits.dtype, device=logits.device)
+    if spec.wick_weight:
+        predicted_wicks = []
+        actual_wicks = []
+        for offset in range(0, point.shape[1], 4):
+            predicted_wicks.append(
+                torch.clamp(torch.exp(point[:, offset + 2]) - EPS, min=0.0)
+                + torch.clamp(torch.exp(point[:, offset + 3]) - EPS, min=0.0)
+            )
+            actual_wicks.append(
+                torch.clamp(torch.exp(target[:, offset + 2]) - EPS, min=0.0)
+                + torch.clamp(torch.exp(target[:, offset + 3]) - EPS, min=0.0)
+            )
+        predicted_wick = torch.log(
+            torch.clamp(torch.stack(predicted_wicks, dim=1), min=EPS)
+        )
+        actual_wick = torch.log(
+            torch.clamp(torch.stack(actual_wicks, dim=1), min=EPS)
+        )
+        wick_loss = torch.nn.functional.smooth_l1_loss(
+            predicted_wick / wick_units, actual_wick / wick_units
+        )
     return (
         spec.point_weight * point_loss
         + spec.close_weight * close_loss
         + spec.quantile_weight * pinball
         + spec.crossing_weight * crossing
+        + spec.wick_weight * wick_loss
     )
 
 
-def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf, loss_scales=None):
+def _evaluate_loss(
+    model,
+    samples,
+    mean,
+    scale,
+    spec,
+    deadline=math.inf,
+    loss_scales=None,
+    feature_cache=None,
+):
     import torch
 
     losses = []
@@ -465,11 +678,19 @@ def _evaluate_loss(model, samples, mean, scale, spec, deadline=math.inf, loss_sc
             if time.monotonic() >= deadline:
                 raise TimeoutError("early-stop evaluation budget exhausted")
             batch = samples[start : start + spec.batch_size]
-            inputs, mask, patches, target_count = _batch_inputs(
-                model, batch, mean, scale
-            )
             target = torch.tensor(np.stack([item.target for item in batch]))
-            logits = _one_step_logits(model, inputs, mask, patches, target_count)
+            if feature_cache is None:
+                inputs, mask, patches, target_count = _batch_inputs(
+                    model, batch, mean, scale
+                )
+                logits = _one_step_logits(model, inputs, mask, patches, target_count)
+            else:
+                logits = _one_step_logits_from_features(
+                    model,
+                    _stack_frozen_head_features(
+                        feature_cache[start : start + spec.batch_size]
+                    ),
+                )
             losses.append(float(output_head_loss(logits, target, model.quantiles, spec, loss_scales)))
     return float(np.mean(losses))
 
@@ -487,6 +708,7 @@ def train_output_head(
     import torch
 
     spec.validate(model.input_patch_len)
+    numeric_runtime = capture_torch_cpu_runtime()
     if not train_samples or not early_stop_samples:
         raise ValueError("output-head training requires train and early-stop samples")
     torch.manual_seed(seed)
@@ -501,6 +723,27 @@ def train_output_head(
 
     mean, scale = _feature_scaler(train_samples)
     loss_scales = training_loss_scales(train_samples) if spec.loss_normalization == "train_std" else None
+    train_feature_cache = None
+    early_stop_feature_cache = None
+    cache_metadata = {
+        "enabled": False,
+        "method": "full_forward_each_optimizer_step",
+    }
+    if _supports_frozen_head_cache(model):
+        train_feature_cache, train_parity = _cache_frozen_head_features(
+            model, train_samples, mean, scale, deadline=deadline
+        )
+        early_stop_feature_cache, early_stop_parity = _cache_frozen_head_features(
+            model, early_stop_samples, mean, scale, deadline=deadline
+        )
+        cache_metadata = {
+            "enabled": True,
+            "method": "last_observed_patch_transformer_features_v1",
+            "train_samples": len(train_feature_cache),
+            "early_stop_samples": len(early_stop_feature_cache),
+            "full_forward_parity_max_abs": max(train_parity, early_stop_parity),
+            "parity_tolerance": 1e-6,
+        }
     optimizer = torch.optim.AdamW(
         model.output_head.parameters(),
         lr=spec.learning_rate,
@@ -523,12 +766,20 @@ def train_output_head(
             if time.monotonic() >= deadline:
                 break
             batch = [train_samples[index] for index in order[offset : offset + spec.batch_size]]
-            inputs, mask, patches, target_count = _batch_inputs(
-                model, batch, mean, scale
-            )
             target = torch.tensor(np.stack([item.target for item in batch]))
             optimizer.zero_grad(set_to_none=True)
-            logits = _one_step_logits(model, inputs, mask, patches, target_count)
+            if train_feature_cache is None:
+                inputs, mask, patches, target_count = _batch_inputs(
+                    model, batch, mean, scale
+                )
+                logits = _one_step_logits(model, inputs, mask, patches, target_count)
+            else:
+                logits = _one_step_logits_from_features(
+                    model,
+                    _stack_frozen_head_features(
+                        [train_feature_cache[index] for index in order[offset : offset + spec.batch_size]]
+                    ),
+                )
             loss = output_head_loss(logits, target, model.quantiles, spec, loss_scales)
             if not torch.isfinite(loss):
                 raise RuntimeError("non-finite output-head training loss")
@@ -539,7 +790,14 @@ def train_output_head(
             break
         try:
             validation_loss = _evaluate_loss(
-                model, early_stop_samples, mean, scale, spec, deadline=deadline, loss_scales=loss_scales
+                model,
+                early_stop_samples,
+                mean,
+                scale,
+                spec,
+                deadline=deadline,
+                loss_scales=loss_scales,
+                feature_cache=early_stop_feature_cache,
             )
         except TimeoutError:
             break
@@ -564,7 +822,9 @@ def train_output_head(
         raise TimeoutError("training budget expired before a complete epoch")
     model.output_head.load_state_dict(best_state)
     model.eval()
+    require_matching_torch_cpu_runtime(numeric_runtime)
     return {
+        "numeric_runtime": numeric_runtime,
         "loss_normalization": spec.loss_normalization,
         "loss_scales": loss_scales,
         "best_epoch": best_epoch,
@@ -575,6 +835,7 @@ def train_output_head(
         "history": history,
         "feature_mean": mean.tolist(),
         "feature_scale": scale.tolist(),
+        "frozen_backbone_cache": cache_metadata,
         "trainable_parameter_names": trainable,
         "trainable_parameters": sum(
             parameter.numel() for parameter in model.output_head.parameters()

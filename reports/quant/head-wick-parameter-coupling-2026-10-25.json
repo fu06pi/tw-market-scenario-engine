@@ -1,0 +1,272 @@
+{
+  "schema_version": "head-shared-parameter-coupling-audit-v1",
+  "status": "SHARED_PARAMETER_COUPLING_CONFIRMED",
+  "claim_rejected": "Zero wick-loss partial derivatives with respect to g/b logits imply g/b point forecasts can never change.",
+  "provenance": {
+    "package_version": "3.0.2",
+    "direct_url": "https://github.com/google-research/timesfm.git",
+    "vcs_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+    "version_matches": true,
+    "commit_matches": true
+  },
+  "pinned_code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "sources": [
+    {
+      "path": ".venv/lib64/python3.12/site-packages/timesfm3/torch/model.py",
+      "sha256": "474b8035db514d852e6358c73ebd1ba90dcd25f17d1ecf4e5bb884ca788e7dbf",
+      "evidence": [
+        {
+          "line": 155,
+          "text": "self.output_head = nn.Linear("
+        },
+        {
+          "line": 157,
+          "text": "output_patch_len * self.num_quantiles,"
+        },
+        {
+          "line": 324,
+          "text": "raw_logits = self.output_head(transformer_output)"
+        },
+        {
+          "line": 350,
+          "text": "b, v, n_patches, self.output_patch_len, self.num_quantiles"
+        }
+      ]
+    },
+    {
+      "path": "src/tw_scenario/quant/timesfm_head_training.py",
+      "sha256": "98aee3685ff929c7c2e5e6b79f821e2dd8a84ab1c0d96983d26183730692c8f9",
+      "evidence": [
+        {
+          "line": 368,
+          "text": "def _batch_inputs(model, samples: list[HeadSample], mean: np.ndarray, scale: np.ndarray):"
+        },
+        {
+          "line": 498,
+          "text": "raw = model.output_head(full_hidden)"
+        },
+        {
+          "line": 658,
+          "text": "+ spec.wick_weight * wick_loss"
+        },
+        {
+          "line": 747,
+          "text": "optimizer = torch.optim.AdamW("
+        },
+        {
+          "line": 786,
+          "text": "loss.backward()"
+        },
+        {
+          "line": 787,
+          "text": "optimizer.step()"
+        },
+        {
+          "line": 807,
+          "text": "\"early_stop_loss\": validation_loss,"
+        },
+        {
+          "line": 831,
+          "text": "\"best_early_stop_loss\": best_loss,"
+        }
+      ]
+    }
+  ],
+  "axis_interpretation": {
+    "inputs": "batch x variate x patch x input_patch_length",
+    "targets": "g,b,log_u,log_d occupy the first four variates, not independent output-head parameter rows",
+    "head_weight": "(horizon x quantile) x hidden; shared across batches, variates and patches",
+    "median_head_row": "horizon 0 x 9 + quantile index 4 = row 4 for every GBUD variate"
+  },
+  "counterexamples": [
+    {
+      "fixture": "synthetic_fixed_hidden_no_pretrained_weights_no_market_data",
+      "optimizer": "SGD",
+      "optimizer_steps": 1,
+      "learning_rate": 0.01,
+      "weight_decay": 0.0,
+      "spec": {
+        "context": 64,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0,
+        "max_epochs": 100,
+        "patience": 10,
+        "batch_size": 1,
+        "point_weight": 0.0,
+        "close_weight": 0.0,
+        "quantile_weight": 0.0,
+        "crossing_weight": 0.0,
+        "wick_weight": 0.25,
+        "loss_normalization": "none"
+      },
+      "shared_head_weight_shape": [
+        576,
+        3
+      ],
+      "hidden_by_target": [
+        [
+          1.0,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          1.0,
+          0.2
+        ],
+        [
+          1.0,
+          0.3,
+          0.7
+        ],
+        [
+          0.8,
+          0.6,
+          1.0
+        ]
+      ],
+      "revin_mean_by_target": [
+        0.001,
+        -0.002,
+        -6.0,
+        -6.5
+      ],
+      "revin_std_by_target": [
+        0.01,
+        0.02,
+        0.8,
+        1.1
+      ],
+      "loss": 0.03127471666501967,
+      "absolute_logit_gradient_l1_by_target": {
+        "g": 0.0,
+        "b": 0.0,
+        "log_u": 0.07787729333883373,
+        "log_d": 0.04723496610543709
+      },
+      "nonzero_parameter_gradient_rows": [
+        4
+      ],
+      "shared_median_weight_gradient": [
+        -0.10386860484385163,
+        -0.049865628030908576,
+        -0.09556974698572769
+      ],
+      "shared_median_bias_gradient": -0.1142602973870478,
+      "median_logit_change_by_target": {
+        "g": 2.5677295193279968e-05,
+        "b": 4.7034835447405535e-05,
+        "log_u": 0.002399899308241693,
+        "log_d": 0.0035512873557301816
+      },
+      "close_return_change": 7.27121306406855e-05,
+      "close_points_change_at_synthetic_previous_close_22000": 1.5981261076596365,
+      "sgd_analytic_max_abs_error": 2.419939248987646e-16,
+      "counterexample_confirmed": true
+    },
+    {
+      "fixture": "synthetic_fixed_hidden_no_pretrained_weights_no_market_data",
+      "optimizer": "AdamW",
+      "optimizer_steps": 1,
+      "learning_rate": 0.01,
+      "weight_decay": 0.0,
+      "spec": {
+        "context": 64,
+        "learning_rate": 0.01,
+        "weight_decay": 0.0,
+        "max_epochs": 100,
+        "patience": 10,
+        "batch_size": 1,
+        "point_weight": 0.0,
+        "close_weight": 0.0,
+        "quantile_weight": 0.0,
+        "crossing_weight": 0.0,
+        "wick_weight": 0.25,
+        "loss_normalization": "none"
+      },
+      "shared_head_weight_shape": [
+        576,
+        3
+      ],
+      "hidden_by_target": [
+        [
+          1.0,
+          0.2,
+          0.3
+        ],
+        [
+          0.5,
+          1.0,
+          0.2
+        ],
+        [
+          1.0,
+          0.3,
+          0.7
+        ],
+        [
+          0.8,
+          0.6,
+          1.0
+        ]
+      ],
+      "revin_mean_by_target": [
+        0.001,
+        -0.002,
+        -6.0,
+        -6.5
+      ],
+      "revin_std_by_target": [
+        0.01,
+        0.02,
+        0.8,
+        1.1
+      ],
+      "loss": 0.03127471666501967,
+      "absolute_logit_gradient_l1_by_target": {
+        "g": 0.0,
+        "b": 0.0,
+        "log_u": 0.07787729333883373,
+        "log_d": 0.04723496610543709
+      },
+      "nonzero_parameter_gradient_rows": [
+        4
+      ],
+      "shared_median_weight_gradient": [
+        -0.10386860484385163,
+        -0.049865628030908576,
+        -0.09556974698572769
+      ],
+      "shared_median_bias_gradient": -0.1142602973870478,
+      "median_logit_change_by_target": {
+        "g": 0.00024999997447066073,
+        "b": 0.0005399999285753577,
+        "log_u": 0.023999997462388123,
+        "log_d": 0.037399995715513334
+      },
+      "close_return_change": 0.0007899999030460184,
+      "close_points_change_at_synthetic_previous_close_22000": 17.369486599255524,
+      "sgd_analytic_max_abs_error": null,
+      "counterexample_confirmed": true
+    }
+  ],
+  "training_implications": [
+    "The direct wick output gradient is confined to u/d medians, but those medians update the same weight row and bias used by g/b medians.",
+    "For the selected non-CPM context patch, cached reverse-RevIN statistics are fixed; positive per-variate scales rescale the shared-parameter coupling rather than remove it.",
+    "The current trainer has no gradient clipping. Do not attribute behavior to an absent global clipping operation.",
+    "AdamW's elementwise adaptive updates can mask some gradient changes on a particular step; exact cancellation, zero derivatives or orthogonality can occur. Coupling is possible, not a guarantee every actual g/b forecast changes.",
+    "The existing crossing term couples adjacent quantile outputs through their loss gradients. A changed median can affect other quantile-row updates on later steps.",
+    "Early stopping uses the full loss including wick_weight, so adding wick loss can also change the restored epoch even where some optimizer updates coincide."
+  ],
+  "may_conclude": [
+    "The asserted structural impossibility of changing g/b or Close is false.",
+    "A wick candidate may change Open and Close and must be assessed on all OHLC gates and folds."
+  ],
+  "may_not_conclude": [
+    "This synthetic audit cannot predict actual validation error, improvement, degradation, effect size or selected epoch.",
+    "No new real-data candidate was trained; no pretrained weights were loaded and no acceptance gate was run or passed.",
+    "The audit does not establish that wick loss is the right intervention or that it repairs the TAIEX first-fold weakness."
+  ],
+  "research_budget_ledger_changed": false,
+  "reproduce": ".venv/bin/python research/audit_head_parameter_coupling.py"
+}

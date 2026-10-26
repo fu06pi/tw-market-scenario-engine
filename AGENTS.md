@@ -1,5 +1,9 @@
 # Codex project instructions
 
+## 訂閱額度中斷續接 — 2026-10-24
+
+每次開始或恢復工作先讀 [RESUME_HANDOFF.md](RESUME_HANDOFF.md)。依使用者指示，在可用額度內持續推進；每個重要步驟及啟動長工作前更新交接，不等額度耗盡才保存。訂閱重置後由使用者說「繼續」再接手，不建立自動喚醒。ChatGPT額度與模型運算預算分開記錄；中斷後先查進程、checkpoint及帳本，避免重跑、重置預算或虛報背景工作。
+
 ## 2026-10-18 模型優先執行目標
 
 以 [CURRENT_GOAL.md](CURRENT_GOAL.md) 為本階段可重播目標。先完成真實訓練 checkpoint、三折驗證與每日 OHLC 推論；模型交付前暫緩卡片、晨報排版、Sheet及排程。派送任務與 active 狀態不得視為訓練進度；需以日誌、參數更新、checkpoint與fold結果佐證。先獨立市場再比較聯合；已執行中的有效實驗先完成，不重啟。原 final 永久 FAIL，後續 V0 整合仍保留，但不得搶占本階段模型工作。
