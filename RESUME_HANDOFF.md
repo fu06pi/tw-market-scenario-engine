@@ -3,7 +3,7 @@
 ## 2026-10-26 續接中的權威狀態（優先於下方舊快照）
 
 - 新增checkpoint專用`timesfm-head-live-preopen`單一執行入口；artifact／資源預檢、08:30前增量capture與官方核對、08:30後推論、08:40 deadline及write-once receipt已接線。112 tests、Ruff及diff check通過。2026-10-26真實bundle預檢為READY；下一verified exchange day為2026-10-27，必須08:20–08:29實際執行後才有genuine forward證據。命令與hash見`reports/quant/head-forward-preflight-2026-10-26.{json,md}`。
-- 最新本機提交 de60f83；GitHub connector已將驗證後的本機tree與遠端獨有cloud evidence合併，遠端 feat/tej-ohlc-research 更新為9681829985783d92edf5da0a37bd0f911763987a。使用expected SHA lease、非force更新；Shell DNS仍不能fetch，因此本機remote-tracking ref保持舊值，不能用`git status ahead`判斷GitHub是否已同步。
+- checkpoint forward實作的本機提交為`d50f166`；GitHub connector在保留遠端獨有cloud evidence後建立等價提交`07ee36f2af9d7b03b2d5a70408e0374acb2f0d06`，PR #2 head已核對。同步使用expected SHA lease、非force更新；Shell DNS仍不能fetch，因此本機remote-tracking ref保持舊值，不能用`git status ahead`判斷GitHub是否已同步。
 - TX normalized 三折已完成：340db2b412224657c0e7，240/240 日，Close MAE 393.12、改善12.50%；固定校準後 O/L coverage 仍低於75%，完整 gate FAIL。
 - wick 候選 d77dbc4223777b1f104e 被中止，只保存 fold-1 sample audit，沒有 checkpoint 或 fold 成績。當時「wick 不會影響 Close」的停止理由錯誤：官方 head 的參數跨 GBUD variates 共用；output 梯度為零不代表參數更新後預測不變。更正證據 research/audit_head_parameter_coupling.py 與 reports/quant/head-wick-parameter-coupling-2026-10-25.json；不能據此宣稱 wick 已成功或失敗。
 - 帳本第12次嘗試保留 RESERVED_UNCLEAN_EXIT_CHARGES_FULL_ALLOWANCE：1476.9139 秒全額預留扣帳，累計21600/21600秒。這不是已實測使用滿六小時。不得刪帳、退回或新開同一搜尋帳本繞過停止規則。
