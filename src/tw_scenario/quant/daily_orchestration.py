@@ -335,6 +335,135 @@ def run_live_preopen(
         raise _failure(output_root, trading_date, initiated_at, stage, exc) from exc
 
 
+def run_head_live_preopen(
+    *,
+    trading_date: date,
+    base_dataset_dir: Path,
+    bundle_path: Path,
+    config: dict,
+    data_root: Path,
+    output_root: Path,
+    cache_dir: Path,
+    clock=None,
+    sleeper=None,
+) -> Path:
+    """Capture once and freeze a checkpoint forecast inside the live 08:20-08:40 window."""
+    from .head_daily import read_head_bundle, run_head_daily
+    from .timesfm3 import runtime_probe
+
+    clock = clock or (lambda: datetime.now(TZ))
+    sleeper = sleeper or time.sleep
+    initiated_at = clock()
+    stage = "validate_head_live_window"
+    try:
+        if initiated_at.utcoffset() is None:
+            raise ValueError("live clock must be timezone-aware")
+        if initiated_at.astimezone(TZ).date() != trading_date:
+            raise ValueError("head live pre-open runs only for the current Taipei trading date")
+        cutoff = datetime.combine(
+            trading_date,
+            datetime.strptime(config["cutoff"], "%H:%M").time(),
+            TZ,
+        )
+        deadline = datetime.combine(
+            trading_date,
+            datetime.strptime(config["deadline"], "%H:%M").time(),
+            TZ,
+        )
+        capture_not_before = datetime.combine(
+            trading_date,
+            datetime.strptime(config.get("capture_not_before", "08:20"), "%H:%M").time(),
+            TZ,
+        )
+        if not capture_not_before <= initiated_at < cutoff:
+            raise ValueError("head live pre-open capture must start from 08:20 through 08:29 Taipei")
+
+        stage = "preflight_head_artifacts"
+        read_head_bundle(bundle_path)
+        probe = runtime_probe(cache_dir)
+        if probe.status != "READY_TO_LOAD":
+            raise RuntimeError(f"TimesFM load blocked: {probe.status}")
+
+        stage = "capture_head_preopen_inputs"
+        daily_dataset_dir, audit = capture_preopen_dataset(
+            base_dataset_dir=base_dataset_dir,
+            trading_date=trading_date,
+            cutoff_at=cutoff,
+            root=data_root,
+        )
+        audit_path = (
+            output_root
+            / "input-audits"
+            / str(trading_date)
+            / f"{daily_dataset_dir.name}.json"
+        )
+        _write_once_or_same(audit_path, audit)
+        if audit["status"] != "PASS":
+            raise ValueError("head pre-open capture failed the cutoff/data-quality audit")
+
+        stage = "wait_for_head_cutoff"
+        remaining = (cutoff - clock()).total_seconds()
+        if remaining > 0:
+            sleeper(remaining)
+        generated_at = clock()
+        if generated_at < cutoff:
+            raise RuntimeError("clock did not reach the 08:30 forecast cutoff")
+
+        stage = "head_forecast_and_freeze"
+        snapshot_path = output_root / "head-snapshots" / f"{trading_date}.json"
+        run_head_daily(
+            daily_dataset_dir,
+            bundle_path,
+            trading_date,
+            snapshot_path,
+            cache_dir,
+        )
+        snapshot = load_snapshot(snapshot_path)
+        if snapshot.trading_date != trading_date:
+            raise ValueError("frozen head snapshot trading date mismatch")
+        if snapshot.timeliness != "ON_TIME" or snapshot.persisted_at > deadline:
+            raise ValueError("head snapshot missed the 08:40 persistence deadline")
+
+        stage = "complete"
+        evidence = {
+            "schema_version": "timesfm-head-live-preopen-v1",
+            "status": "HEAD_FORWARD_SHADOW_FROZEN",
+            "trading_date": str(trading_date),
+            "initiated_at": initiated_at.isoformat(),
+            "capture_completed_by_cutoff": True,
+            "generated_at": snapshot.generated_at.isoformat(),
+            "persisted_at": snapshot.persisted_at.isoformat(),
+            "completed_at": clock().isoformat(),
+            "daily_dataset_dir": str(daily_dataset_dir),
+            "input_audit": str(audit_path),
+            "bundle_hash": digest(json.loads(bundle_path.read_text(encoding="utf-8"))),
+            "forecast_id": snapshot.forecast_id,
+            "snapshot_hash": snapshot.snapshot_hash,
+            "snapshot": str(snapshot_path),
+            "timeliness": snapshot.timeliness,
+            "data_quality": snapshot.data_quality.status,
+            "research_only": True,
+            "genuine_forward": True,
+            "development_gate": "FAIL",
+            "production_switch": False,
+            "production_sheet_written": False,
+        }
+        path = output_root / "e2e-receipts" / f"{snapshot.forecast_id}-head-preopen.json"
+        _write_once_or_same(path, evidence)
+        return path
+    except Exception as exc:
+        if isinstance(exc, DailyRunFailed):
+            raise
+        raise _failure(
+            output_root,
+            trading_date,
+            initiated_at,
+            stage,
+            exc,
+            phase="head-preopen",
+        ) from exc
+
+
 def _append_or_same(record, root: Path, kind: str):
     contract = record.contract or "cash"
     path = root / kind / record.forecast_id / f"{record.instrument}-{contract}.json"

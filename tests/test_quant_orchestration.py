@@ -25,6 +25,7 @@ from tw_scenario.quant.daily import (
 )
 from tw_scenario.quant.daily_orchestration import (
     DailyRunFailed,
+    run_head_live_preopen,
     run_live_postclose,
     run_live_preopen,
 )
@@ -222,6 +223,77 @@ def test_live_preopen_composes_capture_forecast_and_staging_write(monkeypatch, t
     assert result["status"] == "STAGING_PREOPEN_E2E_VERIFIED"
     assert result["capture_completed_by_cutoff"] is True
     assert result["staging_sheet_written"] is True
+    assert result["production_sheet_written"] is False
+
+
+def test_head_live_preopen_rejects_wrong_window_and_preserves_failure(tmp_path):
+    with pytest.raises(DailyRunFailed) as raised:
+        run_head_live_preopen(
+            trading_date=DAY,
+            base_dataset_dir=tmp_path / "base",
+            bundle_path=tmp_path / "bundle.json",
+            config={"cutoff": "08:30", "deadline": "08:40"},
+            data_root=tmp_path / "data",
+            output_root=tmp_path / "daily",
+            cache_dir=tmp_path / "cache",
+            clock=lambda: _at("08:10"),
+        )
+    evidence = json.loads(raised.value.evidence_path.read_text())
+    assert evidence["status"] == "FAIL"
+    assert evidence["failed_stage"] == "validate_head_live_window"
+    assert evidence["production_sheet_written"] is False
+
+
+def test_head_live_preopen_captures_and_freezes_before_deadline(monkeypatch, tmp_path):
+    from tw_scenario.quant import head_daily, timesfm3
+
+    bundle_path = tmp_path / "bundle.json"
+    bundle_path.write_text(json.dumps({
+        "TAIEX": {"result": "taiex.json", "checkpoint": "taiex.safetensors"},
+        "TX": {"result": "tx.json", "checkpoint": "tx.safetensors"},
+    }))
+    daily_dataset = tmp_path / "daily-dataset"
+    audit = {"status": "PASS", "report_hash": "a" * 64, "issues": []}
+    monkeypatch.setattr(
+        daily_orchestration,
+        "capture_preopen_dataset",
+        lambda **_kwargs: (daily_dataset, audit),
+    )
+    monkeypatch.setattr(head_daily, "read_head_bundle", lambda _path: {"validated": True})
+    monkeypatch.setattr(
+        timesfm3,
+        "runtime_probe",
+        lambda _path: type("Probe", (), {"status": "READY_TO_LOAD"})(),
+    )
+
+    def fake_head_daily(_dataset, _bundle, _day, output, _cache):
+        _snapshot(output)
+        return output
+
+    monkeypatch.setattr(head_daily, "run_head_daily", fake_head_daily)
+    moments = iter((_at("08:25"), _at("08:25"), _at("08:30"), _at("08:31")))
+    path = run_head_live_preopen(
+        trading_date=DAY,
+        base_dataset_dir=tmp_path / "base",
+        bundle_path=bundle_path,
+        config={
+            "cutoff": "08:30",
+            "deadline": "08:40",
+            "capture_not_before": "08:20",
+        },
+        data_root=tmp_path / "data",
+        output_root=tmp_path / "daily",
+        cache_dir=tmp_path / "cache",
+        clock=lambda: next(moments),
+        sleeper=lambda _seconds: None,
+    )
+    result = json.loads(path.read_text())
+    assert result["status"] == "HEAD_FORWARD_SHADOW_FROZEN"
+    assert result["capture_completed_by_cutoff"] is True
+    assert result["timeliness"] == "ON_TIME"
+    assert result["genuine_forward"] is True
+    assert result["development_gate"] == "FAIL"
+    assert result["production_switch"] is False
     assert result["production_sheet_written"] is False
 
 

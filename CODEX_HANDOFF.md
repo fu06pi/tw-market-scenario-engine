@@ -10,6 +10,8 @@
 
 下一步是在不開新模型搜尋的前提下完成安全同步、以固定版本執行下一個真正交易日的08:40前forward shadow；沒有新授權研究預算前不重跑wick候選。正式排程與Sheet保持不變，`production_switch=false`。`CURRENT_GOAL.md`原有未提交修改需保留、不納入提交。
 
+已新增固定checkpoint專用的`timesfm-head-live-preopen`，把artifact／資源預檢、08:30前FinMind與官方增量擷取、08:30後推論及08:40 deadline綁在同一次手動執行。下一個verified exchange day是2026-10-27；需在台北時間08:20–08:29以`cce0208...` base dataset與私有`head-delivery-2026-10-26/bundle.json`執行。2026-10-26預檢為READY、112 tests通過，但尚未到執行窗，因此不能標示genuine forward成功。預檢證據見`reports/quant/head-forward-preflight-2026-10-26.{json,md}`。
+
 ## 2026-10-24 第一折失效與推論輸入核對
 
 已完成240日新舊TAIEX配對診斷：第一折開盤誤差優於基準，日盤body誤差較差；三折都低估振幅，正規化加劇range低估。詳見 reports/quant/head-fold-diagnostic-2026-10-24.md。TAIEX/TX各240日每日輸入與驗證輸入逐元素一致，僅排除輸入建構差異，原數值replay仍FAIL。全套101測試通過。未啟動新訓練、未改正式排程；續接見RESUME_HANDOFF.md。

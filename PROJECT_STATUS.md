@@ -9,6 +9,7 @@
 - wick候選`d77dbc4223777b1f104e`中止於第一折sample audit後，沒有checkpoint或成績。共享head參數審計已推翻原先的結構性不可能判斷；仍沒有實際增益證據。
 - 研究帳本依既定unclean-exit規則扣滿21600/21600秒；最後1476.91秒是full reservation而非實測compute。舊checkpoint缺少數值runtime metadata，真實0.001點replay仍`FAIL`；未來訓練新增CPU runtime identity及重載一致性檢查。
 - 公開證據：`reports/quant/output-head-delivery-2026-10-26.{json,md}`、`reports/quant/head-wick-parameter-coupling-2026-10-25.json`。正式預設維持baseline，`production_switch=false`。
+- 新增`timesfm-head-live-preopen`單一盤前入口：08:20–08:29預檢固定bundle與資源、擷取及核對增量資料，08:30後執行checkpoint推論，08:40前封存才算成功；不寫Sheet或正式晨報。真實bundle、兩份校準artifact與checkpoint均已核對，本機preflight為`READY_TO_LOAD`（可用RAM 5,195 MiB、swap 1,034 MiB）。完整112項測試、Ruff及diff check通過。下一個交易日2026-10-27仍須實際執行，現在只有`READY_FOR_MANUAL_FORWARD_WINDOW`，不是forward成功。
 
 ## 2026-10-25 凍結 backbone 快取
 
@@ -131,7 +132,7 @@ TAIEX joint 相較原 independent TimesFM 的 close MAE 由 170.43 改善至 169
 - [ ] 至少一個 genuine 08:40 前手動 live staging E2E；目前只有2026-10-08 retrospective shadow。
 - [ ] 3–5 個交易日 genuine forward shadow；單次 retrospective staging write/readback已完成。
 - [ ] 經歷史時間戳核實的重大事件日曆與海外市場特徵；目前不把新聞加入數值訓練，未平倉量亦尚未進入模型特徵。
-- [ ] 實際執行新版TimesFM獨立與JOINT output-head訓練及三段walk-forward。2026-10-16本機preflight為`BLOCKED_INSUFFICIENT_MEMORY`：可用RAM 2,762 MiB、free swap 0 MiB，低於3,072 MiB門檻；尚無新checkpoint或準確度結果。2026-10-17已建立ChatGPT雲端訓練工作，結果仍須回寫可重現artifact並通過同一gate才能採信。
+- [x] 實際執行新版TimesFM獨立市場output-head三段walk-forward：八個完整候選、24個fold checkpoint、每候選240/240日均已交付；完整gate全為`FAIL`。JOINT新版head未在耗盡的研究預算內完成，不以獨立市場結果冒充JOINT。
 - [ ] 將外部 `財經事件晨報`、`V1 台股劇本`、`V1 台股收盤驗證` 從 legacy 08:50／情境機率介面遷移到凍結 OHLC 契約；正式切換前不得修改現行任務。
 - [ ] 正式排程切換與 rollback 演練。
 

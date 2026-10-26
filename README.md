@@ -124,6 +124,17 @@ UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 tw-scenario quant ti
 
 命令不接受回填生成時間；08:30 前拒絕，08:40 後如實標示 LATE。先核對 checkpoint hash、模型 revision、feature 順序、scaler及標籤截止日，再使用不含當日日盤答案的輸入推論。輸出沿用 `ohlc-forecast-v1`，包含雙市場 OHLC、指定 TX 合約、同合約前收、區間、來源與模型雜湊；檔案不可覆寫並執行 readback。區間目前是未校準的轉換分位數包絡，名義80%並不代表已達到實際覆蓋率，快照固定 WARN 並揭露限制；不會修改正式排程。
 
+真正盤前 shadow 使用單一 `timesfm-head-live-preopen` 入口。它只允許交易日台北時間08:20–08:29啟動，先驗證bundle、checkpoint、校準artifact與本機資源，再擷取並核對FinMind／官方增量；08:30後載入固定head並在08:40前封存。成功receipt仍明確保留`development_gate=FAIL`、`research_only=true`與`production_switch=false`，不寫Google Sheet或正式晨報：
+
+```bash
+UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 tw-scenario quant \
+  timesfm-head-live-preopen --date YYYY-MM-DD \
+  --base-dataset-dir data/processed/<certified-dataset-id> \
+  --bundle reports/generated/quant/experiments/<fixed-bundle>/bundle.json
+```
+
+錯誤時段、資料逾時、官方核對差異、artifact竄改、資源不足、模型錯誤及08:40逾時都會fail-closed並保存不可變失敗attempt。此入口用來取得固定版本的前向觀察，不能把一日準時執行改稱模型達標。
+
 2026-10-18 工程驗證：獨立與聯合 synthetic 小模型各完成 optimizer → safetensors → 重載 → CLI 推論 → 凍結快照及 readback，並驗證竄改拒絕、不可覆寫、盤前不讀實際值。全套92項測試通過。這不是 pinned TimesFM 真實訓練、三折成績或 genuine forward 完成證據。
 
 

@@ -699,6 +699,44 @@ def timesfm_head_daily(
                 )})
 
 
+@app.command("timesfm-head-live-preopen")
+def timesfm_head_live_preopen(
+    trading_date: Annotated[str, typer.Option("--date")],
+    base_dataset_dir: Annotated[Path, typer.Option("--base-dataset-dir")],
+    bundle_path: Annotated[Path, typer.Option("--bundle")],
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_REPORT_ROOT / "daily",
+    cache_dir: Annotated[
+        Path, typer.Option("--cache-dir", help="Pinned local TimesFM weight cache.")
+    ] = Path("data/raw/timesfm3"),
+    config_path: Annotated[
+        Path, typer.Option("--config")
+    ] = DEFAULT_CONFIG,
+) -> None:
+    """Capture and freeze one research checkpoint forecast in the live pre-open window."""
+    from .daily_orchestration import DailyRunFailed, run_head_live_preopen
+
+    try:
+        config = _load_config(config_path)
+        evidence_path = run_head_live_preopen(
+            trading_date=_parse_date(trading_date, "date"),
+            base_dataset_dir=base_dataset_dir,
+            bundle_path=bundle_path,
+            config=config,
+            data_root=data_root,
+            output_root=output_root,
+            cache_dir=cache_dir,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})
+
+
 @app.command("timesfm-head-select")
 def timesfm_head_select(
     results: Annotated[
