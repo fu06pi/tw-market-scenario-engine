@@ -6,6 +6,7 @@
 - 公平比較已固化為`timesfm-head-fair-gate`：新增`head_fair_gate.py`、`head_fair_comparator.json`與測試。CLI已重建240日報告至`reports/generated/quant/model-search-v2/fair-gate-75d81bef117162e5a51a/`，結果與探索重算一致；公開aggregate為`reports/quant/output-head-fair-gate-2026-10-27.{json,md}`。
 - wick、recent、JOINT三條模型改動都未對公平comparator產生真增益，已觸發原定連續三輪無增益停止規則。剩餘phase-2研究預算不再用於盲目調參；先完成公平gate、完整測試、結果報告與最佳baseline交付，不能放寬門檻製造PASS。
 - 2026-10-27完整驗證為116 tests passed、Ruff pass、`git diff --check` pass。generated逐日結果受`.gitignore`保護；提交必須排除使用者既有`CURRENT_GOAL.md`修改。
+- 本機提交`a1a8ff6`已完成；GitHub connector以遠端`322d8038`為parent、expected-SHA lease非force更新PR #2至`31c58e3a8cac2cf247db06614ae9645dbc1e5c31`，保留遠端獨有歷史。PR說明已更新公平gate結果；GitHub目前沒有回報status checks。除`CURRENT_GOAL.md`原有修改外工作樹應保持乾淨。
 
 - 18:43後使用者糾正優先順序：模型尚未完成，不應先等待交易日。已停止推進forward／Sheet／晨報／排程，改回完整模型訓練與驗證。舊八個完整候選仍全為FAIL；checkpoint存在不代表模型完成。
 - 已宣告獨立的model-search phase 2：`config/quant/timesfm_output_head_range_loss_v2.json`與`reports/quant/model-search-v2-plan-2026-10-26.md`。新帳本固定在`reports/generated/quant/model-search-v2/output-head-search-budget.json`，總額7200秒、每市場3600秒；舊21600秒帳本保持不動。只測wick loss單一改動，先TAIEX三折再TX三折，不並行。

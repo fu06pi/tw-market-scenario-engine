@@ -6,7 +6,7 @@
 
 JOINT run `75d81bef117162e5a51a`公平結果：TAIEX Close改善-13.71%，三折-12.97%／-17.21%／-10.87%，CI95 `[-21.65%,-9.09%]`；TX改善-5.93%，三折-0.04%／-4.91%／-9.20%，CI95 `[-12.24%,-0.06%]`。全部240日保留，TAIEX 2026-06-08用固定range fallback。兩市場均`FAIL`。
 
-wick、recent、JOINT已連續三輪沒有對公平comparator產生增益，依原停止規則不再消耗剩餘4147.65秒作盲目調參。接手先讀`reports/quant/output-head-fair-gate-2026-10-27.{json,md}`與`RESUME_HANDOFF.md`；完成測試、提交與安全同步。正式預設仍是最強baseline，沒有新future holdout或production切換。
+wick、recent、JOINT已連續三輪沒有對公平comparator產生增益，依原停止規則不再消耗剩餘4147.65秒作盲目調參。完整116項測試、Ruff及diff check已通過；本機提交`a1a8ff6`，PR #2遠端head為`31c58e3a8cac2cf247db06614ae9645dbc1e5c31`。接手先讀`reports/quant/output-head-fair-gate-2026-10-27.{json,md}`與`RESUME_HANDOFF.md`。正式預設仍是最強baseline，沒有新future holdout或production切換。
 
 ## 2026-10-26 最新接續點
 
