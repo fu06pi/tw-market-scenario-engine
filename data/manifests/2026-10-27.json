@@ -1,0 +1,113 @@
+{
+  "trading_date": "2026-10-27",
+  "generated_at": "2026-10-27T08:56:11+08:00",
+  "data_cutoff_at": "2026-10-27T08:50:00+08:00",
+  "snapshot_status": "formal_preopen_legacy_compatibility",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_scope": "Legacy TAIEX scenario only. Inputs public or frozen by 08:50 Asia/Taipei. New OHLC pipeline requires 08:30 cutoff/08:40 persistence and has not switched; exclude from new-model metrics.",
+  "recovery": "Today's GitHub prediction and manifest both returned 404. Recovered today's V0 08:38 frozen hypotheses and independently generated V1 compatibility targets. No prior-day probabilities or targets reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash is SHA-256 over this full manifest; snapshot_hash excluded from prediction hash.",
+  "calendar": {
+    "is_trading_day": true,
+    "basis": "Tuesday after the 2026-10-26 holiday; 2026-10-27 is not listed as a TWSE/TAIFEX holiday.",
+    "url": "https://www.taifex.com.tw/file/taifex/CHINESE/4/2026Calendar.pdf"
+  },
+  "sources": [
+    {
+      "id": "v0_google_sheet",
+      "title": "財金晨報預測與覆盤資料庫",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "sheet_range": "每日預測與覆盤!A230:P247",
+      "frozen_at": "2026-10-27T08:38:00+08:00",
+      "access_mode": "read_only",
+      "shared_source_note": "盤前資訊截止2026/10/27 08:38台灣時間；來源：AP 10/26美股正式收盤、Investing SOX 10/26歷史收盤、Yahoo台積電ADR 10/27 04:00、TWSE 10/22收盤、Celestica 10/26 IR、經濟日報10/26法說日程、Google Sheet模型修正紀錄至10/22。10/26台灣休市，無新台指期夜盤收盤；ADR不同來源數值有差異，採Yahoo 424.37/+1.40%，不得當作精確換算台積電現貨。不得以盤後消息改寫本列。",
+      "raw_rows": [
+        {"row":230,"date":"2026/10/27","item":"TAIEX開盤Gap","hypothesis":"10/22台股最後收46,041.43；10/23及10/26台灣休市。10/26 Nasdaq+0.82%、SOX+2.82%，TSM ADR依Yahoo+1.40%；但10/22美股曾急跌、油價高、台指期缺最新夜盤。","prediction":"10/27 09:00開盤>46,041.43；另記Gap 0%至+1.20%","confidence":"方向62%；區間53%","evidence":"海外半導體反彈、ADR較10/22美股收盤回升；連休與未確認台指夜盤限制幅度判斷。"},
+        {"row":231,"date":"2026/10/27","item":"首30分鐘下探","hypothesis":"10/22開高走低、收在日低；連休後累積消息易導致09:00–09:30重新定價，但海外晶片反彈構成反證。","prediction":"10/27 09:00–09:30分鐘K最低價/當日開盤價-1≤-0.30%","confidence":"58%","evidence":"前交易日指數-1.805%、連休資訊累積、油價及FOMC前風險；僅可用有時戳分鐘K驗證。"},
+        {"row":232,"date":"2026/10/27","item":"首30分鐘反彈","hypothesis":"前次現貨急跌後隔夜科技反彈，連休後若開盤集中反映賣壓，可能出現技術性承接。","prediction":"10/27 09:00–09:30分鐘K最高價/當日開盤價-1≥+0.30%","confidence":"57%","evidence":"SOX+2.82%、Nasdaq+0.82%；前日收最低形成均值回歸候選，與下探預測不互斥。"},
+        {"row":233,"date":"2026/10/27","item":"TAIEX收盤方向","hypothesis":"前收46,041.43，海外半導體反彈與Celestica展望偏多，但10/22大盤收最低、油價與利率風險仍在；開盤訊號不直接外推全天。","prediction":"10/27正式13:30收盤>46,041.43；另記CLV","confidence":"55%","evidence":"海外正向與本地連休賣壓對沖；採低信心方向，收盤不得套用盤中資料回填。"},
+        {"row":234,"date":"2026/10/27","item":"TAIEX開盤至收盤","hypothesis":"10/22台股開46,942.75、收46,041.43，開高走低；本次連休資訊量大，開盤後可能再次反轉。","prediction":"10/27正式收盤<當日09:00開盤價","confidence":"52%","evidence":"前次開高走低與長假不確定性；SOX反彈反證，故僅微弱偏空。"},
+        {"row":235,"date":"2026/10/27","item":"上市市場廣度","hypothesis":"10/22指數下跌1.805%、科技股弱；10/26美股反彈可能改善個股廣度，但長假風險仍壓抑中小型股。","prediction":"10/27上市非平盤上漲家數/(上漲+下跌)>50%","confidence":"53%","evidence":"海外風險偏好回升但未確認台灣資金面；平盤不計入分母。"},
+        {"row":236,"date":"2026/10/27","item":"OTC相對TAIEX","hypothesis":"SOX與EDA財報反彈可能有利中小型科技；但台積電權重帶動加權指數且OTC資金承接不明。","prediction":"10/27 OTC正式收盤報酬>TAIEX收盤報酬，均以10/22收盤為基準","confidence":"51%","evidence":"科技反彈與大型權值領漲可能相互抵銷；未以未確認OTC歷史數據加權。"},
+        {"row":237,"date":"2026/10/27","item":"台積電2330開盤與收盤","hypothesis":"10/22台積電收2,385元；TSM ADR 10/26 Yahoo收424.37、+1.40%，10/23亦上漲；但跨市場價格不可直接換算且前次台積電開高收低。","prediction":"10/27台積電09:00開盤>2,385元，且13:30收盤>2,385元；分開計分","confidence":"開盤64%；收盤56%","evidence":"ADR與SOX回升支持開盤，前次價格接受度不佳限制收盤信心。"},
+        {"row":238,"date":"2026/10/27","item":"聯發科2454收盤","hypothesis":"10/22聯發科收4,010元、當日-3.14%，連跌；10/26 SOX+2.82%、Cadence財報優於預期，但個股近期相對弱勢。","prediction":"10/27聯發科正式收盤>4,010元；另記相對TAIEX","confidence":"55%","evidence":"海外IC/EDA反彈及前次超跌候選，前日個股弱勢限制信心。"},
+        {"row":239,"date":"2026/10/27","item":"AI大型權值固定四檔","hypothesis":"固定2330台積電、2317鴻海、2382廣達、2308台達電；Celestica Q3營收58.3億美元超指引、2027營收展望400億美元，海外AI供應鏈需求強，但融資成本疑慮仍在。","prediction":"四檔各以10/22收盤為基準，10/27等權報酬>0；另記上漲檔數≥3","confidence":"等權59%；家數55%","evidence":"Celestica 10/26已發布財報、SOX+2.82%；公司基本面與台股現貨價格接受度分開。"},
+        {"row":240,"date":"2026/10/27","item":"ABF載板三雄","hypothesis":"固定欣興3037、南電8046、景碩3189；SOX回升及AI伺服器需求偏多，惟前期ABF漲跌大且與SOX常背離。","prediction":"三檔各以10/22收盤計10/27等權報酬>0；±0.20%中性帶僅敏感度","confidence":"54%","evidence":"海外半導體反彈但需個別催化；不以SOX單一因子提高過高信心。"},
+        {"row":241,"date":"2026/10/27","item":"CCL材料雙股","hypothesis":"固定台光電2383、台燿6274；AI伺服器與高速網通需求有基本面支撐，連休後估值與資金風險仍高。","prediction":"兩檔各以10/22收盤計10/27等權報酬>0；±0.20%中性帶僅敏感度","confidence":"54%","evidence":"Celestica展望與海外科技回升；固定池、硬門檻不因收盤微幅差異改判。"},
+        {"row":242,"date":"2026/10/27","item":"DRAM南亞科2408相對強度","hypothesis":"10/22美光桃園勞資事件供應影響未量化；SK hynix財報時程有來源歧異，10/27盤前不使用未公布結果。","prediction":"10/27南亞科2408收盤報酬>TAIEX當日報酬；另記絕對報酬","confidence":"52%","evidence":"SOX反彈但DRAM供需與事件影響未確證；避免以未確認停工損失推論漲價。"},
+        {"row":243,"date":"2026/10/27","item":"金融類股相對強度","hypothesis":"10/22金融+0.62%而TAIEX-1.805%，顯著相對抗跌；本次科技反彈可能吸引資金回電子，但FOMC前利率風險仍在。","prediction":"10/27金融類指數收盤報酬<TAIEX當日收盤報酬","confidence":"55%","evidence":"前次金融相對強、SOX反彈利於電子；金融不視為固定避險因子。"},
+        {"row":244,"date":"2026/10/27","item":"塑膠類股相對強度","hypothesis":"10/22塑膠類-4.08%，弱於TAIEX；Brent原油10/26約110.74美元，油價高不等於塑化利差改善。","prediction":"10/27塑膠類指數收盤報酬<TAIEX當日收盤報酬","confidence":"53%","evidence":"高油價與中國需求不確定性；前次急跌可能反彈，信心偏低。"},
+        {"row":245,"date":"2026/10/27","item":"半導體設備固定三檔","hypothesis":"固定帆宣6196、漢唐2404、弘塑3131；台積電資本支出基本面支撐，SOX+2.82%，但高估值及海外設備股前期大幅波動。","prediction":"三檔各以10/22收盤計10/27等權報酬>TAIEX當日收盤報酬","confidence":"53%","evidence":"海外半導體反彈與擴產題材，缺設備股完整收盤雙源校驗故低信心。"},
+        {"row":246,"date":"2026/10/27","item":"鴻海2317相對強度","hypothesis":"10/22鴻海收245元、-2%；Celestica 10/26財報及2027 AI需求展望強，可能支持ODM，但鴻海與Celestica業務不完全相同。","prediction":"10/27鴻海收盤報酬>TAIEX當日收盤報酬；另記收盤是否>245元","confidence":"56%","evidence":"AI伺服器需求利多、海外同業財報；前次鴻海走弱、個股差異限制信心。"},
+        {"row":247,"date":"2026/10/27","item":"TAIEX全日振幅","hypothesis":"10/22 TAIEX高47,332.18、低46,041.43，前收46,887.77，振幅2.75%；連休四天後重啟現貨，FOMC前風險升高。","prediction":"10/27(全日最高-最低)/46,041.43≥1.00%；另記CLV與High-to-Close","confidence":"67%","evidence":"前交易日大振幅、連休資訊累積與海外晶片反彈；振幅與方向獨立評分。"}
+      ]
+    },
+    {
+      "id": "taiwan_previous_close",
+      "url": "https://www.twse.com.tw/",
+      "available_before_cutoff": true,
+      "values": {"session_date":"2026-10-22","taiex_close":46041.43,"taiex_return_pct":-1.805,"open":46942.75,"high":47332.18,"low":46041.43,"tsmc_close":2385,"mediatek_close":4010,"hon_hai_close":245}
+    },
+    {
+      "id": "us_equities",
+      "url": "https://www.reuters.com/business/us-stock-futures-edge-up-oil-falls-heading-into-earnings-barrage-2026-10-26/",
+      "available_before_cutoff": true,
+      "values": {"session_date":"2026-10-26","dow_return_pct":0.28,"sp500_return_pct":0.70,"nasdaq_return_pct":0.83,"sox_return_pct":2.8}
+    },
+    {
+      "id": "tsmc_adr",
+      "url": "https://finance.yahoo.com/quote/TSM/history/",
+      "available_before_cutoff": true,
+      "values": {"session_date":"2026-10-26","close_usd_v0":424.37,"return_pct_v0":1.40,"oct23_return_pct":1.49},
+      "quality_note": "Historical pages returned conflicting rendered values. Retained V0's 08:38 frozen 424.37/+1.40% and did not map it mechanically to Taiwan cash price."
+    },
+    {
+      "id": "rates_oil",
+      "available_before_cutoff": true,
+      "values": {"us10y_yield_pct_approx":4.99,"brent_usd_v0_approx":110.74},
+      "quality_note": "The 10-year yield hovered just under 5%. V0 froze Brent around 110.74; elevated oil is treated as an inflation/valuation risk, not a directional plastics signal."
+    },
+    {
+      "id": "fx",
+      "available_before_cutoff": true,
+      "values": null,
+      "quality_note": "Taiwan was closed on 2026-10-23 and 2026-10-26, so there was no new domestic USD/TWD cash close. The stale 2026-10-22 close was not assigned a new directional feature."
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport",
+      "available_before_cutoff": false,
+      "values": null,
+      "quality_note": "No new night-session close existed during the Taiwan closures. The stale 2026-10-22 night value was not substituted or given hard weight."
+    },
+    {
+      "id": "company_and_macro_events",
+      "available_before_cutoff": true,
+      "events": [
+        {"event":"Celestica Q3 results and 2027 outlook","status":"V0 froze Q3 revenue US$5.83B and 2027 revenue outlook US$40B; supportive for AI supply-chain demand but not a direct Taiwan price signal."},
+        {"event":"Federal Reserve policy decision","scheduled_at":"2026-10-28 US time","status_at_cutoff":"not yet occurred; risk flag only, no outcome assumed"},
+        {"event":"Large-cap technology earnings week","status_at_cutoff":"future reports not incorporated"},
+        {"event":"SK hynix reporting date","status_at_cutoff":"source timing conflict; unpublished result excluded"}
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "模型修正紀錄!A47:J49",
+    "rows": [
+      {"row":47,"date":"2026/10/22","signal":"隔夜美股與夜盤偏多不保證台股收紅","observation":"10/22開46,942.75(+0.117%)、高47,332.18、收46,041.43(-1.805%)、CLV=0%。","rule":"Open與Close獨立；下修隔夜SOX/ADR/期貨對Close的直接權重，盤中接受度只能進事後驗證。"},
+      {"row":48,"date":"2026/10/22","signal":"盤中重大事件與盤前訊號嚴格時間隔離","observation":"11:30颱風陸警是08:38快照後事件。","rule":"盤後或盤中事件不得倒填盤前快照；保留event_time、published_at、observed_at。"},
+      {"row":49,"date":"2026/10/22","signal":"非電子輪動須分金融與塑化","observation":"金融+0.62%，塑化-4.08%，TAIEX-1.805%。","rule":"金融、塑化獨立建模，不合併成單一非電子因子。"}
+    ],
+    "application_note": "Open and close were estimated separately; overnight semiconductor strength was capped for close; financials and plastics were not pooled. Candidate rules only; Sheet unchanged."
+  },
+  "missing_or_qualified": [
+    "No new TAIFEX night-session close existed during the 2026-10-23 and 2026-10-26 Taiwan closures; stale night data received zero hard weight.",
+    "No new Taiwan USD/TWD cash close existed during the closures; stale FX was not relabeled as current.",
+    "TSM ADR source renderings conflict; V0's frozen 424.37/+1.40% was retained with reduced weight.",
+    "No 09:00 onward cash-market, breadth, intraday acceptance, company result, policy decision or closing data is used."
+  ]
+}
