@@ -4,7 +4,7 @@
 
 唯一一條公平審計後的結構性路線已完成。JOINT run `73b3f1aadccb646372be`使用因果night-regression anchor residual、固定range fallback及凍結TimesFM 3 backbone，共完成三折checkpoint與240個預定日期。公平Close改善為TAIEX -2.78%、TX -0.35%；因果shrinkage仍為-1.39%/-0.27%，兩市場均`FAIL`。phase-2帳本累計4410.32/7200秒，剩2789.68秒；依停止規則不再用同一development日期調參。權威報告為`reports/quant/residual-head-result-2026-10-27.{json,md}`，正式預設維持night regression加range fallback，`production_switch=false`。
 
-程式提交`a441dd5`加入residual target；結果彙總與狀態文件仍需提交及同步PR。`CURRENT_GOAL.md`的使用者修改必須繼續排除。下一步是完整測試、提交、同步PR；不得將原gate的+19.68%/+14.26%包裝為公平改善，也不得重開舊final。
+本機程式／結果提交為`a441dd5`與`890a6ed`；GitHub connector以遠端`58dfaf0`為parent及expected-SHA lease，非force同步等價commit `0ce472a652d11326b5e19433b954db45a17edca0`。PR #2說明已更新，GitHub回報mergeable clean且沒有status checks。`CURRENT_GOAL.md`的使用者修改持續排除。不得將原gate的+19.68%/+14.26%包裝為公平改善，也不得重開舊final。
 
 ## 2026-10-27 公平 gate 接續點
 
