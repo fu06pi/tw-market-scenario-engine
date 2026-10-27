@@ -1,5 +1,11 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+## 2026-10-27 公平 gate 更正
+
+Phase-2已完成wick、recent及recent JOINT三條路線。原gate把原始區間寬度和點預測baseline選擇綁在一起，會排除Close較強的night regression，造成對較弱range baseline的表面改善。新增的`timesfm-head-fair-gate`固定night regression為點預測comparator、當日失敗才回退range，並對候選與comparator套用相同因果區間校準。
+
+Recent JOINT候選在公平比較下，TAIEX Close MAE 407.22點對358.12點，改善-13.71%；TX 404.50點對381.87點，改善-5.93%。兩市場三折皆沒有正改善，完整gate均`FAIL`。wick、recent與JOINT連續三路線無真實增益，依事前停止規則停止盲目搜尋；正式預設保留最強baseline，`production_switch=false`。完整結果與重現命令見[`reports/quant/output-head-fair-gate-2026-10-27.md`](reports/quant/output-head-fair-gate-2026-10-27.md)。
+
 ## 2026-10-26 output-head 研究交付
 
 TAIEX／TX 各完成四個三折 expanding walk-forward 候選，共24個真實 fold checkpoint；八個候選皆保留240/240日，完整開發 gate 全部 `FAIL`。目前最低 Close MAE 為 TAIEX train-std 64日模型415.00點（改善9.09%，CI95 `[-1.11%,15.20%]`）及 TX 原64日模型392.75點（改善12.59%，CI95 `[1.47%,21.79%]`）。TAIEX欠缺穩定改善證據；TX固定因果校準後 Open／Low coverage為74.58%／72.92%，未達75%下限。公開彙總見 [`reports/quant/output-head-delivery-2026-10-26.md`](reports/quant/output-head-delivery-2026-10-26.md)。

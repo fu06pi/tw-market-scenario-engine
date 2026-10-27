@@ -1566,6 +1566,75 @@ def timesfm_head_calibrate(
                            'coverage': report['development_gate']['interval_coverage']}))
 
 
+@app.command('timesfm-head-blend')
+def timesfm_head_blend(
+    dataset_dir: Path,
+    experiment_dir: Path,
+    output_dir: Path,
+    training_config: Path = Path('config/quant/timesfm_output_head_range_loss_v2.json'),
+    blend_config: Path = Path('config/quant/head_causal_blend.json'),
+    calibration_config: Path = Path('config/quant/head_interval_recalibration.json'),
+):
+    """Evaluate a causal frozen-head/baseline blend on saved development folds."""
+    from .head_blend import evaluate_saved_head_blend
+
+    report, rows = evaluate_saved_head_blend(
+        dataset_dir,
+        experiment_dir,
+        json.loads(training_config.read_text()),
+        json.loads(blend_config.read_text()),
+        json.loads(calibration_config.read_text()),
+    )
+    write_once(output_dir / 'result.json', report)
+    write_once(output_dir / 'predictions.json', rows)
+    typer.echo(json.dumps({
+        'result': str(output_dir / 'result.json'),
+        'status': report['development_gate']['status'],
+        'close_relative_improvement': report['development_gate'][
+            'close_relative_improvement'],
+        'coverage': report['development_gate']['interval_coverage'],
+    }))
+
+
+@app.command("timesfm-head-fair-gate")
+def timesfm_head_fair_gate(
+    dataset_dir: Path,
+    experiment_dir: Path,
+    output_dir: Path,
+    training_config: Path = Path("config/quant/timesfm_output_head_recent.json"),
+    comparator_config: Path = Path("config/quant/head_fair_comparator.json"),
+    calibration_config: Path = Path("config/quant/head_interval_recalibration_60.json"),
+):
+    """Evaluate saved folds against a fixed, equally calibrated point comparator."""
+    from .head_fair_gate import evaluate_saved_head_fair_gate
+
+    report, rows = evaluate_saved_head_fair_gate(
+        dataset_dir,
+        experiment_dir,
+        json.loads(training_config.read_text()),
+        json.loads(comparator_config.read_text()),
+        json.loads(calibration_config.read_text()),
+    )
+    write_once(output_dir / "result.json", report)
+    write_once(output_dir / "predictions.json", rows)
+    _echo_json(
+        {
+            "result": str(output_dir / "result.json"),
+            "status": report["status"],
+            "instruments": {
+                market: {
+                    "status": result["status"],
+                    "close_relative_improvement": result["development_gate"][
+                        "close_relative_improvement"
+                    ],
+                    "fallback_dates": result["fallback"]["dates"],
+                }
+                for market, result in report["instrument_results"].items()
+            },
+        }
+    )
+
+
 @app.command('timesfm-head-replay')
 def timesfm_head_replay(
     dataset_dir: Path,

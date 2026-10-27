@@ -1,5 +1,13 @@
 # Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
+## 2026-10-27 公平 gate 接續點
+
+已完成Phase-2四次操作：TAIEX wick、TX wick、TAIEX recent及recent JOINT，共扣除3052.35／7200秒。原gate因區間穩定規則排除較強點baseline，JOINT表面改善不可採用。`timesfm-head-fair-gate`現固定night regression comparator、同日失敗才回退range，並對兩邊同樣作60日／40樣本因果校準。
+
+JOINT run `75d81bef117162e5a51a`公平結果：TAIEX Close改善-13.71%，三折-12.97%／-17.21%／-10.87%，CI95 `[-21.65%,-9.09%]`；TX改善-5.93%，三折-0.04%／-4.91%／-9.20%，CI95 `[-12.24%,-0.06%]`。全部240日保留，TAIEX 2026-06-08用固定range fallback。兩市場均`FAIL`。
+
+wick、recent、JOINT已連續三輪沒有對公平comparator產生增益，依原停止規則不再消耗剩餘4147.65秒作盲目調參。接手先讀`reports/quant/output-head-fair-gate-2026-10-27.{json,md}`與`RESUME_HANDOFF.md`；完成測試、提交與安全同步。正式預設仍是最強baseline，沒有新future holdout或production切換。
+
 ## 2026-10-26 最新接續點
 
 量化模型的有界搜尋已停止：八個完整候選、24個fold checkpoint均已交付，但沒有候選通過雙市場完整gate。最佳研究候選為TAIEX `88b26bf3d30c9ded6d0d`與TX `d635e40df84cdfad4cde`；正式預設仍是各市場鎖定baseline。完整aggregate、checkpoint hashes、八項OHLC誤差、fold/CI/coverage/interval score在`reports/quant/output-head-delivery-2026-10-26.{json,md}`。

@@ -1,5 +1,13 @@
 # Project Status
 
+## 2026-10-27 公平 baseline gate 與停止結論
+
+Phase-2完成wick、recent與recent JOINT路線後，發現原gate會先用原始區間寬度排除點預測較強的night regression，導致候選和較弱的range baseline比較。現已新增`timesfm-head-fair-gate`，固定night regression為點預測comparator、僅在同日失敗時回退range，並對候選與comparator使用相同60日／40樣本因果區間校準。
+
+Recent JOINT run `75d81bef117162e5a51a`在公平比較下兩市場皆`FAIL`：TAIEX候選／comparator Close MAE為407.22／358.12點，改善-13.71%，三折-12.97%／-17.21%／-10.87%，CI95 `[-21.65%,-9.09%]`；TX為404.50／381.87點，改善-5.93%，三折-0.04%／-4.91%／-9.20%，CI95 `[-12.24%,-0.06%]`。TAIEX 2026-06-08 night regression產生非正Low，依固定規則回退range並保留該日；全部240日均納入。
+
+原混合baseline顯示的TAIEX +10.79%／TX +9.97%不能作晉級證據。三條模型改動均未對公平comparator產生真增益，已觸發連續三輪無增益停止規則；Phase-2帳本扣除3052.35／7200秒，剩餘4147.65秒不再用於盲目搜尋。完整aggregate與重現命令見[`reports/quant/output-head-fair-gate-2026-10-27.md`](reports/quant/output-head-fair-gate-2026-10-27.md)。正式預設維持最強baseline，未開新future holdout，`production_switch=false`。
+
 ## 2026-10-26 量化模型交付狀態
 
 - 八個獨立市場output-head候選完成完整三折，共24個checkpoint；全部240/240日成功。TAIEX最佳研究候選為`88b26bf3d30c9ded6d0d`，Close MAE 415.00點、改善9.09%，但bootstrap CI95下界-1.11%且第一折惡化20.52%。TX最佳為`d635e40df84cdfad4cde`，Close MAE 392.75點、改善12.59%，CI95 `[1.47%,21.79%]`。

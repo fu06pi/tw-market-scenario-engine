@@ -1424,6 +1424,14 @@ def run_output_head_walk_forward(
             model.output_head.load_state_dict(original_head)
             early_stop_sessions = int(config["early_stop_sessions"])
             usable_train_days = train_days[spec.context:]
+            training_window = config.get("training_window_sessions")
+            if training_window is not None:
+                training_window = int(training_window)
+                if training_window <= early_stop_sessions:
+                    raise ValueError(
+                        "training_window_sessions must exceed early_stop_sessions"
+                    )
+                usable_train_days = usable_train_days[-training_window:]
             if len(usable_train_days) <= early_stop_sessions:
                 raise ValueError("fold lacks output-head training samples")
             stride = int(config["training_stride"])

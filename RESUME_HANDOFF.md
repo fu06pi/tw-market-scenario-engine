@@ -2,6 +2,19 @@
 
 ## 2026-10-26 續接中的權威狀態（優先於下方舊快照）
 
+- 2026-10-27公平gate審計已完成探索重算：JOINT run `75d81bef117162e5a51a` 對固定night regression點預測baseline（TAIEX 2026-06-08 night regression產生非正價格時，以事前固定range回退）且候選與comparator同用60日／40樣本因果校準後，TAIEX close改善為-13.7113%，三折-12.9660%／-17.2069%／-10.8743%，CI95 [-21.6495%,-9.0859%]；TX為-5.9279%，三折-0.0426%／-4.9132%／-9.2019%，CI95 [-12.2426%,-0.0557%]。兩市場均FAIL。原本+10.79%／+9.97%來自區間穩定規則排除較強點baseline，不能作晉級證據。
+- 公平比較已固化為`timesfm-head-fair-gate`：新增`head_fair_gate.py`、`head_fair_comparator.json`與測試。CLI已重建240日報告至`reports/generated/quant/model-search-v2/fair-gate-75d81bef117162e5a51a/`，結果與探索重算一致；公開aggregate為`reports/quant/output-head-fair-gate-2026-10-27.{json,md}`。
+- wick、recent、JOINT三條模型改動都未對公平comparator產生真增益，已觸發原定連續三輪無增益停止規則。剩餘phase-2研究預算不再用於盲目調參；先完成公平gate、完整測試、結果報告與最佳baseline交付，不能放寬門檻製造PASS。
+- 2026-10-27完整驗證為116 tests passed、Ruff pass、`git diff --check` pass。generated逐日結果受`.gitignore`保護；提交必須排除使用者既有`CURRENT_GOAL.md`修改。
+
+- 18:43後使用者糾正優先順序：模型尚未完成，不應先等待交易日。已停止推進forward／Sheet／晨報／排程，改回完整模型訓練與驗證。舊八個完整候選仍全為FAIL；checkpoint存在不代表模型完成。
+- 已宣告獨立的model-search phase 2：`config/quant/timesfm_output_head_range_loss_v2.json`與`reports/quant/model-search-v2-plan-2026-10-26.md`。新帳本固定在`reports/generated/quant/model-search-v2/output-head-search-budget.json`，總額7200秒、每市場3600秒；舊21600秒帳本保持不動。只測wick loss單一改動，先TAIEX三折再TX三折，不並行。
+- TAIEX phase-2 wick候選已完成三折，run `ab0491deabaa5272ecfd`，3個checkpoint、240/240日、實耗499.11秒、peak RSS 2852.71 MiB。Close MAE 414.22、改善9.26%，fold改善-20.48%／15.97%／11.86%，bootstrap CI95 [-0.82%,15.40%]；raw interval O/H/L/C coverage 83.33%／93.33%／60.83%／84.17%。完整gate仍FAIL（bootstrap下界、interval coverage），不能宣稱模型完成。
+- TX phase-2 wick候選已完成三折，run `46be52591ffd4af5df82`，3個checkpoint、240/240日、實耗641.01秒。Close改善12.77%，fold改善4.68%／28.16%／-4.49%，bootstrap下界為正；完整gate仍因interval coverage FAIL。phase-2帳本目前已正式扣帳1142.62秒。
+- 公平baseline審計發現各折事後選出的baseline模型不同。若先用被interval規則排除、但點預測較強的night regression做blend，再和較弱的fold baseline比較，可製造表面PASS；以相同因果選擇與校準公平比較後TAIEX僅+0.70%、TX-0.53%，均FAIL。不得使用原表面PASS。27特徵nested Ridge最佳TAIEX+4.98%、TX+3.78%，其他樹與close-only模型更差。
+- 近期密集樣本TAIEX候選已完成，run `3977db39de71357a4e7b`、240/240日、實耗651.51秒。Close MAE411.11、對現行fold baseline改善9.94%，fold -20.83%／17.82%／11.65%，bootstrap CI95 [-0.32%,16.41%]，仍FAIL。與因果校準後night regression公平比較則惡化14.80%，不能利用原baseline interval排除規則宣稱接近達標。
+- 22:34左右已啟動recent設定的JOINT八目標三折，session `37800`；這是獨立市場失敗後的既定joint路線。接手先poll／檢查新run，禁止重複啟動。
+- 使用者最新指令是「以讓gate通過為最優先」。完成TX相同候選後，下一改動優先處理跨fold穩定性與因果baseline residual/blend；仍須只用預測日前資料，且不能以同一開發集調參結果冒充future holdout。
 - 新增checkpoint專用`timesfm-head-live-preopen`單一執行入口；artifact／資源預檢、08:30前增量capture與官方核對、08:30後推論、08:40 deadline及write-once receipt已接線。112 tests、Ruff及diff check通過。2026-10-26真實bundle預檢為READY；下一verified exchange day為2026-10-27，必須08:20–08:29實際執行後才有genuine forward證據。命令與hash見`reports/quant/head-forward-preflight-2026-10-26.{json,md}`。
 - checkpoint forward實作的本機提交為`d50f166`；GitHub connector在保留遠端獨有cloud evidence後建立等價提交`07ee36f2af9d7b03b2d5a70408e0374acb2f0d06`，PR #2 head已核對。同步使用expected SHA lease、非force更新；Shell DNS仍不能fetch，因此本機remote-tracking ref保持舊值，不能用`git status ahead`判斷GitHub是否已同步。
 - TX normalized 三折已完成：340db2b412224657c0e7，240/240 日，Close MAE 393.12、改善12.50%；固定校準後 O/L coverage 仍低於75%，完整 gate FAIL。
