@@ -19,6 +19,7 @@ from tw_scenario.quant.timesfm_head_training import (
     _one_step_logits_from_features,
     _persist_sample_audit,
     _spec_from_config,
+    _target_contract,
     audited_head_samples,
     build_joint_head_samples,
     development_acceptance,
@@ -73,6 +74,22 @@ def test_training_grid_selection_is_explicit_and_bounded():
     assert _spec_from_config(config, 1).context == 512
     with pytest.raises(ValueError, match="candidate_index"):
         _spec_from_config(config, 2)
+
+
+def test_residual_target_contract_requires_fixed_anchor_and_fallback():
+    assert _target_contract({}) == {
+        "target_mode": "absolute_gbud",
+        "anchor_model": None,
+        "fallback_model": None,
+    }
+    config = {
+        "target_mode": "night_regression_residual",
+        "anchor_model": "night_regression",
+        "anchor_fallback_model": "range",
+    }
+    assert _target_contract(config)["anchor_model"] == "night_regression"
+    with pytest.raises(ValueError, match="fixed night-regression/range"):
+        _target_contract({**config, "anchor_fallback_model": "zero"})
 
 
 def test_training_inputs_keep_future_features_known_but_targets_masked():
@@ -205,6 +222,53 @@ def test_joint_samples_align_markets_and_keep_separate_references():
     data.misalign = True
     with pytest.raises(ValueError, match="not aligned"):
         build_joint_head_samples(data, [date(2026, 1, 2)], 2)
+
+
+def test_joint_residual_samples_subtract_causal_anchor(monkeypatch):
+    import tw_scenario.quant.timesfm_head_training as training
+
+    class Data:
+        def research_history(self, instrument, day, representation, context, window):
+            del day, representation, window
+            value = 0.2 if instrument == "TAIEX" else 0.4
+            return (
+                np.full((context, 4), value, dtype=np.float32),
+                np.full((context, 2), value, dtype=np.float32),
+                [date(2025, 12, 30), date(2025, 12, 31)],
+            )
+
+        def reference(self, instrument, day):
+            del day
+            return SimpleNamespace(close=100.0 if instrument == "TAIEX" else 200.0)
+
+        def actual(self, instrument, day):
+            del day
+            close = 100.0 if instrument == "TAIEX" else 200.0
+            return Prices(open=close, high=close, low=close, close=close)
+
+        def research_features(self, instrument, day):
+            del instrument, day
+            return np.array([0.0, 1.0], dtype=np.float32)
+
+        def contract(self, instrument, day):
+            del day
+            return "" if instrument == "TAIEX" else "202601"
+
+    def anchor(data, instrument, day, config):
+        del data, day, config
+        value = 0.05 if instrument == "TAIEX" else 0.1
+        return np.full(4, value, dtype=np.float32), instrument == "TX"
+
+    monkeypatch.setattr(training, "_anchor_target", anchor)
+    config = {"target_mode": "night_regression_residual"}
+    sample = build_joint_head_samples(Data(), [date(2026, 1, 2)], 2, config)[0]
+    np.testing.assert_allclose(sample.history[:, :4], 0.15)
+    np.testing.assert_allclose(sample.history[:, 4:], 0.3)
+    np.testing.assert_allclose(sample.target[:2], -0.05)
+    np.testing.assert_allclose(sample.target[4:6], -0.1)
+    np.testing.assert_allclose(sample.anchor_target[:4], 0.05)
+    np.testing.assert_allclose(sample.anchor_target[4:], 0.1)
+    assert sample.anchor_fallback == (False, True)
 
 
 def test_output_head_loss_penalizes_bad_point_and_crossing():

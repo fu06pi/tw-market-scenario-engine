@@ -1,5 +1,11 @@
 # Project Status
 
+## 2026-10-27 residual-head 完整結果
+
+依公平審計後凍結的單一路線，JOINT run `73b3f1aadccb646372be`完成night-regression anchor residual訓練：三折各有一個2.95 MB checkpoint，240個預定日期全部保留，2026-06-08 JOINT推論失敗明確計入coverage。實耗1356.85秒、peak RSS 2852.88 MiB；phase-2帳本累計4410.32/7200秒，剩餘2789.68秒不再用於同一development期間調參。
+
+原gate對各折所選baseline顯示TAIEX +19.68%、TX +14.26%，但公平gate固定night regression後為TAIEX -2.78%（Close MAE 362.88/353.06，CI95 `[-6.34%,0.39%]`）及TX -0.35%（379.18/377.84，CI95 `[-3.33%,2.23%]`）。60日因果shrinkage仍為TAIEX -1.39%、TX -0.27%。兩市場均欠缺7.5% Close buffer、多數fold與bootstrap下界證據；interval score亦較comparator差。完整aggregate、checkpoint hash與重現命令見[`reports/quant/residual-head-result-2026-10-27.md`](reports/quant/residual-head-result-2026-10-27.md)。開發與final gate都未通過，預設仍是固定baseline，`production_switch=false`。
+
 ## 2026-10-27 公平 baseline gate 與停止結論
 
 Phase-2完成wick、recent與recent JOINT路線後，發現原gate會先用原始區間寬度排除點預測較強的night regression，導致候選和較弱的range baseline比較。現已新增`timesfm-head-fair-gate`，固定night regression為點預測comparator、僅在同日失敗時回退range，並對候選與comparator使用相同60日／40樣本因果區間校準。

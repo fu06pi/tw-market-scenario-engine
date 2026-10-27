@@ -1,5 +1,11 @@
 # Codex 交接：FinMind／官方／TEJ → V1 量化 → V0 晨報
 
+## 2026-10-27 residual-head 完成後接續點
+
+唯一一條公平審計後的結構性路線已完成。JOINT run `73b3f1aadccb646372be`使用因果night-regression anchor residual、固定range fallback及凍結TimesFM 3 backbone，共完成三折checkpoint與240個預定日期。公平Close改善為TAIEX -2.78%、TX -0.35%；因果shrinkage仍為-1.39%/-0.27%，兩市場均`FAIL`。phase-2帳本累計4410.32/7200秒，剩2789.68秒；依停止規則不再用同一development日期調參。權威報告為`reports/quant/residual-head-result-2026-10-27.{json,md}`，正式預設維持night regression加range fallback，`production_switch=false`。
+
+程式提交`a441dd5`加入residual target；結果彙總與狀態文件仍需提交及同步PR。`CURRENT_GOAL.md`的使用者修改必須繼續排除。下一步是完整測試、提交、同步PR；不得將原gate的+19.68%/+14.26%包裝為公平改善，也不得重開舊final。
+
 ## 2026-10-27 公平 gate 接續點
 
 已完成Phase-2四次操作：TAIEX wick、TX wick、TAIEX recent及recent JOINT，共扣除3052.35／7200秒。原gate因區間穩定規則排除較強點baseline，JOINT表面改善不可採用。`timesfm-head-fair-gate`現固定night regression comparator、同日失敗才回退range，並對兩邊同樣作60日／40樣本因果校準。

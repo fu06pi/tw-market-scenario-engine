@@ -1,5 +1,11 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+## 2026-10-27 residual-head 最終停止結論
+
+公平審計後唯一新增的結構性候選已完成：run `73b3f1aadccb646372be`以固定night-regression作anchor、range作失敗回退，TimesFM 3凍結backbone的自訂共享output head只預測因果GBUD residual。JOINT三折、三個真實checkpoint與240個預定日期均已執行，耗時1356.85秒、peak RSS 2852.88 MiB。
+
+對固定且同樣校準的公平comparator，TAIEX Close MAE為362.88對353.06點（改善-2.78%，三折+0.19%/-2.11%/-4.55%）；TX為379.18對377.84點（改善-0.35%，三折+5.24%/-3.01%/-0.22%）。因果shrinkage後仍為-1.39%/-0.27%。兩市場完整gate均`FAIL`，因此停止在同一development期間繼續調參；正式預設維持night regression加range fallback，`production_switch=false`。完整結果見[`reports/quant/residual-head-result-2026-10-27.md`](reports/quant/residual-head-result-2026-10-27.md)。
+
 ## 2026-10-27 公平 gate 更正
 
 Phase-2已完成wick、recent及recent JOINT三條路線。原gate把原始區間寬度和點預測baseline選擇綁在一起，會排除Close較強的night regression，造成對較弱range baseline的表面改善。新增的`timesfm-head-fair-gate`固定night regression為點預測comparator、當日失敗才回退range，並對候選與comparator套用相同因果區間校準。

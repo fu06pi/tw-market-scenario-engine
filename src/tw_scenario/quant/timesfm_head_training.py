@@ -14,6 +14,7 @@ import numpy as np
 from .backtest import _git_state, _select_baseline, load_dataset, walk_forward
 from .contracts import EPS, OHLC, decode, digest, encode, write_once
 from .evaluation import block_improvement, metrics
+from .forecast import predict
 from .head_budget import bounded_head_run, budget_deadline
 from .numeric_runtime import capture_torch_cpu_runtime, require_matching_torch_cpu_runtime
 from .timesfm3 import (
@@ -35,6 +36,8 @@ class HeadSample:
     previous_close: float | tuple[float, float]
     actual: dict[str, float] | dict[str, dict[str, float]]
     contract: str | dict[str, str]
+    anchor_target: np.ndarray | None = None
+    anchor_fallback: bool | tuple[bool, bool] = False
 
 
 @dataclass(frozen=True)
@@ -109,6 +112,23 @@ def _spec_from_config(config: dict, candidate_index: int) -> HeadTrainingSpec:
         wick_weight=float(config.get("wick_weight", 0.0)),
         loss_normalization=config.get("loss_normalization", "none"),
     )
+
+
+def _target_contract(config: dict) -> dict:
+    mode = config.get("target_mode", "absolute_gbud")
+    if mode == "absolute_gbud":
+        return {"target_mode": mode, "anchor_model": None, "fallback_model": None}
+    if mode == "night_regression_residual":
+        if config.get("anchor_model") != "night_regression" or config.get(
+            "anchor_fallback_model"
+        ) != "range":
+            raise ValueError("residual target requires fixed night-regression/range anchor")
+        return {
+            "target_mode": mode,
+            "anchor_model": "night_regression",
+            "fallback_model": "range",
+        }
+    raise ValueError("unsupported output-head target mode")
 
 
 def expanding_folds(
@@ -229,16 +249,60 @@ def restore_output_head(model, checkpoint_path: Path, result: dict, *, forecast_
     return mean, scale
 
 
-def build_head_samples(data, instrument: str, days: list[date], context: int) -> list[HeadSample]:
+def _anchor_target(data, instrument: str, day: date, config: dict) -> tuple[np.ndarray, bool]:
+    """Return a causal night-regression anchor with the fixed range fallback."""
+    cache = getattr(data, "_head_anchor_cache", None)
+    if cache is None:
+        cache = data._head_anchor_cache = {}
+    key = (instrument, day, digest({
+        "window": config["window"],
+        "min_history": config["min_history"],
+        "arima_order": config.get("arima_order"),
+    }))
+    if key in cache:
+        target, fallback = cache[key]
+        return target.copy(), fallback
+    try:
+        _, target, _, _ = predict(
+            data, instrument, day, "night_regression", "gbud", config
+        )
+        fallback = False
+    except (FloatingPointError, ValueError):
+        _, target, _, _ = predict(data, instrument, day, "range", "gbud", config)
+        fallback = True
+    target = np.asarray(target, dtype=np.float32)
+    target.setflags(write=False)
+    cache[key] = (target, fallback)
+    return target.copy(), fallback
+
+
+def _residual_history(data, instrument: str, days: list[date], targets, config: dict):
+    anchors = np.stack([_anchor_target(data, instrument, day, config)[0] for day in days])
+    return np.asarray(targets, dtype=np.float32) - anchors
+
+
+def build_head_samples(
+    data,
+    instrument: str,
+    days: list[date],
+    context: int,
+    config: dict | None = None,
+) -> list[HeadSample]:
     """Materialize causal samples; failed dates remain explicit at the caller."""
     samples = []
     for day in days:
-        history, features, _ = data.research_history(
+        history, features, used_days = data.research_history(
             instrument, day, "gbud", context, context
         )
         previous_close = data.reference(instrument, day).close
         actual_bar = data.actual(instrument, day)
         target = encode(actual_bar, previous_close, "gbud").astype(np.float32)
+        anchor_target = None
+        anchor_fallback = False
+        if config is not None and config.get("target_mode") == "night_regression_residual":
+            history = _residual_history(data, instrument, used_days, history, config)
+            anchor_target, anchor_fallback = _anchor_target(data, instrument, day, config)
+            target = target - anchor_target
         samples.append(HeadSample(
             day=day,
             history=history.astype(np.float32),
@@ -248,11 +312,15 @@ def build_head_samples(data, instrument: str, days: list[date], context: int) ->
             previous_close=float(previous_close),
             actual={field: float(getattr(actual_bar, field)) for field in OHLC},
             contract=data.contract(instrument, day),
+            anchor_target=anchor_target,
+            anchor_fallback=anchor_fallback,
         ))
     return samples
 
 
-def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadSample]:
+def build_joint_head_samples(
+    data, days: list[date], context: int, config: dict | None = None
+) -> list[HeadSample]:
     """Materialize aligned eight-target TAIEX/TX samples and market-specific features."""
     samples = []
     for day in days:
@@ -276,6 +344,18 @@ def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadS
             encode(actual_bars["TAIEX"], references[0], "gbud"),
             encode(actual_bars["TX"], references[1], "gbud"),
         ]).astype(np.float32)
+        anchor_target = None
+        anchor_fallback: bool | tuple[bool, bool] = False
+        if config is not None and config.get("target_mode") == "night_regression_residual":
+            taiex_history = _residual_history(
+                data, "TAIEX", taiex_dates, taiex_history, config
+            )
+            tx_history = _residual_history(data, "TX", tx_dates, tx_history, config)
+            taiex_anchor, taiex_fallback = _anchor_target(data, "TAIEX", day, config)
+            tx_anchor, tx_fallback = _anchor_target(data, "TX", day, config)
+            anchor_target = np.concatenate([taiex_anchor, tx_anchor]).astype(np.float32)
+            anchor_fallback = (taiex_fallback, tx_fallback)
+            targets = targets - anchor_target
         samples.append(HeadSample(
             day=day,
             history=np.column_stack([taiex_history, tx_history]).astype(np.float32),
@@ -294,20 +374,29 @@ def build_joint_head_samples(data, days: list[date], context: int) -> list[HeadS
                 for instrument in ("TAIEX", "TX")
             },
             contract={"TAIEX": "", "TX": data.contract("TX", day)},
+            anchor_target=anchor_target,
+            anchor_fallback=anchor_fallback,
         ))
     return samples
 
 
-def materialize_training_samples(data, instrument, days, context):
+def materialize_training_samples(data, instrument, days, context, config=None):
     """Audit expected history failures without swallowing unrelated programming errors."""
     samples, records = [], []
     for day in days:
         try:
-            batch = (
-                build_joint_head_samples(data, [day], context)
-                if instrument == "JOINT"
-                else build_head_samples(data, instrument, [day], context)
-            )
+            if instrument == "JOINT":
+                batch = (
+                    build_joint_head_samples(data, [day], context)
+                    if config is None
+                    else build_joint_head_samples(data, [day], context, config)
+                )
+            else:
+                batch = (
+                    build_head_samples(data, instrument, [day], context)
+                    if config is None
+                    else build_head_samples(data, instrument, [day], context, config)
+                )
         except ValueError as exc:
             if not str(exc).startswith("insufficient contiguous expanded history:"):
                 raise
@@ -325,11 +414,13 @@ def materialize_training_samples(data, instrument, days, context):
     }
 
 
-def audited_head_samples(data, instrument: str, days: list[date], context: int):
+def audited_head_samples(
+    data, instrument: str, days: list[date], context: int, config: dict | None = None
+):
     """Cloud-compatible audit using only classified history exclusions."""
     if instrument not in {"TAIEX", "TX", "JOINT"}:
         raise ValueError("instrument must be TAIEX, TX, or JOINT")
-    samples, audit = materialize_training_samples(data, instrument, days, context)
+    samples, audit = materialize_training_samples(data, instrument, days, context, config)
     return samples, {
         "requested": audit["requested"], "usable": audit["usable"],
         "failed": audit["ineligible"], "rows": audit["dates"],
@@ -856,6 +947,11 @@ def predict_head(model, sample: HeadSample, mean: np.ndarray, scale: np.ndarray)
         logits = _one_step_logits(
             model, inputs, mask, patches, target_count
         )[0].cpu().numpy()
+    if sample.anchor_target is not None:
+        anchor = np.asarray(sample.anchor_target, dtype=float)
+        if anchor.shape != (4,) or not np.all(np.isfinite(anchor)):
+            raise ValueError("invalid market-specific residual anchor")
+        logits = logits + anchor[:, None]
     ordered = np.sort(logits, axis=1)
     median = ordered[:, len(model.quantiles) // 2]
     point = decode(median, sample.previous_close, "gbud")
@@ -913,6 +1009,11 @@ def predict_joint_head(
         logits = _one_step_logits(
             model, inputs, mask, patches, target_count
         )[0].cpu().numpy()
+    if sample.anchor_target is not None:
+        anchor = np.asarray(sample.anchor_target, dtype=float)
+        if anchor.shape != (8,) or not np.all(np.isfinite(anchor)):
+            raise ValueError("invalid joint residual anchor")
+        logits = logits + anchor[:, None]
     return {
         instrument: _decode_quantile_block(
             logits[offset : offset + 4], sample.previous_close[index]
@@ -1159,6 +1260,7 @@ def run_output_head_training(
     if instrument not in {"TAIEX", "TX", "JOINT"}:
         raise ValueError("instrument must be TAIEX, TX, or JOINT")
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    target_contract = _target_contract(config)
     probe = runtime_probe(cache_dir, int(config["memory_probe_limit_mb"]))
     if probe.status != "READY_TO_LOAD":
         raise RuntimeError(f"TimesFM 3 load blocked by preflight: {probe.status}")
@@ -1200,6 +1302,7 @@ def run_output_head_training(
         "feature_names": feature_names,
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
+        **target_contract,
     }
     experiment_dir = output_root / "timesfm3-output-head" / digest(identity)[:20]
     result_path = experiment_dir / "result.json"
@@ -1209,10 +1312,10 @@ def run_output_head_training(
     experiment_dir.mkdir(parents=True, exist_ok=True)
     started = time.monotonic()
     train_samples, training_audit = audited_head_samples(
-        data, instrument, training_days[::stride], context
+        data, instrument, training_days[::stride], context, config
     )
     early_stop_samples, early_stop_audit = audited_head_samples(
-        data, instrument, early_stop_days, context
+        data, instrument, early_stop_days, context, config
     )
     sample_audit = _persist_sample_audit(
         experiment_dir / "sample-audit.json", identity, training_audit, early_stop_audit
@@ -1276,7 +1379,7 @@ def run_output_head_training(
 
 def _prediction_row(model, sample, mean, scale, instrument):
     point, interval, quantiles = predict_head(model, sample, mean, scale)
-    return {
+    row = {
         "date": str(sample.day),
         "instrument": instrument,
         "contract": sample.contract,
@@ -1288,6 +1391,14 @@ def _prediction_row(model, sample, mean, scale, instrument):
         "interval_method": "rank-aligned TimesFM transformed quantiles",
         "raw_transformed_quantiles": quantiles.tolist(),
     }
+    if sample.anchor_target is not None:
+        row["anchor"] = {
+            "model": "night_regression",
+            "fallback_model": "range",
+            "fallback_used": bool(sample.anchor_fallback),
+            "target_mode": "night_regression_residual",
+        }
+    return row
 
 
 def _joint_prediction_rows(model, sample, mean, scale) -> list[dict]:
@@ -1308,6 +1419,21 @@ def _joint_prediction_rows(model, sample, mean, scale) -> list[dict]:
             "interval": interval,
             "interval_method": "market-block rank-aligned TimesFM transformed quantiles",
             "raw_transformed_quantiles": quantiles.tolist(),
+            **(
+                {
+                    "anchor": {
+                        "model": "night_regression",
+                        "fallback_model": "range",
+                        "fallback_used": bool(
+                            sample.anchor_fallback[0 if instrument == "TAIEX" else 1]
+                        ),
+                        "target_mode": "night_regression_residual",
+                    }
+                }
+                if sample.anchor_target is not None
+                and isinstance(sample.anchor_fallback, tuple)
+                else {}
+            ),
         })
     return rows
 
@@ -1327,6 +1453,7 @@ def run_output_head_walk_forward(
     if instrument not in {"TAIEX", "TX", "JOINT"}:
         raise ValueError("instrument must be TAIEX, TX, or JOINT")
     config = json.loads(config_path.read_text(encoding="utf-8"))
+    target_contract = _target_contract(config)
     probe = runtime_probe(cache_dir, int(config["memory_probe_limit_mb"]))
     if probe.status != "READY_TO_LOAD":
         raise RuntimeError(f"TimesFM 3 load blocked by preflight: {probe.status}")
@@ -1370,6 +1497,7 @@ def run_output_head_walk_forward(
         ),
         "candidate_index": candidate_index,
         "spec": spec.__dict__,
+        **target_contract,
     }
     experiment_dir = output_root / "timesfm3-output-head-walk-forward" / digest(identity)[:20]
     result_path = experiment_dir / "result.json"
@@ -1440,10 +1568,10 @@ def run_output_head_walk_forward(
             training_days = usable_train_days[:-early_stop_sessions:stride]
             early_stop_days = usable_train_days[-early_stop_sessions:]
             training_samples, training_audit = audited_head_samples(
-                data, instrument, training_days, spec.context
+                data, instrument, training_days, spec.context, config
             )
             early_stop_samples, early_stop_audit = audited_head_samples(
-                data, instrument, early_stop_days, spec.context
+                data, instrument, early_stop_days, spec.context, config
             )
             sample_audit = _persist_sample_audit(
                 experiment_dir / f"fold-{fold_index}-sample-audit.json",
@@ -1474,13 +1602,13 @@ def run_output_head_walk_forward(
                         raise TimeoutError("validation budget exhausted")
                     if instrument == "JOINT":
                         sample = build_joint_head_samples(
-                            data, [validation_day], spec.context
+                            data, [validation_day], spec.context, config
                         )[0]
                         for row in _joint_prediction_rows(model, sample, mean, scale):
                             fold_candidate[row["instrument"]].append(row)
                     else:
                         sample = build_head_samples(
-                            data, instrument, [validation_day], spec.context
+                            data, instrument, [validation_day], spec.context, config
                         )[0]
                         fold_candidate[instrument].append(
                             _prediction_row(model, sample, mean, scale, instrument)
