@@ -1,0 +1,65 @@
+{
+  "trading_date": "2026-10-27",
+  "generated_at": "2026-10-27T08:56:11+08:00",
+  "data_cutoff_at": "2026-10-27T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "c82420180de9c0d29b6f6cb98e093d18174285653c990315b609007045307803",
+  "scenarios": {
+    "bull": 0.31,
+    "base": 0.51,
+    "bear": 0.18
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 75,
+    "expected_close_return_bps": 25
+  },
+  "narrative": {
+    "market_view": "連休後海外半導體與台積電ADR回升，支持台股開高；但10月22日現貨收在日低、油價與利率仍高，且沒有新的台指期夜盤與台幣現貨收盤可確認，因此主情境為開高後高波動回吐，而非高信心趨勢上漲。",
+    "open_hypothesis": "以10月22日收盤46041.43為基準，預期開高約75bps、345.31點至46386.74；V0事前區間為0至+1.20%。Nasdaq、SOX及TSM ADR正向，但連休造成的資訊累積與期貨缺口限制幅度信心。",
+    "intraday_hypothesis": "預期gap_fade且全日振幅至少1%的機率偏高。首30分鐘可能同時出現相對開盤-0.30%下探與+0.30%上探；只有台積電、OTC與上市廣度同步接受開高，才轉為trend_up。",
+    "close_hypothesis": "預期收盤較10月22日收盤上漲約25bps、115.10點至46156.53，但低於預估開盤。10月22日開高走低的價格接受度、FOMC前風險與高油價抵銷部分海外科技反彈。",
+    "breadth_hypothesis": "預期上市非平盤上漲家數略高於50%，但權值科技可能強於中小型；OTC、ABF、CCL、DRAM、金融與塑化需獨立驗證，不以指數開高推定全面轉強。",
+    "bull_script": "台積電站穩2385上方、指數接受46400至46600區間，OTC同步上漲且市場廣度超過60%，收盤報酬達+50bps以上。",
+    "base_script": "開高0%至1.20%後雙向震盪，首30分鐘回測但前收附近有支撐；收盤落在前收±50bps，以+25bps為中心並低於開盤。",
+    "bear_script": "開高失敗或直接跌破46041.43，台積電失守2385、廣度低於40%，高油價與FOMC前去風險主導，收盤報酬低於-50bps。"
+  },
+  "key_drivers": [
+    "10月26日Nasdaq約+0.83%、SOX約+2.8%，海外科技beta正向",
+    "TSM ADR V0凍結值424.37美元、+1.40%，10月23日亦上漲，但跨來源值有差異且不直接換算現貨",
+    "10月22日TAIEX收46041.43、-1.805%，開46942.75且收在日低，顯示上方賣壓與價格接受度不佳",
+    "台灣10月23日與10月26日休市，沒有新的TAIFEX夜盤及USD/TWD現貨收盤，兩項均不使用舊值替代",
+    "美國10年債息約4.99%、Brent約110.74美元，估值與通膨風險仍高",
+    "Celestica財報與2027展望支持AI供應鏈需求，但不得直接外推台灣個股收盤",
+    "10月28日Fed決議與本週大型科技財報尚未發生，只列風險、不預填結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未高於46041.43，或開高後首30分鐘持續低於前收與VWAP，open-up/base失效",
+    "站穩46600、台積電與OTC同步上漲且市場廣度超過60%，gap_fade轉Bull/trend_up",
+    "台積電失守2385、廣度低於40%且大型電子同步轉弱，Close轉Bear",
+    "凍結後不以今日09:00後盤中、收盤、Fed或公司新公布結果修改機率、方向或點位"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-27",
+      "item": "08:38凍結18項盤前假說",
+      "source_row": "每日預測與覆盤!A230:P247",
+      "extracted_at": "2026-10-27T08:56:11+08:00",
+      "note": "完整非空欄位原樣保存於data manifest；Google Sheet唯讀且未修改。"
+    },
+    {
+      "trading_date": "2026-10-22",
+      "item": "Open/Close分離、事件時序隔離、金融與塑化分開建模",
+      "source_row": "模型修正紀錄!A47:J49",
+      "extracted_at": "2026-10-27T08:56:11+08:00",
+      "note": "僅候選規則，未宣稱單日樣本已通過walk-forward。"
+    }
+  ],
+  "snapshot_hash": "038c3f65b2c211293bc30282702dd5f1cab2c2d9f4344a99880924faf47a240e"
+}
