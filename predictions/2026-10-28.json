@@ -1,0 +1,50 @@
+{
+  "trading_date": "2026-10-28",
+  "generated_at": "2026-10-28T08:53:21+08:00",
+  "data_cutoff_at": "2026-10-28T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "653be791f2abf2006bd270aa4baad839070c78beeff1d3a113439688e0599c35",
+  "scenarios": {"bull":0.34,"base":0.50,"bear":0.16},
+  "targets": {
+    "open_direction":"up",
+    "close_direction":"up",
+    "intraday_regime":"gap_fade",
+    "breadth_direction":"down",
+    "expected_open_gap_bps":110,
+    "expected_close_return_bps":35
+  },
+  "narrative": {
+    "market_view":"台指期夜盤、SOX、Nasdaq與台積電ADR同向走強，支持明顯開高；但10月27日TAIEX僅小漲、上市廣度低於50%且OTC下跌，顯示本地承接未擴散。主情境為權值帶動開高後震盪回吐，收盤仍略高於前收。",
+    "open_hypothesis":"以10月27日收盤46096.23為基準，預期開高約110bps、507.06點至46603.29；V0事前區間為0至+1.50%。夜盤+774是相對期貨參考價，不直接當作現貨點數。",
+    "intraday_hypothesis":"預期gap_fade與高波動並存，首30分鐘可能同時測試相對開盤-0.30%下探與+0.30%上探。只有台積電、OTC及市場廣度同步接受開高，才轉為trend_up。",
+    "close_hypothesis":"預期收盤較前收上漲約35bps、161.34點至46257.57，但低於預估開盤。海外科技利多被前日開高走低、弱廣度、FOMC前降風險及高油價部分抵銷。",
+    "breadth_hypothesis":"預期上市非平盤上漲家數低於50%，權值科技優於中小型；OTC可能弱於TAIEX，ABF、CCL與DRAM依各自催化分開驗證。",
+    "bull_script":"指數接受46600以上、台積電站穩2438附近，OTC同步翻紅且市場廣度超過60%，收盤報酬達+70bps以上。",
+    "base_script":"開高0.4%至1.5%後雙向震盪並回吐，權值支撐指數但多數個股分化，收盤落在前收-50至+70bps，以+35bps為中心。",
+    "bear_script":"開高失敗並跌破46096.23，台積電失守2400、OTC續弱且廣度低於35%，FOMC前去風險主導，收盤報酬低於-50bps。"
+  },
+  "key_drivers": [
+    "台指期夜盤收46880、相對參考價+774；台積電期貨2438、+42",
+    "Nasdaq +1.18%、SOX +3.60%、TSM ADR 436.87美元、+2.95%，隔夜科技訊號一致偏多",
+    "10月27日TAIEX收46096.23、僅+0.119%，開高後收低於開盤且全日振幅1.974%",
+    "10月27日上市479漲、534跌，廣度47.285%；OTC -0.65%，本地承接未擴散",
+    "外資現貨約賣超81億元，投信買超形成對沖",
+    "美元兌新台幣10月27日收32.452",
+    "美國10年債息4.993%、Brent 113.88美元、WTI 99.90美元",
+    "Fed決議、聯電法說及大型科技財報尚未發生，僅列風險、不預填結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未高於46096.23，或開高後首30分鐘持續低於前收與VWAP，open-up/base失效",
+    "站穩46880、台積電與OTC同步上漲且市場廣度超過60%，gap_fade轉Bull/trend_up",
+    "台積電失守2400、廣度低於35%且OTC持續弱於TAIEX，Close轉Bear",
+    "凍結後不以今日09:00後盤中、收盤、Fed、聯電法說或公司新結果修改機率、方向或點位"
+  ],
+  "v0_references": [
+    {"trading_date":"2026-10-28","item":"08:45凍結18項盤前假說","source_row":"每日預測與覆盤!A248:P265","extracted_at":"2026-10-28T08:53:21+08:00","note":"完整非空欄位原樣保存於data manifest；Google Sheet唯讀且未修改。"},
+    {"trading_date":"2026-10-27","item":"Open/Close/產業分離、價格路徑完整保存","source_row":"模型修正紀錄!A50:J52","extracted_at":"2026-10-28T08:53:21+08:00","note":"僅候選規則，未宣稱單日樣本已通過walk-forward。"}
+  ],
+  "snapshot_hash":"3ef363313f53816225c31db13b7ce60e59c913624813c05205665ae2febc3592"
+}
