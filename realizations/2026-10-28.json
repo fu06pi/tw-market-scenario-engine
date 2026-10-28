@@ -73,21 +73,21 @@
     {
       "id": "cna_open",
       "publisher": "CNA",
-      "url": "https://www.cna.com.tw/news/afe/202610280028.aspx",
+      "url": "https://www.cna.com.tw/news/afe/202610280026.aspx",
       "trading_date": "2026-10-28",
       "role": "Dated newswire confirmation of TAIEX open 46402.79 and opening change +306.56"
     },
     {
       "id": "economic_daily_close",
       "publisher": "Economic Daily",
-      "url": "https://money.udn.com/money/story/5607/9100129",
+      "url": "https://money.udn.com/money/story/5612/9842152",
       "trading_date": "2026-10-28",
       "role": "Same-day OHLC and regular-session turnover crosscheck"
     },
     {
       "id": "cna_close",
       "publisher": "CNA",
-      "url": "https://www.cna.com.tw/news/afe/202610280250.aspx",
+      "url": "https://www.cna.com.tw/news/afe/202610280155.aspx",
       "trading_date": "2026-10-28",
       "role": "Same-day market-driver and TSMC close crosscheck"
     }
