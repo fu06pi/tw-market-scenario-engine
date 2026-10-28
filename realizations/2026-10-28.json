@@ -1,0 +1,95 @@
+{
+  "trading_date": "2026-10-28",
+  "previous_close": 46096.23,
+  "open": 46402.79,
+  "high": 47060.46,
+  "low": 46402.79,
+  "close": 47035.58,
+  "turnover": 722135000000,
+  "breadth_up": 714,
+  "breadth_down": 280,
+  "otc_return_pct": 4.06,
+  "heavyweight_contribution_points": {},
+  "recorded_at": "2026-10-28T15:17:04+08:00",
+  "turnover_unit": "TWD",
+  "turnover_scope": "regular-session value reported by same-day close reports",
+  "turnover_all_sessions": 743235504983,
+  "turnover_all_sessions_scope": "TWSE MI_INDEX total across listed securities/session scopes; not interchangeable with regular-session value",
+  "breadth_flat": 87,
+  "breadth_no_trade": 2,
+  "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+  "session_change_points": 939.35,
+  "session_return_pct": 2.04,
+  "data_quality": {
+    "ohlc_source": "CNA opening bulletin plus same-day close reports, crosschecked with official TWSE close",
+    "official_mi_index_status": "OK",
+    "otc_source": "Official TPEx index summary",
+    "breadth_pool_note": "Official stock-only 714/280/87 used; non-flat advancer share is 71.8310%.",
+    "intraday_order_note": "The index opened at the daily low, rose to 47060.46 and closed near the daily high. No frozen minute series, so the regime label remains diagnostic.",
+    "heavyweight_contribution_note": "TSMC closed 2425, up 25; index-point contribution was not reproducibly available and is not estimated."
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261028&type=ALLBUT0999&response=json",
+      "trading_date": "2026-10-28",
+      "retrieved_at": "2026-10-28T15:17:04+08:00",
+      "role": "Official trading-day confirmation, close, sectors, stock-only breadth and all-session turnover",
+      "facts": {
+        "date": "20261028",
+        "stat": "OK",
+        "close": 47035.58,
+        "change_points": 939.35,
+        "return_pct": 2.04,
+        "stock_up": 714,
+        "stock_down": 280,
+        "stock_flat": 87,
+        "all_securities_turnover_twd": 743235504983,
+        "sectors_pct": {
+          "semiconductor": 2.29,
+          "computer_peripheral": 1.48,
+          "electronic_components": 4.38,
+          "financial": -0.56,
+          "shipping": 0.22
+        }
+      }
+    },
+    {
+      "id": "tpex_index_summary",
+      "publisher": "TPEx",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/indexSummary?date=2026%2F10%2F28&response=json",
+      "trading_date": "2026-10-28",
+      "retrieved_at": "2026-10-28T15:17:04+08:00",
+      "role": "Official OTC close and return",
+      "facts": {
+        "date": "20261028",
+        "stat": "ok",
+        "otc_close": 394.61,
+        "otc_change_points": 15.41,
+        "otc_return_pct": 4.06
+      }
+    },
+    {
+      "id": "cna_open",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610280028.aspx",
+      "trading_date": "2026-10-28",
+      "role": "Dated newswire confirmation of TAIEX open 46402.79 and opening change +306.56"
+    },
+    {
+      "id": "economic_daily_close",
+      "publisher": "Economic Daily",
+      "url": "https://money.udn.com/money/story/5607/9100129",
+      "trading_date": "2026-10-28",
+      "role": "Same-day OHLC and regular-session turnover crosscheck"
+    },
+    {
+      "id": "cna_close",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610280250.aspx",
+      "trading_date": "2026-10-28",
+      "role": "Same-day market-driver and TSMC close crosscheck"
+    }
+  ]
+}
