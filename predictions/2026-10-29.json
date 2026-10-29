@@ -1,0 +1,43 @@
+{
+  "trading_date":"2026-10-29",
+  "generated_at":"2026-10-29T08:52:42+08:00",
+  "data_cutoff_at":"2026-10-29T08:50:00+08:00",
+  "model_version":"v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version":"features-v1",
+  "prompt_version":"scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash":"e36bfc3e9e7654343eeac9f5e393427ad7fa0c8c755f7a8ad7ac882f79406a16",
+  "scenarios":{"bull":0.20,"base":0.50,"bear":0.30},
+  "targets":{"open_direction":"down","close_direction":"down","intraday_regime":"range","breadth_direction":"down","expected_open_gap_bps":-20,"expected_close_return_bps":-30},
+  "narrative":{
+    "market_view":"前一交易日TAIEX大漲2.04%且廣度全面改善，但台指期夜盤回落、台積電期貨近乎持平，Microsoft與Alphabet財報後價格反應分化。SOX及台積電ADR仍上漲形成支撐，主情境為小幅開低後高波動震盪，收盤略低於前收。",
+    "open_hypothesis":"以10月28日收盤47035.58為基準，預期開低約20bps、94.07點至46941.51；V0事前區間為-0.60%至+0.40%。夜盤-128是相對期貨參考價，不直接當作現貨跌點。",
+    "intraday_hypothesis":"預期range高波動，首30分鐘下探0.30%的機率略高於上探0.30%；若小幅開低後科技權值迅速回補，可能形成先跌後彈，而非單向trend_down。",
+    "close_hypothesis":"預期收盤較前收下跌約30bps、141.11點至46894.47。前日急漲、夜盤轉弱與Alphabet盤後賣壓偏空，SOX、TSM ADR及Microsoft雲端成長限制跌幅。",
+    "breadth_hypothesis":"預期上市非平盤上漲家數低於50%，OTC可能弱於TAIEX；前日724漲、287跌及OTC+4.06%後，今日較可能出現輪動與高beta獲利了結。",
+    "bull_script":"小幅開低後指數站回47035.58，台積電突破2425、OTC續強且廣度超過60%，收盤報酬達+50bps以上。",
+    "base_script":"開盤落在-0.60%至+0.40%區間，科技與金融輪動、盤中雙向震盪，收盤落在前收±50bps，以-30bps為中心。",
+    "bear_script":"跌破46800且台積電失守2400、OTC與廣度同步惡化，前日強勢轉為獲利了結，收盤報酬低於-70bps。"
+  },
+  "key_drivers":[
+    "台指期夜盤收47121、相對參考價-128；台積電期貨2432、-1",
+    "Nasdaq +0.27%、SOX +1.76%、TSM ADR 439.51美元、+0.60%，海外半導體仍偏多",
+    "10月28日TAIEX收47035.58、+2.04%，上市724漲287跌、OTC +4.06%",
+    "Fed維持3.75%至4.00%，但10票維持、2票主張升息，政策訊號並非完全鴿派",
+    "Microsoft Azure +48%偏多；Alphabet Cloud +103%但盤後股價走弱，基本面與價格反應分離",
+    "外資10月28日轉買超159.22億元，新台幣升至32.418",
+    "美國10年債息約5.00%、Brent約110.63美元、WTI約101.98美元",
+    "弘塑法說、ECB、GDP與PCE尚未發生，不預填結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換"
+  ],
+  "invalidation_conditions":[
+    "開盤高於47035.58且首30分鐘站穩前收與VWAP，open-down/base偏空失效",
+    "站穩47121、台積電突破2425、OTC續強且廣度超過60%，range轉Bull/trend_up",
+    "跌破46800、台積電失守2400且廣度低於35%，Close轉為較強Bear",
+    "凍結後不以今日09:00後盤中、收盤、弘塑法說或晚間新數據修改機率、方向或點位"
+  ],
+  "v0_references":[
+    {"trading_date":"2026-10-29","item":"08:35凍結18項盤前假說","source_row":"每日預測與覆盤!A266:P283","extracted_at":"2026-10-29T08:52:42+08:00","note":"完整非空欄位原樣保存於data manifest；Google Sheet唯讀且未修改。"},
+    {"trading_date":"2026-10-28","item":"強隔夜訊號延續與首30分鐘雙情境","source_row":"模型修正紀錄!A53:J54","extracted_at":"2026-10-29T08:52:42+08:00","note":"僅候選規則，未宣稱單日樣本已通過walk-forward。"}
+  ],
+  "snapshot_hash":"8703820ed5915f45139afcd851f1eabcf2097c1c4efb481f25c029f881f774f6"
+}
