@@ -1,0 +1,66 @@
+{
+  "trading_date": "2026-10-30",
+  "generated_at": "2026-10-30T08:53:50+08:00",
+  "data_cutoff_at": "2026-10-30T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "4bb3fb6ffb8ad9cff4ef113f46b884e7bec114e616285576ccaa21a17033b525",
+  "scenarios": {
+    "bull": 0.14,
+    "base": 0.48,
+    "bear": 0.38
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -105,
+    "expected_close_return_bps": -75
+  },
+  "narrative": {
+    "market_view": "台指期夜盤、Nasdaq、SOX、台積電ADR與台積電期貨同步走弱，且前一交易日市場廣度僅24.01%，支持明顯開低。前日指數已跌1.419%、Amazon AWS仍高成長，則構成開低後承接反證；主情境是低開、高波動並部分回補，但收盤仍低於前收。",
+    "open_hypothesis": "以10月29日收盤46368.33為基準，預期開低約105bps、486.87點至45881.46；落在V0事前區間-1.80%至-0.20%內。台指夜盤-643是相對期貨參考價，不直接當成現貨跌點。",
+    "intraday_hypothesis": "預期gap_fade高波動型態：首30分鐘下探0.30%的機率仍高，但大幅負Gap與前日急跌提高技術反彈機率，所以上探與下探可同時成立；若權值、OTC與廣度未改善，則轉為trend_down。",
+    "close_hypothesis": "預期收盤較前收下跌約75bps、347.76點至46020.57，較預估開盤回升約139點。海外科技與外資賣壓偏空，但美國GDP與AWS成長及前日已跌限制Bear尾部。",
+    "breadth_hypothesis": "預期上市非平盤上漲家數低於50%，OTC可能弱於TAIEX；金融可相對抗跌，但不把金融或塑化固定視為避險。",
+    "bull_script": "開低後迅速收復46055至46368區間，台積電站回2415、OTC翻紅且廣度超過55%，收盤回到前收以上。",
+    "base_script": "開低0.2%至1.8%後雙向震盪並部分回補，收盤仍低於前收但高於預估開盤，以-75bps為中心，市場廣度偏弱。",
+    "bear_script": "跌破45900後無法收復，台積電失守2390附近、OTC續弱且廣度低於30%，低開演變為trend_down，收盤跌幅擴大至120bps以上。"
+  },
+  "key_drivers": [
+    "11月台指期夜盤收45926、相對參考價-643；台積電期貨2390、-30",
+    "Nasdaq 26184.72、-1.38%；SOX 11517.63、-1.42%；TSM ADR 431.81美元、-1.75%",
+    "10月29日TAIEX收46368.33、-1.419%，上市236漲747跌、OTC約-1.83%",
+    "外資10月29日轉賣超688.15億元，新台幣收32.492、貶7.4分",
+    "美國10年債息約4.939%；Brent 114.88美元、WTI 102.00美元，油價仍高但當日回落",
+    "美國Q3 GDP年化+3.4%、9月PCE年增+3.6%、核心+3.1%",
+    "Amazon AWS +39.3%為需求面反證，但Amazon及Intel盤後價格反應偏弱",
+    "日銀決議與鴻海13:00投資人會議在截止後，不納入盤前結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未低於46368.33，open-down與-105bps中心估計失效",
+    "開低後站回46368.33、台積電站回2415、OTC翻紅且廣度超過55%，gap_fade升級為Bull",
+    "跌破45900後無法收復、台積電失守2390且廣度低於30%，Base轉為較強Bear/trend_down",
+    "凍結後不以今日09:00後盤中、收盤、日銀決議或公司會議內容修改機率、方向或點位"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-30",
+      "item": "08:43凍結18項盤前假說",
+      "source_row": "每日預測與覆盤!A284:P301",
+      "extracted_at": "2026-10-30T08:53:50+08:00",
+      "note": "完整非空欄位原樣保存於data manifest；Google Sheet唯讀且未修改。"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "統一後模型規則2026-10-29.v1",
+      "source_row": "模型規則主表!A2:P21",
+      "extracted_at": "2026-10-30T08:53:50+08:00",
+      "note": "採用R01/R02/R04/R15/R16/R17/R18紀錄規範；R10/R12只作候選情境約束，不宣稱已通過walk-forward。"
+    }
+  ],
+  "snapshot_hash": "4ebf802d1dfcf588c2ea11b6e535570387cb78f8467f5580e1a7df8d0430381e"
+}
