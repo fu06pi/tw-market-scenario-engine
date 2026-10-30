@@ -1,0 +1,101 @@
+{
+  "trading_date": "2026-10-30",
+  "previous_close": 46368.33,
+  "open": 46139.79,
+  "high": 46139.79,
+  "low": 44726.26,
+  "close": 45211.83,
+  "turnover": 877730000000,
+  "breadth_up": 92,
+  "breadth_down": 941,
+  "otc_return_pct": -4.42,
+  "heavyweight_contribution_points": {},
+  "recorded_at": "2026-10-30T15:20:09+08:00",
+  "turnover_unit": "TWD",
+  "turnover_scope": "regular-session value reported by same-day close reports",
+  "turnover_all_sessions": 933850709846,
+  "turnover_all_sessions_scope": "TWSE MI_INDEX total across listed securities/session scopes; not interchangeable with regular-session value",
+  "breadth_flat": 45,
+  "breadth_no_trade": 4,
+  "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+  "session_change_points": -1156.5,
+  "session_return_pct": -2.49,
+  "data_quality": {
+    "ohlc_source": "Official TWSE daily index history, crosschecked with same-day CNA close report",
+    "official_mi_index_status": "OK",
+    "otc_source": "Official TPEx index summary",
+    "breadth_pool_note": "Official stock-only 92/941/45 used; non-flat advancer share is 8.9061%. CNA broader close count 98/956/53 is retained only as a scope crosscheck.",
+    "intraday_order_note": "The index opened at the daily high, fell to 44726.26, then recovered 485.57 points to close 45211.83. No frozen minute series, so the regime label remains diagnostic.",
+    "heavyweight_contribution_note": "TSMC closed 2370, down 45; index-point contribution was not reproducibly available and is not estimated."
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261030&type=ALLBUT0999&response=json",
+      "trading_date": "2026-10-30",
+      "retrieved_at": "2026-10-30T15:20:09+08:00",
+      "role": "Official trading-day confirmation, close, sectors, stock-only breadth and all-session turnover",
+      "facts": {
+        "date": "20261030",
+        "stat": "OK",
+        "close": 45211.83,
+        "change_points": -1156.5,
+        "return_pct": -2.49,
+        "stock_up": 92,
+        "stock_down": 941,
+        "stock_flat": 45,
+        "all_securities_turnover_twd": 933850709846,
+        "sectors_pct": {
+          "semiconductor": -2.24,
+          "electronic_components": -6.46,
+          "financial": -0.16,
+          "shipping": 1.93
+        }
+      }
+    },
+    {
+      "id": "twse_ohlc",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261030&response=html",
+      "trading_date": "2026-10-30",
+      "retrieved_at": "2026-10-30T15:20:09+08:00",
+      "role": "Official TAIEX daily OHLC",
+      "facts": {
+        "open": 46139.79,
+        "high": 46139.79,
+        "low": 44726.26,
+        "close": 45211.83
+      }
+    },
+    {
+      "id": "tpex_index_summary",
+      "publisher": "TPEx",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/indexSummary?date=2026%2F10%2F30&response=json",
+      "trading_date": "2026-10-30",
+      "retrieved_at": "2026-10-30T15:20:09+08:00",
+      "role": "Official OTC close and return",
+      "facts": {
+        "date": "20261030",
+        "stat": "ok",
+        "otc_close": 370.26,
+        "otc_change_points": -17.11,
+        "otc_return_pct": -4.42
+      }
+    },
+    {
+      "id": "cna_close",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610300135.aspx",
+      "trading_date": "2026-10-30",
+      "role": "Same-day OHLC, return, breadth and regular-session turnover crosscheck"
+    },
+    {
+      "id": "cna_intraday",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202610300059.aspx",
+      "trading_date": "2026-10-30",
+      "role": "Same-day intraday drivers and heavyweight crosscheck"
+    }
+  ]
+}
