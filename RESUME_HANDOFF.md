@@ -8,7 +8,7 @@
 - 127 tests、Ruff、diff check及CLI help通過。證據為`reports/quant/daily-forward-engine-2026-10-30.json`，操作契約為`docs/DAILY_FORWARD_OPERATIONS.md`。
 - 2026-10-30已錯過08:30，不回填；certified calendar確認下一交易日2026-11-02。
 - 排程註冊尚未完成：目前computer-use沒有ChatGPT desktop app surface；`crontab -l`遭PAM拒絕，`systemctl --user`遭sandbox拒絕user bus。依OpenAI官方文件，本機專案Scheduled task需桌面App保持運行。入口已就緒，接手後若桌面surface可用，建立週一至週五08:20及18:10 Asia/Taipei兩個local-project task；不可宣稱目前已排程。
-- `CURRENT_GOAL.md`仍是使用者既有修改，不覆蓋、不提交。本輪尚未commit/push；原Phase-3及Put/Call未提交檔仍在工作樹，提交時需一併審查，但不可混入`CURRENT_GOAL.md`。
+- `CURRENT_GOAL.md`仍是使用者既有修改，不覆蓋、不提交。Phase-3、Put/Call與daily forward已由本機commit `729e297`保存；shell DNS無法push後，GitHub connector以遠端`2e2a7c0`為parent及expected-SHA lease，非force同步等價commit `b8127c5e52c06da434c5fe7063d8190c25e9ac26`。PR #2 head、說明及mergeable clean已核對；工作樹只應保留`CURRENT_GOAL.md`。
 
 ## 2026-10-29 Phase-3 續接（最新）
 
