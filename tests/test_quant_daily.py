@@ -260,6 +260,53 @@ def test_persistence_deadline_uses_persisted_at_and_includes_exact_0840():
         OHLCForecastSnapshotBodyV1.model_validate(payload)
 
 
+def test_fixed_daily_comparator_uses_predeclared_range_fallback(monkeypatch):
+    class CalendarStub:
+        def __init__(self):
+            self.days = [DAY - timedelta(days=2), DAY - timedelta(days=1), DAY]
+
+    data = type("DatasetStub", (), {"calendar": CalendarStub()})()
+    row = {
+        "date": str(DAY - timedelta(days=1)),
+        "instrument": "TAIEX",
+        "contract": "",
+        "status": "OK",
+        "previous_close": 100.0,
+        "actual": {"open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0},
+        "predicted": {"open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0},
+    }
+    monkeypatch.setattr(daily_runner, "walk_forward", lambda *_args: [row])
+
+    def fake_predict(_data, _instrument, _day, model, _representation, _config):
+        if model == "night_regression":
+            raise ValueError("primary failed")
+        return Prices(open=100, high=101, low=99, close=100), np.zeros(4), 100.0, []
+
+    monkeypatch.setattr(daily_runner, "predict", fake_predict)
+    policy = {
+        "version": "fixed-point-comparator-v1",
+        "primary_model": "night_regression",
+        "fallback_model": "range",
+        "representation": "gbud",
+        "selection_policy": "predeclared_primary_before_evaluation",
+        "failure_policy": "same_date_fallback_preserve_primary_error",
+    }
+    prices, interval, previous, model, fallback_used, reason = (
+        daily_runner._fixed_comparator_prediction(
+            data,
+            "TAIEX",
+            policy,
+            DAY,
+            {"calibration_window": 1, "min_calibration": 1},
+        )
+    )
+    assert model == "range"
+    assert fallback_used is True
+    assert reason == "ValueError: primary failed"
+    assert prices.close == previous == 100
+    assert interval["close"] == [100, 100]
+
+
 def _realization(snapshot: OHLCForecastSnapshotV1) -> OHLCRealizationV1:
     return OHLCRealizationV1(
         realization_id="tx-20261014-official-v1",

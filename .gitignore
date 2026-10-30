@@ -12,6 +12,7 @@ __pycache__/
 *.parquet
 /data/raw/
 /data/processed/
+/data/import/
 /reports/generated/
 /reports/quant/experiments/
 

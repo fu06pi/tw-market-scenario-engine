@@ -30,7 +30,8 @@ from .daily_input import (
     capture_preopen_dataset,
     data_quality_evidence,
 )
-from .daily_runner import build_locked_baseline_body
+from .daily_runner import build_fixed_comparator_body, build_locked_baseline_body
+from .forward_metrics import build_forward_metrics, write_forward_metrics
 from .sheets import StagingSheetWriter, save_receipt
 
 
@@ -464,6 +465,151 @@ def run_head_live_preopen(
         ) from exc
 
 
+def run_forward_preopen(
+    *,
+    trading_date: date,
+    base_dataset_dir: Path,
+    comparator_path: Path,
+    failed_candidate_summary_path: Path,
+    config: dict,
+    config_path: Path,
+    data_root: Path,
+    output_root: Path,
+    clock=None,
+    sleeper=None,
+) -> Path:
+    """Capture and freeze one numerical-only genuine forward baseline snapshot."""
+    clock = clock or (lambda: datetime.now(TZ))
+    sleeper = sleeper or time.sleep
+    initiated_at = clock()
+    stage = "validate_forward_window"
+    try:
+        if initiated_at.utcoffset() is None:
+            raise ValueError("forward clock must be timezone-aware")
+        if initiated_at.astimezone(TZ).date() != trading_date:
+            raise ValueError("forward pre-open runs only for the current Taipei date")
+        cutoff = datetime.combine(
+            trading_date,
+            datetime.strptime(config["cutoff"], "%H:%M").time(),
+            TZ,
+        )
+        deadline = datetime.combine(
+            trading_date,
+            datetime.strptime(config["deadline"], "%H:%M").time(),
+            TZ,
+        )
+        capture_not_before = datetime.combine(
+            trading_date,
+            datetime.strptime(config["capture_not_before"], "%H:%M").time(),
+            TZ,
+        )
+        if not capture_not_before <= initiated_at < cutoff:
+            raise ValueError("forward capture must start from 08:20 through 08:29 Taipei")
+
+        stage = "capture_forward_inputs"
+        daily_dataset_dir, audit = capture_preopen_dataset(
+            base_dataset_dir=base_dataset_dir,
+            trading_date=trading_date,
+            cutoff_at=cutoff,
+            root=data_root,
+        )
+        audit_path = (
+            output_root
+            / "input-audits"
+            / str(trading_date)
+            / f"{daily_dataset_dir.name}.json"
+        )
+        _write_once_or_same(audit_path, audit)
+        if audit["status"] != "PASS":
+            raise ValueError("forward input capture failed data-quality audit")
+
+        stage = "validate_forward_policy"
+        comparator = _read_json(comparator_path)
+        failed_summary = _read_json(failed_candidate_summary_path)
+        if failed_summary.get("status") not in {"FAIL", "DEVELOPMENT_GATE_FAIL"}:
+            raise ValueError("daily comparator requires a recorded candidate gate failure")
+        data, daily_dataset_id = load_dataset(daily_dataset_dir)
+        manifest = _read_manifest(daily_dataset_dir)
+        if trading_date not in data.calendar.days:
+            raise ValueError("forecast date is not an exchange trading day")
+        if failed_summary.get("dataset_id") != manifest.get("parent_dataset_id"):
+            raise ValueError("failed candidate summary does not match certified parent dataset")
+
+        stage = "wait_for_forward_cutoff"
+        remaining = (cutoff - clock()).total_seconds()
+        if remaining > 0:
+            sleeper(remaining)
+        generated_at = clock()
+        if generated_at < cutoff:
+            raise RuntimeError("clock did not reach the 08:30 forecast cutoff")
+
+        stage = "forecast_and_freeze_forward_snapshot"
+        quality = data_quality_evidence(audit)
+        body = build_fixed_comparator_body(
+            data=data,
+            manifest=manifest,
+            comparator_policy=comparator,
+            config=config,
+            trading_date=trading_date,
+            generated_at=generated_at,
+            persisted_at=None,
+            code_version=digest(_git_state(config_path.parent.parent.parent)),
+            final_summary_hash=digest(failed_summary),
+            data_quality=quality,
+        )
+        snapshot = seal_snapshot(body)
+        if snapshot.timeliness != "ON_TIME" or snapshot.persisted_at > deadline:
+            raise ValueError("forward snapshot missed the 08:40 persistence deadline")
+        snapshot_path = output_root / "forward-snapshots" / f"{trading_date}.json"
+        if snapshot_path.exists():
+            if load_snapshot(snapshot_path) != snapshot:
+                raise FileExistsError(
+                    "a different forward snapshot is already frozen for this trading date"
+                )
+            reused = True
+        else:
+            freeze_snapshot(snapshot, snapshot_path)
+            reused = False
+
+        stage = "complete"
+        evidence = {
+            "schema_version": "genuine-forward-preopen-v1",
+            "status": "GENUINE_FORWARD_SNAPSHOT_FROZEN",
+            "trading_date": str(trading_date),
+            "initiated_at": initiated_at.isoformat(),
+            "generated_at": snapshot.generated_at.isoformat(),
+            "persisted_at": snapshot.persisted_at.isoformat(),
+            "daily_dataset_id": daily_dataset_id,
+            "daily_dataset_dir": str(daily_dataset_dir),
+            "input_audit": str(audit_path),
+            "comparator_policy": comparator,
+            "failed_candidate_summary_hash": digest(failed_summary),
+            "forecast_id": snapshot.forecast_id,
+            "snapshot_hash": snapshot.snapshot_hash,
+            "snapshot": str(snapshot_path),
+            "snapshot_reused": reused,
+            "genuine_forward": True,
+            "numerical_only": True,
+            "staging_sheet_written": False,
+            "production_switch": False,
+            "production_sheet_written": False,
+        }
+        path = output_root / "forward-receipts" / f"{snapshot.forecast_id}-preopen.json"
+        _write_once_or_same(path, evidence)
+        return path
+    except Exception as exc:
+        if isinstance(exc, DailyRunFailed):
+            raise
+        raise _failure(
+            output_root,
+            trading_date,
+            initiated_at,
+            stage,
+            exc,
+            phase="forward-preopen",
+        ) from exc
+
+
 def _append_or_same(record, root: Path, kind: str):
     contract = record.contract or "cash"
     path = root / kind / record.forecast_id / f"{record.instrument}-{contract}.json"
@@ -476,6 +622,130 @@ def _append_or_same(record, root: Path, kind: str):
     else:
         append_evaluation(record, root)
     return path, False
+
+
+def run_forward_postclose(
+    *,
+    snapshot_path: Path,
+    daily_dataset_dir: Path,
+    data_root: Path,
+    output_root: Path,
+    config: dict,
+    clock=None,
+) -> Path:
+    """Append actual OHLC and cumulative metrics without touching Sheets or narratives."""
+    clock = clock or (lambda: datetime.now(TZ))
+    initiated_at = clock()
+    snapshot = load_snapshot(snapshot_path)
+    trading_date = snapshot.trading_date
+    stage = "validate_forward_postclose_window"
+    try:
+        if initiated_at.utcoffset() is None:
+            raise ValueError("post-close clock must be timezone-aware")
+        if initiated_at.astimezone(TZ).date() != trading_date:
+            raise ValueError("forward post-close runs only on the snapshot trading date")
+        earliest = datetime.combine(
+            trading_date,
+            datetime.strptime(config["postclose_not_before"], "%H:%M").time(),
+            TZ,
+        )
+        if initiated_at < earliest:
+            raise ValueError("forward post-close cannot begin before 18:00 Taipei")
+        expected_snapshot = output_root / "forward-snapshots" / f"{trading_date}.json"
+        if snapshot_path.resolve() != expected_snapshot.resolve():
+            raise ValueError("post-close must use the canonical forward snapshot path")
+
+        stage = "capture_forward_actuals"
+        bars, audit = capture_postclose_bars(daily_dataset_dir, snapshot, data_root)
+        audit_path = (
+            output_root
+            / "postclose-input-audits"
+            / str(trading_date)
+            / f"{snapshot.forecast_id}.json"
+        )
+        _write_once_or_same(audit_path, audit)
+        if audit["status"] != "PASS":
+            raise ValueError("forward post-close input audit is FAIL")
+
+        stage = "append_forward_records"
+        recorded_at = clock()
+        reused = {"realizations": [], "evaluations": []}
+        for forecast in snapshot.forecasts:
+            bar = bars[forecast.instrument]
+            realization = OHLCRealizationV1(
+                realization_id=(
+                    f"realization-{forecast.instrument.lower()}-"
+                    f"{digest({'forecast_id': snapshot.forecast_id, 'source': bar.source_hash})[:16]}"
+                ),
+                forecast_id=snapshot.forecast_id,
+                snapshot_hash=snapshot.snapshot_hash,
+                trading_date=trading_date,
+                instrument=forecast.instrument,
+                contract=forecast.contract,
+                actual=OHLCValues(
+                    open=bar.open,
+                    high=bar.high,
+                    low=bar.low,
+                    close=bar.close,
+                ),
+                source_id=f"finmind:{forecast.instrument}:day:{trading_date}",
+                source_hash=bar.source_hash,
+                observed_at=bar.fetched_at,
+                recorded_at=recorded_at,
+            )
+            from .daily import evaluate_realization
+
+            evaluation = evaluate_realization(snapshot, realization, recorded_at)
+            _, realization_reused = _append_or_same(
+                realization, output_root, "realizations-v1"
+            )
+            _, evaluation_reused = _append_or_same(
+                evaluation, output_root, "evaluations-v1"
+            )
+            reused["realizations"].append(realization_reused)
+            reused["evaluations"].append(evaluation_reused)
+
+        stage = "recompute_forward_metrics"
+        metrics = build_forward_metrics(
+            output_root,
+            generated_at=clock(),
+            neutral_bps=float(config["neutral_bps"]),
+        )
+        metrics_path = write_forward_metrics(metrics, output_root, snapshot.forecast_id)
+
+        stage = "complete"
+        evidence = {
+            "schema_version": "genuine-forward-postclose-v1",
+            "status": "GENUINE_FORWARD_EVALUATED",
+            "trading_date": str(trading_date),
+            "initiated_at": initiated_at.isoformat(),
+            "completed_at": clock().isoformat(),
+            "forecast_id": snapshot.forecast_id,
+            "snapshot_hash": snapshot.snapshot_hash,
+            "postclose_input_audit": str(audit_path),
+            "metrics": str(metrics_path),
+            "metrics_hash": metrics["report_hash"],
+            "fully_evaluated_days": metrics["fully_evaluated_days"],
+            "reused": reused,
+            "genuine_forward": True,
+            "staging_sheet_written": False,
+            "production_switch": False,
+            "production_sheet_written": False,
+        }
+        path = output_root / "forward-receipts" / f"{snapshot.forecast_id}-postclose.json"
+        _write_once_or_same(path, evidence)
+        return path
+    except Exception as exc:
+        if isinstance(exc, DailyRunFailed):
+            raise
+        raise _failure(
+            output_root,
+            trading_date,
+            initiated_at,
+            stage,
+            exc,
+            phase="forward-postclose",
+        ) from exc
 
 
 def run_live_postclose(

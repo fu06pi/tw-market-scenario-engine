@@ -17,6 +17,14 @@ from .contracts import TZ, digest, write_once
 DEFAULT_CONFIG = Path("config/quant/research.json")
 DEFAULT_STAGING_CONFIG = Path("config/quant/staging.json")
 DEFAULT_REPORT_ROOT = Path("reports/generated/quant")
+DEFAULT_CERTIFIED_DATASET = Path(
+    "data/processed/cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce"
+)
+DEFAULT_COMPARATOR_POLICY = Path("config/quant/head_fair_comparator.json")
+DEFAULT_FAILED_CANDIDATE_SUMMARY = Path(
+    "reports/quant/residual-head-result-2026-10-27.json"
+)
+DEFAULT_FORWARD_ROOT = DEFAULT_REPORT_ROOT / "daily-forward"
 SENSITIVE_CONFIG_KEYS = {"api_key", "credential", "password", "secret", "token"}
 
 
@@ -1119,6 +1127,47 @@ def daily_live_preopen(
     _echo_json({**result, "evidence": str(evidence_path)})
 
 
+@daily_app.command("forward-preopen")
+def daily_forward_preopen(
+    trading_date: Annotated[str, typer.Option("--date")],
+    base_dataset_dir: Annotated[
+        Path, typer.Option("--base-dataset-dir")
+    ] = DEFAULT_CERTIFIED_DATASET,
+    comparator_path: Annotated[
+        Path, typer.Option("--comparator")
+    ] = DEFAULT_COMPARATOR_POLICY,
+    failed_candidate_summary_path: Annotated[
+        Path, typer.Option("--failed-candidate-summary")
+    ] = DEFAULT_FAILED_CANDIDATE_SUMMARY,
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_FORWARD_ROOT,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Freeze the numerical-only genuine forward snapshot; never write Sheets."""
+    from .daily_orchestration import DailyRunFailed, run_forward_preopen
+
+    try:
+        config = _load_config(config_path)
+        evidence_path = run_forward_preopen(
+            trading_date=_parse_date(trading_date, "date"),
+            base_dataset_dir=base_dataset_dir,
+            comparator_path=comparator_path,
+            failed_candidate_summary_path=failed_candidate_summary_path,
+            config=config,
+            config_path=config_path,
+            data_root=data_root,
+            output_root=output_root,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})
+
+
 @daily_app.command("freeze")
 def daily_freeze(
     snapshot_json: Annotated[
@@ -1542,6 +1591,44 @@ def daily_live_postclose(
     _echo_json({**result, "evidence": str(evidence_path)})
 
 
+@daily_app.command("forward-postclose")
+def daily_forward_postclose(
+    trading_date: Annotated[str, typer.Option("--date")],
+    data_root: Annotated[Path, typer.Option("--data-root")] = Path("data"),
+    output_root: Annotated[
+        Path, typer.Option("--output-root")
+    ] = DEFAULT_FORWARD_ROOT,
+    config_path: Annotated[Path, typer.Option("--config")] = DEFAULT_CONFIG,
+) -> None:
+    """Append actual OHLC and cumulative genuine-forward error metrics."""
+    from .daily_orchestration import DailyRunFailed, run_forward_postclose
+
+    try:
+        config = _load_config(config_path)
+        day = _parse_date(trading_date, "date")
+        snapshot_path = output_root / "forward-snapshots" / f"{day}.json"
+        preopen_receipts = sorted(
+            output_root.glob(f"forward-receipts/ohlc-v1-{day}-*-preopen.json")
+        )
+        if len(preopen_receipts) != 1:
+            raise ValueError("exactly one pre-open forward receipt is required")
+        preopen = _read_json(preopen_receipts[0])
+        daily_dataset_dir = Path(preopen["daily_dataset_dir"])
+        evidence_path = run_forward_postclose(
+            snapshot_path=snapshot_path,
+            daily_dataset_dir=daily_dataset_dir,
+            data_root=data_root,
+            output_root=output_root,
+            config=config,
+        )
+        result = _read_json(evidence_path)
+    except DailyRunFailed as exc:
+        _abort(_safe_error(exc))
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({**result, "evidence": str(evidence_path)})
+
+
 @app.command('timesfm-head-calibrate')
 def timesfm_head_calibrate(
     dataset_dir: Path,
@@ -1633,6 +1720,74 @@ def timesfm_head_fair_gate(
             },
         }
     )
+
+
+@app.command("phase3-ridge-walk-forward")
+def phase3_ridge_walk_forward(
+    dataset_dir: Path,
+    output_root: Path = Path("reports/generated/quant"),
+    config: Path = Path("config/quant/phase3_price_residual_ridge.json"),
+):
+    """Run the frozen low-parameter residual Ridge before TimesFM adaptation."""
+    from .phase3 import run_phase3_price_residual_ridge
+
+    try:
+        result_path = run_phase3_price_residual_ridge(
+            dataset_dir=dataset_dir,
+            config_path=config,
+            output_root=output_root,
+        )
+        result = _read_json(result_path)
+    except (OSError, TypeError, ValueError, RuntimeError, TimeoutError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "result": str(result_path),
+        "status": result["status"],
+        "markets": {
+            market: {
+                "status": values["development_gate"]["status"],
+                "close_relative_improvement": values["development_gate"][
+                    "close_relative_improvement"
+                ],
+            }
+            for market, values in result["markets"].items()
+        },
+        "future_holdout_opened": False,
+        "production_switch": False,
+    })
+
+
+@app.command("phase3-ridge-daily")
+def phase3_ridge_daily(
+    dataset_dir: Path,
+    checkpoint: Path,
+    instrument: str,
+    trading_date: str,
+    output: Path,
+    config: Path = Path("config/quant/phase3_price_residual_ridge.json"),
+):
+    """Create one write-once research forecast from a locked Phase-3 checkpoint."""
+    from .phase3 import predict_phase3_day
+
+    try:
+        day = _parse_date(trading_date, "trading_date")
+        payload = predict_phase3_day(
+            dataset_dir=dataset_dir,
+            config_path=config,
+            checkpoint_path=checkpoint,
+            instrument=instrument.upper(),
+            forecast_day=day,
+        )
+        _write_json_once_or_same(output, payload)
+    except (OSError, TypeError, ValueError, RuntimeError) as exc:
+        _abort(_safe_error(exc))
+    _echo_json({
+        "status": "FROZEN_RESEARCH_FORECAST",
+        "output": str(output),
+        "date": payload["date"],
+        "instrument": payload["instrument"],
+        "production_switch": False,
+    })
 
 
 @app.command('timesfm-head-replay')

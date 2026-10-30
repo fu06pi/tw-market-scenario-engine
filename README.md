@@ -1,5 +1,11 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+## 2026-10-30 genuine forward 數值採樣
+
+依使用者最新指示，從下一個交易日開始固定採樣現行模型的盤前預測。每日研究預設已鎖定為公平 comparator：`night_regression`，只有當日主要模型失敗才回退 `range`；未通過 gate 的 TimesFM／residual 候選不會替代它。`quant daily forward-preopen` 會在08:20–08:29擷取、08:30後預測並在08:40前建立每日期唯一且不可回寫的雙市場 OHLC 快照；`quant daily forward-postclose` 只追加實際值、單日誤差及累積 forward metrics，不寫 Sheet 或晨報，`production_switch=false`。
+
+完整127項測試、Ruff、diff check及兩個CLI help均通過。2026-10-30已錯過截止，不補寫；repo行事曆的下一交易日為2026-11-02。可重播命令、輸出位置與排程設定見 [`docs/DAILY_FORWARD_OPERATIONS.md`](docs/DAILY_FORWARD_OPERATIONS.md)。目前本機沒有可操作的ChatGPT desktop排程surface，`crontab`及user systemd亦受執行環境阻擋，因此排程入口已完成、實際註冊仍為`BLOCKED`，不能宣稱已開始累積樣本。
+
 ## 2026-10-27 residual-head 最終停止結論
 
 公平審計後唯一新增的結構性候選已完成：run `73b3f1aadccb646372be`以固定night-regression作anchor、range作失敗回退，TimesFM 3凍結backbone的自訂共享output head只預測因果GBUD residual。JOINT三折、三個真實checkpoint與240個預定日期均已執行，耗時1356.85秒、peak RSS 2852.88 MiB。

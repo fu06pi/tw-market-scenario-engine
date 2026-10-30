@@ -1,5 +1,23 @@
 # 額度中斷與續接交接
 
+## 2026-10-30 genuine forward 數值採樣（最新）
+
+- 使用者最新指示覆蓋先前「模型完成前不做排程」的優先順序：從現在起以現行模型累積盤前 genuine forward OHLC 與盤後誤差；仍維持`production_switch=false`，不寫正式晨報或Google Sheet，也不把forward工程稱為模型達標。
+- 新增`quant daily forward-preopen`／`forward-postclose`及`ops/run-forward-*`。每日固定公平comparator為`night_regression`，當日失敗才回退`range`；不使用所有gate FAIL的TimesFM／Phase-3候選。
+- 盤前建立`forward-snapshots/YYYY-MM-DD.json`唯一不可回寫快照；盤後只追加realization／evaluation，並版本化重算雙市場OHLC MAE、bp、RMSE、方向混淆矩陣、區間coverage／width／score。沒有同一快照、晚到、休市或DQ失敗全部fail-closed並留attempt。
+- 127 tests、Ruff、diff check及CLI help通過。證據為`reports/quant/daily-forward-engine-2026-10-30.json`，操作契約為`docs/DAILY_FORWARD_OPERATIONS.md`。
+- 2026-10-30已錯過08:30，不回填；certified calendar確認下一交易日2026-11-02。
+- 排程註冊尚未完成：目前computer-use沒有ChatGPT desktop app surface；`crontab -l`遭PAM拒絕，`systemctl --user`遭sandbox拒絕user bus。依OpenAI官方文件，本機專案Scheduled task需桌面App保持運行。入口已就緒，接手後若桌面surface可用，建立週一至週五08:20及18:10 Asia/Taipei兩個local-project task；不可宣稱目前已排程。
+- `CURRENT_GOAL.md`仍是使用者既有修改，不覆蓋、不提交。本輪尚未commit/push；原Phase-3及Put/Call未提交檔仍在工作樹，提交時需一併審查，但不可混入`CURRENT_GOAL.md`。
+
+## 2026-10-29 Phase-3 續接（最新）
+
+- 使用者要求持續推進至模型目標。已核對本機 HEAD `83a684a`、工作樹僅有使用者既有的 `CURRENT_GOAL.md` 修改，沒有訓練進程；不得覆蓋或提交該檔。
+- 最新權威結果仍是 residual-head run `73b3f1aadccb646372be`：公平 comparator 下 TAIEX/TX Close 改善 -2.78%/-0.35%，兩市場均 `FAIL`。舊 development 日期不得再用於無界 TimesFM shared-head 調參。
+- FinMind 無 token 的實際探查顯示 `TaiwanOptionDaily`、選擇權／期貨法人、股票法人與匯率資料均回覆 free-level 拒絕；不能把未取得資料寫成已接入。TEJ 私密金鑰仍只存在 `.env`，未輸出值。
+- 新 Phase-3 事前路線：先以既有 27 個已核實 08:30 前特徵，建立各市場獨立、價格／bp 空間的 causal residual Ridge。每個 outer fold 只用更早資料做 nested 選參數，保留固定 night-regression/range comparator、全部日期、同一因果區間校準與原 7.5% gate。此低參數模型若無穩定增益，不啟動 TimesFM 低秩 adapter；若有增益才把 correction route 接入凍結 TimesFM 表示。
+- Phase-3 未開始產生成績；建立設定、測試與 checkpoint／daily inference 後才可報訓練完成。新 future holdout 起點維持 2026-10-09，舊資料只作 development。
+
 ## 2026-10-26 續接中的權威狀態（優先於下方舊快照）
 
 - 2026-10-27 residual-head已完成：JOINT run `73b3f1aadccb646372be`有三個真實checkpoint、240個預定日期、實耗1356.85秒、peak RSS 2852.88 MiB。公平gate固定night regression後TAIEX Close改善-2.78%（362.88/353.06，三折+0.19%/-2.11%/-4.55%，CI95 [-6.34%,0.39%]），TX -0.35%（379.18/377.84，三折+5.24%/-3.01%/-0.22%，CI95 [-3.33%,2.23%]）；因果shrinkage仍為-1.39%/-0.27%。兩市場均FAIL。phase-2帳本4410.32/7200秒，剩2789.68秒依停止規則不再用於同一development調參。權威aggregate為`reports/quant/residual-head-result-2026-10-27.{json,md}`。118 tests、Ruff、diff check及aggregate byte-for-byte重現通過；本機提交`a441dd5`、`890a6ed`，GitHub等價commit `0ce472a652d11326b5e19433b954db45a17edca0`已用expected-SHA lease非force同步PR #2，PR為mergeable clean、沒有status checks。不得包含`CURRENT_GOAL.md`，不得再報原gate表面+19.68%/+14.26%為公平改善。

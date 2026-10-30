@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from datetime import date, datetime
+from pathlib import Path
 
 import pytest
 
@@ -25,6 +26,8 @@ from tw_scenario.quant.daily import (
 )
 from tw_scenario.quant.daily_orchestration import (
     DailyRunFailed,
+    run_forward_postclose,
+    run_forward_preopen,
     run_head_live_preopen,
     run_live_postclose,
     run_live_preopen,
@@ -297,6 +300,76 @@ def test_head_live_preopen_captures_and_freezes_before_deadline(monkeypatch, tmp
     assert result["production_sheet_written"] is False
 
 
+def test_forward_preopen_is_numerical_only_and_freezes_canonical_date_path(
+    monkeypatch, tmp_path
+):
+    daily_dataset = tmp_path / "daily-dataset"
+    audit = {"status": "PASS", "report_hash": "a" * 64, "issues": []}
+    comparator = {
+        "version": "fixed-point-comparator-v1",
+        "primary_model": "night_regression",
+        "fallback_model": "range",
+        "representation": "gbud",
+        "selection_policy": "predeclared_primary_before_evaluation",
+        "failure_policy": "same_date_fallback_preserve_primary_error",
+    }
+    comparator_path = tmp_path / "comparator.json"
+    comparator_path.write_text(json.dumps(comparator))
+    failed_path = tmp_path / "failed.json"
+    failed_path.write_text(json.dumps({"status": "DEVELOPMENT_GATE_FAIL", "dataset_id": "base"}))
+    monkeypatch.setattr(
+        daily_orchestration,
+        "capture_preopen_dataset",
+        lambda **_kwargs: (daily_dataset, audit),
+    )
+    monkeypatch.setattr(
+        daily_orchestration,
+        "load_dataset",
+        lambda _path: (type("Data", (), {"calendar": type("Cal", (), {"days": [DAY]})()})(), "daily"),
+    )
+    monkeypatch.setattr(
+        daily_orchestration,
+        "_read_manifest",
+        lambda _path: {"parent_dataset_id": "base"},
+    )
+
+    snapshot_path = tmp_path / "prepared.json"
+    prepared = _snapshot(snapshot_path)
+    monkeypatch.setattr(
+        daily_orchestration,
+        "build_fixed_comparator_body",
+        lambda **_kwargs: OHLCForecastSnapshotBodyV1.model_validate(
+            prepared.model_dump(mode="json", exclude={"snapshot_hash"})
+        ),
+    )
+    moments = iter((_at("08:25"), _at("08:25"), _at("08:30")))
+    output_root = tmp_path / "forward"
+    receipt = run_forward_preopen(
+        trading_date=DAY,
+        base_dataset_dir=tmp_path / "base",
+        comparator_path=comparator_path,
+        failed_candidate_summary_path=failed_path,
+        config={
+            "cutoff": "08:30",
+            "deadline": "08:40",
+            "capture_not_before": "08:20",
+        },
+        config_path=tmp_path / "config" / "quant" / "research.json",
+        data_root=tmp_path / "data",
+        output_root=output_root,
+        clock=lambda: next(moments),
+        sleeper=lambda _seconds: None,
+    )
+    result = json.loads(receipt.read_text())
+    frozen = output_root / "forward-snapshots" / f"{DAY}.json"
+    assert result["status"] == "GENUINE_FORWARD_SNAPSHOT_FROZEN"
+    assert result["genuine_forward"] is True
+    assert result["numerical_only"] is True
+    assert result["staging_sheet_written"] is False
+    assert frozen.exists()
+    assert frozen.read_bytes() == snapshot_path.read_bytes()
+
+
 def test_live_postclose_appends_records_and_writes_staging(monkeypatch, tmp_path):
     snapshot_path = tmp_path / "snapshot.json"
     snapshot = _snapshot(snapshot_path)
@@ -350,3 +423,56 @@ def test_live_postclose_appends_records_and_writes_staging(monkeypatch, tmp_path
     assert result["staging_sheet_written"] is True
     assert len(list((tmp_path / "daily" / "realizations-v1").rglob("*.json"))) == 2
     assert len(list((tmp_path / "daily" / "evaluations-v1").rglob("*.json"))) == 2
+
+
+def test_forward_postclose_appends_metrics_without_sheet(monkeypatch, tmp_path):
+    output_root = tmp_path / "forward"
+    snapshot_path = output_root / "forward-snapshots" / f"{DAY}.json"
+    _snapshot(snapshot_path)
+    frozen_bytes = snapshot_path.read_bytes()
+
+    def actual(instrument, contract=""):
+        return Bar(
+            instrument=instrument,
+            contract=contract,
+            trading_date=DAY,
+            session="day",
+            open=20_010,
+            high=20_250,
+            low=19_750,
+            close=20_120,
+            session_start_at=_at("08:45" if instrument == "TX" else "09:00"),
+            session_end_at=_at("13:45" if instrument == "TX" else "13:30"),
+            available_at=_at("18:00"),
+            fetched_at=_at("18:05"),
+            availability_basis="test live fetch",
+            source="test",
+            source_hash=("a" if instrument == "TAIEX" else "b") * 64,
+        )
+
+    monkeypatch.setattr(
+        daily_orchestration,
+        "capture_postclose_bars",
+        lambda *_args: (
+            {"TAIEX": actual("TAIEX"), "TX": actual("TX", "202610")},
+            {"status": "PASS", "report_hash": "c" * 64, "issues": []},
+        ),
+    )
+    moments = iter((_at("18:10"), _at("18:11"), _at("18:12"), _at("18:13")))
+    receipt = run_forward_postclose(
+        snapshot_path=snapshot_path,
+        daily_dataset_dir=tmp_path / "daily-dataset",
+        data_root=tmp_path / "data",
+        output_root=output_root,
+        config={"postclose_not_before": "18:00", "neutral_bps": 5.0},
+        clock=lambda: next(moments),
+    )
+    result = json.loads(receipt.read_text())
+    metrics = json.loads(Path(result["metrics"]).read_text())
+    assert result["status"] == "GENUINE_FORWARD_EVALUATED"
+    assert result["staging_sheet_written"] is False
+    assert result["fully_evaluated_days"] == 1
+    assert metrics["instruments"]["TAIEX"]["evaluated_days"] == 1
+    assert metrics["instruments"]["TX"]["evaluated_days"] == 1
+    assert metrics["instruments"]["TAIEX"]["ohlc"]["close"]["mae_points"] == 20
+    assert snapshot_path.read_bytes() == frozen_bytes

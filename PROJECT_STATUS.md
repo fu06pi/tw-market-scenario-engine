@@ -1,5 +1,13 @@
 # Project Status
 
+## 2026-10-30 每日 genuine forward 採樣
+
+- 已實作現行公平基準的數值-only盤前／盤後路徑：`night_regression`主模型、`range`同日fallback、每交易日唯一不可回寫快照、同一snapshot append-only實際值與累積誤差。
+- 累積報告包含TAIEX／TX各自四價MAE／bp／RMSE、gap／close-return／range誤差、方向混淆矩陣、80%區間coverage／width／score及fallback使用日。
+- 127 tests、Ruff、diff check與CLI介面通過；`production_switch=false`，未寫Sheet或晨報。
+- 今日2026-10-30已錯過截止，沒有建立genuine forward樣本。下一交易日為2026-11-02。
+- 排程命令已落在`ops/run-forward-preopen`與`ops/run-forward-postclose`；實際scheduler註冊因本環境無ChatGPT desktop surface且OS排程受限而`BLOCKED`，尚未開始自動採樣。
+
 ## 2026-10-27 residual-head 完整結果
 
 依公平審計後凍結的單一路線，JOINT run `73b3f1aadccb646372be`完成night-regression anchor residual訓練：三折各有一個2.95 MB checkpoint，240個預定日期全部保留，2026-06-08 JOINT推論失敗明確計入coverage。實耗1356.85秒、peak RSS 2852.88 MiB；phase-2帳本累計4410.32/7200秒，剩餘2789.68秒不再用於同一development期間調參。
