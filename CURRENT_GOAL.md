@@ -20,7 +20,12 @@
 2. 驗證真實訓練路徑：固定 TimesFM 3 程式與權重，核對 forward、遮罩、分位數、梯度及預測期已知夜盤特徵的作用。完成小批次參數更新、checkpoint 保存與重載。明確標示為自訂 output-head 訓練，凍結 backbone。
 3. 完成第一個完整實驗：使用 config/quant/timesfm_output_head_short.json 的 64 交易日候選，完成三折 expanding walk-forward，先獨立市場再比較聯合八目標。已有有效實驗執行中則先完成保存，不因新指令反覆重啟。
 4. 按驗證證據改善：依序比較 96／128 日、特徵組合、GBUD／相對 OHLC、因果基準殘差修正及區間校準。每輪只改一類問題，完成一個候選再擴大搜尋。殘差必須來自當時可用資料產生的 walk-forward 基準；所有轉換與校準只用預測日前可用資料。
-5. 完成推論交付：保存最佳候選、設定、scaler、校準資訊、checkpoint hash；提供資料下載、訓練、回測及每日推論 CLI。輸出兩市場 OHLC、區間、合約、截止時間、資料品質及模型版本，保存不可回寫數字快照。
+5. 最新一輪模型訓練完成後，必須先處理並重新驗證以下瓶頸，再進行候選升級：
+   - 區間校準：針對 High／Low coverage 失衡，使用只依賴預測日前資料的 calibration window，重新檢查 75%–85% coverage、interval score 與區間寬度；不得只為提高 coverage 無限制放寬區間。
+   - 跨市場穩定性：分別檢查 TAIEX、TX 的每一 fold、OHLC 欄位、波動／換月狀態與失敗日期；任一市場未通過完整 gate，joint 或整體候選仍為 FAIL。
+   - 穩定改善證據：重新確認多數 fold 改善、block-bootstrap 改善下界非負，並保留所有失敗日期；不得用同一 holdout 反覆調參。
+   - 未來泛化：開發 gate 通過後，鎖定候選並使用新的未觸碰 future holdout 驗證；validation 改善不得直接宣稱達成最終目標。
+6. 完成推論交付：保存最佳候選、設定、scaler、校準資訊、checkpoint hash；提供資料下載、訓練、回測及每日推論 CLI。輸出兩市場 OHLC、區間、合約、截止時間、資料品質及模型版本，保存不可回寫數字快照。
 
 ## 資料與研究邊界
 
