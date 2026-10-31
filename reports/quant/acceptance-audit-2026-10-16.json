@@ -1,0 +1,105 @@
+{
+  "schema_version": "quant-acceptance-audit-v1",
+  "audit_date": "2026-10-16",
+  "overall_status": "INCOMPLETE_RESEARCH_GATE_FAILED",
+  "research_acceptance": "FAIL",
+  "production_readiness": "NOT_READY",
+  "production_switch": false,
+  "requirements": [
+    {
+      "id": "project_existing_v1_and_v0_interface",
+      "status": "PARTIAL",
+      "evidence": ["src/tw_scenario/quant", "docs/V1_V0_MIGRATION_CONTRACT.md"],
+      "remaining": "External V0/V01 tasks still use the legacy interface and have not been switched."
+    },
+    {
+      "id": "taiex_tx_daytime_ohlc_cutoff_contract",
+      "status": "IMPLEMENTED_NOT_LIVE_VERIFIED",
+      "evidence": ["src/tw_scenario/quant/daily.py", "src/tw_scenario/quant/daily_orchestration.py"],
+      "remaining": "No genuine trading-day 08:20-08:40 run has completed."
+    },
+    {
+      "id": "tej_finmind_official_sources",
+      "status": "PASS_WITH_DISCLOSED_SOURCE_LIMIT",
+      "evidence": ["reports/quant/source-audit-2026-10-13.json", "reports/quant/reconciliation-finmind-official-2018-2026.json"],
+      "remaining": "TEJ entitlement only supplied useful 2025 overlap; FinMind plus TWSE/TAIFEX supplies the 2018+ research series. Historical point-in-time publication is not proven."
+    },
+    {
+      "id": "data_quality_and_contract_roll",
+      "status": "PASS_RETROSPECTIVE",
+      "evidence": ["reports/quant/data-quality-certified-finmind-official-2018-2026.json"],
+      "remaining": "Forward availability still requires daily evidence."
+    },
+    {
+      "id": "relative_and_gbud_targets",
+      "status": "PASS_EXECUTED",
+      "evidence": ["config/quant/research.json", "reports/quant/research-summary-validation-lock-2026-10-14.json"],
+      "remaining": null
+    },
+    {
+      "id": "causal_feature_set",
+      "status": "PARTIAL",
+      "evidence": ["src/tw_scenario/quant/forecast.py"],
+      "remaining": "Night return/range/volume, prior-close TX/TAIEX basis and staleness are used. Open interest is ingested but not used by the model. No verified point-in-time overseas market feature set has been added."
+    },
+    {
+      "id": "baseline_and_timesfm_comparisons",
+      "status": "PARTIAL",
+      "evidence": ["reports/quant/research-summary-validation-lock-2026-10-14.json", "reports/quant/timesfm3-output-head-gradient-smoke-2026-10-15.json"],
+      "remaining": "Naive, range, night regression, ARIMA/ARIMAX, TimesFM 3 univariate/multivariate and joint variants ran. Official TimesFM 3 historical fine-tuning was unavailable; the custom one-step output-head smoke is not a fine-tuned candidate."
+    },
+    {
+      "id": "chronological_isolation_and_closed_final",
+      "status": "PASS",
+      "evidence": ["config/quant/research.json", "reports/quant/research-summary-final-2026-10-14.json"],
+      "remaining": "The 2025-10-09 through 2026-10-08 final period must remain closed to tuning."
+    },
+    {
+      "id": "numerical_acceptance_gate",
+      "status": "FAIL",
+      "evidence": ["reports/quant/research-summary-final-2026-10-14.json"],
+      "remaining": "TAIEX close MAE worsened 4.64%; TX improved only 0.45%; interval coverage missed the lower bound. Locked baselines remain the daily default."
+    },
+    {
+      "id": "uncertainty_and_stability",
+      "status": "PARTIAL_POST_HOC",
+      "evidence": ["reports/quant/research-summary-final-2026-10-14.json", "reports/quant/final-stability-diagnostics-2026-10-16.json"],
+      "remaining": "Block uncertainty plus annual, realized-volatility and TX rollover diagnostics are complete. Major-event stability is not evaluated because no frozen point-in-time event calendar was supplied."
+    },
+    {
+      "id": "daily_cli_snapshot_and_review",
+      "status": "IMPLEMENTED_NOT_LIVE_VERIFIED",
+      "evidence": ["src/tw_scenario/quant/cli.py", "reports/quant/daily-engine-implementation-2026-10-16.json"],
+      "remaining": "Google ADC is absent on the host; no genuine pre-open and post-close staging day exists."
+    },
+    {
+      "id": "v0_v01_morning_and_postclose_integration",
+      "status": "PARTIAL_STAGING_ONLY",
+      "evidence": ["reports/quant/staging-sheet-validation-2026-10-15.json", "docs/V0_EXTERNAL_TASK_CUTOVER_PACKET.md"],
+      "remaining": "Retrospective staging readback passed. External tasks and formal Sheet are unchanged pending forward evidence and separate cutover review."
+    },
+    {
+      "id": "scheduling_and_rollback",
+      "status": "NOT_STARTED_BY_DESIGN",
+      "evidence": ["config/quant/staging.json", "docs/V0_EXTERNAL_TASK_CUTOVER_PACKET.md"],
+      "remaining": "ohlc-shadow is paused. One manual live E2E and 3-5 shadow days must precede any formal schedule switch or rollback drill."
+    },
+    {
+      "id": "research_only_license_boundary",
+      "status": "PASS",
+      "evidence": ["AGENTS.md", "reports/quant/source-audit-2026-10-13.json", "reports/quant/timesfm3-preflight-2026-10-13.json"],
+      "remaining": null
+    }
+  ],
+  "blocking_external_state": [
+    "Google Application Default Credentials with staging-only Sheet access are not available on the execution host.",
+    "The next genuine pre-open validation must run during an actual trading day from 08:20 through 08:29 Asia/Taipei."
+  ],
+  "claims_prohibited": [
+    "TimesFM 3 passed the requested final gate",
+    "The daily engine has genuine forward evidence",
+    "V0/V01 has been migrated",
+    "Production scheduling is ready",
+    "Forecast accuracy implies trading profitability"
+  ]
+}

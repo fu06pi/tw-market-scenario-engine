@@ -1,0 +1,9 @@
+{
+  "version": "causal-head-marginal-residual-v1",
+  "candidate_context": 64,
+  "window": 60,
+  "minimum": 40,
+  "lower_quantile": 0.1,
+  "upper_quantile": 0.9,
+  "update_policy": "previous_walk_forward_residuals_available_by_0830_only"
+}

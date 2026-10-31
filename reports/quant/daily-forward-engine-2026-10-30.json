@@ -1,0 +1,46 @@
+{
+  "schema_version": "daily-forward-engine-implementation-v1",
+  "as_of": "2026-10-30",
+  "status": "IMPLEMENTED_TESTED_SCHEDULER_REGISTRATION_BLOCKED",
+  "next_exchange_day": "2026-11-02",
+  "missed_dates_not_backfilled": [
+    "2026-10-30"
+  ],
+  "model_policy": {
+    "primary": "night_regression",
+    "fallback": "range",
+    "representation": "gbud",
+    "trained_candidates_gate": "FAIL"
+  },
+  "preopen": {
+    "command": "./ops/run-forward-preopen",
+    "start": "08:20 Asia/Taipei",
+    "cutoff": "08:30 Asia/Taipei",
+    "deadline": "08:40 Asia/Taipei",
+    "write_once_by_trading_date": true
+  },
+  "postclose": {
+    "command": "./ops/run-forward-postclose",
+    "recommended_start": "18:10 Asia/Taipei",
+    "append_only": true,
+    "cumulative_metrics": true
+  },
+  "outputs": {
+    "google_sheet": false,
+    "morning_report": false,
+    "production_switch": false
+  },
+  "verification": {
+    "pytest": "128 passed",
+    "ruff": "PASS",
+    "git_diff_check": "PASS",
+    "cli_help": "PASS"
+  },
+  "scheduler_registration": {
+    "status": "BLOCKED",
+    "chatgpt_desktop_surface": "unavailable",
+    "crontab": "PAM denied",
+    "user_systemd": "sandbox denied user bus",
+    "required_action": "register the two local-project scheduled tasks from ChatGPT desktop Scheduled"
+  }
+}

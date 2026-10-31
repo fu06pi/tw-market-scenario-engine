@@ -7,9 +7,11 @@ import typer
 
 from .metrics import evaluate_snapshot
 from .models import MarketRealization, PredictionSnapshot
+from .quant.cli import app as quant_app
 from .snapshot import freeze_snapshot, verify_snapshot
 
 app = typer.Typer(no_args_is_help=True)
+app.add_typer(quant_app, name="quant")
 
 
 @app.command()
