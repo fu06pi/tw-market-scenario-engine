@@ -1,0 +1,69 @@
+{
+  "trading_date": "2026-11-02",
+  "generated_at": "2026-11-02T08:54:43+08:00",
+  "data_cutoff_at": "2026-11-02T08:50:00+08:00",
+  "snapshot_status": "formal_preopen_legacy_compatibility",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_scope": "Legacy TAIEX scenario only. Inputs public or frozen by 08:50 Asia/Taipei. New OHLC pipeline requires 08:30 cutoff/08:40 persistence and has not switched; exclude from new-model metrics.",
+  "recovery": "Today's GitHub prediction and manifest both returned 404. Recovered today's V0 08:43:42 frozen hypotheses and independently generated V1 compatibility targets. No prior-day probabilities or targets reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash is SHA-256 over this full manifest; snapshot_hash excluded from prediction hash.",
+  "calendar": {"is_trading_day":true,"basis":"Monday and not a listed 2026 TWSE holiday.","url":"https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html"},
+  "sources": [
+    {
+      "id":"v0_google_sheet","title":"財金晨報預測與覆盤資料庫","spreadsheet_id":"19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ","sheet_range":"每日預測與覆盤!A302:P319","frozen_at":"2026-11-02T08:43:42+08:00","access_mode":"read_only",
+      "shared_source_note":"盤前鎖定：target_date=2026-11-02；cutoff/generated_at=2026-11-02T08:43:42+08:00 Asia/Taipei；前收TAIEX 45,211.83(2026-10-30)；10/30美股正式close Nasdaq 25,437(-2.86%)、S&P 500 7,580.07(-1.82%)、SOX約-7.20%、TSM ADR 406.13(-5.95%)；最近可交易台指期11月夜盤10/30 session於10/31 04:59:59收44,433(相對期貨參考價-867)，台積電期貨2,289(-87)；10/30台積電收2,370、聯發科3,915、鴻海245.5。11/02 14:30十銓法說、11/02美東10:00 ISM製造業、11/02美東17:00 Apple財報電話會議均未公布，不得作當日盤前已知結果。模型規則主表2026-10-29.v1；R01/R02/R04/R14/R15/R16/R17/R18為紀錄規範，候選R03/R05/R08/R10/R11/R12/R13/R19/R20不視為已驗證係數；R21待核。原始A:F/O禁止盤後修改；G:N/P留待收盤。來源：https://money.udn.com/money/story/11112/9848216 ; https://www.reuters.com/business/nasdaq-futures-tumble-amazon-intel-results-deepen-ai-spending-woes-2026-10-30/ ; https://www.reuters.com/legal/transactional/global-markets-global-markets-2026-10-30/ ; https://hk.finance.yahoo.com/quote/TSM/history/ ; https://www.taifex.com.tw/ ; https://tw.stock.yahoo.com/calendar/earnings-call ; https://irplatform.tdcc.com.tw/ir/event/list ; https://www.ismworld.org/ ; https://investor.apple.com/investor-relations/ ; https://investor.cld.tsmc.com/english/dividends",
+      "raw_rows": [
+        {"row":302,"date":"2026/11/02","item":"TAIEX開盤Gap","hypothesis":"10/30現貨收45,211.83、跌2.494%；10/30美股Nasdaq-2.86%、SOX約-7.20%、TSM ADR-5.95%；10/30台指期11月夜盤44,433，相對期貨參考價-867。三者偏空，但現貨前日已大跌、週一07:00後海外期貨即時行情未取得。","prediction":"11/02 09:00開盤<45,211.83；另獨立預測Gap落在[-2.80%,-0.30%]","confidence":"方向83%；區間56%","evidence":"10/30正式海外收盤、TSM ADR 406.13(-5.95%)、最近可交易夜盤44,433(-867)同向；夜盤與現貨前收價差-778.83非預估Gap，須保留期現基差。"},
+        {"row":303,"date":"2026/11/02","item":"首30分鐘下探","hypothesis":"10/30現貨開盤即全日最高、早盤急跌；11/02隔夜期貨及SOX顯著偏空，但低開後仍可能有回補。","prediction":"11/02 09:00–09:30具時戳資料之最低價/當日開盤價-1≤-0.30%","confidence":"64%","evidence":"夜盤-867、SOX約-7.20%、TSM ADR-5.95%；缺完整分鐘K時不以全天低點代替。"},
+        {"row":304,"date":"2026/11/02","item":"首30分鐘反彈","hypothesis":"10/30指數大跌2.494%、週一可能大幅開低，短線空單回補與超跌承接可能形成上探；海外科技重挫為反證。","prediction":"11/02 09:00–09:30具時戳資料之最高價/當日開盤價-1≥+0.30%","confidence":"52%","evidence":"超跌後反彈僅候選情境；上探與下探可同時成立，不能把前日失敗反向調參。"},
+        {"row":305,"date":"2026/11/02","item":"TAIEX收盤方向","hypothesis":"10/30收45,211.83，科技股與ADR週五再跌，短期風險偏好受壓；但前日現貨已跌2.494%，不排除反彈。","prediction":"11/02 13:30正式收盤<45,211.83；另記CLV","confidence":"61%","evidence":"SOX約-7.20%、Nasdaq-2.86%、TSM ADR-5.95%、夜盤-867；前日跌幅與技術性反彈為反證；與Gap獨立評分。"},
+        {"row":306,"date":"2026/11/02","item":"TAIEX開盤至收盤","hypothesis":"週五開盤即日高且開收-2.011%，週一可能延續賣壓；但負Gap較大時，開盤後回補的機率不能忽略。","prediction":"11/02 13:30正式收盤<當日09:00開盤","confidence":"54%","evidence":"海外科技下跌與週末風險累積；大幅開低後回補為反證；不將開低直接當作開收下跌。"},
+        {"row":307,"date":"2026/11/02","item":"上市市場廣度","hypothesis":"10/30上市上漲98、下跌956、平盤53，非平盤上漲比9.30%；11/02海外風險偏弱，廣度恐仍不足半數。","prediction":"11/02上市上漲/(上漲+下跌)<50%，平盤不納分母","confidence":"64%","evidence":"10/30廣度9.30%、SOX大跌；不以TAIEX指數跌幅代替漲跌家數。"},
+        {"row":308,"date":"2026/11/02","item":"OTC相對TAIEX","hypothesis":"海外科技風險偏空，可能使中小型電子承壓；但台積電權重高，若大型權值領跌，OTC也可能相對抗跌。","prediction":"11/02 OTC正式收盤報酬<TAIEX正式收盤報酬（均以10/30正式收盤為基準）","confidence":"54%","evidence":"SOX-7.20%、市場廣度弱；前日OTC兩日正式收盤尚未核實，故不引入虛構精確超額。"},
+        {"row":309,"date":"2026/11/02","item":"台積電2330開盤與收盤","hypothesis":"10/30台積電收2,370元；TSM ADR正式收406.13(-5.95%)、台積電期貨最近夜盤2,289(-87)，海外及期貨偏空。","prediction":"11/02 09:00開盤<2,370元；13:30收盤<2,370元，兩條分開評分","confidence":"開盤81%；收盤64%","evidence":"ADR-5.95%、SOX約-7.20%、台積電期貨2,289(-87)；不以ADR美元價格直接換算現貨開盤價。"},
+        {"row":310,"date":"2026/11/02","item":"聯發科2454","hypothesis":"10/30聯發科正式收3,915元，前日已跌3.214%；全球半導體股大幅修正，手機/IC設計可能持續受壓，但超跌反彈是反證。","prediction":"11/02聯發科2454正式收盤≤3,915元","confidence":"60%","evidence":"SOX約-7.20%、Nasdaq-2.86%、前日個股-3.214%；公司法說結果僅以截至盤前已公開資訊使用。"},
+        {"row":311,"date":"2026/11/02","item":"AI大型權值四檔","hypothesis":"固定台積電2330、鴻海2317、廣達2382、台達電2308；AI雲端需求基本面與市場對資本支出回報的短期疑慮並存。","prediction":"四檔各以10/30正式收盤為基準，11/02等權平均報酬≤0","confidence":"64%","evidence":"美國科技/半導體10/30大跌、Amazon/Intel財報後AI估值壓力；固定股票池不替換。"},
+        {"row":312,"date":"2026/11/02","item":"ABF載板三雄","hypothesis":"固定欣興3037、南電8046、景碩3189；海外晶片股重挫恐壓抑PCB資金，但前日跌幅已可能反映部分利空。","prediction":"三檔各以10/30正式收盤為基準，11/02等權平均報酬≤0","confidence":"58%","evidence":"SOX約-7.20%、台股前日全面下跌；缺正式成分收盤時盤後標待核實。"},
+        {"row":313,"date":"2026/11/02","item":"CCL材料雙股","hypothesis":"固定台光電2383、台燿6274；AI伺服器長期需求與短期科技估值修正並存。","prediction":"兩檔各以10/30正式收盤為基準，11/02等權平均報酬≤0","confidence":"56%","evidence":"Nasdaq-2.86%、SOX約-7.20%、AI資本支出回報疑慮；不把AI需求等同當日股價上漲。"},
+        {"row":314,"date":"2026/11/02","item":"DRAM／南亞科相對強度","hypothesis":"美國科技股10/30急跌，記憶體可能受風險偏好拖累；DRAM產品報價與個股事件可獨立於SOX。","prediction":"11/02南亞科2408正式收盤報酬<TAIEX正式收盤報酬（各以10/30正式收盤為基準）","confidence":"53%","evidence":"海外半導體賣壓；缺完整產品報價與南亞科前收核對，僅低信心相對弱勢。"},
+        {"row":315,"date":"2026/11/02","item":"金融類股相對強度","hypothesis":"10/30科技領跌，金融可能相對抗跌，但美債殖利率下降、利率預期與資金面會使金融內部分化。","prediction":"11/02金融類指數正式收盤報酬>TAIEX正式收盤報酬","confidence":"58%","evidence":"10/30 Nasdaq-2.86%、SOX約-7.20%，美10Y殖利率約4.931%；金融非固定避險。"},
+        {"row":316,"date":"2026/11/02","item":"塑膠類股相對強度","hypothesis":"Brent 10/30約117.63美元，油價上漲與產品利差不一定同向；在科技股領跌時塑化可能相對抗跌。","prediction":"11/02塑膠類指數正式收盤報酬>TAIEX正式收盤報酬","confidence":"54%","evidence":"10/30 Brent約117.63美元、科技風險偏空；原料成本/需求不確定，不預設塑化絕對上漲。"},
+        {"row":317,"date":"2026/11/02","item":"半導體設備固定三檔","hypothesis":"固定帆宣6196、漢唐2404、弘塑3131；長期擴產需求仍在，短期海外晶片及設備股風險偏空。","prediction":"三檔各以10/30正式收盤為基準，11/02等權平均報酬<TAIEX正式收盤報酬","confidence":"54%","evidence":"SOX約-7.20%、Intel大跌、資本支出報酬疑慮；固定池，不用SOX直接代替設備股報酬。"},
+        {"row":318,"date":"2026/11/02","item":"鴻海2317相對強度","hypothesis":"10/30鴻海收245.5元、約-1.008%，優於TAIEX-2.494%；AI伺服器需求仍有支撐，但海外科技估值壓力增加。","prediction":"11/02鴻海2317正式收盤報酬>TAIEX正式收盤報酬；另記收盤是否>245.5元","confidence":"54%","evidence":"10/30鴻海相對抗跌、AI伺服器需求；Nasdaq與SOX大跌為反證；相對與絕對報酬分開。"},
+        {"row":319,"date":"2026/11/02","item":"TAIEX全日振幅","hypothesis":"10/30全日高46,139.79、低44,726.26，振幅3.048%；11/02隔夜期貨-867、SOX大跌，波動風險高。","prediction":"11/02(正式全日最高-正式全日最低)/45,211.83≥1.00%；另記CLV與High-to-Close","confidence":"73%","evidence":"前日振幅3.048%、台指期夜盤-867、週末風險累積；結算與日曆不作方向係數。"}
+      ]
+    },
+    {"id":"taiwan_previous_session","url":"https://udn.com/news/story/7251/9846996","published_at":"2026-10-30","available_before_cutoff":true,"values":{"session_date":"2026-10-30","open":46139.79,"high":46139.79,"low":44726.26,"close":45211.83,"return_points":-1156.50,"return_pct":-2.494,"turnover_twd_billion":877.7,"advancers":98,"decliners":956,"flats":53,"breadth_pct":9.30,"foreign_net_sell_twd_billion":112.467,"tsmc_close":2370,"mediatek_close":3915,"hon_hai_close":245.5}},
+    {"id":"taifex_night","url":"https://money.udn.com/money/story/11112/9848216","session_date":"2026-10-30","close_time":"2026-10-31T04:59:59+08:00","available_before_cutoff":true,"values":{"tx_contract":"2026-11","tx_close":44433,"change_vs_reference_points":-867,"tsmc_futures_close":2289,"tsmc_futures_change":-87,"semiconductor_30_futures_close":14900,"semiconductor_30_change":-390},"quality_note":"Changes are versus futures reference prices and are not direct cash-index point forecasts."},
+    {"id":"us_equities_adr","available_before_cutoff":true,"values":{"session_date":"2026-10-30","dow_close":51770.31,"dow_return_pct":-1.09,"sp500_close":7580.07,"sp500_return_pct":-1.82,"nasdaq_close":25437.00,"nasdaq_return_pct":-2.86,"sox_close":10688.8,"sox_return_pct":-7.20,"tsm_adr_close_usd":406.13,"tsm_adr_return_pct":-5.95}},
+    {"id":"fx_flow","available_before_cutoff":true,"values":{"usd_twd_close":32.478,"intraday_weakest":32.676,"foreign_net_sell_twd_billion":112.467},"quality_note":"Month-end exporter selling and central-bank smoothing affected the close; FX level is a constraint, not a direct direction rule."},
+    {"id":"rates_oil","available_before_cutoff":true,"values":{"us10y_yield_pct":4.929,"brent_close_usd":112.38,"brent_return_pct":1.43,"wti_close_usd":102.89,"wti_return_pct":0.87},"quality_note":"V0 cited a different Brent snapshot; independently verified settled prices are stored here and discrepancy is qualified."},
+    {"id":"events","available_before_cutoff":true,"events":[{"event":"十銓法說","scheduled_at":"2026-11-02T14:30:00+08:00","status_at_cutoff":"not yet occurred; excluded"},{"event":"US ISM manufacturing","scheduled_at":"2026-11-02T10:00:00-05:00","status_at_cutoff":"not yet published; excluded"},{"event":"Apple earnings call","scheduled_at":"2026-11-02T17:00:00-05:00","status_at_cutoff":"not yet occurred; excluded"},{"event":"US futures Monday session","status_at_cutoff":"V0 explicitly records the 07:00 onward live quote as unavailable; no fabricated value used"}]}
+  ],
+  "model_corrections_read_only": {
+    "source_range":"模型規則主表!A2:P21","version":"2026-10-29.v1",
+    "rules_used":[
+      {"id":"R01","decision":"Open、Close/前收與Close/Open分開預測與評分。"},
+      {"id":"R02","decision":"未公布法說、ISM與Apple資訊不得倒填盤前。"},
+      {"id":"R04","decision":"指數、廣度與OTC分開評分。"},
+      {"id":"R08","decision":"休市後累積資訊為候選，不直接固定提高收盤係數。","status":"候選（待驗證）"},
+      {"id":"R10","decision":"夜盤與現貨基差不直接換算現貨Gap。","status":"候選（待驗證）"},
+      {"id":"R12","decision":"急跌後同時保留續跌與開低反彈情境。","status":"候選（待驗證）"},
+      {"id":"R15","decision":"Gap、Close/前收、Close/Open、振幅與CLV分別計算。"},
+      {"id":"R16","decision":"保存generated_at、cutoff與canonical hash，落檔後回讀。"},
+      {"id":"R17","decision":"海外正式close與盤中last分開。"},
+      {"id":"R18","decision":"使用最近實際交易夜盤並保存session、合約、參考價與新鮮度。"}
+    ],
+    "application_note":"Sheet read only and unchanged. Record-keeping rules applied; candidate rules are scenario constraints only and not calibrated coefficients."
+  },
+  "missing_or_qualified": [
+    "TAIFEX -867 is versus the futures reference price, not a cash-index point forecast.",
+    "Monday 07:00 onward live overseas-futures quote was unavailable in the frozen V0 source and was not fabricated.",
+    "V0 cited Brent around 117.63 while an independently verified settlement source reported 112.38; the conflict is preserved and oil receives no directional hard weight.",
+    "No 09:00 onward cash-market, breadth, intraday acceptance, event result or closing data is used."
+  ]
+}
