@@ -1,0 +1,42 @@
+{
+  "trading_date": "2026-11-02",
+  "generated_at": "2026-11-02T08:54:43+08:00",
+  "data_cutoff_at": "2026-11-02T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "7c74bac0026cddbcf540aa88195fa9d41cc38364c72b2a89cb0ce9e85d57e2e7",
+  "scenarios": {"bull":0.08,"base":0.37,"bear":0.55},
+  "targets": {"open_direction":"down","close_direction":"down","intraday_regime":"trend_down","breadth_direction":"down","expected_open_gap_bps":-155,"expected_close_return_bps":-175},
+  "narrative": {
+    "market_view": "最近可交易台指期夜盤、Nasdaq、SOX、台積電ADR與台積電期貨全面重挫，且10月30日上市廣度僅9.30%，風險訊號高度同向。主情境為明顯開低並維持高波動偏空；但台股前一日已跌2.494%，仍保留大幅低開後空單回補情境。",
+    "open_hypothesis": "以10月30日收盤45211.83為基準，預期開低約155bps、700.78點至44511.05；落在V0事前區間-2.80%至-0.30%內。夜盤44433與現貨前收的差距不是現貨Gap預測，未直接照搬。",
+    "intraday_hypothesis": "預期trend_down高波動型態，首30分鐘下探0.30%的機率高於反彈；若大幅低開後台積電、OTC與廣度同步回升，才轉為gap_fade。上探與下探門檻可同時成立。",
+    "close_hypothesis": "預期收盤較前收下跌約175bps、791.21點至44420.62，並較預估開盤再低約90點。海外科技與期貨訊號同向偏空；前兩日累積跌幅與可能的技術性反彈限制Bear尾部。",
+    "breadth_hypothesis": "預期上市非平盤上漲家數低於50%，AI大型權值、ABF、CCL與半導體設備承壓；金融與鴻海可能相對抗跌，但不等同絕對上漲。",
+    "bull_script": "開低後迅速收復44726至45212區間，台積電站回2370、OTC翻紅且廣度超過50%，收盤回到前收附近或以上。",
+    "base_script": "開低0.3%至2.8%後高波動震盪，反彈無法收復前收，收盤以-175bps為中心，廣度持續偏弱。",
+    "bear_script": "跌破44400後無法收復，台積電失守2289附近、OTC續弱且廣度低於25%，形成單向trend_down，收盤跌幅擴大至250bps以上。"
+  },
+  "key_drivers": [
+    "11月台指期最近夜盤收44433、相對參考價-867；台積電期貨2289、-87",
+    "Nasdaq -2.86%、S&P 500 -1.82%、SOX約-7.20%、TSM ADR 406.13美元、-5.95%",
+    "10月30日TAIEX收45211.83、-2.494%，上市98漲956跌，非平盤廣度9.30%",
+    "外資10月30日賣超1124.67億元；新台幣盤中一度32.676、收32.478",
+    "美國10年債息約4.929%；Brent與WTI結算約112.38與102.89美元",
+    "週一07:00後海外期貨即時行情未能在V0凍結資料中取得，未虛構補值",
+    "十銓法說、ISM製造業與Apple電話會議均在截止後，不納入結果",
+    "formal_preopen_legacy_compatibility；新OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未低於45211.83，open-down與-155bps中心估計失效",
+    "開低後站回45211.83、台積電站回2370、OTC翻紅且廣度超過50%，trend_down轉Bull/gap_fade",
+    "跌破44400、台積電失守2289且廣度低於25%，Base轉為更強Bear",
+    "凍結後不以今日09:00後盤中、收盤、十銓法說、ISM或Apple資訊修改機率、方向或點位"
+  ],
+  "v0_references": [
+    {"trading_date":"2026-11-02","item":"08:43:42凍結18項盤前假說","source_row":"每日預測與覆盤!A302:P319","extracted_at":"2026-11-02T08:54:43+08:00","note":"完整非空欄位原樣保存於data manifest；Google Sheet唯讀且未修改。"},
+    {"trading_date":"2026-10-29","item":"統一後模型規則2026-10-29.v1","source_row":"模型規則主表!A2:P21","extracted_at":"2026-11-02T08:54:43+08:00","note":"採用R01/R02/R04/R15/R16/R17/R18紀錄規範；R08/R10/R12只作候選情境約束，不宣稱已通過walk-forward。"}
+  ],
+  "snapshot_hash": "1e7cdee5b58701e79177ce8f1aed9965545b3939a0fdbe82525fe4cf383b21f1"
+}
