@@ -150,3 +150,9 @@ python -m tw_scenario.cli audit . reports/generated/audit-v2.json
 已使用現有行情，對「只用前日 OHLC 的拆分 Ridge 研究版」完成時間順序驗證。TAIEX 的 179 個保留測試日收盤方向命中 49.72%；TX202603 的 32 日為 53.13%。兩市場收盤 MAE 均略差於各自事前選定的價格基準，因此未通過誤差改善門檻，維持研究狀態。
 
 歷史發布時間尚未核實，這次採明示的可用時間假設；原始資料與 available_at 不回寫。完整分割、基準、八項 OHLC 誤差、資料品質及重現方式見 [歷史驗證報告](reports/research/historical-validation-v1/README.md)。這些結果不是盤前前向績效，也未觸發正式排程切換。
+
+### 可比較的簡單基準
+
+已提供 4 個價格基準、5 個純方向基準與可重複執行的共同日期比較流程。價格與方向各自按驗證期選基準，保留失敗與覆蓋率，不在評估期事後換贏家。夜盤特徵不足時明示不可比較，不補零。
+
+定義及盤前接口見 [簡單基準規則](docs/methodology/SIMPLE_BASELINES.md)；已執行的 TAIEX／TX 對照表見 [基準比較報告](reports/research/simple-baseline-comparison-v1/README.md)。這批歷史評估期已被使用過，因此不算新的未見資料驗證。

@@ -1,0 +1,10 @@
+{
+  "files": {
+    "plan.json": "860dbf67cd5510dc8ad4e67547cb52cb1b5d6c1598f25cd905fddcbb6d242fd9",
+    "TAIEX-selection.json": "b5cff3f8ca38660efce8c888860aa2273917dfa6ee2d2bdefd248b91ecfbb429",
+    "summary.json": "f36bb58204388b0f1fc27d7e93f43b448e70eeff934749ddbd127ff88969889e",
+    "TX202603-selection.json": "9452a05753e810a84c2df5a1f43e3d9cb4f9b5930a9210932ef940c8b19f95b8"
+  },
+  "private_daily_results": "reports/generated/simple-baseline-comparison-v1-verified/daily-private.json",
+  "raw_price_data_in_git": false
+}

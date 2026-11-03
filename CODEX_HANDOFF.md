@@ -37,3 +37,9 @@
 後續從具歷史 available_at 證據的真實資料 adapter 繼續。新 schema 不能直接吃舊敘事情境；舊 body 僅能從既有點估推導供診斷。先固定時序切分與研究設定，再比較 split 候選，不得把合成端到端測試當市場成效。
 
 本次未完成真實模型驗收或 V0／Sheet／排程切換。10／27 actual 缺漏仍待取得官方可驗證資料，不能從敘事、別天數字或未確認來源補值。
+
+## 簡單基準交接補充
+
+`baselines.py` 已提供 4 個價格基準、5 個純方向基準，以及有時間／市場／合約檢查的 `predict_preopen_baseline`。原夜盤規則保留，但價格快取沒有完整夜盤／海外特徵，不能用零值補齊並加入排名。
+
+`scripts/compare_simple_baselines.py` 從原研究讀取凍結參考，要求共同日期及實際行情完全一致，價格／方向各依驗證期選基準。先前評估區間已看過，輸出固定標示不是新獨立測試。定義與操作見 [SIMPLE_BASELINES.md](docs/methodology/SIMPLE_BASELINES.md)。舊歷史研究、原始行情、快照、評估與每日排程保持原狀。
