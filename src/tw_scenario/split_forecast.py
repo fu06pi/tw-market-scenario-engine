@@ -228,6 +228,27 @@ def _vector(inputs: PreopenInputs, names: tuple[str, ...]) -> list[float]:
     return [values[name] for name in names]
 
 
+def fit_ridge_head(x, y, query, alpha: float) -> tuple[float, dict]:
+    """Shared numerical head. Callers enforce their own temporal/data contract.
+
+    The live caller validates PreopenInputs; retrospective research explicitly
+    records availability assumptions instead of forging historical timestamps.
+    """
+    if not np.isfinite(alpha) or alpha <= 0:
+        raise ValueError("ridge alpha must be finite and positive")
+    model = make_pipeline(StandardScaler(), Ridge(alpha=alpha))
+    model.fit(x, y)
+    prediction = float(model.predict([query])[0])
+    scaler, regressor = model.steps[0][1], model.steps[1][1]
+    return prediction, {
+        "alpha": alpha,
+        "mean": scaler.mean_.tolist(),
+        "scale": scaler.scale_.tolist(),
+        "coef": regressor.coef_.tolist(),
+        "intercept": float(regressor.intercept_),
+    }
+
+
 def forecast_split(
     examples: list[TrainingExample],
     inputs: PreopenInputs,
@@ -258,19 +279,11 @@ def forecast_split(
         ("b", config.body_features, config.body_alpha),
     ):
         # Separate standardizers and estimators; neither head sees today's O/H/L/C.
-        model = make_pipeline(StandardScaler(), Ridge(alpha=alpha))
         x = [_vector(e.inputs, names) for e in ordered]
-        model.fit(x, [getattr(c, name) for c in components])
-        predictions[name] = float(model.predict([_vector(inputs, names)])[0])
-        scaler, regressor = model.steps[0][1], model.steps[1][1]
-        heads[name] = {
-            "features": list(names),
-            "alpha": alpha,
-            "mean": scaler.mean_.tolist(),
-            "scale": scaler.scale_.tolist(),
-            "coef": regressor.coef_.tolist(),
-            "intercept": float(regressor.intercept_),
-        }
+        predictions[name], parameters = fit_ridge_head(
+            x, [getattr(c, name) for c in components], _vector(inputs, names), alpha
+        )
+        heads[name] = {"features": list(names), **parameters}
     result = Components(
         **predictions,
         u=float(np.mean([c.u for c in components])),

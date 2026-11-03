@@ -1,0 +1,15 @@
+{
+  "files": {
+    "TX202603-locked-selection.json": "2e5e335951517484b0234c3fb570730e1c6c6b81df93e2b2c0fdfdfc4d4ab75f",
+    "plan.json": "d52c05de9d558e3f468b648fdcf4d0c2d1fb03251957cdb851e5ad5961a3051b",
+    "TAIEX-locked-selection.json": "fa1d8597612ae06d711f6a075d52b6c54c28004a8140cf6858bb02d63f235cc5",
+    "summary.json": "0bee81756617ef4c5fad2733c5ac528a7efbfcac254ca603b8ed59a180e8370e"
+  },
+  "implementation_sha256": {
+    "scripts/run_historical_validation.py": "44ee129200b3fde2f1157a83f98c58d2e506ea687f88a6153cc9ac12dc89836c",
+    "src/tw_scenario/split_forecast.py": "e60eb18e99fc6e87dc72aebabadf54e2e1eae01ec22e37192f655037dbda96af",
+    "src/tw_scenario/metrics.py": "bae48794a808dc6469d15aae54dca982d8e7d45b70dfc157278e61840dbbf5bd"
+  },
+  "private_daily_results": "reports/generated/historical-validation-v1/daily-private.json",
+  "note": "Aggregate results only. Licensed source data and per-day actual OHLC are not distributed in Git."
+}

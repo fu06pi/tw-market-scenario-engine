@@ -144,3 +144,9 @@ python -m tw_scenario.cli audit . reports/generated/audit-v2.json
 ```
 
 輸出檔必須尚不存在。已提交 [2026-11-03 ledger](reports/audits/2026-11-03-eligibility-v2.json)；它提供依儲存庫證據判定的 legacy 資格，不是新版模型達標報告。
+
+### 歷史資料驗證結果
+
+已使用現有行情，對「只用前日 OHLC 的拆分 Ridge 研究版」完成時間順序驗證。TAIEX 的 179 個保留測試日收盤方向命中 49.72%；TX202603 的 32 日為 53.13%。兩市場收盤 MAE 均略差於各自事前選定的價格基準，因此未通過誤差改善門檻，維持研究狀態。
+
+歷史發布時間尚未核實，這次採明示的可用時間假設；原始資料與 available_at 不回寫。完整分割、基準、八項 OHLC 誤差、資料品質及重現方式見 [歷史驗證報告](reports/research/historical-validation-v1/README.md)。這些結果不是盤前前向績效，也未觸發正式排程切換。
