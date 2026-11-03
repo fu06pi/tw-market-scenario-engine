@@ -1,0 +1,128 @@
+{
+  "trading_date": "2026-11-03",
+  "generated_at": "2026-11-03T09:01:07+08:00",
+  "data_cutoff_at": "2026-11-03T08:50:00+08:00",
+  "snapshot_status": "reconstructed_late_generated_legacy_compatibility",
+  "reconstructed": true,
+  "late_generated": true,
+  "aggregate_metric_eligibility": false,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility_reconstruction",
+  "cutoff_scope": "Only information published or frozen no later than 08:50 Asia/Taipei was used. The V0 hypothesis table was frozen at 08:40:13. The compatibility snapshot was generated after 09:00, is explicitly reconstructed/late-generated, and must be evaluated separately from formal pre-open samples. No 09:00 onward market data was used.",
+  "recovery": "predictions/2026-11-03.json and data/manifests/2026-11-03.json both returned GitHub 404 before generation. Today's V0 frozen content was recovered verbatim from 每日預測與覆盤!A320:P337. No prior-day probabilities, targets, narrative, or quantitative output was reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash is SHA-256 over this full manifest; snapshot_hash is SHA-256 over the prediction object with snapshot_hash omitted.",
+  "calendar": {
+    "is_trading_day": true,
+    "basis": "Tuesday and not listed as a 2026 TWSE market holiday.",
+    "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html"
+  },
+  "sources": [
+    {
+      "id": "v0_google_sheet",
+      "title": "財金晨報預測與覆盤資料庫",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "sheet_range": "每日預測與覆盤!A320:P337",
+      "frozen_at": "2026-11-03T08:40:13+08:00",
+      "access_mode": "read_only",
+      "shared_source_note": "盤前鎖定：target_date=2026-11-03；cutoff=2026-11-03T08:40:13+08:00 Asia/Taipei；前收TAIEX 44,920.14(11/02)；11/02美股正式收盤 Nasdaq 25,164.32(-1.07%)、S&P 7,541.40(-0.51%)、Dow 51,983.98(+0.41%)；SOX約-3.4%(新聞收盤幅度，指數精確收盤值待交叉核實)，TSM ADR 402.52(-0.89%，ChartExchange收盤；其他資料頁仍停留盤中報價)；台指期2611 11/02 22:08:50盤中last 45,266(+39相對前日參考)，非夜盤正式收盤，完整11/03 05:00夜盤收盤未核實，禁止視為close。11/02 Apple FY26Q4營收1145億美元、iPhone 575.8億美元，但記憶體成本壓力。11/02 ISM製造業55.5、價格指數75.2。11/03 RBA 11:30、JOLTS 23:00、AMD財報11/04 06:00均未發生，不作盤前結果。規則2026-10-29.v1；R01/R02/R04/R14/R15/R16/R17/R18採用為紀錄規範；R03/R05/R08/R10/R11/R12/R13/R19/R20仍候選；R21待核。A:F/O不得盤後修改，G:N/P留空。來源：https://apnews.com/article/475bb37b4d95dd99e26c94e708c99f8f ; https://www.investors.com/news/technology/analog-chip-stocks-buoy-philadelphia-semiconductor-index/ ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://www.ismworld.org/supply-management-news-and-reports/reports/ism-pmi-reports/pmi/october/ ; https://apnews.com/article/9698be9e0226091a537611382144eb44 ; https://www.rba.gov.au/media-releases/2025/mr-25-02.html ; https://www.bls.gov/schedule/news_release/jolts.htm ; https://ir.amd.com/news-events/press-releases/detail/1300/amd-to-report-fiscal-third-quarter-2026-financial-results",
+      "raw_rows": [
+        {"row":320,"date":"2026/11/03","item":"TAIEX開盤Gap","hypothesis":"11/02現貨收44,920.14(-0.645%)；美股Nasdaq-1.07%、SOX約-3.4%、TSM ADR-0.89%，偏空但美股道瓊上漲、Apple財報優於預期；最新台指期夜盤正式收盤未核實，不能把22:08 last當close。","prediction":"11/03 09:00開盤<44,920.14；另獨立預測Gap位於[-1.20%,0.00%)","confidence":"方向61%；區間54%","evidence":"Nasdaq與SOX走弱，TSM ADR 402.52較10/30收406.13下跌0.89%；前日台股早盤急跌後收斂且廣度轉強、夜盤close缺失為反證。"},
+        {"row":321,"date":"2026/11/03","item":"首30分鐘下探","hypothesis":"前日09:01快速下探超過1%，11/02美國半導體再度下跌；但今日開盤若先反映賣壓，短線可能回補。","prediction":"11/03 09:00–09:30具時戳最低價/當日開盤價-1≤-0.30%","confidence":"59%","evidence":"SOX約-3.4%、Nasdaq-1.07%；前日高波動；無法使用今日開盤後資料。"},
+        {"row":322,"date":"2026/11/03","item":"首30分鐘反彈","hypothesis":"前日09:00–09:30上探未達+0.30%；今日若開低可能因Apple業績、ISM製造業擴張而短線承接，但半導體弱勢是反證。","prediction":"11/03 09:00–09:30具時戳最高價/當日開盤價-1≥+0.30%","confidence":"53%","evidence":"Apple營收+12%、ISM 55.5支持基本面；隔夜SOX走弱；上探與下探獨立評分。"},
+        {"row":323,"date":"2026/11/03","item":"TAIEX收盤方向","hypothesis":"前收44,920.14，連續修正後價格已反映部分風險；隔夜科技賣壓未消退，惟Apple財報、ISM與美股非科技族群提供反證。","prediction":"11/03 13:30正式收盤<44,920.14；另記CLV","confidence":"55%","evidence":"Nasdaq-1.07%、SOX約-3.4%；前日TAIEX-0.645%但上市上漲526/下跌456，顯示指數與廣度分離。"},
+        {"row":324,"date":"2026/11/03","item":"TAIEX開盤至收盤","hypothesis":"隔夜科技偏空可能先反映在開盤，後續受本地廣度與11:30澳洲央行決議影響；不將開低直接等同全天續跌。","prediction":"11/03正式收盤<當日09:00開盤","confidence":"52%","evidence":"前日開收-0.254%、但CLV約68.82%顯示低點後回升；隔夜科技股弱。"},
+        {"row":325,"date":"2026/11/03","item":"上市市場廣度","hypothesis":"11/02上市上漲526、下跌456，非平盤上漲比53.56%；即使TAIEX下跌，非電子可能分散電子賣壓。","prediction":"11/03上市上漲/(上漲+下跌)>50%，平盤不納分母","confidence":"51%","evidence":"11/02廣度53.56%，美股11/02指數分化、非科技相對抗跌；SOX下跌是反證。"},
+        {"row":326,"date":"2026/11/03","item":"OTC相對TAIEX","hypothesis":"前日OTC暫示相對TAIEX較強，但正式OTC收盤資料仍待核；隔夜半導體跌幅較大，可能壓抑中小型科技。","prediction":"11/03 OTC正式收盤報酬>TAIEX正式收盤報酬（均以11/02正式收盤為基準）","confidence":"52%","evidence":"前日台股指數弱於市場廣度；權值與中小型可能分化；缺OTC正式前收須待覆盤核實。"},
+        {"row":327,"date":"2026/11/03","item":"台積電2330開盤與收盤","hypothesis":"11/02台積電收2,330元(-1.688%)，ADR 11/02正式收402.52(-0.89%)；SOX約-3.4%，但台積電前日已跌且ADR下跌較小。","prediction":"11/03 09:00開盤<2,330元；13:30收盤<2,330元，兩項分開評分","confidence":"開盤60%；收盤55%","evidence":"ADR正式close 402.52(-0.89%)、SOX約-3.4%；Apple財報強勁提供消費電子需求反證。"},
+        {"row":328,"date":"2026/11/03","item":"聯發科2454","hypothesis":"11/02聯發科收3,970元(+1.405%)，相對TAIEX逆勢強；隔夜晶片股走弱，前日反彈可能面臨回吐，但無新公司級負面事件確認。","prediction":"11/03聯發科2454正式收盤≤3,970元","confidence":"54%","evidence":"11/02聯發科逆勢反彈；SOX約-3.4%、AMD財報仍待公布；不把前日強勢機械外推。"},
+        {"row":329,"date":"2026/11/03","item":"AI大型權值四檔","hypothesis":"固定台積電2330、鴻海2317、廣達2382、台達電2308；Apple營收超預期與AI基建需求為正面，但海外科技估值承壓。","prediction":"四檔各以11/02正式收盤為基準，11/03等權平均報酬≤0","confidence":"56%","evidence":"Nasdaq-1.07%、SOX約-3.4%；Apple營收1145億美元是反證；固定四檔，缺正式收盤不得計等權。"},
+        {"row":330,"date":"2026/11/03","item":"ABF載板三雄","hypothesis":"固定欣興3037、南電8046、景碩3189；11/02部分PCB相對強，但海外晶片股續跌，產業內價格接受度可能分化。","prediction":"三檔各以11/02正式收盤為基準，11/03等權平均報酬≤0","confidence":"52%","evidence":"SOX約-3.4%，前日PCB/載板有承接；缺完整11/02個股正式收盤時不得填估值。"},
+        {"row":331,"date":"2026/11/03","item":"CCL材料雙股","hypothesis":"固定台光電2383、台燿6274；AI伺服器需求支撐基本面，但科技股估值與資金面壓力仍在。","prediction":"兩檔各以11/02正式收盤為基準，11/03等權平均報酬≤0","confidence":"52%","evidence":"Apple/ISM反映需求韌性，Nasdaq及SOX偏空；固定池不因盤後個股表現調整。"},
+        {"row":332,"date":"2026/11/03","item":"DRAM／南亞科相對強度","hypothesis":"11/02南亞科收456.5元(+0.44%)，優於TAIEX-0.645%；Apple明確提到記憶體成本壓力支持價格偏強敘事，但美國記憶體股隨SOX下跌。","prediction":"11/03南亞科2408正式收盤報酬>TAIEX正式收盤報酬","confidence":"53%","evidence":"Apple財報揭露記憶體成本上升、南亞科前日超額+1.085pp；海外晶片股下跌為反證。"},
+        {"row":333,"date":"2026/11/03","item":"金融類股相對強度","hypothesis":"11/02金融類約-1.00%，落後TAIEX-0.645%；若電子再弱，資金可能輪動金融，但前日金融並未相對抗跌。","prediction":"11/03金融類指數正式收盤報酬>TAIEX正式收盤報酬","confidence":"53%","evidence":"美股道瓊+0.41%對照Nasdaq-1.07%；前日金融相對弱，不能視為固定避險。"},
+        {"row":334,"date":"2026/11/03","item":"塑膠類股相對強度","hypothesis":"11/02塑膠類相對抗跌，但Brent 11/02大跌約7.6%，油價與產品利差不等同，前日漲幅後可能分化。","prediction":"11/03塑膠類指數正式收盤報酬<TAIEX正式收盤報酬","confidence":"53%","evidence":"Brent 11/02約-7.6%、前日塑化逆勢上漲；油價下跌對成本與售價影響可能相反。"},
+        {"row":335,"date":"2026/11/03","item":"半導體設備固定三檔","hypothesis":"固定帆宣6196、漢唐2404、弘塑3131；長期設備需求仍在，但SOX再跌、估值風險壓抑短線。","prediction":"三檔各以11/02正式收盤為基準，11/03等權平均報酬<TAIEX正式收盤報酬","confidence":"53%","evidence":"SOX約-3.4%、晶片股風險偏弱；台積電擴產需求是反證，完整正式價未核時待核實。"},
+        {"row":336,"date":"2026/11/03","item":"鴻海2317相對強度","hypothesis":"11/02鴻海收約251元(+2.24%)，逆勢優於TAIEX；Apple 2026Q4營收1145億美元、iPhone 575.8億美元，支持消費電子需求但供應鏈毛利受記憶體成本影響。","prediction":"11/03鴻海2317正式收盤報酬>TAIEX正式收盤報酬；另記收盤是否>251元","confidence":"56%","evidence":"Apple營收與iPhone超預期、前日鴻海超額約2.89pp；Apple盤後價格及記憶體成本壓力為反證。"},
+        {"row":337,"date":"2026/11/03","item":"TAIEX全日振幅","hypothesis":"11/02高45,156.17、低44,399.10，振幅1.685%；11/03海外半導體弱、澳洲央行決議於台股時段，存在波動風險但不預設事件方向。","prediction":"11/03(正式全日最高-正式全日最低)/44,920.14≥1.00%；另記CLV與High-to-Close","confidence":"66%","evidence":"前日振幅(45156.17-44399.10)/44920.14=1.685%；SOX約-3.4%；11:30 RBA利率決議，波動與方向分開。"}
+      ]
+    },
+    {
+      "id": "taiwan_previous_session",
+      "url": "https://udn.com/news/story/7251/9851840",
+      "published_at": "2026-11-02T14:43:00+08:00",
+      "available_before_cutoff": true,
+      "values": {"session_date":"2026-11-02","high":45156.17,"low":44399.10,"close":44920.14,"return_points":-291.69,"return_pct":-0.645,"turnover_twd_billion":789.53,"advancers":526,"decliners":456,"breadth_pct":53.56,"tsmc_close":2330,"mediatek_close":3970,"hon_hai_close":251}
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://money.udn.com/money/story/11112/9853212",
+      "source_attribution": "Taiwan Futures Exchange via Economic Daily News",
+      "published_at": "2026-11-03T05:17:27+08:00",
+      "session_date": "2026-11-02",
+      "available_before_cutoff": true,
+      "values": {"tx_contract":"2026-11","tx_close":44310,"change_vs_reference_points":-917,"mini_tx_close":44301,"tsmc_futures_close":2291,"tsmc_futures_change":-51,"semiconductor_30_futures_close":15116,"semiconductor_30_change":-67},
+      "quality_note": "The -917 and other changes are versus futures reference prices, not direct cash-index forecasts. This independently verified 05:17:27 release postdates the V0 08:40 sheet freeze source list but predates the 08:50 cutoff."
+    },
+    {
+      "id": "us_equities",
+      "available_before_cutoff": true,
+      "values": {"session_date":"2026-11-02","dow_close":51983.98,"dow_return_pct":0.41,"sp500_close":7541.40,"sp500_return_pct":-0.51,"nasdaq_close":25164.32,"nasdaq_return_pct":-1.07,"sox_close":10328.33,"sox_return_pct":-3.37},
+      "urls": ["https://apnews.com/article/475bb37b4d95dd99e26c94e708c99f8f","https://www.nasdaq.com/market-activity/index/sox/historical"]
+    },
+    {
+      "id": "tsm_adr_conflict",
+      "available_before_cutoff": true,
+      "values": {"v0_frozen_close_usd":402.52,"v0_frozen_return_pct":-0.89,"independent_candidate_close_usd":410.64,"independent_candidate_return_pct":1.11},
+      "urls": ["https://chartexchange.com/symbol/nyse-tsm/historical/","https://www.investing.com/equities/taiwan-semiconductor-manufactur-historical-data"],
+      "quality_note": "Pre-cutoff sources conflict. The raw V0 assertion is preserved, but ADR direction and price receive zero quantitative weight in the reconstructed V1 snapshot."
+    },
+    {
+      "id": "fx_flow",
+      "url": "https://money.udn.com/money/story/5616/9852393",
+      "published_at": "2026-11-02T18:35:00+08:00",
+      "available_before_cutoff": true,
+      "values": {"usd_twd_close":32.592,"twd_change":-0.114,"foreign_net_sell_twd_billion":73.521,"investment_trust_net_buy_twd_billion":33.816},
+      "quality_note": "FX level and flows are context constraints, not deterministic direction rules."
+    },
+    {
+      "id": "rates_oil",
+      "available_before_cutoff": true,
+      "values": {"us10y_yield_pct":4.884,"brent_close_usd":104.77,"brent_return_pct":-7.6,"wti_close_usd":96.46,"wti_return_pct":-7.4},
+      "quality_note": "Oil-price effects on Taiwan petrochemical shares are ambiguous because feedstock costs, product prices, and demand can move differently."
+    },
+    {
+      "id": "events",
+      "available_before_cutoff": true,
+      "events": [
+        {"event":"Apple FY2026 Q4 results","published_at":"2026-11-02T16:30:00-05:00","status_at_cutoff":"published; revenue USD114.5bn and iPhone revenue USD57.58bn; memory-cost pressure noted"},
+        {"event":"US ISM manufacturing","published_at":"2026-11-02T10:00:00-05:00","status_at_cutoff":"published; PMI 55.5 and prices 75.2"},
+        {"event":"RBA rate decision","scheduled_at":"2026-11-03T11:30:00+08:00","status_at_cutoff":"not yet occurred; result excluded"},
+        {"event":"US JOLTS","scheduled_at":"2026-11-03T23:00:00+08:00","status_at_cutoff":"not yet occurred; result excluded"},
+        {"event":"AMD fiscal Q3 2026 results","scheduled_at":"2026-11-04T06:00:00+08:00","status_at_cutoff":"not yet occurred; result excluded"}
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "模型規則主表!A2:P21",
+    "version": "2026-10-29.v1",
+    "rules_used": [
+      {"id":"R01","decision":"Open、Close/前收與Close/Open分開預測與評分。"},
+      {"id":"R02","decision":"未公布的RBA、JOLTS與AMD資訊不得倒填盤前。"},
+      {"id":"R04","decision":"指數、廣度與OTC分開評分。"},
+      {"id":"R10","decision":"夜盤與現貨基差不直接換算現貨Gap。","status":"候選（待驗證）"},
+      {"id":"R12","decision":"急跌後同時保留續跌與開低反彈情境。","status":"候選（待驗證）"},
+      {"id":"R15","decision":"Gap、Close/前收、Close/Open、振幅與CLV分別計算。"},
+      {"id":"R16","decision":"保存generated_at、cutoff與canonical hash，落檔後回讀。"},
+      {"id":"R17","decision":"海外正式close、期貨正式夜盤close與盤中last分開。"},
+      {"id":"R18","decision":"使用最近實際交易夜盤並保存session、合約、參考價與新鮮度。"}
+    ],
+    "application_note": "Sheet was read only and unchanged. Record-keeping rules were applied; candidate rules are scenario constraints only, not calibrated coefficients."
+  },
+  "missing_or_qualified": [
+    "The snapshot was generated after 09:00 and is reconstructed/late-generated; it is excluded from aggregate formal-preopen and new-OHLC-model metrics.",
+    "TAIFEX -917 is versus the futures reference price, not a cash-index point forecast.",
+    "TSM ADR pre-cutoff source values conflict; ADR direction and price receive zero quantitative weight.",
+    "The repository states the new TEJ/TimesFM/ARIMA OHLC pipeline is not yet implemented or switched. This is a legacy scenario compatibility output, not a trained OHLC forecast.",
+    "No 09:00 onward Taiwan cash-market, breadth, intraday acceptance, event result, or closing data was used."
+  ]
+}
