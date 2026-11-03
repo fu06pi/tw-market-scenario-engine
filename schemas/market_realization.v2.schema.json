@@ -1,0 +1,85 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "open": {
+      "exclusiveMinimum": 0,
+      "title": "Open",
+      "type": "number"
+    },
+    "high": {
+      "exclusiveMinimum": 0,
+      "title": "High",
+      "type": "number"
+    },
+    "low": {
+      "exclusiveMinimum": 0,
+      "title": "Low",
+      "type": "number"
+    },
+    "close": {
+      "exclusiveMinimum": 0,
+      "title": "Close",
+      "type": "number"
+    },
+    "trading_date": {
+      "format": "date",
+      "title": "Trading Date",
+      "type": "string"
+    },
+    "market": {
+      "enum": [
+        "TAIEX",
+        "TX"
+      ],
+      "title": "Market",
+      "type": "string"
+    },
+    "contract": {
+      "anyOf": [
+        {
+          "pattern": "^[12]\\d{3}(0[1-9]|1[0-2])$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contract"
+    },
+    "session": {
+      "const": "day",
+      "default": "day",
+      "title": "Session",
+      "type": "string"
+    },
+    "available_at": {
+      "format": "date-time",
+      "title": "Available At",
+      "type": "string"
+    },
+    "source": {
+      "minLength": 1,
+      "title": "Source",
+      "type": "string"
+    },
+    "availability_basis": {
+      "minLength": 1,
+      "title": "Availability Basis",
+      "type": "string"
+    }
+  },
+  "required": [
+    "open",
+    "high",
+    "low",
+    "close",
+    "trading_date",
+    "market",
+    "available_at",
+    "source",
+    "availability_basis"
+  ],
+  "title": "ObservedBar",
+  "type": "object"
+}

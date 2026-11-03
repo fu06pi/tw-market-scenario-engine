@@ -130,3 +130,17 @@ python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/samp
 [Google Drive 原始文件備份](https://drive.google.com/file/d/1UPYML3IeAbG40iw5FREPCORo-RP8f-98/view?usp=drivesdk)。
 
 本次只更新上述架構與交接文件；未執行模型訓練或切換正式排程。
+
+## 2026-11-03：評分與開收盤拆分階段
+
+已新增統一評分政策、唯讀樣本資格稽核、版本化雜湊與獨立 gap／body 研究模型；可由 `forecast-split` 產生一致的 OHLC 研究快照，並分別評估開盤、盤中及收盤誤差。
+
+這次完成前兩項架構修正與合成資料端到端驗證，未切換原晨報／Sheet／排程，尚無真實資料的準確率改善證據。原始歷史紀錄保留。高低點仍採過去影線平均基準，TimesFM／ARIMA、真實時序驗證與正式整合仍待完成。
+
+操作、資料契約、已執行檢查與限制見 [評分統一與開盤／盤中分離](docs/architecture/AUDIT_AND_SPLIT_V2.md)。可重現唯讀稽核：
+
+```bash
+python -m tw_scenario.cli audit . reports/generated/audit-v2.json
+```
+
+輸出檔必須尚不存在。已提交 [2026-11-03 ledger](reports/audits/2026-11-03-eligibility-v2.json)；它提供依儲存庫證據判定的 legacy 資格，不是新版模型達標報告。

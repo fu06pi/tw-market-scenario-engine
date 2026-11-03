@@ -29,3 +29,11 @@
 
 ## 環境
 沿用 pyproject.toml；先執行 python -m pip install -e '.[dev]' 及 python -m pytest -q。模型依賴於實作時核實並固定。限制網路需記錄真實錯誤並支援離線匯出檔，不能編造下載成功或模型績效。
+
+## 2026-11-03 階段交接補充
+
+使用者要求先完成評分一致性與開盤／盤中拆分。已有 audit.py、policy.py、split_forecast.py、v2 schemas、CLI 與合成範例；操作見 [AUDIT_AND_SPLIT_V2.md](docs/architecture/AUDIT_AND_SPLIT_V2.md)。舊實際結果、預測、評估及 manifest 不回寫。
+
+後續從具歷史 available_at 證據的真實資料 adapter 繼續。新 schema 不能直接吃舊敘事情境；舊 body 僅能從既有點估推導供診斷。先固定時序切分與研究設定，再比較 split 候選，不得把合成端到端測試當市場成效。
+
+本次未完成真實模型驗收或 V0／Sheet／排程切換。10／27 actual 缺漏仍待取得官方可驗證資料，不能從敘事、別天數字或未確認來源補值。
