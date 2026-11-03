@@ -1,0 +1,63 @@
+{
+  "trading_date": "2026-11-03",
+  "generated_at": "2026-11-03T09:01:07+08:00",
+  "data_cutoff_at": "2026-11-03T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility-reconstructed",
+  "feature_version": "features-v1-cutoff-audited",
+  "prompt_version": "scenario-prompt-v1-reconstructed-late-generated",
+  "data_manifest_hash": "b64170c9c998e0e1495b71c7e05fb7412fad6ea87a49791129db6e67f883e909",
+  "scenarios": {"bull":0.16,"base":0.48,"bear":0.36},
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": -70,
+    "expected_close_return_bps": -45
+  },
+  "narrative": {
+    "market_view": "海外科技偏空、夜盤正式收盤明顯低於參考價，但美股道瓊上漲、前一交易日台股廣度仍高於50%，形成指數與廣度分離。主情境為開低後高波動回補一部分跌幅，收盤仍低於前收；ADR資料互相衝突，量化層完全不採其方向或價格。此檔案為09:00後依08:50截止資料補建的legacy compatibility樣本，不能列入正式盤前或新OHLC模型績效。",
+    "open_hypothesis": "以前收44,920.14為基準，預期開低約70bps、314.44點至44,605.70，位於V0事前區間[-1.20%,0.00%)內。台指期夜盤44,310、-917是相對期貨參考價，僅作風險方向與波動背景，不把917點直接當現貨Gap。",
+    "intraday_hypothesis": "預期gap_fade高波動型態：開盤先反映Nasdaq、SOX與台指夜盤弱勢，之後因前日上市廣度53.56%、Apple營收與ISM擴張而出現承接，但反彈未必收復前收。首30分鐘下探及反彈0.30%可同時成立，不能用日線OHLC推定先後。",
+    "close_hypothesis": "預期收盤較前收下跌約45bps、202.14點至44,718.00，較預估開盤回升約112點但仍收黑。若電子權值賣壓擴散至廣度，應轉為Bear；若台積電、OTC與上市廣度同步轉強並收復前收，轉為Bull。",
+    "breadth_hypothesis": "以51%的低信心預期上市非平盤上漲家數仍略高於50%，延續前日指數下跌但526漲、456跌的分離；半導體與AI權值偏弱可能由非電子與個別Apple供應鏈抵銷。廣度方向與指數收盤方向分開評分。",
+    "bull_script": "開低後快速收復44,920.14，台積電站回2,330、OTC翻紅且上市廣度明顯高於50%，收盤回到前收以上；海外科技弱勢僅造成短暫風險折價。",
+    "base_script": "開低約0%至1.2%，早盤下探後回補部分跌幅，終場以-45bps附近收黑；上市廣度在50%附近或略上，指數與個股家數維持分離。",
+    "bear_script": "夜盤風險訊號延伸至現貨，開低後反彈失敗，台積電跌破2,291期貨參考區、OTC轉弱且上市廣度低於40%，收盤跌幅擴大至100bps以上。"
+  },
+  "key_drivers": [
+    "11月台指期11/02夜盤於2026-11-03 05:17:27前完成並發布：44,310、相對參考價-917；台積電期貨2,291、-51",
+    "Nasdaq 25,164.32(-1.07%)、S&P 500 7,541.40(-0.51%)、SOX 10,328.33(-3.37%)，但Dow 51,983.98(+0.41%)",
+    "11/02 TAIEX收44,920.14(-0.645%)，上市526漲、456跌，非平盤廣度53.56%，指數與廣度分離",
+    "美元兌新台幣收32.592；外資賣超735.21億元，投信買超338.16億元",
+    "美國10年債息約4.884%；Brent 104.77美元(-7.6%)、WTI 96.46美元(-7.4%)",
+    "Apple FY2026 Q4營收1,145億美元、iPhone 575.8億美元；ISM製造業55.5、價格指數75.2",
+    "TSM ADR盤前可取得來源互相衝突，量化權重設為零並保留原始V0記錄",
+    "RBA 11:30、JOLTS 23:00、AMD 11/04 06:00在截止時均未發生，結果不得納入",
+    "reconstructed_late_generated_legacy_compatibility；新TEJ/TimesFM/ARIMA OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未低於44,920.14，open-down與-70bps中心估計失效",
+    "開低後收復44,920.14、台積電站回2,330、OTC翻紅且廣度明顯高於50%，Base/gap_fade轉Bull",
+    "跌破44,310附近且無法收復、台積電弱於2,291、OTC轉弱且廣度低於40%，Base轉Bear",
+    "若可驗證ADR正式收盤資料事後統一，不回寫本檔概率或點位；只在覆盤記錄資料品質差異",
+    "不以09:00後台股盤中、收盤、RBA決議、JOLTS或AMD結果補作或修正本預測"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-03",
+      "item": "08:40:13凍結18項盤前假說",
+      "source_row": "每日預測與覆盤!A320:P337",
+      "extracted_at": "2026-11-03T09:01:07+08:00",
+      "note": "完整A:F原始內容原樣保存在data manifest；Google Sheet唯讀且未修改。"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "統一後模型規則2026-10-29.v1",
+      "source_row": "模型規則主表!A2:P21",
+      "extracted_at": "2026-11-03T09:01:07+08:00",
+      "note": "採用R01/R02/R04/R15/R16/R17/R18紀錄規範；R10/R12僅作候選情境約束，不宣稱已通過walk-forward。"
+    }
+  ],
+  "snapshot_hash": "63e4977e2070ec6becab644ef9c2172eb8fc40f5eff89c7c3f33485a3612379b"
+}
