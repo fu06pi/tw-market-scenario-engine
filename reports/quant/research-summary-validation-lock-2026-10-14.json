@@ -1,0 +1,1094 @@
+{
+  "status": "VALIDATION_LOCKED_FINAL_NOT_OPENED",
+  "generated_date": "2026-10-14",
+  "scope": "retrospective academic research; possible TimesFM pretraining overlap",
+  "production_switch": false,
+  "dataset": {
+    "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+    "range": [
+      "2018-01-01",
+      "2026-10-08"
+    ],
+    "quality_status": "PASS_RETROSPECTIVE",
+    "expected_selected_observations": 6396,
+    "missing_count": 0,
+    "duplicate_count": 0,
+    "calendar_gap_count": 0
+  },
+  "splits": {
+    "validation": [
+      "2024-10-09",
+      "2025-10-08"
+    ],
+    "final_test": [
+      "2025-10-09",
+      "2026-10-08"
+    ]
+  },
+  "locked_baselines": {
+    "TAIEX": {
+      "model": "arimax",
+      "representation": "gbud",
+      "validation_close_mae": 175.6713445512295,
+      "validation_expected_days": 244,
+      "validation_paired_days": 244,
+      "validation_paired_coverage": 1.0,
+      "validation_paired_dates_hash": "0dde2c3e8cfa0a6ac048076291676376de45e968119ba874b0d43533f7ab639c",
+      "validation_paired_metrics": {
+        "expected_days": 244,
+        "success_days": 244,
+        "forecast_coverage": 1.0,
+        "failed_days": [],
+        "ohlc": {
+          "open": {
+            "mae_points": 70.68888701991199,
+            "mae_bps": 31.4270730350941,
+            "rmse_points": 125.49656071718583
+          },
+          "high": {
+            "mae_points": 6763.189812044721,
+            "mae_bps": 3871.1676258650346,
+            "rmse_points": 103549.46512120205
+          },
+          "low": {
+            "mae_points": 132.41381143929084,
+            "mae_bps": 58.64896137954799,
+            "rmse_points": 213.7196223052629
+          },
+          "close": {
+            "mae_points": 175.6713445512295,
+            "mae_bps": 78.02180976260951,
+            "rmse_points": 245.2930521903386
+          }
+        },
+        "gap_mae_bps": 31.4270730350941,
+        "close_return_mae_bps": 78.02180976260951,
+        "range_mae_bps": 3889.326978477215,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 81,
+              "flat": 4,
+              "up": 20
+            },
+            "flat": {
+              "down": 2,
+              "flat": 0,
+              "up": 6
+            },
+            "up": {
+              "down": 31,
+              "flat": 6,
+              "up": 94
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 105,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 8,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 131,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 244,
+        "intervals": {
+          "open": {
+            "coverage": 0.7868852459016393,
+            "width": 195.3673679550674,
+            "interval_score": 390.4574508236982
+          },
+          "high": {
+            "coverage": 0.8483606557377049,
+            "width": 5.656621310799997e+19,
+            "interval_score": 5.656621310799997e+19
+          },
+          "low": {
+            "coverage": 0.8401639344262295,
+            "width": 532.9791949577415,
+            "interval_score": 729.248937589943
+          },
+          "close": {
+            "coverage": 0.7991803278688525,
+            "width": 518.0746614408647,
+            "interval_score": 847.474623096381
+          }
+        }
+      }
+    },
+    "TX": {
+      "model": "night_regression",
+      "representation": "gbud",
+      "validation_close_mae": 162.0732172152703,
+      "validation_expected_days": 244,
+      "validation_paired_days": 241,
+      "validation_paired_coverage": 0.9877049180327869,
+      "validation_paired_dates_hash": "2aef2ec976981ec7103412fe3fabca06497dda902ed62300d2e66a3d1166131d",
+      "validation_paired_metrics": {
+        "expected_days": 241,
+        "success_days": 241,
+        "forecast_coverage": 1.0,
+        "failed_days": [],
+        "ohlc": {
+          "open": {
+            "mae_points": 74.13461132190965,
+            "mae_bps": 32.95518533948332,
+            "rmse_points": 137.51436462776635
+          },
+          "high": {
+            "mae_points": 129.73321288784263,
+            "mae_bps": 57.78344605024495,
+            "rmse_points": 192.58117584110425
+          },
+          "low": {
+            "mae_points": 126.33763348925902,
+            "mae_bps": 56.09288182929107,
+            "rmse_points": 193.40823265877242
+          },
+          "close": {
+            "mae_points": 162.0732172152703,
+            "mae_bps": 71.84245524936752,
+            "rmse_points": 223.90057421548065
+          }
+        },
+        "gap_mae_bps": 32.95518533948332,
+        "close_return_mae_bps": 71.84245524936752,
+        "range_mae_bps": 74.61394861659335,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 71,
+              "flat": 5,
+              "up": 29
+            },
+            "flat": {
+              "down": 2,
+              "flat": 1,
+              "up": 4
+            },
+            "up": {
+              "down": 26,
+              "flat": 4,
+              "up": 99
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 105,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 7,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 129,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 241,
+        "intervals": {
+          "open": {
+            "coverage": 0.7634854771784232,
+            "width": 194.37151424320007,
+            "interval_score": 423.4784051550588
+          },
+          "high": {
+            "coverage": 0.8132780082987552,
+            "width": 374.1009999137746,
+            "interval_score": 580.5501364173708
+          },
+          "low": {
+            "coverage": 0.7883817427385892,
+            "width": 363.073200014266,
+            "interval_score": 616.1051830457448
+          },
+          "close": {
+            "coverage": 0.8049792531120332,
+            "width": 495.30580080658666,
+            "interval_score": 774.848448178957
+          }
+        }
+      }
+    }
+  },
+  "baseline_final_test": {
+    "TAIEX": {
+      "metrics": {
+        "expected_days": 242,
+        "success_days": 239,
+        "forecast_coverage": 0.987603305785124,
+        "failed_days": [
+          {
+            "date": "2025-10-30",
+            "reason": "ValueError: ARIMA nonconvergence"
+          },
+          {
+            "date": "2025-11-28",
+            "reason": "ValueError: ARIMA nonconvergence"
+          },
+          {
+            "date": "2026-06-08",
+            "reason": "ValidationError: 1 validation error for Prices\nlow\n  Input should be greater than 0 [type=greater_than, input_value=np.float64(0.0), input_type=float64]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than"
+          }
+        ],
+        "ohlc": {
+          "open": {
+            "mae_points": 135.75439424325913,
+            "mae_bps": 38.247369371893306,
+            "rmse_points": 187.27707880035678
+          },
+          "high": {
+            "mae_points": 264.9152863435718,
+            "mae_bps": 71.19456698416077,
+            "rmse_points": 364.88453821568896
+          },
+          "low": {
+            "mae_points": 299.92833552956927,
+            "mae_bps": 78.75825970786846,
+            "rmse_points": 451.5039033279089
+          },
+          "close": {
+            "mae_points": 355.60928887923933,
+            "mae_bps": 93.21143211520683,
+            "rmse_points": 507.31627164942944
+          }
+        },
+        "gap_mae_bps": 38.247369371893306,
+        "close_return_mae_bps": 93.21143211520683,
+        "range_mae_bps": 112.72196652557417,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 63,
+              "flat": 4,
+              "up": 32
+            },
+            "flat": {
+              "down": 2,
+              "flat": 0,
+              "up": 4
+            },
+            "up": {
+              "down": 21,
+              "flat": 4,
+              "up": 109
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 99,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 6,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 134,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 239,
+        "intervals": {
+          "open": {
+            "coverage": 0.7907949790794979,
+            "width": 458.2030953998373,
+            "interval_score": 702.7768377019567
+          },
+          "high": {
+            "coverage": 0.7824267782426778,
+            "width": 1447.3126957007605,
+            "interval_score": 1845.8995586577685
+          },
+          "low": {
+            "coverage": 0.8242677824267782,
+            "width": 1651.3816430023671,
+            "interval_score": 2153.6450086742243
+          },
+          "close": {
+            "coverage": 0.7447698744769874,
+            "width": 1026.0114404962274,
+            "interval_score": 1838.8479663413598
+          }
+        }
+      },
+      "failed_days": [
+        {
+          "date": "2025-10-30",
+          "instrument": "TAIEX",
+          "contract": "",
+          "status": "FAILED",
+          "error": "ValueError: ARIMA nonconvergence"
+        },
+        {
+          "date": "2025-11-28",
+          "instrument": "TAIEX",
+          "contract": "",
+          "status": "FAILED",
+          "error": "ValueError: ARIMA nonconvergence"
+        },
+        {
+          "date": "2026-06-08",
+          "instrument": "TAIEX",
+          "contract": "",
+          "status": "FAILED",
+          "error": "ValidationError: 1 validation error for Prices\nlow\n  Input should be greater than 0 [type=greater_than, input_value=np.float64(0.0), input_type=float64]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than"
+        }
+      ]
+    },
+    "TX": {
+      "metrics": {
+        "expected_days": 242,
+        "success_days": 242,
+        "forecast_coverage": 1.0,
+        "failed_days": [],
+        "ohlc": {
+          "open": {
+            "mae_points": 158.03606993934335,
+            "mae_bps": 42.12351110911412,
+            "rmse_points": 236.8957638041807
+          },
+          "high": {
+            "mae_points": 314.7847853632145,
+            "mae_bps": 82.56784012578211,
+            "rmse_points": 497.37825222595467
+          },
+          "low": {
+            "mae_points": 325.6179035086993,
+            "mae_bps": 84.04822654132508,
+            "rmse_points": 498.9437054826761
+          },
+          "close": {
+            "mae_points": 379.1800236298525,
+            "mae_bps": 98.76531660895117,
+            "rmse_points": 540.6370064485166
+          }
+        },
+        "gap_mae_bps": 42.12351110911412,
+        "close_return_mae_bps": 98.76531660895117,
+        "range_mae_bps": 119.54832226008607,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 67,
+              "flat": 1,
+              "up": 31
+            },
+            "flat": {
+              "down": 5,
+              "flat": 1,
+              "up": 6
+            },
+            "up": {
+              "down": 18,
+              "flat": 5,
+              "up": 108
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 99,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 12,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 131,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 242,
+        "intervals": {
+          "open": {
+            "coverage": 0.743801652892562,
+            "width": 468.94615917925194,
+            "interval_score": 891.5428453224457
+          },
+          "high": {
+            "coverage": 0.7768595041322314,
+            "width": 1067.4739515413767,
+            "interval_score": 1563.0514243935731
+          },
+          "low": {
+            "coverage": 0.768595041322314,
+            "width": 911.003880783832,
+            "interval_score": 1621.564666100517
+          },
+          "close": {
+            "coverage": 0.7396694214876033,
+            "width": 1111.3508281805114,
+            "interval_score": 2008.7026664486953
+          }
+        }
+      },
+      "failed_days": []
+    }
+  },
+  "timesfm3": {
+    "code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+    "weight_repo": "google/timesfm-3.0-pytorch",
+    "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+    "independent_validation_elapsed_seconds": 1609.8781826659106,
+    "joint_validation_elapsed_seconds": 258.8733850669814,
+    "locked_candidates_after_joint_comparison": {
+      "TAIEX": {
+        "model": "timesfm_joint_multivariate",
+        "representation": "gbud",
+        "validation_close_mae": 169.18987826914392,
+        "validation_expected_days": 244,
+        "validation_paired_days": 244,
+        "validation_paired_coverage": 1.0,
+        "validation_paired_dates_hash": "0dde2c3e8cfa0a6ac048076291676376de45e968119ba874b0d43533f7ab639c",
+        "validation_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 72.97902905353439,
+              "mae_bps": 32.61422910731916,
+              "rmse_points": 120.65114974354083
+            },
+            "high": {
+              "mae_points": 113.84835215648617,
+              "mae_bps": 50.887328090607255,
+              "rmse_points": 170.29637459154424
+            },
+            "low": {
+              "mae_points": 132.43170325414806,
+              "mae_bps": 59.119590417430636,
+              "rmse_points": 220.1433824935146
+            },
+            "close": {
+              "mae_points": 169.18987826914392,
+              "mae_bps": 75.66855838079934,
+              "rmse_points": 246.7053885295579
+            }
+          },
+          "gap_mae_bps": 32.61422910731916,
+          "close_return_mae_bps": 75.66855838079934,
+          "range_mae_bps": 62.20664574225414,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 66,
+                "flat": 11,
+                "up": 28
+              },
+              "flat": {
+                "down": 1,
+                "flat": 0,
+                "up": 7
+              },
+              "up": {
+                "down": 17,
+                "flat": 8,
+                "up": 106
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 105,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 8,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 131,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7909836065573771,
+              "width": 206.22319730964992,
+              "interval_score": 391.04469056786036
+            },
+            "high": {
+              "coverage": 0.8401639344262295,
+              "width": 391.5379088197406,
+              "interval_score": 588.1755885673479
+            },
+            "low": {
+              "coverage": 0.8401639344262295,
+              "width": 455.034351612937,
+              "interval_score": 714.8282077186908
+            },
+            "close": {
+              "coverage": 0.7909836065573771,
+              "width": 508.90499156341286,
+              "interval_score": 866.0705718793185
+            }
+          }
+        }
+      },
+      "TX": {
+        "model": "timesfm_multivariate",
+        "representation": "gbud",
+        "validation_close_mae": 156.72942657377206,
+        "validation_expected_days": 244,
+        "validation_paired_days": 244,
+        "validation_paired_coverage": 1.0,
+        "validation_paired_dates_hash": "0dde2c3e8cfa0a6ac048076291676376de45e968119ba874b0d43533f7ab639c",
+        "validation_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 75.20136724141902,
+              "mae_bps": 33.907353846206405,
+              "rmse_points": 168.3122369289004
+            },
+            "high": {
+              "mae_points": 121.20169673374947,
+              "mae_bps": 53.906286928504024,
+              "rmse_points": 200.28617734200134
+            },
+            "low": {
+              "mae_points": 128.02392144275234,
+              "mae_bps": 57.29885226088233,
+              "rmse_points": 215.78715781239677
+            },
+            "close": {
+              "mae_points": 156.72942657377206,
+              "mae_bps": 69.7955665158375,
+              "rmse_points": 233.79799387199242
+            }
+          },
+          "gap_mae_bps": 33.907353846206405,
+          "close_return_mae_bps": 69.7955665158375,
+          "range_mae_bps": 68.93187522814452,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 64,
+                "flat": 8,
+                "up": 36
+              },
+              "flat": {
+                "down": 2,
+                "flat": 1,
+                "up": 4
+              },
+              "up": {
+                "down": 14,
+                "flat": 9,
+                "up": 106
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 108,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 129,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7950819672131147,
+              "width": 178.60551052245148,
+              "interval_score": 476.09180523140736
+            },
+            "high": {
+              "coverage": 0.819672131147541,
+              "width": 342.59016857216386,
+              "interval_score": 573.7603960614538
+            },
+            "low": {
+              "coverage": 0.8237704918032787,
+              "width": 350.5956211666713,
+              "interval_score": 643.4822698024852
+            },
+            "close": {
+              "coverage": 0.8155737704918032,
+              "width": 455.8591894677285,
+              "interval_score": 790.2024959533674
+            }
+          }
+        }
+      }
+    },
+    "validation_vs_locked_baseline_on_paired_dates": {
+      "TAIEX": {
+        "status": "FAIL",
+        "paired_days": 244,
+        "paired_coverage": 1.0,
+        "close_relative_improvement": 0.03689540999781815,
+        "ohl_degradation": {
+          "open": 0.032397483256134674,
+          "high": -0.9831664709522523,
+          "low": 0.00013512045807573259
+        },
+        "interval_coverage": {
+          "open": 0.7909836065573771,
+          "high": 0.8401639344262295,
+          "low": 0.8401639344262295,
+          "close": 0.7909836065573771
+        },
+        "interval_coverage_pass": true,
+        "candidate_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 72.97902905353439,
+              "mae_bps": 32.61422910731916,
+              "rmse_points": 120.65114974354083
+            },
+            "high": {
+              "mae_points": 113.84835215648617,
+              "mae_bps": 50.887328090607255,
+              "rmse_points": 170.29637459154424
+            },
+            "low": {
+              "mae_points": 132.43170325414806,
+              "mae_bps": 59.119590417430636,
+              "rmse_points": 220.1433824935146
+            },
+            "close": {
+              "mae_points": 169.18987826914392,
+              "mae_bps": 75.66855838079934,
+              "rmse_points": 246.7053885295579
+            }
+          },
+          "gap_mae_bps": 32.61422910731916,
+          "close_return_mae_bps": 75.66855838079934,
+          "range_mae_bps": 62.20664574225414,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 66,
+                "flat": 11,
+                "up": 28
+              },
+              "flat": {
+                "down": 1,
+                "flat": 0,
+                "up": 7
+              },
+              "up": {
+                "down": 17,
+                "flat": 8,
+                "up": 106
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 105,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 8,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 131,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7909836065573771,
+              "width": 206.22319730964992,
+              "interval_score": 391.04469056786036
+            },
+            "high": {
+              "coverage": 0.8401639344262295,
+              "width": 391.5379088197406,
+              "interval_score": 588.1755885673479
+            },
+            "low": {
+              "coverage": 0.8401639344262295,
+              "width": 455.034351612937,
+              "interval_score": 714.8282077186908
+            },
+            "close": {
+              "coverage": 0.7909836065573771,
+              "width": 508.90499156341286,
+              "interval_score": 866.0705718793185
+            }
+          }
+        },
+        "baseline_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 70.68888701991199,
+              "mae_bps": 31.4270730350941,
+              "rmse_points": 125.49656071718583
+            },
+            "high": {
+              "mae_points": 6763.189812044721,
+              "mae_bps": 3871.1676258650346,
+              "rmse_points": 103549.46512120205
+            },
+            "low": {
+              "mae_points": 132.41381143929084,
+              "mae_bps": 58.64896137954799,
+              "rmse_points": 213.7196223052629
+            },
+            "close": {
+              "mae_points": 175.6713445512295,
+              "mae_bps": 78.02180976260951,
+              "rmse_points": 245.2930521903386
+            }
+          },
+          "gap_mae_bps": 31.4270730350941,
+          "close_return_mae_bps": 78.02180976260951,
+          "range_mae_bps": 3889.326978477215,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 81,
+                "flat": 4,
+                "up": 20
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 6
+              },
+              "up": {
+                "down": 31,
+                "flat": 6,
+                "up": 94
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 105,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 8,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 131,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7868852459016393,
+              "width": 195.3673679550674,
+              "interval_score": 390.4574508236982
+            },
+            "high": {
+              "coverage": 0.8483606557377049,
+              "width": 5.656621310799997e+19,
+              "interval_score": 5.656621310799997e+19
+            },
+            "low": {
+              "coverage": 0.8401639344262295,
+              "width": 532.9791949577415,
+              "interval_score": 729.248937589943
+            },
+            "close": {
+              "coverage": 0.7991803278688525,
+              "width": 518.0746614408647,
+              "interval_score": 847.474623096381
+            }
+          }
+        },
+        "block_improvement": {
+          "paired_days": 244,
+          "block_length": 20,
+          "close_relative_improvement_ci95": [
+            -0.04554402617906082,
+            0.09353003959497456
+          ]
+        }
+      },
+      "TX": {
+        "status": "PASS",
+        "paired_days": 244,
+        "paired_coverage": 1.0,
+        "close_relative_improvement": 0.06342898561388366,
+        "ohl_degradation": {
+          "open": -0.06023401392203076,
+          "high": -0.10735710041110869,
+          "low": -0.03027655263249418
+        },
+        "interval_coverage": {
+          "open": 0.7950819672131147,
+          "high": 0.819672131147541,
+          "low": 0.8237704918032787,
+          "close": 0.8155737704918032
+        },
+        "interval_coverage_pass": true,
+        "candidate_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 75.20136724141902,
+              "mae_bps": 33.907353846206405,
+              "rmse_points": 168.3122369289004
+            },
+            "high": {
+              "mae_points": 121.20169673374947,
+              "mae_bps": 53.906286928504024,
+              "rmse_points": 200.28617734200134
+            },
+            "low": {
+              "mae_points": 128.02392144275234,
+              "mae_bps": 57.29885226088233,
+              "rmse_points": 215.78715781239677
+            },
+            "close": {
+              "mae_points": 156.72942657377206,
+              "mae_bps": 69.7955665158375,
+              "rmse_points": 233.79799387199242
+            }
+          },
+          "gap_mae_bps": 33.907353846206405,
+          "close_return_mae_bps": 69.7955665158375,
+          "range_mae_bps": 68.93187522814452,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 64,
+                "flat": 8,
+                "up": 36
+              },
+              "flat": {
+                "down": 2,
+                "flat": 1,
+                "up": 4
+              },
+              "up": {
+                "down": 14,
+                "flat": 9,
+                "up": 106
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 108,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 129,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7950819672131147,
+              "width": 178.60551052245148,
+              "interval_score": 476.09180523140736
+            },
+            "high": {
+              "coverage": 0.819672131147541,
+              "width": 342.59016857216386,
+              "interval_score": 573.7603960614538
+            },
+            "low": {
+              "coverage": 0.8237704918032787,
+              "width": 350.5956211666713,
+              "interval_score": 643.4822698024852
+            },
+            "close": {
+              "coverage": 0.8155737704918032,
+              "width": 455.8591894677285,
+              "interval_score": 790.2024959533674
+            }
+          }
+        },
+        "baseline_paired_metrics": {
+          "expected_days": 244,
+          "success_days": 244,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 80.0213759121729,
+              "mae_bps": 35.73764191176011,
+              "rmse_points": 170.35633444806155
+            },
+            "high": {
+              "mae_points": 135.77848072232376,
+              "mae_bps": 60.658471036123125,
+              "rmse_points": 223.77219976295206
+            },
+            "low": {
+              "mae_points": 132.02106413977822,
+              "mae_bps": 58.793606394184884,
+              "rmse_points": 214.49417424793373
+            },
+            "close": {
+              "mae_points": 167.34387907200153,
+              "mae_bps": 74.3609977798435,
+              "rmse_points": 242.9857790136426
+            }
+          },
+          "gap_mae_bps": 35.73764191176011,
+          "close_return_mae_bps": 74.3609977798435,
+          "range_mae_bps": 74.84945892173374,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 72,
+                "flat": 5,
+                "up": 31
+              },
+              "flat": {
+                "down": 2,
+                "flat": 1,
+                "up": 4
+              },
+              "up": {
+                "down": 26,
+                "flat": 4,
+                "up": 99
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 108,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 129,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 244,
+          "intervals": {
+            "open": {
+              "coverage": 0.7622950819672131,
+              "width": 194.171470460761,
+              "interval_score": 482.283203297207
+            },
+            "high": {
+              "coverage": 0.8114754098360656,
+              "width": 376.3558154337828,
+              "interval_score": 649.73500918868
+            },
+            "low": {
+              "coverage": 0.7868852459016393,
+              "width": 363.02182210656406,
+              "interval_score": 662.6729778073303
+            },
+            "close": {
+              "coverage": 0.8032786885245902,
+              "width": 495.1227076734409,
+              "interval_score": 824.4137505603354
+            }
+          }
+        },
+        "block_improvement": {
+          "paired_days": 244,
+          "block_length": 20,
+          "close_relative_improvement_ci95": [
+            0.013247652367350487,
+            0.1117837347259864
+          ]
+        }
+      }
+    },
+    "final_test_opened": false,
+    "official_3_0_finetuning_available": false,
+    "custom_gradient_smoke_status": "NOT_RUN"
+  },
+  "artifact_evidence": {
+    "baseline_full_local_sha256": "ac62717da4fd761ed5f19c5bb4cbbe41f62cd34e39f7396f38418b1d43ae58dd",
+    "independent_timesfm_validation_full_local_sha256": "ac822597e4592524254c7dc69c6f292bbb0da10a867ba472401d1886860c9abc",
+    "joint_timesfm_validation_full_local_sha256": "95d0dc9929c7e288e6f90b8d12e4355b98a79aa2e35686500947fb86a3704ff1",
+    "joint_validation_lock_hash": "cd4dec04b9883146b4e2b784e123ab5603e7209f17dd238f744981382148cb17",
+    "full_daily_rows_committed": false,
+    "reason": "FinMind raw-data redistribution restriction; full artifacts remain locally reproducible"
+  },
+  "next_gate": "Run the validation-locked candidates on the final test exactly once; do not retune it."
+}

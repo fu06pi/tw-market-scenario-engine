@@ -1,0 +1,361 @@
+{
+  "schema_version": "final-stability-diagnostics-v1",
+  "status": "POST_HOC_DIAGNOSTIC_ONLY",
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "final_test_split": [
+    "2025-10-09",
+    "2026-10-08"
+  ],
+  "final_test_closed_to_tuning": true,
+  "candidate_acceptance_status": "FAIL",
+  "source_hashes": {
+    "baseline_result": "254a503f1980dbd31af918cb1ff07e469de1f4c82e3534552d0155c254e80b31",
+    "candidate_result": "a08fe39893e6cf4db820aa759e139e94f909a8440140d05fc7fd668705826d48"
+  },
+  "interpretation": "These groups describe the already-closed final test. They were not predeclared selection gates and must not be used to retune or relabel it.",
+  "instruments": {
+    "TAIEX": {
+      "instrument": "TAIEX",
+      "paired_days": 239,
+      "candidate_failed_days": [],
+      "baseline_failed_days": [
+        {
+          "date": "2025-10-30",
+          "reason": "ValueError: ARIMA nonconvergence"
+        },
+        {
+          "date": "2025-11-28",
+          "reason": "ValueError: ARIMA nonconvergence"
+        },
+        {
+          "date": "2026-06-08",
+          "reason": "ValidationError: 1 validation error for Prices\nlow\n  Input should be greater than 0 [type=greater_than, input_value=np.float64(0.0), input_type=float64]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than"
+        }
+      ],
+      "group_definitions": {
+        "calendar_year": "calendar year of the final-test trading date",
+        "realized_range_regime": "post-hoc actual (H-L)/previous_close: low <100bp, normal 100-200bp, high >=200bp",
+        "contract_rollover": "not applicable to TAIEX"
+      },
+      "groups": {
+        "calendar_year": {
+          "2025": {
+            "paired_days": 55,
+            "candidate_ohlc_mae_points": {
+              "open": 93.41174797910696,
+              "high": 133.36306907784052,
+              "low": 147.99311008106815,
+              "close": 187.8002883157128
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 108.22780044195746,
+              "high": 149.4507449804096,
+              "low": 163.8245895870311,
+              "close": 186.71066940682047
+            },
+            "close_relative_improvement": -0.005835868471544936,
+            "candidate_interval_coverage": {
+              "open": 0.6909090909090909,
+              "high": 0.7454545454545455,
+              "low": 0.8181818181818182,
+              "close": 0.8
+            }
+          },
+          "2026": {
+            "paired_days": 184,
+            "candidate_ohlc_mae_points": {
+              "open": 96.63341641399984,
+              "high": 275.0403259259623,
+              "low": 328.7479090589471,
+              "close": 427.1996929414203
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 143.98245217299606,
+              "high": 299.4291438162561,
+              "low": 340.6115204580454,
+              "close": 406.0952892650166
+            },
+            "close_relative_improvement": -0.0519690925610099,
+            "candidate_interval_coverage": {
+              "open": 0.8260869565217391,
+              "high": 0.8043478260869565,
+              "low": 0.8478260869565217,
+              "close": 0.717391304347826
+            }
+          }
+        },
+        "realized_range_regime": {
+          "low_lt_100bp": {
+            "paired_days": 48,
+            "candidate_ohlc_mae_points": {
+              "open": 61.79585942417634,
+              "high": 108.48247353228521,
+              "low": 94.58900599206345,
+              "close": 128.6590325632561
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 80.19956266930171,
+              "high": 121.99021673942093,
+              "low": 116.74991211050451,
+              "close": 135.98849373846875
+            },
+            "close_relative_improvement": 0.05389765688050474,
+            "candidate_interval_coverage": {
+              "open": 0.8333333333333334,
+              "high": 0.8541666666666666,
+              "low": 0.9583333333333334,
+              "close": 0.9791666666666666
+            }
+          },
+          "normal_100_200bp": {
+            "paired_days": 114,
+            "candidate_ohlc_mae_points": {
+              "open": 84.73835297359182,
+              "high": 189.86271216573834,
+              "low": 230.51224234459445,
+              "close": 283.31971011788994
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 121.09482536335899,
+              "high": 227.44509351792183,
+              "low": 251.06287891156535,
+              "close": 271.87798478462423
+            },
+            "close_relative_improvement": -0.04208404495247975,
+            "candidate_interval_coverage": {
+              "open": 0.7982456140350878,
+              "high": 0.8070175438596491,
+              "low": 0.868421052631579,
+              "close": 0.7894736842105263
+            }
+          },
+          "high_ge_200bp": {
+            "paired_days": 77,
+            "candidate_ohlc_mae_points": {
+              "open": 133.66001646333663,
+              "high": 403.7776734183691,
+              "low": 491.0463429402883,
+              "close": 655.3205044429844
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 192.08975486479903,
+              "high": 409.4867840464722,
+              "low": 486.46374304343374,
+              "close": 616.4815854187601
+            },
+            "close_relative_improvement": -0.06300093943250884,
+            "candidate_interval_coverage": {
+              "open": 0.7662337662337663,
+              "high": 0.7272727272727273,
+              "low": 0.7272727272727273,
+              "close": 0.5064935064935064
+            }
+          }
+        }
+      },
+      "major_event": {
+        "status": "NOT_EVALUATED_MISSING_TIMESTAMPED_EVENT_CALENDAR",
+        "reason": "No frozen point-in-time major-event labels were supplied."
+      }
+    },
+    "TX": {
+      "instrument": "TX",
+      "paired_days": 242,
+      "candidate_failed_days": [],
+      "baseline_failed_days": [],
+      "group_definitions": {
+        "calendar_year": "calendar year of the final-test trading date",
+        "realized_range_regime": "post-hoc actual (H-L)/previous_close: low <100bp, normal 100-200bp, high >=200bp",
+        "contract_rollover": "TX contract differs from the preceding paired final-test row; first row is boundary_unknown"
+      },
+      "groups": {
+        "calendar_year": {
+          "2025": {
+            "paired_days": 57,
+            "candidate_ohlc_mae_points": {
+              "open": 88.16305241663825,
+              "high": 126.5353765677495,
+              "low": 141.51803834284817,
+              "close": 182.70676211211997
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 107.65582780407624,
+              "high": 146.53687587070448,
+              "low": 167.1817243532813,
+              "close": 197.61513404526616
+            },
+            "close_relative_improvement": 0.07544144837475475,
+            "candidate_interval_coverage": {
+              "open": 0.7368421052631579,
+              "high": 0.7719298245614035,
+              "low": 0.7192982456140351,
+              "close": 0.7543859649122807
+            }
+          },
+          "2026": {
+            "paired_days": 185,
+            "candidate_ohlc_mae_points": {
+              "open": 176.54892104051123,
+              "high": 315.359080147828,
+              "low": 359.047611092737,
+              "close": 437.46783849991783
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 173.5586310296689,
+              "high": 366.62333045009603,
+              "low": 374.4333749241524,
+              "close": 435.121638258617
+            },
+            "close_relative_improvement": -0.005392056002295087,
+            "candidate_interval_coverage": {
+              "open": 0.7297297297297297,
+              "high": 0.7351351351351352,
+              "low": 0.7513513513513513,
+              "close": 0.7243243243243244
+            }
+          }
+        },
+        "realized_range_regime": {
+          "low_lt_100bp": {
+            "paired_days": 65,
+            "candidate_ohlc_mae_points": {
+              "open": 66.94269009855931,
+              "high": 107.45381784683576,
+              "low": 100.44749032323413,
+              "close": 137.50410067658316
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 82.92665334072439,
+              "high": 131.79733920473154,
+              "low": 116.48793332293342,
+              "close": 140.52729917977743
+            },
+            "close_relative_improvement": 0.021513247040538808,
+            "candidate_interval_coverage": {
+              "open": 0.8461538461538461,
+              "high": 0.8461538461538461,
+              "low": 0.8923076923076924,
+              "close": 0.9538461538461539
+            }
+          },
+          "normal_100_200bp": {
+            "paired_days": 116,
+            "candidate_ohlc_mae_points": {
+              "open": 156.5225180261222,
+              "high": 239.96604233820136,
+              "low": 252.96031062518622,
+              "close": 307.18542065077565
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 162.71456372945252,
+              "high": 288.0275309110465,
+              "low": 269.3570729459059,
+              "close": 313.2481458497638
+            },
+            "close_relative_improvement": 0.01935438494788677,
+            "candidate_interval_coverage": {
+              "open": 0.7413793103448276,
+              "high": 0.7844827586206896,
+              "low": 0.7844827586206896,
+              "close": 0.7586206896551724
+            }
+          },
+          "high_ge_200bp": {
+            "paired_days": 61,
+            "candidate_ohlc_mae_points": {
+              "open": 248.83536775092503,
+              "high": 503.82602000711836,
+              "low": 633.0795628551946,
+              "close": 766.7960692361928
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 229.17388632061503,
+              "high": 560.6540561296553,
+              "low": 655.449123301467,
+              "close": 758.8607598879702
+            },
+            "close_relative_improvement": -0.010456871362533038,
+            "candidate_interval_coverage": {
+              "open": 0.5901639344262295,
+              "high": 0.5573770491803278,
+              "low": 0.5081967213114754,
+              "close": 0.4426229508196721
+            }
+          }
+        },
+        "contract_rollover": {
+          "rollover": {
+            "paired_days": 11,
+            "candidate_ohlc_mae_points": {
+              "open": 161.18049528430493,
+              "high": 345.1006139393678,
+              "low": 329.04045613672366,
+              "close": 439.9584681933418
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 200.35537779958065,
+              "high": 431.1395556246018,
+              "low": 346.05131366611846,
+              "close": 478.9191229965687
+            },
+            "close_relative_improvement": 0.08135121972046644,
+            "candidate_interval_coverage": {
+              "open": 0.8181818181818182,
+              "high": 0.7272727272727273,
+              "low": 0.8181818181818182,
+              "close": 0.7272727272727273
+            }
+          },
+          "non_rollover": {
+            "paired_days": 230,
+            "candidate_ohlc_mae_points": {
+              "open": 155.97995964671355,
+              "high": 268.4753430640333,
+              "low": 307.97644216848624,
+              "close": 375.85046332346394
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 156.54602030071135,
+              "high": 310.4815093414003,
+              "low": 325.44045511223703,
+              "close": 375.61904017111414
+            },
+            "close_relative_improvement": -0.0006161113458049705,
+            "candidate_interval_coverage": {
+              "open": 0.7260869565217392,
+              "high": 0.7434782608695653,
+              "low": 0.7391304347826086,
+              "close": 0.7304347826086957
+            }
+          },
+          "boundary_unknown": {
+            "paired_days": 1,
+            "candidate_ohlc_mae_points": {
+              "open": 38.46821337148867,
+              "high": 8.510633649191732,
+              "low": 36.309521442897676,
+              "close": 60.68584835219008
+            },
+            "baseline_ohlc_mae_points": {
+              "open": 35.23510036209336,
+              "high": 24.6357975052415,
+              "low": 141.66352296341574,
+              "close": 101.07612610581054
+            },
+            "close_relative_improvement": 0.39960255017429436,
+            "candidate_interval_coverage": {
+              "open": 1.0,
+              "high": 1.0,
+              "low": 1.0,
+              "close": 1.0
+            }
+          }
+        }
+      },
+      "major_event": {
+        "status": "NOT_EVALUATED_MISSING_TIMESTAMPED_EVENT_CALENDAR",
+        "reason": "No frozen point-in-time major-event labels were supplied."
+      }
+    }
+  }
+}

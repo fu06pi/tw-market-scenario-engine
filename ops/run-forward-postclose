@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd "$repo_root"
+export UV_CACHE_DIR="${UV_CACHE_DIR:-/tmp/tw-market-uv-cache}"
+trading_date="$(TZ=Asia/Taipei date +%F)"
+
+exec uv run --frozen tw-scenario quant daily forward-postclose --date "$trading_date"

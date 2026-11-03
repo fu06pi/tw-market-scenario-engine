@@ -1,0 +1,57 @@
+{
+  "scope": "training labels only; no new validation/model selection",
+  "markets": {
+    "TAIEX": {
+      "train_samples": 319,
+      "train_start": "2018-10-18",
+      "train_end": "2025-08-08",
+      "target_order": [
+        "g",
+        "b",
+        "log_u",
+        "log_d"
+      ],
+      "std": [
+        0.005528331792193241,
+        0.00847074508826942,
+        3.1470079773017026,
+        3.4028098880951134
+      ],
+      "close_return_std": 0.011491060957433215,
+      "current_point_gradient_at_one_std_error": [
+        0.0013820829480483102,
+        0.002117686272067355,
+        0.25,
+        0.25
+      ],
+      "extension_vs_gb_mean_gradient_ratio": 142.86656306539987,
+      "meaning": "Point-term output-gradient diagnostic only; does not measure full pinball/parameter gradients or explain one day."
+    },
+    "TX": {
+      "train_samples": 319,
+      "train_start": "2018-10-18",
+      "train_end": "2025-08-08",
+      "target_order": [
+        "g",
+        "b",
+        "log_u",
+        "log_d"
+      ],
+      "std": [
+        0.008929433989563543,
+        0.007888904495039917,
+        1.4674646197449,
+        1.547128151777713
+      ],
+      "close_return_std": 0.012277201148809277,
+      "current_point_gradient_at_one_std_error": [
+        0.0022323584973908857,
+        0.0019722261237599794,
+        0.25,
+        0.25
+      ],
+      "extension_vs_gb_mean_gradient_ratio": 118.91781116374383,
+      "meaning": "Point-term output-gradient diagnostic only; does not measure full pinball/parameter gradients or explain one day."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "scope": "input_parity_only_not_numeric_replay_pass",
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "markets": {
+    "TAIEX": {
+      "checked_days": 240,
+      "failures": [],
+      "status": "PASS"
+    },
+    "TX": {
+      "checked_days": 240,
+      "failures": [],
+      "status": "PASS"
+    }
+  }
+}

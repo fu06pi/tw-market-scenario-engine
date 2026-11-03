@@ -1,0 +1,49 @@
+{
+  "status": "PINNED_REAL_DATA_ZERO_SHOT_SMOKE",
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "config_hash": "8e3d1c44573752e33174135e7fe0212c49118fae68af46fb422eedfb1e2bd5cb",
+  "forecast_date": "2025-10-08",
+  "instrument": "TAIEX",
+  "representation": "relative",
+  "history_start": "2024-09-24",
+  "history_end": "2025-10-07",
+  "history_rows": 252,
+  "reference_close": 27211.95,
+  "load_seconds": 2.260695501929149,
+  "univariate_seconds": 0.5044041719520465,
+  "multivariate_seconds": 0.29402784002013505,
+  "univariate_point": [
+    0.0041514309123158455,
+    0.0104603860527277,
+    -0.00031102588400244713,
+    0.004267788026481867
+  ],
+  "multivariate_point": [
+    -0.004245087970048189,
+    -0.0018393662758171558,
+    -0.012398263439536095,
+    -0.0076505085453391075
+  ],
+  "univariate_prices": {
+    "open": 27325.153345766495,
+    "high": 27498.091468238446,
+    "low": 27203.487695261945,
+    "close": 27328.33300673845
+  },
+  "multivariate_prices": {
+    "open": 27096.677722001656,
+    "high": 27161.94326132397,
+    "low": 26876.651927186977,
+    "close": 27004.559078551134
+  },
+  "univariate_quantile_shape": [
+    4,
+    9
+  ],
+  "multivariate_quantile_shape": [
+    4,
+    9
+  ],
+  "max_rss_mb": 2835.859375,
+  "completed_at": "2026-10-13 22:37:54.198038+08:00"
+}

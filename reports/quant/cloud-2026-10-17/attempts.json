@@ -1,0 +1,98 @@
+[
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "JOINT",
+      "--candidate-index",
+      "0"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 6.919607408000047,
+    "peak_child_rss_kib": 2935736,
+    "log": "ERROR: insufficient contiguous expanded history: 13 < 256\n"
+  },
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "JOINT",
+      "--candidate-index",
+      "1"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 6.773009695000042,
+    "peak_child_rss_kib_cumulative": 2929848,
+    "log": "ERROR: insufficient contiguous expanded history: 13 < 256\n"
+  },
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "JOINT",
+      "--candidate-index",
+      "2"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 6.911418743000013,
+    "peak_child_rss_kib_cumulative": 2936688,
+    "log": "ERROR: insufficient contiguous expanded history: 13 < 256\n"
+  },
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "JOINT",
+      "--candidate-index",
+      "4"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 7.4171939379999685,
+    "peak_child_rss_kib_cumulative": 2936688,
+    "log": "ERROR: insufficient contiguous expanded history: 269 < 512\n"
+  },
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "TAIEX",
+      "--candidate-index",
+      "0"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 6.750349234999931,
+    "peak_child_rss_kib_cumulative": 2936688,
+    "log": "ERROR: insufficient contiguous expanded history: 13 < 256\n"
+  },
+  {
+    "command": [
+      ".venv/bin/tw-scenario",
+      "quant",
+      "timesfm-head-walk-forward",
+      "data/processed/59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+      "--instrument",
+      "TX",
+      "--candidate-index",
+      "0"
+    ],
+    "exit_code": 2,
+    "elapsed_seconds": 6.94422028300005,
+    "peak_child_rss_kib_cumulative": 2936688,
+    "log": "ERROR: insufficient contiguous expanded history: 13 < 256\n"
+  }
+]

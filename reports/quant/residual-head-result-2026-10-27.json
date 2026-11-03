@@ -1,0 +1,614 @@
+{
+  "schema_version": "timesfm3-night-regression-residual-head-summary-v1",
+  "as_of": "2026-10-27",
+  "status": "DEVELOPMENT_GATE_FAIL",
+  "production_switch": false,
+  "research_scope": "development_only_not_independent_holdout",
+  "run_id": "73b3f1aadccb646372be",
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "source_result_sha256": "e54295b8ab0f695d651c4460dc52099b08bd2c3efb03a3dfa1be39d25826b3b4",
+  "fair_result_sha256": "14b23c6a85271c8bfb1ae747dc439b63691e405caea5c0fcd0dadb2a69c0f90c",
+  "fair_predictions_sha256": "8b4e95a9e2038dce63a60070bc1a0806f4d537c220cf9bb6bb353739da0ffc7e",
+  "config_sha256": "c026a4e221b5d2636f9158f3907d71f734f3719136e5e2150ef49e18d14604d0",
+  "training_method": "causal night-regression GBUD residuals; frozen TimesFM 3 backbone; custom trainable shared output head",
+  "official_timesfm3_finetuning": false,
+  "elapsed_seconds": 1356.8499270160682,
+  "peak_rss_mb": 2852.8828125,
+  "checkpoints": [
+    {
+      "fold": 1,
+      "sha256": "8ef489115362acce6e4ffe3ea32c8d255b72937b630d0a4bfab3342be6dbbea3",
+      "best_epoch": 4,
+      "epochs_completed": 5
+    },
+    {
+      "fold": 2,
+      "sha256": "d3878df388919a9cf0d68e9b8503bf1067906461b5114b8393106985d7ac1e84",
+      "best_epoch": 2,
+      "epochs_completed": 4
+    },
+    {
+      "fold": 3,
+      "sha256": "36ffaf465e1a108a5b62f91aaa84472ac92e2d649cf749ac0f74dc47f87c05a7",
+      "best_epoch": 5,
+      "epochs_completed": 5
+    }
+  ],
+  "markets": {
+    "TAIEX": {
+      "raw_source_gate": {
+        "status": "FAIL",
+        "paired_days": 239,
+        "paired_coverage": 0.9958333333333333,
+        "close_relative_improvement": 0.19684452128177876,
+        "fold_improvements": [
+          0.0019035760681331837,
+          0.30234288784428553,
+          0.1531129240930127
+        ],
+        "close_improvement_ci95": [
+          0.11115182981527635,
+          0.2695126607567442
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 112.8416458839267,
+          "high": 264.3724504760365,
+          "low": 290.64616651436506,
+          "close": 362.88401629384225
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 138.96983215956243,
+          "high": 354.57630259049097,
+          "low": 356.2704368187702,
+          "close": 451.8228735399766
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.8744769874476988,
+            "width": 421.955941198283,
+            "interval_score": 595.5418952418429
+          },
+          "high": {
+            "coverage": 0.9707112970711297,
+            "width": 426517.8056739691,
+            "interval_score": 426569.78676475456
+          },
+          "low": {
+            "coverage": 0.7322175732217573,
+            "width": 2112.7021684568927,
+            "interval_score": 2719.584221162413
+          },
+          "close": {
+            "coverage": 0.9079497907949791,
+            "width": 1541.2035189469195,
+            "interval_score": 1797.5613610451012
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.7740585774058577,
+            "width": 413.8578825607126,
+            "interval_score": 757.787060258525
+          },
+          "high": {
+            "coverage": 0.7698744769874477,
+            "width": 1035.9571894888704,
+            "interval_score": 1622.925141493111
+          },
+          "low": {
+            "coverage": 0.7698744769874477,
+            "width": 1019.9900018593229,
+            "interval_score": 1702.539462953669
+          },
+          "close": {
+            "coverage": 0.7322175732217573,
+            "width": 1323.1612692168592,
+            "interval_score": 2280.7249030643584
+          }
+        },
+        "requirements": {
+          "close_buffer": true,
+          "fold_majority": true,
+          "bootstrap_lower_nonnegative": true,
+          "ohl_noninferiority": true,
+          "interval_coverage": false,
+          "interval_score_noninferior": false,
+          "forecast_coverage": true
+        }
+      },
+      "fair_gate": {
+        "status": "FAIL",
+        "paired_days": 239,
+        "paired_coverage": 0.9958333333333333,
+        "close_relative_improvement": -0.027834594953924485,
+        "fold_improvements": [
+          0.0019035760681331837,
+          -0.021086800268110162,
+          -0.045508184163612464
+        ],
+        "close_improvement_ci95": [
+          -0.06337765085494645,
+          0.0038998584738684575
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 112.8416458839267,
+          "high": 264.3724504760365,
+          "low": 290.64616651436506,
+          "close": 362.88401629384225
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 133.99931019006573,
+          "high": 261.3684369251288,
+          "low": 297.30221335042063,
+          "close": 353.05682263994
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.8284518828451883,
+            "width": 370.740850884891,
+            "interval_score": 586.1330798465717
+          },
+          "high": {
+            "coverage": 0.8200836820083682,
+            "width": 841.8881304761986,
+            "interval_score": 1376.7326963250039
+          },
+          "low": {
+            "coverage": 0.7740585774058577,
+            "width": 824.2286757842757,
+            "interval_score": 1493.2776282797233
+          },
+          "close": {
+            "coverage": 0.8075313807531381,
+            "width": 1201.9064583735724,
+            "interval_score": 1862.4124540702378
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.799163179916318,
+            "width": 439.59516119281676,
+            "interval_score": 661.3031871835874
+          },
+          "high": {
+            "coverage": 0.7866108786610879,
+            "width": 691.6814483204274,
+            "interval_score": 1122.0590511494536
+          },
+          "low": {
+            "coverage": 0.7740585774058577,
+            "width": 786.9599617186643,
+            "interval_score": 1348.3927239523912
+          },
+          "close": {
+            "coverage": 0.7656903765690377,
+            "width": 1109.3896123501668,
+            "interval_score": 1803.6620881918361
+          }
+        },
+        "requirements": {
+          "close_buffer": false,
+          "fold_majority": false,
+          "bootstrap_lower_nonnegative": false,
+          "ohl_noninferiority": true,
+          "interval_coverage": true,
+          "interval_score_noninferior": false,
+          "forecast_coverage": true
+        },
+        "comparator": {
+          "version": "fixed-point-comparator-v1",
+          "primary_model": "night_regression",
+          "fallback_model": "range",
+          "representation": "gbud",
+          "selection_policy": "predeclared_primary_before_evaluation",
+          "failure_policy": "same_date_fallback_preserve_primary_error"
+        },
+        "calibration": {
+          "version": "causal-head-marginal-residual-v1",
+          "candidate_context": 64,
+          "window": 60,
+          "minimum": 40,
+          "lower_quantile": 0.1,
+          "upper_quantile": 0.9,
+          "update_policy": "previous_walk_forward_residuals_available_by_0830_only"
+        },
+        "candidate_failed_dates": [
+          "2026-06-08"
+        ],
+        "comparator_fallback": {
+          "count": 1,
+          "dates": [
+            "2026-06-08"
+          ],
+          "primary_errors": [
+            "ValidationError: 1 validation error for Prices\nlow\n  Input should be greater than 0 [type=greater_than, input_value=np.float64(0.0), input_type=float64]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than"
+          ]
+        }
+      },
+      "causal_shrinkage_diagnostic": {
+        "status": "FAIL",
+        "paired_days": 240,
+        "paired_coverage": 1.0,
+        "close_relative_improvement": -0.013939777354985639,
+        "fold_improvements": [
+          -0.0019122326557792224,
+          -0.02134244456405887,
+          -0.01211459365549361
+        ],
+        "close_improvement_ci95": [
+          -0.02773066499523414,
+          7.27788209514274e-05
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 128.50594227439987,
+          "high": 260.6232883615236,
+          "low": 300.9321560731205,
+          "close": 363.1118621625153
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 135.7886880642738,
+          "high": 264.37471397298225,
+          "low": 306.83518998563375,
+          "close": 358.11975254560696
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.8,
+            "width": 417.7862838084623,
+            "interval_score": 646.1101871771684
+          },
+          "high": {
+            "coverage": 0.7958333333333333,
+            "width": 710.3302566186062,
+            "interval_score": 1176.6321288661622
+          },
+          "low": {
+            "coverage": 0.7833333333333333,
+            "width": 794.4236967339999,
+            "interval_score": 1439.1159432873285
+          },
+          "close": {
+            "coverage": 0.75,
+            "width": 1115.9120635572144,
+            "interval_score": 1832.7829650479187
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.7958333333333333,
+            "width": 440.4157864156297,
+            "interval_score": 671.7840574603008
+          },
+          "high": {
+            "coverage": 0.7833333333333333,
+            "width": 693.4761513080527,
+            "interval_score": 1154.8232515554628
+          },
+          "low": {
+            "coverage": 0.7708333333333334,
+            "width": 787.9567086924355,
+            "interval_score": 1418.5341670245848
+          },
+          "close": {
+            "coverage": 0.7625,
+            "width": 1110.8837342568809,
+            "interval_score": 1836.156266413924
+          }
+        },
+        "requirements": {
+          "close_buffer": false,
+          "fold_majority": false,
+          "bootstrap_lower_nonnegative": false,
+          "ohl_noninferiority": true,
+          "interval_coverage": true,
+          "interval_score_noninferior": false,
+          "forecast_coverage": true
+        },
+        "candidate_failure_policy": "same-date comparator for diagnostic only; frozen rows unchanged",
+        "alpha_mean": 0.2814583333333333,
+        "alpha_last": {
+          "status": "CAUSAL_GRID_SELECTED",
+          "alpha": 0.05,
+          "samples": 60,
+          "window": 60,
+          "objective": "prior_published_close_mae"
+        }
+      }
+    },
+    "TX": {
+      "raw_source_gate": {
+        "status": "FAIL",
+        "paired_days": 239,
+        "paired_coverage": 0.9958333333333333,
+        "close_relative_improvement": 0.14263025690609177,
+        "fold_improvements": [
+          0.0523525746677469,
+          0.2841542360515982,
+          -0.002214011716586972
+        ],
+        "close_improvement_ci95": [
+          0.052734232037469415,
+          0.23137212171374752
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 160.3709434536371,
+          "high": 275.4705556287723,
+          "low": 308.81685321963505,
+          "close": 379.1814326033256
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 271.0218066574636,
+          "high": 359.79534503691764,
+          "low": 397.12735034347617,
+          "close": 442.261271356521
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.8368200836820083,
+            "width": 536.6644040990467,
+            "interval_score": 801.5124375034951
+          },
+          "high": {
+            "coverage": 0.9581589958158996,
+            "width": 1524.4184963118678,
+            "interval_score": 1597.4701118703465
+          },
+          "low": {
+            "coverage": 0.5899581589958159,
+            "width": 726.164122972415,
+            "interval_score": 1721.6906038148038
+          },
+          "close": {
+            "coverage": 0.8870292887029289,
+            "width": 1612.3892156642473,
+            "interval_score": 1898.2320124133041
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.7489539748953975,
+            "width": 704.6073070030806,
+            "interval_score": 1390.5681246659844
+          },
+          "high": {
+            "coverage": 0.7489539748953975,
+            "width": 978.5381558855942,
+            "interval_score": 1709.34268843677
+          },
+          "low": {
+            "coverage": 0.7364016736401674,
+            "width": 1068.43707571105,
+            "interval_score": 1915.1034536002219
+          },
+          "close": {
+            "coverage": 0.7364016736401674,
+            "width": 1232.8486505580452,
+            "interval_score": 2279.8160531267654
+          }
+        },
+        "requirements": {
+          "close_buffer": true,
+          "fold_majority": true,
+          "bootstrap_lower_nonnegative": true,
+          "ohl_noninferiority": true,
+          "interval_coverage": false,
+          "interval_score_noninferior": true,
+          "forecast_coverage": true
+        }
+      },
+      "fair_gate": {
+        "status": "FAIL",
+        "paired_days": 239,
+        "paired_coverage": 0.9958333333333333,
+        "close_relative_improvement": -0.00354303024885394,
+        "fold_improvements": [
+          0.0523525746677469,
+          -0.030072686684758043,
+          -0.002214011716586972
+        ],
+        "close_improvement_ci95": [
+          -0.03331111173757764,
+          0.02232030338543099
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 160.3709434536371,
+          "high": 275.4705556287723,
+          "low": 308.81685321963505,
+          "close": 379.1814326033256
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 155.66133852641545,
+          "high": 301.8257590264931,
+          "low": 324.1129227457617,
+          "close": 377.84272440146185
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.7698744769874477,
+            "width": 503.4589327224708,
+            "interval_score": 861.2908938946144
+          },
+          "high": {
+            "coverage": 0.8075313807531381,
+            "width": 808.8103108682191,
+            "interval_score": 1340.181597381602
+          },
+          "low": {
+            "coverage": 0.7531380753138075,
+            "width": 938.7036495638619,
+            "interval_score": 1616.9415980918322
+          },
+          "close": {
+            "coverage": 0.799163179916318,
+            "width": 1278.2235912351175,
+            "interval_score": 1942.1759469773551
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.7824267782426778,
+            "width": 493.9429097712941,
+            "interval_score": 870.5858394011434
+          },
+          "high": {
+            "coverage": 0.7824267782426778,
+            "width": 749.9352028505996,
+            "interval_score": 1313.1462296195748
+          },
+          "low": {
+            "coverage": 0.7740585774058577,
+            "width": 945.8727519190179,
+            "interval_score": 1595.194605752889
+          },
+          "close": {
+            "coverage": 0.7782426778242678,
+            "width": 1210.9952949271017,
+            "interval_score": 1985.3925366354374
+          }
+        },
+        "requirements": {
+          "close_buffer": false,
+          "fold_majority": false,
+          "bootstrap_lower_nonnegative": false,
+          "ohl_noninferiority": true,
+          "interval_coverage": true,
+          "interval_score_noninferior": false,
+          "forecast_coverage": true
+        },
+        "comparator": {
+          "version": "fixed-point-comparator-v1",
+          "primary_model": "night_regression",
+          "fallback_model": "range",
+          "representation": "gbud",
+          "selection_policy": "predeclared_primary_before_evaluation",
+          "failure_policy": "same_date_fallback_preserve_primary_error"
+        },
+        "calibration": {
+          "version": "causal-head-marginal-residual-v1",
+          "candidate_context": 64,
+          "window": 60,
+          "minimum": 40,
+          "lower_quantile": 0.1,
+          "upper_quantile": 0.9,
+          "update_policy": "previous_walk_forward_residuals_available_by_0830_only"
+        },
+        "candidate_failed_dates": [
+          "2026-06-08"
+        ],
+        "comparator_fallback": {
+          "count": 0,
+          "dates": [],
+          "primary_errors": []
+        }
+      },
+      "causal_shrinkage_diagnostic": {
+        "status": "FAIL",
+        "paired_days": 240,
+        "paired_coverage": 1.0,
+        "close_relative_improvement": -0.0026896902763178243,
+        "fold_improvements": [
+          0.019203703349299328,
+          -0.011151375389594431,
+          -0.003593749683311831
+        ],
+        "close_improvement_ci95": [
+          -0.015454780012164998,
+          0.01078184408187279
+        ],
+        "candidate_ohlc_mae_points": {
+          "open": 158.3058765086817,
+          "high": 307.27219129732146,
+          "low": 314.48727681964397,
+          "close": 382.8951153996209
+        },
+        "comparator_ohlc_mae_points": {
+          "open": 157.0952991699455,
+          "high": 317.06618874572325,
+          "low": 325.76680704236645,
+          "close": 381.8680087297038
+        },
+        "candidate_intervals": {
+          "open": {
+            "coverage": 0.7666666666666667,
+            "width": 488.7554771985414,
+            "interval_score": 864.3036840068087
+          },
+          "high": {
+            "coverage": 0.7666666666666667,
+            "width": 740.6951150020165,
+            "interval_score": 1464.468271170381
+          },
+          "low": {
+            "coverage": 0.775,
+            "width": 942.8224478980977,
+            "interval_score": 1630.7883017031584
+          },
+          "close": {
+            "coverage": 0.7708333333333334,
+            "width": 1210.1290114073088,
+            "interval_score": 1986.7620964719624
+          }
+        },
+        "comparator_intervals": {
+          "open": {
+            "coverage": 0.7791666666666667,
+            "width": 494.525344581773,
+            "interval_score": 873.9567235585249
+          },
+          "high": {
+            "coverage": 0.7791666666666667,
+            "width": 752.1229308323549,
+            "interval_score": 1472.1580798607106
+          },
+          "low": {
+            "coverage": 0.7708333333333334,
+            "width": 948.1441498787759,
+            "interval_score": 1610.2760200533337
+          },
+          "close": {
+            "coverage": 0.775,
+            "width": 1212.8998478553674,
+            "interval_score": 2004.044440755046
+          }
+        },
+        "requirements": {
+          "close_buffer": false,
+          "fold_majority": false,
+          "bootstrap_lower_nonnegative": false,
+          "ohl_noninferiority": true,
+          "interval_coverage": true,
+          "interval_score_noninferior": false,
+          "forecast_coverage": true
+        },
+        "candidate_failure_policy": "same-date comparator for diagnostic only; frozen rows unchanged",
+        "alpha_mean": 0.4214583333333333,
+        "alpha_last": {
+          "status": "CAUSAL_GRID_SELECTED",
+          "alpha": 0.25,
+          "samples": 60,
+          "window": 60,
+          "objective": "prior_published_close_mae"
+        }
+      }
+    }
+  },
+  "budget": {
+    "limit_seconds": 7200.0,
+    "charged_seconds": 4410.320218935609,
+    "remaining_seconds": 2789.679781064391,
+    "attempts": 5
+  },
+  "conclusion": {
+    "development_gate_passed": false,
+    "final_gate_passed": false,
+    "default_model": "fixed night-regression comparator with range fallback",
+    "search_action": "STOP_NO_FURTHER_DEVELOPMENT_TUNING",
+    "reason": "Residual-head and causal-shrinkage Close improvements are negative against the fixed fair comparator in both markets."
+  },
+  "limitations": [
+    "The old final period is development data and was not reopened as an independent test.",
+    "The one failed JOINT day remains in the frozen result and is disclosed.",
+    "Historical TimesFM pretraining overlap cannot be excluded.",
+    "Prediction error is separate from trading profitability."
+  ]
+}

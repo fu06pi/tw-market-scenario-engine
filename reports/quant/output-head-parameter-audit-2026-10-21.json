@@ -1,0 +1,151 @@
+{
+  "schema_version": "head-parameter-update-audit-v1",
+  "scope": "head tensors only; does not establish full-model forward reload equivalence",
+  "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "checkpoints": [
+    {
+      "instrument": "TAIEX",
+      "fold": 1,
+      "sha256": "29f6dbf4b66e3cfef4dff19daf3dd6df41731ee1335ee0b14592b1692281460f",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.0050729848819224595,
+          "max_abs_delta": 0.0044871787540614605
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.6847781824052946,
+          "max_abs_delta": 0.02952312957495451
+        }
+      }
+    },
+    {
+      "instrument": "TAIEX",
+      "fold": 2,
+      "sha256": "4cfbcaf678aad3382d436188bf1cd3368df762070c95886dff1c01a5fe2ffbef",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.005147942309896709,
+          "max_abs_delta": 0.004477908834815025
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.4839416259865301,
+          "max_abs_delta": 0.020650246180593967
+        }
+      }
+    },
+    {
+      "instrument": "TAIEX",
+      "fold": 3,
+      "sha256": "83d1474bb3a479f59af0e270a04efe0d0f0c54b215bfefc64320bee6ae1d20be",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.0023018277356758737,
+          "max_abs_delta": 0.0018112869001924992
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.20102806213800403,
+          "max_abs_delta": 0.008045843802392483
+        }
+      }
+    },
+    {
+      "instrument": "TX",
+      "fold": 1,
+      "sha256": "9476b9e22190f8fb28844e7976e6365839512b004a14fc2fda7d4484e9a1d3cc",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.0011146811484231125,
+          "max_abs_delta": 0.0005432453472167253
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.35697001956378027,
+          "max_abs_delta": 0.01699987379834056
+        }
+      }
+    },
+    {
+      "instrument": "TX",
+      "fold": 2,
+      "sha256": "631b1efed4b6f714a1ae5030506015b42365b7c75dde4488e24a32e3060906f6",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.0012961957543723402,
+          "max_abs_delta": 0.000641866005025804
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.5137796362712226,
+          "max_abs_delta": 0.024631186854094267
+        }
+      }
+    },
+    {
+      "instrument": "TX",
+      "fold": 3,
+      "sha256": "4d9251f8499b990ae3e89a8f99e39a6cb68fb46dbe6fd3719433f15ca99d0c99",
+      "delta_from_pinned_pretrained_head": {
+        "bias": {
+          "shape": [
+            576
+          ],
+          "changed_elements": 9,
+          "l2_delta": 0.0021473542760186834,
+          "max_abs_delta": 0.001136675477027893
+        },
+        "weight": {
+          "shape": [
+            576,
+            1280
+          ],
+          "changed_elements": 11520,
+          "l2_delta": 0.8073243840047596,
+          "max_abs_delta": 0.03719716286286712
+        }
+      }
+    }
+  ]
+}

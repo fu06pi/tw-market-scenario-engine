@@ -1,0 +1,13 @@
+{
+  "status": "LOAD_PASS",
+  "provenance": {
+    "package_version": "3.0.2",
+    "direct_url": "https://github.com/google-research/timesfm.git",
+    "vcs_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+    "version_matches": true,
+    "commit_matches": true
+  },
+  "model_type": "TimesFM3Torch",
+  "elapsed_seconds": 5.780266625999957,
+  "peak_rss_kib": 2844912
+}

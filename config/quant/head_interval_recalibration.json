@@ -1,0 +1,16 @@
+{
+  "version": "causal-head-marginal-residual-v1",
+  "candidate_context": 64,
+  "window": 126,
+  "minimum": 40,
+  "lower_quantile": 0.1,
+  "upper_quantile": 0.9,
+  "normalization": "prediction_day_same_contract_previous_close",
+  "warmup_policy": "retain_original_uncalibrated_interval_and_count_all_days",
+  "update_policy": "previous_walk_forward_residuals_available_by_0830_only",
+  "fold_policy": "carry_prior_published_residuals_across_predeclared_refits",
+  "point_policy": "unchanged",
+  "interval_policy": "marginal_only_not_joint_OHLC_quantiles",
+  "research_scope": "development_only_not_new_independent_holdout",
+  "production_switch": false
+}

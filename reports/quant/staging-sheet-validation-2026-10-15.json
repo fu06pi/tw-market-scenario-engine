@@ -1,0 +1,37 @@
+{
+  "schema_version": "staging-sheet-validation-v1",
+  "validated_at": "2026-10-15T14:23:58+08:00",
+  "test_type": "retrospective_shadow",
+  "trading_date": "2026-10-08",
+  "forecast_id": "ohlc-v1-2026-10-08-2b927a68bdff6eaad7aaf8b04681b1632a5c157605a0c0c90339417a2c192172",
+  "snapshot_hash": "e6c7ca8cc192c3121de02410923903fc48ff47b1836fb90ee97017f349e6923d",
+  "staging": {
+    "spreadsheet_id": "1d54RLYn6Egk3ky-Gs-7unQdODIAlgB_wocnkGtxxb7o",
+    "sheet_name": "每日預測與覆盤",
+    "rows": [
+      132,
+      133
+    ],
+    "morning_columns": "A:F,O",
+    "postclose_columns": "G:N,P",
+    "morning_artifact_sha256": "8d24d788b1aca55603b12a7ef7bbc50f92c2b9822e0165141167fd8b9c06f309",
+    "postclose_artifact_sha256": "a38a93b5df3678ca00c914398b46c48d53c1ae3bf943fbcec76b6d785b0cef53",
+    "expected_final_rows_sha256": "e26c2553793956638759184f4884ac8d960cfbbaaeb418b728fd3679878d2814",
+    "morning_readback_exact_match": true,
+    "postclose_readback_exact_match": true,
+    "preopen_unchanged_after_postclose": true,
+    "same_forecast_id_and_snapshot_hash_both_rows": true
+  },
+  "production": {
+    "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+    "write_requested": false,
+    "schedule_changed": false,
+    "production_switch": false,
+    "observation": "Existing V0 schedule independently added 2026-10-15 morning rows at 08:43 Asia/Taipei while staging validation ran."
+  },
+  "limitations": [
+    "Retrospective 2026-10-08 shadow; this is not an on-time 08:40 forward publication.",
+    "Google Sheets connector request/readback proves staging cell integrity but is not a production cutover.",
+    "Three to five genuine forward shadow trading days remain required."
+  ]
+}
