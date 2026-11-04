@@ -156,3 +156,9 @@ python -m tw_scenario.cli audit . reports/generated/audit-v2.json
 已提供 4 個價格基準、5 個純方向基準與可重複執行的共同日期比較流程。價格與方向各自按驗證期選基準，保留失敗與覆蓋率，不在評估期事後換贏家。夜盤特徵不足時明示不可比較，不補零。
 
 定義及盤前接口見 [簡單基準規則](docs/methodology/SIMPLE_BASELINES.md)；已執行的 TAIEX／TX 對照表見 [基準比較報告](reports/research/simple-baseline-comparison-v1/README.md)。這批歷史評估期已被使用過，因此不算新的未見資料驗證。
+
+### 夜盤資料配對研究
+
+已取得期交所 22 個月 TX 日盤／夜盤資料，以相同樣本與參數，只在開盤頭增加夜盤報酬。各 179 個共同評估日中，TAIEX 收盤 MAE 降低 22.19%、TX 降低 28.76%；但 TAIEX 開盤 MAE 惡化 3.65%，且回歸版的收盤 MAE 仍未勝過預先列入的夜盤直推簡單基準。
+
+這是歷史回溯條件下的資訊增益，不是完整正式驗收或新獨立前向績效。歷史發布時間仍未驗證，未改動原排程。合約選擇、週末／換月處理、配對結果與限制見 [夜盤研究報告](reports/research/night-ablation-v1/README.md)。

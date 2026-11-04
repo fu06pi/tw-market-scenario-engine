@@ -1,0 +1,10 @@
+{
+  "public_files": {
+    "plan.json": "372267caeded858df7a021df2ad2cfc9b0dab28af923bb42a046aa977cfd16ec",
+    "source-crosscheck.json": "3f7118e5f48521a394786eab69d1f011944b4f4f5e0dead5c49b6c229e3626e2",
+    "summary.json": "cff7d46ea180365af885eb349a286bae7009f70b1030c2d31162051feb8b507f"
+  },
+  "raw_data_committed": false,
+  "private_daily_results": "reports/generated/night-ablation-v1-verified/daily-private.json",
+  "hardening_check": "Metrics match initial run exactly after stricter cache and completeness checks; plan, parameters and inputs unchanged."
+}
