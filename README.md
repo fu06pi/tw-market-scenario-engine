@@ -1,5 +1,7 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+最新進度（2026-11-04）：新增獨立盤前影子流程、夜盤殘差、盤中夜盤特徵對照、TAIEX 開盤校準及 80% 邊際區間／監控。驗證仍以簡單夜盤基準較穩定，未切換正式模型；影子 workflow 待 PR 合併後啟用，真實前向樣本為 0。見 [第一輪結果與操作](reports/research/prospective-night-v1/README.md)。下方原架構決策與舊階段狀態保留供追溯。
+
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
 架構決策更新：2026-10-11。
 

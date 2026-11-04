@@ -1,0 +1,76 @@
+name: Preopen shadow (isolated research)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '15 0 * * 1-5' # 08:15 Asia/Taipei; delayed starts fail closed
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: preopen-shadow-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  shadow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-shadow.txt
+      - name: Install numerical runtime
+        run: |
+          python -m pip install -r requirements-shadow.txt
+          python -m pip install --no-deps -e .
+      - name: Collect by 08:30 and freeze before 08:40 Taipei
+        id: forecast
+        run: >-
+          python -m scripts.run_shadow
+          --checkpoint reports/research/prospective-night-v1/checkpoint.json
+          --output reports/generated/shadow/current
+      - name: Record setup or execution failures that produced no snapshot
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          run = Path("reports/generated/shadow/current")
+          run.mkdir(parents=True, exist_ok=True)
+          if not (run / "forecast.json").exists() and not (run / "failure.json").exists():
+              with (run / "failure.json").open("x") as stream:
+                  json.dump({"status": "failed", "recorded_at": datetime.now(timezone.utc).isoformat(),
+                             "reason": "workflow setup/execution failed; inspect job logs",
+                             "eligible_for_formal_accuracy": False}, stream)
+          PY
+      - name: Preserve every attempt including failure
+        id: persist
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: preopen-shadow-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/generated/shadow/current/
+          if-no-files-found: error
+          retention-days: 90
+      - name: Read actual remote artifact timestamp and verify deadline
+        if: always() && steps.persist.outputs.artifact-id != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ARTIFACT_ID: ${{ steps.persist.outputs.artifact-id }}
+          ARTIFACT_DIGEST: ${{ steps.persist.outputs.artifact-digest }}
+          REPOSITORY: ${{ github.repository }}
+        run: python -m scripts.verify_shadow_artifact --run-dir reports/generated/shadow/current --output reports/generated/remote-receipt.json
+      - name: Preserve remote API readback separately
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shadow-remote-receipt-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/generated/remote-receipt.json
+          if-no-files-found: warn
+          retention-days: 90

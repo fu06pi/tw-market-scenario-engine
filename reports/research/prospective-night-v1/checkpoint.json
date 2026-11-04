@@ -1,0 +1,923 @@
+{
+  "schema_version": "shadow-checkpoint-v1",
+  "frozen_at": "2026-11-04T14:50:55.051165+08:00",
+  "plan_sha256": "ce33d1f0f74681c23cb00d2b5d3eadfbb335582271ecad439a0d66764046e0bf",
+  "markets": {
+    "TAIEX": {
+      "default_baseline": "night_carry",
+      "models": {
+        "zero_return": {
+          "version": "night-refinements-v1",
+          "method": "zero_return",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.002841318082626179,
+            "b": 0.0036076581414366087
+          }
+        },
+        "expanding_mean": {
+          "version": "night-refinements-v1",
+          "method": "expanding_mean",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.002841318082626179,
+            "b": 0.0036076581414366087
+          }
+        },
+        "previous_return": {
+          "version": "night-refinements-v1",
+          "method": "previous_return",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.002841318082626179,
+            "b": 0.0036076581414366087
+          }
+        },
+        "rolling_mean_20": {
+          "version": "night-refinements-v1",
+          "method": "rolling_mean_20",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.0005938923457103273,
+            "b": 0.0013322381964004184
+          }
+        },
+        "night_carry": {
+          "version": "night-refinements-v1",
+          "method": "night_carry",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.002841318082626179,
+            "b": 0.0036076581414366087
+          }
+        },
+        "night_residual": {
+          "version": "night-refinements-v1",
+          "method": "night_residual",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {
+            "residual": {
+              "alpha": 0.1,
+              "mean": [
+                13.123248191225459,
+                19.395558519630704
+              ],
+              "scale": [
+                75.230115994036,
+                170.27588052328943
+              ],
+              "coef": [
+                0.0014735543457254324,
+                0.00018271316411743967
+              ],
+              "intercept": 0.0008894539908310018
+            }
+          }
+        },
+        "body_control": {
+          "version": "night-refinements-v1",
+          "method": "body_control",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                13.415152775669938,
+                18.958080323122832,
+                14.650202961503783
+              ],
+              "scale": [
+                76.00271622729441,
+                169.26093105256695,
+                123.55070757307934
+              ],
+              "coef": [
+                -0.0003626736908672338,
+                -0.00029113551509776315,
+                0.0053368742412289285
+              ],
+              "intercept": 0.0012991526707828505
+            },
+            "body_control": {
+              "alpha": 0.1,
+              "mean": [
+                5.18630535104442,
+                154.95823452526838
+              ],
+              "scale": [
+                125.91873658873448,
+                91.03937958750097
+              ],
+              "coef": [
+                0.0007829106341836151,
+                0.001369586414478214
+              ],
+              "intercept": 0.00045907030640282185
+            }
+          }
+        },
+        "body_night": {
+          "version": "night-refinements-v1",
+          "method": "body_night",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                13.415152775669938,
+                18.958080323122832,
+                14.650202961503783
+              ],
+              "scale": [
+                76.00271622729441,
+                169.26093105256695,
+                123.55070757307934
+              ],
+              "coef": [
+                -0.0003626736908672338,
+                -0.00029113551509776315,
+                0.0053368742412289285
+              ],
+              "intercept": 0.0012991526707828505
+            },
+            "body_night": {
+              "alpha": 0.1,
+              "mean": [
+                5.18630535104442,
+                154.95823452526838,
+                14.650202961503783
+              ],
+              "scale": [
+                125.91873658873448,
+                91.03937958750097,
+                123.55070757307934
+              ],
+              "coef": [
+                0.0011196592176180064,
+                0.0005515100706824706,
+                0.006141980134943157
+              ],
+              "intercept": 0.0004590703064028232
+            }
+          }
+        },
+        "gap_calibrated": {
+          "version": "night-refinements-v1",
+          "method": "gap_calibrated",
+          "market": "TAIEX",
+          "training_first": "2025-01-06",
+          "training_last": "2026-09-30",
+          "training_n": 420,
+          "mean": {
+            "g": 0.00129915267078285,
+            "b": 0.0004590703064028236,
+            "u": 0.0035377230420438927,
+            "d": 0.0029228783239187853
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                13.415152775669938,
+                18.958080323122832,
+                14.650202961503783
+              ],
+              "scale": [
+                76.00271622729441,
+                169.26093105256695,
+                123.55070757307934
+              ],
+              "coef": [
+                -0.0003626736908672338,
+                -0.00029113551509776315,
+                0.0053368742412289285
+              ],
+              "intercept": 0.0012991526707828505
+            },
+            "body_night": {
+              "alpha": 0.1,
+              "mean": [
+                5.18630535104442,
+                154.95823452526838,
+                14.650202961503783
+              ],
+              "scale": [
+                125.91873658873448,
+                91.03937958750097,
+                123.55070757307934
+              ],
+              "coef": [
+                0.0011196592176180064,
+                0.0005515100706824706,
+                0.006141980134943157
+              ],
+              "intercept": 0.0004590703064028232
+            },
+            "calibration": {
+              "alpha": 0.1,
+              "mean": [
+                0.0013435479156656215
+              ],
+              "scale": [
+                0.005289130428833751
+              ],
+              "coef": [
+                0.004671303862021933
+              ],
+              "intercept": 0.0009759632252522387
+            }
+          },
+          "gap_calibration_n": 60
+        }
+      },
+      "intervals": {
+        "zero_return": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "zero_return",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 76.00613403368295,
+            "high": 119.04190130415866,
+            "low": 126.92238962867752,
+            "close": 132.383921117521
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "expanding_mean": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "expanding_mean",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 65.48923169178815,
+            "high": 105.4184560082993,
+            "low": 124.6562540279787,
+            "close": 141.85605010819037
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "previous_return": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "previous_return",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 107.3119207471485,
+            "high": 121.28563739117807,
+            "low": 173.8093459350916,
+            "close": 186.04497037335432
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "rolling_mean_20": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "rolling_mean_20",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 69.12508090916052,
+            "high": 109.06413450913999,
+            "low": 132.86573836313576,
+            "close": 140.32997539386196
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "night_carry": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "night_carry",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 67.82034453293876,
+            "high": 71.08048522823432,
+            "low": 66.13987950658048,
+            "close": 97.77747435221248
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "night_residual": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "night_residual",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 67.82034453293876,
+            "high": 68.25634921279381,
+            "low": 69.5452874581171,
+            "close": 87.53351567557613
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "body_control": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "body_control",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 55.87231254551481,
+            "high": 67.90632479667698,
+            "low": 89.0855056731865,
+            "close": 112.11755726102224
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "body_night": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "body_night",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 55.87231254551481,
+            "high": 65.08060610835741,
+            "low": 74.37625877180318,
+            "close": 101.99403703304594
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "gap_calibrated": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TAIEX",
+          "method": "gap_calibrated",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 56.12000430309098,
+            "high": 57.71482382643041,
+            "low": 71.7977197108458,
+            "close": 101.99403703304594
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        }
+      }
+    },
+    "TX_selected_monthly": {
+      "default_baseline": "night_carry",
+      "models": {
+        "zero_return": {
+          "version": "night-refinements-v1",
+          "method": "zero_return",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.014548129478021128,
+            "b": -0.002830668129758282
+          }
+        },
+        "expanding_mean": {
+          "version": "night-refinements-v1",
+          "method": "expanding_mean",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.014548129478021128,
+            "b": -0.002830668129758282
+          }
+        },
+        "previous_return": {
+          "version": "night-refinements-v1",
+          "method": "previous_return",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.014548129478021128,
+            "b": -0.002830668129758282
+          }
+        },
+        "rolling_mean_20": {
+          "version": "night-refinements-v1",
+          "method": "rolling_mean_20",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.0012908476720635432,
+            "b": 0.0008508325234024186
+          }
+        },
+        "night_carry": {
+          "version": "night-refinements-v1",
+          "method": "night_carry",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {},
+          "recent": {
+            "g": 0.014548129478021128,
+            "b": -0.002830668129758282
+          }
+        },
+        "night_residual": {
+          "version": "night-refinements-v1",
+          "method": "night_residual",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {
+            "residual": {
+              "alpha": 0.1,
+              "mean": [
+                17.037482194362752,
+                19.17348187268296
+              ],
+              "scale": [
+                148.00999811853137,
+                178.61548921155767
+              ],
+              "coef": [
+                0.0025574112722182452,
+                -0.001175823306996921
+              ],
+              "intercept": 0.0006158884058654451
+            }
+          }
+        },
+        "body_control": {
+          "version": "night-refinements-v1",
+          "method": "body_control",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                17.23549097653781,
+                18.37602271887035,
+                14.529392659428797
+              ],
+              "scale": [
+                147.42225231215724,
+                177.99883730150327,
+                123.27328184548604
+              ],
+              "coef": [
+                9.835187000830258e-05,
+                1.4579176082575992e-05,
+                0.012891679722913331
+              ],
+              "intercept": 0.001696521094764843
+            },
+            "body_control": {
+              "alpha": 0.1,
+              "mean": [
+                1.1539499432009528,
+                144.7471148623827
+              ],
+              "scale": [
+                100.96785987067139,
+                82.37821942082267
+              ],
+              "coef": [
+                -0.0007091474598778828,
+                -0.0003568001976506705
+              ],
+              "intercept": 1.216325935824933e-06
+            }
+          }
+        },
+        "body_night": {
+          "version": "night-refinements-v1",
+          "method": "body_night",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                17.23549097653781,
+                18.37602271887035,
+                14.529392659428797
+              ],
+              "scale": [
+                147.42225231215724,
+                177.99883730150327,
+                123.27328184548604
+              ],
+              "coef": [
+                9.835187000830258e-05,
+                1.4579176082575992e-05,
+                0.012891679722913331
+              ],
+              "intercept": 0.001696521094764843
+            },
+            "body_night": {
+              "alpha": 0.1,
+              "mean": [
+                1.1539499432009528,
+                144.7471148623827,
+                14.529392659428797
+              ],
+              "scale": [
+                100.96785987067139,
+                82.37821942082267,
+                123.27328184548604
+              ],
+              "coef": [
+                -0.0007160760391336046,
+                -0.0003067009633480941,
+                -0.00030446582057885396
+              ],
+              "intercept": 1.216325935824912e-06
+            }
+          }
+        },
+        "gap_calibrated": {
+          "version": "night-refinements-v1",
+          "method": "gap_calibrated",
+          "market": "TX_selected_monthly",
+          "training_first": "2025-01-02",
+          "training_last": "2026-09-30",
+          "training_n": 422,
+          "mean": {
+            "g": 0.001696521094764843,
+            "b": 1.2163259358247755e-06,
+            "u": 0.003433267050004785,
+            "d": 0.0036137662023897044
+          },
+          "heads": {
+            "gap": {
+              "alpha": 0.1,
+              "mean": [
+                17.23549097653781,
+                18.37602271887035,
+                14.529392659428797
+              ],
+              "scale": [
+                147.42225231215724,
+                177.99883730150327,
+                123.27328184548604
+              ],
+              "coef": [
+                9.835187000830258e-05,
+                1.4579176082575992e-05,
+                0.012891679722913331
+              ],
+              "intercept": 0.001696521094764843
+            },
+            "body_night": {
+              "alpha": 0.1,
+              "mean": [
+                1.1539499432009528,
+                144.7471148623827,
+                14.529392659428797
+              ],
+              "scale": [
+                100.96785987067139,
+                82.37821942082267,
+                123.27328184548604
+              ],
+              "coef": [
+                -0.0007160760391336046,
+                -0.0003067009633480941,
+                -0.00030446582057885396
+              ],
+              "intercept": 1.216325935824912e-06
+            }
+          }
+        }
+      },
+      "intervals": {
+        "zero_return": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "zero_return",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 99.25825061812448,
+            "high": 136.74705620855903,
+            "low": 102.29868355841467,
+            "close": 122.54901960784328
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "expanding_mean": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "expanding_mean",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 109.514263981521,
+            "high": 129.6412645420112,
+            "low": 105.5195848775529,
+            "close": 132.36318097760176
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "previous_return": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "previous_return",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 132.40696220102367,
+            "high": 148.39071941900212,
+            "low": 172.41569993841844,
+            "close": 179.83992604485988
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "rolling_mean_20": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "rolling_mean_20",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 103.78231888055628,
+            "high": 130.32818936069765,
+            "low": 116.12855025119967,
+            "close": 138.11536141307639
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "night_carry": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "night_carry",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 34.646114685710245,
+            "high": 62.80397476783449,
+            "low": 76.02902259978283,
+            "close": 86.43283385317501
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "night_residual": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "night_residual",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 34.646114685710245,
+            "high": 60.3166421846044,
+            "low": 76.47451387654093,
+            "close": 84.39527042231302
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "body_control": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "body_control",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 42.49328615366525,
+            "high": 69.91343265701185,
+            "low": 77.5407158768934,
+            "close": 84.74847662239338
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "body_night": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "body_night",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 42.49328615366525,
+            "high": 72.02533396358562,
+            "low": 76.31679737276161,
+            "close": 86.77700006834476
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        },
+        "gap_calibrated": {
+          "version": "marginal-absolute-bp-v1",
+          "alpha": 0.2,
+          "n": 30,
+          "market": "TX_selected_monthly",
+          "method": "gap_calibrated",
+          "first": "2025-11-19",
+          "last": "2025-12-31",
+          "radius_bps": {
+            "open": 42.49328615366525,
+            "high": 72.02533396358562,
+            "low": 76.31679737276161,
+            "close": 86.77700006834476
+          },
+          "joint_coverage_claim": false,
+          "historical_availability_verified": false
+        }
+      }
+    }
+  },
+  "scoring_policy": {
+    "version": "1.0",
+    "flat_threshold_bps": 5.0,
+    "bull_close_return_bps": 50.0,
+    "bear_close_return_bps": -50.0
+  },
+  "historical_availability_verified": false,
+  "interval_warning": "Old retrospective calibration; 80% coverage is unverified prospectively",
+  "hash_version": "sha256-json-v2",
+  "snapshot_hash": "fffd2ed32aa1c107230294066ddd4bcbe3f9d6ced6d5bb0f96ef917c28277809"
+}

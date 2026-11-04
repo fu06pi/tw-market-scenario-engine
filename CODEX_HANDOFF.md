@@ -1,5 +1,7 @@
 # Codex 交接：TEJ → V1 量化 → V0 晨報
 
+2026-11-04 最新交接：已新增 `shadow.py`、`refinements.py`、`intervals.py` 與準備權重／實際盤前執行／artifact 回讀／監控 scripts；操作見 [prospective-night-v1](reports/research/prospective-night-v1/README.md)。兩市場預設鎖定 night_carry，新變體未通過驗證門檻。新影子 workflow 在 PR，尚未合併啟用；前向樣本為 0。下一步先取得真實 08:30 來源及 08:40 前遠端 artifact，再匯入指定市場／合約 actual 做新樣本監控。保留本次凍結權重及歷史原件；正式晨報／Sheet 串接與切換仍待端到端證據。
+
 更新：2026-10-11。Repository：fu06pi/tw-market-scenario-engine。
 
 ## 最新需求
