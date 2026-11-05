@@ -1,0 +1,7 @@
+{
+  "status": "failed",
+  "recorded_at": "2026-11-04T14:51:23.719397+08:00",
+  "failure_type": "ValueError",
+  "reason": "shadow collection must start on weekdays at 06:00–08:30 Taipei",
+  "eligible_for_formal_accuracy": false
+}

@@ -1,5 +1,9 @@
 # Codex 交接：TEJ → V1 量化 → V0 晨報
 
+2026-11-05 最新交接：新增 `postclose.py`、`morning_adapter.py` 與獨立 15:30 收盤／跨日診斷 workflow，盤前 wrapper 在凍結數字後產生原晨報欄位的轉接 payload。136 項測試通過；11/4 兩市場日盤來源實測成功，11/5 此次仍缺 TX 日盤，失敗保留。操作見 [驗證報告](reports/verification/2026-11-05-shadow-close.md)。新 workflow 未合併啟用，未寫正式或 staging Sheet，前向樣本仍 0；下一步必須取得真實盤前遠端 artifact 並完成同日收盤／Sheet 讀回，不能把合成範例或下午來源 smoke 當成已完成遷移。
+
+2026-11-04 最新交接：已新增 `shadow.py`、`refinements.py`、`intervals.py` 與準備權重／實際盤前執行／artifact 回讀／監控 scripts；操作見 [prospective-night-v1](reports/research/prospective-night-v1/README.md)。兩市場預設鎖定 night_carry，新變體未通過驗證門檻。新影子 workflow 在 PR，尚未合併啟用；前向樣本為 0。下一步先取得真實 08:30 來源及 08:40 前遠端 artifact，再匯入指定市場／合約 actual 做新樣本監控。保留本次凍結權重及歷史原件；正式晨報／Sheet 串接與切換仍待端到端證據。
+
 更新：2026-10-11。Repository：fu06pi/tw-market-scenario-engine。
 
 ## 最新需求
@@ -29,3 +33,23 @@
 
 ## 環境
 沿用 pyproject.toml；先執行 python -m pip install -e '.[dev]' 及 python -m pytest -q。模型依賴於實作時核實並固定。限制網路需記錄真實錯誤並支援離線匯出檔，不能編造下載成功或模型績效。
+
+## 2026-11-03 階段交接補充
+
+使用者要求先完成評分一致性與開盤／盤中拆分。已有 audit.py、policy.py、split_forecast.py、v2 schemas、CLI 與合成範例；操作見 [AUDIT_AND_SPLIT_V2.md](docs/architecture/AUDIT_AND_SPLIT_V2.md)。舊實際結果、預測、評估及 manifest 不回寫。
+
+後續從具歷史 available_at 證據的真實資料 adapter 繼續。新 schema 不能直接吃舊敘事情境；舊 body 僅能從既有點估推導供診斷。先固定時序切分與研究設定，再比較 split 候選，不得把合成端到端測試當市場成效。
+
+本次未完成真實模型驗收或 V0／Sheet／排程切換。10／27 actual 缺漏仍待取得官方可驗證資料，不能從敘事、別天數字或未確認來源補值。
+
+## 簡單基準交接補充
+
+`baselines.py` 已提供 4 個價格基準、5 個純方向基準，以及有時間／市場／合約檢查的 `predict_preopen_baseline`。原夜盤規則保留，但價格快取沒有完整夜盤／海外特徵，不能用零值補齊並加入排名。
+
+`scripts/compare_simple_baselines.py` 從原研究讀取凍結參考，要求共同日期及實際行情完全一致，價格／方向各依驗證期選基準。先前評估區間已看過，輸出固定標示不是新獨立測試。定義與操作見 [SIMPLE_BASELINES.md](docs/methodology/SIMPLE_BASELINES.md)。舊歷史研究、原始行情、快照、評估與每日排程保持原狀。
+
+## 夜盤資料研究交接
+
+`taifex.py` 已提供官方月 CSV 下載、嚴格日夜／月合約解析及夜盤對齊。`fetch_taifex_history.py` 可續跑不可覆寫快取；`run_night_ablation.py` 以同參數／共同資料做無夜盤、只增開盤夜盤特徵、夜盤直推基準的配對研究。
+
+此處只有來源擷取與回溯研究。available_at 保持未知，不可把標準 05:00 結束或 fetched_at 冒充歷史發布時間；尚未接成正式 08:30 盤前即時資料源。夜盤資訊改善兩標的收盤誤差，但 TAIEX 開盤幅度未改善，回歸版收盤仍輸給簡單夜盤基準；未切換每日流程。詳見 [night-ablation-v1](reports/research/night-ablation-v1/README.md)，後續須使用新未見資料／實際盤前保存證據，不得反覆調已使用的評估期。

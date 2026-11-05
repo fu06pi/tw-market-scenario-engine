@@ -1,0 +1,402 @@
+{
+  "fixture_kind": "SYNTHETIC_INTEGRATION_ONLY",
+  "genuine_forecast_count": 0,
+  "live_sheet_write": false,
+  "forecast": {
+    "schema_version": "prospective-shadow-v1",
+    "status": "shadow_only",
+    "trading_date": "2026-11-05",
+    "generated_at": "2026-11-05T08:25:00+08:00",
+    "data_cutoff_at": "2026-11-05T08:20:00+08:00",
+    "deadline": "2026-11-05T08:40:00+08:00",
+    "checkpoint_hash": "a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f",
+    "sources": [
+      {
+        "fetched_at": "2026-11-05T08:20:00+08:00",
+        "availability_basis": "synthetic fixture clock; not a real market observation"
+      }
+    ],
+    "markets": {
+      "TAIEX": {
+        "inputs": {
+          "date": "2026-11-05",
+          "market": "TAIEX",
+          "previous_close": 100,
+          "feature_latest_date": "2026-11-04",
+          "features": [
+            30,
+            80,
+            10,
+            60
+          ],
+          "night_return_bps": 60,
+          "contract": null
+        },
+        "models": {
+          "night_carry": {
+            "components": {
+              "g": 0.005982071677547464,
+              "b": 0.0,
+              "u": 0.0029999999999999996,
+              "d": 0.004
+            },
+            "prices": {
+              "open": 100.6,
+              "high": 100.90225315303972,
+              "low": 100.19840372800554,
+              "close": 100.6
+            },
+            "marginal_80": {
+              "open": {
+                "lower": 99.6,
+                "upper": 101.6
+              },
+              "high": {
+                "lower": 99.90225315303972,
+                "upper": 101.90225315303972
+              },
+              "low": {
+                "lower": 99.19840372800554,
+                "upper": 101.19840372800554
+              },
+              "close": {
+                "lower": 99.6,
+                "upper": 101.6
+              }
+            }
+          }
+        },
+        "default_baseline": "night_carry"
+      },
+      "TX_selected_monthly": {
+        "inputs": {
+          "date": "2026-11-05",
+          "market": "TX_selected_monthly",
+          "previous_close": 100,
+          "feature_latest_date": "2026-11-04",
+          "features": [
+            30,
+            80,
+            10,
+            60
+          ],
+          "night_return_bps": 60,
+          "contract": "202611"
+        },
+        "models": {
+          "night_carry": {
+            "components": {
+              "g": 0.005982071677547464,
+              "b": 0.0,
+              "u": 0.0029999999999999996,
+              "d": 0.004
+            },
+            "prices": {
+              "open": 100.6,
+              "high": 100.90225315303972,
+              "low": 100.19840372800554,
+              "close": 100.6
+            },
+            "marginal_80": {
+              "open": {
+                "lower": 99.6,
+                "upper": 101.6
+              },
+              "high": {
+                "lower": 99.90225315303972,
+                "upper": 101.90225315303972
+              },
+              "low": {
+                "lower": 99.19840372800554,
+                "upper": 101.19840372800554
+              },
+              "close": {
+                "lower": 99.6,
+                "upper": 101.6
+              }
+            }
+          }
+        },
+        "default_baseline": "night_carry"
+      }
+    },
+    "scoring_policy": {
+      "version": "1.0",
+      "flat_threshold_bps": 5,
+      "bull_close_return_bps": 50,
+      "bear_close_return_bps": -50
+    },
+    "local_clock_evidence_only": true,
+    "remote_persistence_verified": false,
+    "eligible_for_formal_accuracy": false,
+    "hash_version": "sha256-json-v2",
+    "snapshot_hash": "0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769",
+    "synthetic_fixture": true
+  },
+  "morning_export": {
+    "schema_version": "v0-shadow-export-v1",
+    "forecast_id": "shadow-2026-11-05-0f850a7ffec7d02a",
+    "forecast_hash": "0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769",
+    "headers": [
+      "日期",
+      "盤前預測項目",
+      "盤前原始假設",
+      "預測方向",
+      "信心度",
+      "盤前證據/原因",
+      "實際開盤",
+      "實際盤中",
+      "實際收盤",
+      "驗證結果",
+      "錯誤類型",
+      "實際主因",
+      "需要修正的假設",
+      "隔日改進規則",
+      "晨報來源/備註",
+      "覆盤時間"
+    ],
+    "records": [
+      {
+        "market": "TAIEX",
+        "contract": null,
+        "method": "night_carry",
+        "values": [
+          "2026-11-05",
+          "TAIEX 日盤 OHLC（影子）",
+          "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+          "開盤漲；收盤漲（中性門檻5.0bp）",
+          "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+          "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only",
+          ""
+        ],
+        "frozen_numerical": {
+          "components": {
+            "g": 0.005982071677547464,
+            "b": 0.0,
+            "u": 0.0029999999999999996,
+            "d": 0.004
+          },
+          "prices": {
+            "open": 100.6,
+            "high": 100.90225315303972,
+            "low": 100.19840372800554,
+            "close": 100.6
+          },
+          "marginal_80": {
+            "open": {
+              "lower": 99.6,
+              "upper": 101.6
+            },
+            "high": {
+              "lower": 99.90225315303972,
+              "upper": 101.90225315303972
+            },
+            "low": {
+              "lower": 99.19840372800554,
+              "upper": 101.19840372800554
+            },
+            "close": {
+              "lower": 99.6,
+              "upper": 101.6
+            }
+          }
+        }
+      },
+      {
+        "market": "TX_selected_monthly",
+        "contract": "202611",
+        "method": "night_carry",
+        "values": [
+          "2026-11-05",
+          "TX202611 日盤 OHLC（影子）",
+          "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+          "開盤漲；收盤漲（中性門檻5.0bp）",
+          "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+          "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only",
+          ""
+        ],
+        "frozen_numerical": {
+          "components": {
+            "g": 0.005982071677547464,
+            "b": 0.0,
+            "u": 0.0029999999999999996,
+            "d": 0.004
+          },
+          "prices": {
+            "open": 100.6,
+            "high": 100.90225315303972,
+            "low": 100.19840372800554,
+            "close": 100.6
+          },
+          "marginal_80": {
+            "open": {
+              "lower": 99.6,
+              "upper": 101.6
+            },
+            "high": {
+              "lower": 99.90225315303972,
+              "upper": 101.90225315303972
+            },
+            "low": {
+              "lower": 99.19840372800554,
+              "upper": 101.19840372800554
+            },
+            "close": {
+              "lower": 99.6,
+              "upper": 101.6
+            }
+          }
+        }
+      }
+    ],
+    "live_sheet_write": false,
+    "hash_version": "sha256-json-v2",
+    "snapshot_hash": "603fedd3eb8327068cff3a20527691e4d8fa1287082314e705153079b175734d"
+  },
+  "synthetic_actuals": [
+    {
+      "trading_date": "2026-11-05",
+      "market": "TAIEX",
+      "contract": null,
+      "session": "day",
+      "available_at": "2026-11-05T14:00:00+08:00",
+      "source": "synthetic",
+      "availability_basis": "synthetic unit test",
+      "open": 100.6,
+      "high": 100.90225315303972,
+      "low": 100.19840372800554,
+      "close": 100.6
+    },
+    {
+      "trading_date": "2026-11-05",
+      "market": "TX",
+      "contract": "202611",
+      "session": "day",
+      "available_at": "2026-11-05T14:00:00+08:00",
+      "source": "synthetic",
+      "availability_basis": "synthetic unit test",
+      "open": 100.6,
+      "high": 100.90225315303972,
+      "low": 100.19840372800554,
+      "close": 100.6
+    }
+  ],
+  "close_patch": {
+    "schema_version": "v0-shadow-review-patch-v1",
+    "forecast_id": "shadow-2026-11-05-0f850a7ffec7d02a",
+    "forecast_hash": "0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769",
+    "records": [
+      {
+        "market": "TAIEX",
+        "contract": null,
+        "expected_immutable": {
+          "0": "2026-11-05",
+          "1": "TAIEX 日盤 OHLC（影子）",
+          "2": "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+          "3": "開盤漲；收盤漲（中性門檻5.0bp）",
+          "4": "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+          "5": "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+          "14": "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only"
+        },
+        "patch_by_zero_based_column": {
+          "6": "100.6（相對前收 60.00000000000006bp）",
+          "7": "最高 100.90225315303972；最低 100.19840372800554；高低點先後與盤中型態未驗證",
+          "8": "100.6（相對前收 60.00000000000006bp）",
+          "9": "open方向正確；close方向正確；open絕對誤差 0.0點；high絕對誤差 0.0點；low絕對誤差 0.0點；close絕對誤差 0.0點",
+          "10": "方向一致，幅度誤差另列",
+          "11": "未執行因果歸因；官方日OHLC僅驗證價格，不能據此認定消息主因",
+          "12": "保留原假設；以後續共同樣本比較候選與鎖定基準",
+          "13": "依固定版本持續影子驗證，不以當日結果臨時調參",
+          "15": "2026-11-05T14:30:00+08:00"
+        }
+      },
+      {
+        "market": "TX_selected_monthly",
+        "contract": "202611",
+        "expected_immutable": {
+          "0": "2026-11-05",
+          "1": "TX202611 日盤 OHLC（影子）",
+          "2": "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+          "3": "開盤漲；收盤漲（中性門檻5.0bp）",
+          "4": "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+          "5": "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+          "14": "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only"
+        },
+        "patch_by_zero_based_column": {
+          "6": "100.6（相對前收 60.00000000000006bp）",
+          "7": "最高 100.90225315303972；最低 100.19840372800554；高低點先後與盤中型態未驗證",
+          "8": "100.6（相對前收 60.00000000000006bp）",
+          "9": "open方向正確；close方向正確；open絕對誤差 0.0點；high絕對誤差 0.0點；low絕對誤差 0.0點；close絕對誤差 0.0點",
+          "10": "方向一致，幅度誤差另列",
+          "11": "未執行因果歸因；官方日OHLC僅驗證價格，不能據此認定消息主因",
+          "12": "保留原假設；以後續共同樣本比較候選與鎖定基準",
+          "13": "依固定版本持續影子驗證，不以當日結果臨時調參",
+          "15": "2026-11-05T14:30:00+08:00"
+        }
+      }
+    ],
+    "allowed_columns": [
+      "G:N",
+      "P"
+    ],
+    "live_sheet_write": false,
+    "hash_version": "sha256-json-v2",
+    "snapshot_hash": "c32f0f7dd2a6ce2cbf1c442031f02c13f9d4ee0a1e4dda072b7547cbc39fd4f1"
+  },
+  "local_readback_rows": [
+    [
+      "2026-11-05",
+      "TAIEX 日盤 OHLC（影子）",
+      "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+      "開盤漲；收盤漲（中性門檻5.0bp）",
+      "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+      "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+      "100.6（相對前收 60.00000000000006bp）",
+      "最高 100.90225315303972；最低 100.19840372800554；高低點先後與盤中型態未驗證",
+      "100.6（相對前收 60.00000000000006bp）",
+      "open方向正確；close方向正確；open絕對誤差 0.0點；high絕對誤差 0.0點；low絕對誤差 0.0點；close絕對誤差 0.0點",
+      "方向一致，幅度誤差另列",
+      "未執行因果歸因；官方日OHLC僅驗證價格，不能據此認定消息主因",
+      "保留原假設；以後續共同樣本比較候選與鎖定基準",
+      "依固定版本持續影子驗證，不以當日結果臨時調參",
+      "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only",
+      "2026-11-05T14:30:00+08:00"
+    ],
+    [
+      "2026-11-05",
+      "TX202611 日盤 OHLC（影子）",
+      "開盤 100.6；最高 100.90225315303972；最低 100.19840372800554；收盤 100.6。名目80%邊際區間：開盤 [99.6, 101.6]；最高 [99.90225315303972, 101.90225315303972]；最低 [99.19840372800554, 101.19840372800554]；收盤 [99.6, 101.6]",
+      "開盤漲；收盤漲（中性門檻5.0bp）",
+      "未估計方向機率；80%為各價位名目邊際區間，前向覆蓋尚未驗證",
+      "已完成TX夜盤報酬 60bp；2026-11-04 日盤前收 100；資料截止 2026-11-05T08:20:00+08:00；固定模型 night_carry。日OHLC不提供高低點先後、盤中型態或市場廣度。",
+      "100.6（相對前收 60.00000000000006bp）",
+      "最高 100.90225315303972；最低 100.19840372800554；高低點先後與盤中型態未驗證",
+      "100.6（相對前收 60.00000000000006bp）",
+      "open方向正確；close方向正確；open絕對誤差 0.0點；high絕對誤差 0.0點；low絕對誤差 0.0點；close絕對誤差 0.0點",
+      "方向一致，幅度誤差另列",
+      "未執行因果歸因；官方日OHLC僅驗證價格，不能據此認定消息主因",
+      "保留原假設；以後續共同樣本比較候選與鎖定基準",
+      "依固定版本持續影子驗證，不以當日結果臨時調參",
+      "forecast_id=shadow-2026-11-05-0f850a7ffec7d02a; snapshot_hash=0f850a7ffec7d02a574bdc7252b25a804bf7081fcd139950b2e27610c381c769; checkpoint_hash=a4fdf37e71ba016da93a5bf5ef499963099c98e34690c935c78ae240ee40947f; method=night_carry; shadow_only",
+      "2026-11-05T14:30:00+08:00"
+    ]
+  ]
+}

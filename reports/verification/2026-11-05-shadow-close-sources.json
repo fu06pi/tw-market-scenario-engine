@@ -1,0 +1,147 @@
+{
+  "recorded_at": "2026-11-05T14:29:30.936658+08:00",
+  "kind": "postclose-source-and-job-smoke",
+  "forecast_created": false,
+  "formal_accuracy_eligible": false,
+  "source_runs": [
+    {
+      "run": "shadow-close-20261105-official",
+      "trading_date": "2026-11-05",
+      "selected_contract": "202611",
+      "recorded_at": "2026-11-05T14:25:15.603975+08:00",
+      "status": "partial_or_failed",
+      "actual_markets": [
+        "TAIEX"
+      ],
+      "failures": [
+        {
+          "market": "TX",
+          "date": "2026-11-05",
+          "contract": "202611",
+          "failure_type": "ValueError",
+          "reason": "day session identity is not confirmed"
+        }
+      ],
+      "bundle_sha256": "03e0cebde2691c820e288260e6976127a1c171c08b65f0a552611201a9f15863",
+      "source_receipts": [
+        {
+          "url": "https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST?response=json&date=20261101",
+          "request_started_at": "2026-11-05T14:25:13.642249+08:00",
+          "fetched_at": "2026-11-05T14:25:14.783373+08:00",
+          "available_at": "2026-11-05T14:25:14.783373+08:00",
+          "raw_sha256": "aca6bf8c911c9b9a4290b872a247c94a3a20c4174bf807f3569b055f36b8d716",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication"
+        },
+        {
+          "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=0&commodity_id=TX&queryDate=2026%2F11%2F05",
+          "request_started_at": "2026-11-05T14:25:14.784953+08:00",
+          "fetched_at": "2026-11-05T14:25:15.602516+08:00",
+          "available_at": "2026-11-05T14:25:15.602516+08:00",
+          "raw_sha256": "b17ed6e578a5759c5eb6034ce7fd21b58bc4699014cc51e8a27b5e1c41d9e47b",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication"
+        }
+      ]
+    },
+    {
+      "run": "shadow-close-20261105-official-csv",
+      "trading_date": "2026-11-05",
+      "selected_contract": "202611",
+      "recorded_at": "2026-11-05T14:27:35.368624+08:00",
+      "status": "partial_or_failed",
+      "actual_markets": [
+        "TAIEX"
+      ],
+      "failures": [
+        {
+          "market": "TX",
+          "date": "2026-11-05",
+          "contract": "202611",
+          "failure_type": "ValueError",
+          "reason": "selected TX contract actual missing; no contract substitution"
+        }
+      ],
+      "bundle_sha256": "ca085a9b565fa648588690cd88552eb25ec583fed44e9a85bf7b62342a23bc2a",
+      "source_receipts": [
+        {
+          "url": "https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST?response=json&date=20261101",
+          "request_started_at": "2026-11-05T14:27:32.382258+08:00",
+          "fetched_at": "2026-11-05T14:27:34.005858+08:00",
+          "available_at": "2026-11-05T14:27:34.005858+08:00",
+          "raw_sha256": "aca6bf8c911c9b9a4290b872a247c94a3a20c4174bf807f3569b055f36b8d716",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication",
+          "request_method": "GET",
+          "request_form": null
+        },
+        {
+          "url": "https://www.taifex.com.tw/cht/3/futDataDown",
+          "request_started_at": "2026-11-05T14:27:34.006503+08:00",
+          "fetched_at": "2026-11-05T14:27:35.363272+08:00",
+          "available_at": "2026-11-05T14:27:35.363272+08:00",
+          "raw_sha256": "0356dd4e8dac09d4685255495a7558f2204e8cc0425b12f0daf635b8d7df8a36",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication",
+          "request_method": "POST",
+          "request_form": {
+            "down_type": "1",
+            "commodity_id": "TX",
+            "queryStartDate": "2026/11/05",
+            "queryEndDate": "2026/11/05",
+            "MarketCode": "0"
+          }
+        }
+      ]
+    },
+    {
+      "run": "shadow-close-20261104-official-smoke",
+      "trading_date": "2026-11-04",
+      "selected_contract": "202611",
+      "recorded_at": "2026-11-05T14:28:09.022395+08:00",
+      "status": "complete",
+      "actual_markets": [
+        "TAIEX",
+        "TX"
+      ],
+      "failures": [],
+      "bundle_sha256": "b64326d6c84b8805e895ed0c1c0ab25b62ff0760ceaed99a71c1ec6ff47c4d5e",
+      "source_receipts": [
+        {
+          "url": "https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST?response=json&date=20261101",
+          "request_started_at": "2026-11-05T14:28:06.723510+08:00",
+          "fetched_at": "2026-11-05T14:28:08.475685+08:00",
+          "available_at": "2026-11-05T14:28:08.475685+08:00",
+          "raw_sha256": "aca6bf8c911c9b9a4290b872a247c94a3a20c4174bf807f3569b055f36b8d716",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication",
+          "request_method": "GET",
+          "request_form": null
+        },
+        {
+          "url": "https://www.taifex.com.tw/cht/3/futDataDown",
+          "request_started_at": "2026-11-05T14:28:08.476708+08:00",
+          "fetched_at": "2026-11-05T14:28:09.020509+08:00",
+          "available_at": "2026-11-05T14:28:09.020509+08:00",
+          "raw_sha256": "dd81f53906bacb41e4061a58e532c4648a8107f77327790e0aa3e0e5b7cea35a",
+          "availability_basis": "Observed post-close HTTP receipt; not historical publication",
+          "request_method": "POST",
+          "request_form": {
+            "down_type": "1",
+            "commodity_id": "TX",
+            "queryStartDate": "2026/11/04",
+            "queryEndDate": "2026/11/04",
+            "MarketCode": "0"
+          }
+        }
+      ]
+    }
+  ],
+  "job_probe": {
+    "schema_version": "shadow-close-job-v1",
+    "recorded_at": "2026-11-05T14:25:13.715302+08:00",
+    "formal_accuracy_eligible": false,
+    "live_sheet_write": false,
+    "status": "failed",
+    "failure_type": "HTTPError",
+    "reason": "HTTP Error 404: Not Found",
+    "hash_version": "sha256-json-v2",
+    "snapshot_hash": "26a589bf98dcd12c7a0e099730cf7eb6c6d9a8fa2cebcb7efbb257885287ff34"
+  },
+  "interpretation": "11/5 returned night rows only; not substituted for daytime. 11/4 official daytime actuals complete. No forecast was backfilled."
+}

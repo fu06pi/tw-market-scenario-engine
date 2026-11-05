@@ -3,6 +3,7 @@ from __future__ import annotations
 from math import fsum
 
 from .models import Direction, MarketRealization, PredictionSnapshot
+from .policy import ScoringPolicy
 
 
 def realized_direction(return_bps: float, flat_threshold_bps: float = 5.0) -> Direction:
@@ -30,23 +31,32 @@ def multiclass_brier(probabilities: dict[str, float], outcome: str) -> float:
     return fsum((probabilities[c] - float(c == outcome)) ** 2 for c in classes) / len(classes)
 
 
-def infer_simple_outcome(realization: MarketRealization) -> str:
+def infer_simple_outcome(
+    realization: MarketRealization, policy: ScoringPolicy | None = None
+) -> str:
+    policy = policy or ScoringPolicy()
     r = realization.close_return_bps
-    if r > 50:
+    if r > policy.bull_close_return_bps:
         return "bull"
-    if r < -50:
+    if r < policy.bear_close_return_bps:
         return "bear"
     return "base"
 
 
-def evaluate_snapshot(snapshot: PredictionSnapshot, realization: MarketRealization) -> dict:
+def evaluate_snapshot(
+    snapshot: PredictionSnapshot,
+    realization: MarketRealization,
+    policy: ScoringPolicy | None = None,
+) -> dict:
+    """Diagnostic scores only; formal inclusion is decided by the audit gate."""
+    policy = policy or ScoringPolicy()
     if snapshot.trading_date != realization.trading_date:
         raise ValueError("prediction and realization dates do not match")
 
-    open_realized = realized_direction(realization.open_gap_bps)
-    close_realized = realized_direction(realization.close_return_bps)
+    open_realized = realized_direction(realization.open_gap_bps, policy.flat_threshold_bps)
+    close_realized = realized_direction(realization.close_return_bps, policy.flat_threshold_bps)
     probs = snapshot.scenarios.model_dump()
-    scenario_outcome = infer_simple_outcome(realization)
+    scenario_outcome = infer_simple_outcome(realization, policy)
 
     return {
         "trading_date": snapshot.trading_date,

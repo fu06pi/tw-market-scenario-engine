@@ -1,5 +1,9 @@
 # 台股日盤 OHLC 量化預測與晨報
 
+最新進度（2026-11-05）：補上官方日盤 actual collector、15:30 獨立收盤流程、跨日影子監控、晨報／覆盤轉接與讀回檢查；136 項測試通過。11/4 兩市場日盤來源實測成功，11/5 本次擷取仍缺 TX 日盤，保留缺漏。新排程待 PR 合併啟用，未寫正式 Sheet，也沒有新增前向準確率。見 [本輪驗證與限制](reports/verification/2026-11-05-shadow-close.md)。
+
+最新進度（2026-11-04）：新增獨立盤前影子流程、夜盤殘差、盤中夜盤特徵對照、TAIEX 開盤校準及 80% 邊際區間／監控。驗證仍以簡單夜盤基準較穩定，未切換正式模型；影子 workflow 待 PR 合併後啟用，真實前向樣本為 0。見 [第一輪結果與操作](reports/research/prospective-night-v1/README.md)。下方原架構決策與舊階段狀態保留供追溯。
+
 Repository：https://github.com/fu06pi/tw-market-scenario-engine  
 架構決策更新：2026-10-11。
 
@@ -130,3 +134,35 @@ python -m tw_scenario.cli evaluate examples/sample_prediction.json examples/samp
 [Google Drive 原始文件備份](https://drive.google.com/file/d/1UPYML3IeAbG40iw5FREPCORo-RP8f-98/view?usp=drivesdk)。
 
 本次只更新上述架構與交接文件；未執行模型訓練或切換正式排程。
+
+## 2026-11-03：評分與開收盤拆分階段
+
+已新增統一評分政策、唯讀樣本資格稽核、版本化雜湊與獨立 gap／body 研究模型；可由 `forecast-split` 產生一致的 OHLC 研究快照，並分別評估開盤、盤中及收盤誤差。
+
+這次完成前兩項架構修正與合成資料端到端驗證，未切換原晨報／Sheet／排程，尚無真實資料的準確率改善證據。原始歷史紀錄保留。高低點仍採過去影線平均基準，TimesFM／ARIMA、真實時序驗證與正式整合仍待完成。
+
+操作、資料契約、已執行檢查與限制見 [評分統一與開盤／盤中分離](docs/architecture/AUDIT_AND_SPLIT_V2.md)。可重現唯讀稽核：
+
+```bash
+python -m tw_scenario.cli audit . reports/generated/audit-v2.json
+```
+
+輸出檔必須尚不存在。已提交 [2026-11-03 ledger](reports/audits/2026-11-03-eligibility-v2.json)；它提供依儲存庫證據判定的 legacy 資格，不是新版模型達標報告。
+
+### 歷史資料驗證結果
+
+已使用現有行情，對「只用前日 OHLC 的拆分 Ridge 研究版」完成時間順序驗證。TAIEX 的 179 個保留測試日收盤方向命中 49.72%；TX202603 的 32 日為 53.13%。兩市場收盤 MAE 均略差於各自事前選定的價格基準，因此未通過誤差改善門檻，維持研究狀態。
+
+歷史發布時間尚未核實，這次採明示的可用時間假設；原始資料與 available_at 不回寫。完整分割、基準、八項 OHLC 誤差、資料品質及重現方式見 [歷史驗證報告](reports/research/historical-validation-v1/README.md)。這些結果不是盤前前向績效，也未觸發正式排程切換。
+
+### 可比較的簡單基準
+
+已提供 4 個價格基準、5 個純方向基準與可重複執行的共同日期比較流程。價格與方向各自按驗證期選基準，保留失敗與覆蓋率，不在評估期事後換贏家。夜盤特徵不足時明示不可比較，不補零。
+
+定義及盤前接口見 [簡單基準規則](docs/methodology/SIMPLE_BASELINES.md)；已執行的 TAIEX／TX 對照表見 [基準比較報告](reports/research/simple-baseline-comparison-v1/README.md)。這批歷史評估期已被使用過，因此不算新的未見資料驗證。
+
+### 夜盤資料配對研究
+
+已取得期交所 22 個月 TX 日盤／夜盤資料，以相同樣本與參數，只在開盤頭增加夜盤報酬。各 179 個共同評估日中，TAIEX 收盤 MAE 降低 22.19%、TX 降低 28.76%；但 TAIEX 開盤 MAE 惡化 3.65%，且回歸版的收盤 MAE 仍未勝過預先列入的夜盤直推簡單基準。
+
+這是歷史回溯條件下的資訊增益，不是完整正式驗收或新獨立前向績效。歷史發布時間仍未驗證，未改動原排程。合約選擇、週末／換月處理、配對結果與限制見 [夜盤研究報告](reports/research/night-ablation-v1/README.md)。

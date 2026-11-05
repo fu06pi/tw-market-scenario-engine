@@ -1,0 +1,29 @@
+{
+  "version": "shadow-integration-v1",
+  "recorded_at": "2026-11-05T14:31:20.962945+08:00",
+  "parent_commit": "a667619242c52ce01dc642b368095177d7c3879f",
+  "files_sha256": {
+    ".github/workflows/preopen-shadow.yml": "34efdfea677aeffbbf51b492c751bc9129b9190aa52917b69e6d333f377f0b16",
+    ".github/workflows/shadow-close.yml": "4da3ce37d71f3c983bd5cf5f247bfdebd1711605b3dcdca6acf30d6b6b3a45de",
+    "src/tw_scenario/postclose.py": "bf2682b1b3c23fae61855b935085ef869ce87d730d56e0f461217d4d82c831c6",
+    "src/tw_scenario/morning_adapter.py": "fb539241a43b1c12f17be32fbf10b47dd7ea4a0e13ee33bfbfe08b9927000778",
+    "scripts/collect_day_actuals.py": "832e472a7ba5057cbeb06b56a1dcee59c69eccf49809c1c5b73511dd1464697e",
+    "scripts/finish_shadow_day.py": "e10fb204962347e091a3ee608f7bf74883eb3dd497a89b8fbd573101384ebf34",
+    "scripts/run_shadow_with_report.py": "e4fe2a19e4a84a8bd6b75c72ccd50236a646ea00306d721663582cfd5d49fac1",
+    "scripts/monitor_shadow.py": "3124b21b19ef6a74575ea5a2eef4911d73f752eb44dd838a1d11dd41998f74be",
+    "scripts/verify_shadow_artifact.py": "a52fcc3e635372bf47f3cdd92b42f066d7f1eb02dc1a0dfc6423dd4494c9d742",
+    "src/tw_scenario/shadow.py": "76722ea3eb521d54262dda4587d8eb85a7140863cbefb81b831841083e52fc9c",
+    "requirements-shadow.txt": "65c8a60e21c0b96af20c437b3ed7826ba3b912b667bd43be0dbce5d3f36b3bb0",
+    "tests/test_morning_adapter.py": "a9bd71efd01bd7a4da5c564aefed44482b74163a3baa6dd85c15ebdff7e9c67b",
+    "tests/test_postclose.py": "264fc2f86ca29f9064bb84d8cacc904390db39745b890af5c342b881ec30e431",
+    "examples/synthetic-shadow-bridge.json": "e7f61c9f463745c24d424e89e30a6e69c7f9922157cb40f88289a0bf0d4d6723",
+    "reports/verification/2026-11-05-shadow-close-sources.json": "23ae4a9c14d8d381b59cabc3533d58b5922f340e483d206f26e69d5321b4098a",
+    "reports/research/prospective-night-v1/checkpoint.json": "7110111f3d47bfae1418da66cf4dfaefbd98b42dcb2a3067ea5610c2597df904"
+  },
+  "model_retrained": false,
+  "new_forward_forecasts": 0,
+  "live_sheet_written": false,
+  "actions_e2e_executed": false,
+  "test_result": "136 passed",
+  "scope": "source smoke and synthetic/local integration, not market accuracy"
+}
