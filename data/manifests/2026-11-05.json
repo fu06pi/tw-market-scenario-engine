@@ -1,0 +1,357 @@
+{
+  "trading_date": "2026-11-05",
+  "generated_at": "2026-11-05T08:59:39+08:00",
+  "data_cutoff_at": "2026-11-05T08:50:00+08:00",
+  "snapshot_status": "formal_preopen_legacy_compatibility",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": true,
+  "new_ohlc_model_metric_eligibility": false,
+  "pipeline_generation": "legacy_scenario_compatibility",
+  "cutoff_scope": "Only information published or frozen no later than 08:50 Asia/Taipei was used. No 09:00 onward Taiwan market data or later event result is included.",
+  "recovery": "Today's GitHub prediction and manifest both returned 404. Recovered today's V0 08:39 frozen hypotheses and independently generated today's V1 compatibility targets. No prior-day probabilities, targets, or narrative reused.",
+  "hash_method": "SHA-256 of UTF-8 JSON ensure_ascii=False sort_keys=True separators=(',',':'); data_manifest_hash is SHA-256 over this full manifest; snapshot_hash excludes snapshot_hash from the prediction object.",
+  "calendar": {
+    "is_trading_day": true,
+    "basis": "Thursday and not listed as a 2026 TWSE holiday.",
+    "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html"
+  },
+  "sources": [
+    {
+      "id": "v0_google_sheet",
+      "title": "財金晨報預測與覆盤資料庫",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "sheet_range": "每日預測與覆盤!A356:P373",
+      "frozen_at": "2026-11-05T08:39:00+08:00",
+      "access_mode": "read_only",
+      "shared_source_note": "盤前快照 target_date=2026-11-05；cutoff=2026-11-05T08:39+08:00；規則2026-10-29.v1；R01/R02/R04/R14/R15/R16/R17/R18；2026-11-04美股正式收盤：DJIA 53356.12(+3.03%)、S&P 7688.62(+1.58%)、Nasdaq 25736.51(+1.44%)；SOX約-3.1%（來源報導）；TSM ADR正式close及台指期夜盤正式close未核實，不納入數值特徵；11/04 TAIEX正式收42948.91、台積電2260、聯發科3715、鴻海240；來源 https://www.wsj.com/finance/investing/u-s-stocks-rally-on-divided-government-as-ai-wobbles-continue-1a679abe ; https://www.marketwatch.com/story/these-stocks-have-soared-the-most-today-after-the-democrats-trounced-trump-9d785314 ; https://www.nownews.com/news/6889296 ; https://macrobullseye.com/calendar/2026/11/05/ ; https://www.bls.gov/schedule/news_release/empsit.htm 。信心度未校準；11/05公布結果禁止回填盤前。",
+      "raw_rows": [
+        {
+          "row": 356,
+          "date": "2026/11/05",
+          "item": "TAIEX開盤Gap",
+          "hypothesis": "美股全面反彈，但半導體逆勢下跌；台股前日高振幅後承接不穩，夜盤正式close未核實。",
+          "prediction": "11/05開盤>42948.91；另Gap位於[0%,+1.50%]",
+          "confidence": "方向57%；區間52%",
+          "evidence": "Nasdaq+1.44%、S&P+1.58%、SOX約-3.1%；前日台股-0.83%。"
+        },
+        {
+          "row": 357,
+          "date": "2026/11/05",
+          "item": "首30分鐘下探",
+          "hypothesis": "前日全日振幅4.35%，早盤可能再次測試承接。",
+          "prediction": "09:00–09:30最低/開盤-1≤-0.30%",
+          "confidence": "61%",
+          "evidence": "前日最低41855.82、最高43741.54；不以全日極值驗證首30分鐘。"
+        },
+        {
+          "row": 358,
+          "date": "2026/11/05",
+          "item": "首30分鐘反彈",
+          "hypothesis": "美股廣泛上漲與前日台股尾盤回升，可能支持早盤反彈。",
+          "prediction": "09:00–09:30最高/開盤-1≥+0.30%",
+          "confidence": "57%",
+          "evidence": "美股S&P+1.58%、台股前日自低點回升1093.09點。"
+        },
+        {
+          "row": 359,
+          "date": "2026/11/05",
+          "item": "TAIEX收盤方向",
+          "hypothesis": "海外股市反彈提供支撐，但SOX弱勢與前日台股盤中急跌提高收盤不確定性。",
+          "prediction": "11/05正式收盤>42948.91",
+          "confidence": "53%",
+          "evidence": "美股三大指數上漲；半導體逆勢弱，台股前日收跌。"
+        },
+        {
+          "row": 360,
+          "date": "2026/11/05",
+          "item": "TAIEX開盤至收盤",
+          "hypothesis": "前日開高走低後尾盤反彈，今日可能震盪，無明確趨勢延續證據。",
+          "prediction": "11/05正式收盤<當日開盤",
+          "confidence": "51%",
+          "evidence": "前日開43449.45、收42948.91；Gap與開收方向分開。"
+        },
+        {
+          "row": 361,
+          "date": "2026/11/05",
+          "item": "上市市場廣度",
+          "hypothesis": "美股普漲可能傳導台灣非電子，但半導體弱勢可能壓抑科技廣度。",
+          "prediction": "11/05上市上漲/(上漲+下跌)>50%，平盤排除",
+          "confidence": "54%",
+          "evidence": "美股約74% S&P成分股上漲；台灣廣度需獨立驗證。"
+        },
+        {
+          "row": 362,
+          "date": "2026/11/05",
+          "item": "OTC相對TAIEX",
+          "hypothesis": "美國半導體弱勢可能使台灣中小型科技落後大型權值。",
+          "prediction": "11/05 OTC報酬<TAIEX報酬",
+          "confidence": "53%",
+          "evidence": "SOX約-3.1%、前日台灣電子波動大；OTC盤前確認不足。"
+        },
+        {
+          "row": 363,
+          "date": "2026/11/05",
+          "item": "台積電2330",
+          "hypothesis": "美股整體反彈但半導體逆勢下跌，台積電可能受晶片股情緒壓抑。",
+          "prediction": "11/05開盤<2260元；收盤<2260元，分開評分",
+          "confidence": "開盤54%；收盤52%",
+          "evidence": "11/04台積電收2260(-1.53%)；SOX約-3.1%；ADR正式收盤未核實。"
+        },
+        {
+          "row": 364,
+          "date": "2026/11/05",
+          "item": "聯發科2454",
+          "hypothesis": "前日聯發科逆勢上漲至3715元，隔夜半導體弱可能壓抑續強。",
+          "prediction": "11/05收盤≤3715元",
+          "confidence": "54%",
+          "evidence": "11/04聯發科+1.09%；SOX逆勢下跌，前日相對強勢已部分反映。"
+        },
+        {
+          "row": 365,
+          "date": "2026/11/05",
+          "item": "AI大型權值四檔",
+          "hypothesis": "AI企業需求仍在，但美國部分資料中心股票下跌、晶片族群分化。",
+          "prediction": "台積電/鴻海/廣達/台達電固定四檔等權報酬≤0",
+          "confidence": "53%",
+          "evidence": "SOX約-3.1%；部分AI基建公司走弱；不得將S&P普漲當AI普漲。"
+        },
+        {
+          "row": 366,
+          "date": "2026/11/05",
+          "item": "ABF載板三雄",
+          "hypothesis": "半導體類股逆勢下跌，可能壓抑載板短線風險偏好。",
+          "prediction": "欣興/南電/景碩固定三檔等權報酬≤0",
+          "confidence": "54%",
+          "evidence": "SOX約-3.1%；產品映射與價格接受度仍需獨立驗證。"
+        },
+        {
+          "row": 367,
+          "date": "2026/11/05",
+          "item": "CCL材料雙股",
+          "hypothesis": "資料中心投資政策不確定性提高，AI材料可能分化。",
+          "prediction": "台光電/台燿固定雙股等權報酬≤0",
+          "confidence": "52%",
+          "evidence": "美國AI基建政策風險、SOX弱；無新增台灣公司確定催化。"
+        },
+        {
+          "row": 368,
+          "date": "2026/11/05",
+          "item": "DRAM／南亞科",
+          "hypothesis": "半導體整體走弱，但DRAM供需獨立，前日價格缺正式核實。",
+          "prediction": "南亞科報酬<TAIEX報酬",
+          "confidence": "52%",
+          "evidence": "SOX約-3.1%；記憶體價格與南亞科前收待核實。"
+        },
+        {
+          "row": 369,
+          "date": "2026/11/05",
+          "item": "金融類股",
+          "hypothesis": "美股普漲及殖利率回落可能支持非科技輪動，前日金融相對抗跌。",
+          "prediction": "金融類指數報酬>TAIEX報酬",
+          "confidence": "55%",
+          "evidence": "11/04金融-0.71%優於TAIEX-0.83%；美股廣度改善。"
+        },
+        {
+          "row": 370,
+          "date": "2026/11/05",
+          "item": "塑膠類股",
+          "hypothesis": "國際油價急跌可能改善部分原料成本，但產品利差方向不確定。",
+          "prediction": "塑膠類指數報酬>TAIEX報酬",
+          "confidence": "52%",
+          "evidence": "WTI約-8%、Brent急跌；前日塑膠相對強，不能直接外推。"
+        },
+        {
+          "row": 371,
+          "date": "2026/11/05",
+          "item": "半導體設備三檔",
+          "hypothesis": "半導體股逆勢下跌，短期設備股可能落後市場。",
+          "prediction": "帆宣/漢唐/弘塑固定三檔等權報酬<TAIEX",
+          "confidence": "53%",
+          "evidence": "SOX約-3.1%；設備需求與估值分開。"
+        },
+        {
+          "row": 372,
+          "date": "2026/11/05",
+          "item": "鴻海2317",
+          "hypothesis": "美股非晶片類普漲、消費電子受惠油價回落，但台灣AI供應鏈仍分化。",
+          "prediction": "鴻海報酬>TAIEX報酬",
+          "confidence": "53%",
+          "evidence": "11/04鴻海收240、跌2.24%；美股普漲但AI投資回報有疑慮。"
+        },
+        {
+          "row": 373,
+          "date": "2026/11/05",
+          "item": "TAIEX全日振幅",
+          "hypothesis": "前日振幅4.35%、交易額逾1.1兆元，短線波動可能延續。",
+          "prediction": "(11/05最高-最低)/42948.91≥1.00%",
+          "confidence": "72%",
+          "evidence": "11/04高43741.54、低41855.82，前日振幅4.35%；屬未校準主觀信心。"
+        }
+      ]
+    },
+    {
+      "id": "taiwan_previous_session",
+      "url": "https://www.cna.com.tw/news/afe/202611040148.aspx",
+      "published_at": "2026-11-04T13:57:00+08:00",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-11-04",
+        "high": 43741.54,
+        "low": 41855.82,
+        "close": 42948.91,
+        "return_points": -358.63,
+        "return_pct": -0.828,
+        "turnover_twd_billion": 1114.821,
+        "advancers": 448,
+        "decliners": 558,
+        "breadth_pct": 44.53,
+        "tsmc_close": 2260,
+        "mediatek_close": 3715,
+        "hon_hai_close": 240
+      }
+    },
+    {
+      "id": "taifex_night",
+      "url": "https://money.udn.com/money/story/11112/9858291",
+      "source_attribution": "Taiwan Futures Exchange via Economic Daily News",
+      "published_at": "2026-11-05T05:16:06+08:00",
+      "session_date": "2026-11-04",
+      "available_before_cutoff": true,
+      "values": {
+        "tx_contract": "2026-11",
+        "tx_close": 43404,
+        "change_vs_reference_points": 201,
+        "mini_tx_close": 43397,
+        "tsmc_futures_close": 2283,
+        "tsmc_futures_change": 1,
+        "semiconductor_30_futures_close": 14099,
+        "semiconductor_30_change": -108
+      },
+      "quality_note": "Changes are versus futures reference prices, not direct cash-index forecasts; the session retraced most of its intranight rise."
+    },
+    {
+      "id": "us_equities",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-11-04",
+        "dow_close": 53356.12,
+        "dow_return_pct": 3.03,
+        "sp500_close": 7688.62,
+        "sp500_return_pct": 1.58,
+        "nasdaq_close": 25736.51,
+        "nasdaq_return_pct": 1.44,
+        "sox_close": 10268.65,
+        "sox_return_pct": -3.13
+      },
+      "urls": [
+        "https://apnews.com/article/c0be7ca45b5875abe758e0570cb9a265",
+        "https://noodleswang.com/dow-1569-taiex-futures-1105/"
+      ]
+    },
+    {
+      "id": "tsm_adr",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-11-04",
+        "close_usd": 395.75,
+        "return_pct": -2.24
+      },
+      "url": "https://noodleswang.com/dow-1569-taiex-futures-1105/",
+      "quality_note": "Independent source confirms weakness; not converted mechanically into Taiwan cash price."
+    },
+    {
+      "id": "fx_flow",
+      "url": "https://www.cna.com.tw/news/afe/202611040268.aspx",
+      "published_at": "2026-11-04T17:42:00+08:00",
+      "available_before_cutoff": true,
+      "values": {
+        "usd_twd_close": 32.821,
+        "twd_change": -0.061,
+        "foreign_net_sell_twd_billion": 149.899,
+        "investment_trust_net_buy_twd_billion": 27.258
+      },
+      "quality_note": "Historic fifth-largest foreign sell and a weaker TWD are risk constraints, not deterministic direction rules."
+    },
+    {
+      "id": "rates_oil",
+      "available_before_cutoff": true,
+      "values": {
+        "us10y_yield_pct": 4.894,
+        "wti_close_usd": 96.29
+      },
+      "urls": [
+        "https://portfolio-terminal.com/markets/10-year-treasury-yield",
+        "https://markets.ft.markitdigital.com/data/commodities/tearsheet/historical?c=WTI+Crude+Oil"
+      ],
+      "quality_note": "Oil effects on Taiwan sectors are ambiguous; no hard direction weight for petrochemicals."
+    },
+    {
+      "id": "events",
+      "available_before_cutoff": true,
+      "events": [
+        {
+          "event": "US employment report",
+          "scheduled_at": "2026-11-05T21:30:00+08:00",
+          "status_at_cutoff": "not yet published; result excluded"
+        },
+        {
+          "event": "11/05 Taiwan company/event releases",
+          "status_at_cutoff": "only events/results public by 08:50 eligible; later results excluded"
+        }
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "模型規則主表!A2:P21",
+    "version": "2026-10-29.v1",
+    "rules_used": [
+      {
+        "id": "R01",
+        "decision": "Open、Close/前收與Close/Open分開預測與評分。"
+      },
+      {
+        "id": "R02",
+        "decision": "未公布的就業與公司事件結果不得倒填盤前。"
+      },
+      {
+        "id": "R04",
+        "decision": "指數、廣度與OTC分開評分。"
+      },
+      {
+        "id": "R10",
+        "decision": "夜盤與現貨基差不直接換算現貨Gap。",
+        "status": "候選（待驗證）"
+      },
+      {
+        "id": "R12",
+        "decision": "前日高波動後同時保留續跌與反彈情境。",
+        "status": "候選（待驗證）"
+      },
+      {
+        "id": "R15",
+        "decision": "Gap、Close/前收、Close/Open、振幅與CLV分別計算。"
+      },
+      {
+        "id": "R16",
+        "decision": "保存generated_at、cutoff與canonical hash，落檔後回讀。"
+      },
+      {
+        "id": "R17",
+        "decision": "海外正式close與盤中last分開。"
+      },
+      {
+        "id": "R18",
+        "decision": "使用最近實際交易夜盤並保存session、合約與參考價。"
+      }
+    ],
+    "application_note": "Google Sheet read only and unchanged. Candidate rules constrain scenarios only and are not treated as calibrated coefficients."
+  },
+  "missing_or_qualified": [
+    "TAIFEX +201 is versus the futures reference price, not a cash-index point forecast.",
+    "Broad US indexes rallied while SOX and TSM ADR fell; signals are explicitly separated.",
+    "The new TEJ/TimesFM/ARIMA OHLC pipeline is not yet switched; this is a legacy scenario compatibility output.",
+    "No 09:00 onward Taiwan market data or later event result is used."
+  ]
+}
+
