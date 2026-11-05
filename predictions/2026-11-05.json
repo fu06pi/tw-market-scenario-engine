@@ -1,0 +1,66 @@
+{
+  "trading_date": "2026-11-05",
+  "generated_at": "2026-11-05T08:59:39+08:00",
+  "data_cutoff_at": "2026-11-05T08:50:00+08:00",
+  "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+  "feature_version": "features-v1-cutoff-audited",
+  "prompt_version": "scenario-prompt-v1-cutoff-audited",
+  "data_manifest_hash": "138cc10903a28f3df9681d782e8a35dcdd60535d10b6e3bcd3091c41621ab76e",
+  "scenarios": {
+    "bull": 0.25,
+    "base": 0.55,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 30,
+    "expected_close_return_bps": 10
+  },
+  "narrative": {
+    "market_view": "美股主要指數全面反彈、台指期夜盤收高，但SOX、台積電ADR與半導體30期貨逆勢下跌，顯示非科技風險偏好改善而半導體仍弱。主情境為小幅開高後高波動回吐，收盤接近前收但略偏正；不把道瓊大漲外推為台灣電子全面上漲。",
+    "open_hypothesis": "以前收42,948.91為基準，預期開高約30bps、128.85點至43,077.76，位於V0事前區間[0%,+1.50%]。夜盤43,404、+201是相對期貨參考價，僅作風險背景，不直接換算現貨Gap。",
+    "intraday_hypothesis": "預期gap_fade高波動型態。前日振幅4.35%、夜盤由高點回吐，加上半導體逆勢弱，首30分鐘可能同時出現相對開盤±0.30%的雙向測試；完整分鐘K才可驗證先後。",
+    "close_hypothesis": "預期收盤較前收上漲約10bps、42.95點至42,991.86，低於預估開盤約86點。廣泛美股反彈與較低殖利率提供支撐，但外資賣超、新台幣偏弱及半導體下跌限制收盤上行。",
+    "breadth_hypothesis": "以54%的低信心預期上市非平盤上漲家數略高於50%。非電子與金融可能改善廣度，但OTC、半導體設備、ABF與CCL可能落後；廣度與指數方向分開評分。",
+    "bull_script": "站穩43,404至43,500，台積電收復2,283附近、OTC翻紅且廣度超過60%，夜盤回吐失敗訊號被否定，收盤報酬擴大至+50bps以上。",
+    "base_script": "小幅開高後雙向震盪並回吐，收盤落在前收±50bps，以+10bps為中心；非電子相對抗跌、半導體分化。",
+    "bear_script": "開高失敗並跌破42,948.91，台積電弱於2,260、OTC續跌且廣度低於40%，收盤報酬跌至-50bps以下。"
+  },
+  "key_drivers": [
+    "11月台指期11/04夜盤收43,404、相對參考價+201；台積電期貨2,283、+1，半導體30期貨14,099、-108",
+    "Dow 53,356.12(+3.03%)、S&P 500 7,688.62(+1.58%)、Nasdaq 25,736.51(+1.44%)，但SOX 10,268.65(-3.13%)",
+    "TSM ADR約395.75美元、-2.24%，不直接換算台積電現貨",
+    "11/04 TAIEX收42,948.91(-0.828%)，振幅4.35%，上市448漲、558跌",
+    "外資賣超1,498.99億元、投信買超272.58億元；USD/TWD收32.821",
+    "美國10年債息約4.894%，WTI約96.29美元",
+    "晚間美國就業報告在08:50尚未公布，結果排除",
+    "formal_preopen_legacy_compatibility；新TEJ/TimesFM/ARIMA OHLC模型尚未切換"
+  ],
+  "invalidation_conditions": [
+    "開盤未高於42,948.91，open-up與+30bps中心估計失效",
+    "站穩43,404至43,500、台積電收復2,283、OTC翻紅且廣度超過60%，Base轉Bull/trend_up",
+    "跌破42,948.91、台積電弱於2,260、OTC續跌且廣度低於40%，Base轉Bear",
+    "不以09:00後台股盤中、收盤或晚間美國就業結果修改本快照"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-05",
+      "item": "08:39凍結18項盤前假說",
+      "source_row": "每日預測與覆盤!A356:P373",
+      "extracted_at": "2026-11-05T08:59:39+08:00",
+      "note": "完整A:F原始內容保存於data manifest；Google Sheet唯讀且未修改。"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "統一後模型規則2026-10-29.v1",
+      "source_row": "模型規則主表!A2:P21",
+      "extracted_at": "2026-11-05T08:59:39+08:00",
+      "note": "採用R01/R02/R04/R15/R16/R17/R18；R10/R12只作候選情境約束。"
+    }
+  ],
+  "snapshot_hash": "965f8ed709547833d9fb6cccb4d5b8c01046a59c2ce2250133c63b8c9f10c744"
+}
+
