@@ -31,7 +31,7 @@ jobs:
       - name: Collect by 08:30 and freeze before 08:40 Taipei
         id: forecast
         run: >-
-          python -m scripts.run_shadow
+          python -m scripts.run_shadow_with_report
           --checkpoint reports/research/prospective-night-v1/checkpoint.json
           --output reports/generated/shadow/current
       - name: Record setup or execution failures that produced no snapshot
