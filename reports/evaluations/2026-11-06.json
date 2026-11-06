@@ -1,0 +1,365 @@
+{
+  "trading_date": "2026-11-06",
+  "target_date": "2026-11-06",
+  "evaluated_at": "2026-11-06T15:22:00+08:00",
+  "model_version": "v1-legacy-scenario-analyst-reconstructed-late",
+  "status": "completed_late_reconstructed_diagnostic",
+  "market_status": "trading_day_confirmed_by_dated_official_TWSE_and_TPEx",
+  "prediction_path": "predictions/2026-11-06.json",
+  "prediction_snapshot_hash": "2b86bb2a4dc2c9a42f158685793c69e804e0c2e7adb68ab05b04f97aef76e75b",
+  "prediction_blob_sha": "8c1a6cfed8c348ee3fb525f28c2513fcfb06501d",
+  "prediction_commit_sha": "d91c7559a77d7ba63e4510f5ad5a7f7518088117",
+  "prediction_commit_at": "2026-11-06T09:01:51+08:00",
+  "prediction_generated_at": "2026-11-06T09:00:44+08:00",
+  "prediction_data_cutoff_at": "2026-11-06T08:50:00+08:00",
+  "snapshot_integrity": {
+    "raw_json_canonical_sha256": "2b86bb2a4dc2c9a42f158685793c69e804e0c2e7adb68ab05b04f97aef76e75b",
+    "raw_hash_matches": true,
+    "stored_snapshot_hash": "2b86bb2a4dc2c9a42f158685793c69e804e0c2e7adb68ab05b04f97aef76e75b",
+    "canonicalization": "JSON with snapshot_hash removed, recursively sorted keys, compact UTF-8, no terminal newline",
+    "immutable_reference": "Git blob 8c1a6cfed8c348ee3fb525f28c2513fcfb06501d at commit d91c7559a77d7ba63e4510f5ad5a7f7518088117",
+    "timestamp_consistency": "generated_at 09:00:44 and Git commit 09:01:51 are both after market open. Hash integrity passes, but timing excludes the sample from formal pre-open performance."
+  },
+  "realization_path": "realizations/2026-11-06.json",
+  "realization": {
+    "trading_date": "2026-11-06",
+    "previous_close": 41574.72,
+    "open": 38915.76,
+    "high": 40435.83,
+    "low": 37837.05,
+    "close": 39701.64,
+    "turnover": 1246104000000,
+    "breadth_up": 105,
+    "breadth_down": 952,
+    "otc_return_pct": -5.43,
+    "recorded_at": "2026-11-06T15:22:00+08:00",
+    "regular_stock_turnover": 1060937217573,
+    "turnover_all_sessions": 1312516977574,
+    "breadth_flat": 27,
+    "breadth_no_trade": 2,
+    "session_change_points": -1873.08,
+    "session_return_pct": -4.51
+  },
+  "evaluation_method": {
+    "implementation": "src/tw_scenario/metrics.py compatible calculations",
+    "config": "config/targets.yaml",
+    "direction_flat_threshold_bps": 5,
+    "scenario_thresholds_bps": {
+      "bull": 50,
+      "bear": -50
+    },
+    "brier_definition": "mean squared multiclass Brier over bull/base/bear; outcome based only on close return",
+    "regime_and_breadth": "Breadth uses final official TWSE stock-only counts. Intraday regime is diagnostic without a frozen minute-regime classifier."
+  },
+  "quantitative_evaluation": {
+    "trading_date": "2026-11-06",
+    "open_direction_realized": "down",
+    "open_direction_hit": 1,
+    "close_direction_realized": "down",
+    "close_direction_hit": 1,
+    "open_gap_bps_realized": -639.5617336689219,
+    "open_gap_mae_bps": 319.5617336689219,
+    "close_return_bps_realized": -450.53340106680275,
+    "close_return_mae_bps": 90.53340106680275,
+    "mfe_bps": -273.9381046943912,
+    "mae_bps": -899.0246957766634,
+    "scenario_outcome": "bear",
+    "brier_score": 0.049266666666666674,
+    "direction_hits": 2,
+    "direction_targets_scored": 2,
+    "direction_accuracy": 1,
+    "open_gap_signed_error_bps": 319.5617336689219,
+    "close_return_signed_error_bps": 90.53340106680275,
+    "expected_open_points": 40244.32896,
+    "open_absolute_error_points": 1328.5689599999969,
+    "expected_close_points": 40078.03008,
+    "close_absolute_error_points": 376.3900799999974,
+    "open_to_close_return_bps": 201.9438911124949,
+    "top_scenario": "bear",
+    "top_scenario_hit": true,
+    "bear_probability": 0.7,
+    "multiclass_log_loss": 0.35667494393873245,
+    "calibration_error": null,
+    "calibration_note": "Single-day proper score is diagnostic only; post-open reconstruction excludes this sample from performance and calibration aggregates.",
+    "breadth_up": 105,
+    "breadth_down": 952,
+    "breadth_flat": 27,
+    "advancer_share_nonflat": 0.09933774834437085,
+    "advance_decline_net": -847,
+    "breadth_direction_realized": "down",
+    "breadth_direction_hit": 1,
+    "intraday_regime_diagnostic": "gap_down_capitulation_then_strong_fade_recovery",
+    "intraday_regime_hit": 0,
+    "intraday_range_points": 2598.78,
+    "low_to_close_recovery_points": 1864.59,
+    "close_location_value": 0.717486666820584,
+    "baseline_lift": null,
+    "baseline_note": "No frozen same-day baseline persisted; lift is not fabricated."
+  },
+  "narrative_evaluation": [
+    {
+      "field": "market_view",
+      "grade": "partially_correct",
+      "note": "明顯開低、高波動、收低與弱廣度命中；但低點後反彈1864.59點，主要路徑不是單向trend_down。",
+      "error_types": [
+        "regime_error",
+        "magnitude_error"
+      ]
+    },
+    {
+      "field": "open_hypothesis",
+      "grade": "partially_correct",
+      "note": "實際開盤-639.56bp，方向命中；-320bp中心低估負Gap319.56bp，且落在原V0區間之外。",
+      "error_types": [
+        "magnitude_error"
+      ]
+    },
+    {
+      "field": "intraday_hypothesis",
+      "grade": "partially_correct",
+      "note": "首段續跌至37837.05成立，但其後強力回補並收在日內區間71.75%；trend_down標籤未命中。",
+      "error_types": [
+        "regime_error"
+      ]
+    },
+    {
+      "field": "close_hypothesis",
+      "grade": "partially_correct",
+      "note": "收盤向下及Bear終態命中；實際-450.53bp，較預測-360bp多跌90.53bp，但收盤較開盤反而上漲201.94bp。",
+      "error_types": [
+        "magnitude_error",
+        "regime_error"
+      ]
+    },
+    {
+      "field": "breadth_hypothesis",
+      "grade": "correct",
+      "note": "官方上市股票105漲、952跌，非平盤上漲占9.93%；OTC亦跌5.43%，廣度向下命中。",
+      "error_types": []
+    },
+    {
+      "field": "bull_script",
+      "grade": "incorrect",
+      "note": "未收復前收，台積電收2135、OTC未翻紅且廣度遠低於55%，Bull條件未成立。",
+      "error_types": [
+        "inference_error"
+      ]
+    },
+    {
+      "field": "base_script",
+      "grade": "incorrect",
+      "note": "雖有強力空單回補，但收盤仍-450.53bp，未回到前收±50bp。",
+      "error_types": [
+        "magnitude_error"
+      ]
+    },
+    {
+      "field": "bear_script",
+      "grade": "correct",
+      "note": "反彈高點40435.83仍未收復40500，台積電弱於期貨參考區、OTC續弱且廣度低於30%，Bear條件完整成立。",
+      "error_types": []
+    }
+  ],
+  "key_driver_evaluation": [
+    {
+      "index": 0,
+      "grade": "correct",
+      "note": "台指夜盤與台積電期貨急跌正確指向巨大負Gap與Bear結果；現貨負Gap仍小於夜盤跌幅。"
+    },
+    {
+      "index": 1,
+      "grade": "correct",
+      "note": "美股主要指數全面重挫與台股方向一致。"
+    },
+    {
+      "index": 2,
+      "grade": "correct",
+      "note": "SOX跌逾12%正確捕捉半導體壓力，台灣半導體類跌4.71%。"
+    },
+    {
+      "index": 3,
+      "grade": "correct",
+      "note": "TSM ADR與晶片情緒弱勢延續，台積電盤中跌停、終場跌4.69%。"
+    },
+    {
+      "index": 4,
+      "grade": "correct",
+      "note": "前日連跌與極弱廣度延續，當日非平盤上漲占比降至9.93%。"
+    },
+    {
+      "index": 5,
+      "grade": "correct",
+      "note": "匯率與外資賣超是有效風險背景；單日因果貢獻未量化。"
+    },
+    {
+      "index": 6,
+      "grade": "unverified",
+      "note": "美債與油價屬盤前背景，無法由本日資料識別獨立貢獻。"
+    },
+    {
+      "index": 7,
+      "grade": "correct",
+      "note": "晚間非農尚未公布且被排除；樣本明確標示late reconstructed。"
+    }
+  ],
+  "invalidation_evaluation": [
+    {
+      "index": 0,
+      "status": "not_triggered",
+      "note": "開盤38915.76低於前收，open-down未失效；幅度誤差319.56bp。"
+    },
+    {
+      "index": 1,
+      "status": "not_triggered",
+      "note": "未站回前收，台積電未收復2240，OTC未翻紅且廣度不足55%。"
+    },
+    {
+      "index": 2,
+      "status": "triggered",
+      "note": "反彈最高40435.83未收復40500，廣度9.93%低於30%；Bear持續條件成立。"
+    },
+    {
+      "index": 3,
+      "status": "complied",
+      "note": "prediction未因盤中、收盤或晚間事件改寫；但它本身於開盤後才生成並保存。"
+    },
+    {
+      "index": 4,
+      "status": "complied",
+      "note": "evaluation明確分離未校準重建樣本與正式績效；hash通過不等於準時發布。"
+    }
+  ],
+  "error_attribution": {
+    "data_missing": [
+      "凍結的09:00–09:30分鐘線與VWAP",
+      "可重現的權值股指數點數貢獻",
+      "凍結的minute-regime classifier"
+    ],
+    "inference_error": [
+      "方向與Bear判斷大致正確，主要錯誤不在方向推論"
+    ],
+    "weight_misestimation": [
+      "開盤Gap中心只給-320bp，低估全球半導體與夜盤共振下的開盤跳空",
+      "未充分給予跌停打開、政策穩市與極端超跌後回補的條件權重"
+    ],
+    "magnitude_error": {
+      "open_gap_mae_bps": 319.5617336689219,
+      "close_return_mae_bps": 90.53340106680275
+    },
+    "regime_error": "預測trend_down；實際為開盤崩跌、再創低後強力回補，收盤位於日內區間71.75%。"
+  },
+  "observed_market_drivers": [
+    "美股四大指數重挫、SOX跌逾12%、TSM ADR跌10.78%，台指夜盤跌7.03%，形成高度一致的外部風險訊號",
+    "台積電盤中跌停2020、收2135；大型電子與高價股早盤大量跌停，電子類跌4.93%、半導體跌4.71%",
+    "韓國股市早盤熔斷，亞洲風險資產同步承壓；此為同日報導支持的市場背景",
+    "行政院宣示穩定股市後，權值股跌幅收斂，指數從低點反彈1864.59點；此為市場解讀，非已估計政策因果",
+    "官方上市股票105漲、952跌，OTC跌5.43%；金融亦跌3.16%，賣壓廣泛",
+    "成交值放大至約1.246兆元，顯示恐慌賣壓與低檔承接同時放大"
+  ],
+  "causal_caveat": "上述為官方數據與同日報導支持的共同變動及市場解讀，不是已估計的因果貢獻。",
+  "proposed_model_changes": [
+    {
+      "proposal": "極端夜盤與SOX共振時，開盤Gap改用非線性／分位數映射，並以截尾或區間輸出避免單一未校準點估。",
+      "status": "research_candidate_not_implemented"
+    },
+    {
+      "proposal": "加入跌停打開、亞洲熔斷、政策穩市與極端超跌後回補特徵，區分trend_down與capitulation-then-fade-recovery。",
+      "status": "research_candidate_not_implemented"
+    },
+    {
+      "proposal": "四項OHLC誤差分開以MAE評估，不使用固定±100點命中；本日開盤點位誤差1328.57點、收盤誤差376.39點。",
+      "status": "research_candidate_not_implemented"
+    },
+    {
+      "proposal": "正式績效要求prediction生成與Git持久化均早於09:00，並符合08:30 cutoff／08:40 persistence；本日排除。",
+      "status": "pipeline_quality_required"
+    }
+  ],
+  "model_change_gate": {
+    "decision": "no_direct_model_logic_change",
+    "reason": "單日結果不足以直接改規則；非線性Gap、capitulation recovery、OHLC MAE與pipeline時限列為跨日研究候選。Repo無獨立correction/lesson結構，因此只記錄於evaluation。"
+  },
+  "sample_eligibility": {
+    "legacy_diagnostic": true,
+    "formal_legacy_direction_metrics": false,
+    "formal_hash_verified_aggregate": false,
+    "new_ohlc_model_performance": false,
+    "reason": "Prediction generated at 09:00:44 and committed at 09:01:51 after market open. Canonical hash matches, but timing invalidates formal pre-open performance. Scores are diagnostic only."
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261106&type=ALLBUT0999&response=json",
+      "trading_date": "2026-11-06",
+      "retrieved_at": "2026-11-06T15:22:00+08:00",
+      "role": "Official trading-day confirmation, close, sectors, stock-only breadth and turnover",
+      "facts": {
+        "date": "20261106",
+        "stat": "OK",
+        "close": 39701.64,
+        "change_points": -1873.08,
+        "return_pct": -4.51,
+        "stock_up": 105,
+        "stock_down": 952,
+        "stock_flat": 27,
+        "regular_stock_turnover_twd": 1060937217573,
+        "all_securities_turnover_twd": 1312516977574,
+        "sectors_pct": {
+          "electronics": -4.93,
+          "semiconductor": -4.71,
+          "electronic_components": -7.12,
+          "financial": -3.16,
+          "shipping": -4.06,
+          "biotech": 2.51
+        }
+      }
+    },
+    {
+      "id": "tpex_index_summary",
+      "publisher": "TPEx",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/indexSummary?date=2026%2F11%2F06&response=json",
+      "trading_date": "2026-11-06",
+      "retrieved_at": "2026-11-06T15:22:00+08:00",
+      "role": "Official OTC close and return",
+      "facts": {
+        "date": "20261106",
+        "stat": "ok",
+        "otc_close": 304.02,
+        "otc_change_points": -17.45,
+        "otc_return_pct": -5.43
+      }
+    },
+    {
+      "id": "cna_close_via_udn",
+      "publisher": "CNA / Economic Daily News",
+      "url": "https://money.udn.com/money/story/5607/9861871",
+      "trading_date": "2026-11-06",
+      "role": "Same-day TAIEX OHLC, return, turnover and broader breadth crosscheck"
+    },
+    {
+      "id": "cna_market_drivers",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202611060037.aspx",
+      "trading_date": "2026-11-06",
+      "role": "Timestamped opening crash, heavyweight limit-down and market-driver crosscheck"
+    },
+    {
+      "id": "cna_close_path_via_udn",
+      "publisher": "CNA / Economic Daily News",
+      "url": "https://money.udn.com/money/story/5607/9861885",
+      "trading_date": "2026-11-06",
+      "role": "Same-day low-to-close rebound, historical context and stabilization-policy interpretation"
+    }
+  ],
+  "v0_modified": false,
+  "prediction_modified": false,
+  "model_logic_modified": false,
+  "date_checks": {
+    "prediction": true,
+    "realization": true,
+    "evaluation": true,
+    "no_historical_fallback": true
+  },
+  "readback_required": true
+}
