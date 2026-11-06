@@ -1,0 +1,99 @@
+{
+  "trading_date": "2026-11-06",
+  "previous_close": 41574.72,
+  "open": 38915.76,
+  "high": 40435.83,
+  "low": 37837.05,
+  "close": 39701.64,
+  "turnover": 1246104000000,
+  "breadth_up": 105,
+  "breadth_down": 952,
+  "otc_return_pct": -5.43,
+  "heavyweight_contribution_points": {},
+  "recorded_at": "2026-11-06T15:22:00+08:00",
+  "turnover_unit": "TWD",
+  "turnover_scope": "same-day close report regular-session market transaction value",
+  "regular_stock_turnover": 1060937217573,
+  "regular_stock_turnover_scope": "TWSE MI_INDEX 一般股票",
+  "turnover_all_sessions": 1312516977574,
+  "turnover_all_sessions_scope": "TWSE MI_INDEX total across listed securities/session scopes; not interchangeable with regular-session value",
+  "breadth_flat": 27,
+  "breadth_no_trade": 2,
+  "breadth_scope": "TWSE MI_INDEX 漲跌證券數合計 股票 column",
+  "session_change_points": -1873.08,
+  "session_return_pct": -4.51,
+  "data_quality": {
+    "ohlc_source": "Same-day CNA/Economic Daily close report, crosschecked with official TWSE close and change",
+    "official_mi_index_status": "OK",
+    "otc_source": "Official TPEx index summary",
+    "breadth_pool_note": "Official stock-only 105/952/27 used; non-flat advancer share is 9.9338%. Broader media counts differ by scope and are crosschecks only.",
+    "intraday_order_note": "Opened 38915.76, fell to 37837.05, rebounded as high as 40435.83, and closed 1864.59 points above the low. No frozen minute series; exact sequencing is supported by same-day reporting but regime remains diagnostic.",
+    "heavyweight_contribution_note": "TSMC touched limit-down 2020 and closed 2135, down 105; reproducible index-point contribution unavailable and is not estimated."
+  },
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "publisher": "TWSE",
+      "url": "https://www.twse.com.tw/rwd/zh/afterTrading/MI_INDEX?date=20261106&type=ALLBUT0999&response=json",
+      "trading_date": "2026-11-06",
+      "retrieved_at": "2026-11-06T15:22:00+08:00",
+      "role": "Official trading-day confirmation, close, sectors, stock-only breadth and turnover",
+      "facts": {
+        "date": "20261106",
+        "stat": "OK",
+        "close": 39701.64,
+        "change_points": -1873.08,
+        "return_pct": -4.51,
+        "stock_up": 105,
+        "stock_down": 952,
+        "stock_flat": 27,
+        "regular_stock_turnover_twd": 1060937217573,
+        "all_securities_turnover_twd": 1312516977574,
+        "sectors_pct": {
+          "electronics": -4.93,
+          "semiconductor": -4.71,
+          "electronic_components": -7.12,
+          "financial": -3.16,
+          "shipping": -4.06,
+          "biotech": 2.51
+        }
+      }
+    },
+    {
+      "id": "tpex_index_summary",
+      "publisher": "TPEx",
+      "url": "https://www.tpex.org.tw/www/zh-tw/afterTrading/indexSummary?date=2026%2F11%2F06&response=json",
+      "trading_date": "2026-11-06",
+      "retrieved_at": "2026-11-06T15:22:00+08:00",
+      "role": "Official OTC close and return",
+      "facts": {
+        "date": "20261106",
+        "stat": "ok",
+        "otc_close": 304.02,
+        "otc_change_points": -17.45,
+        "otc_return_pct": -5.43
+      }
+    },
+    {
+      "id": "cna_close_via_udn",
+      "publisher": "CNA / Economic Daily News",
+      "url": "https://money.udn.com/money/story/5607/9861871",
+      "trading_date": "2026-11-06",
+      "role": "Same-day TAIEX OHLC, return, turnover and broader breadth crosscheck"
+    },
+    {
+      "id": "cna_market_drivers",
+      "publisher": "CNA",
+      "url": "https://www.cna.com.tw/news/afe/202611060037.aspx",
+      "trading_date": "2026-11-06",
+      "role": "Timestamped opening crash, heavyweight limit-down and market-driver crosscheck"
+    },
+    {
+      "id": "cna_close_path_via_udn",
+      "publisher": "CNA / Economic Daily News",
+      "url": "https://money.udn.com/money/story/5607/9861885",
+      "trading_date": "2026-11-06",
+      "role": "Same-day low-to-close rebound, historical context and stabilization-policy interpretation"
+    }
+  ]
+}
