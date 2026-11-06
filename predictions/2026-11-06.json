@@ -1,0 +1,68 @@
+{
+  "trading_date": "2026-11-06",
+  "generated_at": "2026-11-06T01:00:44Z",
+  "data_cutoff_at": "2026-11-06T08:50:00+08:00",
+  "model_version": "v1-legacy-scenario-analyst-reconstructed-late",
+  "feature_version": "features-v1-cutoff-audited-20261106",
+  "prompt_version": "scenario-v1-reconstruction-explicit-uncalibrated",
+  "data_manifest_hash": "172fd05fd0a1233f1fdaf0e861fb5e350c73284fe5166940d91482eb40b9a2eb",
+  "scenarios": {
+    "bull": 0.07,
+    "base": 0.23,
+    "bear": 0.7
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "trend_down",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -320.0,
+    "expected_close_return_bps": -360.0
+  },
+  "narrative": {
+    "market_view": "Nasdaq、SOX、台積電ADR及最近台指夜盤同向急跌，配合前日台股-3.20%、上市廣度15.39%，主情境為明顯開低後高波動偏空。台股已連跌與較低美債殖利率構成反彈反證，不能把夜盤跌點直接當成現貨Gap。此為09:00後依08:50前資料補建的reconstructed/late_generated legacy情境，機率與幅度未校準，不是TimesFM/ARIMA新OHLC模型輸出，排除正式盤前績效。",
+    "open_hypothesis": "以前收41,574.72為基準，預估開低320bps、1,330.39點至40,244.33。今日V0原始Gap區間[-2.50%,-0.20%]完整保留；核實夜盤相對參考價-7.034%後，本情境中心低於V0原區間。-320bps為未校準主觀幅度，不是把夜盤-2,946點或ADR跌幅機械套用。",
+    "intraday_hypothesis": "以trend_down為待驗證路徑假說，首30分鐘續跌風險較高，但大幅低開也可能觸發空單回補。首30分鐘±0.30%可同時成立，必須使用09:00–09:30時戳資料驗證，不以全日OHLC推定先後。",
+    "close_hypothesis": "預估收盤較前收下跌360bps、1,496.69點至40,078.03，較預估開盤再低約166.30點。海外晶片急跌與台灣弱廣度偏空，但已累積跌幅使技術性回補仍可能出現；收盤/前收與收盤/開盤分別評分。",
+    "breadth_hypothesis": "預期上市非平盤上漲家數低於50%，AI大型權值、ABF、CCL與設備股承壓；金融、塑膠與鴻海僅保留相對抗跌可能，不等於絕對上漲。廣度是獨立未驗證假說，非日線模型推導。",
+    "bull_script": "大幅開低後收復40,500、41,000並站回前收41,574.72，台積電站回2,240、OTC翻紅且廣度超過55%，主偏空失效；Bull終態定義為收盤報酬>+50bps。",
+    "base_script": "開低後出現強力空單回補，跌幅顯著收斂，收盤回到前收±50bps。此為23%的反彈情境，不是-360bps中心估計的另一名稱。",
+    "bear_script": "開低後無法收復40,500，台積電弱於2,026期貨參考區、OTC續弱且廣度低於30%，偏空延續。Bear終態定義為收盤報酬<-50bps，主觀中心-360bps。"
+  },
+  "key_drivers": [
+    "11/05 session台指期夜盤收38,936，相對參考價41,882跌2,946點(-7.034%)；11/06 05:08發布，台積電期貨2,026、-221",
+    "美國11/05 Nasdaq 24,315(-5.52%)、S&P 500 7,353.73(-4.36%)、Dow 51,523.06(-3.44%)",
+    "SOX官方收9,011.14；媒體跌幅12.2%至12.3%不一，僅用跌逾12%壓力訊號",
+    "TSM ADR收353.10美元(-10.78%)；Qualcomm/Arm財報與AI基建投資疑慮壓抑晶片情緒，不直接當台灣公司營收下修證據",
+    "11/05 TAIEX收41,574.72(-3.20%)，173漲951跌，上漲/(上漲+下跌)=15.39%",
+    "11/05 USD/TWD收32.876、美元上升0.055；外資賣超1,024.60億元",
+    "05:58公開美10年債息約4.835%、Brent結算98.29美元(+3.88%)；WTI結算90.52美元(+2.72%)",
+    "11/06 21:30美國非農尚未發布，結果排除；本次reconstructed/late_generated，評估單列"
+  ],
+  "invalidation_conditions": [
+    "若開盤未低於41,574.72，open_direction=down失效；幅度誤差仍按原始-320bps記錄",
+    "開低後站回41,574.72、台積電收復2,240、OTC翻紅且廣度>55%，trend_down及收盤偏空假說失效",
+    "反彈無法收復40,500且廣度<30%，偏空持續；若跌破夜盤38,936也不回寫加碼Bear機率",
+    "本檔生成後不以09:00後行情、當日收盤、晚間非農結果或事後修訂資料改寫任何量化欄位",
+    "未校準情境、重建樣本及新OHLC模型績效必須分開，不能以hash通過宣稱準時發布"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-06",
+      "item": "08:36:24凍結18項今日盤前假說",
+      "note": "A:F/O逐字保存在manifest；未使用G:N/P、未修改Sheet。",
+      "source_row": "每日預測與覆盤!A374:P391",
+      "extracted_at": "2026-11-06T01:00:44Z",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "統一模型規則2026-10-29.v1",
+      "note": "R01/R02/R04/R14/R15/R16/R17/R18紀錄規範；R10/R12候選約束，原始規則完整保存於manifest。",
+      "source_row": "模型規則主表!A1:P22",
+      "extracted_at": "2026-11-06T01:00:44Z",
+      "content_hash": null
+    }
+  ],
+  "snapshot_hash": "2b86bb2a4dc2c9a42f158685793c69e804e0c2e7adb68ab05b04f97aef76e75b"
+}
