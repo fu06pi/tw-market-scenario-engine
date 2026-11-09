@@ -1,0 +1,882 @@
+{
+  "trading_date": "2026-11-09",
+  "generated_at": "2026-11-09T08:55:03+08:00",
+  "data_cutoff_at": "2026-11-09T08:50:00+08:00",
+  "snapshot_status": "preopen_legacy_analyst_uncalibrated",
+  "reconstructed": false,
+  "late_generated": false,
+  "aggregate_metric_eligibility": false,
+  "new_ohlc_model_metric_eligibility": false,
+  "legacy_scenario_metric_eligibility": true,
+  "recovery": {
+    "prediction_initial_check": "GitHub API error 404 Not Found",
+    "manifest_initial_check": "GitHub API error 404 Not Found",
+    "frozen_v1_found": false,
+    "frozen_v0_found": true,
+    "v0_frozen_at": "2026-11-09T08:40:50+08:00",
+    "note": "Today's 18 original A:F/O records recovered verbatim. No earlier prediction file, probability or target reused. Newly produced analyst scenario, not recovered pre-existing V1."
+  },
+  "calendar": {
+    "is_trading_day": true,
+    "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html",
+    "basis": "2026 official TWSE holiday list; Monday November 9 is not a holiday."
+  },
+  "hash_method": "SHA-256 UTF-8 JSON ensure_ascii=False, sort_keys=True, separators=(',',':'), no newline. Snapshot uses exact repo Pydantic model_dump(mode='json') fields excluding snapshot_hash.",
+  "pipeline_scope": "TAIEX legacy analyst scenario, not TX daytime or new TEJ/TimesFM/ARIMA OHLC model output. User requests 08:50 legacy cutoff. README/AGENTS new OHLC 08:30 cutoff and 08:40 persistence remain separate. No switch to V0 or existing schedules.",
+  "sources": [
+    {
+      "id": "v0_today",
+      "spreadsheet_id": "19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ",
+      "range": "每日預測與覆盤!A392:P409",
+      "frozen_at": "2026-11-09T08:40:50+08:00",
+      "access": "read_only",
+      "availability_basis": "Every O cell explicitly records today's cutoff 08:40:50; G:N/P were empty when retrieved.",
+      "raw_rows": [
+        {
+          "row": 392,
+          "A_to_F": [
+            "2026/11/09",
+            "TAIEX開盤Gap",
+            "美股科技反彈與台灣穩市政策支撐開盤，但前週極端下跌及融資賣壓可能壓抑反彈。",
+            "開盤>39701.64；Gap (開盤/39701.64-1)介於0%至+2.50%",
+            "60%",
+            "Nasdaq+1.09%、SOX+4.2%、ADR+6.33%；夜盤正式close缺漏，區間信心低。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 393,
+          "A_to_F": [
+            "2026/11/09",
+            "首30分鐘下探",
+            "高波動及急跌後的價格發現可能帶來開盤下探。",
+            "09:00–09:30最低/開盤-1≤-0.30%",
+            "59%",
+            "前日全日振幅6.25%，盤初價格發現可能延續。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 394,
+          "A_to_F": [
+            "2026/11/09",
+            "首30分鐘反彈",
+            "海外科技反彈與限空政策可能促使早盤承接。",
+            "09:00–09:30最高/開盤-1≥+0.30%",
+            "62%",
+            "ADR+6.33%、SOX+4.2%、穩市措施。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 395,
+          "A_to_F": [
+            "2026/11/09",
+            "TAIEX收盤方向",
+            "政策支撐與科技反彈可能促使反彈，但趨勢尚未扭轉。",
+            "收盤>39701.64",
+            "55%",
+            "週五台股-4.51%、美股科技週五反彈，週線仍弱。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 396,
+          "A_to_F": [
+            "2026/11/09",
+            "TAIEX開盤至收盤",
+            "急跌後反彈有機會延續，但政策利多可能在開盤反映。",
+            "收盤>當日開盤",
+            "51%",
+            "開盤方向與全天趨勢分開；高波動。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 397,
+          "A_to_F": [
+            "2026/11/09",
+            "上市市場廣度",
+            "限空及美股科技回升可能改善多數股票價格。",
+            "上市非平盤上漲/(上漲+下跌)>50%",
+            "54%",
+            "政策性穩市，但前日OTC -5.43%，不以權值代替廣度。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 398,
+          "A_to_F": [
+            "2026/11/09",
+            "OTC相對TAIEX",
+            "中小型科技跌深可能反彈，但流動性風險偏高。",
+            "OTC報酬>TAIEX報酬",
+            "51%",
+            "前日OTC -5.43%、TAIEX -4.51%；反彈不確定。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 399,
+          "A_to_F": [
+            "2026/11/09",
+            "台積電2330",
+            "ADR大漲及SOX反彈提供開盤修復訊號。",
+            "開盤>2135；收盤>2135",
+            "65%／59%",
+            "11/6台積電2135、ADR375.44(+6.33%)；11/10營收未公布。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 400,
+          "A_to_F": [
+            "2026/11/09",
+            "聯發科2454",
+            "海外半導體反彈支持IC設計，但台灣高beta壓力未消失。",
+            "收盤>3390",
+            "56%",
+            "前收3390；SOX+4.2%，不直接等同聯發科必漲。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 401,
+          "A_to_F": [
+            "2026/11/09",
+            "AI大型權值四檔",
+            "AI鏈週五海外反彈，政策支持風險偏好。",
+            "台積電、鴻海、廣達、台達電等權報酬>0",
+            "57%",
+            "SOX+4.2%、ADR+6.33%；固定股票池。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 402,
+          "A_to_F": [
+            "2026/11/09",
+            "ABF載板三雄",
+            "上週半導體與載板大跌，可能跟隨SOX反彈。",
+            "欣興、南電、景碩等權報酬>0",
+            "54%",
+            "SOX反彈但產業股高波動。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 403,
+          "A_to_F": [
+            "2026/11/09",
+            "CCL材料雙股",
+            "AI供應鏈短線反彈可能擴散至材料。",
+            "台光電、台燿等權報酬>0",
+            "54%",
+            "海外AI科技反彈，週五台光電下跌。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 404,
+          "A_to_F": [
+            "2026/11/09",
+            "DRAM南亞科",
+            "記憶體供需獨立於AI估值壓力，可能出現相對修復。",
+            "南亞科報酬>TAIEX報酬",
+            "52%",
+            "SOX反彈但DRAM產品差異，不用SOX直接替代。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 405,
+          "A_to_F": [
+            "2026/11/09",
+            "金融類股",
+            "極端行情後政策穩市可能改善金融風險偏好。",
+            "金融類指數報酬>TAIEX報酬",
+            "53%",
+            "前日金融-3.16%、TAIEX-4.51%，但不視為固定避險。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 406,
+          "A_to_F": [
+            "2026/11/09",
+            "塑膠類股",
+            "原物料與非科技輪動不確定，科技反彈可能領先。",
+            "塑膠類指數報酬<TAIEX報酬",
+            "51%",
+            "海外科技領漲，油價與利差未完整核實。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 407,
+          "A_to_F": [
+            "2026/11/09",
+            "半導體設備三檔",
+            "半導體風險偏好回升可能帶動設備鏈反彈。",
+            "帆宣、漢唐、弘塑等權報酬>TAIEX報酬",
+            "52%",
+            "SOX+4.2%；公司特定催化未確認。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 408,
+          "A_to_F": [
+            "2026/11/09",
+            "鴻海2317",
+            "海外科技反彈與AI伺服器需求支持修復。",
+            "鴻海報酬>TAIEX報酬",
+            "53%",
+            "前收224.5；美股AI反彈但鴻海相對強度未知。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        },
+        {
+          "row": 409,
+          "A_to_F": [
+            "2026/11/09",
+            "TAIEX全日振幅",
+            "週五極端振幅及政策轉折提高價格發現不確定性。",
+            "(當日最高-最低)/39701.64≥1.00%",
+            "76%",
+            "前日全日振幅6.25%，本日政策生效。"
+          ],
+          "O": "target_date=2026-11-09;cutoff=2026-11-09T08:40:50+08:00;規則=2026-10-29.v1;主觀信心未校準;夜盤正式收盤未核實，不推算Gap;11/10 13:30台積電10月營收尚未公布; https://www.cna.com.tw/news/afe/202611060141.aspx ; https://www.reuters.com/business/nasdaq-futures-rise-after-steep-ai-selloff-chip-stocks-stabilize-2026-11-06/ ; https://stockanalysis.com/stocks/tsm/history/?period=daily ; https://investor.tsmc.com/english/financial-calendar ; https://ec.ltn.com.tw/article/breakingnews/5632054"
+        }
+      ]
+    },
+    {
+      "id": "night_session",
+      "url": "https://money.udn.com/money/story/11112/9863127",
+      "published_at": "2026-11-07T05:12:12+08:00",
+      "available_before_cutoff": true,
+      "source_attribution": "TAIFEX via Economic Daily News",
+      "session_date": "2026-11-06",
+      "session_start": "2026-11-06T15:00:00+08:00",
+      "session_end": "2026-11-07T05:00:00+08:00",
+      "contract": "TX202611",
+      "quote_type": "night_last_not_settlement",
+      "values": {
+        "tx_close": 40298,
+        "change_vs_reference_points": 646,
+        "reference": 39652,
+        "return_vs_reference_pct": 1.629173812165843,
+        "tsmc_futures_close": 2173,
+        "tsmc_change": 40
+      },
+      "note": "Latest actual Friday night session, not a Sunday session. Reference39652 differs from Friday day last39786. Do not turn futures change into cash gap."
+    },
+    {
+      "id": "us_equities",
+      "session_date": "2026-11-06",
+      "available_before_cutoff": true,
+      "available_at_upper_bound": "2026-11-07T23:59:59+08:00",
+      "availability_basis": "Completed Friday US session, Saturday public close recap; Nasdaq rounded gain also frozen in today's 08:40:50 V0.",
+      "url": "https://apnews.com/article/806f71d95105bc7efbc760b194dd8cad",
+      "values": {
+        "nasdaq_close": 24579.42,
+        "nasdaq_return_pct": 1.09,
+        "sp500_close": 7376.86,
+        "sp500_return_pct": 0.31,
+        "dow_close": 51285.73,
+        "dow_return_pct": -0.46
+      }
+    },
+    {
+      "id": "sox",
+      "url": "https://indexes.nasdaqomx.com/Index/History/SOX",
+      "session_date": "2026-11-06",
+      "available_before_cutoff": true,
+      "values": {
+        "close": 9390.25,
+        "return_pct": 4.21
+      },
+      "availability_basis": "Completed Friday index history and Saturday recap; V0 08:40:50 independently froze rounded +4.2%.",
+      "qualification": "Overview variants contain stale intraday prices; use History official close, not live overview variants."
+    },
+    {
+      "id": "tsm_adr",
+      "url": "https://stockanalysis.com/stocks/tsm/history/?period=daily",
+      "session_date": "2026-11-06",
+      "available_before_cutoff": true,
+      "values": {
+        "close_usd": 375.44,
+        "return_pct": 6.33
+      },
+      "availability_basis": "Today's 08:40:50 frozen V0 cites completed Friday close; independently matches Saturday close recap at https://princejain.me/stock-tracker/us-markets/briefs/2026-11-07-premarket.html",
+      "note": "No ADR-to-cash price conversion."
+    },
+    {
+      "id": "taiwan_previous_session",
+      "url": "https://www.cna.com.tw/news/afe/202611060138.aspx",
+      "published_at": "2026-11-06T13:43:00+08:00",
+      "updated_at": "2026-11-06T14:31:00+08:00",
+      "available_before_cutoff": true,
+      "values": {
+        "session_date": "2026-11-06",
+        "open": 38915.76,
+        "high": 40435.83,
+        "low": 37837.05,
+        "close": 39701.64,
+        "return_points": -1873.08,
+        "return_pct": -4.51,
+        "turnover_twd_billion": 1246.104,
+        "advancers": 106,
+        "decliners": 976,
+        "flats": 27,
+        "breadth_ratio": 0.09796672828096119,
+        "otc_return_pct": -5.43,
+        "tsmc_close": 2135,
+        "mediatek_close": 3390,
+        "hon_hai_close": 224.5
+      },
+      "qualification": "CNA stock-count pool106/976 differs from Goodinfo109/983 and combined-market counts. Store CNA pool; do not blend denominators. OTC/individual closes from today's V0 freeze. Turnover quote scope differs from other sites; no turnover hard feature."
+    },
+    {
+      "id": "fx_flow",
+      "urls": [
+        "https://money.udn.com/money/story/5616/9862542",
+        "https://www.cna.com.tw/news/afe/202611060230.aspx"
+      ],
+      "published_at": [
+        "2026-11-06T18:31:18+08:00",
+        "2026-11-06T17:13:00+08:00"
+      ],
+      "available_before_cutoff": true,
+      "values": {
+        "usd_twd_close": 32.768,
+        "usd_twd_change": -0.108,
+        "foreign_net_sell_twd_billion": 91.188
+      },
+      "note": "FX strength affected by exporter/central-bank flows; not automatic confirmation of risk removal."
+    },
+    {
+      "id": "policy",
+      "url": "https://ec.ltn.com.tw/article/breakingnews/5632054",
+      "published_at": "2026-11-06T18:41:00+08:00",
+      "effective_date": "2026-11-09",
+      "available_before_cutoff": true,
+      "description": "FSC announced borrow-sale daily order limit reduction from30% to3%, short-margin increase from90% to130%, broader collateral, treasury-stock and investor-meeting encouragement.",
+      "qualification": "Primary FSC page not found in searches; multiple timestamped reports and V0 frozen cite agree. Not a complete short-sale ban; no claim that policy guarantees a rise."
+    },
+    {
+      "id": "rates",
+      "url": "https://www.wsj.com/finance/investing/u-s-treasurys-little-changed-markets-await-employment-data-88f3f2b6",
+      "published_date": "2026-11-06",
+      "available_before_cutoff": true,
+      "availability_basis": "Friday US report predates Monday cutoff.",
+      "values": {
+        "us10y_yield_pct": 4.861
+      },
+      "qualification": "Report quote, not claimed official closing settlement. Other late-session recaps give4.88–4.89; preserve timing differences, no exact rate delta hard feature."
+    },
+    {
+      "id": "oil",
+      "url": "https://www.reuters.com/business/energy/oil-set-sharp-weekly-drop-middle-east-supply-concerns-provide-floor-2026-11-06/",
+      "session_date": "2026-11-06",
+      "published_date": "2026-11-07",
+      "available_before_cutoff": true,
+      "available_at_upper_bound": "2026-11-07T23:59:59+08:00",
+      "values": {
+        "brent_settlement_usd": 98.32,
+        "brent_return_pct": 0.03,
+        "wti_settlement_usd": 90.83,
+        "wti_return_pct": 0.34
+      },
+      "note": "Contract settlements, not Monday live quotes; geopolitical risk, no hard Taiwan petrochemical direction weight."
+    },
+    {
+      "id": "nfp",
+      "url": "https://www.bls.gov/news.release/archives/empsit_11062026.htm",
+      "published_at": "2026-11-06T08:30:00-05:00",
+      "available_before_cutoff": true,
+      "values": {
+        "nonfarm_payroll_change": 165000,
+        "unemployment_pct": 4.1
+      },
+      "note": "Allowed as already published before Monday; not used in prior Friday preopen snapshot."
+    },
+    {
+      "id": "company_calendar",
+      "url": "https://investor.tsmc.com/english/financial-calendar",
+      "available_before_cutoff": true,
+      "availability_basis": "Today's V0 08:40:50 froze same future event; official calendar independently agrees.",
+      "events": [
+        {
+          "name": "TSMC October2026 monthly sales",
+          "scheduled_at": "2026-11-10T13:30:00+08:00",
+          "status_at_cutoff": "not published; result excluded"
+        }
+      ]
+    }
+  ],
+  "model_corrections_read_only": {
+    "source_range": "模型規則主表!A1:P22",
+    "version": "2026-10-29.v1",
+    "raw_values": [
+      [
+        "規則ID",
+        "主題",
+        "類型",
+        "目前決策",
+        "統一後規則",
+        "適用時點",
+        "允許資訊",
+        "禁止做法",
+        "合併來源／原列",
+        "衝突處理",
+        "數值權重決策",
+        "採用／完成條件",
+        "目前驗證證據",
+        "程式／排程落地",
+        "版本",
+        "整理日期"
+      ],
+      [
+        "R01",
+        "Open與Close分開預測／隔夜訊號用途",
+        "預測與評分規範",
+        "已採用（紀錄規範）",
+        "Open、Close/前收與Close/Open分別鎖定目標並評分，允許共享截止前的SOX、ADR、期貨訊號；不把隔夜利多等同全天續漲，也不把其對Close的影響固定設為零。",
+        "盤前；盤中更新另存",
+        "截至預測截止點已公開資料",
+        "以盤中證據回改盤前；宣稱隔夜訊號只能影響Open",
+        "模型修正紀錄!2；模型修正紀錄!47；模型修正紀錄!50；模型修正紀錄!53",
+        "規則分離是評分要求；隔夜訊號對Close的係數仍待驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R02",
+        "事件時間對齊與資訊隔離",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "每則事件保存event_time、published_at、observed_at、Asia/Taipei時區；盤前僅使用截止前可得資訊，未公布內容不入特徵；盤中及盤後資訊分別歸入更新、覆盤或下一交易日。",
+        "各預測時點",
+        "當時已發布、已取得資料",
+        "同日即當成盤中事件；將盤後法說倒填當日盤前",
+        "模型修正紀錄!7；模型修正紀錄!22；模型修正紀錄!26；模型修正紀錄!48",
+        "與Surprise及公司催化規則並存；時間合法不代表有預測力。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R03",
+        "公司催化、新鮮度與價格接受度",
+        "統計假說",
+        "候選（待驗證）",
+        "候選比較公司新增催化、事件經過時間、事前已反映漲幅對後續報酬的影響；不預設新利多必漲或舊催化必失效。當日相對強弱只供盤中版本更新。",
+        "盤前／盤中分版本",
+        "截止前公告、歷史價格；更新時點以前現貨",
+        "固定增加利多權重；用當日收盤證明盤前催化已反映",
+        "模型修正紀錄!3；模型修正紀錄!5；模型修正紀錄!9；模型修正紀錄!28；模型修正紀錄!35",
+        "9/22新催化、9/23衰減與9/24盤中再評估整併；衰減率不先指定。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R04",
+        "市場廣度定義與權值／等權分離",
+        "指標與評分規範",
+        "已採用（紀錄規範）",
+        "TAIEX報酬、上漲/(上漲+下跌)、含平盤占比、漲跌家數差、OTC與正式等權報酬各自保存並事先鎖定評分口徑；沒有等權序列不得用上漲家數冒充等權報酬。",
+        "盤前定義；盤後評分",
+        "同市場、同日期、同時點正式資料",
+        "事後換分母；指數漲即稱全面上漲",
+        "模型修正紀錄!4；模型修正紀錄!17；模型修正紀錄!25；V1_改善提案!4；V1_改善提案!7；V1_改善提案!9；V1_改善提案!12",
+        "分層是觀測維度；增加何種預測權重另走驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R05",
+        "電子、金融與非電子的分層擴散",
+        "統計假說",
+        "候選（待驗證）",
+        "候選使用大型權值電子、電子中小型/OTC、金融、非電子的事前擴散與相對報酬特徵；金融、塑化、航運可分化，不把所有非電子視為同一方向。",
+        "盤前／盤中分版本",
+        "歷史分層廣度；更新時點以前資料",
+        "用當日收盤廣度預測當日收盤；把分層誤認成已驗證加權",
+        "模型修正紀錄!12；模型修正紀錄!15；模型修正紀錄!46；模型修正紀錄!49",
+        "各層各自檢驗增益；不預設權值強或等權強。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R06",
+        "結算日與波動／方向",
+        "統計假說",
+        "候選（待驗證）",
+        "結算日作可驗證的日曆標記；方向、振幅與反轉機率分開測試，不預設結算必增波動、必拉高或必反轉。",
+        "盤前",
+        "已知結算日曆與歷史資料",
+        "因一個結算日即固定提高波動或反轉權重",
+        "模型修正紀錄!6",
+        "撤除固定方向敘述；波動係數也須驗證。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R07",
+        "長假前流動性",
+        "統計假說",
+        "候選（待驗證）",
+        "候選測試長假前成交量、振幅與趨勢延續的條件差異；先保存日曆標記，不預設量縮、追價降低或午後收斂。",
+        "盤前",
+        "已知休市日曆與歷史流動性",
+        "把9/24單日型態變成所有假前固定先驗",
+        "模型修正紀錄!8",
+        "歷史假期樣本不足時維持候選。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R08",
+        "休市後累積資訊與Reopen",
+        "統計假說",
+        "候選（待驗證）",
+        "連續休市後候選比較整段休市期間的累積海外變動與一般隔夜輸入；一般週末與額外休市分開標記。是否另建regime由相同基準樣本外結果決定。",
+        "盤前",
+        "前次現貨收盤至本次截止的已公開資料",
+        "只看最後一晚；重複累計同一報酬；直接提高收盤係數",
+        "模型修正紀錄!10",
+        "與最近可交易夜盤R18並存；不把每次週一都當特殊長假。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R09",
+        "事件Surprise與市場共識",
+        "統計假說",
+        "候選（待驗證）",
+        "候選比較公布值相對事前共識／定價差；結果公布前只可用事件日曆及事前分布，結果公布後Surprise只供後續預測或更新。",
+        "發布前／發布後分版本",
+        "當時可得的共識、公布值與跨市場價格",
+        "用尚未發布的Surprise預測當日盤前",
+        "模型修正紀錄!11",
+        "時間對齊由R02控制；Surprise與價格反應分開。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R10",
+        "現貨Gap校準與夜盤基差／背離",
+        "統計假說",
+        "候選（待驗證）",
+        "候選以夜盤報酬、明確基準的期現基差、SOX/ADR、前日報酬及連休累積資訊校準現貨Gap；同向與背離均作特徵，不硬定同向加權、背離縮Gap。首30分鐘下探不當作Gap命中。",
+        "盤前",
+        "截止前行情；合約、換月、參考價與現貨前收",
+        "夜盤點數直接換算現貨Gap；盤中低點冒充開盤",
+        "模型修正紀錄!13；模型修正紀錄!14；模型修正紀錄!20；模型修正紀錄!23；模型修正紀錄!41；V1_改善提案!2；V1_改善提案!6；V1_改善提案!8；V1_改善提案!11",
+        "整併多次Gap提案；不固定提高或降低夜盤權重。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R11",
+        "產品映射與固定股票池",
+        "統計假說",
+        "候選（待驗證）",
+        "先固定股票池與成分；DRAM、NOR、NAND/控制器、HDD，及ABF、CCL、AI各池分開保存。海外產品重疊度及公司催化僅為候選特徵；完整同時點收盤才能計精確等權。",
+        "盤前定池；盤後驗證",
+        "截止前產業／公司資訊與正式成分股價格",
+        "SOX代替全產業；依結果換成分；缺價用盤中價補",
+        "模型修正紀錄!18；模型修正紀錄!36；模型修正紀錄!38；模型修正紀錄!42；模型修正紀錄!51",
+        "資料完整性可先落實；分池預測增益與係數仍待測。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R12",
+        "前日急跌、續跌與反彈雙情境",
+        "統計假說",
+        "候選（待驗證）",
+        "候選同時估計早盤續跌與開盤即低點反彈，前日型態及隔夜訊號均為特徵；上探、下探分別計分且可同時成立。不因上一日勝負立即改方向或機率。",
+        "盤前／盤中分版本",
+        "歷史路徑、截止前夜盤；更新時點以前分鐘K",
+        "急跌後必反彈或必續跌；反覆單日調高反方向權重",
+        "模型修正紀錄!19；模型修正紀錄!29；模型修正紀錄!34；模型修正紀錄!45；模型修正紀錄!54",
+        "整併10/14、10/16、10/21、10/28；重複錯誤作追加樣本。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R13",
+        "金融／塑化／航運輪動與擁擠",
+        "統計假說",
+        "候選（待驗證）",
+        "各產業絕對與相對TAIEX報酬分別建模；前日超額、漲幅及risk-off為候選交互特徵。不將金融固定視為避險，也不預設前日漲逾5%必回吐。",
+        "盤前／盤中分版本",
+        "歷史類股、截止前利率／公司事件",
+        "前日領漲就推續強；失敗隔天便固定押反轉",
+        "模型修正紀錄!21；模型修正紀錄!24；模型修正紀錄!31；模型修正紀錄!33；模型修正紀錄!39",
+        "撤除金融+1%/電子-1%與前日+5%等未驗證硬門檻。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R14",
+        "首30分鐘時間戳與門檻證據",
+        "資料與評分規範",
+        "已採用（紀錄規範）",
+        "首30分鐘一律用事先定義的09:00–09:30有時戳資料。時窗內單點跨門檻可證明該門檻達成，不能當作精確極值；無完整時窗不得證明未達門檻。正式全日最低=開盤可證下探為零，正式全日最高=開盤可證上探為零。",
+        "盤後驗證／盤中更新",
+        "正式分鐘K或有時戳報價；經核對的全日邊界",
+        "全日極值代替早盤極值；缺資料直接判失敗",
+        "模型修正紀錄!43",
+        "資料不足維持待核實；精確極值與門檻命中分開。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R15",
+        "固定評分口徑與中性帶",
+        "指標與評分規範",
+        "已採用（紀錄規範）",
+        "Gap、Close/前收、Close/Open、振幅、CLV與High-to-Close分別計算；保留原始硬門檻。中性帶、方向分類與敏感度須事先指定，不能追溯改判勝負；H=L時CLV記NA。",
+        "盤前定義；盤後評分",
+        "同時點完整正式OHLC與原始門檻",
+        "四捨五入後判區間；事後新增中性帶把錯誤改命中",
+        "模型修正紀錄!40；模型修正紀錄!52",
+        "新增口徑僅對未來版本生效，歷史原始評分保留。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R16",
+        "快照雜湊、盤前落檔與回讀",
+        "資料完整性規範",
+        "已採用（紀錄規範）",
+        "分別保存generated_at、persisted_at、target_date、cutoff及canonical hash；盤前落檔後回讀確認。延遲補登、重建與通過完整性檢查的盤前快照分層評估；失敗原件保留。",
+        "盤前落檔／盤後稽核",
+        "原始快照、時間戳與雜湊紀錄",
+        "把生成成功當作已保存；以重建資料冒充可稽核基準",
+        "V1_改善提案!5；V1_改善提案!10；V1_改善提案!13",
+        "整併V1三次完整性提案；本次未驗證GitHub程式與排程落地。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R17",
+        "海外行情close／last與來源核對",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "海外行情記交易日、時區、最後時間、正式close或盤中last類型及來源；正式收盤與盤中幅度分開；來源衝突未釐清前不輸入相應特徵。錯誤衍生特徵另建修正版，原始預測保留。",
+        "盤前資料檢查",
+        "可核對的正式行情與原始來源",
+        "盤中-2.3%當正式收盤；以資料錯誤直接歸因模型",
+        "模型修正紀錄!44",
+        "10/21先處理SOX來源／類型問題，再評估模型增益。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R18",
+        "最近可交易夜盤與新鮮度",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "週一或休市後讀取最近實際交易夜盤，保存session日期、close時間、合約、參考價及資料距今時間；缺交易時段與抓取失敗分開記錄。",
+        "盤前",
+        "截止前最近可交易夜盤",
+        "假定週末沒有可用夜盤；無條件提高Trend-Day機率",
+        "模型修正紀錄!16",
+        "修補輸入遺漏；趨勢權重是否提高另由R01/R08/R10驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R19",
+        "盤初selloff條件分類",
+        "統計假說",
+        "候選（待驗證）",
+        "以更新時點前的Open-to-Low、OTC、廣度等候選特徵比較selloff警示與基準；不直接採用>1%或>2%門檻，不以收盤才知道的『開盤即全日最高』作09:30輸入。",
+        "盤中更新",
+        "截至更新時點的分鐘K與市場廣度",
+        "全日高低點偷渡早盤；用警示命中改判盤前預測",
+        "模型修正紀錄!27；模型修正紀錄!32",
+        "10/13與10/15整併；依R14取得可稽核分鐘資料。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R20",
+        "Close盤中更新與尾盤接受度",
+        "統計假說",
+        "候選（待驗證）",
+        "候選在固定09:30或事前指定更新時點，使用當時已知VWAP、廣度、回升與權值同步性預測剩餘時段；尾盤更新另定時點。全日CLV及最終集合競價僅為結果或次日歷史特徵。",
+        "盤中更新；次日歷史特徵",
+        "更新時點以前資料；前日完整行情",
+        "全日CLV預測當日收盤；13:30成交結果用於08:50特徵",
+        "模型修正紀錄!30；模型修正紀錄!37；V1_改善提案!3",
+        "盤前版本與更新版本各自保存、各自評分，不覆蓋原始快照。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R21",
+        "10/28收盤／日高衝突處理",
+        "待處理資料問題",
+        "待核對（資料）",
+        "表內10/28覆盤暫用47,060.46作收盤，10/29盤前另記正式收盤47,035.58、日高47,060.46；目前作來源衝突隔離。取得並保存TWSE原始資料後，另建修正版收盤、報酬、CLV、相對報酬與評分，保留舊值及修正時間。",
+        "盤後資料修正",
+        "TWSE正式OHLC原始回應及來源時間",
+        "僅憑另一列文字就宣告外部官方已核實；錯誤收盤驅動係數調整",
+        "每日預測與覆盤!I249:I265、O267；模型修正紀錄!D53:E53",
+        "不否定10/28方向觀察；精確幅度及衍生統計待核對。",
+        "隔離爭議資料；核對前不得以其精確幅度調整係數。",
+        "保存TWSE原始OHLC；重新計算報酬與CLV；建立含原值、新值、依據及時間的修正紀錄。",
+        "表內兩種數值互相衝突；本次未取得TWSE原始回應。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ]
+    ],
+    "adopted_record_rules": [
+      "R01",
+      "R02",
+      "R04",
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18"
+    ],
+    "candidate_constraints": [
+      "R10",
+      "R12"
+    ],
+    "note": "Only record standards applied; no candidate coefficient promoted from one-day outcome. Sheet unchanged."
+  },
+  "repository_files": {
+    "README.md": {
+      "blob_sha": "d3bcb2546221e152193edb12682049510c962fd1"
+    },
+    "AGENTS.md": {
+      "blob_sha": "ee10da2f44adc69268c7f7e66dd8931d95c93628"
+    },
+    "CODEX_HANDOFF.md": {
+      "blob_sha": "07d703d3b307cd0d0eb358df2ce39142b9b1ae13"
+    },
+    "PROJECT_STATUS.md": {
+      "blob_sha": "8ef47c0e2b37a7bdff2a89373dd627d541276991"
+    },
+    "config/features.yaml": {
+      "blob_sha": "c9552c952e59cded043ada6eecea8773460988ef"
+    },
+    "schemas/prediction_snapshot.schema.json": {
+      "blob_sha": "77edf088921c9ae8556d707a7abb5f42c627935c"
+    },
+    "src/tw_scenario/baselines.py": {
+      "blob_sha": "8bafae7df1cbf33b22f66cc09cef3d306daed856"
+    },
+    "src/tw_scenario/snapshot.py": {
+      "blob_sha": "9a8f8c57d2da8c7b702420edc9c1ea7bd9f8830b"
+    }
+  },
+  "methodology": {
+    "baseline": "Repo overnight_gap_baseline:0.50*night_return_pct+0.25*SOX+0.25*ADR; open only. Positive score over0.15 means UP.",
+    "baseline_inputs": {
+      "taifex_night_return_pct": 1.629173812165843,
+      "sox_return_pct": 4.21,
+      "tsmc_adr_return_pct": 6.33
+    },
+    "baseline_score": 3.4495869060829216,
+    "baseline_open_direction": "up",
+    "analyst_estimates": "Bull/Base/Bear0.36/0.44/0.20 and gap+125/close+75bps are uncalibrated analyst estimates, not fitted model output or baseline magnitude. No prior quantitative results reused.",
+    "class_definitions": "Bull close_return>50bps; Base within[-50,+50]bps; Bear<-50bps. Direction flat within+/-5bps. Intraday regime and breadth are independent unvalidated narrative hypotheses, not daily OHLC deductions.",
+    "method_file_note": "docs/METHODOLOGY.md returned404; current README/AGENTS research contracts and actual snapshot/baseline code used. No method invented as existing repository implementation."
+  },
+  "missing_or_qualified": [
+    "Monday07:00–08:50 overseas futures/live Asia quotes not independently verified; absent, not zero.",
+    "Current top10 concentration, TSMC index weight, exact ex-dividend index points and complete company event calendar not verified; no zero fill.",
+    "Exact official historical pool breadth/turnover variants not reconciled; chosen source pool explicitly retained.",
+    "New model not run; output must not be counted as TimesFM/ARIMA OHLC inference or calibrated probability.",
+    "Only completed prior sessions, pre-cutoff published releases and today's08:40:50 V0 freeze used; no Monday08:45 TX daytime or09:00 cash data used."
+  ],
+  "fetched_at_upper_bound": "2026-11-09T08:55:03+08:00"
+}
