@@ -1,0 +1,19 @@
+{
+  "trading_date": "2026-11-09",
+  "previous_close": 39701.64,
+  "open": 40347.28,
+  "high": 42349.36,
+  "low": 40347.28,
+  "close": 41661.7,
+  "turnover": 837929000000,
+  "breadth_up": 804,
+  "breadth_down": 229,
+  "otc_return_pct": 5.9,
+  "recorded_at": "2026-11-09T15:16:11+08:00",
+  "regular_stock_turnover": 744159616782,
+  "turnover_all_sessions": 863934624473,
+  "breadth_flat": 52,
+  "breadth_no_trade": 0,
+  "session_change_points": 1960.06,
+  "session_return_pct": 4.94
+}
