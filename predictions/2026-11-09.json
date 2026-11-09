@@ -1,0 +1,68 @@
+{
+  "trading_date": "2026-11-09",
+  "generated_at": "2026-11-09T08:55:03+08:00",
+  "data_cutoff_at": "2026-11-09T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "features-v1-cutoff-audit-20261109",
+  "prompt_version": "scenario-v1-explicit-provenance",
+  "data_manifest_hash": "bd1375129cf67b5150bc93161e6e2551d409b38c8eef1f3be77251dc461fb0e0",
+  "scenarios": {
+    "bull": 0.36,
+    "base": 0.44,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 125.0,
+    "expected_close_return_bps": 75.0
+  },
+  "narrative": {
+    "market_view": "最近台指夜盤、Nasdaq、SOX與台積電ADR同步反彈，配合11/9穩市措施生效，支持開高修復；但前日台股跌4.51%、OTC跌5.43%、外資仍賣超，主情境是開高後高波動回吐，不視為趨勢翻多。機率及點位為未校準legacy主觀情境，非TimesFM/ARIMA正式推論。",
+    "open_hypothesis": "以前收39,701.64為基準，預估開高125bps、496.27點至40,197.91，位於V0事前0%至+2.50%區間。最近夜盤40,298、相對參考價+646僅作背景，不直接換算現貨漲點。",
+    "intraday_hypothesis": "預期gap_fade：開盤先反映海外半導體回升與政策，之後受融資與解套壓力回吐部分漲幅。首30分鐘上下探0.30%可同時成立，路徑須以時戳分鐘資料驗證，不能由日線OHLC推定。",
+    "close_hypothesis": "預估收盤較前收上漲75bps、297.76點至39,999.40，低於預估開盤約198.51點。V0對收盤高於開盤僅51%主觀信心；本情境保留原文但獨立採開高回吐中心，不假裝兩者同一判斷。",
+    "breadth_hypothesis": "低信心預期上市非平盤上漲家數超過50%，但需獨立觀察OTC與非權值擴散；前日CNA股票池106漲976跌僅9.80%，不能把權值反彈視為全面普漲。",
+    "bull_script": "站穩40,298至40,436區，台積電站穩2,173附近且OTC轉強、廣度超過60%，開高後續漲；Bull終態為收盤報酬>+50bps。",
+    "base_script": "開高後明顯回吐，多空重新定價，終場回到前收±50bps。Base機率44%是終態區間，不等於+75bps期望中心；+75bps中心受Bull上尾影響。",
+    "bear_script": "開高失敗並跌破39,701.64，台積電失守2,135、OTC續弱且廣度低於40%，政策未抵銷去槓桿賣壓；Bear終態為收盤報酬<-50bps。"
+  },
+  "key_drivers": [
+    "最近11/06夜盤於11/07 05:12發布：TX202611收40,298、參考價39,652、+646；台積電期貨2,173、+40",
+    "11/06 Nasdaq+1.09%、S&P+0.31%，Dow-0.46%；SOX正式收9,390.25(+4.21%)、TSM ADR375.44(+6.33%)",
+    "11/06 TAIEX39,701.64(-4.51%)，OTC-5.43%；CNA股票池106漲976跌，反彈擴散尚待驗證",
+    "穩市措施11/09生效：借券賣出委託上限30%降3%、融券保證金90%升130%；非全面禁空、不保證上漲",
+    "外資11/06賣超911.88億元，USD/TWD收32.768、升1.08角；匯率受出口商與央行調節影響",
+    "已公布美國10月非農+165,000、失業率4.1%，美10Y報價約4.861%至4.89%提供利率風險背景",
+    "Brent11/06結算98.32美元、WTI90.83美元；地緣供應風險未解除",
+    "11/10 13:30台積電10月營收尚未公布，結果排除；Monday截止前即時海外期貨未驗證，未填零"
+  ],
+  "invalidation_conditions": [
+    "若開盤未高於39,701.64，open_direction=up失效；保留+125bps原始誤差",
+    "站穩40,436、台積電高於2,173且OTC及廣度>60%同步轉強，gap_fade路徑失效，轉強趨勢情境",
+    "跌破39,701.64、台積電弱於2,135且廣度<40%，收紅及廣度改善假說失效",
+    "不以今日08:45後TX日盤、09:00後台股行情、收盤結果或未來台積電營收改寫快照",
+    "機率未校準、路徑及廣度非日OHLC模型輸出；只能在legacy情境組別評分，不與新模型績效混列"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-09",
+      "item": "08:40:50凍結18項今日盤前假說",
+      "note": "A:F/O逐字保存在manifest；V0未修改。",
+      "source_row": "每日預測與覆盤!A392:P409",
+      "extracted_at": "2026-11-09T08:55:03+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "模型規則2026-10-29.v1",
+      "note": "紀錄規範採用，R10/R12僅候選；完整規則原文保存在manifest。",
+      "source_row": "模型規則主表!A1:P22",
+      "extracted_at": "2026-11-09T08:55:03+08:00",
+      "content_hash": null
+    }
+  ],
+  "snapshot_hash": "29af3659f818e46e59a356eb79ef4bef0c4e20ac022990432265ff500d53e3c6"
+}
