@@ -1,0 +1,359 @@
+{
+  "trading_date": "2026-11-10",
+  "generated_at": "2026-11-10T08:58:09+08:00",
+  "data_cutoff_at": "2026-11-10T08:50:00+08:00",
+  "snapshot_status": "reconstructed_late_generated_legacy_analyst",
+  "reconstructed": true,
+  "late_generated": true,
+  "aggregate_metric_eligibility": false,
+  "new_ohlc_model_metric_eligibility": false,
+  "legacy_scenario_metric_eligibility": false,
+  "limitation": "V0原始18列原樣保存；V1情境於截止後補建，非當時已凍結的正式樣本。未使用當日開盤後行情。未校準分析判斷，不是TimesFM/ARIMA或TEJ模型輸出。",
+  "sources": [
+    {
+      "id": "v0",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit#gid=1442465875",
+      "range": "'每日預測與覆盤'!A410:P427",
+      "available_at": "2026-11-10T08:35:06+08:00",
+      "availability_basis": "所有當日列O欄記載同一凍結cutoff；未讀取實現結果欄作特徵，完整raw保存原null。此為Sheet宣告時間，非獨立版本歷史證明。",
+      "raw_rows": [
+        {
+          "row": 410,
+          "A_to_F": [
+            "2026/11/10",
+            "TAIEX開盤Gap",
+            "美股全面反彈與SOX強漲支持開高；前日台股已反彈4.94%，追價空間不確定。",
+            "開盤>41661.70；Gap介於0%至+2.50%",
+            "63%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%、ADR+3.54%；台指夜盤未核實，區間信心有限。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 411,
+          "A_to_F": [
+            "2026/11/10",
+            "首30分鐘下探",
+            "前日強彈後可能有獲利了結，開盤價格發現不確定。",
+            "09:00–09:30最低/開盤-1≤-0.30%",
+            "55%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 前日台股+4.94%、振幅5.04%；不以全日低點替代首30分鐘。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 412,
+          "A_to_F": [
+            "2026/11/10",
+            "首30分鐘反彈",
+            "隔夜半導體領漲，開盤後可能延續買盤。",
+            "09:00–09:30最高/開盤-1≥+0.30%",
+            "58%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 Nasdaq+2.74%、SOX+6.85%；仍須09:00–09:30時戳驗證。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 413,
+          "A_to_F": [
+            "2026/11/10",
+            "TAIEX收盤方向",
+            "隔夜風險偏好回升支持收高，但前日已大漲且晚間CPI風險可能限制追價。",
+            "收盤>41661.70",
+            "55%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 美股三大指數普漲、半導體強勢；NVIDIA逆勢下跌，科技股分化。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 414,
+          "A_to_F": [
+            "2026/11/10",
+            "TAIEX開盤至收盤",
+            "隔夜利多可能反映於開盤，前日大漲後收盤延續不確定。",
+            "收盤<當日開盤",
+            "52%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 前日TAIEX+4.94%，隔夜SOX強漲；Gap與收盤獨立評分。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 415,
+          "A_to_F": [
+            "2026/11/10",
+            "上市市場廣度",
+            "美股11個S&P板塊普漲，可能支持台股多數股票，但半導體集中風險仍在。",
+            "上市非平盤上漲/(上漲+下跌)>50%",
+            "55%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 11/09上市821漲233跌；美股全面反彈，廣度不等同指數。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 416,
+          "A_to_F": [
+            "2026/11/10",
+            "OTC相對TAIEX",
+            "中小型股可能受惠風險偏好，但權值半導體強勢可能領漲。",
+            "OTC報酬<TAIEX報酬",
+            "52%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%、台積電ADR+3.54%；OTC正式前收待驗證。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 417,
+          "A_to_F": [
+            "2026/11/10",
+            "台積電2330",
+            "ADR與SOX強漲支持台積電現貨開高，13:30營收結果尚未知；11/09現貨收盤來源衝突需隔離。",
+            "開盤>11/09官方收盤；收盤>11/09官方收盤",
+            "64%／56%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 ADR收388.73(+3.54%)；SOX+6.85%；11/09現貨收盤表內2210與外部2235衝突，待TWSE核實。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 418,
+          "A_to_F": [
+            "2026/11/10",
+            "聯發科2454",
+            "半導體板塊反彈可能支撐IC設計，但公司特定消息尚未核實。",
+            "收盤>11/09官方收盤",
+            "54%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%；不能將SOX直接等同聯發科個股漲幅。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 419,
+          "A_to_F": [
+            "2026/11/10",
+            "AI大型權值四檔",
+            "全球AI與半導體反彈，但NVIDIA逆勢跌4.27%顯示分化。",
+            "台積電、鴻海、廣達、台達電等權報酬>0",
+            "56%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%、Nasdaq+2.74%、NVIDIA-4.27%；固定股票池。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 420,
+          "A_to_F": [
+            "2026/11/10",
+            "ABF載板三雄",
+            "海外晶片族群反彈支持載板情緒，惟前日台股已大漲。",
+            "欣興、南電、景碩等權報酬>0",
+            "54%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%，但沒有ABF公司級新增確認。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 421,
+          "A_to_F": [
+            "2026/11/10",
+            "CCL材料雙股",
+            "AI供應鏈可能受惠半導體反彈，但材料與晶片股驅動不同。",
+            "台光電、台燿等權報酬>0",
+            "53%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 Nasdaq+2.74%、SOX+6.85%；未核實個別材料訂單事件。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 422,
+          "A_to_F": [
+            "2026/11/10",
+            "DRAM／南亞科",
+            "半導體強勢可能改善DRAM風險偏好，但DRAM供需與GPU不同。",
+            "南亞科報酬>TAIEX報酬",
+            "51%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%；DRAM產品映射需獨立驗證。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 423,
+          "A_to_F": [
+            "2026/11/10",
+            "金融類股",
+            "美股普漲有利風險偏好，但台股前日金融漲幅落後指數。",
+            "金融類股報酬<TAIEX報酬",
+            "53%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 11/09金融+2.35%、TAIEX+4.94%；不假定前日弱勢必延續。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 424,
+          "A_to_F": [
+            "2026/11/10",
+            "塑膠類股",
+            "前日塑化大漲約7.4%，油價下跌可能改變原料與產品利差，追價不確定。",
+            "塑膠類股報酬<TAIEX報酬",
+            "52%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 11/09塑化+7.40%；Brent油價急跌；產品利差未核實。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 425,
+          "A_to_F": [
+            "2026/11/10",
+            "半導體設備三檔",
+            "SOX大漲支持設備鏈風險偏好，但美國晶片內部分化。",
+            "帆宣、漢唐、弘塑等權報酬>TAIEX報酬",
+            "52%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 SOX+6.85%；設備股需獨立檢查相對報酬。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 426,
+          "A_to_F": [
+            "2026/11/10",
+            "鴻海2317",
+            "美股廣泛反彈支持AI伺服器鏈，但NVIDIA逆勢下跌造成相對強度不確定。",
+            "鴻海報酬>TAIEX報酬",
+            "52%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 Nasdaq+2.74%、NVIDIA-4.27%；不以AI題材直接推論相對勝出。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        },
+        {
+          "row": 427,
+          "A_to_F": [
+            "2026/11/10",
+            "TAIEX全日振幅",
+            "前日振幅約5.04%、今日CPI前部位調整，可能維持波動。",
+            "(當日最高-最低)/41661.70≥1.00%",
+            "73%",
+            "11/09 TAIEX收41661.70(+4.94%)；11/09美股Nasdaq+2.74%、S&P500+2.35%、SOX約+6.85%、TSM ADR收388.73(+3.54%)；NVIDIA-4.27%；11/10 13:30台積電10月營收尚未公布、21:30美國CPI尚未公布。 11/09高42349.36、低40347.28；前日振幅5.043%。"
+          ],
+          "O": "target_date=2026-11-10;cutoff=2026-11-10T08:35:06+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準;11/09台積電收盤資料來源衝突(既有覆盤2210、外部報導2235)，台積電絕對價驗證待官方核實；台指夜盤正式close未核實不輸入;公告結果不得回填盤前。來源 https://www.reuters.com/business/wall-st-futures-rise-after-rough-week-nvidia-unsettles-investors-2026-11-09/ ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://investor.tsmc.com/english/financial-calendar ; https://chartexchange.com/symbol/nyse-tsm/historical/ ; https://effectstory.com/en/articles/taiex-jumps-1960-points-foreign-investors-net-sell-nov-9-2026"
+        }
+      ]
+    },
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html",
+      "availability_basis": "2026官方年度交易日曆；2026-11-10星期二，非列示休市日。",
+      "is_trading_day": true
+    },
+    {
+      "id": "night",
+      "url": "https://money.udn.com/money/story/11112/9868017?from=edn_hottestlist_cate_side",
+      "published_at": "2026-11-10T05:20:01+08:00",
+      "availability_basis": "搜尋索引顯示原始發布時間；頁面open DisabledError；二級來源轉述TAIFEX，未獨立官方下載驗證。",
+      "contract": "TX202611",
+      "session_end": "2026-11-10T05:00:00+08:00",
+      "close": 42542,
+      "reported_change": 1064,
+      "reference_implied": 41478,
+      "reported_return_pct": 2.565215294855104,
+      "limitation": "相對夜盤參考價，不冒稱相對同合約日盤最後成交41423的報酬，不直接等於現貨開盤Gap。"
+    },
+    {
+      "id": "us",
+      "url": "https://apnews.com/article/f7ec9680fc858e3c2505913e7b3a54e2",
+      "session_date": "2026-11-09",
+      "available_at_upper_bound": "2026-11-10T08:35:06+08:00",
+      "availability_basis": "美股已結束交易；Nasdaq/S&P等同值亦已出現在08:35:06的V0凍結列；AP發布時分未單獨取得。",
+      "nasdaq_close": 25253.14,
+      "nasdaq_return_pct": 2.74,
+      "sp500_close": 7549.94,
+      "sp500_return_pct": 2.35,
+      "dow_return_pct": 2.15,
+      "oil_direction": "down",
+      "brent_reported_change_pct": -5.8
+    },
+    {
+      "id": "adr",
+      "url": "https://chartexchange.com/symbol/nyse-tsm/historical/",
+      "available_at": "2026-11-10T04:59:59+08:00",
+      "availability_basis": "頁面明示At Close Nov9 15:59:59 EST，且V0於08:35凍結同值；僅採常規盤收盤",
+      "close": 388.73,
+      "return_pct": 3.54
+    },
+    {
+      "id": "sox",
+      "url": "https://indexes.nasdaqomx.com/Index/Overview/SOX?source=brokerage&source_caller=ui",
+      "session_date": "2026-11-09",
+      "conflict": {
+        "v0_return_pct": 6.85,
+        "official_overview_return_pct": 6.15,
+        "official_overview_level": 9967.82
+      },
+      "use": "只取正向訊號；不同as-of未解，兩個精確漲幅均不作數值特徵",
+      "available_at_upper_bound": "2026-11-10T08:35:06+08:00",
+      "availability_basis": "正向訊號由V0凍結證明；本次官方overview僅作交叉比對，不宣稱歷史final close"
+    },
+    {
+      "id": "fx",
+      "url": "https://www.cna.com.tw/news/afe/202611090222.aspx",
+      "session_date": "2026-11-09",
+      "available_at_upper_bound": "2026-11-10T00:00:00+08:00",
+      "availability_basis": "11/09已發布之前日收盤報導；不使用頁面相關新聞",
+      "usd_twd_close": 32.882,
+      "twd_depreciation": 0.114,
+      "use": "股漲匯貶、外資匯出風險"
+    },
+    {
+      "id": "events",
+      "urls": [
+        "https://www.bls.gov/schedule/2026/11_sched_list.htm",
+        "https://investor.tsmc.com/english/financial-calendar"
+      ],
+      "available_at_upper_bound": "2026-11-10T08:35:06+08:00",
+      "availability_basis": "BLS頁面11/03修訂；兩事件時程亦已載V0凍結列",
+      "events": [
+        {
+          "name": "TSMC October sales",
+          "at": "2026-11-10T13:30:00+08:00",
+          "result_used": false
+        },
+        {
+          "name": "US October CPI",
+          "at": "2026-11-10T21:30:00+08:00",
+          "result_used": false
+        }
+      ]
+    },
+    {
+      "id": "taiwan_structure",
+      "source": "v0",
+      "as_of": "2026-11-09",
+      "previous_close": 41661.7,
+      "previous_return_pct": 4.94,
+      "breadth_up": 821,
+      "breadth_down": 233,
+      "breadth_ratio": 0.7789373814041746,
+      "previous_range_pct": 5.043,
+      "use": "V0既有前日結構引用，未獨立TWSE逐筆驗證，不借用昨日V1量化結果"
+    }
+  ],
+  "missing_or_excluded": [
+    "US10Y精確終值及變動未以官方歷史表核實，不填補或當作數值特徵",
+    "WTI/Brent不同二級來源結算價衝突，僅用V0已凍結油跌方向",
+    "台積電2210與2235前收衝突，排除絕對價與ADR溢價",
+    "OTC正式前收、權重集中度、除權息點數、最新官方法人部位缺失",
+    "模型修正紀錄本次未另讀；僅引用當日O欄規則版本2026-10-29.v1及R01/R02/R04/R14-R18，不假稱已重新驗證規則全文"
+  ],
+  "methodology": {
+    "kind": "uncalibrated_analyst_judgment",
+    "probability_calibration": false,
+    "probability_rationale": "Bull0.38/Base0.42/Bear0.20為隔夜反彈與前日急彈、CPI前去風險的主觀配置，非V0信心平均或學習模型機率",
+    "target_rationale": "開盤+160bps反映隔夜正向但折讓前日已漲4.94%；收盤+60bps表示開高後回吐，與gap_fade一致；未套用有爭議SOX精確幅度。",
+    "scenario_close_bps": {
+      "bull": 250,
+      "base": 0,
+      "bear": -175
+    },
+    "weighted_close_bps": 60,
+    "scenario_definition": "Bull收盤報酬>+50bps；Base介於-50與+50bps含邊界；Bear<-50bps。scenario centers只供一致性檢查，非區間預測。",
+    "new_model_status": "README/HANDOFF/PROJECT_STATUS均未宣稱新OHLC模型落地；不屬08:30/08:40新模型樣本",
+    "baseline_score": null
+  },
+  "write_policy": "GitHub create-only；prediction與manifest讀回全內容比對、canonical SHA256驗證；不得覆寫"
+}
