@@ -1,0 +1,66 @@
+{
+  "trading_date": "2026-11-10",
+  "generated_at": "2026-11-10T08:58:09+08:00",
+  "data_cutoff_at": "2026-11-10T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "1.0-missingness-explicit-20261110",
+  "prompt_version": "v1-20261110-reconstruction",
+  "data_manifest_hash": "990d2ac3c499e8da3ad5d5c7f1d0d4b4a699c053d202dfa5567bbdb5b4edebcc",
+  "scenarios": {
+    "bull": 0.38,
+    "base": 0.42,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 160.0,
+    "expected_close_return_bps": 60.0
+  },
+  "narrative": {
+    "market_view": "補建、未校準的legacy分析情境：隔夜風險偏好回升支持偏多開局，但11/09台股已漲4.94%、匯率轉弱且CPI前追價意願受限，不假設全面單邊續漲。",
+    "open_hypothesis": "相對11/09 TAIEX前收41661.70，預期開高約160bps（+1.60%，約42328.29）；這是主觀中心值，不是夜盤點差直接換算。",
+    "intraday_hypothesis": "未驗證路徑情境為gap_fade：利多先反映於開盤，再因獲利了結與事件前減碼回吐。不能從日OHLC推定高低點先後；首30分鐘觀察只作後續驗證，不回改本預測。",
+    "close_hypothesis": "預期仍較前收小漲約60bps（+0.60%，約41911.67），但低於預期開盤；收高與開高走低並不矛盾。",
+    "breadth_hypothesis": "預期上市非平盤股票上漲比例略高於50%，但半導體權值可能強於OTC；廣度獨立評估，不由指數漲幅推定。",
+    "bull_script": "38%主觀權重：半導體買盤延續且擴散、開盤Gap被接受，收盤>前收+50bps；情境中心+250bps。需廣度同步而非單一權值支撐。",
+    "base_script": "42%主觀權重：開高後回吐，CPI與台積電營收前追價放緩；收盤在前收±50bps，中心0bps。",
+    "bear_script": "20%主觀權重：前日急彈後利多出盡、匯出壓力與AI分化放大；跌破前收且收盤<-50bps，情境中心-175bps。"
+  },
+  "key_drivers": [
+    "11/09 Nasdaq+2.74%、S&P500+2.35%，TSM ADR388.73/+3.54%，半導體正向但SOX精確漲幅衝突隔離",
+    "TX202611夜盤二級轉述42542/+1064；05:20發布，非現貨Gap",
+    "前日台股+4.94%、廣度821漲233跌；漲幅已部分反映風險偏好",
+    "新台幣前日收32.882、貶0.114；股票與資金流向背離",
+    "NVIDIA逆勢-4.27%僅依V0凍結引用；AI供應鏈不能一體視之",
+    "今日13:30台積電營收、21:30美國CPI結果尚未知；油價跌方向有利風險偏好"
+  ],
+  "invalidation_conditions": [
+    "若開盤≤41661.70，開高假說失效；不更改快照",
+    "若開高後持續接受高價、收盤≥開盤且廣度擴散，gap_fade路徑失效",
+    "若收盤≤41661.70則close up假說失效；若非平盤上漲比≤50%則breadth up失效",
+    "來源時間或合約歸屬驗證不成立時標示資料品質失敗，不回填當日實現資訊",
+    "SOX與台積電前收衝突未解，禁用其精確幅度或絕對價觸發條件"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-10",
+      "item": "當日盤前凍結18項原文",
+      "note": "08:35:06凍結；完整A:F/O列保留於manifest；非讀取實現結果",
+      "source_row": "每日預測與覆盤!A410:F427,O410:O427",
+      "extracted_at": "2026-11-10T08:58:09+08:00",
+      "content_hash": null
+    },
+    {
+      "trading_date": "2026-11-10",
+      "item": "當日規則引用",
+      "note": "O欄記載2026-10-29.v1，R01/R02/R04/R14/R15/R16/R17/R18；本次未另讀模型修正紀錄，不宣稱全文驗證",
+      "source_row": "每日預測與覆盤!O410:O427",
+      "extracted_at": "2026-11-10T08:58:09+08:00",
+      "content_hash": null
+    }
+  ],
+  "snapshot_hash": "4f8c035bc51c6db3f29368dbb3374fd172fdf6b1cc38dacd3f120d772b2f5853"
+}
