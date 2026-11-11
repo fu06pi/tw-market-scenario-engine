@@ -1,0 +1,22 @@
+{
+  "trading_date": "2026-11-11",
+  "previous_close": 42711.92,
+  "open": 43135.76,
+  "high": 44257.15,
+  "low": 42708.05,
+  "close": 44257.15,
+  "turnover": 849165000000,
+  "breadth_up": 634,
+  "breadth_down": 368,
+  "breadth_flat": 81,
+  "breadth_no_trade": 3,
+  "breadth_no_comparison": 1,
+  "otc_close": 344.11,
+  "otc_return_pct": 3.35,
+  "recorded_at": "2026-11-11T15:22:38+08:00",
+  "regular_stock_turnover": 788885446601,
+  "turnover_all_sessions": 873959477729,
+  "session_change_points": 1545.23,
+  "session_return_pct": 3.62,
+  "turnover_basis": "turnover: CNA regular-session headline in TWD; turnover_all_sessions: TWSE MI_INDEX total; not interchangeable"
+}
