@@ -1,0 +1,74 @@
+{
+  "trading_date": "2026-11-11",
+  "generated_at": "2026-11-11T09:02:26+08:00",
+  "data_cutoff_at": "2026-11-11T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "1.0-missingness-explicit-20261111",
+  "prompt_version": "v1-20261111-reconstruction",
+  "data_manifest_hash": "5bef20afe0cb1314fe50532fe12f5b7c7fd9eac64b59b324da870ec28a134f81",
+  "scenarios": {
+    "bull": 0.22,
+    "base": 0.46,
+    "bear": 0.32
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -40.0,
+    "expected_close_return_bps": -15.0
+  },
+  "narrative": {
+    "market_view": "補建之未校準legacy分析情境：隔夜科技轉弱、CPI與殖利率壓力、前日大漲後獲利了結偏空；台積電已公布的強勁10月營收提供承接反證，不假定單邊下跌。",
+    "open_hypothesis": "以前收42711.92為基準，預估小幅開低40bps（-0.40%，約42541.07）；幅度在今日V0原區間-1.50%至0%內。夜盤-124點未直接換成現貨Gap；ADR/SOX精確數值不入特徵。",
+    "intraday_hypothesis": "gap_fade待驗證路徑：低開後部分回補缺口，台積電基本面支撐與利率壓力拉扯；不由日OHLC推斷高低點先後，首30分鐘上下探可以同時成立，須獨立分鐘資料驗證。",
+    "close_hypothesis": "預期相對前收-15bps（-0.15%，約42647.85），高於預估開盤約106.78點但仍略收黑。這是主觀情境期望，不是校準後點預測。",
+    "breadth_hypothesis": "預期上市上漲/(上漲+下跌)<50%，平盤不入分母；台積電可能較大盤抗跌，金融僅相對抗跌，不能推成全面絕對上漲。",
+    "bull_script": "22%主觀權重：營收支撐擴散至權值與OTC，收復42711.92且廣度>50%，收盤報酬>+50bps；情境中心+150bps。",
+    "base_script": "46%主觀權重：低開後回補部分缺口、雙向震盪，收盤落前收±50bps，情境中心0bps；不預設開盤為全日低點。",
+    "bear_script": "32%主觀權重：升息與匯出壓力壓過營收支撐，低開後承接失敗，收盤跌幅超過50bps；情境中心-150bps。"
+  },
+  "key_drivers": [
+    "11/10 Nasdaq-0.74%、S&P500-0.38%、Dow-0.30%；06:43:25發布核對",
+    "台指夜盤新聞收42522、相對參考價-124，台積電期貨2291/+8；合約月份未官方核實，僅作背景",
+    "BLS於11/10 21:30台北已公布CPI月增0.4%；22:26有時間戳的美債盤中報告顯示殖利率壓力",
+    "台積電官方11/10已公布10月營收5868.9億元，月增14.7%、年增59.7%，不再當作今日未知事件",
+    "前日TAIEX+2.52%但V0廣度534漲497跌僅51.79%；外資仍賣超、台幣尾盤轉升不等於匯出解除",
+    "04:20已發布油價續跌背景；11/11美債休市建議不等於美股休市"
+  ],
+  "invalidation_conditions": [
+    "若開盤>=42711.92，open down及小幅低開假說失效；不修改快照",
+    "若收盤>=42711.92，close down假說失效；方向中性另按事前±5bps報告，不追溯改原硬門檻",
+    "若低開後收盤不高於開盤，缺口部分回補至收盤的路徑失效；不能以全日高點替代收盤驗證",
+    "若非平盤股票上漲比>=50%，breadth down假說失效；權值漲跌與廣度分開",
+    "ADR/SOX來源衝突、夜盤合約未核實前，禁止其精確數值重新加入本快照；資料更正另留紀錄"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-11",
+      "item": "當日凍結18項盤前假說",
+      "note": "cutoff08:38:55；A:F/O完整原樣保存在manifest，V0未修改",
+      "source_row": "每日預測與覆盤!A428:F445,O428:O445",
+      "extracted_at": "2026-11-11T09:02:26+08:00",
+      "content_hash": "74c7659eec59c09b59c1d9b97c2e902242a72940c448e1e952ddb27e66326bc6"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "模型規則主表2026-10-29.v1",
+      "note": "採R01/R02/R04/R14/R15/R16/R17/R18紀錄規範；R10/R12仍候選，不採硬權重",
+      "source_row": "模型規則主表!A1:P21",
+      "extracted_at": "2026-11-11T09:02:26+08:00",
+      "content_hash": "ccf03617bd1046b3dcd00057f22890b68ce2cfe313306fae050b062e8e5df8c3"
+    },
+    {
+      "trading_date": "2026-09-22",
+      "item": "模型修正紀錄R01歷史追溯",
+      "note": "僅讀頭列與R01/R03歷史；採現行決策欄，不使用歷史已撤回係數",
+      "source_row": "模型修正紀錄!A1:T3",
+      "extracted_at": "2026-11-11T09:02:26+08:00",
+      "content_hash": "ccf03617bd1046b3dcd00057f22890b68ce2cfe313306fae050b062e8e5df8c3"
+    }
+  ],
+  "snapshot_hash": "50b91ad8682f557a9d6424054b81c5e5883ee86b0a584ecb6fb5046a08de0f76"
+}
