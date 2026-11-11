@@ -1,0 +1,923 @@
+{
+  "trading_date": "2026-11-11",
+  "generated_at": "2026-11-11T09:02:26+08:00",
+  "data_cutoff_at": "2026-11-11T08:50:00+08:00",
+  "reconstructed": true,
+  "late_generated": true,
+  "snapshot_status": "reconstructed_late_generated_legacy_analyst",
+  "aggregate_metric_eligibility": false,
+  "new_ohlc_model_metric_eligibility": false,
+  "legacy_scenario_metric_eligibility": false,
+  "limitations": [
+    "今日V0有凍結原文；並無已保存的今日V1數字。V1於09:00後補建，不能冒充當時正式樣本。",
+    "V0 cutoff為儲存格自述，非獨立Sheets版本歷史證明。",
+    "新OHLC流程尚未在main確認正式切換。本次legacy主觀情境不是模型推論，不修改V0。",
+    "未使用2026-11-11現貨或期貨日盤行情、09:00後事件；研究頁面相關新聞不作輸入。"
+  ],
+  "sources": [
+    {
+      "id": "v0",
+      "url": "https://docs.google.com/spreadsheets/d/19hnXUjtgDQzZpwEa9-bf4jZNmVupSt8gpq4YFkLXVhQ/edit",
+      "range": "'每日預測與覆盤'!A428:P445",
+      "available_at": "2026-11-11T08:38:55+08:00",
+      "availability_basis": "18列O欄記載凍結cutoff；G:N/P為空不作實現結果輸入",
+      "raw_rows": [
+        {
+          "row": 428,
+          "A_to_F": [
+            "2026/11/11",
+            "TAIEX開盤Gap",
+            "美股科技回落，但台積電營收強勁，昨日台股已連漲兩日，預期小幅開低。",
+            "開盤<42711.92；Gap -1.50%至0%",
+            "55%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 429,
+          "A_to_F": [
+            "2026/11/11",
+            "首30分鐘下探",
+            "前日振幅大且海外科技回檔，早盤仍可能有價格發現。",
+            "09:00–09:30最低/開盤-1≤-0.30%",
+            "58%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 430,
+          "A_to_F": [
+            "2026/11/11",
+            "首30分鐘反彈",
+            "台積電營收正向及前日強勢可能帶來逢低承接。",
+            "09:00–09:30最高/開盤-1≥+0.30%",
+            "55%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 431,
+          "A_to_F": [
+            "2026/11/11",
+            "TAIEX收盤方向",
+            "海外科技回落與前日大漲後獲利了結壓力，收盤略偏空。",
+            "收盤<42711.92",
+            "53%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 432,
+          "A_to_F": [
+            "2026/11/11",
+            "TAIEX開盤至收盤",
+            "盤初若開低可能有承接，但無足夠訊號確立趨勢。",
+            "收盤>當日開盤",
+            "51%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 433,
+          "A_to_F": [
+            "2026/11/11",
+            "上市市場廣度",
+            "前日534漲497跌，廣度僅微偏多；美股轉弱可能壓抑多數股票。",
+            "上漲/(上漲+下跌)<50%（平盤不入分母）",
+            "54%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 434,
+          "A_to_F": [
+            "2026/11/11",
+            "OTC相對TAIEX",
+            "海外科技偏弱且風險承受下降，中小型電子可能較弱。",
+            "OTC報酬<TAIEX報酬",
+            "53%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 435,
+          "A_to_F": [
+            "2026/11/11",
+            "台積電2330",
+            "10月營收創高提供支撐，但SOX回落；開盤較前收偏多，收盤不確定。",
+            "開盤>2285；收盤>2285",
+            "56%／53%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 436,
+          "A_to_F": [
+            "2026/11/11",
+            "聯發科2454",
+            "前日上漲後美股科技轉弱，IC設計可能回吐。",
+            "收盤<3830",
+            "54%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 437,
+          "A_to_F": [
+            "2026/11/11",
+            "AI大型權值四檔",
+            "AI基本面受台積電營收支持，海外科技修正與獲利了結形成拉扯。",
+            "台積電、鴻海、廣達、台達電等權報酬≤0",
+            "52%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 438,
+          "A_to_F": [
+            "2026/11/11",
+            "ABF載板三雄",
+            "SOX小跌，載板短線可能回吐。",
+            "欣興、南電、景碩等權報酬≤0",
+            "53%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 439,
+          "A_to_F": [
+            "2026/11/11",
+            "CCL材料雙股",
+            "AI材料需求仍在，但短線科技股回檔。",
+            "台光電、台燿等權報酬≤0",
+            "52%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 440,
+          "A_to_F": [
+            "2026/11/11",
+            "DRAM／南亞科",
+            "記憶體獨立供需，不能直接映射SOX；保守預測相對弱。",
+            "南亞科報酬<TAIEX報酬",
+            "51%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 441,
+          "A_to_F": [
+            "2026/11/11",
+            "金融類股",
+            "科技回檔時金融可能相對抗跌，但不預設絕對上漲。",
+            "金融類股報酬>TAIEX報酬",
+            "54%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 442,
+          "A_to_F": [
+            "2026/11/11",
+            "塑膠類股",
+            "前日塑化+3.78%，短線獲利了結可能壓抑相對報酬。",
+            "塑膠類股報酬<TAIEX報酬",
+            "52%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 443,
+          "A_to_F": [
+            "2026/11/11",
+            "半導體設備三檔",
+            "台積電營收創高支持長線設備需求，惟SOX回檔。",
+            "帆宣、漢唐、弘塑等權報酬>TAIEX報酬",
+            "52%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 444,
+          "A_to_F": [
+            "2026/11/11",
+            "鴻海2317",
+            "AI伺服器需求仍在，但美股科技回落，預測相對弱。",
+            "鴻海報酬<TAIEX報酬",
+            "52%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        },
+        {
+          "row": 445,
+          "A_to_F": [
+            "2026/11/11",
+            "TAIEX全日振幅",
+            "前日振幅2.89%，市場仍在高波動修復階段。",
+            "(當日最高-最低)/42711.92≥1.00%",
+            "70%",
+            "11/10台股收42,711.92(+2.52%)、高43,135.92、低41,930.03；11/10美股Nasdaq -0.74%、S&P500 -0.38%、SOX -0.35%；台積電10月營收5,868.9億元(月+14.7%、年+59.7%)已於11/10公布；11/11美國退伍軍人節美債休市、美股正常交易。台指夜盤與TSM ADR正式收盤未核實，不作量化特徵。"
+          ],
+          "O": "target_date=2026-11-11;cutoff=2026-11-11T08:38:55+08:00;規則=2026-10-29.v1;R01/R02/R04/R14/R15/R16/R17/R18;主觀信心未校準；來源 https://www.cna.com.tw/news/afe/202611100133.aspx ; https://pr.tsmc.com/chinese/news/3349 ; https://www.investing.com/indices/phlx-semiconductor-historical-data ; https://www.bls.gov/schedule/2026/11_sched_list.htm ; https://www.kiplinger.com/investing/stocks/is-the-stock-market-open-on-veterans-day ; 美股指數 https://portfolio-terminal.com/markets/stock-market-close ; 不使用未核實夜盤及ADR。"
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "range": "'模型規則主表'!A1:P21",
+      "version": "2026-10-29.v1",
+      "available_at_upper_bound": "2026-10-30T00:00:00+08:00",
+      "availability_basis": "主表整理日期2026-10-29；並非獨立版史證明",
+      "raw_rows": [
+        [
+          "規則ID",
+          "主題",
+          "類型",
+          "目前決策",
+          "統一後規則",
+          "適用時點",
+          "允許資訊",
+          "禁止做法",
+          "合併來源／原列",
+          "衝突處理",
+          "數值權重決策",
+          "採用／完成條件",
+          "目前驗證證據",
+          "程式／排程落地",
+          "版本",
+          "整理日期"
+        ],
+        [
+          "R01",
+          "Open與Close分開預測／隔夜訊號用途",
+          "預測與評分規範",
+          "已採用（紀錄規範）",
+          "Open、Close/前收與Close/Open分別鎖定目標並評分，允許共享截止前的SOX、ADR、期貨訊號；不把隔夜利多等同全天續漲，也不把其對Close的影響固定設為零。",
+          "盤前；盤中更新另存",
+          "截至預測截止點已公開資料",
+          "以盤中證據回改盤前；宣稱隔夜訊號只能影響Open",
+          "模型修正紀錄!2；模型修正紀錄!47；模型修正紀錄!50；模型修正紀錄!53",
+          "規則分離是評分要求；隔夜訊號對Close的係數仍待驗證。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R02",
+          "事件時間對齊與資訊隔離",
+          "資料規範",
+          "已採用（紀錄規範）",
+          "每則事件保存event_time、published_at、observed_at、Asia/Taipei時區；盤前僅使用截止前可得資訊，未公布內容不入特徵；盤中及盤後資訊分別歸入更新、覆盤或下一交易日。",
+          "各預測時點",
+          "當時已發布、已取得資料",
+          "同日即當成盤中事件；將盤後法說倒填當日盤前",
+          "模型修正紀錄!7；模型修正紀錄!22；模型修正紀錄!26；模型修正紀錄!48",
+          "與Surprise及公司催化規則並存；時間合法不代表有預測力。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R03",
+          "公司催化、新鮮度與價格接受度",
+          "統計假說",
+          "候選（待驗證）",
+          "候選比較公司新增催化、事件經過時間、事前已反映漲幅對後續報酬的影響；不預設新利多必漲或舊催化必失效。當日相對強弱只供盤中版本更新。",
+          "盤前／盤中分版本",
+          "截止前公告、歷史價格；更新時點以前現貨",
+          "固定增加利多權重；用當日收盤證明盤前催化已反映",
+          "模型修正紀錄!3；模型修正紀錄!5；模型修正紀錄!9；模型修正紀錄!28；模型修正紀錄!35",
+          "9/22新催化、9/23衰減與9/24盤中再評估整併；衰減率不先指定。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R04",
+          "市場廣度定義與權值／等權分離",
+          "指標與評分規範",
+          "已採用（紀錄規範）",
+          "TAIEX報酬、上漲/(上漲+下跌)、含平盤占比、漲跌家數差、OTC與正式等權報酬各自保存並事先鎖定評分口徑；沒有等權序列不得用上漲家數冒充等權報酬。",
+          "盤前定義；盤後評分",
+          "同市場、同日期、同時點正式資料",
+          "事後換分母；指數漲即稱全面上漲",
+          "模型修正紀錄!4；模型修正紀錄!17；模型修正紀錄!25；V1_改善提案!4；V1_改善提案!7；V1_改善提案!9；V1_改善提案!12",
+          "分層是觀測維度；增加何種預測權重另走驗證。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R05",
+          "電子、金融與非電子的分層擴散",
+          "統計假說",
+          "候選（待驗證）",
+          "候選使用大型權值電子、電子中小型/OTC、金融、非電子的事前擴散與相對報酬特徵；金融、塑化、航運可分化，不把所有非電子視為同一方向。",
+          "盤前／盤中分版本",
+          "歷史分層廣度；更新時點以前資料",
+          "用當日收盤廣度預測當日收盤；把分層誤認成已驗證加權",
+          "模型修正紀錄!12；模型修正紀錄!15；模型修正紀錄!46；模型修正紀錄!49",
+          "各層各自檢驗增益；不預設權值強或等權強。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R06",
+          "結算日與波動／方向",
+          "統計假說",
+          "候選（待驗證）",
+          "結算日作可驗證的日曆標記；方向、振幅與反轉機率分開測試，不預設結算必增波動、必拉高或必反轉。",
+          "盤前",
+          "已知結算日曆與歷史資料",
+          "因一個結算日即固定提高波動或反轉權重",
+          "模型修正紀錄!6",
+          "撤除固定方向敘述；波動係數也須驗證。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R07",
+          "長假前流動性",
+          "統計假說",
+          "候選（待驗證）",
+          "候選測試長假前成交量、振幅與趨勢延續的條件差異；先保存日曆標記，不預設量縮、追價降低或午後收斂。",
+          "盤前",
+          "已知休市日曆與歷史流動性",
+          "把9/24單日型態變成所有假前固定先驗",
+          "模型修正紀錄!8",
+          "歷史假期樣本不足時維持候選。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R08",
+          "休市後累積資訊與Reopen",
+          "統計假說",
+          "候選（待驗證）",
+          "連續休市後候選比較整段休市期間的累積海外變動與一般隔夜輸入；一般週末與額外休市分開標記。是否另建regime由相同基準樣本外結果決定。",
+          "盤前",
+          "前次現貨收盤至本次截止的已公開資料",
+          "只看最後一晚；重複累計同一報酬；直接提高收盤係數",
+          "模型修正紀錄!10",
+          "與最近可交易夜盤R18並存；不把每次週一都當特殊長假。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R09",
+          "事件Surprise與市場共識",
+          "統計假說",
+          "候選（待驗證）",
+          "候選比較公布值相對事前共識／定價差；結果公布前只可用事件日曆及事前分布，結果公布後Surprise只供後續預測或更新。",
+          "發布前／發布後分版本",
+          "當時可得的共識、公布值與跨市場價格",
+          "用尚未發布的Surprise預測當日盤前",
+          "模型修正紀錄!11",
+          "時間對齊由R02控制；Surprise與價格反應分開。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R10",
+          "現貨Gap校準與夜盤基差／背離",
+          "統計假說",
+          "候選（待驗證）",
+          "候選以夜盤報酬、明確基準的期現基差、SOX/ADR、前日報酬及連休累積資訊校準現貨Gap；同向與背離均作特徵，不硬定同向加權、背離縮Gap。首30分鐘下探不當作Gap命中。",
+          "盤前",
+          "截止前行情；合約、換月、參考價與現貨前收",
+          "夜盤點數直接換算現貨Gap；盤中低點冒充開盤",
+          "模型修正紀錄!13；模型修正紀錄!14；模型修正紀錄!20；模型修正紀錄!23；模型修正紀錄!41；V1_改善提案!2；V1_改善提案!6；V1_改善提案!8；V1_改善提案!11",
+          "整併多次Gap提案；不固定提高或降低夜盤權重。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R11",
+          "產品映射與固定股票池",
+          "統計假說",
+          "候選（待驗證）",
+          "先固定股票池與成分；DRAM、NOR、NAND/控制器、HDD，及ABF、CCL、AI各池分開保存。海外產品重疊度及公司催化僅為候選特徵；完整同時點收盤才能計精確等權。",
+          "盤前定池；盤後驗證",
+          "截止前產業／公司資訊與正式成分股價格",
+          "SOX代替全產業；依結果換成分；缺價用盤中價補",
+          "模型修正紀錄!18；模型修正紀錄!36；模型修正紀錄!38；模型修正紀錄!42；模型修正紀錄!51",
+          "資料完整性可先落實；分池預測增益與係數仍待測。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R12",
+          "前日急跌、續跌與反彈雙情境",
+          "統計假說",
+          "候選（待驗證）",
+          "候選同時估計早盤續跌與開盤即低點反彈，前日型態及隔夜訊號均為特徵；上探、下探分別計分且可同時成立。不因上一日勝負立即改方向或機率。",
+          "盤前／盤中分版本",
+          "歷史路徑、截止前夜盤；更新時點以前分鐘K",
+          "急跌後必反彈或必續跌；反覆單日調高反方向權重",
+          "模型修正紀錄!19；模型修正紀錄!29；模型修正紀錄!34；模型修正紀錄!45；模型修正紀錄!54",
+          "整併10/14、10/16、10/21、10/28；重複錯誤作追加樣本。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R13",
+          "金融／塑化／航運輪動與擁擠",
+          "統計假說",
+          "候選（待驗證）",
+          "各產業絕對與相對TAIEX報酬分別建模；前日超額、漲幅及risk-off為候選交互特徵。不將金融固定視為避險，也不預設前日漲逾5%必回吐。",
+          "盤前／盤中分版本",
+          "歷史類股、截止前利率／公司事件",
+          "前日領漲就推續強；失敗隔天便固定押反轉",
+          "模型修正紀錄!21；模型修正紀錄!24；模型修正紀錄!31；模型修正紀錄!33；模型修正紀錄!39",
+          "撤除金融+1%/電子-1%與前日+5%等未驗證硬門檻。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R14",
+          "首30分鐘時間戳與門檻證據",
+          "資料與評分規範",
+          "已採用（紀錄規範）",
+          "首30分鐘一律用事先定義的09:00–09:30有時戳資料。時窗內單點跨門檻可證明該門檻達成，不能當作精確極值；無完整時窗不得證明未達門檻。正式全日最低=開盤可證下探為零，正式全日最高=開盤可證上探為零。",
+          "盤後驗證／盤中更新",
+          "正式分鐘K或有時戳報價；經核對的全日邊界",
+          "全日極值代替早盤極值；缺資料直接判失敗",
+          "模型修正紀錄!43",
+          "資料不足維持待核實；精確極值與門檻命中分開。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R15",
+          "固定評分口徑與中性帶",
+          "指標與評分規範",
+          "已採用（紀錄規範）",
+          "Gap、Close/前收、Close/Open、振幅、CLV與High-to-Close分別計算；保留原始硬門檻。中性帶、方向分類與敏感度須事先指定，不能追溯改判勝負；H=L時CLV記NA。",
+          "盤前定義；盤後評分",
+          "同時點完整正式OHLC與原始門檻",
+          "四捨五入後判區間；事後新增中性帶把錯誤改命中",
+          "模型修正紀錄!40；模型修正紀錄!52",
+          "新增口徑僅對未來版本生效，歷史原始評分保留。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R16",
+          "快照雜湊、盤前落檔與回讀",
+          "資料完整性規範",
+          "已採用（紀錄規範）",
+          "分別保存generated_at、persisted_at、target_date、cutoff及canonical hash；盤前落檔後回讀確認。延遲補登、重建與通過完整性檢查的盤前快照分層評估；失敗原件保留。",
+          "盤前落檔／盤後稽核",
+          "原始快照、時間戳與雜湊紀錄",
+          "把生成成功當作已保存；以重建資料冒充可稽核基準",
+          "V1_改善提案!5；V1_改善提案!10；V1_改善提案!13",
+          "整併V1三次完整性提案；本次未驗證GitHub程式與排程落地。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R17",
+          "海外行情close／last與來源核對",
+          "資料規範",
+          "已採用（紀錄規範）",
+          "海外行情記交易日、時區、最後時間、正式close或盤中last類型及來源；正式收盤與盤中幅度分開；來源衝突未釐清前不輸入相應特徵。錯誤衍生特徵另建修正版，原始預測保留。",
+          "盤前資料檢查",
+          "可核對的正式行情與原始來源",
+          "盤中-2.3%當正式收盤；以資料錯誤直接歸因模型",
+          "模型修正紀錄!44",
+          "10/21先處理SOX來源／類型問題，再評估模型增益。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R18",
+          "最近可交易夜盤與新鮮度",
+          "資料規範",
+          "已採用（紀錄規範）",
+          "週一或休市後讀取最近實際交易夜盤，保存session日期、close時間、合約、參考價及資料距今時間；缺交易時段與抓取失敗分開記錄。",
+          "盤前",
+          "截止前最近可交易夜盤",
+          "假定週末沒有可用夜盤；無條件提高Trend-Day機率",
+          "模型修正紀錄!16",
+          "修補輸入遺漏；趨勢權重是否提高另由R01/R08/R10驗證。",
+          "僅統一紀錄與評分規範；本次不改模型數值係數。",
+          "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+          "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R19",
+          "盤初selloff條件分類",
+          "統計假說",
+          "候選（待驗證）",
+          "以更新時點前的Open-to-Low、OTC、廣度等候選特徵比較selloff警示與基準；不直接採用>1%或>2%門檻，不以收盤才知道的『開盤即全日最高』作09:30輸入。",
+          "盤中更新",
+          "截至更新時點的分鐘K與市場廣度",
+          "全日高低點偷渡早盤；用警示命中改判盤前預測",
+          "模型修正紀錄!27；模型修正紀錄!32",
+          "10/13與10/15整併；依R14取得可稽核分鐘資料。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ],
+        [
+          "R20",
+          "Close盤中更新與尾盤接受度",
+          "統計假說",
+          "候選（待驗證）",
+          "候選在固定09:30或事前指定更新時點，使用當時已知VWAP、廣度、回升與權值同步性預測剩餘時段；尾盤更新另定時點。全日CLV及最終集合競價僅為結果或次日歷史特徵。",
+          "盤中更新；次日歷史特徵",
+          "更新時點以前資料；前日完整行情",
+          "全日CLV預測當日收盤；13:30成交結果用於08:50特徵",
+          "模型修正紀錄!30；模型修正紀錄!37；V1_改善提案!3",
+          "盤前版本與更新版本各自保存、各自評分，不覆蓋原始快照。",
+          "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+          "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+          "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+          "未核驗；本次只優化試算表規則與追溯欄位。",
+          "2026-10-29.v1",
+          "2026-10-29"
+        ]
+      ],
+      "used_ids": [
+        "R01",
+        "R02",
+        "R04",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18"
+      ],
+      "candidate_only": [
+        "R10",
+        "R12"
+      ],
+      "model_corrections_read": {
+        "range": "'模型修正紀錄'!A1:T3",
+        "majorDimension": "ROWS",
+        "values": [
+          [
+            "更新日期",
+            "訊號/假設",
+            "原權重/規則",
+            "驗證樣本",
+            "觀察結果",
+            "錯誤類型",
+            "統一後規則／決策（現行）",
+            "權重決策（現行）",
+            "適用條件",
+            "備註",
+            "規則ID",
+            "目前決策",
+            "規則類型",
+            "適用時點",
+            "原修正後規則（歷史保留）",
+            "原權重調整（歷史保留）",
+            "合併／衝突處理",
+            "採用前驗證",
+            "主表版本",
+            "整理日期"
+          ],
+          [
+            "2026/09/22",
+            "隔夜科技強勢→台股突破力道",
+            "偏多但以開高震盪為主，獲利了結風險權重較高",
+            "9/22：SOX +4.29%、TSMC ADR +2.41%、台指夜盤+728點；現貨開盤+262後最高+882.69創新高",
+            "完整收盤資料推翻早盤初判：雖開盤+262、最高+882.69創高，但終場僅+81.33且收當日最低；強隔夜訊號主要解釋開盤gap，不能直接推論全天趨勢延續。",
+            "早盤覆盤造成權重錯估；完整日內資料顯示趨勢延續規則過度擬合早盤",
+            "【已採用（紀錄規範）；R01】Open、Close/前收與Close/Open分別鎖定目標並評分，允許共享截止前的SOX、ADR、期貨訊號；不把隔夜利多等同全天續漲，也不把其對Close的影響固定設為零。",
+            "僅統一紀錄與評分規範；本次不改模型數值係數。",
+            "隔夜科技大漲、夜盤明顯領先現貨，尤其接近/突破歷史高點時。",
+            "9/22完整OHLC：47,981.04／48,601.53／47,800.17／47,800.17。此規則取代早盤時建立的「三強訊號→趨勢延續主情境」初步結論。",
+            "R01",
+            "已採用（紀錄規範）",
+            "預測與評分規範",
+            "盤前；盤中更新另存",
+            "SOX/TSMC ADR/台指夜盤強勢用來提高「開高」機率；是否趨勢延續必須等現貨09:15–09:30確認。若創高後高點回撤>50%、跌破開盤區或VWAP、核心權值轉弱，切換為沖高回落/均值回歸情境。",
+            "降低隔夜訊號對「收盤方向/趨勢日」的直接權重；提高現貨盤中確認權重。",
+            "規則分離是評分要求；隔夜訊號對Close的係數仍待驗證。",
+            "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+            "2026-10-29.v1",
+            "2026-10-29"
+          ],
+          [
+            "2026/09/22",
+            "個股當日公司催化需覆蓋產業beta",
+            "聯發科僅以SOX與既有2nm手機晶片題材評估，預期IC設計強度低於AI伺服器",
+            "9/22聯發科當日發布Dimensity CX C10 Max並切入高階Googlebook/AI PC；盤中最高5,480創高，遠強於台積電",
+            "漏掉開盤前新增公司事件，導致相對強度預測錯誤。",
+            "資訊遺漏＋權重錯估",
+            "【候選（待驗證）；R03】候選比較公司新增催化、事件經過時間、事前已反映漲幅對後續報酬的影響；不預設新利多必漲或舊催化必失效。當日相對強弱只供盤中版本更新。",
+            "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+            "核心權值股與高權重產業龍頭",
+            "避免只依前一晚全球beta推論當日領漲排序。",
+            "R03",
+            "候選（待驗證）",
+            "統計假說",
+            "盤前／盤中分版本",
+            "盤前最後一輪必查核心權值股當日公告/新品/法說/客戶事件；若有新增重大催化，重新評分個股與子產業相對強度。",
+            "提高當日公司級催化權重",
+            "9/22新催化、9/23衰減與9/24盤中再評估整併；衰減率不先指定。",
+            "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+            "2026-10-29.v1",
+            "2026-10-29"
+          ]
+        ]
+      }
+    },
+    {
+      "id": "trading_calendar",
+      "url": "https://www.twse.com.tw/holidaySchedule/holidaySchedule?response=html",
+      "is_trading_day": true,
+      "availability_basis": "官方2026年度日曆；11/11星期三非列示休市日",
+      "available_at_upper_bound": "2026-11-11T08:50:00+08:00"
+    },
+    {
+      "id": "night",
+      "url": "https://money.udn.com/money/story/11112/9870702?from=edn_newestlist_rank",
+      "published_at": "2026-11-11T05:11:58+08:00",
+      "availability_basis": "二級來源明示發布時間及資料來源台灣期交所；民視06:43:25交叉核對",
+      "verification_url": "https://finance.ftvnews.com.tw/news/detail/2026B11W0089",
+      "session_start": "2026-11-10T15:00:00+08:00",
+      "session_end": "2026-11-11T05:00:00+08:00",
+      "reported_close": 42522,
+      "reported_change_from_reference": -124,
+      "reference_implied": 42646,
+      "reported_return_pct": -0.2907658397036064,
+      "tsmc_futures_close": 2291,
+      "tsmc_futures_change": 8,
+      "contract": null,
+      "contract_status": "新聞未明示月份；不可冒稱已官方核對TX202611同合約收益",
+      "numeric_feature_used": false,
+      "use": "只用已核對的夜盤負向背景；不把-124點或42522與現貨差當Gap。"
+    },
+    {
+      "id": "us_equity",
+      "url": "https://finance.ftvnews.com.tw/news/detail/2026B11W0089",
+      "published_at": "2026-11-11T06:43:25+08:00",
+      "session_date": "2026-11-10",
+      "availability_basis": "明示發布/更新06:43:25，報導美股終場；V0同方向於08:38凍結",
+      "nasdaq_return_pct": -0.74,
+      "sp500_return_pct": -0.38,
+      "dow_return_pct": -0.3,
+      "nasdaq_close": 25065.88,
+      "sp500_close": 7520.93,
+      "dow_close": 52231.89,
+      "sox_reported_close": 9998.33,
+      "sox_reported_return_pct": -0.35
+    },
+    {
+      "id": "sox_conflict",
+      "url": "https://indexes.nasdaqomx.com/Index/History/SOX",
+      "observed_official_overview": {
+        "as_of": "2026-11-10",
+        "level": 9984.9,
+        "return_pct": -0.49
+      },
+      "conflicting_media": {
+        "level": 9998.33,
+        "return_pct": -0.35
+      },
+      "numeric_feature_used": false,
+      "use": "官方overview/媒體不同as-of未解，排除精確數值。僅V0與06:43已證明的負向背景保留。",
+      "historical_available_at_for_overview": null
+    },
+    {
+      "id": "adr_conflict",
+      "urls": [
+        "https://chartexchange.com/symbol/nyse-tsm/historical",
+        "https://stockanalysis.com/stocks/tsm/history/?period=daily",
+        "https://money.udn.com/money/story/123398/9870779?from=edn_newestlist_cate_side"
+      ],
+      "session_date": "2026-11-10",
+      "values": [
+        {
+          "source": "ChartExchange",
+          "close": 396.69,
+          "return_pct": 2.077,
+          "last_quote_at": "2026-11-11T04:59:58+08:00"
+        },
+        {
+          "source": "StockAnalysis",
+          "close": 396.49,
+          "return_pct": 2.03
+        },
+        {
+          "source": "UDN",
+          "close": 396.48,
+          "return_pct": 2.02
+        }
+      ],
+      "numeric_feature_used": false,
+      "weight": 0,
+      "availability_basis": "最後報價時間不是網頁發布證據；新聞發布時分未取得，加上精確收盤衝突，保留稽核但不作輸入，沿用今日V0的ADR缺失狀態"
+    },
+    {
+      "id": "cpi",
+      "url": "https://www.bls.gov/news.release/cpi.nr0.htm?_hsmi=376865416",
+      "published_at": "2026-11-10T21:30:00+08:00",
+      "availability_basis": "官方Embargo 08:30 ET Tuesday November10；美東已為EST",
+      "headline_mom_pct": 0.4,
+      "use": "已公布通膨壓力背景，不使用後續修訂或今日未發生結果"
+    },
+    {
+      "id": "company",
+      "url": "https://pr.tsmc.com/english/news/3349",
+      "published_date": "2026-11-10",
+      "available_at_upper_bound": "2026-11-11T00:00:00+08:00",
+      "availability_basis": "官方Issued on11/10，且11/11 08:38 V0已記錄；不虛構精確發布時分",
+      "october_revenue_ntd_million": 586890,
+      "mom_pct": 14.7,
+      "yoy_pct": 59.7,
+      "use": "公司基本面支撐；已公開不代表市場surprise，無一致預期不造surprise"
+    },
+    {
+      "id": "taiwan_previous",
+      "url": "https://www.cna.com.tw/news/afe/202611100131.aspx",
+      "published_at": "2026-11-10T13:47:00+08:00",
+      "availability_basis": "前一交易日官方收盤轉述；全文時間明示",
+      "previous_close": 42711.92,
+      "previous_open": 42130.33,
+      "previous_high": 43135.92,
+      "previous_low": 41930.03,
+      "previous_return_pct": 2.52,
+      "turnover_reported_ntd_billion": 1003.339,
+      "use": "OHLC核對V0一致；不同網站成交額口徑不合，成交量/相對量不作數值特徵",
+      "breadth_up_from_v0": 534,
+      "breadth_down_from_v0": 497,
+      "breadth_ratio_from_v0": 0.5179437439379243
+    },
+    {
+      "id": "fx_and_flows",
+      "url": "https://money.udn.com/money/story/5616/9869973?from=edn_newest_index",
+      "published_at": "2026-11-10T18:45:28+08:00",
+      "availability_basis": "CNA轉載明示時間；僅該日正文，不使用相關新聞",
+      "usd_twd_close": 32.865,
+      "usd_twd_previous": 32.882,
+      "twd_appreciation": 0.017,
+      "previous_session_high": 32.97,
+      "foreign_net_sell_ntd_billion": 34.116,
+      "use": "外資匯出壓力背景；外資淨額有0.01億元差不作硬係數，法人合計修訂衝突排除"
+    },
+    {
+      "id": "rates",
+      "url": "https://advisorservices.schwab.com/story/stock-market-update-open",
+      "published_at": "2026-11-10T22:26:00+08:00",
+      "availability_basis": "頁面明示Nov10 09:26ET；是美股開盤前資料而非正式債券收盤",
+      "us10y_intraday_pct": 4.94,
+      "intraday_change_bps": 7,
+      "numeric_final_close_feature_used": false,
+      "use": "升息/估值壓力背景；不把盤中值當US10Y終值",
+      "official_crosscheck": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "official_11_10_reported_pct": 4.98,
+      "official_11_10_publication_time_verified": false
+    },
+    {
+      "id": "oil",
+      "url": "https://www.881903.com/news/finance/2658928",
+      "published_at": "2026-11-11T04:20:00+08:00",
+      "availability_basis": "搜尋索引顯示發布/最後更新04:20香港時間，同台北；open原始錯誤DisabledError，二級來源數值與Reuters方向一致",
+      "wti_close": 86.04,
+      "wti_return_pct": -0.93,
+      "brent_close": 91.49,
+      "brent_return_pct": -1.17,
+      "use": "油跌背景；不同摘要WTI86.44衝突不採，不作硬係數"
+    },
+    {
+      "id": "holiday_events",
+      "url": "https://www.sifma.org/news/press-releases/sifma-fixed-income-market-close-recommendation-in-the-u-s-the-u-k-and-japan-for-the-u-s-veterans-day-holiday-2026",
+      "published_date": "2026-10-28",
+      "available_at_upper_bound": "2026-10-29T00:00:00+08:00",
+      "availability_basis": "官方公告日期明示",
+      "event": "11/11美元固定收益市場全日休市建議；不是美股休市",
+      "us_stocks_open_source": "https://www.emega.com.tw/emegaTran/calendarRestList.do"
+    }
+  ],
+  "missing_or_excluded": [
+    "ADR與SOX精確收盤數值因衝突排除；無過去快照數值借用",
+    "TAIFEX夜盤月份及同合約日盤正式參考價未官方逐表核實，數值特徵排除",
+    "US10Y正式11/10發布時分未核實；僅使用有發布時間的較早盤中壓力背景",
+    "OTC正式前收、TSMC權重、前十大集中度、當日除權息點數、相對量缺失，不填0",
+    "全球歐洲/亞洲完整收盤及截止前即時期貨未逐項核實；不宣稱完整跨市場數值集",
+    "模型新分支研究狀態未用main文件以外證明，不宣稱TimesFM/ARIMA已正式運作"
+  ],
+  "methodology": {
+    "kind": "legacy_uncalibrated_analyst_reconstruction",
+    "docs_methodology_status": "docs/METHODOLOGY.md GitHub API error404 Not Found；採已讀README/AGENTS/config/schema及snapshot實際程式規則",
+    "class_definition": "Bull close_return>50bps; Base [-50,+50]bps; Bear<-50bps。方向flat為[-5,+5]bps，廣度up>50%,down<50%,flat=50%。",
+    "scenarios": {
+      "bull": 0.22,
+      "base": 0.46,
+      "bear": 0.32
+    },
+    "scenario_center_bps": {
+      "bull": 150,
+      "base": 0,
+      "bear": -150
+    },
+    "expected_close_bps": -15,
+    "expected_open_gap_bps": -40,
+    "rationale": "前日+2.52%後，Nasdaq/CPI/匯出壓力偏空；TSMC已公布營收提供支撐，主情境小幅低開後部分回補。僅今日資料重新作分析；非V0信心平均，非固定baseline或訓練模型輸出。",
+    "calibrated": false,
+    "baseline_invoked": false,
+    "intraday_and_breadth": "待驗證敘事情境，不是日OHLC模型可推得結果",
+    "new_ohlc_status": "未證明切換；不屬08:30/08:40新模型樣本"
+  },
+  "repo_versions": {
+    "README.md": "d3bcb2546221e152193edb12682049510c962fd1",
+    "AGENTS.md": "ee10da2f44adc69268c7f7e66dd8931d95c93628",
+    "config/features.yaml": "c9552c952e59cded043ada6eecea8773460988ef",
+    "schemas/prediction_snapshot.schema.json": "77edf088921c9ae8556d707a7abb5f42c627935c",
+    "src/tw_scenario/models.py": "b512fc39335cba97c7f0cf76ee67e01b74fecbe1",
+    "src/tw_scenario/snapshot.py": "9a8f8c57d2da8c7b702420edc9c1ea7bd9f8830b"
+  },
+  "fetched_at_upper_bound": "2026-11-11T09:02:26+08:00"
+}
