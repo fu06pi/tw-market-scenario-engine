@@ -1,0 +1,129 @@
+{
+  "trading_date": "2026-11-12",
+  "previous_close": 44257.15,
+  "open": 44180.46,
+  "high": 44525.24,
+  "low": 42943.5,
+  "close": 43091.87,
+  "turnover": 1046993909327,
+  "breadth_up": 277,
+  "breadth_down": 730,
+  "otc_return_pct": -2.44,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-12T15:24:04+08:00",
+  "is_trading_day": true,
+  "turnover_scope": "TWSE MI_INDEX表6總計(1~15)，含多交易口徑；不可與新聞日盤成交額直接比較",
+  "regular_session_turnover_twd": 1013293000000,
+  "breadth_scope": "TWSE MI_INDEX表7股票欄，上漲/(上漲+下跌)，排除持平/未成交/無比價",
+  "breadth_flat": 75,
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261112&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-12",
+      "retrieved_at": "2026-11-12T15:21:30+08:00",
+      "availability_basis": "直接HTTP GET成功；JSON stat=OK,date=20261112，表0/6/7/8",
+      "raw_response_sha256": "ba9a690baba4d400de848cc8b000fc61011bcffb81d85182952c41bd170539e7",
+      "supports": [
+        "official close/change/sectors",
+        "market turnover",
+        "stock breadth",
+        "heavyweight prices"
+      ],
+      "selected_data": {
+        "close": 43091.87,
+        "change": -1165.28,
+        "breadth_up": 277,
+        "breadth_down": 730,
+        "breadth_flat": 75,
+        "breadth_untraded": 2,
+        "breadth_no_comparison": 2,
+        "turnover_total_twd": 1046993909327,
+        "stock_turnover_twd": 952234444372
+      }
+    },
+    {
+      "id": "cna_open",
+      "url": "https://www.cna.com.tw/news/afe/202611120033.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-12T09:04:00+08:00",
+      "supports": [
+        "official trading day corroboration",
+        "open 44180.46"
+      ],
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    },
+    {
+      "id": "cna_close",
+      "url": "https://money.udn.com/money/story/5607/9874257",
+      "publisher": "CNA via Economic Daily",
+      "published_at": "2026-11-12T14:01:04+08:00",
+      "supports": [
+        "open/high/low/close",
+        "regular_session_turnover 1013293000000"
+      ],
+      "excluded_fields": {
+        "breadth_up": 286,
+        "breadth_down": 741,
+        "breadth_flat": 82
+      },
+      "exclusion_reason": "採直接官方表7股票欄；媒體家數不同且範圍未完全對齊",
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    },
+    {
+      "id": "cna_path",
+      "url": "https://money.udn.com/money/story/5607/9874417",
+      "publisher": "CNA via Economic Daily",
+      "published_at": "2026-11-12T14:36:47+08:00",
+      "supports": [
+        "開低後翻紅、午後下挫",
+        "OTC -2.44%",
+        "electronic -3.07%,financial -0.05%"
+      ],
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    },
+    {
+      "id": "edn_path",
+      "url": "https://money.udn.com/money/story/5607/9874197",
+      "publisher": "Economic Daily reporter",
+      "published_at": "2026-11-12T13:40:32+08:00",
+      "supports": [
+        "11:30後賣壓擴大之新聞描述"
+      ],
+      "limitations": "標題開高與CNA/官方開盤數字不符；不用此來源決定開盤方向，獲利了結屬解讀非因果估計",
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    },
+    {
+      "id": "edn_ai_conflict",
+      "url": "https://money.udn.com/money/story/12509/9874319",
+      "publisher": "Economic Daily AI human collaboration",
+      "published_at": "2026-11-12T14:10:32+08:00",
+      "supports": [
+        "OHLC cross-check"
+      ],
+      "excluded_fields": {
+        "breadth_up": 290,
+        "breadth_down": 819
+      },
+      "exclusion_reason": "與直接官方股票欄不一致，不用於評分",
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    },
+    {
+      "id": "preopen_risk_context",
+      "url": "https://www.capitalfutures.com.tw/zh-tw/Financial/GlobalArticle?ContentId=C26111200150",
+      "publisher": "Capital Futures / Jin10",
+      "published_at": "2026-11-12T07:05:03+08:00",
+      "supports": [
+        "盤前已報導AI龍頭盤後逆風，不能把其風險訊息當盤後才出現"
+      ],
+      "limitations": "傳聞內容未獨立證實，只檢查風險資訊是否已公開；不宣稱傳聞為事實或當日跌幅的確定原因",
+      "retrieved_at": "2026-11-12T15:22:11+08:00"
+    }
+  ],
+  "limitations": [
+    "官方OHLC歷史及分鐘端點本次擷取失敗；日OHLC採CNA高可信來源並與經濟日報交叉比對",
+    "無可驗證分鐘線，不由日OHLC推斷高低順序、首30分鐘振幅或正式regime",
+    "權值指數貢獻點數無完整權重資料，留空不估造"
+  ]
+}
