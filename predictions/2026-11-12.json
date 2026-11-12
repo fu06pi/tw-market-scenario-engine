@@ -1,0 +1,74 @@
+{
+  "trading_date": "2026-11-12",
+  "generated_at": "2026-11-12T08:53:30+08:00",
+  "data_cutoff_at": "2026-11-12T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "1.0-missingness-explicit-20261112",
+  "prompt_version": "v1-20261112-reconstruction",
+  "data_manifest_hash": "781371813bff2afd7bf48c8284dd5ef732075a052078cc731980aefbdfa6293c",
+  "scenarios": {
+    "bull": 0.34,
+    "base": 0.46,
+    "bear": 0.2
+  },
+  "targets": {
+    "open_direction": "up",
+    "close_direction": "up",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 85.0,
+    "expected_close_return_bps": 25.0
+  },
+  "narrative": {
+    "market_view": "截止後補建的未校準legacy情境：AI風險偏好、Nasdaq/台積電ADR及夜盤走強支持開高；但台股前日+3.62%、三日反彈4555.51點，主情境是利多先反映、追價後回吐，不假設全面單邊續漲。",
+    "open_hypothesis": "以前收44257.15為基準，預期開高85bps（+0.85%，約44633.34），位於今日V0原始0%至+2.50%區間；夜盤+470點並未直接換成現貨Gap，SOX精確數值不入特徵。",
+    "intraday_hypothesis": "gap_fade待驗證路徑：開高後可能因連漲獲利了結、油價及利率壓力回吐。首30分鐘上下探0.30%可同時成立，必須用有時戳分鐘資料另行驗證；不能由日OHLC推定高低順序。",
+    "close_hypothesis": "預期相對前收+25bps（+0.25%，約44367.79），較預期開盤低約265.54點；收紅不等於收盤高於開盤。此為主觀情境期望，不是校準後模型價位。",
+    "breadth_hypothesis": "預期上市非平盤股票上漲比略高於50%，但大型半導體可能領先OTC；金融/塑膠相對落後不代表絕對下跌，指數與廣度分開評分。",
+    "bull_script": "34%主觀權重：開高後高價被接受，權值、OTC與廣度同步改善，終場較前收漲逾50bps；情境中心+150bps。",
+    "base_script": "46%主觀權重：開高後回吐、雙向震盪，收盤在前收±50bps，情境中心0bps；不把盤中一度上漲當作收盤方向命中。",
+    "bear_script": "20%主觀權重：利多出盡、前日急彈後賣壓與匯出風險再起，失守44257.15且收盤跌逾50bps；情境中心-130bps。"
+  },
+  "key_drivers": [
+    "11/11 Nasdaq+1.60%、S&P500+1.31%、TSM ADR413.35/+4.25%；07:15發布且V0已凍結",
+    "夜盤新聞44606/+470，05:13已發布；同月份官方口徑未核實，只用正向背景",
+    "CoreWeave官方11/10業績與資金安排支持AI情緒；不能直接映射每檔供應鏈",
+    "前日TAIEX44257.15/+3.62%，V0廣度642漲374跌；連續三日強彈提高回吐風險",
+    "新台幣32.86僅微升0.5分，外資仍賣超7.66億元連10賣；減賣不等於轉買",
+    "11/11美債休市無新正式收益率；較早10Y4.98%仍高，油價反彈增加不確定性"
+  ],
+  "invalidation_conditions": [
+    "開盤<=44257.15則open up假說失效，不更改快照",
+    "收盤<=44257.15則close up假說失效；另列預先±5bps中性分類，不回溯改原硬門檻",
+    "若收盤>=開盤且權值/OTC/廣度同步擴散，開高後回吐至收盤的gap_fade路徑失效",
+    "上市非平盤上漲比<=50%則breadth up假說失效；不以指數上漲替代",
+    "來源時間或夜盤合約歸屬出錯時另標資料品質問題，不回填當日開盤後行情；SOX精確值未解不加入"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-12",
+      "item": "當日凍結18項盤前原文",
+      "note": "08:41:57凍結自述；A:F/O完整原樣保存，未改寫缺夜盤原文",
+      "source_row": "每日預測與覆盤!A446:F463,O446:O463",
+      "extracted_at": "2026-11-12T08:53:30+08:00",
+      "content_hash": "d227932eb266026d779ef8ddf138acc6f485fc0bfc744b1fa23de169c3e3e493"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "模型規則主表2026-10-29.v1",
+      "note": "採R01/R02/R04/R14/R15/R16/R17/R18紀錄規範；R10/R12仍候選，不升格硬權重",
+      "source_row": "模型規則主表!A1:P21",
+      "extracted_at": "2026-11-12T08:53:30+08:00",
+      "content_hash": "717654a3613deace5bf54a91b3d10351323dfbd00404da96a7affda72fd1d960"
+    },
+    {
+      "trading_date": "2026-09-22",
+      "item": "模型修正紀錄歷史追溯",
+      "note": "僅讀R01/R03及表頭，採現行決策，不使用已撤回歷史係數",
+      "source_row": "模型修正紀錄!A1:T3",
+      "extracted_at": "2026-11-12T08:53:30+08:00",
+      "content_hash": "ca80da4cbba6f7b8e989f2c19958beeb00497499f005e23d521600f387cbc330"
+    }
+  ],
+  "snapshot_hash": "ccf69a463af0f19f4f026c80ae0be5db4ad2c51c5e3336d76a4da6aac2b85233"
+}
