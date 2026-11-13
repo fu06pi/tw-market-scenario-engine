@@ -1,0 +1,74 @@
+{
+  "trading_date": "2026-11-13",
+  "generated_at": "2026-11-13T08:58:22+08:00",
+  "data_cutoff_at": "2026-11-13T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "1.0-missingness-explicit-20261113",
+  "prompt_version": "v1-20261113-reconstruction",
+  "data_manifest_hash": "a2c4f7327cfc04f29f14d7623c34ec57c75898c72690439b80a7534d8f5f33ac",
+  "scenarios": {
+    "bull": 0.2,
+    "base": 0.45,
+    "bear": 0.35
+  },
+  "targets": {
+    "open_direction": "flat",
+    "close_direction": "down",
+    "intraday_regime": "range",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": 0.0,
+    "expected_close_return_bps": -35.0
+  },
+  "narrative": {
+    "market_view": "截止後補建、未校準legacy情境：美股/ADR偏弱與台指夜盤反彈背離，AMAT已公布業績提供反證；不機械沿用V0開低或推定全面續跌。開盤前收附近，盤中高波動拉扯，收盤略偏空。",
+    "open_hypothesis": "以前收43091.87為基準，預期Gap中心0bps、開盤約43091.87，方向flat依±5bps中性帶。V0原始開低假說原樣保留；本次另外核對的05:10夜盤反彈及05:01 AMAT業績使開盤判斷中性，沒有把夜盤548點直接搬成現貨Gap。",
+    "intraday_hypothesis": "range待驗證路徑：反彈承接與利率/油價壓力雙向拉扯；不預設當日高低點先後。首30分鐘上下探可同時成立，需有時戳分鐘資料獨立評分，不以全日極值代替。",
+    "close_hypothesis": "相對前收預期-35bps（-0.35%，約42941.05），較預期開盤低約150.82點。夜盤偏多不等於全天續漲；PPI前去風險使收盤期望略負，非校準模型價位。",
+    "breadth_hypothesis": "低信心預期上市上漲/(上漲+下跌)<50%，平盤不入分母；金融或鴻海可能相對抗跌，不代表其絕對上漲；前日正式家數缺漏不造數值。",
+    "bull_script": "20%主觀權重：夜盤修復延續且AMAT設備需求支撐擴散，站回43091.87並廣度>50%，收盤漲逾50bps；情境中心+175bps。",
+    "base_script": "45%主觀權重：前收附近開出、雙向震盪，收盤在前收±50bps，情境中心0bps；不因盤中短暫上漲而宣告全天偏多。",
+    "bear_script": "35%主觀權重：利率、油價與匯出壓力壓過承接，跌破前收且廣度持續弱，收盤跌逾50bps；情境中心-200bps。"
+  },
+  "key_drivers": [
+    "11/12 Nasdaq-0.39%、S&P500-0.35%、TSM ADR405.49/-1.90%；V0凍結及07:28新聞核對",
+    "05:10發布夜盤43676/+548、台積電期貨2350/+11；與ADR背離，合約口徑未官方完成核實",
+    "前日TAIEX43091.87/-2.63%，高低差1581.74點；跌深承接與風險控制拉扯",
+    "CBC官方USD/TWD32.889，前日貶0.029；外資連11賣，資金面未完全轉多",
+    "04:44有時間戳盤中美債報價約5.10%，06:02油價結算轉述WTI88.74、Brent95.82，利率/通膨壓力",
+    "AMAT05:01已公布Q4營收104.09億美元、年增53%是正向反證；今日21:30 PPI仍未知"
+  ],
+  "invalidation_conditions": [
+    "若開盤報酬超出±5bps，open flat中心及中性分類失效；不改快照",
+    "若收盤>=43091.87，close down硬方向假說失效；另列±5bps中性分類不追溯改勝負",
+    "若當日呈持續單向且不回到開盤區，range敘事受反證；正式regime分類需另行凍結分鐘規則，本次不計正式regime命中率",
+    "上市非平盤上漲比>=50%則breadth down假說失效；不以指數方向代替廣度",
+    "PPI與當日行情禁止回填；來源/合約錯誤另標資料品質，不覆寫快照"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-13",
+      "item": "當日盤前凍結18項原文",
+      "note": "08:41:52凍結自述；完整原文保存，V0開低與本次中性開盤分歧明列，不回寫",
+      "source_row": "每日預測與覆盤!A464:F481,O464:O481",
+      "extracted_at": "2026-11-13T08:58:22+08:00",
+      "content_hash": "bea638069dff05973e613bec677ccea90dc72a78e17e6720eed30600e56170ff"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "模型規則主表2026-10-29.v1",
+      "note": "採R01/R02/R04/R14/R15/R16/R17/R18紀錄規範；R10/R12候選不升格硬權重",
+      "source_row": "模型規則主表!A1:P21",
+      "extracted_at": "2026-11-13T08:58:22+08:00",
+      "content_hash": "f15603dabc37b0f4b989f705f2ebe3cad410ac01c4fc9f22671b0fa160277723"
+    },
+    {
+      "trading_date": "2026-09-22",
+      "item": "模型修正紀錄歷史追溯",
+      "note": "僅讀R01/R03與表頭，採現行決策，不使用已撤回歷史係數",
+      "source_row": "模型修正紀錄!A1:T3",
+      "extracted_at": "2026-11-13T08:58:22+08:00",
+      "content_hash": "ca80da4cbba6f7b8e989f2c19958beeb00497499f005e23d521600f387cbc330"
+    }
+  ],
+  "snapshot_hash": "6a590a2f119b4de6ec79dff67fcc9155dcf926093b7b1edc04baf1380e983039"
+}
