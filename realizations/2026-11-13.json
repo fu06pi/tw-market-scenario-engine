@@ -1,0 +1,119 @@
+{
+  "trading_date": "2026-11-13",
+  "previous_close": 43091.87,
+  "open": 43719.75,
+  "high": 44489.48,
+  "low": 43534.12,
+  "close": 43675.12,
+  "turnover": 949200797304,
+  "breadth_up": 811,
+  "breadth_down": 199,
+  "breadth_flat": 74,
+  "otc_return_pct": 1.99,
+  "heavyweight_contribution_points": {
+    "2330": 79
+  },
+  "heavyweight_contribution_basis": "CNA約數非權重精確重算",
+  "observed_at": "2026-11-13T07:21:47Z",
+  "is_trading_day": true,
+  "turnover_scope": "TWSE MI_INDEX表6總計(1~15)，不同於新聞日盤口徑",
+  "regular_session_turnover_twd": 916255000000,
+  "breadth_scope": "TWSE表7股票欄，上漲/(上漲+下跌)，不含平盤/未成交/無比價",
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261113&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-13",
+      "retrieved_at": "2026-11-13T07:21:47Z",
+      "raw_response_sha256": "9739c9a7157ec77e3b34fee0658b20cce6c049ba45f767978c08e78f126cb1fa",
+      "availability_basis": "直接HTTP成功，stat=OK,date=20261113；表0/6/7/8",
+      "selected_data": {
+        "close": 43675.12,
+        "change": 583.25,
+        "breadth_up": 811,
+        "breadth_down": 199,
+        "breadth_flat": 74,
+        "breadth_untraded": 1,
+        "breadth_no_comparison": 1,
+        "turnover_total_twd": 949200797304,
+        "stock_turnover_twd": 853670541324
+      },
+      "supports": [
+        "交易日確認",
+        "收盤/漲跌/產業報酬",
+        "股票廣度",
+        "全市場成交統計",
+        "權值股價格"
+      ]
+    },
+    {
+      "id": "twse_ohlc",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261102&response=html",
+      "publisher": "TWSE",
+      "retrieved_at": "2026-11-13T07:21:47Z",
+      "availability_basis": "搜尋及開啟官方月報成功；115/11/13列，前收採115/11/12列；date指定月初但內容含11/13",
+      "supports": [
+        "previous_close",
+        "當日OHLC"
+      ],
+      "selected_data": {
+        "previous_close": 43091.87,
+        "open": 43719.75,
+        "high": 44489.48,
+        "low": 43534.12,
+        "close": 43675.12
+      },
+      "limitations": "11/13 JSON端點直接HTTP重導失敗；官方月報HTML與CNA交叉一致"
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611130136.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-13T13:44:00+08:00",
+      "retrieved_at": "2026-11-13T07:21:47Z",
+      "supports": [
+        "OHLC cross-check",
+        "日盤成交額9162.55億元"
+      ],
+      "excluded_fields": {
+        "breadth_up": 817,
+        "breadth_down": 206,
+        "breadth_flat": 85
+      },
+      "exclusion_reason": "廣度以官方表7股票欄評分，不混用媒體家數"
+    },
+    {
+      "id": "cna_structure",
+      "url": "https://www.cna.com.tw/news/afe/202611130135.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-13T13:42:00+08:00",
+      "retrieved_at": "2026-11-13T07:21:47Z",
+      "supports": [
+        "台積電2350/+10、貢獻約79點",
+        "聯發科/日月光/台光電收漲",
+        "電子+1.2%、金融逾2%、傳產多漲"
+      ]
+    },
+    {
+      "id": "media_path",
+      "url": "https://tw.news.yahoo.com/%E5%8F%B0%E8%82%A1%E6%94%B6%E7%9B%A4-%E8%81%AF%E7%99%BC%E7%A7%91-%E5%89%B5%E6%84%8F%E9%A0%98%E8%BB%8D%E5%BC%B7%E5%BD%88-%E5%8F%B0%E8%82%A1%E4%B8%8A%E6%BC%B2583%E9%BB%9E-%E8%B3%87%E5%AE%89%E8%82%A1%E5%8B%81%E6%8F%9A%E7%A9%A9%E7%9B%A4-054800780.html",
+      "publisher": "Yahoo轉載記者余國棟",
+      "retrieved_at": "2026-11-13T07:21:47Z",
+      "availability_basis": "搜尋全文可讀，重新open回404；僅輔助質性描述",
+      "supports": [
+        "早盤衝高後收斂的報導",
+        "OTC342.41/+1.99%"
+      ],
+      "excluded_fields": {
+        "breadth_up": 983,
+        "breadth_down": 293
+      },
+      "limitations": "家數與官方不同，管理層傳聞未獨立查證不採用為事實/因果"
+    }
+  ],
+  "limitations": [
+    "無分鐘線，不能由OHLC確認高低先後與正式regime",
+    "OTC採二級來源；當日外資/匯率未核實，不造資金流原因"
+  ]
+}
