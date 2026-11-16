@@ -183,7 +183,7 @@ def main(root, output, public):
     write_immutable_json(seal({**metadata, "markets": metrics}), public / "metrics.json")
     write_immutable_json(seal({**metadata, "markets": presentation}), output / "evidence-private.json")
     with (public / "price-comparison.csv").open("x", newline="", encoding="utf-8-sig") as stream:
-        writer = csv.DictWriter(stream, fieldnames=["market", "method", "field", "expected", "n",
+        writer = csv.DictWriter(stream, lineterminator="\n", fieldnames=["market", "method", "field", "expected", "n",
             "failed_or_missing", "mae_points", "rmse_points", "mae_bps", "rmse_bps"])
         writer.writeheader()
         for market, record in metrics.items():

@@ -26,7 +26,7 @@
   "private_transcript_published": false,
   "news_direction_real_paired_n_this_delivery": 0,
   "code_sha256": {
-    "scripts/prepare_academic_results.py": "b7148363dc0e72ef5d32aa037b3c964196b8ebb3139cba5f643b741cd1eabcc9",
+    "scripts/prepare_academic_results.py": "f220cb0c3f65692cc89e9805f9c9bc3271534be31cd9825f67cf55effd66e1c7",
     "scripts/build_academic_bundle.py": "58bdcdb89f070147eb628c41f207be738032a3a61b05b4c1d832fbebf40b7da5",
     "scripts/check_academic_bundle.py": "02853390aa7a5c58fc5e144c841bd0b8290325db30c4aa1270e099366c842ae7",
     "scripts/compare_news_decisions.py": "8df53fafc72684c82ac447a7e849e99f1adc7f82bfc455ec315d71878854c090",
@@ -42,5 +42,6 @@
     "report.pdf": "7b73222d2165868611a5b1f734f5e01eeff6c7a1fd92c51c307a482501a0eec7",
     "presentation.pptx": "08e151e292cfcc147363e9539dc6d8b27d6f5318f54a387c4a0164523980dce3",
     "speaker-notes.md": "099ff3678f0ffd0775d3fcf38ece3090930b5a48afec5a9ac753018269be0793"
-  }
+  },
+  "csv_line_endings": "LF; numeric values unchanged"
 }
