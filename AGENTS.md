@@ -1,5 +1,9 @@
 # Codex project instructions
 
+## Research follow-up — 2026-11-16
+
+The user also authorizes progress on the remaining four gaps. A fixed TimesFM3 zero-shot comparison now covers 179 common dates in each market with two predeclared variants; this is retrospective, not full-model fine-tuning or new independent evidence. Threshold sensitivity does not select a new threshold. Large-error component attribution is algebra, not market causation. The bounded independent news trial uses the frozen protocol and immutable GitHub comment receipts; keep original tasks/Sheets unchanged, use the exact recorded code commit, never backdate a prediction, and do not mistake a scheduled run or afternoon preflight for a completed forward sample.
+
 ## Current delivery priority — 2026-11-16
 
 The user confirms the professor's priority: freeze existing research and complete the project flow, information timeline, per-target OHLC actual/predicted figures, MAE/RMSE and common-date comparisons, a usable demonstration and presentation before further tuning. ARIMA and regime switching remain later extensions. Preserve the original numerical acceptance targets, but do not make an academic presentation depend on reaching them or hide negative results.

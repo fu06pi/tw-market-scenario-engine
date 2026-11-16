@@ -1,5 +1,7 @@
 # Codex 交接：TEJ → V1 量化 → V0 晨報
 
+2026-11-16 第二輪：`run_timesfm_comparison.py`已實際完成兩市場各179日兩種zero-shot設定，716次預測；`diagnose_thresholds_and_errors.py`維持原政策做敏感度與十案模型重現／來源查核；153項測試通過。`forward_trial.py`與CLI支援專用Issue #4的GitHub留言伺服器時間／精確payload、盤前與收盤及累計研究；協議與新聞指令固定於config／docs，預定11/17～11/30十個工作日，啟用以後續trial-status.json為準。重現與結果見 [第二輪報告](reports/followup/2026-11-16/README.md)。不要重跑已見評估調參、改原任務或倒填盤前；原全模型微調／ARIMA／正式Sheet尚待。
+
 2026-11-16 最新交接：使用者確認教授優先順序，先凍結模型完成圖表／評估／展示。`prepare_academic_results.py` 驗證原始凍結結果、輸出彙總與ignored逐日繪圖證據；`build_academic_bundle.py` 產生14張圖、16頁PPTX、講稿與離線HTML；`check_academic_bundle.py` 做操作、PDF與PPTX內容／幾何讀回。操作見 [學術成果](reports/academic/2026-11-16/README.md)。TimesFM僅已有8訓練／8驗證的輸出頭試驗，不與179日夜盤研究混算。另有 `news_comparison.py` 與CLI評分獨立盤前方向決策；尚缺真實B2紀錄，不能宣稱新聞改善。不要重用最後評估調參；接續先補真實盤前／收盤／Sheet證據，再做ARIMA或新聞實驗。
 
 2026-11-05 最新交接：新增 `postclose.py`、`morning_adapter.py` 與獨立 15:30 收盤／跨日診斷 workflow，盤前 wrapper 在凍結數字後產生原晨報欄位的轉接 payload。136 項測試通過；11/4 兩市場日盤來源實測成功，11/5 此次仍缺 TX 日盤，失敗保留。操作見 [驗證報告](reports/verification/2026-11-05-shadow-close.md)。新 workflow 未合併啟用，未寫正式或 staging Sheet，前向樣本仍 0；下一步必須取得真實盤前遠端 artifact 並完成同日收盤／Sheet 讀回，不能把合成範例或下午來源 smoke 當成已完成遷移。

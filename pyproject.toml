@@ -19,6 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 dev = ["pytest>=8.3", "ruff>=0.7"]
 presentation = ["matplotlib>=3.9", "python-pptx>=1.0"]
+timesfm-research = ["timesfm==3.0.2", "torch==2.8.0", "huggingface-hub==2.2.0", "safetensors==0.8.0"]
 
 [project.scripts]
 tw-scenario = "tw_scenario.cli:app"
