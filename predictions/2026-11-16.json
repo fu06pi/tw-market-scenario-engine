@@ -1,0 +1,201 @@
+{
+  "trading_date": "2026-11-16",
+  "generated_at": "2026-11-16T08:56:28+08:00",
+  "data_cutoff_at": "2026-11-16T08:50:00+08:00",
+  "model_version": "v1-legacy-analyst-scenario-uncalibrated",
+  "feature_version": "1.0-missingness-explicit-20261116",
+  "prompt_version": "v1-20261116-reconstruction",
+  "data_manifest_hash": "fb5738db39a1cbc78b83a48d480a64a539bbd4d4a168637aadd53ebf5c97037b",
+  "scenarios": {
+    "bull": 0.22,
+    "base": 0.48,
+    "bear": 0.3
+  },
+  "targets": {
+    "open_direction": "down",
+    "close_direction": "down",
+    "intraday_regime": "gap_fade",
+    "breadth_direction": "down",
+    "expected_open_gap_bps": -65.0,
+    "expected_close_return_bps": -25.0
+  },
+  "narrative": {
+    "market_view": "【reconstructed / late_generated；未校準舊版分析情境，非正式新OHLC模型樣本】海外科技與高利率壓力偏空，但上週五台股廣度及外資回補提供反證；主軸為低開、部分回補，收盤仍略低前收。",
+    "open_hypothesis": "以11/13現貨前收43675.12為基準，預期低開約-65bp，約43391.23；此為主觀現貨跳空估計，不把夜盤-133點或ADR價差直接當作現貨Gap。",
+    "intraday_hypothesis": "未驗證路徑gap_fade：低開後先測支撐，再部分回補缺口；不主張日OHLC能證明高低順序，亦不保證收盤高於開盤。若首30分鐘低點持續被跌破，轉向Bear情境。",
+    "close_hypothesis": "期望收盤相對前收-25bp，約43565.93；比期望開盤高約174.70點但仍低於前收，Open、Close/前收與Close/Open分開評估。",
+    "breadth_hypothesis": "上漲家數占漲跌家數略低50%、櫃買相對偏弱，僅低信心情境。前次811漲/199跌不是今日廣度；金融可能相對抗跌，不等同絕對上漲。",
+    "bull_script": "22%：科技賣壓被吸收，台積電收復2350並站穩、漲家占比持續高於55%，指數收復43675.12；代表性收盤中心+200bp，非報酬保證。",
+    "base_script": "48%：外部科技壓力使低開，國內承接部分回補，收在前收附近；代表性收盤中心0bp、參考帶-50至+50bp，路徑是假說而非模型辨識。",
+    "bear_script": "30%：台積電續弱、AI高波動族群同步承壓，首30分鐘低點失守且漲家占比低於35%，缺口不補；代表性收盤中心-230bp。"
+  },
+  "key_drivers": [
+    "最近完成Nasdaq-0.91%、TSM ADR-1.67%，SOX下跌方向但精確報酬有官方欄位衝突，僅背景。",
+    "TX202611最近夜盤43706；相對前日同合約最後43834為-128點，相對結算43839為-133點；週末不是缺失交易日。",
+    "前次台股43675.12、漲811/跌199、外資約買超288.4億元，是反向承接證據，不外推今日。",
+    "美元兌台幣32.838、前次32.889；10年美債5.15%、升5bp，科技估值承壓。",
+    "WTI前次結算88.56美元、-0.20%；10月PPI已於11/13公布，不將已知值當今日未公布事件。",
+    "NVIDIA官方11/12人事更替與預定11/18台灣05:20財報帶來事件風險；尚無財報結果，未採未核實回歸傳聞。"
+  ],
+  "invalidation_conditions": [
+    "若現貨開盤≥43675.12，低開假說失效，保留原快照另記實現值，不回改。",
+    "若10:00前連續30分鐘站穩43675.12、台積電≥2350且漲家占比>55%，Base偏弱路徑失效，Bull條件成立。",
+    "若首30分鐘低點跌破且持續15分鐘、漲家占比<35%，部分回補路徑失效；Bear風險提高但不改凍結機率。",
+    "若截止前來源、合約或數字口徑被證實錯誤，標記資料品質失效；不得覆寫歷史快照。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-11-16",
+      "item": "TAIEX開盤Gap",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A482:P482",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "44571febabcfd9e80bb1003e8d42f54e811e6e41106051248a9a12501a25c4b0"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "首30分鐘下探",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A483:P483",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "c0e5b2b771a35a660113bc54bb29ba029460589e73c009b9cda0f67c839cc191"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "首30分鐘反彈",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A484:P484",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "de45dd80e2100e327340aa1371f0c28ee1241f97e2b440f0420eb0b338aeb426"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "TAIEX收盤方向",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A485:P485",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "ce105fae99cb2a6865cf3c4ced01b82660c3c7ad9515687c605c58e4265e08a3"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "TAIEX開盤至收盤",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A486:P486",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "9be5efe2eb77bcb966a9798e0d452e83fa5c80295ea5b81b05cbc6a2b0128d02"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "上市市場廣度",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A487:P487",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "d0d5c7d93f1c266bceaf24d7cf06b4a025c8e1c701c4185bdba0d5ab3ee5c404"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "OTC相對TAIEX",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A488:P488",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "f62d8236d78d73a1ad9eb95e791d17d27e676dc51830eadf4cc23dd4f6605dd9"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "台積電2330",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A489:P489",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "74270ef0dc406458d7e345f6cf2bb8ce5ad9a918e1dfff905dffd3f39f2ceafe"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "聯發科2454",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A490:P490",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "7872c3920c78fc2f5ee4c88250478453926d5cba6942831e8c22f33a25c32b07"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "AI大型權值四檔",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A491:P491",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "5453eeead02bdc6b61a11dbe51f5ba6d4dcf78612569a59511f8e42afa69a5b0"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "ABF載板三雄",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A492:P492",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "0cdd34416f37f8a513359d306b404d6c7a2d5a34c86fdfa5f46b06abfd377dd4"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "CCL材料雙股",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A493:P493",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "221a2f416c478a20b72e96d5155b50f2f54f6a1f4ee1b28b8dfa37598a6d6c15"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "DRAM／南亞科",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A494:P494",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "172e9842392d07eb0f44def4417225960dc5492e0abd270d41ec0c9f427924bf"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "金融類股",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A495:P495",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "5b9c30eed059107cd64e0a739e410e9f0966735216f7849ddfcaa496502292fd"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "塑膠類股",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A496:P496",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "c7856fa6018473e37da20e89ff791bd7c65dff0c9d1c540b8108c7b49d9c51f2"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "半導體設備三檔",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A497:P497",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "c38bca3b68dccd691409dfa973c332028a327aefda27e2437157534742965a63"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "鴻海2317",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A498:P498",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "f6c86bb3503294ce2999d28dbbede5646a4be990fcb6ab5092200d56bc20d69f"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "TAIEX全日振幅",
+      "note": "08:36:38原件A:F及O完整保存在manifest；信心值未校準，未直接轉成V1機率。",
+      "source_row": "每日預測與覆盤!A499:P499",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "374fa63bf6b68cb4f2260e8bc3d8b91ef61c4cec1dfd988f3e94e380a75b53a6"
+    },
+    {
+      "trading_date": "2026-11-16",
+      "item": "模型規則主表2026-10-29.v1；模型修正紀錄R01/R03",
+      "note": "採R01/R02/R04/R14/R15/R16/R17/R18紀錄規範；候選規則不當作已驗證權重。",
+      "source_row": "模型規則主表!A1:P21；模型修正紀錄!A1:T3",
+      "extracted_at": "2026-11-16T08:56:28+08:00",
+      "content_hash": "7b72d7b31218c8e46e780a133ac37e1cb949b4b1aba30c61f4388d70cec99821"
+    }
+  ],
+  "snapshot_hash": "7c06a1702e0ca43e94939a664345d2fe35950633f2e48f92addd8b7a45fe4b95"
+}
