@@ -1,0 +1,30 @@
+{
+  "schema_version": "timesfm3-frozen-backbone-cache-benchmark-v1",
+  "measured_at": "2026-10-25",
+  "scope": "engineering parity and speed measurement; not model performance evidence",
+  "instrument": "TAIEX",
+  "forecast_date": "2026-10-08",
+  "context": 64,
+  "timesfm_code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "timesfm_weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "runtime": {
+    "device": "cpu",
+    "available_ram_mb_before_load": 4624,
+    "peak_rss_mb": 2769.49609375,
+    "model_load_seconds": 1.3115931118372828
+  },
+  "single_sample": {
+    "full_forward_seconds": 0.2703038388863206,
+    "cache_build_seconds": 0.2677914679516107,
+    "cached_head_seconds_mean_over_100": 0.0006604348588734865,
+    "cached_head_speedup_vs_full_forward": 409.28160477080485,
+    "max_absolute_transformed_output_difference": 0.0,
+    "bitwise_equal": true
+  },
+  "method": "Cache the pinned frozen transformer's last observed patch representation and reverse-RevIN statistics once per sample. Reconstruct the original full Linear input matrix shape before each trainable output-head call to preserve CPU float32 arithmetic exactly.",
+  "limitations": [
+    "The speedup is for repeated output-head calls after one mandatory cache build per sample.",
+    "End-to-end fold runtime also includes data materialization, cache construction, validation inference, checkpointing and evaluation.",
+    "This changes execution efficiency only and does not establish better forecast accuracy."
+  ]
+}

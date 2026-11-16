@@ -1,0 +1,21 @@
+{
+  "version": "ohlc-research-v1", "seed": 4655,
+  "train_start": "2018-01-01", "validation_start": "2024-10-09",
+  "test_start": "2025-10-09", "test_end": "2026-10-08",
+  "capture_not_before": "08:20", "cutoff": "08:30", "deadline": "08:40",
+  "postclose_not_before": "18:00", "timezone": "Asia/Taipei",
+  "roll_rule": "five_exchange_sessions_before_expiry",
+  "neutral_bps": 5.0, "window": 252, "min_history": 60,
+  "calibration_window": 126, "min_calibration": 40,
+  "representations": ["relative", "gbud"],
+  "baselines": ["zero", "range", "night_regression", "arima", "arimax"],
+  "arima_order": [1, 0, 0], "refit": "daily_trailing_window",
+  "interval_level": 0.8, "bootstrap_block": 20, "bootstrap_draws": 1000,
+  "budget_cpu_seconds": 7200, "probe_timeout_seconds": 600,
+  "memory_probe_limit_mb": 3072, "max_no_gain_rounds": 3,
+  "timesfm_code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "timesfm_weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "timesfm_weight_repo": "google/timesfm-3.0-pytorch",
+  "historical_evidence": "retrospective_with_availability_assumptions",
+  "production_switch": false
+}

@@ -1,0 +1,72 @@
+{
+  "schema_version": "timesfm-head-forward-preflight-v1",
+  "as_of": "2026-10-26T16:51:24+08:00",
+  "status": "READY_FOR_MANUAL_FORWARD_WINDOW",
+  "forward_execution_completed": false,
+  "next_verified_exchange_date": "2026-10-27",
+  "window": {
+    "capture_start": "08:20:00+08:00",
+    "cutoff": "08:30:00+08:00",
+    "persistence_deadline": "08:40:00+08:00"
+  },
+  "base_dataset": {
+    "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+    "end": "2026-10-12",
+    "rows": 26907,
+    "calendar_days": 2208,
+    "integrity": "VERIFIED",
+    "source": "FinMind v4 reconciled with TWSE/TAIFEX official"
+  },
+  "bundle": {
+    "file_sha256": "997a29d11dcb97d541e35bbc7f24161037bd74c08fd640bd56e05f4d18223889",
+    "markets": {
+      "TAIEX": {
+        "candidate": "88b26bf3d30c9ded6d0d",
+        "fold": 3,
+        "checkpoint_sha256": "21c3d98864bd413bcbc4d7a74beee6d2ac2c686426ac1c83b63111d198d0deeb",
+        "calibration_sha256": "c0334095bcbaaff41a9a2981f3568cc37649d1d7dba43d6e840461fcbe6c8bf9",
+        "training_label_end": "2026-06-12"
+      },
+      "TX": {
+        "candidate": "d635e40df84cdfad4cde",
+        "fold": 3,
+        "checkpoint_sha256": "4d9251f8499b990ae3e89a8f99e39a6cb68fb46dbe6fd3719433f15ca99d0c99",
+        "calibration_sha256": "4b9e6f7d22ea273631d2435c57f38b2ce521b0a550497418b645143588100564",
+        "training_label_end": "2026-06-12"
+      }
+    }
+  },
+  "runtime": {
+    "status": "READY_TO_LOAD",
+    "device": "cpu",
+    "available_ram_mb": 5195,
+    "swap_free_mb": 1034,
+    "disk_free_mb": 118278,
+    "timesfm3_installed": true,
+    "torch_installed": true,
+    "per_core_batch_size": 1
+  },
+  "credentials": {
+    "finmind_token": "ABSENT_OPTIONAL",
+    "tej_api_key": "VALID_PRIVATE_FILE",
+    "values_exposed": false,
+    "tej_required_for_daily_forward": false
+  },
+  "validation": {
+    "pytest": "112 passed",
+    "ruff": "PASS",
+    "diff_check": "PASS",
+    "bundle_artifacts": "PASS",
+    "calibration_bound_both_markets": true
+  },
+  "command": "UV_CACHE_DIR=/tmp/uv-cache uv run --frozen --extra timesfm3 tw-scenario quant timesfm-head-live-preopen --date 2026-10-27 --base-dataset-dir data/processed/cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce --bundle reports/generated/quant/experiments/head-delivery-2026-10-26/bundle.json",
+  "research_only": true,
+  "development_gate": "FAIL",
+  "production_switch": false,
+  "limitations": [
+    "This preflight is not an on-time forecast or genuine forward result.",
+    "The selected artifacts are failed development candidates retained for forward observation.",
+    "The command must start manually between 08:20 and 08:29 Asia/Taipei on the exchange date.",
+    "No Google Sheet, morning report, production schedule, or trading service is changed."
+  ]
+}

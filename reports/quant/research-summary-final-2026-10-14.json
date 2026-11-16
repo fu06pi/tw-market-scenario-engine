@@ -1,0 +1,836 @@
+{
+  "status": "FAIL",
+  "generated_date": "2026-10-14",
+  "experiment_type": "locked_timesfm_candidate_single_final_test",
+  "scope": "retrospective_with_possible_pretraining_overlap",
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "final_test_split": [
+    "2025-10-09",
+    "2026-10-08"
+  ],
+  "validation_lock_hash": "cd4dec04b9883146b4e2b784e123ab5603e7209f17dd238f744981382148cb17",
+  "baseline_lock_hash": "254a503f1980dbd31af918cb1ff07e469de1f4c82e3534552d0155c254e80b31",
+  "full_local_artifact_sha256": "7894d58185595b16c1dd89f72ecc26fd48d2ee356404d5d46d7cea95b9b7a133",
+  "elapsed_seconds": 384.9700317099923,
+  "max_rss_mb": 2861.5625,
+  "acceptance_gate": {
+    "status": "FAIL",
+    "requirements": {
+      "close_relative_improvement_minimum": 0.05,
+      "open_high_low_degradation_maximum": 0.05,
+      "marginal_interval_coverage_range": [
+        0.75,
+        0.85
+      ]
+    },
+    "instruments": {
+      "TAIEX": {
+        "status": "FAIL",
+        "paired_days": 239,
+        "paired_coverage": 0.987603305785124,
+        "close_relative_improvement": -0.04639499411220149,
+        "ohl_degradation": {
+          "open": -0.2936359164284761,
+          "high": -0.08485170319546831,
+          "low": -0.04259923991468195
+        },
+        "interval_coverage": {
+          "open": 0.7949790794979079,
+          "high": 0.7907949790794979,
+          "low": 0.8410041841004184,
+          "close": 0.7364016736401674
+        },
+        "interval_coverage_pass": false,
+        "candidate_paired_metrics": {
+          "expected_days": 239,
+          "success_days": 239,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 95.8920282804471,
+              "mae_bps": 27.399976462762456,
+              "rmse_points": 170.18170235437677
+            },
+            "high": {
+              "mae_points": 242.43677309480452,
+              "mae_bps": 65.11044908786052,
+              "rmse_points": 362.7379292045804
+            },
+            "low": {
+              "mae_points": 287.15161640713393,
+              "mae_bps": 75.10890934315171,
+              "rmse_points": 447.81523846691533
+            },
+            "close": {
+              "mae_points": 372.1077797430358,
+              "mae_bps": 97.75674810641578,
+              "rmse_points": 522.7093881986835
+            }
+          },
+          "gap_mae_bps": 27.399976462762456,
+          "close_return_mae_bps": 97.75674810641578,
+          "range_mae_bps": 92.17291648296657,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 54,
+                "flat": 8,
+                "up": 37
+              },
+              "flat": {
+                "down": 1,
+                "flat": 1,
+                "up": 4
+              },
+              "up": {
+                "down": 9,
+                "flat": 5,
+                "up": 120
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 6,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 239,
+          "intervals": {
+            "open": {
+              "coverage": 0.7949790794979079,
+              "width": 312.8433042938947,
+              "interval_score": 596.8535325158851
+            },
+            "high": {
+              "coverage": 0.7907949790794979,
+              "width": 948.6795719269995,
+              "interval_score": 1277.7633189664323
+            },
+            "low": {
+              "coverage": 0.8410041841004184,
+              "width": 1214.7652315318153,
+              "interval_score": 1599.400961792241
+            },
+            "close": {
+              "coverage": 0.7364016736401674,
+              "width": 1075.754620670393,
+              "interval_score": 1909.8108339417192
+            }
+          }
+        },
+        "baseline_paired_metrics": {
+          "expected_days": 239,
+          "success_days": 239,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 135.75439424325913,
+              "mae_bps": 38.247369371893306,
+              "rmse_points": 187.27707880035678
+            },
+            "high": {
+              "mae_points": 264.9152863435718,
+              "mae_bps": 71.19456698416077,
+              "rmse_points": 364.88453821568896
+            },
+            "low": {
+              "mae_points": 299.92833552956927,
+              "mae_bps": 78.75825970786846,
+              "rmse_points": 451.5039033279089
+            },
+            "close": {
+              "mae_points": 355.60928887923933,
+              "mae_bps": 93.21143211520683,
+              "rmse_points": 507.31627164942944
+            }
+          },
+          "gap_mae_bps": 38.247369371893306,
+          "close_return_mae_bps": 93.21143211520683,
+          "range_mae_bps": 112.72196652557417,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 63,
+                "flat": 4,
+                "up": 32
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 4
+              },
+              "up": {
+                "down": 21,
+                "flat": 4,
+                "up": 109
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 6,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 239,
+          "intervals": {
+            "open": {
+              "coverage": 0.7907949790794979,
+              "width": 458.2030953998373,
+              "interval_score": 702.7768377019567
+            },
+            "high": {
+              "coverage": 0.7824267782426778,
+              "width": 1447.3126957007605,
+              "interval_score": 1845.8995586577685
+            },
+            "low": {
+              "coverage": 0.8242677824267782,
+              "width": 1651.3816430023671,
+              "interval_score": 2153.6450086742243
+            },
+            "close": {
+              "coverage": 0.7447698744769874,
+              "width": 1026.0114404962274,
+              "interval_score": 1838.8479663413598
+            }
+          }
+        },
+        "block_improvement": {
+          "paired_days": 239,
+          "block_length": 20,
+          "close_relative_improvement_ci95": [
+            -0.10936455712375862,
+            0.007810465215962737
+          ]
+        }
+      },
+      "TX": {
+        "status": "FAIL",
+        "paired_days": 242,
+        "paired_coverage": 1.0,
+        "close_relative_improvement": 0.004530547754866721,
+        "ohl_degradation": {
+          "open": -0.014587227070362974,
+          "high": -0.1394626164253191,
+          "low": -0.054685557979073596
+        },
+        "interval_coverage": {
+          "open": 0.731404958677686,
+          "high": 0.743801652892562,
+          "low": 0.743801652892562,
+          "close": 0.731404958677686
+        },
+        "interval_coverage_pass": false,
+        "candidate_paired_metrics": {
+          "expected_days": 242,
+          "success_days": 242,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 155.7307619018304,
+              "mae_bps": 41.01995139764623,
+              "rmse_points": 234.16279423873232
+            },
+            "high": {
+              "mae_points": 270.8840755855781,
+              "mae_bps": 71.00505319264741,
+              "rmse_points": 399.6230202585605
+            },
+            "low": {
+              "mae_points": 307.81130676734995,
+              "mae_bps": 79.38570544710028,
+              "rmse_points": 486.74374350472704
+            },
+            "close": {
+              "mae_points": 377.46213042510595,
+              "mae_bps": 97.90438034822876,
+              "rmse_points": 544.3277560697638
+            }
+          },
+          "gap_mae_bps": 41.01995139764623,
+          "close_return_mae_bps": 97.90438034822876,
+          "range_mae_bps": 91.26421385640438,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 64,
+                "flat": 3,
+                "up": 32
+              },
+              "flat": {
+                "down": 4,
+                "flat": 1,
+                "up": 7
+              },
+              "up": {
+                "down": 14,
+                "flat": 2,
+                "up": 115
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 131,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 242,
+          "intervals": {
+            "open": {
+              "coverage": 0.731404958677686,
+              "width": 439.13861819639965,
+              "interval_score": 907.1823869471012
+            },
+            "high": {
+              "coverage": 0.743801652892562,
+              "width": 721.7196641636273,
+              "interval_score": 1320.4391686630213
+            },
+            "low": {
+              "coverage": 0.743801652892562,
+              "width": 814.8755113110216,
+              "interval_score": 1548.1263113411162
+            },
+            "close": {
+              "coverage": 0.731404958677686,
+              "width": 1051.010097273259,
+              "interval_score": 2017.451172021678
+            }
+          }
+        },
+        "baseline_paired_metrics": {
+          "expected_days": 242,
+          "success_days": 242,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "ohlc": {
+            "open": {
+              "mae_points": 158.03606993934335,
+              "mae_bps": 42.12351110911412,
+              "rmse_points": 236.8957638041807
+            },
+            "high": {
+              "mae_points": 314.7847853632145,
+              "mae_bps": 82.56784012578211,
+              "rmse_points": 497.37825222595467
+            },
+            "low": {
+              "mae_points": 325.6179035086993,
+              "mae_bps": 84.04822654132508,
+              "rmse_points": 498.9437054826761
+            },
+            "close": {
+              "mae_points": 379.1800236298525,
+              "mae_bps": 98.76531660895117,
+              "rmse_points": 540.6370064485166
+            }
+          },
+          "gap_mae_bps": 42.12351110911412,
+          "close_return_mae_bps": 98.76531660895117,
+          "range_mae_bps": 119.54832226008607,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 67,
+                "flat": 1,
+                "up": 31
+              },
+              "flat": {
+                "down": 5,
+                "flat": 1,
+                "up": 6
+              },
+              "up": {
+                "down": 18,
+                "flat": 5,
+                "up": 108
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 131,
+                "up": 0
+              }
+            }
+          },
+          "interval_days": 242,
+          "intervals": {
+            "open": {
+              "coverage": 0.743801652892562,
+              "width": 468.94615917925194,
+              "interval_score": 891.5428453224457
+            },
+            "high": {
+              "coverage": 0.7768595041322314,
+              "width": 1067.4739515413767,
+              "interval_score": 1563.0514243935731
+            },
+            "low": {
+              "coverage": 0.768595041322314,
+              "width": 911.003880783832,
+              "interval_score": 1621.564666100517
+            },
+            "close": {
+              "coverage": 0.7396694214876033,
+              "width": 1111.3508281805114,
+              "interval_score": 2008.7026664486953
+            }
+          }
+        },
+        "block_improvement": {
+          "paired_days": 242,
+          "block_length": 20,
+          "close_relative_improvement_ci95": [
+            -0.0269590221772858,
+            0.037719199928356616
+          ]
+        }
+      }
+    }
+  },
+  "candidate_metrics": {
+    "TAIEX": {
+      "expected_days": 242,
+      "success_days": 242,
+      "forecast_coverage": 1.0,
+      "failed_days": [],
+      "ohlc": {
+        "open": {
+          "mae_points": 96.61762656410562,
+          "mae_bps": 27.535432813881126,
+          "rmse_points": 170.86831485879472
+        },
+        "high": {
+          "mae_points": 242.13275267600494,
+          "mae_bps": 65.06036899088889,
+          "rmse_points": 361.50860516338884
+        },
+        "low": {
+          "mae_points": 284.4836877637991,
+          "mae_bps": 74.48428424005142,
+          "rmse_points": 445.12084294324836
+        },
+        "close": {
+          "mae_points": 371.5253755094048,
+          "mae_bps": 97.474486994632,
+          "rmse_points": 522.775780071607
+        }
+      },
+      "gap_mae_bps": 27.535432813881126,
+      "close_return_mae_bps": 97.474486994632,
+      "range_mae_bps": 91.83103461511477,
+      "direction": {
+        "neutral_bps": 5.0,
+        "actual_rows_predicted_columns": {
+          "down": {
+            "down": 55,
+            "flat": 8,
+            "up": 37
+          },
+          "flat": {
+            "down": 2,
+            "flat": 1,
+            "up": 4
+          },
+          "up": {
+            "down": 9,
+            "flat": 5,
+            "up": 121
+          }
+        },
+        "zero_return_baseline": {
+          "down": {
+            "down": 0,
+            "flat": 100,
+            "up": 0
+          },
+          "flat": {
+            "down": 0,
+            "flat": 7,
+            "up": 0
+          },
+          "up": {
+            "down": 0,
+            "flat": 135,
+            "up": 0
+          }
+        }
+      },
+      "interval_days": 242,
+      "intervals": {
+        "open": {
+          "coverage": 0.7933884297520661,
+          "width": 312.40917247540364,
+          "interval_score": 602.0017852526938
+        },
+        "high": {
+          "coverage": 0.7892561983471075,
+          "width": 941.5568236602724,
+          "interval_score": 1275.6544902594399
+        },
+        "low": {
+          "coverage": 0.8429752066115702,
+          "width": 1221.2506216044435,
+          "interval_score": 1601.1181403327162
+        },
+        "close": {
+          "coverage": 0.7355371900826446,
+          "width": 1072.120228796805,
+          "interval_score": 1910.9323699065449
+        }
+      }
+    },
+    "TX": {
+      "expected_days": 242,
+      "success_days": 242,
+      "forecast_coverage": 1.0,
+      "failed_days": [],
+      "ohlc": {
+        "open": {
+          "mae_points": 155.7307619018304,
+          "mae_bps": 41.01995139764623,
+          "rmse_points": 234.16279423873232
+        },
+        "high": {
+          "mae_points": 270.8840755855781,
+          "mae_bps": 71.00505319264741,
+          "rmse_points": 399.6230202585605
+        },
+        "low": {
+          "mae_points": 307.81130676734995,
+          "mae_bps": 79.38570544710028,
+          "rmse_points": 486.74374350472704
+        },
+        "close": {
+          "mae_points": 377.46213042510595,
+          "mae_bps": 97.90438034822876,
+          "rmse_points": 544.3277560697638
+        }
+      },
+      "gap_mae_bps": 41.01995139764623,
+      "close_return_mae_bps": 97.90438034822876,
+      "range_mae_bps": 91.26421385640438,
+      "direction": {
+        "neutral_bps": 5.0,
+        "actual_rows_predicted_columns": {
+          "down": {
+            "down": 64,
+            "flat": 3,
+            "up": 32
+          },
+          "flat": {
+            "down": 4,
+            "flat": 1,
+            "up": 7
+          },
+          "up": {
+            "down": 14,
+            "flat": 2,
+            "up": 115
+          }
+        },
+        "zero_return_baseline": {
+          "down": {
+            "down": 0,
+            "flat": 99,
+            "up": 0
+          },
+          "flat": {
+            "down": 0,
+            "flat": 12,
+            "up": 0
+          },
+          "up": {
+            "down": 0,
+            "flat": 131,
+            "up": 0
+          }
+        }
+      },
+      "interval_days": 242,
+      "intervals": {
+        "open": {
+          "coverage": 0.731404958677686,
+          "width": 439.13861819639965,
+          "interval_score": 907.1823869471012
+        },
+        "high": {
+          "coverage": 0.743801652892562,
+          "width": 721.7196641636273,
+          "interval_score": 1320.4391686630213
+        },
+        "low": {
+          "coverage": 0.743801652892562,
+          "width": 814.8755113110216,
+          "interval_score": 1548.1263113411162
+        },
+        "close": {
+          "coverage": 0.731404958677686,
+          "width": 1051.010097273259,
+          "interval_score": 2017.451172021678
+        }
+      }
+    }
+  },
+  "candidate_selection": {
+    "TAIEX": {
+      "model": "timesfm_joint_multivariate",
+      "representation": "gbud",
+      "validation_close_mae": 169.18987826914392,
+      "validation_expected_days": 244,
+      "validation_paired_days": 244,
+      "validation_paired_coverage": 1.0,
+      "validation_paired_dates_hash": "0dde2c3e8cfa0a6ac048076291676376de45e968119ba874b0d43533f7ab639c",
+      "validation_paired_metrics": {
+        "expected_days": 244,
+        "success_days": 244,
+        "forecast_coverage": 1.0,
+        "failed_days": [],
+        "ohlc": {
+          "open": {
+            "mae_points": 72.97902905353439,
+            "mae_bps": 32.61422910731916,
+            "rmse_points": 120.65114974354083
+          },
+          "high": {
+            "mae_points": 113.84835215648617,
+            "mae_bps": 50.887328090607255,
+            "rmse_points": 170.29637459154424
+          },
+          "low": {
+            "mae_points": 132.43170325414806,
+            "mae_bps": 59.119590417430636,
+            "rmse_points": 220.1433824935146
+          },
+          "close": {
+            "mae_points": 169.18987826914392,
+            "mae_bps": 75.66855838079934,
+            "rmse_points": 246.7053885295579
+          }
+        },
+        "gap_mae_bps": 32.61422910731916,
+        "close_return_mae_bps": 75.66855838079934,
+        "range_mae_bps": 62.20664574225414,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 66,
+              "flat": 11,
+              "up": 28
+            },
+            "flat": {
+              "down": 1,
+              "flat": 0,
+              "up": 7
+            },
+            "up": {
+              "down": 17,
+              "flat": 8,
+              "up": 106
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 105,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 8,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 131,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 244,
+        "intervals": {
+          "open": {
+            "coverage": 0.7909836065573771,
+            "width": 206.22319730964992,
+            "interval_score": 391.04469056786036
+          },
+          "high": {
+            "coverage": 0.8401639344262295,
+            "width": 391.5379088197406,
+            "interval_score": 588.1755885673479
+          },
+          "low": {
+            "coverage": 0.8401639344262295,
+            "width": 455.034351612937,
+            "interval_score": 714.8282077186908
+          },
+          "close": {
+            "coverage": 0.7909836065573771,
+            "width": 508.90499156341286,
+            "interval_score": 866.0705718793185
+          }
+        }
+      }
+    },
+    "TX": {
+      "model": "timesfm_multivariate",
+      "representation": "gbud",
+      "validation_close_mae": 156.72942657377206,
+      "validation_expected_days": 244,
+      "validation_paired_days": 244,
+      "validation_paired_coverage": 1.0,
+      "validation_paired_dates_hash": "0dde2c3e8cfa0a6ac048076291676376de45e968119ba874b0d43533f7ab639c",
+      "validation_paired_metrics": {
+        "expected_days": 244,
+        "success_days": 244,
+        "forecast_coverage": 1.0,
+        "failed_days": [],
+        "ohlc": {
+          "open": {
+            "mae_points": 75.20136724141902,
+            "mae_bps": 33.907353846206405,
+            "rmse_points": 168.3122369289004
+          },
+          "high": {
+            "mae_points": 121.20169673374947,
+            "mae_bps": 53.906286928504024,
+            "rmse_points": 200.28617734200134
+          },
+          "low": {
+            "mae_points": 128.02392144275234,
+            "mae_bps": 57.29885226088233,
+            "rmse_points": 215.78715781239677
+          },
+          "close": {
+            "mae_points": 156.72942657377206,
+            "mae_bps": 69.7955665158375,
+            "rmse_points": 233.79799387199242
+          }
+        },
+        "gap_mae_bps": 33.907353846206405,
+        "close_return_mae_bps": 69.7955665158375,
+        "range_mae_bps": 68.93187522814452,
+        "direction": {
+          "neutral_bps": 5.0,
+          "actual_rows_predicted_columns": {
+            "down": {
+              "down": 64,
+              "flat": 8,
+              "up": 36
+            },
+            "flat": {
+              "down": 2,
+              "flat": 1,
+              "up": 4
+            },
+            "up": {
+              "down": 14,
+              "flat": 9,
+              "up": 106
+            }
+          },
+          "zero_return_baseline": {
+            "down": {
+              "down": 0,
+              "flat": 108,
+              "up": 0
+            },
+            "flat": {
+              "down": 0,
+              "flat": 7,
+              "up": 0
+            },
+            "up": {
+              "down": 0,
+              "flat": 129,
+              "up": 0
+            }
+          }
+        },
+        "interval_days": 244,
+        "intervals": {
+          "open": {
+            "coverage": 0.7950819672131147,
+            "width": 178.60551052245148,
+            "interval_score": 476.09180523140736
+          },
+          "high": {
+            "coverage": 0.819672131147541,
+            "width": 342.59016857216386,
+            "interval_score": 573.7603960614538
+          },
+          "low": {
+            "coverage": 0.8237704918032787,
+            "width": 350.5956211666713,
+            "interval_score": 643.4822698024852
+          },
+          "close": {
+            "coverage": 0.8155737704918032,
+            "width": 455.8591894677285,
+            "interval_score": 790.2024959533674
+          }
+        }
+      }
+    }
+  },
+  "final_test_must_not_be_reused_for_tuning": true,
+  "default_output_policy": "locked strongest baseline because overall acceptance failed",
+  "full_daily_rows_committed": false,
+  "artifact_policy": "full actual/predicted rows remain local because FinMind raw-data redistribution is restricted",
+  "production_switch": false
+}

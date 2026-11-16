@@ -1,0 +1,28 @@
+{
+  "status": "READY_TO_LOAD",
+  "available_ram_mb": 4630,
+  "swap_free_mb": 0,
+  "disk_free_mb": 128435,
+  "timesfm3_installed": true,
+  "torch_installed": true,
+  "device": "cpu",
+  "per_core_batch_size": 1,
+  "code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "weight_repo": "google/timesfm-3.0-pytorch",
+  "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "weights_loaded": false,
+  "weights_downloaded": false,
+  "gradient_smoke": {
+    "status": "NOT_RUN",
+    "name": "custom_output_head_gradient_smoke",
+    "official_timesfm3_finetuning": false,
+    "required_evidence": [
+      "finite_loss",
+      "nonzero_output_head_gradient",
+      "output_head_parameter_delta",
+      "forecast_delta",
+      "save_reload_equivalence"
+    ]
+  },
+  "production_switch": false
+}

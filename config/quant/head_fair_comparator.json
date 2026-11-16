@@ -1,0 +1,8 @@
+{
+  "version": "fixed-point-comparator-v1",
+  "primary_model": "night_regression",
+  "fallback_model": "range",
+  "representation": "gbud",
+  "selection_policy": "predeclared_primary_before_evaluation",
+  "failure_policy": "same_date_fallback_preserve_primary_error"
+}

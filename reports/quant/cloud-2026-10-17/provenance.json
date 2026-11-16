@@ -1,0 +1,45 @@
+{
+  "source_commit": "b4912f465436cb7811c797caaf24ed08d645d52a",
+  "source_tree": "429309ce618c2092244b219defd762d0bc1ff1a4",
+  "platform": "Linux-6.18.44-x86_64-with-glibc2.39",
+  "python": "3.12.14",
+  "cpu_visible": 9,
+  "cpu_model": "AMD EPYC 9V74",
+  "cgroup": {
+    "memory.max": "8589934592",
+    "memory.current": "4307505152",
+    "memory.peak": "5863157760",
+    "cpu.max": "800000 100000"
+  },
+  "gpu": false,
+  "swap": false,
+  "disk_free_bytes": 28210466816,
+  "weight_sha256": "a7592b0a8432baee54483254e5647856911ce69e09d09a9bb65904b2d98f17da",
+  "weight_bytes": 1322898824,
+  "packages": {
+    "timesfm": "3.0.2",
+    "torch": "2.9.1+cpu",
+    "socksio": "1.0.0",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "statsmodels": "0.14.6",
+    "pytest": "9.1.1",
+    "ruff": "0.17.0",
+    "huggingface-hub": "2.2.0"
+  },
+  "dataset_hashes": {
+    "dataset_id": "59de0a50dea2af2377d34461d7b64df6201bdb063267ecfc68009aef3f27ad0c",
+    "bars_hash": "ca310ffdb9fcf8f4882c8d9e0a441241dce36dff2258e7cb6917ab4f90c72a8a",
+    "calendar_hash": "3f8f86fffe38e13fe8d50d8cc9643ec08bf5ff6e854274e250621a6ac619d3d2",
+    "reconciliation_hash": "fe8b3b3ad94fa2bca7bbe01c1c3117193be286a6234f2cff98e1b0ef5471c88a"
+  },
+  "source_file_hashes": {
+    "AGENTS.md": "4fb6a31fb67fed38f3e316b2f65f9b765c4935105b37fb477b672bd6eb940bb5",
+    "README.md": "5a8f95c55e5f4116e203c88c920aaba40fc28c498b3db06b815ba2794a58a3b6",
+    "PROJECT_STATUS.md": "793c0634b99ad4e2c096ba7fdbb24118b37324e0cf6f083ac4c2eeeeb9db8ea7",
+    "CURRENT_GOAL.md": "ca6c6c8848278d911cd0a5a13d85af701227eeedcabeb3658a6fd2d4d8356323",
+    "CODEX_HANDOFF.md": "9c108bbab1b32b36cf2ad2f02e51af5d08d9393af86822fdbb10df014ebda71c",
+    "config/quant/timesfm_output_head.json": "9bb8dd9ce406d82f66e7f533e9426f641729897cba3ba950ba5d9fad813a8e2c",
+    "uv.lock": "9bfd4b36af9d548f048d5dfdca2c89ec1ada126987c407740e7b25673df8544b"
+  }
+}

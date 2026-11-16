@@ -1,0 +1,232 @@
+{
+  "schema_version": "output-head-fair-gate-summary-v1",
+  "as_of": "2026-10-27",
+  "status": "DEVELOPMENT_GATE_FAIL",
+  "development_only": true,
+  "final_test_opened": false,
+  "production_switch": false,
+  "source": {
+    "joint_run_id": "75d81bef117162e5a51a",
+    "result": "reports/generated/quant/model-search-v2/fair-gate-75d81bef117162e5a51a/result.json",
+    "result_sha256": "65b22ffe4bc30bc7724e47997fc810b687a888702cc969d380b5049a1fd8790e",
+    "fold_sha256": {
+      "fold-1.json": "a1cdfd4152ab21e518239343680200c8d2b57ce93d6ee5034104cdea359357c8",
+      "fold-2.json": "810a56efa75bf25a783ab93b729c10c87c5737fab296e4e2a20d9082c9646b23",
+      "fold-3.json": "968e2be8e52ea0b417f90da68d935665572861d2299d140b7519ec1baccd1696"
+    },
+    "timesfm_code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+    "timesfm_weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+    "training_scope": "pinned TimesFM 3 backbone frozen; shared JOINT output_head only"
+  },
+  "comparator": {
+    "version": "fixed-point-comparator-v1",
+    "primary_model": "night_regression",
+    "fallback_model": "range",
+    "representation": "gbud",
+    "selection_policy": "predeclared_primary_before_evaluation",
+    "failure_policy": "same_date_fallback_preserve_primary_error",
+    "interval_calibration": {
+      "version": "causal-head-marginal-residual-v1",
+      "candidate_context": 64,
+      "window": 60,
+      "minimum": 40,
+      "lower_quantile": 0.1,
+      "upper_quantile": 0.9,
+      "update_policy": "previous_walk_forward_residuals_available_by_0830_only"
+    },
+    "rationale": "Select the strongest predeclared point comparator independently of raw interval stability, then apply the identical causal interval calibration to both sides."
+  },
+  "research_budget": {
+    "limit_seconds": 7200.0,
+    "charged_seconds": 3052.348086220678,
+    "remaining_seconds": 4147.651913779322,
+    "completed_operations": 4,
+    "stop_reason": "three consecutive model routes produced no gain against the fair comparator"
+  },
+  "instruments": {
+    "TAIEX": {
+      "paired_days": 240,
+      "candidate_close_mae_points": 407.2225544510358,
+      "comparator_close_mae_points": 358.11975254560696,
+      "fair_close_relative_improvement": -0.13711279971683643,
+      "previous_mixed_baseline_close_relative_improvement": 0.10789594535997937,
+      "fold_improvements": [
+        -0.12965995328290347,
+        -0.17206881600713797,
+        -0.10874267493087753
+      ],
+      "block_bootstrap_ci95": [
+        -0.21649492029214285,
+        -0.09085921957358532
+      ],
+      "candidate_ohlc_mae_points": {
+        "open": 98.2171656199928,
+        "high": 275.71838877828577,
+        "low": 299.74256011296103,
+        "close": 407.2225544510358
+      },
+      "comparator_ohlc_mae_points": {
+        "open": 135.7886880642738,
+        "high": 264.37471397298225,
+        "low": 306.83518998563375,
+        "close": 358.11975254560696
+      },
+      "candidate_intervals": {
+        "open": {
+          "coverage": 0.8291666666666667,
+          "width": 309.74204829375543,
+          "interval_score": 603.5835172094914
+        },
+        "high": {
+          "coverage": 0.7791666666666667,
+          "width": 870.4455960202046,
+          "interval_score": 1340.9208524956373
+        },
+        "low": {
+          "coverage": 0.7416666666666667,
+          "width": 867.0192737806848,
+          "interval_score": 1475.983864150837
+        },
+        "close": {
+          "coverage": 0.8,
+          "width": 1328.5257152111653,
+          "interval_score": 2009.5947554575328
+        }
+      },
+      "comparator_intervals": {
+        "open": {
+          "coverage": 0.7958333333333333,
+          "width": 440.4157864156297,
+          "interval_score": 671.7840574603008
+        },
+        "high": {
+          "coverage": 0.7833333333333333,
+          "width": 693.4761513080527,
+          "interval_score": 1154.8232515554628
+        },
+        "low": {
+          "coverage": 0.7708333333333334,
+          "width": 787.9567086924355,
+          "interval_score": 1418.5341670245848
+        },
+        "close": {
+          "coverage": 0.7625,
+          "width": 1110.8837342568809,
+          "interval_score": 1836.156266413924
+        }
+      },
+      "requirements": {
+        "close_buffer": false,
+        "fold_majority": false,
+        "bootstrap_lower_nonnegative": false,
+        "ohl_noninferiority": true,
+        "interval_coverage": false,
+        "interval_score_noninferior": false,
+        "forecast_coverage": true
+      },
+      "fallback": {
+        "count": 1,
+        "dates": [
+          "2026-06-08"
+        ],
+        "primary_errors": [
+          "ValidationError: 1 validation error for Prices\nlow\n  Input should be greater than 0 [type=greater_than, input_value=np.float64(0.0), input_type=float64]\n    For further information visit https://errors.pydantic.dev/2.14/v/greater_than"
+        ]
+      },
+      "status": "FAIL"
+    },
+    "TX": {
+      "paired_days": 240,
+      "candidate_close_mae_points": 404.50481391644473,
+      "comparator_close_mae_points": 381.8680087297038,
+      "fair_close_relative_improvement": -0.059279134856158766,
+      "previous_mixed_baseline_close_relative_improvement": 0.09969530342927135,
+      "fold_improvements": [
+        -0.00042605582174259915,
+        -0.0491317080328213,
+        -0.09201888615365461
+      ],
+      "block_bootstrap_ci95": [
+        -0.12242645530473023,
+        -0.0005566115967001056
+      ],
+      "candidate_ohlc_mae_points": {
+        "open": 184.53179189742926,
+        "high": 297.8176589771877,
+        "low": 328.8278651811508,
+        "close": 404.50481391644473
+      },
+      "comparator_ohlc_mae_points": {
+        "open": 157.0952991699455,
+        "high": 317.06618874572325,
+        "low": 325.76680704236645,
+        "close": 381.8680087297038
+      },
+      "candidate_intervals": {
+        "open": {
+          "coverage": 0.775,
+          "width": 568.4358347545683,
+          "interval_score": 1042.2177154768876
+        },
+        "high": {
+          "coverage": 0.8,
+          "width": 918.1259733371423,
+          "interval_score": 1452.9903833521537
+        },
+        "low": {
+          "coverage": 0.7333333333333333,
+          "width": 995.6565180120831,
+          "interval_score": 1699.6914151838268
+        },
+        "close": {
+          "coverage": 0.775,
+          "width": 1283.6128048492,
+          "interval_score": 2146.7750312633575
+        }
+      },
+      "comparator_intervals": {
+        "open": {
+          "coverage": 0.7791666666666667,
+          "width": 494.525344581773,
+          "interval_score": 873.9567235585249
+        },
+        "high": {
+          "coverage": 0.7791666666666667,
+          "width": 752.1229308323549,
+          "interval_score": 1472.1580798607106
+        },
+        "low": {
+          "coverage": 0.7708333333333334,
+          "width": 948.1441498787759,
+          "interval_score": 1610.2760200533337
+        },
+        "close": {
+          "coverage": 0.775,
+          "width": 1212.8998478553674,
+          "interval_score": 2004.044440755046
+        }
+      },
+      "requirements": {
+        "close_buffer": false,
+        "fold_majority": false,
+        "bootstrap_lower_nonnegative": false,
+        "ohl_noninferiority": false,
+        "interval_coverage": false,
+        "interval_score_noninferior": false,
+        "forecast_coverage": true
+      },
+      "fallback": {
+        "count": 0,
+        "dates": [],
+        "primary_errors": []
+      },
+      "status": "FAIL"
+    }
+  },
+  "conclusion": {
+    "development_gate_passed": false,
+    "final_gate_passed": false,
+    "default_model": "fixed strongest baseline",
+    "claim": "The recent JOINT TimesFM output head does not beat the equally calibrated fixed night-regression comparator on either market."
+  }
+}

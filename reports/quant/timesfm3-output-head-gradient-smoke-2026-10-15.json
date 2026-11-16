@@ -1,0 +1,61 @@
+{
+  "schema_version": "timesfm3-custom-output-head-gradient-smoke-summary-v1",
+  "recorded_at": "2026-10-15T14:31:06+08:00",
+  "status": "PASS",
+  "name": "custom_output_head_gradient_smoke",
+  "official_timesfm3_finetuning": false,
+  "production_candidate": false,
+  "changes_model_selection": false,
+  "final_test_opened": false,
+  "dataset_id": "cce0208a6ee26a9874f1836c5aa24f374ee4cf74880c2d39afb5748e366a50ce",
+  "code_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "weight_repo": "google/timesfm-3.0-pytorch",
+  "weight_revision": "43046b85ec22d584a13f8098c2ed39c889e129c2",
+  "sample": {
+    "instrument": "TAIEX",
+    "sample_date": "2024-10-08",
+    "history_start": "2024-07-03",
+    "history_end": "2024-10-07",
+    "history_rows": 64,
+    "split": "train"
+  },
+  "training_scope": "one pre-validation sample; output head only; one SGD step",
+  "optimizer": {
+    "name": "SGD",
+    "learning_rate": 1e-05,
+    "steps": 1,
+    "seed": 0
+  },
+  "trainable_parameter_names": [
+    "output_head.weight",
+    "output_head.bias"
+  ],
+  "trainable_parameters": 737856,
+  "loss_before": 1.934121012687683,
+  "loss_after": 1.9337894916534424,
+  "gradient_norm_l2": 5.758203506469727,
+  "parameter_delta_l2": 5.758181941928342e-05,
+  "forecast_delta_l2": 0.0012779140379279852,
+  "save_reload_max_abs": 0.0,
+  "evidence": {
+    "finite_loss": true,
+    "nonzero_output_head_gradient": true,
+    "output_head_parameter_delta": true,
+    "forecast_delta": true,
+    "save_reload_equivalence": true
+  },
+  "checkpoint": {
+    "sha256": "7891e4103612fca14ebad39d22a7d4c5eb898cd3924656916f870814af9b8a98",
+    "bytes": 2951568,
+    "scope": "output_head_only_local_research_artifact",
+    "committed_to_git": false
+  },
+  "full_local_result_sha256": "f4ea6c929f3581e13bb47d2802ff154cef541b3a71cbceb90f305743f088eb51",
+  "elapsed_seconds": 3.304175856988877,
+  "peak_rss_mb": 2852.0390625,
+  "limitations": [
+    "This is a custom PyTorch gradient smoke, not an official TimesFM 3 fine-tuning API.",
+    "One train-period sample and one optimizer step do not establish forecast improvement.",
+    "The checkpoint is not eligible for daily output or final-test reevaluation."
+  ]
+}

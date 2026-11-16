@@ -1,0 +1,30 @@
+{
+  "status": "PASS_READ_ONLY_PREFLIGHT",
+  "checked_at": "2026-10-16T00:55:23+08:00",
+  "spreadsheet_id": "1d54RLYn6Egk3ky-Gs-7unQdODIAlgB_wocnkGtxxb7o",
+  "sheet": {
+    "title": "每日預測與覆盤",
+    "sheet_id": 1960148887,
+    "row_count": 1000,
+    "column_count": 26
+  },
+  "contract": {
+    "range": "A1:P1",
+    "columns": 16,
+    "header_fingerprint": "c39229caff02d4b5975608e8745b2884d319b275cf850a61d37d804c24c426c2",
+    "matches_v0_headers": true
+  },
+  "bounded_row_probe": {
+    "range": "A120:P160",
+    "last_populated_row": 133,
+    "next_two_row_start": 134,
+    "rows_134_135_empty": true
+  },
+  "operation": {
+    "read_only": true,
+    "cells_written": 0,
+    "production_sheet_read": false,
+    "production_sheet_written": false
+  },
+  "limitation": "Connector preflight proves the staging layout and empty target rows. It does not provide Application Default Credentials to the repo CLI and is not a genuine forward forecast."
+}

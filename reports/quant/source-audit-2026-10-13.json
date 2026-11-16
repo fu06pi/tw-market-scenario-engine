@@ -1,0 +1,82 @@
+{
+  "schema_version": "source-audit-v1",
+  "checked_date": "2026-10-13",
+  "decision": {
+    "primary_incremental_api": "FinMind",
+    "authoritative_reconciliation": ["TWSE", "TAIFEX"],
+    "third_party_overlap": "TEJ_2025_only",
+    "reason": "The verified TEJ trial entitlement does not provide the requested 2018+ common history. FinMind live probes do, while official records remain the definition and price reconciliation authority."
+  },
+  "tej": {
+    "credential_check": "SUCCESS_REDACTED",
+    "sdk_version": "0.1.31",
+    "account_period": ["2026-10-11", "2027-01-11"],
+    "request_limit_per_day": 500,
+    "row_limit_per_day": 50000,
+    "authorized_table_count": 28,
+    "tables": {
+      "TRAIL/TAPRCD": {
+        "instrument_filter": "Y9999",
+        "2018_2024_rows": 0,
+        "2025_rows": 243,
+        "2026_rows": 0,
+        "observed_min": "2025-01-02",
+        "observed_max": "2025-12-31"
+      },
+      "TRAIL/TAFUTR": {
+        "instrument_filter": "explicit TX YYYYMM contracts",
+        "2025_rows": 1458,
+        "2026_rows": 0,
+        "observed_min": "2025-01-02",
+        "observed_max": "2025-12-31",
+        "limitation": "The table does not establish a sufficient 2018+ or independently verified day/night historical series for this account."
+      }
+    }
+  },
+  "finmind": {
+    "api": "https://api.finmindtrade.com/api/v4/data",
+    "repository": "https://github.com/FinMind/FinMind",
+    "documentation_snapshot_commit": "8b42547c1e34f77823dd8d3836c1fc1388bc5678",
+    "documentation_snapshot_commit_date": "2026-10-10T04:27:28Z",
+    "token_present_during_probe": false,
+    "public_rate_limit_per_hour": 300,
+    "registered_token_rate_limit_per_hour": 600,
+    "datasets": {
+      "TaiwanStockPrice": {
+        "data_id": "TAIEX",
+        "documented_range": "1994-10-01 onward",
+        "documented_update": "Monday-Friday 17:30",
+        "live_probe_ranges": ["2018-01-02/2018-01-10", "2025-01-02/2025-01-10"],
+        "required_columns_observed": ["date", "stock_id", "open", "max", "min", "close", "Trading_Volume"]
+      },
+      "TaiwanFuturesDaily": {
+        "data_id": "TX",
+        "documented_range": "1998-07-01 onward",
+        "live_probe_ranges": ["2018-01-02/2018-01-10", "2025-01-02/2025-01-10"],
+        "required_columns_observed": ["date", "futures_id", "contract_date", "open", "max", "min", "close", "volume", "settlement_price", "open_interest", "trading_session"],
+        "sessions_observed": ["position", "after_market"],
+        "night_attribution": "after_market is attributed to the next exchange business day",
+        "zero_semantics": "after_market settlement_price and open_interest can be zero because those fields are not published for that session; zero is not a tradable settlement price"
+      }
+    },
+    "license_and_terms": {
+      "repository_code": "Apache-2.0",
+      "free_data_use": "non-commercial",
+      "attribution_required": "FinMind",
+      "raw_redistribution": "not permitted",
+      "production_status": "research_only"
+    },
+    "historical_point_in_time_status": "NOT_VERIFIED; current API fetch time is not historical publication evidence"
+  },
+  "official": {
+    "twse": "MI_5MINS_HIST monthly TAIEX OHLC",
+    "taifex": "futDataDown annual/range CSV plus daily report session checks",
+    "first_dataset_id": "fa3b3c0e5ddecb386b51446f0758efdff715e5b09d66ddcbe3c384b85e5be19e",
+    "first_dataset_status": "REJECTED_DQ_FAIL",
+    "first_dataset_rows": 2210,
+    "first_dataset_expected_rows": 6359,
+    "first_dataset_missing_rows": 4226,
+    "root_cause": "settlement=0 was parsed as a positive settlement price and caused TX batches to fail validation",
+    "usage": "Retain as failure evidence only; do not use for model selection or performance claims."
+  }
+}

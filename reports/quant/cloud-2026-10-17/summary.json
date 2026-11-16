@@ -1,0 +1,70 @@
+{
+  "status": "NO_GO",
+  "reason": "BLOCKED_SAMPLE_MATERIALIZATION",
+  "source_commit": "b4912f465436cb7811c797caaf24ed08d645d52a",
+  "source_tree": "429309ce618c2092244b219defd762d0bc1ff1a4",
+  "model_parameters_updated": false,
+  "checkpoint": null,
+  "development_gate": "NOT_EVALUATED",
+  "old_final_status": "FAIL",
+  "final_reopened": false,
+  "production_switch": false,
+  "training_scope": "custom output-head-only, not official fine-tuning",
+  "indexed_joint_candidates": [
+    {
+      "index": 0,
+      "context": 256,
+      "status": "PRE_TRAINING_FAILED"
+    },
+    {
+      "index": 1,
+      "context": 256,
+      "status": "PRE_TRAINING_FAILED"
+    },
+    {
+      "index": 2,
+      "context": 256,
+      "status": "PRE_TRAINING_FAILED"
+    },
+    {
+      "index": 3,
+      "context": 256,
+      "status": "NOT_RUN_SHARED_SAMPLE_BLOCKER"
+    },
+    {
+      "index": 4,
+      "context": 512,
+      "status": "PRE_TRAINING_FAILED"
+    },
+    {
+      "index": 5,
+      "context": 512,
+      "status": "NOT_RUN_SHARED_SAMPLE_BLOCKER"
+    },
+    {
+      "index": 6,
+      "context": 512,
+      "status": "NOT_RUN_SHARED_SAMPLE_BLOCKER"
+    },
+    {
+      "index": 7,
+      "context": 512,
+      "status": "NOT_RUN_SHARED_SAMPLE_BLOCKER"
+    }
+  ],
+  "independent_controls": {
+    "TAIEX": "CANDIDATE_0_PRE_TRAINING_FAILED",
+    "TX": "CANDIDATE_0_PRE_TRAINING_FAILED"
+  },
+  "selection": null,
+  "bootstrap": null,
+  "training_budget_seconds": 7200,
+  "budget_exhausted": false,
+  "no_gain_validation_rounds": 0,
+  "test_results": {
+    "pytest_passed": 76,
+    "ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "known_environment_setup_failure": "Initial dev/research-only pytest had 2 missing-torch errors; resolved by installing the frozen timesfm3 extra. Initial model download required socksio; resolved with environment-only socksio==1.0.0."
+}

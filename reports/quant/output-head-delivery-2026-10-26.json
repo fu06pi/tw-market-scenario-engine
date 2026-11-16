@@ -1,0 +1,1183 @@
+{
+  "schema_version": "output-head-delivery-summary-v1",
+  "as_of": "2026-10-26",
+  "scope": "retrospective development only; old final remains closed",
+  "official_timesfm3_finetuning": false,
+  "training_method": "custom frozen TimesFM 3 backbone with trainable shared output head",
+  "production_switch": false,
+  "overall_status": "DEVELOPMENT_GATE_FAIL",
+  "production_default": "locked strongest baseline for each market",
+  "markets": {
+    "TAIEX": {
+      "candidates": [
+        {
+          "label": "context64",
+          "run_id": "dd4ef236644360b9e734",
+          "result_sha256": "37f742ebdc74f7a189487fca42de8709da8b8dbe67c0c9d0f9fd3ee9a96dc53e",
+          "context": 64,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.0797634930275043,
+          "close_improvement_ci95": [
+            -0.027375730056765035,
+            0.1556641888218064
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.22040421833403334,
+              "checkpoint_sha256": "29f6dbf4b66e3cfef4dff19daf3dd6df41731ee1335ee0b14592b1692281460f"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.1837060900950941,
+              "checkpoint_sha256": "4cfbcaf678aad3382d436188bf1cd3368df762070c95886dff1c01a5fe2ffbef"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": 0.06819962083174191,
+              "checkpoint_sha256": "83d1474bb3a479f59af0e270a04efe0d0f0c54b215bfefc64320bee6ae1d20be"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 99.69556036596184,
+              "mae_bps": 27.812834180957154,
+              "rmse_points": 175.18199465746662
+            },
+            "high": {
+              "mae_points": 290.28795018030127,
+              "mae_bps": 76.58074749817145,
+              "rmse_points": 406.9698298442944
+            },
+            "low": {
+              "mae_points": 316.58477873708375,
+              "mae_bps": 82.84979065042644,
+              "rmse_points": 496.8931850761823
+            },
+            "close": {
+              "mae_points": 420.0642953244424,
+              "mae_bps": 110.1436649276205,
+              "rmse_points": 577.5609370329265
+            }
+          },
+          "gap_mae_bps": 27.812834180957154,
+          "close_return_mae_bps": 110.1436649276205,
+          "range_mae_bps": 98.57079054769594,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 49,
+                "flat": 9,
+                "up": 41
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 5
+              },
+              "up": {
+                "down": 20,
+                "flat": 6,
+                "up": 108
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8791666666666667,
+              "width": 403.6119907460692,
+              "interval_score": 635.1790961027721
+            },
+            "high": {
+              "coverage": 0.925,
+              "width": 1394.6017276933324,
+              "interval_score": 1508.1247714335918
+            },
+            "low": {
+              "coverage": 0.6625,
+              "width": 778.1083774302853,
+              "interval_score": 1544.3170227376147
+            },
+            "close": {
+              "coverage": 0.8666666666666667,
+              "width": 1574.374841222199,
+              "interval_score": 1964.9542990510295
+            }
+          },
+          "requirements": {
+            "close_buffer": true,
+            "fold_majority": true,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context96",
+          "run_id": "6197e7f4be27ac0c8f6e",
+          "result_sha256": "48d9769b41029e5f4581aec627f505384f1758459f13ef35f5e41c0e0dddd4b0",
+          "context": 96,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": -0.024210928021578537,
+          "close_improvement_ci95": [
+            -0.21256566649289424,
+            0.09482437213169836
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.2994157996690816,
+              "checkpoint_sha256": "a8ef7a4335c8cfcba9096db28b6f9b8c9610d3cb26e5889e6a492a72bc0751a9"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.14104273656220012,
+              "checkpoint_sha256": "5a81c98c367080a963105a6e77335af78b8b366673e00030403c696a8af49d85"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.10809999421429639,
+              "checkpoint_sha256": "ae33050600b80b199169f0fd95e9e92c39cb65736cbe8890074c1e42c06579bf"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 102.16860047233459,
+              "mae_bps": 28.603905369723275,
+              "rmse_points": 178.32245875411382
+            },
+            "high": {
+              "mae_points": 322.65919152674655,
+              "mae_bps": 84.54841645994078,
+              "rmse_points": 450.0534077021589
+            },
+            "low": {
+              "mae_points": 319.03754672712523,
+              "mae_bps": 83.82585851886321,
+              "rmse_points": 510.9027060328761
+            },
+            "close": {
+              "mae_points": 467.5259441275748,
+              "mae_bps": 122.01702430640631,
+              "rmse_points": 665.2331829692146
+            }
+          },
+          "gap_mae_bps": 28.603905369723275,
+          "close_return_mae_bps": 122.01702430640631,
+          "range_mae_bps": 86.79881082833123,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 42,
+                "flat": 5,
+                "up": 52
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 5
+              },
+              "up": {
+                "down": 19,
+                "flat": 3,
+                "up": 112
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8333333333333334,
+              "width": 336.87651420620966,
+              "interval_score": 569.9250363450558
+            },
+            "high": {
+              "coverage": 0.8833333333333333,
+              "width": 1237.561636133808,
+              "interval_score": 1448.6597362153186
+            },
+            "low": {
+              "coverage": 0.5875,
+              "width": 646.2711983468802,
+              "interval_score": 1662.7300932447713
+            },
+            "close": {
+              "coverage": 0.7708333333333334,
+              "width": 1323.9788371613145,
+              "interval_score": 2147.201433644229
+            }
+          },
+          "requirements": {
+            "close_buffer": false,
+            "fold_majority": false,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context128",
+          "run_id": "7ed6c8055e40e5d8fb4e",
+          "result_sha256": "997bc7b73e8e6fc8f4c973dd2107f0aa4185ec7146b978bfa12aa1dd5ea83852",
+          "context": 128,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": -0.08638420126249913,
+          "close_improvement_ci95": [
+            -0.3079334776073626,
+            0.057354398922195404
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.2810034302301665,
+              "checkpoint_sha256": "e9437fd6a3e8a86a2a9b9fe6fc3a8bb6605d130133ef9639242cef2ea5f6e0fc"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.13631457047143447,
+              "checkpoint_sha256": "fd93214ef59c2fae859841ee54f1571cfe2ce6948614e13ad2aef65f31e7a4f7"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.25658401050596313,
+              "checkpoint_sha256": "13bd8e607dbef4e697ac6b14a00186a1573545b5fea678a9aab5325abac39176"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 97.79049823026726,
+              "mae_bps": 27.29029869989075,
+              "rmse_points": 170.44088967006607
+            },
+            "high": {
+              "mae_points": 350.78033641368995,
+              "mae_bps": 90.58707591890659,
+              "rmse_points": 502.33459837883953
+            },
+            "low": {
+              "mae_points": 315.5533316106976,
+              "mae_bps": 81.73654673102973,
+              "rmse_points": 493.5416802466149
+            },
+            "close": {
+              "mae_points": 495.9064441556419,
+              "mae_bps": 128.13771924562795,
+              "rmse_points": 719.1844194095229
+            }
+          },
+          "gap_mae_bps": 27.29029869989075,
+          "close_return_mae_bps": 128.13771924562795,
+          "range_mae_bps": 90.8763381988278,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 51,
+                "flat": 6,
+                "up": 42
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 5
+              },
+              "up": {
+                "down": 28,
+                "flat": 3,
+                "up": 103
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.85,
+              "width": 355.2303891133252,
+              "interval_score": 573.6974561357742
+            },
+            "high": {
+              "coverage": 0.8791666666666667,
+              "width": 1289.006845351718,
+              "interval_score": 1524.612716015101
+            },
+            "low": {
+              "coverage": 0.5791666666666667,
+              "width": 597.4921464509913,
+              "interval_score": 1714.6314933357132
+            },
+            "close": {
+              "coverage": 0.7541666666666667,
+              "width": 1361.9146763949354,
+              "interval_score": 2302.0693883132794
+            }
+          },
+          "requirements": {
+            "close_buffer": false,
+            "fold_majority": false,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context64_train_std",
+          "run_id": "88b26bf3d30c9ded6d0d",
+          "result_sha256": "7f384919b496cecb80d6c07d4daa81b2f20f48201df2a16becdac72edefd8b75",
+          "context": 64,
+          "loss_normalization": "train_std",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.09086594245435786,
+          "close_improvement_ci95": [
+            -0.011089693887368673,
+            0.1519687317073686
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.20515760834516183,
+              "checkpoint_sha256": "9aeae5898c3c28ef28d7feb052bc2be0f41ca1bb24f6e05a9ef21f717678c2cb"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.1552911620510663,
+              "checkpoint_sha256": "d9dfdd52c03c4620488da71acd305d7fec836a5ca3d2a3cfe200a67aa14fd55a"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": 0.11935773421181683,
+              "checkpoint_sha256": "21c3d98864bd413bcbc4d7a74beee6d2ac2c686426ac1c83b63111d198d0deeb"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 99.53962979761673,
+              "mae_bps": 27.63714088378751,
+              "rmse_points": 177.85634415839252
+            },
+            "high": {
+              "mae_points": 299.38707468794837,
+              "mae_bps": 79.3270378158557,
+              "rmse_points": 429.53739490679726
+            },
+            "low": {
+              "mae_points": 315.4482454602991,
+              "mae_bps": 82.15789285595733,
+              "rmse_points": 505.8102586218282
+            },
+            "close": {
+              "mae_points": 414.9963127356948,
+              "mae_bps": 109.13098721579907,
+              "rmse_points": 574.8727996927983
+            }
+          },
+          "gap_mae_bps": 27.63714088378751,
+          "close_return_mae_bps": 109.13098721579907,
+          "range_mae_bps": 107.61591528783384,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 53,
+                "flat": 9,
+                "up": 37
+              },
+              "flat": {
+                "down": 2,
+                "flat": 0,
+                "up": 5
+              },
+              "up": {
+                "down": 20,
+                "flat": 6,
+                "up": 108
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 99,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 7,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 134,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8333333333333334,
+              "width": 341.336481066509,
+              "interval_score": 621.843221443934
+            },
+            "high": {
+              "coverage": 0.9333333333333333,
+              "width": 1369.281125568917,
+              "interval_score": 1488.0671965301706
+            },
+            "low": {
+              "coverage": 0.6166666666666667,
+              "width": 670.284313274483,
+              "interval_score": 1527.2915382395056
+            },
+            "close": {
+              "coverage": 0.8416666666666667,
+              "width": 1433.5501825016393,
+              "interval_score": 1895.3924641475917
+            }
+          },
+          "requirements": {
+            "close_buffer": true,
+            "fold_majority": true,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        }
+      ],
+      "best_research_not_promoted": "88b26bf3d30c9ded6d0d",
+      "best_selection_rule": "minimum development close MAE after every full gate failed",
+      "calibration": {
+        "result_sha256": "0eb6b2d16ae7fa39f0dd84552b699e85ace5abf9417f9427c4a4315b9a204754",
+        "artifact_sha256": "c0334095bcbaaff41a9a2981f3568cc37649d1d7dba43d6e840461fcbe6c8bf9",
+        "source_result_sha256": "7f384919b496cecb80d6c07d4daa81b2f20f48201df2a16becdac72edefd8b75",
+        "development_gate": "FAIL",
+        "all_days": 240,
+        "counts": {
+          "WARMUP_ORIGINAL_INTERVAL": 40,
+          "CALIBRATED": 200
+        },
+        "points_unchanged": true,
+        "coverage": {
+          "open": 0.8291666666666667,
+          "high": 0.7625,
+          "low": 0.7708333333333334,
+          "close": 0.7583333333333333
+        },
+        "intervals": {
+          "open": {
+            "coverage": 0.8291666666666667,
+            "width": 320.41262082805065,
+            "interval_score": 623.6450419455598
+          },
+          "high": {
+            "coverage": 0.7625,
+            "width": 859.1130602098826,
+            "interval_score": 1428.5849915307926
+          },
+          "low": {
+            "coverage": 0.7708333333333334,
+            "width": 842.6682772818633,
+            "interval_score": 1519.2030415732065
+          },
+          "close": {
+            "coverage": 0.7583333333333333,
+            "width": 1267.4897675533405,
+            "interval_score": 2067.565388932982
+          }
+        },
+        "requirements": {
+          "close_buffer": true,
+          "fold_majority": true,
+          "bootstrap_lower_nonnegative": false,
+          "ohl_noninferiority": true,
+          "interval_coverage": true,
+          "interval_score_noninferior": true,
+          "forecast_coverage": true
+        }
+      }
+    },
+    "TX": {
+      "candidates": [
+        {
+          "label": "context64",
+          "run_id": "d635e40df84cdfad4cde",
+          "result_sha256": "1c355b0af41530751df66a683de6fe7ae6f3fba5866739df70533fa09e74ba57",
+          "context": 64,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.12585843158748944,
+          "close_improvement_ci95": [
+            0.014650705612581886,
+            0.21788638041053937
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": 0.016981812512051442,
+              "checkpoint_sha256": "9476b9e22190f8fb28844e7976e6365839512b004a14fc2fda7d4484e9a1d3cc"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.28518914963715325,
+              "checkpoint_sha256": "631b1efed4b6f714a1ae5030506015b42365b7c75dde4488e24a32e3060906f6"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.04292374070855942,
+              "checkpoint_sha256": "4d9251f8499b990ae3e89a8f99e39a6cb68fb46dbe6fd3719433f15ca99d0c99"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 180.7374793211955,
+              "mae_bps": 47.71444631097309,
+              "rmse_points": 267.89394231114835
+            },
+            "high": {
+              "mae_points": 278.7935000815247,
+              "mae_bps": 72.66726746693394,
+              "rmse_points": 405.88246182245877
+            },
+            "low": {
+              "mae_points": 329.4220497414423,
+              "mae_bps": 85.53537854579376,
+              "rmse_points": 504.51959250441485
+            },
+            "close": {
+              "mae_points": 392.74978106209744,
+              "mae_bps": 101.9104989557869,
+              "rmse_points": 568.1324002990833
+            }
+          },
+          "gap_mae_bps": 47.71444631097309,
+          "close_return_mae_bps": 101.9104989557869,
+          "range_mae_bps": 83.448137109574,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 61,
+                "flat": 2,
+                "up": 35
+              },
+              "flat": {
+                "down": 4,
+                "flat": 0,
+                "up": 8
+              },
+              "up": {
+                "down": 16,
+                "flat": 3,
+                "up": 111
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 98,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 130,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8083333333333333,
+              "width": 579.741914549941,
+              "interval_score": 957.8797962866757
+            },
+            "high": {
+              "coverage": 0.925,
+              "width": 1357.0938116336508,
+              "interval_score": 1486.1330252358296
+            },
+            "low": {
+              "coverage": 0.65,
+              "width": 800.6365890615416,
+              "interval_score": 1698.9037930085503
+            },
+            "close": {
+              "coverage": 0.8375,
+              "width": 1575.8114496920812,
+              "interval_score": 2019.4076439687276
+            }
+          },
+          "requirements": {
+            "close_buffer": true,
+            "fold_majority": true,
+            "bootstrap_lower_nonnegative": true,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context96",
+          "run_id": "601d01aa4ed209962486",
+          "result_sha256": "ae7e13ba4ec03cd349f2a5fb994a2b52e6d892d049c58203f437d24f5dc46a3f",
+          "context": 96,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.03917583026465565,
+          "close_improvement_ci95": [
+            -0.12902636519530528,
+            0.16445010515760267
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.07861041831640114,
+              "checkpoint_sha256": "498b45b56837a3e9fe067ab136eba2b51e3289240f1d4635b852eb7161fbf923"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.24924678806808398,
+              "checkpoint_sha256": "550de5657b86f1c2a2a0f2cc252aaf6473bec1a6995ed3a3400696aa408273db"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.1935953165230151,
+              "checkpoint_sha256": "ff46480ccbdd3fa22ca66d4a4b1201f2865feb7670019b86d30ee254a3cca1d6"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 205.09187874600667,
+              "mae_bps": 52.98904017232309,
+              "rmse_points": 298.7655635489937
+            },
+            "high": {
+              "mae_points": 283.9819252774767,
+              "mae_bps": 73.96985127945113,
+              "rmse_points": 395.62338621604
+            },
+            "low": {
+              "mae_points": 370.13275488465086,
+              "mae_bps": 94.8842621771861,
+              "rmse_points": 561.6222554877501
+            },
+            "close": {
+              "mae_points": 431.696072969097,
+              "mae_bps": 111.87726546619704,
+              "rmse_points": 609.9199742049318
+            }
+          },
+          "gap_mae_bps": 52.98904017232309,
+          "close_return_mae_bps": 111.87726546619704,
+          "range_mae_bps": 74.25647617367352,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 51,
+                "flat": 2,
+                "up": 45
+              },
+              "flat": {
+                "down": 4,
+                "flat": 0,
+                "up": 8
+              },
+              "up": {
+                "down": 12,
+                "flat": 2,
+                "up": 116
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 98,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 130,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.7791666666666667,
+              "width": 609.0340183139881,
+              "interval_score": 996.1970272941338
+            },
+            "high": {
+              "coverage": 0.9333333333333333,
+              "width": 1473.4514701675341,
+              "interval_score": 1602.750491798267
+            },
+            "low": {
+              "coverage": 0.6125,
+              "width": 725.7135154933461,
+              "interval_score": 1707.6043192224636
+            },
+            "close": {
+              "coverage": 0.8166666666666667,
+              "width": 1598.902265067452,
+              "interval_score": 2082.9665526868052
+            }
+          },
+          "requirements": {
+            "close_buffer": false,
+            "fold_majority": false,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context128",
+          "run_id": "e48eafb8d283c39acc1d",
+          "result_sha256": "f837e2899d9838c2da9ec7a03e973fbce327db810ec78fd758c31c8ebade9ac4",
+          "context": 128,
+          "loss_normalization": "none",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.09249903676905125,
+          "close_improvement_ci95": [
+            -0.047403540786102115,
+            0.1934023148207782
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": -0.038759901691875154,
+              "checkpoint_sha256": "18732594b250fe43872d72949144560a44432c9497315ee69bc9757bec61ad81"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.2617861166200812,
+              "checkpoint_sha256": "07a530c92607caf91ff78cb7ccfdd11b928f6fd74ff56384c277aec0a52794bb"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.08063874473270283,
+              "checkpoint_sha256": "87b5921a377b1d2ac24c19b5eaf7590bff13c2158b1343d435e396fa7025111b"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 181.93309427629316,
+              "mae_bps": 47.44098066037692,
+              "rmse_points": 268.82011443915326
+            },
+            "high": {
+              "mae_points": 281.3984631436193,
+              "mae_bps": 73.70937121398138,
+              "rmse_points": 415.5190930584352
+            },
+            "low": {
+              "mae_points": 340.6879256857872,
+              "mae_bps": 87.5318767590691,
+              "rmse_points": 518.0787926891796
+            },
+            "close": {
+              "mae_points": 407.73807985115906,
+              "mae_bps": 105.93502676857854,
+              "rmse_points": 591.0810674153244
+            }
+          },
+          "gap_mae_bps": 47.44098066037692,
+          "close_return_mae_bps": 105.93502676857854,
+          "range_mae_bps": 82.8219563782862,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 60,
+                "flat": 4,
+                "up": 34
+              },
+              "flat": {
+                "down": 5,
+                "flat": 0,
+                "up": 7
+              },
+              "up": {
+                "down": 16,
+                "flat": 0,
+                "up": 114
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 98,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 130,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8083333333333333,
+              "width": 583.7946159850604,
+              "interval_score": 917.3164500501168
+            },
+            "high": {
+              "coverage": 0.9291666666666667,
+              "width": 1387.3335540850167,
+              "interval_score": 1524.3210148372323
+            },
+            "low": {
+              "coverage": 0.6583333333333333,
+              "width": 801.881106508588,
+              "interval_score": 1715.6698847660286
+            },
+            "close": {
+              "coverage": 0.8333333333333334,
+              "width": 1572.0150293902432,
+              "interval_score": 2058.0124836155305
+            }
+          },
+          "requirements": {
+            "close_buffer": true,
+            "fold_majority": false,
+            "bootstrap_lower_nonnegative": false,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        },
+        {
+          "label": "context64_train_std",
+          "run_id": "340db2b412224657c0e7",
+          "result_sha256": "b5cab8d10b4e34b5c08806c3e65d70d9e0c8b047101b5f0c091eb16ec94e7138",
+          "context": 64,
+          "loss_normalization": "train_std",
+          "status": "DEVELOPMENT_GATE_FAIL",
+          "development_gate": "FAIL",
+          "paired_days": 240,
+          "forecast_coverage": 1.0,
+          "failed_days": [],
+          "close_relative_improvement": 0.12504069855471,
+          "close_improvement_ci95": [
+            0.009671951571466691,
+            0.22417168090203568
+          ],
+          "folds": [
+            {
+              "fold": 1,
+              "close_relative_improvement": 0.04511064952267785,
+              "checkpoint_sha256": "715ad0d1c3d9a4320039e1e26ebb772536eb584abfbe62e5e7986fc4dc5aaf8b"
+            },
+            {
+              "fold": 2,
+              "close_relative_improvement": 0.2804475095511504,
+              "checkpoint_sha256": "f4728bc99e39a51dbd51d07abc3a6804c7a67eaf0adcf9e949925d56bd7b5076"
+            },
+            {
+              "fold": 3,
+              "close_relative_improvement": -0.050023205433378015,
+              "checkpoint_sha256": "091ab73937d0207284ec6665b0ba3e9b93ae248583b9e6424df3c12993e91b28"
+            }
+          ],
+          "ohlc": {
+            "open": {
+              "mae_points": 177.2662237203135,
+              "mae_bps": 46.62762744633873,
+              "rmse_points": 267.58832348346755
+            },
+            "high": {
+              "mae_points": 285.4644660320703,
+              "mae_bps": 74.6213042869588,
+              "rmse_points": 419.5427994926344
+            },
+            "low": {
+              "mae_points": 326.5750888990537,
+              "mae_bps": 84.28542545470799,
+              "rmse_points": 501.71151374258784
+            },
+            "close": {
+              "mae_points": 393.1171866188136,
+              "mae_bps": 101.6695685991213,
+              "rmse_points": 571.7245706192826
+            }
+          },
+          "gap_mae_bps": 46.62762744633873,
+          "close_return_mae_bps": 101.6695685991213,
+          "range_mae_bps": 85.44238637098849,
+          "direction": {
+            "neutral_bps": 5.0,
+            "actual_rows_predicted_columns": {
+              "down": {
+                "down": 58,
+                "flat": 5,
+                "up": 35
+              },
+              "flat": {
+                "down": 4,
+                "flat": 1,
+                "up": 7
+              },
+              "up": {
+                "down": 12,
+                "flat": 3,
+                "up": 115
+              }
+            },
+            "zero_return_baseline": {
+              "down": {
+                "down": 0,
+                "flat": 98,
+                "up": 0
+              },
+              "flat": {
+                "down": 0,
+                "flat": 12,
+                "up": 0
+              },
+              "up": {
+                "down": 0,
+                "flat": 130,
+                "up": 0
+              }
+            }
+          },
+          "intervals": {
+            "open": {
+              "coverage": 0.8083333333333333,
+              "width": 587.5423941969057,
+              "interval_score": 920.8777849941868
+            },
+            "high": {
+              "coverage": 0.9416666666666667,
+              "width": 1450.4408395533717,
+              "interval_score": 1530.4546272749974
+            },
+            "low": {
+              "coverage": 0.6291666666666667,
+              "width": 803.9009626081669,
+              "interval_score": 1677.464438893564
+            },
+            "close": {
+              "coverage": 0.8416666666666667,
+              "width": 1665.6554394843363,
+              "interval_score": 2009.3592843147044
+            }
+          },
+          "requirements": {
+            "close_buffer": true,
+            "fold_majority": true,
+            "bootstrap_lower_nonnegative": true,
+            "ohl_noninferiority": true,
+            "interval_coverage": false,
+            "interval_score_noninferior": true,
+            "forecast_coverage": true
+          }
+        }
+      ],
+      "best_research_not_promoted": "d635e40df84cdfad4cde",
+      "best_selection_rule": "minimum development close MAE after every full gate failed",
+      "calibration": {
+        "result_sha256": "f3bb587c2765904619bedcf2bf01b17710a0f2744bd4aeeaa7d55dd520dd33ad",
+        "artifact_sha256": "4b9e6f7d22ea273631d2435c57f38b2ce521b0a550497418b645143588100564",
+        "source_result_sha256": "1c355b0af41530751df66a683de6fe7ae6f3fba5866739df70533fa09e74ba57",
+        "development_gate": "FAIL",
+        "all_days": 240,
+        "counts": {
+          "WARMUP_ORIGINAL_INTERVAL": 40,
+          "CALIBRATED": 200
+        },
+        "points_unchanged": true,
+        "coverage": {
+          "open": 0.7458333333333333,
+          "high": 0.7666666666666667,
+          "low": 0.7291666666666666,
+          "close": 0.7708333333333334
+        },
+        "intervals": {
+          "open": {
+            "coverage": 0.7458333333333333,
+            "width": 535.4249859093113,
+            "interval_score": 1039.4910381405318
+          },
+          "high": {
+            "coverage": 0.7666666666666667,
+            "width": 827.379127561464,
+            "interval_score": 1432.518571729594
+          },
+          "low": {
+            "coverage": 0.7291666666666666,
+            "width": 865.9225006490643,
+            "interval_score": 1683.5866279423203
+          },
+          "close": {
+            "coverage": 0.7708333333333334,
+            "width": 1197.903317094208,
+            "interval_score": 2114.2579731557635
+          }
+        },
+        "requirements": {
+          "close_buffer": true,
+          "fold_majority": true,
+          "bootstrap_lower_nonnegative": true,
+          "ohl_noninferiority": true,
+          "interval_coverage": false,
+          "interval_score_noninferior": true,
+          "forecast_coverage": true
+        }
+      }
+    }
+  },
+  "daily_snapshot": {
+    "path": "reports/generated/quant/experiments/head-delivery-2026-10-26/snapshot-2026-10-12.json",
+    "file_sha256": "203e8d150ce1efab70b989985ebae53c366308a18fc488ea28657ff1016698b4",
+    "forecast_id": "ohlc-v1-2026-10-12-ebee7b6b6aa03af350bf874510ca856a1b9d029173531a81053c4a04643d3178",
+    "snapshot_hash": "62e90965ab347c55f1335d7f34ec688382126a4586bd5cf952b8c8cb9253db77",
+    "trading_date": "2026-10-12",
+    "timeliness": "LATE",
+    "data_quality": "WARN",
+    "instruments": [
+      "TAIEX",
+      "TX"
+    ],
+    "checkpoint_sha256": {
+      "TAIEX": "21c3d98864bd413bcbc4d7a74beee6d2ac2c686426ac1c83b63111d198d0deeb",
+      "TX": "4d9251f8499b990ae3e89a8f99e39a6cb68fb46dbe6fd3719433f15ca99d0c99"
+    },
+    "causal_calibration": true,
+    "tamper_check": "PASS",
+    "genuine_forward": false
+  },
+  "wick_candidate": {
+    "run_id": "d77dbc4223777b1f104e",
+    "status": "INTERRUPTED_BEFORE_FIRST_FOLD_CHECKPOINT",
+    "result_exists": false,
+    "sample_audit_exists": true,
+    "conclusion": "no accuracy conclusion"
+  },
+  "budget": {
+    "limit_seconds": 21600.0,
+    "charged_seconds": 21600.0,
+    "attempts": 12,
+    "last_attempt_status": "RESERVED_UNCLEAN_EXIT_CHARGES_FULL_ALLOWANCE",
+    "note": "The final unclean reservation is charged in full by the frozen policy; it is not measured compute time."
+  },
+  "replay": {
+    "status": "FAIL",
+    "tolerance_points": 0.001,
+    "reason": "legacy checkpoints lack numeric runtime metadata and saved interval replay exceeded tolerance"
+  },
+  "limitations": [
+    "No candidate passed the complete development gate in both markets.",
+    "The fixed 2025-10-09 through 2026-10-08 final remains a permanent failure and was not reopened.",
+    "Historical TimesFM pretraining overlap cannot be excluded; a fixed-version genuine forward holdout is still required.",
+    "Prediction error is separate from trading profitability."
+  ]
+}
