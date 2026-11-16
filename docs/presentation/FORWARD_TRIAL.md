@@ -52,3 +52,5 @@ python -m scripts.forward_trial_cli close \
 收盤另貼新的close留言，再用`aggregate_trial_comments`讀所有已驗證留言累計；頁面需讀完整，不忽略第二頁或失敗紀錄。
 
 是否已建立／啟用排程、最終固定commit、伺服器回讀與首次實際執行，分別以`trial-status.json`及ledger真實記錄為準。下午的preflight留言不是盤前樣本；預約成功也不是已執行成功。
+
+2026-11-16已由排程服務讀回確認啟用，詳見[狀態](../../reports/followup/2026-11-16/trial-status.json)。方案5個啟用任務上限，研究合併在單一任務；RRULE列10個08:15，RDATE另列10個15:30，以實際台北時鐘分流。固定執行commit `398d3b7b35f8d007178037ccbc8e06b6ee5d19a6`，原四任務不變。新排程尚未首次執行，未宣稱環境啟動、來源成功或新增有效樣本。
