@@ -1,0 +1,107 @@
+{
+  "trading_date": "2026-11-17",
+  "previous_close": 41040.08,
+  "open": 40546.64,
+  "high": 41533.84,
+  "low": 39786.45,
+  "close": 40092.11,
+  "turnover": 997737877197,
+  "breadth_up": 234,
+  "breadth_down": 789,
+  "breadth_flat": 61,
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-17T07:16:59Z",
+  "is_trading_day": true,
+  "turnover_scope": "TWSE MI_INDEX表6總計(1~15)，全口徑與新聞日盤分開",
+  "regular_session_turnover_twd": 961795000000,
+  "breadth_scope": "TWSE MI_INDEX表7股票欄，上漲/(上漲+下跌)，不含平盤/未成交/無比價",
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261117&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-17",
+      "retrieved_at": "2026-11-17T07:14:49.223989Z",
+      "availability_basis": "直接HTTP成功，JSON date=20261117 stat=OK；表0/6/7/8",
+      "raw_response_sha256": "32dbc356c71fc9b0abed3edc6db6cb3ebe9ea13a51102ab864e5589f1e3e2532",
+      "selected_data": {
+        "close": 40092.11,
+        "change": -947.97,
+        "breadth_up": 234,
+        "breadth_down": 789,
+        "breadth_flat": 61,
+        "breadth_untraded": 2,
+        "breadth_no_comparison": 1,
+        "turnover_total_twd": 997737877197,
+        "stock_turnover_twd": 852312494548,
+        "electronics_pct": -2.71,
+        "semiconductors_pct": -2.16,
+        "financials_pct": -0.35
+      },
+      "supports": [
+        "交易日確認",
+        "收盤漲跌、成交、股票廣度、類股與個股"
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611170136.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-17T13:50:00+08:00",
+      "retrieved_at": "2026-11-17T07:16:59Z",
+      "supports": [
+        "open/high/low/close",
+        "regular_session_turnover_twd=961795000000"
+      ],
+      "excluded_fields": {
+        "breadth_up": 238,
+        "breadth_down": 799,
+        "breadth_flat": 74
+      },
+      "exclusion_reason": "採官方MI_INDEX股票欄，不混用媒體範圍"
+    },
+    {
+      "id": "cna_open",
+      "url": "https://www.cna.com.tw/news/afe/202611170023.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-17T09:04:00+08:00",
+      "retrieved_at": "2026-11-17T07:16:59Z",
+      "supports": [
+        "開盤40546.64，下跌493.44；據此核對前收41040.08"
+      ]
+    },
+    {
+      "id": "cna_path",
+      "url": "https://www.cna.com.tw/news/afe/202611170131.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-17T13:45:00+08:00",
+      "updated_at": "2026-11-17T13:54:00+08:00",
+      "retrieved_at": "2026-11-17T07:16:59Z",
+      "supports": [
+        "早盤急拉翻紅與午盤回檔新聞敘述",
+        "台積電2170/-45、聯發科與鴻海抵抗跌勢"
+      ],
+      "limitations": "不能取代分鐘線或市場廣度時序；新聞事件解讀不是因果估計"
+    },
+    {
+      "id": "edn_path",
+      "url": "https://money.udn.com/money/story/5607/9883924?from=edn_hotestlist_storybottom",
+      "publisher": "Economic Daily",
+      "published_at": "2026-11-17T13:39:45+08:00",
+      "retrieved_at": "2026-11-17T07:16:59Z",
+      "supports": [
+        "OHLC交叉核對",
+        "開低反彈再回落質性描述",
+        "科技鏈疲弱與部分權值抗跌"
+      ],
+      "limitations": "斷頭/搶短賣壓是記者解讀，沒有強制平倉逐筆證據"
+    }
+  ],
+  "limitations": [
+    "官方日OHLC與分鐘端點本次308循環重導失敗；OHLC使用CNA並與經濟日報交叉",
+    "無分鐘線，不核首30分鐘極值、15/30分鐘持續條件及正式regime",
+    "未核實OTC正式收盤、當日外資/匯率收盤及政策實際買盤，留空不造數值",
+    "權值貢獻點數缺完整權重，留空"
+  ]
+}
