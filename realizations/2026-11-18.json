@@ -1,0 +1,138 @@
+{
+  "trading_date": "2026-11-18",
+  "previous_close": 40092.11,
+  "open": 40720.09,
+  "high": 40938.2,
+  "low": 39260.99,
+  "close": 40194.91,
+  "turnover": 1057629849456,
+  "breadth_up": 492,
+  "breadth_down": 520,
+  "breadth_flat": 71,
+  "otc_return_pct": 0.31,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-18T07:22:10Z",
+  "is_trading_day": true,
+  "turnover_scope": "TWSE表6總計(1~15)，含多種交易口徑；新聞日盤另存",
+  "regular_session_turnover_twd": 1030685000000,
+  "breadth_scope": "TWSE MI_INDEX表7股票欄，up/(up+down)，排除持平、未成交、無比價",
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261118&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-18",
+      "retrieved_at": "2026-11-18T07:20:25.058843Z",
+      "raw_response_sha256": "66026f9a0a9fca50dd61ce4ac97dc993b612c2ac7b49ca65be6fd135eb62e28f",
+      "availability_basis": "直接HTTP成功，date=20261118 stat=OK；表0/6/7/8",
+      "selected_data": {
+        "close": 40194.91,
+        "change": 102.8,
+        "breadth_up": 492,
+        "breadth_down": 520,
+        "breadth_flat": 71,
+        "breadth_untraded": 1,
+        "breadth_no_comparison": 3,
+        "turnover_total_twd": 1057629849456,
+        "electronics_pct": 0.88,
+        "semiconductors_pct": 0.64,
+        "financials_pct": -3.22
+      },
+      "supports": [
+        "交易日確認",
+        "收盤、類股、成交、官方股票廣度、個股"
+      ]
+    },
+    {
+      "id": "twse_ohlc",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261110&response=html",
+      "publisher": "TWSE",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "availability_basis": "開啟官方月報，115/11/18列及115/11/17前收均完整；URL日期為月內查詢日而非目標日",
+      "selected_data": {
+        "previous_close": 40092.11,
+        "open": 40720.09,
+        "high": 40938.2,
+        "low": 39260.99,
+        "close": 40194.91
+      },
+      "supports": [
+        "官方日OHLC與前收"
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://money.udn.com/money/story/5612/9886514",
+      "publisher": "CNA via Economic Daily",
+      "published_at": "2026-11-18T13:54:39+08:00",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "supports": [
+        "OHLC交叉核對",
+        "日盤成交1030685000000元"
+      ],
+      "excluded_fields": {
+        "breadth_up": 499,
+        "breadth_down": 533,
+        "breadth_flat": 81
+      },
+      "exclusion_reason": "評分採TWSE股票欄，不混用媒體統計"
+    },
+    {
+      "id": "edn_path",
+      "url": "https://money.udn.com/money/story/5607/9886487",
+      "publisher": "Economic Daily",
+      "published_at": "2026-11-18T13:47:24+08:00",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "supports": [
+        "結算日尾盤拉抬新聞敘述",
+        "部分電子強勢及個股分歧"
+      ],
+      "limitations": "軋空、政策買盤為新聞解讀，未取得逐筆交易及因果識別"
+    },
+    {
+      "id": "ltn_path",
+      "url": "https://ec.ltn.com.tw/article/breakingnews/5644463",
+      "publisher": "Liberty Times",
+      "published_at": "2026-11-18T13:47:00+08:00",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "supports": [
+        "開高衝高後翻黑、再回升新聞路徑",
+        "財報支撐市場解讀"
+      ],
+      "limitations": "新聞時序不替代分鐘分類器；其中個股成交值屬普通交易，與官方多口徑分列"
+    },
+    {
+      "id": "nvda_primary",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/default.aspx",
+      "publisher": "NVIDIA",
+      "release_date": "2026-11-17 America/New_York",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "supports": [
+        "核對盤前driver的營收1158億美元、年增103%及財報已發布"
+      ],
+      "limitations": "本次回讀公司內容不能單獨證明早晨保存時間；05:20時序來自當日凍結manifest，不新增價格特徵"
+    },
+    {
+      "id": "otc_secondary",
+      "url": "https://tw.finance.yahoo.com/",
+      "crosscheck_url": "https://www.pocket.tw/school/articles/article-mwlrf6uq/",
+      "publisher": "Yahoo Finance / Pocket Securities",
+      "retrieved_at": "2026-11-18T07:22:10Z",
+      "selected_data": {
+        "close": 307.55,
+        "change": 0.94,
+        "return_pct": 0.31
+      },
+      "supports": [
+        "11/18櫃買收盤+0.31%，略優TAIEX+0.2564%"
+      ],
+      "limitations": "未取得TPEx原始報表；二級來源交叉一致。StockQ不同頁出現307.12/302.51等衝突舊快照，不採用"
+    }
+  ],
+  "limitations": [
+    "官方分鐘端點回404頁，無分鐘線，不能驗證首30分鐘與15/30分鐘連續條件",
+    "OTC採二級來源交叉核對；未取得TPEx原檔",
+    "當日外資/匯率終值、政策實際買盤及權值精確貢獻未核，不造數值",
+    "日OHLC不能自行推斷高低點先後；路徑引用新聞並標質性"
+  ]
+}
