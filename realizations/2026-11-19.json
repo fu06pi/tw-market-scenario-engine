@@ -1,0 +1,128 @@
+{
+  "trading_date": "2026-11-19",
+  "previous_close": 40194.91,
+  "open": 40145.73,
+  "high": 40315.53,
+  "low": 38259.7,
+  "close": 38426.89,
+  "turnover": 930987418697,
+  "breadth_up": 67,
+  "breadth_down": 993,
+  "breadth_flat": 25,
+  "otc_return_pct": -7.22,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-19T07:18:56Z",
+  "is_trading_day": true,
+  "turnover_scope": "TWSE表6總計(1~15)，與新聞普通日盤成交分列",
+  "regular_session_turnover_twd": 895281000000,
+  "breadth_scope": "TWSE表7股票欄，up/(up+down)，排除持平/未成交/無比價",
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261119&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-19",
+      "retrieved_at": "2026-11-19T07:17:03.911852Z",
+      "raw_response_sha256": "006b2927df02637016250ac91951bd3529860560c6033060d5639dc6bc2548da",
+      "availability_basis": "直接HTTP成功 date=20261119 stat=OK；表0/6/7/8",
+      "selected_data": {
+        "close": 38426.89,
+        "change": -1768.02,
+        "breadth_up": 67,
+        "breadth_down": 993,
+        "breadth_flat": 25,
+        "breadth_untraded": 1,
+        "breadth_no_comparison": 1,
+        "turnover_total_twd": 930987418697,
+        "electronics_pct": -4.7,
+        "semiconductors_pct": -4.29,
+        "financials_pct": -2.14
+      },
+      "supports": [
+        "交易日確認",
+        "收盤、成交、官方股票廣度、類股、個股"
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611190149.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-19T13:54:00+08:00",
+      "retrieved_at": "2026-11-19T07:18:56Z",
+      "supports": [
+        "OHLC與普通日盤成交895281000000元"
+      ],
+      "selected_data": {
+        "open": 40145.73,
+        "high": 40315.53,
+        "low": 38259.7,
+        "close": 38426.89
+      },
+      "excluded_fields": {
+        "breadth_up": 69,
+        "breadth_down": 1014,
+        "breadth_flat": 30
+      },
+      "exclusion_reason": "家數採官方表7股票欄，不混用不同市場範圍"
+    },
+    {
+      "id": "twse_ohlc_search",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?date=20261116&response=html",
+      "publisher": "TWSE",
+      "retrieved_at": "2026-11-19T07:18:56Z",
+      "availability_basis": "搜尋摘要115/11/19列OHLC與CNA相符；直接open回DisabledError，非完整原檔保存",
+      "supports": [
+        "當日OHLC交叉核對"
+      ],
+      "limitations": "以CNA為完整OHLC取得依據；不宣稱已下載官方完整月報"
+    },
+    {
+      "id": "cna_path",
+      "url": "https://money.udn.com/money/amp/story/5612/9888919",
+      "publisher": "CNA via Economic Daily",
+      "published_at": "2026-11-19T13:55:00+08:00",
+      "retrieved_at": "2026-11-19T07:18:56Z",
+      "availability_basis": "搜尋可讀，直接open失敗；定性輔助",
+      "supports": [
+        "科技股弱勢市場解讀",
+        "當日收低/失守支撐新聞敘述"
+      ],
+      "limitations": "不使用歷史排名作模型評分，不把同向價格當因果"
+    },
+    {
+      "id": "edn_path",
+      "url": "https://money.udn.com/money/story/5607/9888887?from=udnamp-referralnews_ch1001artbottom",
+      "publisher": "Economic Daily",
+      "published_at": "2026-11-19T13:45:11+08:00",
+      "retrieved_at": "2026-11-19T07:18:56Z",
+      "supports": [
+        "權值遭賣單壓低大盤新聞敘述",
+        "11:20附近低點新聞時間",
+        "AI估值疑慮為市場解讀"
+      ],
+      "limitations": "缺分鐘原始報價，單則新聞時點不等於完整15/30分鐘證據；政策及海外未來事件結果不回填"
+    },
+    {
+      "id": "otc_secondary",
+      "url": "https://www.pocket.tw/school/articles/article-mwn618db/",
+      "publisher": "Pocket Securities",
+      "crosscheck_url": "https://tw.stock.yahoo.com/news/%E5%8F%B0%E8%82%A1%E6%94%B6%E7%9B%A4-%E5%8F%B0%E7%A9%8D%E9%9B%BB%E8%B7%8C75%E5%85%83-%E5%8F%B0%E8%82%A1%E9%81%AD%E8%A1%80%E6%B4%971768%E9%BB%9E-%E7%B6%A0%E6%B5%B7-%E7%89%87%E5%8F%B2%E4%B8%8A%E7%AC%AC7%E6%85%98-055000820.html",
+      "retrieved_at": "2026-11-19T07:18:56Z",
+      "selected_data": {
+        "close": 285.33,
+        "change": -22.22,
+        "return_pct": -7.22
+      },
+      "supports": [
+        "櫃買弱於TAIEX"
+      ],
+      "limitations": "二級來源交叉一致，未取得TPEx原始報表"
+    }
+  ],
+  "limitations": [
+    "分鐘端點返回404頁，無完整分鐘線，不核首30分鐘極值、連續15/30分鐘與同步廣度條件",
+    "OHLC由CNA完整報導及官方搜尋摘要交叉確認；官方月報直接open失敗",
+    "OTC採二級交叉來源，非TPEx原檔",
+    "外資/匯率當日終值及精確權值貢獻未核，不造數值；晚間尚未公布事件不回填"
+  ]
+}
