@@ -1,0 +1,637 @@
+{
+  "trading_date": "2026-11-20",
+  "evaluated_at": "2026-11-20T07:24:18Z",
+  "model_version": "legacy-analyst-scenario-v1.reconstructed.20261120",
+  "feature_version": "1.0.asof-audit.20261120",
+  "prompt_version": "v1-legacy-reconstruction-08h50-20261120",
+  "evaluation_version": "v1-legacy-diagnostic-20261120",
+  "evaluation_status": "completed_diagnostic_only_post_open_reconstruction",
+  "is_trading_day": true,
+  "prediction_path": "predictions/2026-11-20.json",
+  "snapshot_hash": "a1b0a73fe8940e89d01867e6a33a64990c9d9d9ac4c96f1a8c7707536435f3f3",
+  "snapshot_reference": {
+    "path": "predictions/2026-11-20.json",
+    "snapshot_hash": "a1b0a73fe8940e89d01867e6a33a64990c9d9d9ac4c96f1a8c7707536435f3f3",
+    "canonical_hash_verified": true,
+    "git_blob_sha": "f65e42711f75d0e2fc75badde1dbac5e85443924",
+    "git_commit_sha": "e816d2c3be745a9f3e2e5e1b948d74889c8ffef6",
+    "persisted_at": "2026-11-20T09:04:52+08:00",
+    "generated_at": "2026-11-20T09:04:26+08:00",
+    "data_cutoff_at": "2026-11-20T08:50:00+08:00",
+    "data_manifest_hash": "906acf4bd85927e0594cc0c6fae7d7e01fa9fda2319b0a90e57cd116bb66d934",
+    "immutability": "本次唯讀當日快照，未補建/修改/覆寫；檔案一筆commit"
+  },
+  "realization_path": "realizations/2026-11-20.json",
+  "realization": {
+    "trading_date": "2026-11-20",
+    "previous_close": 38426.89,
+    "open": 37646.13,
+    "high": 37646.13,
+    "low": 35738.68,
+    "close": 36033.29,
+    "turnover": 932320621139,
+    "breadth_up": 16,
+    "breadth_down": 1058,
+    "breadth_flat": 11,
+    "otc_return_pct": -7.72,
+    "heavyweight_contribution_points": {},
+    "observed_at": "2026-11-20T07:24:18Z",
+    "is_trading_day": true,
+    "regular_session_turnover_twd": 877350000000,
+    "turnover_scope": "TWSE表6總計(1~15)多交易口徑，普通日盤另存不混用",
+    "breadth_scope": "TWSE表7股票欄up/(up+down)，不含平盤/未成交/無比價",
+    "source_manifest": [
+      {
+        "id": "twse_mi_index",
+        "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261120&type=ALLBUT0999",
+        "publisher": "TWSE",
+        "trading_date": "2026-11-20",
+        "retrieved_at": "2026-11-20T07:22:32.771632Z",
+        "raw_response_sha256": "0c644b60e053bf7538e853171867cf35ba79f8ff80bf39483023a871bc565360",
+        "availability_basis": "直接HTTP成功 date=20261120 stat=OK，表0/6/7/8",
+        "selected_data": {
+          "close": 36033.29,
+          "change": -2393.6,
+          "breadth_up": 16,
+          "breadth_down": 1058,
+          "breadth_flat": 11,
+          "breadth_untraded": 1,
+          "breadth_no_comparison": 1,
+          "limit_down_stocks": 179,
+          "turnover_total_twd": 932320621139,
+          "electronics_pct": -6.26,
+          "semiconductors_pct": -5.82,
+          "financials_pct": -5.82
+        },
+        "supports": [
+          "交易日、收盤、成交、股票廣度、類股、個股與最後揭示量"
+        ]
+      },
+      {
+        "id": "twse_ohlc",
+        "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=html",
+        "publisher": "TWSE",
+        "retrieved_at": "2026-11-20T07:24:18Z",
+        "availability_basis": "已開啟官方115年11月月報，115/11/20及11/19列",
+        "selected_data": {
+          "previous_close": 38426.89,
+          "open": 37646.13,
+          "high": 37646.13,
+          "low": 35738.68,
+          "close": 36033.29
+        },
+        "supports": [
+          "官方OHLC與前收"
+        ]
+      },
+      {
+        "id": "cna_close",
+        "url": "https://www.cna.com.tw/news/afe/202611200120.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-11-20T13:45:00+08:00",
+        "retrieved_at": "2026-11-20T07:24:18Z",
+        "availability_basis": "搜尋完整報導可讀，直接open逾時；官方OHLC已另取得",
+        "supports": [
+          "OHLC交叉核對",
+          "普通日盤成交877350000000元"
+        ],
+        "excluded_fields": {
+          "breadth_up": 16,
+          "breadth_down": 1080,
+          "breadth_flat": 16
+        },
+        "exclusion_reason": "廣度固定採官方表7股票欄"
+      },
+      {
+        "id": "cna_market",
+        "url": "https://www.cna.com.tw/news/afe/202611200121.aspx",
+        "publisher": "CNA",
+        "published_at": "2026-11-20T13:45:00+08:00",
+        "updated_at": "2026-11-20T13:55:00+08:00",
+        "retrieved_at": "2026-11-20T07:24:18Z",
+        "supports": [
+          "大型權值弱勢與尾盤拉抬之新聞描述",
+          "AI風險背景與政策未保證止跌"
+        ],
+        "excluded_fields": {
+          "intraday_low": 35959.03
+        },
+        "exclusion_reason": "正文/圖說低點與官方35738.68及該文『最多跌2688.21點』不一致；採官方低點，不引用歷史跌幅排名"
+      },
+      {
+        "id": "otc_secondary",
+        "url": "https://www.pocket.tw/school/articles/article-mwomd7rf/",
+        "publisher": "Pocket Securities",
+        "crosscheck_url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+        "retrieved_at": "2026-11-20T07:24:18Z",
+        "selected_data": {
+          "close": 263.31,
+          "change": -22.02,
+          "return_pct": -7.72
+        },
+        "supports": [
+          "OTC弱於TAIEX"
+        ],
+        "limitations": "二級來源交叉，未取得TPEx原檔；政策細則及強制平倉金額不作本日因果估計"
+      },
+      {
+        "id": "ebc_market",
+        "url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+        "publisher": "EBC",
+        "published_at": "2026-11-20T14:00:00+08:00",
+        "retrieved_at": "2026-11-20T07:24:18Z",
+        "supports": [
+          "科技權值重挫、尾盤台積電拉回2000之質性描述",
+          "OTC交叉核對"
+        ],
+        "excluded_fields": {
+          "listed_down": 1325,
+          "otc_down": 1075
+        },
+        "exclusion_reason": "家數與官方範圍不符不評分；新聞對AI融資的解讀不是因果證明"
+      }
+    ],
+    "limitations": [
+      "分鐘端點返回404頁；無VWAP、09:30時窗廣度及連續時段資料，不強判正式regime/條件觸發",
+      "OTC二級來源交叉，未取得TPEx原檔",
+      "當日外資/匯率終值、政策因果、被動/強制賣出金額及精確權值貢獻缺漏，不估造",
+      "官方H=O只能證明沒有高於開盤的全日指數值，不能重建分鐘路徑"
+    ]
+  },
+  "metric_eligibility": {
+    "formal_ohlc": false,
+    "aggregate_performance": false,
+    "probability_calibration_aggregate": false,
+    "legacy_diagnostic_only": true,
+    "before_taiex_open": false,
+    "reasons": [
+      "09:04:26生成/09:04:52提交晚於現貨開盤",
+      "不符合08:30/08:40正式契約，manifest列reconstructed/late_generated且eligible均false",
+      "沒有執行學習OHLC模型，不能混為TimesFM/ARIMA/TEJ績效",
+      "情境分桶/中性帶與config不同，需單獨分層，不能合併跨日校準"
+    ]
+  },
+  "quantitative": {
+    "trading_date": "2026-11-20",
+    "open_direction_realized": "down",
+    "open_direction_hit": 1,
+    "close_direction_realized": "down",
+    "close_direction_hit": 1,
+    "open_gap_bps_realized": -203.1806373089262,
+    "open_gap_mae_bps": 83.18063730892621,
+    "close_return_bps_realized": -622.8971431203512,
+    "close_return_mae_bps": 524.8971431203512,
+    "mfe_bps": -203.1806373089262,
+    "mae_bps": -699.5648099546959,
+    "scenario_outcome": "bear",
+    "brier_score": 0.22166666666666668,
+    "scenario_log_loss": 1.0498221244986778,
+    "top_scenario": "base",
+    "top_scenario_hit": 0,
+    "scenario_outcome_snapshot_thresholds": "bear",
+    "brier_score_snapshot_thresholds": 0.22166666666666668,
+    "open_price_predicted": 37965.76732,
+    "close_price_predicted": 38050.306478,
+    "open_price_absolute_error": 319.63732000000164,
+    "close_price_absolute_error": 2017.0164779999977,
+    "open_gap_signed_error_bps": 83.18063730892621,
+    "close_return_signed_error_bps": 524.8971431203512,
+    "direction_hits": 2,
+    "direction_evaluated": 2,
+    "direction_accuracy": 1,
+    "breadth_direction_realized": "down",
+    "breadth_direction_hit": 1,
+    "breadth_up_ratio": 0.0148975791433892,
+    "intraday_regime_realized": null,
+    "intraday_regime_hit": null,
+    "qualitative_path": "開盤即全日最高，收盤遠低於開盤，尾盤雖由低點回升294.61點仍收於全日區間下方15.45%；無正式分鐘分類器",
+    "body_return_bps": -428.4211949541683,
+    "predicted_body_return_bps": 22.267206477732948,
+    "close_open_direction_predicted": "up",
+    "close_open_direction_realized": "down",
+    "close_open_direction_hit": 0,
+    "range_bps": 496.3841726457689,
+    "close_location_in_range": 0.15445227922094998,
+    "first30_up_excursion_from_open_bps": 0,
+    "first30_up_excursion_basis": "全日H=O證明任意首30分鐘時窗都無高於開盤的指數值；不提供時窗最低",
+    "bear_center_absolute_error_bps": 362.8971431203512,
+    "high_error": null,
+    "low_error": null,
+    "tx_errors": null,
+    "interval_scores": null
+  },
+  "metric_methodology": {
+    "native_metrics_verified": true,
+    "flat_threshold_bps": 5,
+    "snapshot_direction_threshold_bps": 10,
+    "scenario_thresholds_bps": {
+      "bull_above": 50,
+      "bear_below": -50
+    },
+    "snapshot_scenario_thresholds_bps": {
+      "bull_above": 30,
+      "bear_below": -150
+    },
+    "threshold_resolution": "兩種情境分桶本日均bear，兩中性帶均down；保留差異，不追溯改快照，不混合校準",
+    "return_denominator": "previous_close=38426.89",
+    "signed_error": "predicted-minus-realized",
+    "brier_normalization": "sum((p_k-one_hot_k)^2)/3",
+    "single_day_loss_interpretation": "單日絕對誤差非多日MAE/RMSE；Brier/log loss不是校準檢定；事後快照全部僅診斷",
+    "mfe_mae_caution": "repo mfe/mae為高低相對前收，不是交易MAE/MFE",
+    "baselines": {
+      "zero_return_open_absolute_error_bps": 203.1806373089262,
+      "zero_return_close_absolute_error_bps": 622.8971431203512,
+      "uniform_brier": 0.2222222222222222,
+      "always_up_open_hit": 0,
+      "always_up_close_hit": 0,
+      "previous_day_continuation_open_hit": 1,
+      "previous_day_continuation_close_hit": 1,
+      "night_sign_open_hit": 1,
+      "night_sign_close_hit": 1,
+      "night_sign_basis": "當日manifest同合約TX202612夜盤相對日盤最後價為負；不重建未保存模型",
+      "weighted_and_logistic": null,
+      "limitations": "無當日已凍結完整weighted/logistic輸出；單日不推論統計優勢"
+    }
+  },
+  "narrative_evaluation": [
+    {
+      "field": "market_view",
+      "predicted": "reconstructed / late_generated：以2026-11-20 08:50前可驗證資訊補建的legacy研究劇本，不是準時正式盤前或已訓練OHLC模型。隔夜美股與ADR走弱、前日台股廣泛急跌，偏空價格發現仍在；限空政策使回補與震盪修復成為重要反向風險，不把政策直接當成上漲保證。",
+      "verdict": "部分正確",
+      "reason": "海外偏弱與本地續跌方向相符，亦未稱政策保證上漲；但修復/回補風險的最高權重Base未實現，-98bp嚴重低估-622.897bp",
+      "error_types": [
+        "magnitude_underestimate",
+        "weight_misspecification"
+      ]
+    },
+    {
+      "field": "open_hypothesis",
+      "predicted": "TAIEX預期低開，expected_open_gap_bps=-120（-1.20%，相對11/19前收38426.89）。這是未校準的主觀中心，不是區間保證，也不是把台指夜盤-500點直接搬到現貨。",
+      "verdict": "正確",
+      "reason": "低開方向相符；實際-203.1806bp，預期-120bp低估83.1806bp/319.64點",
+      "error_types": [
+        "magnitude_underestimate"
+      ]
+    },
+    {
+      "field": "intraday_hypothesis",
+      "predicted": "intraday_regime=range：低開後以高波動、反覆測試承接為主；可能先續跌亦可能開盤附近反彈，沒有指定高低點先後。若回補能擴散至廣度，跌幅可收斂；若只拉權值，修復可能反覆。此路徑未經分鐘資料模型驗證。",
+      "verdict": "部分正確",
+      "reason": "高振幅與承接反覆的風險有提及，但開盤即最高且收遠低於開盤，不支持開盤附近反彈修復的中心敘事；正式range無分鐘資料不計分。H=O可證首30分鐘沒有高於開盤上探",
+      "error_types": [
+        "missing_information",
+        "weight_misspecification"
+      ]
+    },
+    {
+      "field": "close_hypothesis",
+      "predicted": "close_direction=down，expected_close_return_bps=-98（-0.98%，相對前收）。Bull/Base/Bear收盤中心+100/-60/-260bp、機率20%/45%/35%，加權=-98bp。收盤中心高於低開中心，但仍低於前收；不可混淆Close/前收與Close/Open。",
+      "verdict": "部分正確",
+      "reason": "相對前收收跌方向相符；幅度低估524.8971bp/2017.02點。預期Close>Open的修復子假說錯誤，實際Close<Open；不得用收跌命中掩蓋",
+      "error_types": [
+        "magnitude_underestimate",
+        "wrong_direction"
+      ]
+    },
+    {
+      "field": "breadth_hypothesis",
+      "predicted": "breadth_direction=down：預期上市股票上漲/(上漲+下跌)<50%，平盤不列分母；權值回升不等於多數股票轉強。前日官方股票67漲993跌，與V0引用69漲1014跌分開保存，並非正式等權報酬。",
+      "verdict": "正確",
+      "reason": "官方16/(16+1058)=1.4898%<50%，並非僅權值拖累；未預測精確廣度，不能計比例幅度誤差",
+      "error_types": []
+    },
+    {
+      "field": "bull_script",
+      "predicted": "20%主觀機率：政策與空單回補形成有效承接，電子權值和股票廣度同步改善，低開缺口逐步回補，收盤高於前收30bp；收盤情境中心+100bp。限空不保證買盤，需用其後獨立盤中版本確認，不回改本快照。",
+      "verdict": "錯誤",
+      "reason": "全日最高37646.13<前收38426.89，缺口未回補，收盤與廣度不符合Bull；政策回補未成結果",
+      "error_types": [
+        "weight_misspecification"
+      ]
+    },
+    {
+      "field": "base_script",
+      "predicted": "45%主觀機率：低開消化隔夜賣壓，出現承接但修復缺乏全面擴散，全天反覆震盪；收盤相對前收落在-150至+30bp，中心-60bp。Base是區間分類，不等同收平或零風險。",
+      "verdict": "錯誤",
+      "reason": "最高機率45%但收盤不在快照[-150,+30]bp，亦不在repo[-50,+50]bp；中心-60bp與range修復未能涵蓋續跌",
+      "error_types": [
+        "magnitude_underestimate",
+        "weight_misspecification"
+      ]
+    },
+    {
+      "field": "bear_script",
+      "predicted": "35%主觀機率：現貨減碼或被動賣壓壓過回補，反彈無法擴散，前低失守後續弱；收盤低於前收150bp，中心-260bp。限制放空不限制持有人賣出，不以政策排除此尾部。",
+      "verdict": "部分正確",
+      "reason": "前低38259.70開盤即跌破，全日未站回，廣度極弱，收盤落Bear；但-260bp中心仍低估362.8971bp，現股/被動賣壓的因果成分未量化",
+      "error_types": [
+        "magnitude_underestimate"
+      ]
+    }
+  ],
+  "key_driver_evaluation": [
+    {
+      "index": 1,
+      "predicted": "11/19美股現金盤：Nasdaq -2.25%、S&P500 -2.02%、Dow -2.19%；台積電ADR收352.09美元、-2.90%，科技風險偏好偏弱。",
+      "verdict": "部分正確",
+      "reason": "海外現金盤與ADR弱勢背景與現貨低開續跌同向，不足以識別各因子對2393.60點跌幅貢獻"
+    },
+    {
+      "index": 2,
+      "predicted": "TX202612夜盤38107 / 11/19日盤最後成交38649 - 1 = 約-1.402%；相對前結算38607則-500點/-1.30%，兩種口徑不混用。",
+      "verdict": "部分正確",
+      "reason": "同合約夜盤負報酬與現貨方向一致，分最後價/結算價口徑合理；不意味能預測當日尾端幅度"
+    },
+    {
+      "index": 3,
+      "predicted": "11/19 TAIEX收38426.89、-4.40%；官方股票67漲993跌、25平，廣度極弱。高低波動後可能有修復，但急跌不構成必反彈。",
+      "verdict": "部分正確",
+      "reason": "前日廣度極弱背景延續至今日1.49%，但潛在修復沒有轉為預期Close/Open上漲；訊號權重值得研究"
+    },
+    {
+      "index": 4,
+      "predicted": "11/20起加碼限空為已公布政策背景；可能改變賣壓結構，但不是價格托底或所有放空全面禁止。",
+      "verdict": "部分正確",
+      "reason": "限空不是價格托底的敘述正確；今日在政策生效下仍重挫，不能因此估計政策有效/無效的反事實幅度"
+    },
+    {
+      "index": 5,
+      "predicted": "11/19 USD/TWD收32.942，較32.947微升；美10年期官方par yield 5.04%、較5.07%低3bp，僅部分舒緩估值壓力。",
+      "verdict": "部分正確",
+      "reason": "前日匯率微升與10Y略降為背景；當日終值/流量未核，不能宣稱舒緩效果已估計"
+    },
+    {
+      "index": 6,
+      "predicted": "11/19 WTI12月83.21美元、Brent1月91.98美元，按06:28報導均近持平；能源非本次方向主要驅動。當日外銷訂單及公司說明會只採行事曆，不採未公布結果。",
+      "verdict": "部分正確",
+      "reason": "能源非中心訊號、未公布外銷訂單/法說結果未回填；其對本日走勢的因果未驗證"
+    }
+  ],
+  "invalidation_evaluation": [
+    {
+      "index": 1,
+      "condition": "後續若TAIEX回到前收38426.89之上且09:00–09:30時窗結束時股票上漲比率>50%，偏空低開後修復受限的主敘事失效；須另存盤中更新，禁止修改本快照。",
+      "status": "not_triggered",
+      "verdict": "正確",
+      "reason": "官方全日H=37646.13<38426.89，回到前收的必要條件整日未成立；無需用收盤廣度推09:30廣度"
+    },
+    {
+      "index": 2,
+      "condition": "後續若跌破已知11/19低點38259.70並持續低於開盤與VWAP，且上漲比率<25%，range主路徑失效，視為bear風險擴大；只作條件，不代表本次觀察到。",
+      "status": "partially_verified",
+      "verdict": "部分正確",
+      "reason": "官方O=H<已知前低38259.70，跌破前低且不高於開盤可證；缺VWAP與同步盤中上漲比，不能認定完整聯合條件觸發"
+    },
+    {
+      "index": 3,
+      "condition": "若權值與OTC、股票廣度方向顯著背離，不以指數回升判定全面轉強；個別目標各自評分。",
+      "status": "not_triggered_on_close_evidence",
+      "verdict": "正確",
+      "reason": "收盤指數、OTC與股票廣度均弱，未見收盤權值獨強而廣度反向的情況；不宣稱整日每分鐘皆一致"
+    },
+    {
+      "index": 4,
+      "condition": "若驗出任一被使用來源實際發布晚於08:50，對應特徵及本補建樣本標記時間不合格；保留原件，不補改成準時樣本。",
+      "status": "not_scorable_process_failure_confirmed",
+      "verdict": "部分正確",
+      "reason": "生成/持久化已在09:00後，正式時效確定失敗。未驗出某一使用來源發布晚於08:50的獨立證據；不能由自述cutoff證明無資訊洩漏"
+    },
+    {
+      "index": 5,
+      "condition": "若來源價格/合約/交易日被證實錯誤，記source_conflict或wrong_market_data；新建修正紀錄，不覆寫凍結prediction。",
+      "status": "not_triggered_on_verified_evidence",
+      "verdict": "部分正確",
+      "reason": "本次prediction hash及同日來源核對通過；實際市場來源有低點/廣度衝突已選官方，不據此認定盤前輸入必錯"
+    }
+  ],
+  "actual_drivers": [
+    {
+      "kind": "observed",
+      "detail": "電子-6.26%、半導體-5.82%、金融-5.82%；台積電2000/-100、鴻海210/-10.5、聯發科3350/-370、台達電900/-100，主要權值同步承壓",
+      "source_ids": [
+        "twse_mi_index"
+      ]
+    },
+    {
+      "kind": "observed",
+      "detail": "股票16漲1058跌、179檔跌停，上漲比1.4898%；聯發科/台達電最後揭示無買價而有賣量，顯示收市流動性壓力，但不能據此估強制平倉金額",
+      "source_ids": [
+        "twse_mi_index"
+      ]
+    },
+    {
+      "kind": "observed",
+      "detail": "OTC二級收盤-7.72%，弱於TAIEX-6.229%，廣泛賣壓並非僅權值現象",
+      "source_ids": [
+        "otc_secondary"
+      ]
+    },
+    {
+      "kind": "interpretation",
+      "detail": "新聞將弱勢與AI估值/融資疑慮及賣壓相聯繫；政策生效沒有保證價格修復。沒有因果識別，不宣稱已知政策效果或被動賣出貢獻",
+      "source_ids": [
+        "cna_market",
+        "ebc_market"
+      ]
+    }
+  ],
+  "error_taxonomy": [
+    "magnitude_underestimate",
+    "weight_misspecification",
+    "wrong_direction",
+    "missing_information",
+    "source_conflict"
+  ],
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261120&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-20",
+      "retrieved_at": "2026-11-20T07:22:32.771632Z",
+      "raw_response_sha256": "0c644b60e053bf7538e853171867cf35ba79f8ff80bf39483023a871bc565360",
+      "availability_basis": "直接HTTP成功 date=20261120 stat=OK，表0/6/7/8",
+      "selected_data": {
+        "close": 36033.29,
+        "change": -2393.6,
+        "breadth_up": 16,
+        "breadth_down": 1058,
+        "breadth_flat": 11,
+        "breadth_untraded": 1,
+        "breadth_no_comparison": 1,
+        "limit_down_stocks": 179,
+        "turnover_total_twd": 932320621139,
+        "electronics_pct": -6.26,
+        "semiconductors_pct": -5.82,
+        "financials_pct": -5.82
+      },
+      "supports": [
+        "交易日、收盤、成交、股票廣度、類股、個股與最後揭示量"
+      ]
+    },
+    {
+      "id": "twse_ohlc",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=html",
+      "publisher": "TWSE",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "availability_basis": "已開啟官方115年11月月報，115/11/20及11/19列",
+      "selected_data": {
+        "previous_close": 38426.89,
+        "open": 37646.13,
+        "high": 37646.13,
+        "low": 35738.68,
+        "close": 36033.29
+      },
+      "supports": [
+        "官方OHLC與前收"
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611200120.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-20T13:45:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "availability_basis": "搜尋完整報導可讀，直接open逾時；官方OHLC已另取得",
+      "supports": [
+        "OHLC交叉核對",
+        "普通日盤成交877350000000元"
+      ],
+      "excluded_fields": {
+        "breadth_up": 16,
+        "breadth_down": 1080,
+        "breadth_flat": 16
+      },
+      "exclusion_reason": "廣度固定採官方表7股票欄"
+    },
+    {
+      "id": "cna_market",
+      "url": "https://www.cna.com.tw/news/afe/202611200121.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-20T13:45:00+08:00",
+      "updated_at": "2026-11-20T13:55:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "supports": [
+        "大型權值弱勢與尾盤拉抬之新聞描述",
+        "AI風險背景與政策未保證止跌"
+      ],
+      "excluded_fields": {
+        "intraday_low": 35959.03
+      },
+      "exclusion_reason": "正文/圖說低點與官方35738.68及該文『最多跌2688.21點』不一致；採官方低點，不引用歷史跌幅排名"
+    },
+    {
+      "id": "otc_secondary",
+      "url": "https://www.pocket.tw/school/articles/article-mwomd7rf/",
+      "publisher": "Pocket Securities",
+      "crosscheck_url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "selected_data": {
+        "close": 263.31,
+        "change": -22.02,
+        "return_pct": -7.72
+      },
+      "supports": [
+        "OTC弱於TAIEX"
+      ],
+      "limitations": "二級來源交叉，未取得TPEx原檔；政策細則及強制平倉金額不作本日因果估計"
+    },
+    {
+      "id": "ebc_market",
+      "url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+      "publisher": "EBC",
+      "published_at": "2026-11-20T14:00:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "supports": [
+        "科技權值重挫、尾盤台積電拉回2000之質性描述",
+        "OTC交叉核對"
+      ],
+      "excluded_fields": {
+        "listed_down": 1325,
+        "otc_down": 1075
+      },
+      "exclusion_reason": "家數與官方範圍不符不評分；新聞對AI融資的解讀不是因果證明"
+    }
+  ],
+  "source_conflicts": [
+    {
+      "field": "breadth",
+      "chosen": "官方股票16/1058/11，179跌停",
+      "alternatives": "CNA16/1080/16；EDN21/1158；EBC1325跌",
+      "resolution": "統一官方股票欄，不混合"
+    },
+    {
+      "field": "OHLC",
+      "chosen": "官方O=H37646.13,L35738.68,C36033.29",
+      "alternatives": "CNA綜述圖說L35959.03；富聯O37447.75,L35777.88",
+      "resolution": "採官方月報+CNA行情報，不將新聞非一致快照當全日極值"
+    },
+    {
+      "field": "turnover",
+      "chosen": "官方多口徑932320621139元，普通日盤877350000000元分列",
+      "resolution": "範圍不同不相互覆蓋"
+    },
+    {
+      "field": "scenario contract",
+      "chosen": "native±50bp；快照Base[-150,+30]bp",
+      "resolution": "本日均bear但概率語義不同，另列並排除正式校準"
+    },
+    {
+      "field": "publication timing",
+      "chosen": "09:04:26/09:04:52實際時間",
+      "resolution": "自述08:50截止不能代替當時快取與盤前落檔證據，整日排除正式績效"
+    }
+  ],
+  "data_quality": {
+    "official_mi_index_date_verified": true,
+    "official_daily_ohlc_verified": true,
+    "snapshot_canonical_hash_verified": true,
+    "minute_data_available": false,
+    "otc_official_verified": false,
+    "otc_secondary_crosschecked": true,
+    "post_open_snapshot": true,
+    "limitations": [
+      "分鐘端點返回404頁；無VWAP、09:30時窗廣度及連續時段資料，不強判正式regime/條件觸發",
+      "OTC二級來源交叉，未取得TPEx原檔",
+      "當日外資/匯率終值、政策因果、被動/強制賣出金額及精確權值貢獻缺漏，不估造",
+      "官方H=O只能證明沒有高於開盤的全日指數值，不能重建分鐘路徑"
+    ]
+  },
+  "proposed_model_changes": [
+    {
+      "id": "process_late_failure",
+      "status": "documented_process_defect",
+      "proposal": "未來08:40未落檔即記失敗，保留缺漏不以09:00後補建當正式樣本；本次不動既有排程/原件"
+    },
+    {
+      "id": "candidate_tail_and_policy",
+      "status": "research_candidate_only",
+      "proposal": "研究高波動續跌、流動性與政策事件對尾端幅度/情境權重的增量；政策不預設修復係數，Open/Close前收與Close/Open分開",
+      "validation": "固定資訊集、前向/walk-forward及區塊不確定性，與夜盤回歸/零報酬比；不因本日直接調係數"
+    },
+    {
+      "id": "process_contract_versions",
+      "status": "documented_contract_defect",
+      "proposal": "未來快照明列版本化情境分桶/中性帶，與config一致；Base中心也須落在其分桶內，舊件保留"
+    },
+    {
+      "id": "candidate_path_data",
+      "status": "research_candidate_only",
+      "proposal": "取得VWAP與同步廣度分鐘資料後，才驗證range失效聯合條件；僅可用H=O等官方邊界證明必要條件"
+    }
+  ],
+  "model_logic_changed": false,
+  "v0_modified": false,
+  "correction_storage": "已查main完整tree，無correction/lesson結構，僅列proposed_model_changes",
+  "validation_checks": {
+    "same_day_prediction_realization_evaluation": true,
+    "required_narrative_count": 8,
+    "driver_count": 6,
+    "invalidation_count": 5,
+    "source_count": 6,
+    "ohlc_coherence": true,
+    "probability_sum": 1,
+    "snapshot_hash_match": true
+  },
+  "realization_commit_sha": "2f0cfb36e76ab6371547dd2bf6244bffe2dc8fb2"
+}
