@@ -1,0 +1,136 @@
+{
+  "trading_date": "2026-11-20",
+  "previous_close": 38426.89,
+  "open": 37646.13,
+  "high": 37646.13,
+  "low": 35738.68,
+  "close": 36033.29,
+  "turnover": 932320621139,
+  "breadth_up": 16,
+  "breadth_down": 1058,
+  "breadth_flat": 11,
+  "otc_return_pct": -7.72,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-20T07:24:18Z",
+  "is_trading_day": true,
+  "regular_session_turnover_twd": 877350000000,
+  "turnover_scope": "TWSE表6總計(1~15)多交易口徑，普通日盤另存不混用",
+  "breadth_scope": "TWSE表7股票欄up/(up+down)，不含平盤/未成交/無比價",
+  "source_manifest": [
+    {
+      "id": "twse_mi_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261120&type=ALLBUT0999",
+      "publisher": "TWSE",
+      "trading_date": "2026-11-20",
+      "retrieved_at": "2026-11-20T07:22:32.771632Z",
+      "raw_response_sha256": "0c644b60e053bf7538e853171867cf35ba79f8ff80bf39483023a871bc565360",
+      "availability_basis": "直接HTTP成功 date=20261120 stat=OK，表0/6/7/8",
+      "selected_data": {
+        "close": 36033.29,
+        "change": -2393.6,
+        "breadth_up": 16,
+        "breadth_down": 1058,
+        "breadth_flat": 11,
+        "breadth_untraded": 1,
+        "breadth_no_comparison": 1,
+        "limit_down_stocks": 179,
+        "turnover_total_twd": 932320621139,
+        "electronics_pct": -6.26,
+        "semiconductors_pct": -5.82,
+        "financials_pct": -5.82
+      },
+      "supports": [
+        "交易日、收盤、成交、股票廣度、類股、個股與最後揭示量"
+      ]
+    },
+    {
+      "id": "twse_ohlc",
+      "url": "https://www.twse.com.tw/indicesReport/MI_5MINS_HIST?response=html",
+      "publisher": "TWSE",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "availability_basis": "已開啟官方115年11月月報，115/11/20及11/19列",
+      "selected_data": {
+        "previous_close": 38426.89,
+        "open": 37646.13,
+        "high": 37646.13,
+        "low": 35738.68,
+        "close": 36033.29
+      },
+      "supports": [
+        "官方OHLC與前收"
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611200120.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-20T13:45:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "availability_basis": "搜尋完整報導可讀，直接open逾時；官方OHLC已另取得",
+      "supports": [
+        "OHLC交叉核對",
+        "普通日盤成交877350000000元"
+      ],
+      "excluded_fields": {
+        "breadth_up": 16,
+        "breadth_down": 1080,
+        "breadth_flat": 16
+      },
+      "exclusion_reason": "廣度固定採官方表7股票欄"
+    },
+    {
+      "id": "cna_market",
+      "url": "https://www.cna.com.tw/news/afe/202611200121.aspx",
+      "publisher": "CNA",
+      "published_at": "2026-11-20T13:45:00+08:00",
+      "updated_at": "2026-11-20T13:55:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "supports": [
+        "大型權值弱勢與尾盤拉抬之新聞描述",
+        "AI風險背景與政策未保證止跌"
+      ],
+      "excluded_fields": {
+        "intraday_low": 35959.03
+      },
+      "exclusion_reason": "正文/圖說低點與官方35738.68及該文『最多跌2688.21點』不一致；採官方低點，不引用歷史跌幅排名"
+    },
+    {
+      "id": "otc_secondary",
+      "url": "https://www.pocket.tw/school/articles/article-mwomd7rf/",
+      "publisher": "Pocket Securities",
+      "crosscheck_url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "selected_data": {
+        "close": 263.31,
+        "change": -22.02,
+        "return_pct": -7.72
+      },
+      "supports": [
+        "OTC弱於TAIEX"
+      ],
+      "limitations": "二級來源交叉，未取得TPEx原檔；政策細則及強制平倉金額不作本日因果估計"
+    },
+    {
+      "id": "ebc_market",
+      "url": "https://fnc.ebc.net.tw/fncnews/stock/223314",
+      "publisher": "EBC",
+      "published_at": "2026-11-20T14:00:00+08:00",
+      "retrieved_at": "2026-11-20T07:24:18Z",
+      "supports": [
+        "科技權值重挫、尾盤台積電拉回2000之質性描述",
+        "OTC交叉核對"
+      ],
+      "excluded_fields": {
+        "listed_down": 1325,
+        "otc_down": 1075
+      },
+      "exclusion_reason": "家數與官方範圍不符不評分；新聞對AI融資的解讀不是因果證明"
+    }
+  ],
+  "limitations": [
+    "分鐘端點返回404頁；無VWAP、09:30時窗廣度及連續時段資料，不強判正式regime/條件觸發",
+    "OTC二級來源交叉，未取得TPEx原檔",
+    "當日外資/匯率終值、政策因果、被動/強制賣出金額及精確權值貢獻缺漏，不估造",
+    "官方H=O只能證明沒有高於開盤的全日指數值，不能重建分鐘路徑"
+  ]
+}
