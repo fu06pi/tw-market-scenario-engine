@@ -1,0 +1,47 @@
+{
+  "created_at": "2026-11-16T13:46:37.798507+08:00",
+  "parent_commit": "5e9dfd0040639b70fddf0c40473bb6f479094c85",
+  "pytest": "147 passed",
+  "ruff": "passed",
+  "browser_and_artifact_checks": {
+    "offline_html_passed": true,
+    "desktop_width": 1440,
+    "mobile_width": 390,
+    "horizontal_overflow": false,
+    "market_selection_passed": true,
+    "synthetic_frozen_prices_unchanged": true,
+    "javascript_errors": [],
+    "external_network_requests": 0,
+    "pdf_pages": 15,
+    "pptx_slides": 16,
+    "pptx_notes_and_geometry_checked": true,
+    "native_office_rendering_checked": false,
+    "model_fits": 0,
+    "real_sheet_write": false,
+    "new_market_accuracy_claim": false
+  },
+  "model_fit_count": 0,
+  "public_full_daily_data": false,
+  "derivative_weights_distributed": false,
+  "private_transcript_published": false,
+  "news_direction_real_paired_n_this_delivery": 0,
+  "code_sha256": {
+    "scripts/prepare_academic_results.py": "f220cb0c3f65692cc89e9805f9c9bc3271534be31cd9825f67cf55effd66e1c7",
+    "scripts/build_academic_bundle.py": "58bdcdb89f070147eb628c41f207be738032a3a61b05b4c1d832fbebf40b7da5",
+    "scripts/check_academic_bundle.py": "02853390aa7a5c58fc5e144c841bd0b8290325db30c4aa1270e099366c842ae7",
+    "scripts/compare_news_decisions.py": "8df53fafc72684c82ac447a7e849e99f1adc7f82bfc455ec315d71878854c090",
+    "src/tw_scenario/news_comparison.py": "a6279bd66fc34ae3d50be9257f39f6985715b563aa8f5f090935098ab9500fa6",
+    "tests/test_academic_results.py": "e182279c5b47036429399e938cdf8c5878c4c8d679ac4ae2a1704da6113dc214",
+    "tests/test_news_comparison.py": "27dc8a6e93dd049216c46797529c716c78bc3b206c7ced9e9d9c6edfd4e203fe",
+    "pyproject.toml": "8f3d8b88914960ec8c56185dac445f8da80d1fd26a5d580d3ecb3abed1467c4a",
+    "docs/presentation/PROJECT_FLOW.md": "98975c114b3637db2665069dfd9a764b4792e04cdbfdef4ebf57c391c86f2160",
+    "docs/presentation/NEWS_COMPARISON.md": "e52278618ed88ad7b97bb4cae1cb016a2397ea722548aa2f42830a5984cb724d"
+  },
+  "rendered_files_sha256": {
+    "report.html": "e8a9a0840e5404065372994d8dbb440b1c65f0c3432bb4a4af02880b2fd4c56e",
+    "report.pdf": "7b73222d2165868611a5b1f734f5e01eeff6c7a1fd92c51c307a482501a0eec7",
+    "presentation.pptx": "08e151e292cfcc147363e9539dc6d8b27d6f5318f54a387c4a0164523980dce3",
+    "speaker-notes.md": "099ff3678f0ffd0775d3fcf38ece3090930b5a48afec5a9ac753018269be0793"
+  },
+  "csv_line_endings": "LF; numeric values unchanged"
+}

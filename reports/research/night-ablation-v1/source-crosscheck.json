@@ -1,0 +1,26 @@
+[
+  {
+    "date": "2025-12-29",
+    "contract": "202601",
+    "HTML_and_CSV_last_trade_match": true,
+    "session_start_match": true,
+    "age_hours": 51.5,
+    "source_url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=1&commodity_id=TX&queryDate=2025%2F12%2F29"
+  },
+  {
+    "date": "2026-06-18",
+    "contract": "202607",
+    "HTML_and_CSV_last_trade_match": true,
+    "session_start_match": true,
+    "age_hours": 3.5,
+    "source_url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=1&commodity_id=TX&queryDate=2026%2F06%2F18"
+  },
+  {
+    "date": "2026-09-14",
+    "contract": "202609",
+    "HTML_and_CSV_last_trade_match": true,
+    "session_start_match": true,
+    "age_hours": 51.5,
+    "source_url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=1&commodity_id=TX&queryDate=2026%2F09%2F14"
+  }
+]

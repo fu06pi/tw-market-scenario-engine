@@ -1,0 +1,3942 @@
+{
+  "benchmark_version": "simple-baselines-v1",
+  "scope": "comparison_on_previously_seen_history",
+  "new_independent_test_evidence": false,
+  "formal_acceptance_pass": false,
+  "historical_asof_verified": false,
+  "plan_sha256": "860dbf67cd5510dc8ad4e67547cb52cb1b5d6c1598f25cd905fddcbb6d242fd9",
+  "markets": {
+    "TAIEX": {
+      "common_dates": {
+        "validation": [
+          "2025-10-01",
+          "2025-10-02",
+          "2025-10-03",
+          "2025-10-07",
+          "2025-10-08",
+          "2025-10-09",
+          "2025-10-13",
+          "2025-10-14",
+          "2025-10-15",
+          "2025-10-16",
+          "2025-10-17",
+          "2025-10-20",
+          "2025-10-21",
+          "2025-10-22",
+          "2025-10-23",
+          "2025-10-27",
+          "2025-10-28",
+          "2025-10-29",
+          "2025-10-30",
+          "2025-10-31",
+          "2025-11-03",
+          "2025-11-04",
+          "2025-11-05",
+          "2025-11-06",
+          "2025-11-07",
+          "2025-11-10",
+          "2025-11-11",
+          "2025-11-12",
+          "2025-11-13",
+          "2025-11-14",
+          "2025-11-17",
+          "2025-11-18",
+          "2025-11-19",
+          "2025-11-20",
+          "2025-11-21",
+          "2025-11-24",
+          "2025-11-25",
+          "2025-11-26",
+          "2025-11-27",
+          "2025-11-28",
+          "2025-12-01",
+          "2025-12-02",
+          "2025-12-03",
+          "2025-12-04",
+          "2025-12-05",
+          "2025-12-08",
+          "2025-12-09",
+          "2025-12-10",
+          "2025-12-11",
+          "2025-12-12",
+          "2025-12-15",
+          "2025-12-16",
+          "2025-12-17",
+          "2025-12-18",
+          "2025-12-19",
+          "2025-12-22",
+          "2025-12-23",
+          "2025-12-24",
+          "2025-12-26",
+          "2025-12-29",
+          "2025-12-30",
+          "2025-12-31"
+        ],
+        "evaluation_seen": [
+          "2026-01-02",
+          "2026-01-05",
+          "2026-01-06",
+          "2026-01-07",
+          "2026-01-08",
+          "2026-01-09",
+          "2026-01-12",
+          "2026-01-13",
+          "2026-01-14",
+          "2026-01-15",
+          "2026-01-16",
+          "2026-01-19",
+          "2026-01-20",
+          "2026-01-21",
+          "2026-01-22",
+          "2026-01-23",
+          "2026-01-26",
+          "2026-01-27",
+          "2026-01-28",
+          "2026-01-29",
+          "2026-01-30",
+          "2026-02-02",
+          "2026-02-03",
+          "2026-02-04",
+          "2026-02-05",
+          "2026-02-06",
+          "2026-02-09",
+          "2026-02-10",
+          "2026-02-11",
+          "2026-02-23",
+          "2026-02-24",
+          "2026-02-25",
+          "2026-02-26",
+          "2026-03-02",
+          "2026-03-03",
+          "2026-03-04",
+          "2026-03-05",
+          "2026-03-06",
+          "2026-03-09",
+          "2026-03-10",
+          "2026-03-11",
+          "2026-03-12",
+          "2026-03-13",
+          "2026-03-16",
+          "2026-03-17",
+          "2026-03-18",
+          "2026-03-19",
+          "2026-03-20",
+          "2026-03-23",
+          "2026-03-24",
+          "2026-03-25",
+          "2026-03-26",
+          "2026-03-27",
+          "2026-03-30",
+          "2026-03-31",
+          "2026-04-01",
+          "2026-04-02",
+          "2026-04-07",
+          "2026-04-08",
+          "2026-04-09",
+          "2026-04-10",
+          "2026-04-13",
+          "2026-04-14",
+          "2026-04-15",
+          "2026-04-16",
+          "2026-04-17",
+          "2026-04-20",
+          "2026-04-21",
+          "2026-04-22",
+          "2026-04-23",
+          "2026-04-24",
+          "2026-04-27",
+          "2026-04-28",
+          "2026-04-29",
+          "2026-04-30",
+          "2026-05-04",
+          "2026-05-05",
+          "2026-05-06",
+          "2026-05-07",
+          "2026-05-08",
+          "2026-05-11",
+          "2026-05-12",
+          "2026-05-13",
+          "2026-05-14",
+          "2026-05-15",
+          "2026-05-18",
+          "2026-05-19",
+          "2026-05-20",
+          "2026-05-21",
+          "2026-05-22",
+          "2026-05-25",
+          "2026-05-26",
+          "2026-05-27",
+          "2026-05-28",
+          "2026-05-29",
+          "2026-06-01",
+          "2026-06-02",
+          "2026-06-03",
+          "2026-06-04",
+          "2026-06-05",
+          "2026-06-08",
+          "2026-06-09",
+          "2026-06-10",
+          "2026-06-11",
+          "2026-06-12",
+          "2026-06-15",
+          "2026-06-16",
+          "2026-06-17",
+          "2026-06-18",
+          "2026-06-22",
+          "2026-06-23",
+          "2026-06-24",
+          "2026-06-25",
+          "2026-06-26",
+          "2026-06-29",
+          "2026-06-30",
+          "2026-07-01",
+          "2026-07-02",
+          "2026-07-03",
+          "2026-07-06",
+          "2026-07-07",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17",
+          "2026-07-20",
+          "2026-07-21",
+          "2026-07-22",
+          "2026-07-23",
+          "2026-07-24",
+          "2026-07-27",
+          "2026-07-28",
+          "2026-07-29",
+          "2026-07-30",
+          "2026-07-31",
+          "2026-08-03",
+          "2026-08-04",
+          "2026-08-05",
+          "2026-08-06",
+          "2026-08-07",
+          "2026-08-10",
+          "2026-08-11",
+          "2026-08-12",
+          "2026-08-13",
+          "2026-08-14",
+          "2026-08-17",
+          "2026-08-18",
+          "2026-08-19",
+          "2026-08-20",
+          "2026-08-21",
+          "2026-08-24",
+          "2026-08-25",
+          "2026-08-26",
+          "2026-08-27",
+          "2026-08-28",
+          "2026-08-31",
+          "2026-09-01",
+          "2026-09-02",
+          "2026-09-03",
+          "2026-09-04",
+          "2026-09-07",
+          "2026-09-08",
+          "2026-09-09",
+          "2026-09-10",
+          "2026-09-11",
+          "2026-09-14",
+          "2026-09-15",
+          "2026-09-16",
+          "2026-09-17",
+          "2026-09-18",
+          "2026-09-21",
+          "2026-09-22",
+          "2026-09-23",
+          "2026-09-24",
+          "2026-09-29",
+          "2026-09-30"
+        ]
+      },
+      "selected_price_baseline": "expanding_mean",
+      "selected_direction_baseline": "always_up",
+      "validation": {
+        "zero_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 157.27435483870977,
+            "open_mae_bps": 57.62696923025603,
+            "open_rmse_bps": 80.00736240370476,
+            "high_mae_points": 247.62768764793773,
+            "high_mae_bps": 90.57253324797126,
+            "high_rmse_bps": 110.55131977833277,
+            "low_mae_points": 217.71237966921498,
+            "low_mae_bps": 79.22097474955042,
+            "low_rmse_bps": 107.87880282117803,
+            "close_mae_points": 253.9619354838711,
+            "close_mae_bps": 92.5183056105116,
+            "close_rmse_bps": 116.86312028497277,
+            "gap_hits": 4,
+            "gap_accuracy": 0.06451612903225806,
+            "gap_mae_bps": 57.62696923025615,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 5,
+            "body_accuracy": 0.08064516129032258,
+            "body_mae_bps": 55.231830891806744,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 31,
+                "flat": 5,
+                "down": 26
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 3,
+            "close_accuracy": 0.04838709677419355,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 61.566453677011744,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "expanding_mean": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 147.8415634317007,
+            "open_mae_bps": 54.13401291938464,
+            "open_rmse_bps": 77.76380789108858,
+            "high_mae_points": 231.496456282134,
+            "high_mae_bps": 84.68430954160432,
+            "high_rmse_bps": 104.64866305886996,
+            "low_mae_points": 216.9713082124667,
+            "low_mae_bps": 78.89626505582025,
+            "low_rmse_bps": 109.14279935640262,
+            "close_mae_points": 251.83334943054956,
+            "close_mae_bps": 91.69773803064463,
+            "close_rmse_bps": 116.06589504114083,
+            "gap_hits": 40,
+            "gap_accuracy": 0.6451612903225806,
+            "gap_mae_bps": 54.13401291938472,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 13,
+            "body_accuracy": 0.20967741935483872,
+            "body_mae_bps": 55.94468571079423,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 14,
+                "flat": 3,
+                "down": 16
+              },
+              "down": {
+                "up": 17,
+                "flat": 2,
+                "down": 10
+              }
+            },
+            "close_hits": 35,
+            "close_accuracy": 0.5645161290322581,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 57.00463714439896,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "previous_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 232.22095877021175,
+            "open_mae_bps": 84.97198106295525,
+            "open_rmse_bps": 124.4375876207059,
+            "high_mae_points": 292.0308167144873,
+            "high_mae_bps": 106.40289180493889,
+            "high_rmse_bps": 147.22440934435966,
+            "low_mae_points": 323.64708940696016,
+            "low_mae_bps": 117.92193846712864,
+            "low_rmse_bps": 158.87643483856095,
+            "close_mae_points": 366.99690425564546,
+            "close_mae_bps": 133.34112824410784,
+            "close_rmse_bps": 173.6070427457838,
+            "gap_hits": 28,
+            "gap_accuracy": 0.45161290322580644,
+            "gap_mae_bps": 84.97198106295536,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 24,
+                "flat": 3,
+                "down": 13
+              },
+              "flat": {
+                "up": 3,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 13,
+                "flat": 1,
+                "down": 4
+              }
+            },
+            "body_hits": 24,
+            "body_accuracy": 0.3870967741935484,
+            "body_mae_bps": 83.77959444622857,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 4,
+                "down": 14
+              },
+              "flat": {
+                "up": 4,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 14,
+                "flat": 1,
+                "down": 11
+              }
+            },
+            "close_hits": 23,
+            "close_accuracy": 0.3709677419354839,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 17,
+                "flat": 2,
+                "down": 16
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 17,
+                "flat": 1,
+                "down": 6
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 45.03998029532599,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "rolling_mean_20": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 150.42843097620755,
+            "open_mae_bps": 54.98905674386407,
+            "open_rmse_bps": 79.21221812643587,
+            "high_mae_points": 219.36507512222911,
+            "high_mae_bps": 80.23396403003947,
+            "high_rmse_bps": 101.48382819836111,
+            "low_mae_points": 224.1919274716391,
+            "low_mae_bps": 81.47997058284531,
+            "low_rmse_bps": 112.36609101882625,
+            "close_mae_points": 259.6118221918882,
+            "close_mae_bps": 94.43429764845006,
+            "close_rmse_bps": 117.94965372061573,
+            "gap_hits": 40,
+            "gap_accuracy": 0.6451612903225806,
+            "gap_mae_bps": 54.98905674386425,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 23,
+            "body_accuracy": 0.3709677419354839,
+            "body_mae_bps": 57.63739262660419,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 4,
+                "down": 9
+              },
+              "flat": {
+                "up": 8,
+                "flat": 0,
+                "down": 5
+              },
+              "down": {
+                "up": 12,
+                "flat": 1,
+                "down": 12
+              }
+            },
+            "close_hits": 26,
+            "close_accuracy": 0.41935483870967744,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 23,
+                "flat": 2,
+                "down": 20
+              },
+              "flat": {
+                "up": 4,
+                "flat": 1,
+                "down": 2
+              },
+              "down": {
+                "up": 8,
+                "flat": 0,
+                "down": 2
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 47.49382216037128,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "always_up": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 40,
+            "gap_accuracy": 0.6451612903225806,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 31,
+            "body_accuracy": 0.5,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 31,
+                "flat": 5,
+                "down": 26
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 35,
+            "close_accuracy": 0.5645161290322581,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_down": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 18,
+            "gap_accuracy": 0.2903225806451613,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              }
+            },
+            "body_hits": 26,
+            "body_accuracy": 0.41935483870967744,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 31,
+                "flat": 5,
+                "down": 26
+              }
+            },
+            "close_hits": 24,
+            "close_accuracy": 0.3870967741935484,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_flat": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 4,
+            "gap_accuracy": 0.06451612903225806,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 5,
+            "body_accuracy": 0.08064516129032258,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 31,
+                "flat": 5,
+                "down": 26
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 3,
+            "close_accuracy": 0.04838709677419355,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "historical_majority": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 40,
+            "gap_accuracy": 0.6451612903225806,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 40,
+                "flat": 4,
+                "down": 18
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 26,
+            "body_accuracy": 0.41935483870967744,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 18,
+                "flat": 5,
+                "down": 18
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              }
+            },
+            "close_hits": 35,
+            "close_accuracy": 0.5645161290322581,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 35,
+                "flat": 3,
+                "down": 24
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "previous_direction": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 28,
+            "gap_accuracy": 0.45161290322580644,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 24,
+                "flat": 3,
+                "down": 13
+              },
+              "flat": {
+                "up": 3,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 13,
+                "flat": 1,
+                "down": 4
+              }
+            },
+            "body_hits": 24,
+            "body_accuracy": 0.3870967741935484,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 4,
+                "down": 14
+              },
+              "flat": {
+                "up": 4,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 14,
+                "flat": 1,
+                "down": 11
+              }
+            },
+            "close_hits": 23,
+            "close_accuracy": 0.3709677419354839,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 17,
+                "flat": 2,
+                "down": 16
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 17,
+                "flat": 1,
+                "down": 6
+              }
+            }
+          },
+          "failures": []
+        },
+        "direct_close_ridge": {
+          "kind": "price_reference",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 149.7172338098741,
+            "open_mae_bps": 54.7942431374024,
+            "open_rmse_bps": 78.30008708293398,
+            "high_mae_points": 226.8978469591533,
+            "high_mae_bps": 82.88722844960785,
+            "high_rmse_bps": 105.04066882922704,
+            "low_mae_points": 221.60569877799014,
+            "low_mae_bps": 80.63984910069168,
+            "low_rmse_bps": 111.4062303988789,
+            "close_mae_points": 253.68377061249421,
+            "close_mae_bps": 92.27937838952813,
+            "close_rmse_bps": 119.46184796825479,
+            "gap_hits": 29,
+            "gap_accuracy": 0.46774193548387094,
+            "gap_mae_bps": 54.79424313740228,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 29,
+                "flat": 4,
+                "down": 11
+              },
+              "flat": {
+                "up": 11,
+                "flat": 0,
+                "down": 7
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 24,
+            "body_accuracy": 0.3870967741935484,
+            "body_mae_bps": 56.70571272454027,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 1,
+                "down": 8
+              },
+              "flat": {
+                "up": 4,
+                "flat": 0,
+                "down": 5
+              },
+              "down": {
+                "up": 16,
+                "flat": 4,
+                "down": 13
+              }
+            },
+            "close_hits": 23,
+            "close_accuracy": 0.3709677419354839,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 2,
+                "down": 12
+              },
+              "flat": {
+                "up": 6,
+                "flat": 0,
+                "down": 5
+              },
+              "down": {
+                "up": 13,
+                "flat": 1,
+                "down": 7
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 47.8282656585114
+          },
+          "failures": []
+        },
+        "split_ridge": {
+          "kind": "frozen_candidate",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 62,
+            "scored": 62,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-01",
+            "last_date": "2025-12-31",
+            "open_mae_points": 148.23208421421043,
+            "open_mae_bps": 54.25507972423416,
+            "open_rmse_bps": 77.80333390492031,
+            "high_mae_points": 229.0587590194466,
+            "high_mae_bps": 83.77065958781671,
+            "high_rmse_bps": 104.4952339979844,
+            "low_mae_points": 215.55728059822408,
+            "low_mae_bps": 78.39773929095607,
+            "low_rmse_bps": 108.96582451811928,
+            "close_mae_points": 251.08370727418972,
+            "close_mae_bps": 91.43305087665685,
+            "close_rmse_bps": 115.73502896344786,
+            "gap_hits": 32,
+            "gap_accuracy": 0.5161290322580645,
+            "gap_mae_bps": 54.25507972423417,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 32,
+                "flat": 4,
+                "down": 16
+              },
+              "flat": {
+                "up": 8,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 17,
+            "body_accuracy": 0.27419354838709675,
+            "body_mae_bps": 56.80066532291791,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 1,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 5,
+                "flat": 2,
+                "down": 12
+              },
+              "down": {
+                "up": 25,
+                "flat": 3,
+                "down": 14
+              }
+            },
+            "close_hits": 21,
+            "close_accuracy": 0.3387096774193548,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 19,
+                "flat": 1,
+                "down": 11
+              },
+              "flat": {
+                "up": 13,
+                "flat": 2,
+                "down": 13
+              },
+              "down": {
+                "up": 3,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 35,
+              "down": 24,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5645161290322581,
+            "always_down_close_accuracy": 0.3870967741935484,
+            "range_mae_bps": 55.84936604477951
+          },
+          "failures": []
+        }
+      },
+      "evaluation_seen": {
+        "zero_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 149.04391061452532,
+            "open_mae_bps": 38.31741713845055,
+            "open_rmse_bps": 65.14828254285548,
+            "high_mae_points": 490.3346812680091,
+            "high_mae_bps": 124.70417690285949,
+            "high_rmse_bps": 170.07890275774827,
+            "low_mae_points": 437.6233216924077,
+            "low_mae_bps": 108.56472121381987,
+            "low_rmse_bps": 153.94918998111743,
+            "close_mae_points": 559.912346368715,
+            "close_mae_bps": 141.40986903092394,
+            "close_rmse_bps": 189.11172939987134,
+            "gap_hits": 18,
+            "gap_accuracy": 0.1005586592178771,
+            "gap_mae_bps": 38.31741713845062,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 4,
+            "body_accuracy": 0.0223463687150838,
+            "body_mae_bps": 116.73930559867141,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 102,
+                "flat": 4,
+                "down": 73
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 3,
+            "close_accuracy": 0.01675977653631285,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 145.44714770663825,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "expanding_mean": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 142.814027324392,
+            "open_mae_bps": 36.68552390592674,
+            "open_rmse_bps": 64.27454948733919,
+            "high_mae_points": 461.98846314920115,
+            "high_mae_bps": 117.60678430986314,
+            "high_rmse_bps": 161.65298006205188,
+            "low_mae_points": 445.80339715257696,
+            "low_mae_bps": 110.46167145145401,
+            "low_rmse_bps": 158.87643515577489,
+            "close_mae_points": 556.1317697114098,
+            "close_mae_bps": 140.32795257723566,
+            "close_rmse_bps": 187.65827493971875,
+            "gap_hits": 107,
+            "gap_accuracy": 0.5977653631284916,
+            "gap_mae_bps": 36.685523905926814,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 19,
+            "body_accuracy": 0.10614525139664804,
+            "body_mae_bps": 116.83425111688483,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 1,
+                "down": 18
+              },
+              "flat": {
+                "up": 86,
+                "flat": 3,
+                "down": 55
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 100,
+            "close_accuracy": 0.5586592178770949,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 142.01314345350883,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "previous_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 214.53049329386715,
+            "open_mae_bps": 54.99759780490388,
+            "open_rmse_bps": 95.72609324198311,
+            "high_mae_points": 549.3452640532525,
+            "high_mae_bps": 139.46286713946887,
+            "high_rmse_bps": 191.48062591627604,
+            "low_mae_points": 514.5804682665699,
+            "low_mae_bps": 128.16828606136835,
+            "low_rmse_bps": 178.46985442902016,
+            "close_mae_points": 772.896649413106,
+            "close_mae_bps": 193.83414790140344,
+            "close_rmse_bps": 255.5626102107044,
+            "gap_hits": 89,
+            "gap_accuracy": 0.4972067039106145,
+            "gap_mae_bps": 54.99759780490389,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 67,
+                "flat": 10,
+                "down": 30
+              },
+              "flat": {
+                "up": 14,
+                "flat": 1,
+                "down": 3
+              },
+              "down": {
+                "up": 26,
+                "flat": 7,
+                "down": 21
+              }
+            },
+            "body_hits": 98,
+            "body_accuracy": 0.547486033519553,
+            "body_mae_bps": 157.5171286607087,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 64,
+                "flat": 1,
+                "down": 37
+              },
+              "flat": {
+                "up": 2,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 36,
+                "flat": 3,
+                "down": 34
+              }
+            },
+            "close_hits": 97,
+            "close_accuracy": 0.5418994413407822,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 61,
+                "flat": 2,
+                "down": 37
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 3
+              },
+              "down": {
+                "up": 39,
+                "flat": 1,
+                "down": 36
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 95.52224970529183,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "rolling_mean_20": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 147.2102758886467,
+            "open_mae_bps": 37.89702330934797,
+            "open_rmse_bps": 65.84343585536983,
+            "high_mae_points": 440.6496968825628,
+            "high_mae_bps": 112.33789851109962,
+            "high_rmse_bps": 156.61550767177835,
+            "low_mae_points": 442.45032410585077,
+            "low_mae_bps": 109.7637647575103,
+            "low_rmse_bps": 157.78368339090625,
+            "close_mae_points": 562.4306920805375,
+            "close_mae_bps": 141.55262822278664,
+            "close_rmse_bps": 191.140258221634,
+            "gap_hits": 82,
+            "gap_accuracy": 0.4581005586592179,
+            "gap_mae_bps": 37.89702330934793,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 77,
+                "flat": 13,
+                "down": 44
+              },
+              "flat": {
+                "up": 28,
+                "flat": 5,
+                "down": 10
+              },
+              "down": {
+                "up": 2,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 91,
+            "body_accuracy": 0.5083798882681564,
+            "body_mae_bps": 117.09580190876986,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 75,
+                "flat": 3,
+                "down": 50
+              },
+              "flat": {
+                "up": 8,
+                "flat": 0,
+                "down": 7
+              },
+              "down": {
+                "up": 19,
+                "flat": 1,
+                "down": 16
+              }
+            },
+            "close_hits": 93,
+            "close_accuracy": 0.5195530726256983,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 79,
+                "flat": 1,
+                "down": 59
+              },
+              "flat": {
+                "up": 8,
+                "flat": 1,
+                "down": 4
+              },
+              "down": {
+                "up": 13,
+                "flat": 1,
+                "down": 13
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 118.6998590986035,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "always_up": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 107,
+            "gap_accuracy": 0.5977653631284916,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 102,
+            "body_accuracy": 0.5698324022346368,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 102,
+                "flat": 4,
+                "down": 73
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 100,
+            "close_accuracy": 0.5586592178770949,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_down": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 54,
+            "gap_accuracy": 0.3016759776536313,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              }
+            },
+            "body_hits": 73,
+            "body_accuracy": 0.40782122905027934,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 102,
+                "flat": 4,
+                "down": 73
+              }
+            },
+            "close_hits": 76,
+            "close_accuracy": 0.4245810055865922,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_flat": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 18,
+            "gap_accuracy": 0.1005586592178771,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 4,
+            "body_accuracy": 0.0223463687150838,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 102,
+                "flat": 4,
+                "down": 73
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 3,
+            "close_accuracy": 0.01675977653631285,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "historical_majority": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 107,
+            "gap_accuracy": 0.5977653631284916,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 107,
+                "flat": 18,
+                "down": 54
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 102,
+            "body_accuracy": 0.5698324022346368,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 102,
+                "flat": 4,
+                "down": 73
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 100,
+            "close_accuracy": 0.5586592178770949,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 100,
+                "flat": 3,
+                "down": 76
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "previous_direction": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 89,
+            "gap_accuracy": 0.4972067039106145,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 67,
+                "flat": 10,
+                "down": 30
+              },
+              "flat": {
+                "up": 14,
+                "flat": 1,
+                "down": 3
+              },
+              "down": {
+                "up": 26,
+                "flat": 7,
+                "down": 21
+              }
+            },
+            "body_hits": 98,
+            "body_accuracy": 0.547486033519553,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 64,
+                "flat": 1,
+                "down": 37
+              },
+              "flat": {
+                "up": 2,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 36,
+                "flat": 3,
+                "down": 34
+              }
+            },
+            "close_hits": 97,
+            "close_accuracy": 0.5418994413407822,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 61,
+                "flat": 2,
+                "down": 37
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 3
+              },
+              "down": {
+                "up": 39,
+                "flat": 1,
+                "down": 36
+              }
+            }
+          },
+          "failures": []
+        },
+        "split_ridge": {
+          "kind": "frozen_candidate",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 150.85371528713705,
+            "open_mae_bps": 38.69975246628538,
+            "open_rmse_bps": 64.82335223456101,
+            "high_mae_points": 454.37310601543606,
+            "high_mae_bps": 115.82207179652806,
+            "high_rmse_bps": 156.88445994319073,
+            "low_mae_points": 446.0725577729759,
+            "low_mae_bps": 110.4680243340901,
+            "low_rmse_bps": 160.46844351513886,
+            "close_mae_points": 559.0476533504574,
+            "close_mae_bps": 141.21374394110404,
+            "close_rmse_bps": 187.6981709718966,
+            "gap_hits": 87,
+            "gap_accuracy": 0.4860335195530726,
+            "gap_mae_bps": 38.6997524662854,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 79,
+                "flat": 12,
+                "down": 41
+              },
+              "flat": {
+                "up": 17,
+                "flat": 4,
+                "down": 9
+              },
+              "down": {
+                "up": 11,
+                "flat": 2,
+                "down": 4
+              }
+            },
+            "body_hits": 67,
+            "body_accuracy": 0.3743016759776536,
+            "body_mae_bps": 116.0575548916398,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 60,
+                "flat": 0,
+                "down": 45
+              },
+              "flat": {
+                "up": 32,
+                "flat": 4,
+                "down": 25
+              },
+              "down": {
+                "up": 10,
+                "flat": 0,
+                "down": 3
+              }
+            },
+            "close_hits": 89,
+            "close_accuracy": 0.4972067039106145,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 89,
+                "flat": 3,
+                "down": 73
+              },
+              "flat": {
+                "up": 11,
+                "flat": 0,
+                "down": 3
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 133.0561164877142
+          },
+          "failures": []
+        },
+        "direct_close_ridge": {
+          "kind": "price_reference",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 179,
+            "scored": 179,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2026-01-02",
+            "last_date": "2026-09-30",
+            "open_mae_points": 151.63471831779955,
+            "open_mae_bps": 38.7096844029103,
+            "open_rmse_bps": 64.27311795867017,
+            "high_mae_points": 443.83310871655414,
+            "high_mae_bps": 113.0511013889525,
+            "high_rmse_bps": 151.16243613594227,
+            "low_mae_points": 448.8231259458107,
+            "low_mae_bps": 111.06533993118195,
+            "low_rmse_bps": 163.17354564930196,
+            "close_mae_points": 560.3696026963419,
+            "close_mae_bps": 141.32537645733075,
+            "close_rmse_bps": 186.81850017634758,
+            "gap_hits": 102,
+            "gap_accuracy": 0.5698324022346368,
+            "gap_mae_bps": 38.70968440291037,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 100,
+                "flat": 16,
+                "down": 51
+              },
+              "flat": {
+                "up": 7,
+                "flat": 2,
+                "down": 3
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 67,
+            "body_accuracy": 0.3743016759776536,
+            "body_mae_bps": 116.61276257632478,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 54,
+                "flat": 2,
+                "down": 40
+              },
+              "flat": {
+                "up": 25,
+                "flat": 1,
+                "down": 21
+              },
+              "down": {
+                "up": 23,
+                "flat": 1,
+                "down": 12
+              }
+            },
+            "close_hits": 86,
+            "close_accuracy": 0.48044692737430167,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 81,
+                "flat": 3,
+                "down": 59
+              },
+              "flat": {
+                "up": 14,
+                "flat": 0,
+                "down": 12
+              },
+              "down": {
+                "up": 5,
+                "flat": 0,
+                "down": 5
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 100,
+              "down": 76,
+              "flat": 3
+            },
+            "always_up_close_accuracy": 0.5586592178770949,
+            "always_down_close_accuracy": 0.4245810055865922,
+            "range_mae_bps": 129.57678699918597
+          },
+          "failures": []
+        }
+      },
+      "candidate_vs_locked_price_improvement": -0.006312294504409843,
+      "candidate_minus_locked_direction_accuracy": -0.06145251396648044
+    },
+    "TX202603": {
+      "common_dates": {
+        "validation": [
+          "2025-10-16",
+          "2025-10-17",
+          "2025-10-20",
+          "2025-10-21",
+          "2025-10-22",
+          "2025-10-23",
+          "2025-10-27",
+          "2025-10-28",
+          "2025-10-29",
+          "2025-10-30",
+          "2025-10-31",
+          "2025-11-03",
+          "2025-11-04",
+          "2025-11-05",
+          "2025-11-06",
+          "2025-11-07",
+          "2025-11-10",
+          "2025-11-11",
+          "2025-11-12",
+          "2025-11-13",
+          "2025-11-14"
+        ],
+        "evaluation_seen": [
+          "2025-11-17",
+          "2025-11-18",
+          "2025-11-19",
+          "2025-11-20",
+          "2025-11-21",
+          "2025-11-24",
+          "2025-11-25",
+          "2025-11-26",
+          "2025-11-27",
+          "2025-11-28",
+          "2025-12-01",
+          "2025-12-02",
+          "2025-12-03",
+          "2025-12-04",
+          "2025-12-05",
+          "2025-12-08",
+          "2025-12-09",
+          "2025-12-10",
+          "2025-12-11",
+          "2025-12-12",
+          "2025-12-15",
+          "2025-12-16",
+          "2025-12-17",
+          "2025-12-18",
+          "2025-12-19",
+          "2025-12-22",
+          "2025-12-23",
+          "2025-12-24",
+          "2025-12-26",
+          "2025-12-29",
+          "2025-12-30",
+          "2025-12-31"
+        ]
+      },
+      "selected_price_baseline": "zero_return",
+      "selected_direction_baseline": "always_down",
+      "validation": {
+        "zero_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 211.57142857142858,
+            "open_mae_bps": 75.79967706377491,
+            "open_rmse_bps": 94.83143494352124,
+            "high_mae_points": 241.572313253391,
+            "high_mae_bps": 86.76858253341089,
+            "high_rmse_bps": 105.03260693843471,
+            "low_mae_points": 236.5815053424556,
+            "low_mae_bps": 84.65767364633764,
+            "low_rmse_bps": 105.698831533938,
+            "close_mae_points": 246.66666666666666,
+            "close_mae_bps": 88.54791049284368,
+            "close_rmse_bps": 109.40997042452476,
+            "gap_hits": 0,
+            "gap_accuracy": 0.0,
+            "gap_mae_bps": 75.79967706377461,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 1,
+            "body_accuracy": 0.047619047619047616,
+            "body_mae_bps": 47.01152788443307,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 0,
+            "close_accuracy": 0.0,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 52.78624573691242,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "expanding_mean": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 203.0048639728328,
+            "open_mae_bps": 72.69918582158273,
+            "open_rmse_bps": 97.207751815995,
+            "high_mae_points": 230.6369648281297,
+            "high_mae_bps": 82.77778835847896,
+            "high_rmse_bps": 101.84734651098765,
+            "low_mae_points": 245.78058738076703,
+            "low_mae_bps": 87.8283102189319,
+            "low_rmse_bps": 112.70412165428087,
+            "close_mae_points": 266.51716582752834,
+            "close_mae_bps": 95.46143002743686,
+            "close_rmse_bps": 113.09682030272714,
+            "gap_hits": 13,
+            "gap_accuracy": 0.6190476190476191,
+            "gap_mae_bps": 72.6991858215827,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 10,
+            "body_accuracy": 0.47619047619047616,
+            "body_mae_bps": 48.22072056891972,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 41.79276077279739,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "previous_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 320.6094043740961,
+            "open_mae_bps": 114.90174182396848,
+            "open_rmse_bps": 145.29107378780813,
+            "high_mae_points": 357.9614895351125,
+            "high_mae_bps": 128.25637382073268,
+            "high_rmse_bps": 160.95768366973115,
+            "low_mae_points": 373.8949494567425,
+            "low_mae_bps": 133.8451810199014,
+            "low_rmse_bps": 157.57708939650212,
+            "close_mae_points": 410.2335448056127,
+            "close_mae_bps": 146.90418698609872,
+            "close_rmse_bps": 175.3455674167184,
+            "gap_hits": 10,
+            "gap_accuracy": 0.47619047619047616,
+            "gap_mae_bps": 114.90174182396814,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 8,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 5,
+                "flat": 0,
+                "down": 2
+              }
+            },
+            "body_hits": 7,
+            "body_accuracy": 0.3333333333333333,
+            "body_mae_bps": 76.77865102807388,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 4,
+                "flat": 1,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 6,
+                "flat": 0,
+                "down": 3
+              }
+            },
+            "close_hits": 6,
+            "close_accuracy": 0.2857142857142857,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 2,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 7,
+                "flat": 0,
+                "down": 4
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 32.546254931526384,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "rolling_mean_20": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 202.072185222398,
+            "open_mae_bps": 72.38894267222717,
+            "open_rmse_bps": 97.16213494813611,
+            "high_mae_points": 238.46072308577035,
+            "high_mae_bps": 85.55280196715415,
+            "high_rmse_bps": 102.17859385451005,
+            "low_mae_points": 246.112354735826,
+            "low_mae_bps": 87.94840466145935,
+            "low_rmse_bps": 112.63206466582352,
+            "close_mae_points": 275.8860901409209,
+            "close_mae_bps": 98.78506919997047,
+            "close_rmse_bps": 113.4538424139131,
+            "gap_hits": 12,
+            "gap_accuracy": 0.5714285714285714,
+            "gap_mae_bps": 72.38894267222697,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 12,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 8,
+            "body_accuracy": 0.38095238095238093,
+            "body_mae_bps": 50.096102544263616,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 8,
+                "flat": 1,
+                "down": 9
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 1,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 41.06158796882274,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "always_up": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 13,
+            "gap_accuracy": 0.6190476190476191,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 10,
+            "body_accuracy": 0.47619047619047616,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_down": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 8,
+            "gap_accuracy": 0.38095238095238093,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              }
+            },
+            "body_hits": 10,
+            "body_accuracy": 0.47619047619047616,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              }
+            },
+            "close_hits": 12,
+            "close_accuracy": 0.5714285714285714,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_flat": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 0,
+            "gap_accuracy": 0.0,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 1,
+            "body_accuracy": 0.047619047619047616,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 0,
+            "close_accuracy": 0.0,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "historical_majority": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 13,
+            "gap_accuracy": 0.6190476190476191,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 10,
+            "body_accuracy": 0.47619047619047616,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 10,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "previous_direction": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 10,
+            "gap_accuracy": 0.47619047619047616,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 8,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 5,
+                "flat": 0,
+                "down": 2
+              }
+            },
+            "body_hits": 7,
+            "body_accuracy": 0.3333333333333333,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 4,
+                "flat": 1,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 6,
+                "flat": 0,
+                "down": 3
+              }
+            },
+            "close_hits": 6,
+            "close_accuracy": 0.2857142857142857,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 2,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 7,
+                "flat": 0,
+                "down": 4
+              }
+            }
+          },
+          "failures": []
+        },
+        "direct_close_ridge": {
+          "kind": "price_reference",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 201.75502118647412,
+            "open_mae_bps": 72.25918738638067,
+            "open_rmse_bps": 98.04117857017175,
+            "high_mae_points": 220.84141571855383,
+            "high_mae_bps": 79.22436435352805,
+            "high_rmse_bps": 100.25186327262061,
+            "low_mae_points": 235.65845400991088,
+            "low_mae_bps": 84.28842010696768,
+            "low_rmse_bps": 113.45086738166033,
+            "close_mae_points": 257.7902157441405,
+            "close_mae_bps": 92.329586115034,
+            "close_rmse_bps": 115.03155866583049,
+            "gap_hits": 12,
+            "gap_accuracy": 0.5714285714285714,
+            "gap_mae_bps": 72.25918738638048,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 0,
+                "down": 7
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 1,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "body_hits": 7,
+            "body_accuracy": 0.3333333333333333,
+            "body_mae_bps": 53.738935713693024,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 7,
+                "flat": 0,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 3,
+                "flat": 1,
+                "down": 0
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 9,
+                "flat": 0,
+                "down": 12
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 39.691485075809396
+          },
+          "failures": []
+        },
+        "split_ridge": {
+          "kind": "frozen_candidate",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 21,
+            "scored": 21,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-10-16",
+            "last_date": "2025-11-14",
+            "open_mae_points": 200.76737124993002,
+            "open_mae_bps": 71.92182167569256,
+            "open_rmse_bps": 96.80797214431779,
+            "high_mae_points": 210.34008920614846,
+            "high_mae_bps": 75.5195128553524,
+            "high_rmse_bps": 100.08847943541336,
+            "low_mae_points": 231.83611665651966,
+            "low_mae_bps": 82.88309216982935,
+            "low_rmse_bps": 109.82111942528499,
+            "close_mae_points": 238.9065220829753,
+            "close_mae_bps": 85.56705596252942,
+            "close_rmse_bps": 109.31555168854399,
+            "gap_hits": 11,
+            "gap_accuracy": 0.5238095238095238,
+            "gap_mae_bps": 71.92182167569251,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 10,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 2,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 1,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "body_hits": 11,
+            "body_accuracy": 0.5238095238095238,
+            "body_mae_bps": 43.53175287896638,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 8,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 2,
+                "flat": 1,
+                "down": 2
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 2
+              }
+            },
+            "close_hits": 9,
+            "close_accuracy": 0.42857142857142855,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 7,
+                "flat": 0,
+                "down": 9
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 2,
+                "flat": 0,
+                "down": 2
+              }
+            },
+            "actual_close_class_counts": {
+              "up": 9,
+              "down": 12
+            },
+            "always_up_close_accuracy": 0.42857142857142855,
+            "always_down_close_accuracy": 0.5714285714285714,
+            "range_mae_bps": 41.99988217332281
+          },
+          "failures": []
+        }
+      },
+      "evaluation_seen": {
+        "zero_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 211.8125,
+            "open_mae_bps": 76.74276631911295,
+            "open_rmse_bps": 99.41541813288394,
+            "high_mae_points": 238.43325779142992,
+            "high_mae_bps": 86.3674474843873,
+            "high_rmse_bps": 110.22947233085537,
+            "low_mae_points": 217.90440195324447,
+            "low_mae_bps": 78.85044718215195,
+            "low_rmse_bps": 112.27645465136222,
+            "close_mae_points": 251.6875,
+            "close_mae_bps": 91.11905828518337,
+            "close_rmse_bps": 121.2305315747075,
+            "gap_hits": 2,
+            "gap_accuracy": 0.0625,
+            "gap_mae_bps": 76.74276631911292,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 0,
+            "body_accuracy": 0.0,
+            "body_mae_bps": 47.12660897021829,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 18,
+                "flat": 0,
+                "down": 14
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 1,
+            "close_accuracy": 0.03125,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 54.13101236051217,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "expanding_mean": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 194.59222178551317,
+            "open_mae_bps": 70.45567865308436,
+            "open_rmse_bps": 97.15682889625606,
+            "high_mae_points": 204.85743431296248,
+            "high_mae_bps": 74.26026463012664,
+            "high_rmse_bps": 103.1085228416073,
+            "low_mae_points": 214.92070216179138,
+            "low_mae_bps": 77.68424041854234,
+            "low_rmse_bps": 115.18383777722872,
+            "close_mae_points": 235.80470613966054,
+            "close_mae_bps": 85.40448631772858,
+            "close_rmse_bps": 120.4435210613617,
+            "gap_hits": 22,
+            "gap_accuracy": 0.6875,
+            "gap_mae_bps": 70.45567865308436,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 5,
+            "body_accuracy": 0.15625,
+            "body_mae_bps": 47.18238190906047,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 5,
+                "flat": 0,
+                "down": 11
+              },
+              "flat": {
+                "up": 13,
+                "flat": 0,
+                "down": 3
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 21,
+            "close_accuracy": 0.65625,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 48.82755529197311,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "previous_return": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 283.75917609098406,
+            "open_mae_bps": 103.11726281182234,
+            "open_rmse_bps": 150.56300319998405,
+            "high_mae_points": 295.3413110082894,
+            "high_mae_bps": 107.20773037889842,
+            "high_rmse_bps": 161.88676725638447,
+            "low_mae_points": 314.7555915176208,
+            "low_mae_bps": 114.37168380411771,
+            "low_rmse_bps": 174.81098063960042,
+            "close_mae_points": 351.6578377972862,
+            "close_mae_bps": 127.55701400619003,
+            "close_rmse_bps": 188.39353293531903,
+            "gap_hits": 18,
+            "gap_accuracy": 0.5625,
+            "gap_mae_bps": 103.11726281182227,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 1,
+                "down": 5
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 5,
+                "flat": 1,
+                "down": 2
+              }
+            },
+            "body_hits": 19,
+            "body_accuracy": 0.59375,
+            "body_mae_bps": 57.34960914764082,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 7,
+                "flat": 0,
+                "down": 8
+              }
+            },
+            "close_hits": 19,
+            "close_accuracy": 0.59375,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 15,
+                "flat": 0,
+                "down": 5
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 6,
+                "flat": 1,
+                "down": 4
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 36.79790180999651,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "rolling_mean_20": {
+          "version": "simple-baselines-v1",
+          "kind": "price",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 207.79373286756697,
+            "open_mae_bps": 75.30794753753412,
+            "open_rmse_bps": 101.8533393876971,
+            "high_mae_points": 219.84488488267982,
+            "high_mae_bps": 79.8016286454651,
+            "high_rmse_bps": 108.7173443392992,
+            "low_mae_points": 230.3794403562789,
+            "low_mae_bps": 83.43968035942606,
+            "low_rmse_bps": 116.8131210178476,
+            "close_mae_points": 256.24007474528696,
+            "close_mae_bps": 92.95217977793956,
+            "close_rmse_bps": 124.46728153612013,
+            "gap_hits": 16,
+            "gap_accuracy": 0.5,
+            "gap_mae_bps": 75.30794753753425,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 2,
+                "down": 7
+              },
+              "flat": {
+                "up": 5,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 1,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 11,
+            "body_accuracy": 0.34375,
+            "body_mae_bps": 48.49756752269188,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 6,
+                "flat": 0,
+                "down": 3
+              },
+              "down": {
+                "up": 12,
+                "flat": 0,
+                "down": 11
+              }
+            },
+            "close_hits": 11,
+            "close_accuracy": 0.34375,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 8,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 5,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 8,
+                "flat": 1,
+                "down": 3
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 41.276400694060555,
+            "coverage_of_available_rows": 1.0
+          },
+          "failures": []
+        },
+        "always_up": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 22,
+            "gap_accuracy": 0.6875,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 18,
+            "body_accuracy": 0.5625,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 18,
+                "flat": 0,
+                "down": 14
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 21,
+            "close_accuracy": 0.65625,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_down": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 8,
+            "gap_accuracy": 0.25,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              }
+            },
+            "body_hits": 14,
+            "body_accuracy": 0.4375,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 18,
+                "flat": 0,
+                "down": 14
+              }
+            },
+            "close_hits": 10,
+            "close_accuracy": 0.3125,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              }
+            }
+          },
+          "failures": []
+        },
+        "always_flat": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 2,
+            "gap_accuracy": 0.0625,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 0,
+            "body_accuracy": 0.0,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 18,
+                "flat": 0,
+                "down": 14
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 1,
+            "close_accuracy": 0.03125,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "flat": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "historical_majority": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 22,
+            "gap_accuracy": 0.6875,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 22,
+                "flat": 2,
+                "down": 8
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "body_hits": 18,
+            "body_accuracy": 0.5625,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 18,
+                "flat": 0,
+                "down": 14
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            },
+            "close_hits": 21,
+            "close_accuracy": 0.65625,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 21,
+                "flat": 1,
+                "down": 10
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              }
+            }
+          },
+          "failures": []
+        },
+        "previous_direction": {
+          "version": "simple-baselines-v1",
+          "kind": "direction_only",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_rows": 1.0,
+            "price_metrics": null,
+            "gap_hits": 18,
+            "gap_accuracy": 0.5625,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 1,
+                "down": 5
+              },
+              "flat": {
+                "up": 1,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 5,
+                "flat": 1,
+                "down": 2
+              }
+            },
+            "body_hits": 19,
+            "body_accuracy": 0.59375,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 7,
+                "flat": 0,
+                "down": 8
+              }
+            },
+            "close_hits": 19,
+            "close_accuracy": 0.59375,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 15,
+                "flat": 0,
+                "down": 5
+              },
+              "flat": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 6,
+                "flat": 1,
+                "down": 4
+              }
+            }
+          },
+          "failures": []
+        },
+        "split_ridge": {
+          "kind": "frozen_candidate",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 205.76463495948246,
+            "open_mae_bps": 74.49849809777218,
+            "open_rmse_bps": 95.95857762415172,
+            "high_mae_points": 210.82787928265736,
+            "high_mae_bps": 76.51897933123503,
+            "high_rmse_bps": 101.52270097803188,
+            "low_mae_points": 233.78255234369965,
+            "low_mae_bps": 84.67274297805113,
+            "low_rmse_bps": 113.75221170573727,
+            "close_mae_points": 253.92280390001406,
+            "close_mae_bps": 92.1692895220892,
+            "close_rmse_bps": 120.34948659131868,
+            "gap_hits": 16,
+            "gap_accuracy": 0.5,
+            "gap_mae_bps": 74.49849809777217,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 15,
+                "flat": 2,
+                "down": 7
+              },
+              "flat": {
+                "up": 3,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 4,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "body_hits": 13,
+            "body_accuracy": 0.40625,
+            "body_mae_bps": 48.41910138660425,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 10,
+                "flat": 0,
+                "down": 10
+              },
+              "flat": {
+                "up": 6,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 2,
+                "flat": 0,
+                "down": 3
+              }
+            },
+            "close_hits": 17,
+            "close_accuracy": 0.53125,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 16,
+                "flat": 1,
+                "down": 7
+              },
+              "flat": {
+                "up": 2,
+                "flat": 0,
+                "down": 2
+              },
+              "down": {
+                "up": 3,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 44.59947523774579
+          },
+          "failures": []
+        },
+        "direct_close_ridge": {
+          "kind": "price_reference",
+          "information_set": "past_day_ohlc",
+          "metrics": {
+            "expected": 32,
+            "scored": 32,
+            "coverage_of_available_test_rows": 1.0,
+            "first_date": "2025-11-17",
+            "last_date": "2025-12-31",
+            "open_mae_points": 210.07907524333086,
+            "open_mae_bps": 76.05988875156515,
+            "open_rmse_bps": 96.79060953635867,
+            "high_mae_points": 211.69540528323125,
+            "high_mae_bps": 76.8133861977224,
+            "high_rmse_bps": 102.56264348556236,
+            "low_mae_points": 229.2588947235571,
+            "low_mae_bps": 83.05220923423718,
+            "low_rmse_bps": 113.13320181733054,
+            "close_mae_points": 244.64383129687758,
+            "close_mae_bps": 88.7806510423193,
+            "close_rmse_bps": 120.39989714680875,
+            "gap_hits": 14,
+            "gap_accuracy": 0.4375,
+            "gap_mae_bps": 76.05988875156507,
+            "gap_confusion_predicted_by_actual": {
+              "up": {
+                "up": 13,
+                "flat": 2,
+                "down": 6
+              },
+              "flat": {
+                "up": 6,
+                "flat": 0,
+                "down": 1
+              },
+              "down": {
+                "up": 3,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "body_hits": 15,
+            "body_accuracy": 0.46875,
+            "body_mae_bps": 46.71597073227227,
+            "body_confusion_predicted_by_actual": {
+              "up": {
+                "up": 11,
+                "flat": 0,
+                "down": 6
+              },
+              "flat": {
+                "up": 3,
+                "flat": 0,
+                "down": 4
+              },
+              "down": {
+                "up": 4,
+                "flat": 0,
+                "down": 4
+              }
+            },
+            "close_hits": 19,
+            "close_accuracy": 0.59375,
+            "close_confusion_predicted_by_actual": {
+              "up": {
+                "up": 18,
+                "flat": 1,
+                "down": 9
+              },
+              "flat": {
+                "up": 3,
+                "flat": 0,
+                "down": 0
+              },
+              "down": {
+                "up": 0,
+                "flat": 0,
+                "down": 1
+              }
+            },
+            "actual_close_class_counts": {
+              "flat": 1,
+              "down": 10,
+              "up": 21
+            },
+            "always_up_close_accuracy": 0.65625,
+            "always_down_close_accuracy": 0.3125,
+            "range_mae_bps": 42.388201691042966
+          },
+          "failures": []
+        }
+      },
+      "candidate_vs_locked_price_improvement": -0.011525922860383675,
+      "candidate_minus_locked_direction_accuracy": 0.21875
+    }
+  },
+  "blocked_baselines": {
+    "overnight_gap": {
+      "status": "unavailable",
+      "information_set": "night_and_overseas",
+      "targets": [
+        "gap"
+      ],
+      "reason": "No frozen night/SOX/TSMC ADR feature histories in this price-only dataset",
+      "required_features": [
+        "taifex_night_return_pct",
+        "sox_return_pct",
+        "tsmc_adr_return_pct"
+      ],
+      "included_in_rankings": false
+    }
+  }
+}

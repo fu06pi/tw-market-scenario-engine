@@ -1,0 +1,174 @@
+{
+  "$defs": {
+    "TimedFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "historical",
+            "completed_overnight",
+            "completed_overseas",
+            "calendar"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "availability_basis": {
+          "minLength": 1,
+          "title": "Availability Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "available_at",
+        "observed_at",
+        "kind",
+        "source",
+        "availability_basis"
+      ],
+      "title": "TimedFeature",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "forecast_id": {
+      "minLength": 1,
+      "title": "Forecast Id",
+      "type": "string"
+    },
+    "trading_date": {
+      "format": "date",
+      "title": "Trading Date",
+      "type": "string"
+    },
+    "market": {
+      "enum": [
+        "TAIEX",
+        "TX"
+      ],
+      "title": "Market",
+      "type": "string"
+    },
+    "contract": {
+      "anyOf": [
+        {
+          "pattern": "^[12]\\d{3}(0[1-9]|1[0-2])$",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Contract"
+    },
+    "previous_close": {
+      "exclusiveMinimum": 0,
+      "title": "Previous Close",
+      "type": "number"
+    },
+    "previous_close_date": {
+      "format": "date",
+      "title": "Previous Close Date",
+      "type": "string"
+    },
+    "previous_close_available_at": {
+      "format": "date-time",
+      "title": "Previous Close Available At",
+      "type": "string"
+    },
+    "previous_close_source": {
+      "minLength": 1,
+      "title": "Previous Close Source",
+      "type": "string"
+    },
+    "previous_close_availability_basis": {
+      "minLength": 1,
+      "title": "Previous Close Availability Basis",
+      "type": "string"
+    },
+    "previous_close_contract": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Previous Close Contract"
+    },
+    "data_cutoff_at": {
+      "format": "date-time",
+      "title": "Data Cutoff At",
+      "type": "string"
+    },
+    "generated_at": {
+      "format": "date-time",
+      "title": "Generated At",
+      "type": "string"
+    },
+    "data_version": {
+      "minLength": 1,
+      "title": "Data Version",
+      "type": "string"
+    },
+    "feature_version": {
+      "minLength": 1,
+      "title": "Feature Version",
+      "type": "string"
+    },
+    "features": {
+      "items": {
+        "$ref": "#/$defs/TimedFeature"
+      },
+      "title": "Features",
+      "type": "array"
+    }
+  },
+  "required": [
+    "forecast_id",
+    "trading_date",
+    "market",
+    "previous_close",
+    "previous_close_date",
+    "previous_close_available_at",
+    "previous_close_source",
+    "previous_close_availability_basis",
+    "data_cutoff_at",
+    "generated_at",
+    "data_version",
+    "feature_version",
+    "features"
+  ],
+  "title": "PreopenInputs",
+  "type": "object"
+}

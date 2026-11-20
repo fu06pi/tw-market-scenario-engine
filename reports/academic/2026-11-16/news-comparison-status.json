@@ -1,0 +1,11 @@
+{
+  "experiment": "independent-news-direction-v1",
+  "contract_and_scoring_implemented": true,
+  "synthetic_tests_passed": true,
+  "real_paired_observations_this_delivery": 0,
+  "direction_improvement": null,
+  "B_price_MAE": "not applicable; no B prices",
+  "A_prices_unchanged": true,
+  "availability_and_remote_persistence_evidence_required": true,
+  "conclusion": "尚無真實盤前新聞決策配對資料，不能判定新聞是否改善方向；不得將文字解釋當新價格預測"
+}

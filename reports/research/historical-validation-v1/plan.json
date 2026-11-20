@@ -1,0 +1,83 @@
+{
+  "experiment": "historical-validation-v1",
+  "scope": "retrospective daily-price-only study; no official forward-performance claim",
+  "availability_assumption": "For simulation only, completed prior observed trading-session OHLC is usable at next observed session pre-open. Original available_at fields are preserved, not relabeled as verified.",
+  "historical_asof_verified": false,
+  "input_files": {
+    "data/processed/taiex-tej.json": "46eb00aa98cab0b77015ce8f0f46db6c9349d495ea5e52fb2325721135cc6af3",
+    "data/processed/taiex-twse.json": "2240f809a00c5141f9f52566d2a83d390f4a112465f3ba149bcd0497d1fed61a",
+    "data/processed/tx-tej.json": "16be7500f6faee9ab816fefa555958cab556321d68a2f1fcf5abc915d5379c3a",
+    "data/raw/twse/twse-taiex-202512.json": "094e7773eebde44e3b207af8073352c8c8212c7342628fb7b22718d8eb217678"
+  },
+  "markets": {
+    "TAIEX": {
+      "train_through": "2025-09-30",
+      "validation_start": "2025-10-01",
+      "validation_end": "2025-12-31",
+      "test_start": "2026-01-01",
+      "test_end": "2026-09-30"
+    },
+    "TX202603": {
+      "train_through": "2025-10-15",
+      "validation_start": "2025-10-16",
+      "validation_end": "2025-11-14",
+      "test_start": "2025-11-17",
+      "test_end": "2025-12-31"
+    }
+  },
+  "features": [
+    "previous_gap_bps",
+    "previous_close_return_bps",
+    "previous_body_bps",
+    "previous_range_bps"
+  ],
+  "gap_features": [
+    "previous_gap_bps",
+    "previous_close_return_bps"
+  ],
+  "body_features": [
+    "previous_body_bps",
+    "previous_range_bps"
+  ],
+  "candidate": "split-ridge-history-only-v1",
+  "alphas": [
+    0.1,
+    1.0,
+    10.0
+  ],
+  "minimum_training_samples": 60,
+  "baselines": [
+    "zero_return",
+    "expanding_mean",
+    "direct_close_ridge"
+  ],
+  "selection": "Minimize validation close MAE in bps; select candidate alpha, direct baseline alpha, and strongest baseline only on validation; keep all locked on final test.",
+  "update_rule": "Expanding-window daily refit; all training labels strictly precede forecast date; include previously completed validation/test sessions as they become past.",
+  "wick_rule": "Historical expanding mean of nonnegative upper/lower log wicks, shared by all models",
+  "flat_threshold_bps": 5.0,
+  "uncertainty": {
+    "method": "paired moving time-block bootstrap",
+    "block_length": 5,
+    "draws": 2000,
+    "seed": 20261103
+  },
+  "budget": {
+    "alpha_candidates": 3,
+    "runtime_seconds_limit": 180,
+    "paid_compute": false
+  },
+  "gates": {
+    "close_mae_improvement_at_least": 0.05,
+    "max_OHL_mae_deterioration": 0.05,
+    "failures_allowed": 0,
+    "full_original_acceptance_claim": false
+  },
+  "limitations": [
+    "No overnight or overseas features in the available cached datasets",
+    "Not a backtest of the legacy news/prompt predictor",
+    "TAIEX uses TEJ 2025 and TWSE 2026; December 2025 source overlap must match",
+    "TX data is one far-month contract, not a front-month rollover series",
+    "Publication/revision times are not historically verified",
+    "80% intervals and their calibration are not implemented"
+  ]
+}

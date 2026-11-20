@@ -1,0 +1,92 @@
+{
+  "benchmark_version": "simple-baselines-v1",
+  "scope": "comparison_on_previously_seen_history",
+  "new_independent_test_evidence": false,
+  "formal_acceptance_pass": false,
+  "historical_asof_verified": false,
+  "scoring_policy": {
+    "version": "1.0",
+    "flat_threshold_bps": 5.0,
+    "bull_close_return_bps": 50.0,
+    "bear_close_return_bps": -50.0
+  },
+  "input_sha256": {
+    "data/processed/taiex-tej.json": "46eb00aa98cab0b77015ce8f0f46db6c9349d495ea5e52fb2325721135cc6af3",
+    "data/processed/taiex-twse.json": "2240f809a00c5141f9f52566d2a83d390f4a112465f3ba149bcd0497d1fed61a",
+    "data/processed/tx-tej.json": "16be7500f6faee9ab816fefa555958cab556321d68a2f1fcf5abc915d5379c3a",
+    "data/raw/twse/twse-taiex-202512.json": "094e7773eebde44e3b207af8073352c8c8212c7342628fb7b22718d8eb217678"
+  },
+  "reference_sha256": {
+    "plan.json": "d52c05de9d558e3f468b648fdcf4d0c2d1fb03251957cdb851e5ad5961a3051b",
+    "summary.json": "0bee81756617ef4c5fad2733c5ac528a7efbfcac254ca603b8ed59a180e8370e",
+    "daily-private.json": "bba04d9a481a50f4362c8194c4a971ca344870eb73e945ec245cd29a99ee9010",
+    "TAIEX-locked-selection.json": "fa1d8597612ae06d711f6a075d52b6c54c28004a8140cf6858bb02d63f235cc5",
+    "TX202603-locked-selection.json": "2e5e335951517484b0234c3fb570730e1c6c6b81df93e2b2c0fdfdfc4d4ab75f"
+  },
+  "implementation_sha256": {
+    "src/tw_scenario/baselines.py": "971078daa2c92c7943894380c31d281746840d020e5f1444cbfa309f47378670",
+    "scripts/compare_simple_baselines.py": "f0581b077023a96f8daef83805c7d185ea0b8063320edf6a57cb84bd765c78d9",
+    "scripts/run_historical_validation.py": "44ee129200b3fde2f1157a83f98c58d2e506ea687f88a6153cc9ac12dc89836c",
+    "src/tw_scenario/policy.py": "7432a46e6be0ec2aeeef3df236e9fe3e71e80e46d5e866ae656483c7815cec65"
+  },
+  "markets": {
+    "TAIEX": {
+      "train_through": "2025-09-30",
+      "validation_start": "2025-10-01",
+      "validation_end": "2025-12-31",
+      "test_start": "2026-01-01",
+      "test_end": "2026-09-30"
+    },
+    "TX202603": {
+      "train_through": "2025-10-15",
+      "validation_start": "2025-10-16",
+      "validation_end": "2025-11-14",
+      "test_start": "2025-11-17",
+      "test_end": "2025-12-31"
+    }
+  },
+  "information_set": "prior completed daytime OHLC",
+  "minimum_common_history": 60,
+  "price_baselines": [
+    "zero_return",
+    "expanding_mean",
+    "previous_return",
+    "rolling_mean_20"
+  ],
+  "direction_only_baselines": [
+    "always_up",
+    "always_down",
+    "always_flat",
+    "historical_majority",
+    "previous_direction"
+  ],
+  "fixed_window": 20,
+  "window_search": false,
+  "wick_rule": "Historical expanding mean of nonnegative upper/lower log wicks, shared by all models",
+  "availability_assumption": "For simulation only, completed prior observed trading-session OHLC is usable at next observed session pre-open. Original available_at fields are preserved, not relabeled as verified.",
+  "references": [
+    "split_ridge",
+    "direct_close_ridge"
+  ],
+  "selection": {
+    "price": "lowest validation close MAE in bps among complete price baselines",
+    "direction": "highest validation close accuracy among complete direction-only baselines",
+    "ties": "fixed method declaration order"
+  },
+  "blocked_baselines": {
+    "overnight_gap": {
+      "status": "unavailable",
+      "information_set": "night_and_overseas",
+      "targets": [
+        "gap"
+      ],
+      "reason": "No frozen night/SOX/TSMC ADR feature histories in this price-only dataset",
+      "required_features": [
+        "taifex_night_return_pct",
+        "sox_return_pct",
+        "tsmc_adr_return_pct"
+      ],
+      "included_in_rankings": false
+    }
+  }
+}

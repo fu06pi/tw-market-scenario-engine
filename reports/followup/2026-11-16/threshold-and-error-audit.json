@@ -1,0 +1,5228 @@
+{
+  "experiment": "threshold-and-error-audit-v1",
+  "direction_sensitivity": [
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.6451612903225806,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.5483870967741935,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.6129032258064516,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.6774193548387096,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "close": {
+        "direction_accuracy": 0.45161290322580644,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.5161290322580645,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.6451612903225806,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "close": {
+        "direction_accuracy": 0.3387096774193548,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.3870967741935484,
+        "actual_flat_fraction": 0.12903225806451613,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.12903225806451613
+      },
+      "close": {
+        "direction_accuracy": 0.24193548387096775,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.3709677419354839,
+        "actual_flat_fraction": 0.25806451612903225,
+        "always_up_accuracy": 0.5,
+        "always_flat_accuracy": 0.25806451612903225
+      },
+      "close": {
+        "direction_accuracy": 0.1774193548387097,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.7741935483870968,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.6774193548387096,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "close": {
+        "direction_accuracy": 0.7419354838709677,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.6451612903225806,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "close": {
+        "direction_accuracy": 0.6935483870967742,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7419354838709677,
+        "actual_flat_fraction": 0.12903225806451613,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.12903225806451613
+      },
+      "close": {
+        "direction_accuracy": 0.6129032258064516,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.7096774193548387,
+        "actual_flat_fraction": 0.25806451612903225,
+        "always_up_accuracy": 0.5,
+        "always_flat_accuracy": 0.25806451612903225
+      },
+      "close": {
+        "direction_accuracy": 0.5806451612903226,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.7903225806451613,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7258064516129032,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.7741935483870968,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.6774193548387096,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "close": {
+        "direction_accuracy": 0.7096774193548387,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.7419354838709677,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.6451612903225806,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "close": {
+        "direction_accuracy": 0.6935483870967742,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.12903225806451613,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.12903225806451613
+      },
+      "close": {
+        "direction_accuracy": 0.6612903225806451,
+        "actual_flat_fraction": 0.04838709677419355,
+        "always_up_accuracy": 0.5645161290322581,
+        "always_flat_accuracy": 0.04838709677419355
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.7258064516129032,
+        "actual_flat_fraction": 0.25806451612903225,
+        "always_up_accuracy": 0.5,
+        "always_flat_accuracy": 0.25806451612903225
+      },
+      "close": {
+        "direction_accuracy": 0.5967741935483871,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "n": 62
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.5586592178770949,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6536312849162011,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.5418994413407822,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5642458100558659,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.5251396648044693,
+        "actual_flat_fraction": 0.0223463687150838,
+        "always_up_accuracy": 0.6312849162011173,
+        "always_flat_accuracy": 0.0223463687150838
+      },
+      "close": {
+        "direction_accuracy": 0.5307262569832403,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.4860335195530726,
+        "actual_flat_fraction": 0.1005586592178771,
+        "always_up_accuracy": 0.5977653631284916,
+        "always_flat_accuracy": 0.1005586592178771
+      },
+      "close": {
+        "direction_accuracy": 0.4972067039106145,
+        "actual_flat_fraction": 0.01675977653631285,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.01675977653631285
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.37988826815642457,
+        "actual_flat_fraction": 0.1787709497206704,
+        "always_up_accuracy": 0.5307262569832403,
+        "always_flat_accuracy": 0.1787709497206704
+      },
+      "close": {
+        "direction_accuracy": 0.4301675977653631,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.441340782122905,
+        "actual_flat_fraction": 0.4245810055865922,
+        "always_up_accuracy": 0.36312849162011174,
+        "always_flat_accuracy": 0.4245810055865922
+      },
+      "close": {
+        "direction_accuracy": 0.2569832402234637,
+        "actual_flat_fraction": 0.0893854748603352,
+        "always_up_accuracy": 0.5083798882681564,
+        "always_flat_accuracy": 0.0893854748603352
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.8659217877094972,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6536312849162011,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7541899441340782,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5642458100558659,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.8379888268156425,
+        "actual_flat_fraction": 0.0223463687150838,
+        "always_up_accuracy": 0.6312849162011173,
+        "always_flat_accuracy": 0.0223463687150838
+      },
+      "close": {
+        "direction_accuracy": 0.7541899441340782,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.8324022346368715,
+        "actual_flat_fraction": 0.1005586592178771,
+        "always_up_accuracy": 0.5977653631284916,
+        "always_flat_accuracy": 0.1005586592178771
+      },
+      "close": {
+        "direction_accuracy": 0.7262569832402235,
+        "actual_flat_fraction": 0.01675977653631285,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.01675977653631285
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7932960893854749,
+        "actual_flat_fraction": 0.1787709497206704,
+        "always_up_accuracy": 0.5307262569832403,
+        "always_flat_accuracy": 0.1787709497206704
+      },
+      "close": {
+        "direction_accuracy": 0.6983240223463687,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.6424581005586593,
+        "actual_flat_fraction": 0.4245810055865922,
+        "always_up_accuracy": 0.36312849162011174,
+        "always_flat_accuracy": 0.4245810055865922
+      },
+      "close": {
+        "direction_accuracy": 0.6536312849162011,
+        "actual_flat_fraction": 0.0893854748603352,
+        "always_up_accuracy": 0.5083798882681564,
+        "always_flat_accuracy": 0.0893854748603352
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.8324022346368715,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6536312849162011,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7821229050279329,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5642458100558659,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.8212290502793296,
+        "actual_flat_fraction": 0.0223463687150838,
+        "always_up_accuracy": 0.6312849162011173,
+        "always_flat_accuracy": 0.0223463687150838
+      },
+      "close": {
+        "direction_accuracy": 0.7597765363128491,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.7988826815642458,
+        "actual_flat_fraction": 0.1005586592178771,
+        "always_up_accuracy": 0.5977653631284916,
+        "always_flat_accuracy": 0.1005586592178771
+      },
+      "close": {
+        "direction_accuracy": 0.7430167597765364,
+        "actual_flat_fraction": 0.01675977653631285,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.01675977653631285
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7597765363128491,
+        "actual_flat_fraction": 0.1787709497206704,
+        "always_up_accuracy": 0.5307262569832403,
+        "always_flat_accuracy": 0.1787709497206704
+      },
+      "close": {
+        "direction_accuracy": 0.7039106145251397,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.6033519553072626,
+        "actual_flat_fraction": 0.4245810055865922,
+        "always_up_accuracy": 0.36312849162011174,
+        "always_flat_accuracy": 0.4245810055865922
+      },
+      "close": {
+        "direction_accuracy": 0.6759776536312849,
+        "actual_flat_fraction": 0.0893854748603352,
+        "always_up_accuracy": 0.5083798882681564,
+        "always_flat_accuracy": 0.0893854748603352
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.5806451612903226,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.5967741935483871,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.4838709677419355,
+        "actual_flat_fraction": 0.03225806451612903,
+        "always_up_accuracy": 0.6612903225806451,
+        "always_flat_accuracy": 0.03225806451612903
+      },
+      "close": {
+        "direction_accuracy": 0.5645161290322581,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.43548387096774194,
+        "actual_flat_fraction": 0.08064516129032258,
+        "always_up_accuracy": 0.6290322580645161,
+        "always_flat_accuracy": 0.08064516129032258
+      },
+      "close": {
+        "direction_accuracy": 0.5483870967741935,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.3548387096774194,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "close": {
+        "direction_accuracy": 0.4032258064516129,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.2903225806451613,
+        "actual_flat_fraction": 0.20967741935483872,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.20967741935483872
+      },
+      "close": {
+        "direction_accuracy": 0.3225806451612903,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.532258064516129,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.7903225806451613,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7258064516129032,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.03225806451612903,
+        "always_up_accuracy": 0.6612903225806451,
+        "always_flat_accuracy": 0.03225806451612903
+      },
+      "close": {
+        "direction_accuracy": 0.7258064516129032,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.08064516129032258,
+        "always_up_accuracy": 0.6290322580645161,
+        "always_flat_accuracy": 0.08064516129032258
+      },
+      "close": {
+        "direction_accuracy": 0.7096774193548387,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7741935483870968,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "close": {
+        "direction_accuracy": 0.6935483870967742,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.7741935483870968,
+        "actual_flat_fraction": 0.20967741935483872,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.20967741935483872
+      },
+      "close": {
+        "direction_accuracy": 0.6290322580645161,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.532258064516129,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.8548387096774194,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6935483870967742,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7419354838709677,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.7903225806451613,
+        "actual_flat_fraction": 0.03225806451612903,
+        "always_up_accuracy": 0.6612903225806451,
+        "always_flat_accuracy": 0.03225806451612903
+      },
+      "close": {
+        "direction_accuracy": 0.7258064516129032,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.7580645161290323,
+        "actual_flat_fraction": 0.08064516129032258,
+        "always_up_accuracy": 0.6290322580645161,
+        "always_flat_accuracy": 0.08064516129032258
+      },
+      "close": {
+        "direction_accuracy": 0.7096774193548387,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.7741935483870968,
+        "actual_flat_fraction": 0.11290322580645161,
+        "always_up_accuracy": 0.6129032258064516,
+        "always_flat_accuracy": 0.11290322580645161
+      },
+      "close": {
+        "direction_accuracy": 0.6935483870967742,
+        "actual_flat_fraction": 0.016129032258064516,
+        "always_up_accuracy": 0.5806451612903226,
+        "always_flat_accuracy": 0.016129032258064516
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.8387096774193549,
+        "actual_flat_fraction": 0.20967741935483872,
+        "always_up_accuracy": 0.5483870967741935,
+        "always_flat_accuracy": 0.20967741935483872
+      },
+      "close": {
+        "direction_accuracy": 0.6451612903225806,
+        "actual_flat_fraction": 0.06451612903225806,
+        "always_up_accuracy": 0.532258064516129,
+        "always_flat_accuracy": 0.06451612903225806
+      },
+      "n": 62
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.547486033519553,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6089385474860335,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.5027932960893855,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5698324022346368,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.49162011173184356,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.6033519553072626,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "close": {
+        "direction_accuracy": 0.46368715083798884,
+        "actual_flat_fraction": 0.0335195530726257,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0335195530726257
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.441340782122905,
+        "actual_flat_fraction": 0.05027932960893855,
+        "always_up_accuracy": 0.5865921787709497,
+        "always_flat_accuracy": 0.05027932960893855
+      },
+      "close": {
+        "direction_accuracy": 0.4301675977653631,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.39106145251396646,
+        "actual_flat_fraction": 0.0670391061452514,
+        "always_up_accuracy": 0.5810055865921788,
+        "always_flat_accuracy": 0.0670391061452514
+      },
+      "close": {
+        "direction_accuracy": 0.37988826815642457,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.27932960893854747,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "close": {
+        "direction_accuracy": 0.19553072625698323,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5027932960893855,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.8938547486033519,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6089385474860335,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7486033519553073,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5698324022346368,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.88268156424581,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.6033519553072626,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "close": {
+        "direction_accuracy": 0.7318435754189944,
+        "actual_flat_fraction": 0.0335195530726257,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0335195530726257
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.8770949720670391,
+        "actual_flat_fraction": 0.05027932960893855,
+        "always_up_accuracy": 0.5865921787709497,
+        "always_flat_accuracy": 0.05027932960893855
+      },
+      "close": {
+        "direction_accuracy": 0.7206703910614525,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.8659217877094972,
+        "actual_flat_fraction": 0.0670391061452514,
+        "always_up_accuracy": 0.5810055865921788,
+        "always_flat_accuracy": 0.0670391061452514
+      },
+      "close": {
+        "direction_accuracy": 0.7150837988826816,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.8491620111731844,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "close": {
+        "direction_accuracy": 0.6871508379888268,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5027932960893855,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 0,
+      "open": {
+        "direction_accuracy": 0.8938547486033519,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.6089385474860335,
+        "always_flat_accuracy": 0.0
+      },
+      "close": {
+        "direction_accuracy": 0.7541899441340782,
+        "actual_flat_fraction": 0.0,
+        "always_up_accuracy": 0.5698324022346368,
+        "always_flat_accuracy": 0.0
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 2,
+      "open": {
+        "direction_accuracy": 0.88268156424581,
+        "actual_flat_fraction": 0.0111731843575419,
+        "always_up_accuracy": 0.6033519553072626,
+        "always_flat_accuracy": 0.0111731843575419
+      },
+      "close": {
+        "direction_accuracy": 0.7486033519553073,
+        "actual_flat_fraction": 0.0335195530726257,
+        "always_up_accuracy": 0.5418994413407822,
+        "always_flat_accuracy": 0.0335195530726257
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 5,
+      "open": {
+        "direction_accuracy": 0.888268156424581,
+        "actual_flat_fraction": 0.05027932960893855,
+        "always_up_accuracy": 0.5865921787709497,
+        "always_flat_accuracy": 0.05027932960893855
+      },
+      "close": {
+        "direction_accuracy": 0.7318435754189944,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 10,
+      "open": {
+        "direction_accuracy": 0.8715083798882681,
+        "actual_flat_fraction": 0.0670391061452514,
+        "always_up_accuracy": 0.5810055865921788,
+        "always_flat_accuracy": 0.0670391061452514
+      },
+      "close": {
+        "direction_accuracy": 0.7318435754189944,
+        "actual_flat_fraction": 0.0446927374301676,
+        "always_up_accuracy": 0.5363128491620112,
+        "always_flat_accuracy": 0.0446927374301676
+      },
+      "n": 179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "threshold_bps": 20,
+      "open": {
+        "direction_accuracy": 0.8491620111731844,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5586592178770949,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "close": {
+        "direction_accuracy": 0.6871508379888268,
+        "actual_flat_fraction": 0.11173184357541899,
+        "always_up_accuracy": 0.5027932960893855,
+        "always_flat_accuracy": 0.11173184357541899
+      },
+      "n": 179
+    }
+  ],
+  "tolerance_hit_rates": [
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3225806451612903
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.45161290322580644
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7419354838709677
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6451612903225806
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8548387096774194
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.06451612903225806
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5806451612903226
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3387096774193548
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7096774193548387
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.06451612903225806
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3709677419354839
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5645161290322581
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.4838709677419355
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.03225806451612903
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.06451612903225806
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.24193548387096775
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.04838709677419355
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.16129032258064516
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3387096774193548
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6129032258064516
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.1935483870967742
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6290322580645161
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.8387096774193549
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.20967741935483872
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.5
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.9354838709677419
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.24193548387096775
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.6935483870967742
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.16129032258064516
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.5
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8387096774193549
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.14516129032258066
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.25806451612903225
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.5645161290322581
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.16129032258064516
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6612903225806451
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8225806451612904
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3709677419354839
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5483870967741935
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.45161290322580644
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7258064516129032
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.5967741935483871
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.8387096774193549
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.1935483870967742
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.4032258064516129
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8709677419354839
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.1935483870967742
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3387096774193548
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7258064516129032
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.4838709677419355
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8387096774193549
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.5645161290322581
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7903225806451613
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.43548387096774194
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6935483870967742
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8548387096774194
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.14516129032258066
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.24193548387096775
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.4032258064516129
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.6451612903225806
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.16129032258064516
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3064516129032258
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.4838709677419355
+    },
+    {
+      "market": "TAIEX",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8064516129032258
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.12290502793296089
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.3128491620111732
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.49162011173184356
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.770949720670391
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.21787709497206703
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.5139664804469274
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.7541899441340782
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.9329608938547486
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.05027932960893855
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.1340782122905028
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.3016759776536313
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.0782122905027933
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.13966480446927373
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2737430167597765
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.5754189944134078
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0335195530726257
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.1564245810055866
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.4022346368715084
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.12849162011173185
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.37988826815642457
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6256983240223464
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0446927374301676
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.11173184357541899
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.22905027932960895
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.055865921787709494
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.1005586592178771
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2346368715083799
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.4748603351955307
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.11173184357541899
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.24581005586592178
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.44692737430167595
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.7094972067039106
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.2011173184357542
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.441340782122905
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.6983240223463687
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.9497206703910615
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.09497206703910614
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.1452513966480447
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.24581005586592178
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.45251396648044695
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.12290502793296089
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.24022346368715083
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.4692737430167598
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6927374301675978
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.1564245810055866
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.2905027932960894
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.4692737430167598
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.1452513966480447
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.2905027932960894
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.46368715083798884
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.7150837988826816
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.05027932960893855
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.1005586592178771
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.16759776536312848
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.2905027932960894
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.16201117318435754
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2905027932960894
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.5865921787709497
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.03910614525139665
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.0670391061452514
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.1787709497206704
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.3687150837988827
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.055865921787709494
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.18994413407821228
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.37988826815642457
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6368715083798883
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.11731843575418995
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.19553072625698323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.3687150837988827
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.2122905027932961
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.37988826815642457
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6703910614525139
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0446927374301676
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.10614525139664804
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.18435754189944134
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.39106145251396646
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.17318435754189945
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.37988826815642457
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6927374301675978
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.1005586592178771
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.19553072625698323
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.36312849162011174
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.2011173184357542
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.3687150837988827
+    },
+    {
+      "market": "TAIEX",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.5977653631284916
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.24193548387096775
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.4032258064516129
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.6290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3064516129032258
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.45161290322580644
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6935483870967742
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.14516129032258066
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.2903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.20967741935483872
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.1935483870967742
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.5645161290322581
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3709677419354839
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7096774193548387
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.43548387096774194
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.1935483870967742
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.3064516129032258
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6129032258064516
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.41935483870967744
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.6774193548387096
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.9032258064516129
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.24193548387096775
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.4838709677419355
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.9354838709677419
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.20967741935483872
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.45161290322580644
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.2903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8870967741935484
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.22580645161290322
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.5161290322580645
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7580645161290323
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3225806451612903
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6451612903225806
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8387096774193549
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.12903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3548387096774194
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.6451612903225806
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.08064516129032258
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.20967741935483872
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.43548387096774194
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7741935483870968
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.25806451612903225
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.5
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.8870967741935484
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.2903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.6290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.8709677419354839
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.9354838709677419
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.16129032258064516
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.45161290322580644
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7903225806451613
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.3548387096774194
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.5967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8870967741935484
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.25806451612903225
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.5645161290322581
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.7419354838709677
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.11290322580645161
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.4032258064516129
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.6774193548387096
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.8225806451612904
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.06451612903225806
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.1774193548387097
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.3870967741935484
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 62,
+      "hit_fraction": 0.6451612903225806
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 62,
+      "hit_fraction": 0.0967741935483871
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 62,
+      "hit_fraction": 0.27419354838709675
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 62,
+      "hit_fraction": 0.46774193548387094
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "validation",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 62,
+      "hit_fraction": 0.7419354838709677
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0335195530726257
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.1005586592178771
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.26256983240223464
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.05027932960893855
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.11173184357541899
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2569832402234637
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.4692737430167598
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.055865921787709494
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.09497206703910614
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.16201117318435754
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.26256983240223464
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.09497206703910614
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.15083798882681565
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2569832402234637
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.4692737430167598
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.03910614525139665
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.0670391061452514
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.12290502793296089
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.2681564245810056
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.11731843575418995
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.22905027932960895
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.4581005586592179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0223463687150838
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.061452513966480445
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.11173184357541899
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.24581005586592178
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.03910614525139665
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.12849162011173185
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.22346368715083798
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "without_night",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.441340782122905
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.1340782122905028
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2681564245810056
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.4748603351955307
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.6871508379888268
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.21787709497206703
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.4581005586592179
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.6983240223463687
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.888268156424581
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.05027932960893855
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.11173184357541899
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.22905027932960895
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.41899441340782123
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.24022346368715083
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.4022346368715084
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.659217877094972
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.08379888268156424
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.11731843575418995
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.22346368715083798
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.44692737430167595
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.10614525139664804
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.2122905027932961
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.44692737430167595
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6983240223463687
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.0446927374301676
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.08379888268156424
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.18435754189944134
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.3463687150837989
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.1787709497206704
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.39106145251396646
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "with_night_gap_only",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6089385474860335
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.1564245810055866
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.2905027932960894
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.48044692737430167
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.7039106145251397
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.2569832402234637
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.4860335195530726
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.6927374301675978
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "open",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.9106145251396648
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.15083798882681565
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.2346368715083799
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.4134078212290503
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.12849162011173185
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.24581005586592178
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.4134078212290503
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "high",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.6871508379888268
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.12849162011173185
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.26256983240223464
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.4860335195530726
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.10614525139664804
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.24022346368715083
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.4860335195530726
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "low",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.7150837988826816
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.07262569832402235
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.0893854748603352
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.17318435754189945
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "points",
+      "threshold": 200,
+      "n": 179,
+      "hit_fraction": 0.33519553072625696
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 10,
+      "n": 179,
+      "hit_fraction": 0.08379888268156424
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 25,
+      "n": 179,
+      "hit_fraction": 0.17318435754189945
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 50,
+      "n": 179,
+      "hit_fraction": 0.35195530726256985
+    },
+    {
+      "market": "TX_selected_monthly",
+      "phase": "evaluation_seen",
+      "method": "night_carry_with_mean_body",
+      "field": "close",
+      "unit": "bps",
+      "threshold": 100,
+      "n": 179,
+      "hit_fraction": 0.5865921787709497
+    }
+  ],
+  "audited_error_cases": [
+    {
+      "market": "TAIEX",
+      "date": "2026-07-31",
+      "contract": "202608",
+      "close_absolute_error_points": 2346.7502221830873,
+      "close_absolute_error_bps": 587.6674910871606,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": -234.2411685217073,
+      "body_error_log_bp": -325.3691976605913,
+      "close_error_log_bp": -559.6103661822979,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TAIEX",
+      "date": "2026-07-17",
+      "contract": "202608",
+      "close_absolute_error_points": 2631.979812928148,
+      "close_absolute_error_bps": 576.8725406407085,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 2.855445509274794,
+      "body_error_log_bp": 595.6736510789034,
+      "close_error_log_bp": 598.5290965881773,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TAIEX",
+      "date": "2026-07-29",
+      "contract": "202608",
+      "close_absolute_error_points": 1874.566775671803,
+      "close_absolute_error_bps": 450.580620332541,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 77.44569514420539,
+      "body_error_log_bp": 380.10814226842797,
+      "close_error_log_bp": 457.5538374126345,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TAIEX",
+      "date": "2026-07-28",
+      "contract": "202608",
+      "close_absolute_error_points": 1784.106156615555,
+      "close_absolute_error_bps": 408.87802812783957,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 32.448602938505175,
+      "body_error_log_bp": 387.4480763127498,
+      "close_error_log_bp": 419.89667925125445,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TAIEX",
+      "date": "2026-04-08",
+      "contract": "202604",
+      "close_absolute_error_points": 1336.4850237856153,
+      "close_absolute_error_bps": 402.1944818797138,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 7.767003617369416,
+      "body_error_log_bp": -399.8271986619323,
+      "close_error_log_bp": -392.0601950445624,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TX_selected_monthly",
+      "date": "2026-07-31",
+      "contract": "202608",
+      "close_absolute_error_points": 1825.0267253342245,
+      "close_absolute_error_bps": 453.19759755009323,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": -84.31471553828577,
+      "body_error_log_bp": -342.5023088729001,
+      "close_error_log_bp": -426.81702441118625,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TX_selected_monthly",
+      "date": "2026-04-08",
+      "contract": "202604",
+      "close_absolute_error_points": 1501.9549235373051,
+      "close_absolute_error_bps": 452.9554339809134,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": -341.696369574098,
+      "body_error_log_bp": -96.96468168136757,
+      "close_error_log_bp": -438.6610512554652,
+      "dominant_component": "gap",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TX_selected_monthly",
+      "date": "2026-07-17",
+      "contract": "202608",
+      "close_absolute_error_points": 1939.5759090146312,
+      "close_absolute_error_bps": 424.41485974061897,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 100.39725765516951,
+      "body_error_log_bp": 343.56747412966104,
+      "close_error_log_bp": 443.9647317848312,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TX_selected_monthly",
+      "date": "2026-07-29",
+      "contract": "202608",
+      "close_absolute_error_points": 1580.0075083215415,
+      "close_absolute_error_bps": 379.69084380398886,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 2.27131912579193,
+      "body_error_log_bp": 381.4403071527445,
+      "close_error_log_bp": 383.71162627853727,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    },
+    {
+      "market": "TX_selected_monthly",
+      "date": "2026-07-07",
+      "contract": "202607",
+      "close_absolute_error_points": 1633.137150368224,
+      "close_absolute_error_bps": 348.3208527851003,
+      "rollover": false,
+      "night_age_hours": 3.5,
+      "checks": {
+        "official_daytime_OHLC_matches": true,
+        "own_market_or_same_contract_reference": true,
+        "date_and_historical_lags_precede_target": true,
+        "fixed_model_replay_matches": true,
+        "component_roundtrip_coherent": true
+      },
+      "gap_error_log_bp": 77.63265504435732,
+      "body_error_log_bp": 272.9252774143208,
+      "close_error_log_bp": 350.55793245867903,
+      "dominant_component": "body",
+      "interpretation": "exact algebraic error location, not market/event causation",
+      "historical_availability_proven": false,
+      "event_cause_proven": false
+    }
+  ],
+  "original_policy_unchanged": true,
+  "threshold_selected": false,
+  "historical_publication_verified": false,
+  "new_independent_test": false,
+  "audit_replays": 10,
+  "audit_ridge_head_fits": 20,
+  "new_hyperparameter_search": false,
+  "hash_version": "sha256-json-v2",
+  "snapshot_hash": "ac0e470c67862ef33511e12eb2c29a181170cc0165fbfdf2821c28f0633b30d4"
+}

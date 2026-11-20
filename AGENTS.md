@@ -1,5 +1,15 @@
 # Codex project instructions
 
+## Research follow-up — 2026-11-16
+
+The user also authorizes progress on the remaining four gaps. A fixed TimesFM3 zero-shot comparison now covers 179 common dates in each market with two predeclared variants; this is retrospective, not full-model fine-tuning or new independent evidence. Threshold sensitivity does not select a new threshold. Large-error component attribution is algebra, not market causation. The bounded independent news trial uses the frozen protocol and immutable GitHub comment receipts; keep original tasks/Sheets unchanged, use the exact recorded code commit, never backdate a prediction, and do not mistake a scheduled run or afternoon preflight for a completed forward sample.
+
+## Current delivery priority — 2026-11-16
+
+The user confirms the professor's priority: freeze existing research and complete the project flow, information timeline, per-target OHLC actual/predicted figures, MAE/RMSE and common-date comparisons, a usable demonstration and presentation before further tuning. ARIMA and regime switching remain later extensions. Preserve the original numerical acceptance targets, but do not make an academic presentation depend on reaching them or hide negative results.
+
+Differentiate the real local TimesFM output-head pilot (8 training / 8 validation windows, recorded parameter updates) from the comparable 179-day night/Ridge study; do not claim full-model fine-tuning or combine unequal denominators. News explanation leaves frozen prices unchanged. Independent news-direction research uses separate immutable decisions and the same cutoff/neutral policy; no genuine improvement claim without paired evidence. Do not publish the private transcript, full licensed datasets or derivative weights.
+
 ## Current decision and scope — 2026-10-11
 Work in fu06pi/tw-market-scenario-engine. Rebuild its existing V1 into a TEJ-backed TAIEX and contract-specific TX daytime OHLC forecasting engine, researching TimesFM 3.0 historical fine-tuning and zero-shot variants against naive, night-session regression and ARIMA/ARIMAX baselines. Frozen V1 forecasts feed the original V0 morning report and post-close review. “V01” is the user's name for that existing report flow; inspect the real interface before mapping it to a module.
 

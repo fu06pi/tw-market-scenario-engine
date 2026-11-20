@@ -1,0 +1,1503 @@
+{
+  "audit_version": "eligibility-v2",
+  "runtime": {
+    "python": "3.12.14",
+    "packages": {
+      "pydantic": "2.14.1",
+      "numpy": "2.5.4",
+      "scikit-learn": "1.9.1",
+      "PyYAML": "6.0.3",
+      "typer": "0.27.3"
+    }
+  },
+  "implementation_sha256": {
+    "audit.py": "ba8023ec8acce807dc0b68c32586c5cbc2f9a11ffb04ca198ded763f7873645d",
+    "snapshot.py": "e7de2dffb99eecbae02bb52f88e43ef8a1b75d84e481fe1231fe91d6aa1ef224",
+    "policy.py": "7432a46e6be0ec2aeeef3df236e9fe3e71e80e46d5e866ae656483c7815cec65",
+    "metrics.py": "bae48794a808dc6469d15aae54dca982d8e7d45b70dfc157278e61840dbbf5bd",
+    "models.py": "58436e512a3d269e309c58d1f2154ed96a6629769607502dcf5f31baee925b94",
+    "split_forecast.py": "5ea2f00d2650c7c06dc58d79703dbc7fa6541d185a072c8b9074ca6e1697ee6a"
+  },
+  "scoring_policy": {
+    "version": "1.0",
+    "flat_threshold_bps": 5.0,
+    "bull_close_return_bps": 50.0,
+    "bear_close_return_bps": -50.0
+  },
+  "scope": "repository records; actual market data not externally revalidated",
+  "coverage_scope": "observed files only; scheduled trading-day coverage not established",
+  "persistence_caveat": "Git metadata is not independent publication-time attestation",
+  "prediction_count": 20,
+  "eligible_count": 6,
+  "rows": [
+    {
+      "prediction_path": "predictions/2026-09-30.json",
+      "scores": {
+        "trading_date": "2026-09-30",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 28.453584526020315,
+        "open_gap_mae_bps": 91.54641547397969,
+        "close_return_bps_realized": 64.69815644789767,
+        "close_return_mae_bps": 10.301843552102326,
+        "mfe_bps": 156.98493196584894,
+        "mae_bps": 28.453584526020315,
+        "scenario_outcome": "bull",
+        "brier_score": 0.1616666666666667,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -44.466403162054526,
+        "session_body_realized_bps": 36.141735728629776,
+        "session_body_mae_bps": 80.6081388906843,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-09-30",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "v1-live-2026-09-30",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-09-30T08:54:34+08:00",
+        "source": "repository_git_history",
+        "commit": "83295699970e5e1a3788bb9c30ecabdbec15546f",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-01.json",
+      "scores": {
+        "trading_date": "2026-10-01",
+        "open_direction_realized": "flat",
+        "open_direction_hit": 0.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 4.557768199628942,
+        "open_gap_mae_bps": 50.44223180037106,
+        "close_return_bps_realized": 86.22421340951814,
+        "close_return_mae_bps": 41.22421340951814,
+        "mfe_bps": 86.22421340951814,
+        "mae_bps": -9.743402865198814,
+        "scenario_outcome": "bull",
+        "brier_score": 0.25999999999999995,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -9.945300845352056,
+        "session_body_realized_bps": 81.62924049424092,
+        "session_body_mae_bps": 91.57454133959297,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-01",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1",
+      "config_hash": null,
+      "integrity": {
+        "valid": false,
+        "method": "invalid",
+        "raw_match": false,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-01T08:56:59+08:00",
+        "source": "repository_git_history",
+        "commit": "ad606f8fc015d1ac2ffa33ebec7425d2fa86ab3c",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "integrity_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-02.json",
+      "scores": {
+        "trading_date": "2026-10-02",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 0.0,
+        "open_gap_bps_realized": 7.685070922491821,
+        "open_gap_mae_bps": 17.31492907750818,
+        "close_return_bps_realized": 25.28255974904914,
+        "close_return_mae_bps": 20.28255974904914,
+        "mfe_bps": 28.56670738761613,
+        "mae_bps": -30.54174579745994,
+        "scenario_outcome": "base",
+        "brier_score": 0.125,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "flat",
+        "session_body_predicted_bps": -19.95012468827939,
+        "session_body_realized_bps": 17.583975416737285,
+        "session_body_mae_bps": 37.53410010501668,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-02",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-02T15:21:38+08:00",
+        "source": "repository_git_history",
+        "commit": "5e43a2c1625649e5de948ba6114e9213a1548aba",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion",
+          "evaluation_late_or_reconstructed",
+          "persistence_contract_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-05.json",
+      "scores": {
+        "trading_date": "2026-10-05",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 20.465907276505657,
+        "open_gap_mae_bps": 129.53409272349435,
+        "close_return_bps_realized": 255.03478647257438,
+        "close_return_mae_bps": 150.03478647257438,
+        "mfe_bps": 267.1274332274254,
+        "mae_bps": 20.465907276505657,
+        "scenario_outcome": "bull",
+        "brier_score": 0.11166666666666665,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -44.33497536945774,
+        "session_body_realized_bps": 234.0897931958774,
+        "session_body_mae_bps": 278.42476856533517,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-05",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-05T11:35:15+08:00",
+        "source": "repository_git_history",
+        "commit": "0e0c7283c28f05460a60467cab4dd11569ec971e",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion",
+          "evaluation_late_or_reconstructed",
+          "generation_contract_failed",
+          "persistence_contract_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-06.json",
+      "scores": {
+        "trading_date": "2026-10-06",
+        "open_direction_realized": "flat",
+        "open_direction_hit": 0.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 4.894186599464501,
+        "open_gap_mae_bps": 40.105813400535496,
+        "close_return_bps_realized": 22.230027172491784,
+        "close_return_mae_bps": 7.769972827508216,
+        "mfe_bps": 51.673598588992675,
+        "mae_bps": -46.739180287109775,
+        "scenario_outcome": "base",
+        "brier_score": 0.155,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -14.932802389249211,
+        "session_body_realized_bps": 17.327360239598466,
+        "session_body_mae_bps": 32.26016262884768,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-06",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1-late-reconstruction",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-06T14:09:56+08:00",
+        "source": "repository_git_history",
+        "commit": "79047d722e98e3e346addcde662762a9bd4b6efb",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion",
+          "evaluation_late_or_reconstructed",
+          "generation_contract_failed",
+          "manifest_explicit_exclusion",
+          "manifest_late_or_reconstructed",
+          "persistence_contract_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-07.json",
+      "scores": {
+        "trading_date": "2026-10-07",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "flat",
+        "close_direction_hit": 0.0,
+        "open_gap_bps_realized": 6.978767646377282,
+        "open_gap_mae_bps": 1.0212323536227181,
+        "close_return_bps_realized": -3.247525467885426,
+        "close_return_mae_bps": 18.247525467885424,
+        "mfe_bps": 28.970817431062112,
+        "mae_bps": -51.18766502316796,
+        "scenario_outcome": "base",
+        "brier_score": 0.10686666666666665,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": 6.994404476421412,
+        "session_body_realized_bps": -10.219161398967724,
+        "session_body_mae_bps": 17.213565875389136,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-07",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-07T08:59:54+08:00",
+        "source": "repository_git_history",
+        "commit": "d76617b54eb85291b34d9460d06f1b64904003f6",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-08.json",
+      "scores": {
+        "trading_date": "2026-10-08",
+        "open_direction_realized": "flat",
+        "open_direction_hit": 0.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -4.680124249167861,
+        "open_gap_mae_bps": 50.31987575083214,
+        "close_return_bps_realized": -98.96926838876219,
+        "close_return_mae_bps": 63.96926838876219,
+        "mfe_bps": -4.680124249167861,
+        "mae_bps": -123.79942565579616,
+        "scenario_outcome": "bear",
+        "brier_score": 0.21146666666666666,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": 20.110608345902392,
+        "session_body_realized_bps": -94.3332932929386,
+        "session_body_mae_bps": 114.443901638841,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-08",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1-late-reconstruction",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-08T09:03:32+08:00",
+        "source": "repository_git_history",
+        "commit": "fb4feb917b8a0a4605c8485aede19d3f172c8795",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion",
+          "evaluation_late_or_reconstructed",
+          "generation_contract_failed",
+          "manifest_explicit_exclusion",
+          "manifest_late_or_reconstructed",
+          "persistence_contract_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-12.json",
+      "scores": {
+        "trading_date": "2026-10-12",
+        "open_direction_realized": "down",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "flat",
+        "close_direction_hit": 0.0,
+        "open_gap_bps_realized": -8.38716585174315,
+        "open_gap_mae_bps": 71.61283414825685,
+        "close_return_bps_realized": -2.327965763492257,
+        "close_return_mae_bps": 87.67203423650774,
+        "mfe_bps": 20.168943801122108,
+        "mae_bps": -110.44048032341713,
+        "scenario_outcome": "base",
+        "brier_score": 0.20646666666666666,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": -10.080645161290036,
+        "session_body_realized_bps": 6.064286305753619,
+        "session_body_mae_bps": 16.144931467043655,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-12",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-12T08:58:09+08:00",
+        "source": "repository_git_history",
+        "commit": "33ea4fbf7752fb4613c67d518e2b8a35b3bf2cd9",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion"
+        ],
+        "warnings": [
+          "conflicting_historical_inclusion_flags"
+        ],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-14.json",
+      "scores": {
+        "trading_date": "2026-10-14",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 8.54962350006705,
+        "open_gap_mae_bps": 36.45037649993295,
+        "close_return_bps_realized": 58.856493545582644,
+        "close_return_mae_bps": 33.856493545582644,
+        "mfe_bps": 148.48790816798464,
+        "mae_bps": 8.54962350006705,
+        "scenario_outcome": "bull",
+        "brier_score": 0.25999999999999995,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -19.910403185664507,
+        "session_body_realized_bps": 50.263896306610434,
+        "session_body_mae_bps": 70.17429949227494,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-14",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-14T08:53:38+08:00",
+        "source": "repository_git_history",
+        "commit": "d917e62be3a2ea427b8772c0ca5ff47591b3a7b9",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion"
+        ],
+        "warnings": [
+          "conflicting_historical_inclusion_flags"
+        ],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-15.json",
+      "scores": {
+        "trading_date": "2026-10-15",
+        "open_direction_realized": "down",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -49.98989220338257,
+        "open_gap_mae_bps": 40.01010779661743,
+        "close_return_bps_realized": -340.5515134651682,
+        "close_return_mae_bps": 235.55151346516823,
+        "mfe_bps": -49.98989220338257,
+        "mae_bps": -376.43573384762874,
+        "scenario_outcome": "bear",
+        "brier_score": 0.12826666666666667,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": -15.136226034307976,
+        "session_body_realized_bps": -292.0214332587534,
+        "session_body_mae_bps": 276.8852072244454,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-15",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-15T09:01:32+08:00",
+        "source": "repository_git_history",
+        "commit": "69a5a76efa8c9d1d392bdcad63c1f18b3ce71bf6",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion",
+          "evaluation_late_or_reconstructed",
+          "generation_contract_failed",
+          "manifest_explicit_exclusion",
+          "manifest_late_or_reconstructed",
+          "persistence_contract_failed"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-16.json",
+      "scores": {
+        "trading_date": "2026-10-16",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 5.356625428172279,
+        "open_gap_mae_bps": 39.64337457182772,
+        "close_return_bps_realized": 30.102276203871625,
+        "close_return_mae_bps": 0.10227620387162517,
+        "mfe_bps": 117.25176160802597,
+        "mae_bps": 5.356625428172279,
+        "scenario_outcome": "base",
+        "brier_score": 0.12526666666666667,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -14.932802389249211,
+        "session_body_realized_bps": 24.732402554057398,
+        "session_body_mae_bps": 39.665204943306605,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-16",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-16T08:55:44+08:00",
+        "source": "repository_git_history",
+        "commit": "b98ad0f257dfef1ee8a0c6970545e5582a0ef29f",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion"
+        ],
+        "warnings": [
+          "conflicting_historical_inclusion_flags"
+        ],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-19.json",
+      "scores": {
+        "trading_date": "2026-10-19",
+        "open_direction_realized": "down",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -56.593689067114816,
+        "open_gap_mae_bps": 63.406310932885184,
+        "close_return_bps_realized": -61.3823531784119,
+        "close_return_mae_bps": 53.6176468215881,
+        "mfe_bps": -56.593689067114816,
+        "mae_bps": -199.7951232889972,
+        "scenario_outcome": "bear",
+        "brier_score": 0.13806666666666667,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": 5.060728744938903,
+        "session_body_realized_bps": -4.815919174530059,
+        "session_body_mae_bps": 9.876647919468962,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-19",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_normalized",
+        "raw_match": false,
+        "normalized_match": true
+      },
+      "persistence": {
+        "recorded_at": "2026-10-19T08:57:18+08:00",
+        "source": "repository_git_history",
+        "commit": "d585f77017eeb3d846d9923da5bdcfaf09560b88",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_explicit_exclusion"
+        ],
+        "warnings": [
+          "conflicting_historical_inclusion_flags"
+        ],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-20.json",
+      "scores": {
+        "trading_date": "2026-10-20",
+        "open_direction_realized": "down",
+        "open_direction_hit": 0.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 0.0,
+        "open_gap_bps_realized": -23.38853805725849,
+        "open_gap_mae_bps": 31.38853805725849,
+        "close_return_bps_realized": -113.0129203999486,
+        "close_return_mae_bps": 138.0129203999486,
+        "mfe_bps": 31.14556209378172,
+        "mae_bps": -140.75624149973765,
+        "scenario_outcome": "bear",
+        "brier_score": 0.34160000000000007,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": 16.986410871302482,
+        "session_body_realized_bps": -89.83449208639138,
+        "session_body_mae_bps": 106.82090295769386,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-20",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-20T08:53:45+08:00",
+        "source": "repository_git_history",
+        "commit": "d59f891ed53e1146765f1560378b75b7f334d964",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_formal_hash_verified_aggregate_excluded"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-21.json",
+      "scores": {
+        "trading_date": "2026-10-21",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 34.86493509916144,
+        "open_gap_mae_bps": 30.135064900838557,
+        "close_return_bps_realized": 128.49478311266927,
+        "close_return_mae_bps": 108.49478311266927,
+        "mfe_bps": 207.80711007058807,
+        "mae_bps": 34.86493509916144,
+        "scenario_outcome": "bull",
+        "brier_score": 0.27226666666666666,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -44.7093889716832,
+        "session_body_realized_bps": 93.30454233221985,
+        "session_body_mae_bps": 138.01393130390306,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-21",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-21T08:56:19+08:00",
+        "source": "repository_git_history",
+        "commit": "60dc709b97632b9e430fbb85935c9b8076830519",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_formal_hash_verified_aggregate_excluded",
+          "generation_after_recorded_persistence"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-22.json",
+      "scores": {
+        "trading_date": "2026-10-22",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 0.0,
+        "open_gap_bps_realized": 11.725872226382439,
+        "open_gap_mae_bps": 23.27412777361756,
+        "close_return_bps_realized": -180.50335940480778,
+        "close_return_mae_bps": 195.50335940480778,
+        "mfe_bps": 94.78164561889102,
+        "mae_bps": -180.50335940480778,
+        "scenario_outcome": "bear",
+        "brier_score": 0.3280666666666667,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -19.930244145490718,
+        "session_body_realized_bps": -192.00409008845898,
+        "session_body_mae_bps": 172.07384594296826,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-22",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-22T08:53:25+08:00",
+        "source": "repository_git_history",
+        "commit": "3ad5ba1ab5cd58153da43cd011848b1f91f6b210",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "evaluation_formal_hash_verified_aggregate_excluded"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-27.json",
+      "scores": null,
+      "trading_date": "2026-10-27",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-27T08:57:14+08:00",
+        "source": "repository_git_history",
+        "commit": "1594afd513f74bfd1478f6525f3cea80596a1904",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": false,
+        "cohort": "legacy_preopen",
+        "reasons": [
+          "missing_actual"
+        ],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-28.json",
+      "scores": {
+        "trading_date": "2026-10-28",
+        "open_direction_realized": "up",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "up",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": 66.50435404370381,
+        "open_gap_mae_bps": 43.49564595629619,
+        "close_return_bps_realized": 203.78022237393267,
+        "close_return_mae_bps": 168.78022237393267,
+        "mfe_bps": 209.17762689052876,
+        "mae_bps": 66.50435404370381,
+        "scenario_outcome": "bull",
+        "brier_score": 0.23706666666666662,
+        "open_direction_predicted": "up",
+        "close_direction_predicted": "up",
+        "session_body_predicted_bps": -74.18397626112628,
+        "session_body_realized_bps": 136.36895540117376,
+        "session_body_mae_bps": 210.55293166230004,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-28",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-28T08:54:05+08:00",
+        "source": "repository_git_history",
+        "commit": "07b7a554574fd45aebace5323b70adaadcccd81d",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-29.json",
+      "scores": {
+        "trading_date": "2026-10-29",
+        "open_direction_realized": "flat",
+        "open_direction_hit": 0.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -4.403049776360302,
+        "open_gap_mae_bps": 15.596950223639698,
+        "close_return_bps_realized": -141.86069354305775,
+        "close_return_mae_bps": 111.86069354305775,
+        "mfe_bps": -4.279738870022198,
+        "mae_bps": -208.4613392669976,
+        "scenario_outcome": "bear",
+        "brier_score": 0.25999999999999995,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": -10.020040080159776,
+        "session_body_realized_bps": -137.5181937119041,
+        "session_body_mae_bps": 127.49815363174433,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-29",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-29T08:53:32+08:00",
+        "source": "repository_git_history",
+        "commit": "a7f2b8b700f0a55f99b3acee401a55c7132ca8cf",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-10-30.json",
+      "scores": {
+        "trading_date": "2026-10-30",
+        "open_direction_realized": "down",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -49.28795149620413,
+        "open_gap_mae_bps": 55.71204850379587,
+        "close_return_bps_realized": -249.41592677588332,
+        "close_return_mae_bps": 174.41592677588332,
+        "mfe_bps": -49.28795149620413,
+        "mae_bps": -354.13610971108955,
+        "scenario_outcome": "bear",
+        "brier_score": 0.21146666666666666,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": 30.318342597270842,
+        "session_body_realized_bps": -201.11925086785166,
+        "session_body_mae_bps": 231.43759346512252,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-10-30",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-10-30T08:54:42+08:00",
+        "source": "repository_git_history",
+        "commit": "49ed8b427ca2a1a22ceb15a64fc349e00d922084",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    },
+    {
+      "prediction_path": "predictions/2026-11-02.json",
+      "scores": {
+        "trading_date": "2026-11-02",
+        "open_direction_realized": "down",
+        "open_direction_hit": 1.0,
+        "close_direction_realized": "down",
+        "close_direction_hit": 1.0,
+        "open_gap_bps_realized": -39.21540004021118,
+        "open_gap_mae_bps": 115.78459995978882,
+        "close_return_bps_realized": -64.51630026919952,
+        "close_return_mae_bps": 110.48369973080048,
+        "mfe_bps": -12.310937203825478,
+        "mae_bps": -179.76047419447582,
+        "scenario_outcome": "bear",
+        "brier_score": 0.11526666666666664,
+        "open_direction_predicted": "down",
+        "close_direction_predicted": "down",
+        "session_body_predicted_bps": -20.31488065007636,
+        "session_body_realized_bps": -25.400509342498047,
+        "session_body_mae_bps": 5.085628692421686,
+        "session_body_source": "derived_legacy_targets_not_independent_head"
+      },
+      "trading_date": "2026-11-02",
+      "market": "TAIEX",
+      "contract": null,
+      "schema_version": "legacy",
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "integrity": {
+        "valid": true,
+        "method": "legacy_raw",
+        "raw_match": true,
+        "normalized_match": false
+      },
+      "persistence": {
+        "recorded_at": "2026-11-02T08:55:57+08:00",
+        "source": "repository_git_history",
+        "commit": "a24e55751fa9d9b76bedd81ce1a14aec85e1ca8b",
+        "content_changed": false,
+        "limitation": "Git metadata is not independent public-publication attestation."
+      },
+      "eligibility": {
+        "eligible": true,
+        "cohort": "legacy_preopen",
+        "reasons": [],
+        "warnings": [],
+        "new_ohlc_acceptance_proven": false
+      }
+    }
+  ],
+  "aggregates": [
+    {
+      "schema_version": "legacy",
+      "market": "TAIEX",
+      "contract": null,
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "v1-live-2026-09-30",
+      "config_hash": null,
+      "observed_forecast_count": 1,
+      "eligible_count": 1,
+      "excluded_count": 0,
+      "metrics": {
+        "open_direction_hit": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "close_direction_hit": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "open_gap_mae_bps": {
+          "mean": 91.54641547397969,
+          "n": 1
+        },
+        "session_body_mae_bps": {
+          "mean": 80.6081388906843,
+          "n": 1
+        },
+        "close_return_mae_bps": {
+          "mean": 10.301843552102326,
+          "n": 1
+        }
+      },
+      "direction_confusion_matrices": {
+        "open": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 1,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        },
+        "close": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 1,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "schema_version": "legacy",
+      "market": "TAIEX",
+      "contract": null,
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1",
+      "config_hash": null,
+      "observed_forecast_count": 4,
+      "eligible_count": 1,
+      "excluded_count": 3,
+      "metrics": {
+        "open_direction_hit": {
+          "mean": 1.0,
+          "n": 1
+        },
+        "close_direction_hit": {
+          "mean": 0.0,
+          "n": 1
+        },
+        "open_gap_mae_bps": {
+          "mean": 1.0212323536227181,
+          "n": 1
+        },
+        "session_body_mae_bps": {
+          "mean": 17.213565875389136,
+          "n": 1
+        },
+        "close_return_mae_bps": {
+          "mean": 18.247525467885424,
+          "n": 1
+        }
+      },
+      "direction_confusion_matrices": {
+        "open": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 1,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        },
+        "close": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 0,
+              "flat": 1,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "schema_version": "legacy",
+      "market": "TAIEX",
+      "contract": null,
+      "model_version": "v1.0.0-alpha",
+      "feature_version": "v1.0.0-alpha",
+      "prompt_version": "automation-v1-late-reconstruction",
+      "config_hash": null,
+      "observed_forecast_count": 2,
+      "eligible_count": 0,
+      "excluded_count": 2,
+      "metrics": {
+        "open_direction_hit": {
+          "mean": null,
+          "n": 0
+        },
+        "close_direction_hit": {
+          "mean": null,
+          "n": 0
+        },
+        "open_gap_mae_bps": {
+          "mean": null,
+          "n": 0
+        },
+        "session_body_mae_bps": {
+          "mean": null,
+          "n": 0
+        },
+        "close_return_mae_bps": {
+          "mean": null,
+          "n": 0
+        }
+      },
+      "direction_confusion_matrices": {
+        "open": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        },
+        "close": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "schema_version": "legacy",
+      "market": "TAIEX",
+      "contract": null,
+      "model_version": "v1.0.0-alpha-legacy-compat",
+      "feature_version": "legacy-scenario-features-v1",
+      "prompt_version": "automation-v1-legacy-compat",
+      "config_hash": null,
+      "observed_forecast_count": 5,
+      "eligible_count": 0,
+      "excluded_count": 5,
+      "metrics": {
+        "open_direction_hit": {
+          "mean": null,
+          "n": 0
+        },
+        "close_direction_hit": {
+          "mean": null,
+          "n": 0
+        },
+        "open_gap_mae_bps": {
+          "mean": null,
+          "n": 0
+        },
+        "session_body_mae_bps": {
+          "mean": null,
+          "n": 0
+        },
+        "close_return_mae_bps": {
+          "mean": null,
+          "n": 0
+        }
+      },
+      "direction_confusion_matrices": {
+        "open": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        },
+        "close": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            }
+          }
+        }
+      }
+    },
+    {
+      "schema_version": "legacy",
+      "market": "TAIEX",
+      "contract": null,
+      "model_version": "v1.0.0-alpha-legacy-scenario-compatibility",
+      "feature_version": "features-v1",
+      "prompt_version": "scenario-prompt-v1-cutoff-audited",
+      "config_hash": null,
+      "observed_forecast_count": 8,
+      "eligible_count": 4,
+      "excluded_count": 4,
+      "metrics": {
+        "open_direction_hit": {
+          "mean": 0.75,
+          "n": 4
+        },
+        "close_direction_hit": {
+          "mean": 1.0,
+          "n": 4
+        },
+        "open_gap_mae_bps": {
+          "mean": 57.64731116088014,
+          "n": 4
+        },
+        "session_body_mae_bps": {
+          "mean": 143.64357686289713,
+          "n": 4
+        },
+        "close_return_mae_bps": {
+          "mean": 141.38513560591855,
+          "n": 4
+        }
+      },
+      "direction_confusion_matrices": {
+        "open": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 1,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 1,
+              "down": 2
+            }
+          }
+        },
+        "close": {
+          "rows": "predicted",
+          "columns": "realized",
+          "counts": {
+            "up": {
+              "up": 1,
+              "flat": 0,
+              "down": 0
+            },
+            "flat": {
+              "up": 0,
+              "flat": 0,
+              "down": 0
+            },
+            "down": {
+              "up": 0,
+              "flat": 0,
+              "down": 3
+            }
+          }
+        }
+      }
+    }
+  ]
+}
