@@ -1,0 +1,15 @@
+{
+  "pdf_pages": 14,
+  "sections": 14,
+  "images_loaded": 10,
+  "desktop_and_mobile_horizontal_overflow": false,
+  "javascript_errors": [],
+  "external_network_requests": 0,
+  "existing_demo_market_switch_and_morning_close_roundtrip_verified": true,
+  "historical_model_fits": 0,
+  "trial_changed": false,
+  "real_sheet_write": false,
+  "native_office_rendering_checked": false,
+  "pytest": "153 passed",
+  "ruff": "passed"
+}
