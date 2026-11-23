@@ -1,0 +1,415 @@
+{
+  "$defs": {
+    "Components": {
+      "additionalProperties": false,
+      "properties": {
+        "g": {
+          "title": "G",
+          "type": "number"
+        },
+        "b": {
+          "title": "B",
+          "type": "number"
+        },
+        "u": {
+          "minimum": 0,
+          "title": "U",
+          "type": "number"
+        },
+        "d": {
+          "minimum": 0,
+          "title": "D",
+          "type": "number"
+        }
+      },
+      "required": [
+        "g",
+        "b",
+        "u",
+        "d"
+      ],
+      "title": "Components",
+      "type": "object"
+    },
+    "OHLC": {
+      "additionalProperties": false,
+      "properties": {
+        "open": {
+          "exclusiveMinimum": 0,
+          "title": "Open",
+          "type": "number"
+        },
+        "high": {
+          "exclusiveMinimum": 0,
+          "title": "High",
+          "type": "number"
+        },
+        "low": {
+          "exclusiveMinimum": 0,
+          "title": "Low",
+          "type": "number"
+        },
+        "close": {
+          "exclusiveMinimum": 0,
+          "title": "Close",
+          "type": "number"
+        }
+      },
+      "required": [
+        "open",
+        "high",
+        "low",
+        "close"
+      ],
+      "title": "OHLC",
+      "type": "object"
+    },
+    "PreopenInputs": {
+      "additionalProperties": false,
+      "properties": {
+        "forecast_id": {
+          "minLength": 1,
+          "title": "Forecast Id",
+          "type": "string"
+        },
+        "trading_date": {
+          "format": "date",
+          "title": "Trading Date",
+          "type": "string"
+        },
+        "market": {
+          "enum": [
+            "TAIEX",
+            "TX"
+          ],
+          "title": "Market",
+          "type": "string"
+        },
+        "contract": {
+          "anyOf": [
+            {
+              "pattern": "^[12]\\d{3}(0[1-9]|1[0-2])$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contract"
+        },
+        "previous_close": {
+          "exclusiveMinimum": 0,
+          "title": "Previous Close",
+          "type": "number"
+        },
+        "previous_close_date": {
+          "format": "date",
+          "title": "Previous Close Date",
+          "type": "string"
+        },
+        "previous_close_available_at": {
+          "format": "date-time",
+          "title": "Previous Close Available At",
+          "type": "string"
+        },
+        "previous_close_source": {
+          "minLength": 1,
+          "title": "Previous Close Source",
+          "type": "string"
+        },
+        "previous_close_availability_basis": {
+          "minLength": 1,
+          "title": "Previous Close Availability Basis",
+          "type": "string"
+        },
+        "previous_close_contract": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Previous Close Contract"
+        },
+        "data_cutoff_at": {
+          "format": "date-time",
+          "title": "Data Cutoff At",
+          "type": "string"
+        },
+        "generated_at": {
+          "format": "date-time",
+          "title": "Generated At",
+          "type": "string"
+        },
+        "data_version": {
+          "minLength": 1,
+          "title": "Data Version",
+          "type": "string"
+        },
+        "feature_version": {
+          "minLength": 1,
+          "title": "Feature Version",
+          "type": "string"
+        },
+        "features": {
+          "items": {
+            "$ref": "#/$defs/TimedFeature"
+          },
+          "title": "Features",
+          "type": "array"
+        }
+      },
+      "required": [
+        "forecast_id",
+        "trading_date",
+        "market",
+        "previous_close",
+        "previous_close_date",
+        "previous_close_available_at",
+        "previous_close_source",
+        "previous_close_availability_basis",
+        "data_cutoff_at",
+        "generated_at",
+        "data_version",
+        "feature_version",
+        "features"
+      ],
+      "title": "PreopenInputs",
+      "type": "object"
+    },
+    "ScoringPolicy": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "default": "1.0",
+          "title": "Version",
+          "type": "string"
+        },
+        "flat_threshold_bps": {
+          "default": 5,
+          "minimum": 0,
+          "title": "Flat Threshold Bps",
+          "type": "number"
+        },
+        "bull_close_return_bps": {
+          "default": 50,
+          "title": "Bull Close Return Bps",
+          "type": "number"
+        },
+        "bear_close_return_bps": {
+          "default": -50,
+          "title": "Bear Close Return Bps",
+          "type": "number"
+        }
+      },
+      "title": "ScoringPolicy",
+      "type": "object"
+    },
+    "SplitConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "default": "split-ridge-v1",
+          "title": "Version",
+          "type": "string"
+        },
+        "gap_features": {
+          "default": [
+            "night_return_bps"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Gap Features",
+          "type": "array"
+        },
+        "body_features": {
+          "default": [
+            "previous_body_bps",
+            "previous_range_bps"
+          ],
+          "items": {
+            "type": "string"
+          },
+          "title": "Body Features",
+          "type": "array"
+        },
+        "gap_alpha": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Gap Alpha",
+          "type": "number"
+        },
+        "body_alpha": {
+          "default": 1,
+          "exclusiveMinimum": 0,
+          "title": "Body Alpha",
+          "type": "number"
+        },
+        "min_training_samples": {
+          "default": 60,
+          "minimum": 3,
+          "title": "Min Training Samples",
+          "type": "integer"
+        }
+      },
+      "title": "SplitConfig",
+      "type": "object"
+    },
+    "TimedFeature": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "available_at": {
+          "format": "date-time",
+          "title": "Available At",
+          "type": "string"
+        },
+        "observed_at": {
+          "format": "date-time",
+          "title": "Observed At",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "historical",
+            "completed_overnight",
+            "completed_overseas",
+            "calendar"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "source": {
+          "minLength": 1,
+          "title": "Source",
+          "type": "string"
+        },
+        "availability_basis": {
+          "minLength": 1,
+          "title": "Availability Basis",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value",
+        "available_at",
+        "observed_at",
+        "kind",
+        "source",
+        "availability_basis"
+      ],
+      "title": "TimedFeature",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "ohlc-split-v2",
+      "default": "ohlc-split-v2",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "hash_version": {
+      "const": "sha256-json-v2",
+      "default": "sha256-json-v2",
+      "title": "Hash Version",
+      "type": "string"
+    },
+    "performance_scope": {
+      "const": "research_candidate",
+      "default": "research_candidate",
+      "title": "Performance Scope",
+      "type": "string"
+    },
+    "model_version": {
+      "default": "split-ridge-v1",
+      "title": "Model Version",
+      "type": "string"
+    },
+    "inputs": {
+      "$ref": "#/$defs/PreopenInputs"
+    },
+    "config": {
+      "$ref": "#/$defs/SplitConfig"
+    },
+    "scoring_policy": {
+      "$ref": "#/$defs/ScoringPolicy",
+      "default": {
+        "version": "1.0",
+        "flat_threshold_bps": 5.0,
+        "bull_close_return_bps": 50.0,
+        "bear_close_return_bps": -50.0
+      }
+    },
+    "components": {
+      "$ref": "#/$defs/Components"
+    },
+    "prices": {
+      "$ref": "#/$defs/OHLC"
+    },
+    "training_dates": {
+      "items": {
+        "format": "date",
+        "type": "string"
+      },
+      "title": "Training Dates",
+      "type": "array"
+    },
+    "training_digest": {
+      "title": "Training Digest",
+      "type": "string"
+    },
+    "head_parameters": {
+      "additionalProperties": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Head Parameters",
+      "type": "object"
+    },
+    "wick_method": {
+      "const": "past_mean_nonnegative_log_wicks",
+      "default": "past_mean_nonnegative_log_wicks",
+      "title": "Wick Method",
+      "type": "string"
+    },
+    "snapshot_hash": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Snapshot Hash"
+    }
+  },
+  "required": [
+    "inputs",
+    "config",
+    "components",
+    "prices",
+    "training_dates",
+    "training_digest",
+    "head_parameters"
+  ],
+  "title": "SplitForecast",
+  "type": "object"
+}

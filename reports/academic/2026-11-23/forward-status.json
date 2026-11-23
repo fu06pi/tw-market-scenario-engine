@@ -1,0 +1,127 @@
+{
+  "as_of": "2026-11-23T13:24:50.620590+08:00",
+  "last_completed_close_date": "2026-11-20",
+  "last_close_aggregate_url": "https://github.com/fu06pi/tw-market-scenario-engine/issues/4#issuecomment-7033406586",
+  "replay_matches_published": true,
+  "comparison": {
+    "schema_version": "news-direction-comparison-v1",
+    "expected_pairs": 2,
+    "paired_n": 2,
+    "missing": [],
+    "failures": [],
+    "groups": [
+      {
+        "market": "TAIEX",
+        "checkpoint": "fffd2ed32aa1c107230294066ddd4bcbe3f9d6ced6d5bb0f96ef917c28277809",
+        "quantitative_method": "night_carry",
+        "ai_model_version": "Codex／GPT-6模型家族；本次精確後端revision未公開，未主張完全固定後端或微調",
+        "prompt_sha256": "5ac4a5e7c5993e3f9b3220960a673cdbd1f945e4137ef9276a10c7241a90fa20",
+        "policy_hash": "08820535cb6fe1238e0acd1ae7f1716b39b9146bce855139be59fcb135cc45d5",
+        "paired_n": 1,
+        "a_direction_accuracy": 0.0,
+        "b_direction_accuracy": 0.0,
+        "b_minus_a_accuracy": 0.0,
+        "a_only_correct": 0,
+        "b_only_correct": 0,
+        "block5_interval_95": null,
+        "paired_rows": [
+          {
+            "date": "2026-11-18",
+            "contract": null,
+            "a_hit": 0,
+            "b_hit": 0,
+            "actual_direction": "up"
+          }
+        ],
+        "price_mae_comparison": "not_applicable: B emits direction, no new prices",
+        "conclusion": "insufficient observations"
+      },
+      {
+        "market": "TX_selected_monthly",
+        "checkpoint": "fffd2ed32aa1c107230294066ddd4bcbe3f9d6ced6d5bb0f96ef917c28277809",
+        "quantitative_method": "night_carry",
+        "ai_model_version": "Codex／GPT-6模型家族；本次精確後端revision未公開，未主張完全固定後端或微調",
+        "prompt_sha256": "5ac4a5e7c5993e3f9b3220960a673cdbd1f945e4137ef9276a10c7241a90fa20",
+        "policy_hash": "08820535cb6fe1238e0acd1ae7f1716b39b9146bce855139be59fcb135cc45d5",
+        "paired_n": 1,
+        "a_direction_accuracy": 1.0,
+        "b_direction_accuracy": 1.0,
+        "b_minus_a_accuracy": 0.0,
+        "a_only_correct": 0,
+        "b_only_correct": 0,
+        "block5_interval_95": null,
+        "paired_rows": [
+          {
+            "date": "2026-11-18",
+            "contract": "202611",
+            "a_hit": 1,
+            "b_hit": 1,
+            "actual_direction": "down"
+          }
+        ],
+        "price_mae_comparison": "not_applicable: B emits direction, no new prices",
+        "conclusion": "insufficient observations"
+      }
+    ],
+    "formal_accuracy_eligible": false,
+    "remote_timing_verification": "required separately; local hashes are not time evidence",
+    "price_predictions_modified": false,
+    "receipt_issues": [
+      {
+        "comment_id": 6933838987,
+        "date": "2026-11-17",
+        "reason": "First actual clock observed 2026-11-17T08:31:38+08:00, after the 08:30 source cutoff; ledger contained no valid same-day preopen. No numerical collection or news decision was attempted. Both markets A and B missing; new valid forecasts=0 and news pairs=0. Scheduling delay origin is not established."
+      },
+      {
+        "comment_id": 6941751273,
+        "date": "2026-11-17",
+        "reason": "2026-11-17 postclose: complete ledger has no valid same-day preopen; morning late_failure comment 6933838987 records first clock after 08:30. Both markets lack frozen A and B, TX contract was not selected preopen. OHLC errors, directional scores, and local morning/review roundtrip cannot be evaluated. No prices or predictions backfilled; new news pairs=0. Preserve missing date in scheduled denominator."
+      },
+      {
+        "comment_id": 6995589393,
+        "date": "2026-11-19",
+        "reason": "2026-11-19 preopen: numerical run failed at 08:16:30.230711+08:00 with ValueError: could not convert string to float: missing-value hyphen. Saved official 2026-11-18 day-session HTML contains TX202706 and TX202709 rows with nonempty last trade and positive volume but high/low represented by hyphens. The frozen futures_rows parser attempts to convert all monthly rows and aborts on these incomplete far-month rows before a quantitative snapshot is produced. Official source URL https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=0&commodity_id=TX&queryDate=2026%2F11%2F18 ; raw SHA256 cb44df48a4ee56b82581ac7a882d24a1d0fd02cf046d3eec19a3c08084ac0ad5 ; fetched_at 2026-11-19T08:16:30.227182+08:00. News fetched separately but no frozen A exists, so no B decision is created. Both markets A/B missing; valid forecasts=0, new news pairs=0. No code edits, schema relaxation, model rerun, contract substitution or backdating; this is a parser/source-handling failure, not model accuracy."
+      },
+      {
+        "comment_id": 7002777509,
+        "date": "2026-11-19",
+        "reason": "2026-11-19 postclose: complete research ledger contains no valid same-day preopen. Morning source_failure comment 6995589393 reports frozen futures_rows parser failing on missing high/low values in unrelated far-month TX202706/TX202709 rows of the 2026-11-18 official day report. No frozen quantitative A or independent news B was created for either market. OHLC errors and A/B direction comparison are unavailable; no morning-to-review local roundtrip can be verified today. No price, forecast or TX contract substitution; no prior-date fallback. Preserve this date and source failure in all scheduled denominators; new news pairs=0. Code, protocol, original four tasks, Sheets and PR unchanged."
+      },
+      {
+        "comment_id": 7026046091,
+        "date": "2026-11-20",
+        "reason": "2026-11-20 preopen: fixed numerical run failed at 2026-11-20T08:15:03.670185+08:00 with ValueError: could not convert string to float: '-'. Saved official earlier-day 2026-11-18 TX day HTML has far-month TX202706/TX202709 high/low missing although last-trade and positive-volume fields exist. Frozen futures_rows parses all monthly rows and fails before producing a forecast, the same missing-value handling issue observed on 2026-11-19. No numerical A exists for either market, so no independent B was created; no news assessment was attempted after numerical failure. New valid forecasts=0; new news pairs=0. No code/schema changes, relaxed checks, substitutions, model rerun, or backdating. Source evidence=[{\"contract\":\"202706\",\"missing_OHLC_columns\":[\"high\",\"low\"],\"url\":\"https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=0&commodity_id=TX&queryDate=2026%2F11%2F18\",\"fetched_at\":\"2026-11-20T08:15:03.667037+08:00\",\"raw_sha256\":\"cb44df48a4ee56b82581ac7a882d24a1d0fd02cf046d3eec19a3c08084ac0ad5\"},{\"contract\":\"202709\",\"missing_OHLC_columns\":[\"high\",\"low\"],\"url\":\"https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=0&commodity_id=TX&queryDate=2026%2F11%2F18\",\"fetched_at\":\"2026-11-20T08:15:03.667037+08:00\",\"raw_sha256\":\"cb44df48a4ee56b82581ac7a882d24a1d0fd02cf046d3eec19a3c08084ac0ad5\"}]. This is a parser/source-handling failure, not an observed model prediction error."
+      },
+      {
+        "comment_id": 7033397175,
+        "date": "2026-11-20",
+        "reason": "2026-11-20 postclose: complete ledger contains no valid same-day preopen. Morning source_failure comment 7026046091 records the numerical parser failing on high/low hyphens in far-month TX202706/TX202709 rows of the official earlier-day 2026-11-18 report. Both markets have no frozen quantitative A or news B and no preopen-selected TX contract. OHLC errors, A/B direction scores and today local morning/review roundtrip cannot be evaluated. No forecasts, prices or contract substituted; no previous-date fallback. Keep this date and all source failures in scheduled denominators. New valid forecasts=0 and news pairs=0. Code, protocol, original four tasks, Sheets and PR unchanged."
+      }
+    ],
+    "verified_preopen_days": 1,
+    "received_preopen_dates": 1,
+    "protocol_sha256": "09a81ae11e23a79f0a59081f92b62091d0890662e6d6ac4a1363b3d0c449c44c",
+    "rejected_preopen_days": 0,
+    "source_commit": "398d3b7b35f8d007178037ccbc8e06b6ee5d19a6",
+    "rule": "first complete close receipt; all failures retained",
+    "expected_scheduled_days": 4,
+    "expected_scheduled_pairs": 8,
+    "missing_preopen_dates": [
+      "2026-11-17",
+      "2026-11-19",
+      "2026-11-20"
+    ],
+    "overall_scheduled_pair_coverage": 0.25
+  },
+  "today_preopen": {
+    "date": "2026-11-23",
+    "status": "late_failure",
+    "receipt_url": "https://github.com/fu06pi/tw-market-scenario-engine/issues/4#issuecomment-7092326803",
+    "server_created_at": "2026-11-23T05:20:49Z",
+    "new_valid_forecasts": 0
+  },
+  "model_fits_this_delivery": 0,
+  "real_sheet_write": false,
+  "trial_code_or_protocol_changed": false,
+  "PR_modified": false
+}

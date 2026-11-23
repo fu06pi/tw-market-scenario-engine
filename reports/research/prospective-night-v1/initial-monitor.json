@@ -1,0 +1,23 @@
+{
+  "recorded_at": "2026-11-04T14:51:25.262614+08:00",
+  "attempted_runs": 1,
+  "successful_local_runs": 0,
+  "failed_run_fraction": 1.0,
+  "failed_runs": [
+    {
+      "run": "reports/generated/shadow/2026-11-04-late-check",
+      "failure": {
+        "status": "failed",
+        "recorded_at": "2026-11-04T14:51:23.719397+08:00",
+        "failure_type": "ValueError",
+        "reason": "shadow collection must start on weekdays at 06:00–08:30 Taipei",
+        "eligible_for_formal_accuracy": false
+      }
+    }
+  ],
+  "pending_labels": [],
+  "groups": [],
+  "formal_accuracy_eligible": false,
+  "remote_timing_verification": "pending",
+  "production_switch": false
+}

@@ -1,0 +1,93 @@
+{
+  "experiment": "night-ablation-v1",
+  "scope": "paired retrospective price-only versus night-augmented research",
+  "markets": [
+    "TAIEX",
+    "TX_selected_monthly"
+  ],
+  "split": {
+    "train_through": "2025-09-30",
+    "validation_start": "2025-10-01",
+    "validation_end": "2025-12-31",
+    "evaluation_start": "2026-01-01",
+    "evaluation_end": "2026-09-30"
+  },
+  "evaluation_price_targets_previously_seen": true,
+  "new_independent_test_evidence": false,
+  "alpha": 0.1,
+  "hyperparameter_search": false,
+  "minimum_training_samples": 60,
+  "gap_without": [
+    "previous_gap_bps",
+    "previous_close_return_bps"
+  ],
+  "gap_with": [
+    "previous_gap_bps",
+    "previous_close_return_bps",
+    "night_return_bps"
+  ],
+  "body_both": [
+    "previous_body_bps",
+    "previous_range_bps"
+  ],
+  "night_return_definition": "10000*(night last trade / same-contract previous regular-session last trade - 1)",
+  "contract_rule": "Earliest YYYYMM month with a positive traded completed night quote available before cutoff; reject if its own previous day close is missing; never use current day volume or another contracts close",
+  "night_exchange_date_rule": "Official TAIFEX night row belongs to the following regular session; start at previous observed regular-session date 15:00, end next calendar day 05:00. Preserve weekend/holiday age.",
+  "reference_price_features": "For TX, prior-day and prior-prior-day prices all belong to the currently selected contract; no cross-contract price changes",
+  "cutoff": "08:30 Asia/Taipei",
+  "flat_threshold_bps": 5.0,
+  "models": [
+    "without_night",
+    "with_night_gap_only",
+    "night_carry_with_mean_body"
+  ],
+  "update_rule": "Daily expanding fit on strictly earlier common matched rows for all arms; no refit selection from evaluation results",
+  "wick_rule": "Same expanding mean of past nonnegative log-wicks in all arms",
+  "primary_metric": "open MAE in bps; predeclared useful improvement >=5% and paired time-block interval lower bound >0",
+  "secondary_metric": "close MAE >=5% improvement and no O/H/L MAE deterioration >5% for original price gate",
+  "bootstrap": {
+    "block_length": 5,
+    "draws": 2000,
+    "seed": 20261104
+  },
+  "formal_acceptance_claim": false,
+  "historical_publication_verified": false,
+  "availability_assumption": "Completed historical night last trade is assumed usable by 08:30 for retrospective simulation; fetched_at is not substituted for historical available_at.",
+  "source_rule_url": "https://www.taifex.com.tw/cht/4/aHIntroduction",
+  "input_files": {
+    "data/raw/taifex/TX-202412.csv": "1d965c9193f2ed3aa0b6122779da31d1381087bc2e20160bfdb1d419ed2c61c3",
+    "data/raw/taifex/TX-202501.csv": "6b9f1d31b3cc9f7c8bec06ed5f5305dc91b1d78ecb94981cd692bc89f0f8e8e5",
+    "data/raw/taifex/TX-202502.csv": "7007410767d2e06d69a2c229db4d2b277d22b6792f491a1eed63eaeac5536943",
+    "data/raw/taifex/TX-202503.csv": "1ea072897569eeb9c0c0c4731acfdc005b30f75a35c15f885ff7f1a91f1b2ad9",
+    "data/raw/taifex/TX-202504.csv": "c943a1073bba0b3f8eba1ed517abe123a988811c9f489cce777cf56fd0bc0ce2",
+    "data/raw/taifex/TX-202505.csv": "0a49d3354e145d878126cb8a80ee16111e5fd97edaa193eb60d4651a2c765ddb",
+    "data/raw/taifex/TX-202506.csv": "0f93f6c64339ccf0ee140f62674820697610119c0bc845f76839834d5d33f902",
+    "data/raw/taifex/TX-202507.csv": "aab1688862e85191af7d5e4385dc7a271d97910140b62bc2083072557c7cb6e8",
+    "data/raw/taifex/TX-202508.csv": "00268d4fcdf26215106216fd2343441824b7e4f1145b0c8d104566335fc1a3bb",
+    "data/raw/taifex/TX-202509.csv": "611addab4b4431800daf47ebd757bf01a55d74d5cb3ade8b27754fa6b66041fc",
+    "data/raw/taifex/TX-202510.csv": "01c62c42186b29308c0a6f0ee1274b613df45b6ef3c4f0b112316fdbbca958f3",
+    "data/raw/taifex/TX-202511.csv": "04664be791b37722d269bead0f5dbcec01a5b682947b112e20de25602057b075",
+    "data/raw/taifex/TX-202512.csv": "69dcb18fc24078f4da46b453a8ee16a87461fc365753aba1f480f804f8d133dc",
+    "data/raw/taifex/TX-202601.csv": "5361c05dc343abfe8ba3a3285c1d958a277defd1168233eda5d7b0a5d6b486a6",
+    "data/raw/taifex/TX-202602.csv": "4b324638c04072c42126df222f59e3835f9663e58f010e403d7779ce1777a3e2",
+    "data/raw/taifex/TX-202603.csv": "e3d745e492540f2a02979f5f1646527baac26de664ddb7f0f23c988790a4e9ae",
+    "data/raw/taifex/TX-202604.csv": "55c2336dfa41e66207f8b28bec989240876987a95dabc8c8dd2ae315a464152b",
+    "data/raw/taifex/TX-202605.csv": "15f53e5ca5d57cea7afc2cc62a48545986d3fa9d2f2bb97b4ebda97f99bde5f5",
+    "data/raw/taifex/TX-202606.csv": "f2ef3b93fb9caa0ba6e10b3f0f29faef01eec6a1330b2494a4266e6d5fec5e8c",
+    "data/raw/taifex/TX-202607.csv": "aec749e51e3cfcba6dba0092c94e68369f6182e653ed63d0607eaa805428c487",
+    "data/raw/taifex/TX-202608.csv": "266c51cf22b17cd26d0dfd0587d3ad2f41712a513576ece54227ace4bfec44f0",
+    "data/raw/taifex/TX-202609.csv": "ed317f149d41edbf886c7fbe0774868dec6483c51c2b2a0e6ba8c0de4f892429"
+  },
+  "price_inputs": {
+    "data/processed/taiex-tej.json": "46eb00aa98cab0b77015ce8f0f46db6c9349d495ea5e52fb2325721135cc6af3",
+    "data/processed/taiex-twse.json": "2240f809a00c5141f9f52566d2a83d390f4a112465f3ba149bcd0497d1fed61a"
+  },
+  "budget_seconds": 180,
+  "limitations": [
+    "Night bulk-CSV historical publication time is unverified",
+    "Evaluation TAIEX price labels have already been used in earlier research",
+    "TX is a deterministic sequence of selected monthly contracts, not the old single far-month TX202603 experiment",
+    "Session times follow standard exchange rules; exceptional schedule changes require separate verification",
+    "No probabilities, calibrated intervals or trading profitability claim"
+  ]
+}

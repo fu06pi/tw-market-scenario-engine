@@ -1,0 +1,29 @@
+{
+  "recorded_at": "2026-11-16T14:39:48.780559+08:00",
+  "pytest": "153 passed",
+  "ruff": "passed",
+  "timesfm_original_plan_and_weights_unchanged": true,
+  "official_clone_commit": "e51928e27119cb17bebc005be2696b75e0a9e688",
+  "installed_forecaster_sha256": "33870c9676be6aab4e62c45a0a89bc1d6c49ca3149ddc46a19c6d9e2c23e0037",
+  "matches_cached_official_forecaster": true,
+  "model_config_observed_sha256": "ff17bbc07b792c5a904cca265b8468579d736a4fe84981da25eb871b0a125bc6",
+  "derivative_weights_distributed": false,
+  "html_pdf_pptx_verification": {
+    "pdf_pages": 10,
+    "pptx_slides": 8,
+    "html_images_loaded": 10,
+    "javascript_errors": [],
+    "model_parameter_updates": 0,
+    "native_office_rendering_checked": false,
+    "market_cause_claim": false
+  },
+  "preflight_comment": "https://github.com/fu06pi/tw-market-scenario-engine/issues/4#issuecomment-6909202815",
+  "preflight_server_created_at": "2026-11-16T06:30:02Z",
+  "preflight_readback_passed": true,
+  "preflight_is_valid_preopen": false,
+  "new_real_news_pairs": 0,
+  "trial_activation_status": "enabled_awaiting_first_run",
+  "trial_status_file": "trial-status.json",
+  "activation_receipt": "https://github.com/fu06pi/tw-market-scenario-engine/issues/4#issuecomment-6909502279",
+  "ical_occurrences_verified": 20
+}

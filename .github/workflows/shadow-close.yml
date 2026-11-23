@@ -1,0 +1,58 @@
+name: Shadow close and review (isolated research)
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '30 7 * * 1-5' # 15:30 Asia/Taipei, after official daytime sessions
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: shadow-close-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  close:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: requirements-shadow.txt
+      - name: Install fixed runtime
+        run: |
+          python -m pip install -r requirements-shadow.txt
+          python -m pip install --no-deps -e .
+      - name: Download today's frozen artifacts, fetch actuals, and review
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: python -m scripts.finish_shadow_day --repository "$REPOSITORY" --output reports/generated/shadow-close/current
+      - name: Record setup failure if no job receipt exists
+        if: always()
+        run: |
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          out = Path("reports/generated/shadow-close/current")
+          out.mkdir(parents=True, exist_ok=True)
+          if not (out / "job.json").exists():
+              with (out / "setup-failure.json").open("x") as stream:
+                  json.dump({"status": "failed", "recorded_at": datetime.now(timezone.utc).isoformat(),
+                             "reason": "workflow setup/execution failed; inspect job logs",
+                             "formal_accuracy_eligible": False}, stream)
+          PY
+      - name: Preserve actual source receipts, reviews, metrics and failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: shadow-close-${{ github.run_id }}-${{ github.run_attempt }}
+          path: reports/generated/shadow-close/current/
+          if-no-files-found: error
+          retention-days: 90

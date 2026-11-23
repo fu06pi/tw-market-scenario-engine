@@ -3,7 +3,7 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class Direction(str, Enum):
@@ -79,17 +79,24 @@ class PredictionSnapshot(BaseModel):
 
 
 class MarketRealization(BaseModel):
+    model_config = ConfigDict(allow_inf_nan=False)
     trading_date: str
-    previous_close: float
-    open: float
-    high: float
-    low: float
-    close: float
+    previous_close: float = Field(gt=0)
+    open: float = Field(gt=0)
+    high: float = Field(gt=0)
+    low: float = Field(gt=0)
+    close: float = Field(gt=0)
     turnover: float | None = None
     breadth_up: int | None = None
     breadth_down: int | None = None
     otc_return_pct: float | None = None
     heavyweight_contribution_points: dict[str, float] = {}
+
+    @model_validator(mode="after")
+    def coherent_ohlc(self):
+        if self.high < max(self.open, self.close) or self.low > min(self.open, self.close):
+            raise ValueError("incoherent realized OHLC")
+        return self
 
     @property
     def open_gap_bps(self) -> float:

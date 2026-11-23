@@ -1,0 +1,29 @@
+{
+  "kind": "after-cutoff-adapter-smoke-only",
+  "preopen_eligible": false,
+  "sources": [
+    {
+      "kind": "cash",
+      "url": "https://www.twse.com.tw/rwd/zh/TAIEX/MI_5MINS_HIST?response=json&date=20261101",
+      "fetched_at": "2026-11-04T14:47:09.764561+08:00",
+      "rows": 3,
+      "latest": "2026-11-04"
+    },
+    {
+      "kind": "day",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=0&commodity_id=TX&queryDate=2026%2F11%2F03",
+      "fetched_at": "2026-11-04T14:47:15.152397+08:00",
+      "rows": 4,
+      "session_start": "None",
+      "selected_month": "202611"
+    },
+    {
+      "kind": "night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketReport?queryType=2&marketCode=1&commodity_id=TX&queryDate=2026%2F11%2F04",
+      "fetched_at": "2026-11-04T14:47:11.692933+08:00",
+      "rows": 6,
+      "session_start": "2026-11-03",
+      "selected_month": "202611"
+    }
+  ]
+}
