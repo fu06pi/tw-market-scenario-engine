@@ -1,0 +1,138 @@
+{
+  "trading_date": "2026-11-24",
+  "previous_close": 36811.89,
+  "open": 39148.91,
+  "high": 40180.38,
+  "low": 39148.91,
+  "close": 40122.35,
+  "turnover": 426833779377,
+  "breadth_up": 1053,
+  "breadth_down": 26,
+  "breadth_flat": 6,
+  "turnover_scope": "TWSE MI_INDEX inclusive total, not regular-session headline",
+  "turnover_regular_twd_rounded": 419405000000,
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "source_manifest": [
+    {
+      "id": "twse_close_breadth",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261124&type=ALLBUT0999",
+      "trading_date": "2026-11-24",
+      "fetched_at": "2026-11-24T15:19:40.578858+08:00",
+      "cache_sha256": "bb418ebe1fc44ba20d96bd2f23524c80b8ba92b70060aefeaa8faeb5eecb9e02",
+      "hash_basis": "locally reserialized complete JSON response, UTF-8 ensure_ascii=False",
+      "extract": {
+        "index_row": [
+          "發行量加權股價指數",
+          "40,122.35",
+          "<p style ='color:red'>+</p>",
+          "3,310.46",
+          "8.99",
+          ""
+        ],
+        "breadth_fields": [
+          "類型",
+          "整體市場",
+          "股票"
+        ],
+        "breadth_rows": [
+          [
+            "上漲(漲停)",
+            "7,311(1,400)",
+            "1,053(335)"
+          ],
+          [
+            "下跌(跌停)",
+            "782(182)",
+            "26(4)"
+          ],
+          [
+            "持平",
+            "85",
+            "6"
+          ],
+          [
+            "未成交",
+            "31,684",
+            "1"
+          ],
+          [
+            "無比價",
+            "3,011",
+            "2"
+          ]
+        ],
+        "turnover_total_twd_inclusive": 426833779377
+      }
+    },
+    {
+      "id": "twse_intraday",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_5MINS_INDEX?response=json&date=20261124",
+      "trading_date": "2026-11-24",
+      "fetched_at": "2026-11-24T15:19:40.578858+08:00",
+      "response_sha256": "6002397e64fe356a4ca8927813fe03c7489a3cf9d73f22928de9508c0ccc5df7",
+      "rows": 3241,
+      "interval_seconds": 5,
+      "filter": "Exclude 09:00:00 reference previous-close row; use 09:00:05 through 13:30:00 inclusive, 3240 rows",
+      "first": [
+        "09:00:05",
+        39148.91
+      ],
+      "last": [
+        "13:30:00",
+        40122.35
+      ],
+      "high_observation": [
+        "09:09:20",
+        40180.38
+      ],
+      "low_observation": [
+        "09:00:05",
+        39148.91
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611240131.aspx",
+      "published_at": "2026-11-24T13:46:00+08:00",
+      "fetched_at": "2026-11-24T15:19:40.578858+08:00",
+      "extract": {
+        "open": 39148.91,
+        "high": 40180.38,
+        "low": 39148.91,
+        "close": 40122.35,
+        "turnover_regular_twd_rounded": 419405000000,
+        "breadth_reported": [
+          1077,
+          28,
+          7
+        ]
+      },
+      "scope_note": "CNA breadth differs from TWSE stock subsection; not substituted into breadth target. Regular-session rounded turnover differs from inclusive official total."
+    },
+    {
+      "id": "cna_drivers",
+      "url": "https://money.udn.com/money/story/5607/9898690?from=edn_newestlist_cate_side",
+      "published_at": "2026-11-24T14:12:22+08:00",
+      "fetched_at": "2026-11-24T15:19:40.578858+08:00",
+      "publisher": "CNA syndicated by Economic Daily",
+      "extract": {
+        "event": "Jensen Huang returns as NVIDIA CEO; Taiwan AI and other sectors rebound",
+        "tsmc_close": 2230,
+        "tsmc_change": 200,
+        "electronics_return_pct": 9.49,
+        "financial_return_pct": 8.74,
+        "listed_otc_limit_up_count": 621
+      },
+      "limitation": "Syndicated byline contains inconsistent day13; use visible Nov24 publication plus independently corroborated prices, no causal coefficient inferred."
+    }
+  ],
+  "realized_at": "2026-11-24T15:19:40.578858+08:00",
+  "intraday_observations": {
+    "first30_low": 39148.91,
+    "first30_high": 40180.38,
+    "first30_end": 40134.6,
+    "vwap": null,
+    "first30_breadth": null
+  }
+}
