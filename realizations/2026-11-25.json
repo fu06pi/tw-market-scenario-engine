@@ -1,0 +1,166 @@
+{
+  "trading_date": "2026-11-25",
+  "previous_close": 40122.35,
+  "open": 39983.91,
+  "high": 39983.91,
+  "low": 36681.9,
+  "close": 38195.43,
+  "turnover": 1222559091583,
+  "turnover_scope": "TWSE MI_INDEX inclusive total(1~15); not regular-session headline",
+  "turnover_regular_twd_rounded": 1188199000000,
+  "breadth_up": 39,
+  "breadth_down": 1033,
+  "breadth_flat": 14,
+  "breadth_scope": "TWSE stocks column; exclude flat from ratio",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-25T15:18:01.515282+08:00",
+  "intraday_summary": {
+    "first30_end": [
+      "09:30:00",
+      38592.38
+    ],
+    "low_time": "10:19:50",
+    "open_is_day_high": true,
+    "above_open_samples": 0,
+    "below_open_samples": 3239,
+    "vwap": null,
+    "intraday_stock_breadth": null
+  },
+  "sector_return_pct": {
+    "電子工業類指數": -4.71,
+    "金融保險類指數": -6.31
+  },
+  "source_manifest": [
+    {
+      "id": "twse_market",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261125&type=ALLBUT0999",
+      "trading_date": "2026-11-25",
+      "fetched_at": "2026-11-25T15:16:04.446074+08:00",
+      "response_sha256": "b3e1b5096a29c1e55cd56bf59e1c35b008ace664260553683df7961e339b3f44",
+      "extract": {
+        "index_row": [
+          "發行量加權股價指數",
+          "38,195.43",
+          "<p style ='color:green'>-</p>",
+          "1,926.92",
+          "-4.80",
+          ""
+        ],
+        "breadth_fields": [
+          "類型",
+          "整體市場",
+          "股票"
+        ],
+        "breadth_rows": [
+          [
+            "上漲(漲停)",
+            "1,291(51)",
+            "39(4)"
+          ],
+          [
+            "下跌(跌停)",
+            "6,347(304)",
+            "1,033(46)"
+          ],
+          [
+            "持平",
+            "200",
+            "14"
+          ],
+          [
+            "未成交",
+            "29,051",
+            "2"
+          ],
+          [
+            "無比價",
+            "6,035",
+            "0"
+          ]
+        ],
+        "inclusive_turnover_twd": 1222559091583,
+        "sector_return_pct": {
+          "電子工業類指數": -4.71,
+          "金融保險類指數": -6.31
+        }
+      }
+    },
+    {
+      "id": "twse_5second_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_5MINS_INDEX?response=json&date=20261125",
+      "trading_date": "2026-11-25",
+      "fetched_at": "2026-11-25T15:16:11.340832+08:00",
+      "response_sha256": "0091c2673733fc4bb0a15516d26842022741db484471f383b0773be56ffff341",
+      "total_rows": 3241,
+      "rows_used": 3240,
+      "interval_seconds": 5,
+      "filter": "Exclude09:00:00 previous-close reference; use09:00:05 through13:30:00. First published traded index is official opening proxy, corroborated CNA09:08.",
+      "first": [
+        "09:00:05",
+        39983.91
+      ],
+      "last": [
+        "13:30:00",
+        38195.43
+      ],
+      "high": [
+        "09:00:05",
+        39983.91
+      ],
+      "low": [
+        "10:19:50",
+        36681.9
+      ],
+      "first30_low": [
+        "09:06:35",
+        38061.05
+      ],
+      "first30_end": [
+        "09:30:00",
+        38592.38
+      ]
+    },
+    {
+      "id": "cna_open",
+      "url": "https://www.cna.com.tw/news/afe/202611250025.aspx",
+      "published_at": "2026-11-25T09:08:00+08:00",
+      "verified_at": "2026-11-25T15:18:01.515282+08:00",
+      "extract": {
+        "open": 39983.91,
+        "change": -138.44
+      }
+    },
+    {
+      "id": "cna_close_drivers",
+      "url": "https://www.cna.com.tw/news/afe/202611250138.aspx",
+      "published_at": "2026-11-25T13:57:00+08:00",
+      "updated_at": "2026-11-25T14:09:00+08:00",
+      "verified_at": "2026-11-25T15:18:01.515282+08:00",
+      "extract": {
+        "close": 38195.43,
+        "change": -1926.92,
+        "regular_turnover_twd_rounded": 1188199000000,
+        "tsmc_close": 2150,
+        "tsmc_change": -80,
+        "drivers": [
+          "AI前景疑慮",
+          "美國關稅不確定性",
+          "電子權值賣壓"
+        ]
+      },
+      "attribution_note": "Reported market explanations, not a causal estimate. Regular-session turnover differs from inclusive MI_INDEX total."
+    },
+    {
+      "id": "cna_intraday",
+      "url": "https://www.cna.com.tw/news/afe/202611250068.aspx",
+      "published_at": "2026-11-25T11:22:00+08:00",
+      "verified_at": "2026-11-25T15:18:01.515282+08:00",
+      "extract": {
+        "low": 36681.9,
+        "listed_otc_decliners_over": 1800
+      },
+      "scope_note": "Listed+OTC intraday count is not substituted for TWSE stock-only closing breadth."
+    }
+  ]
+}
