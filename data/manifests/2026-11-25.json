@@ -1,0 +1,969 @@
+{
+  "target_date": "2026-11-25",
+  "trading_date": "2026-11-25",
+  "generated_at": "2026-11-25T08:59:32+08:00",
+  "data_cutoff_at": "2026-11-25T08:50:00+08:00",
+  "clock_read_utc": "2026-11-25 00:56:04 UTC",
+  "is_trading_day": true,
+  "reconstructed": true,
+  "late_generated": true,
+  "status": "reconstructed_late_generated",
+  "evaluation_cohort": "legacy_analyst_reconstructed_late_uncalibrated",
+  "eligible_for_on_time_premarket_metrics": false,
+  "eligible_for_new_ohlc_or_news_trial_metrics": false,
+  "original_frozen_v1_found": false,
+  "recovery_checks": {
+    "prediction": "today path404 Not Found",
+    "manifest": "today path404 Not Found",
+    "v0_dates": {
+      "range": "'每日預測與覆盤'!A1:A1000",
+      "nonempty_rows": 607,
+      "matches": []
+    },
+    "v0_empty_range": {
+      "range": "'每日預測與覆盤'!A608:P625",
+      "majorDimension": "ROWS",
+      "values": []
+    },
+    "research_issue4": "Fresh issue read:15 comments, last updated2026-11-23T05:20:49Z; no same-date frozen entry found. No old quantitative output copied."
+  },
+  "v0_rules_original": {
+    "range": "'模型規則主表'!A1:P21",
+    "majorDimension": "ROWS",
+    "values": [
+      [
+        "規則ID",
+        "主題",
+        "類型",
+        "目前決策",
+        "統一後規則",
+        "適用時點",
+        "允許資訊",
+        "禁止做法",
+        "合併來源／原列",
+        "衝突處理",
+        "數值權重決策",
+        "採用／完成條件",
+        "目前驗證證據",
+        "程式／排程落地",
+        "版本",
+        "整理日期"
+      ],
+      [
+        "R01",
+        "Open與Close分開預測／隔夜訊號用途",
+        "預測與評分規範",
+        "已採用（紀錄規範）",
+        "Open、Close/前收與Close/Open分別鎖定目標並評分，允許共享截止前的SOX、ADR、期貨訊號；不把隔夜利多等同全天續漲，也不把其對Close的影響固定設為零。",
+        "盤前；盤中更新另存",
+        "截至預測截止點已公開資料",
+        "以盤中證據回改盤前；宣稱隔夜訊號只能影響Open",
+        "模型修正紀錄!2；模型修正紀錄!47；模型修正紀錄!50；模型修正紀錄!53",
+        "規則分離是評分要求；隔夜訊號對Close的係數仍待驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R02",
+        "事件時間對齊與資訊隔離",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "每則事件保存event_time、published_at、observed_at、Asia/Taipei時區；盤前僅使用截止前可得資訊，未公布內容不入特徵；盤中及盤後資訊分別歸入更新、覆盤或下一交易日。",
+        "各預測時點",
+        "當時已發布、已取得資料",
+        "同日即當成盤中事件；將盤後法說倒填當日盤前",
+        "模型修正紀錄!7；模型修正紀錄!22；模型修正紀錄!26；模型修正紀錄!48",
+        "與Surprise及公司催化規則並存；時間合法不代表有預測力。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R03",
+        "公司催化、新鮮度與價格接受度",
+        "統計假說",
+        "候選（待驗證）",
+        "候選比較公司新增催化、事件經過時間、事前已反映漲幅對後續報酬的影響；不預設新利多必漲或舊催化必失效。當日相對強弱只供盤中版本更新。",
+        "盤前／盤中分版本",
+        "截止前公告、歷史價格；更新時點以前現貨",
+        "固定增加利多權重；用當日收盤證明盤前催化已反映",
+        "模型修正紀錄!3；模型修正紀錄!5；模型修正紀錄!9；模型修正紀錄!28；模型修正紀錄!35",
+        "9/22新催化、9/23衰減與9/24盤中再評估整併；衰減率不先指定。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R04",
+        "市場廣度定義與權值／等權分離",
+        "指標與評分規範",
+        "已採用（紀錄規範）",
+        "TAIEX報酬、上漲/(上漲+下跌)、含平盤占比、漲跌家數差、OTC與正式等權報酬各自保存並事先鎖定評分口徑；沒有等權序列不得用上漲家數冒充等權報酬。",
+        "盤前定義；盤後評分",
+        "同市場、同日期、同時點正式資料",
+        "事後換分母；指數漲即稱全面上漲",
+        "模型修正紀錄!4；模型修正紀錄!17；模型修正紀錄!25；V1_改善提案!4；V1_改善提案!7；V1_改善提案!9；V1_改善提案!12",
+        "分層是觀測維度；增加何種預測權重另走驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R05",
+        "電子、金融與非電子的分層擴散",
+        "統計假說",
+        "候選（待驗證）",
+        "候選使用大型權值電子、電子中小型/OTC、金融、非電子的事前擴散與相對報酬特徵；金融、塑化、航運可分化，不把所有非電子視為同一方向。",
+        "盤前／盤中分版本",
+        "歷史分層廣度；更新時點以前資料",
+        "用當日收盤廣度預測當日收盤；把分層誤認成已驗證加權",
+        "模型修正紀錄!12；模型修正紀錄!15；模型修正紀錄!46；模型修正紀錄!49",
+        "各層各自檢驗增益；不預設權值強或等權強。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R06",
+        "結算日與波動／方向",
+        "統計假說",
+        "候選（待驗證）",
+        "結算日作可驗證的日曆標記；方向、振幅與反轉機率分開測試，不預設結算必增波動、必拉高或必反轉。",
+        "盤前",
+        "已知結算日曆與歷史資料",
+        "因一個結算日即固定提高波動或反轉權重",
+        "模型修正紀錄!6",
+        "撤除固定方向敘述；波動係數也須驗證。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R07",
+        "長假前流動性",
+        "統計假說",
+        "候選（待驗證）",
+        "候選測試長假前成交量、振幅與趨勢延續的條件差異；先保存日曆標記，不預設量縮、追價降低或午後收斂。",
+        "盤前",
+        "已知休市日曆與歷史流動性",
+        "把9/24單日型態變成所有假前固定先驗",
+        "模型修正紀錄!8",
+        "歷史假期樣本不足時維持候選。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R08",
+        "休市後累積資訊與Reopen",
+        "統計假說",
+        "候選（待驗證）",
+        "連續休市後候選比較整段休市期間的累積海外變動與一般隔夜輸入；一般週末與額外休市分開標記。是否另建regime由相同基準樣本外結果決定。",
+        "盤前",
+        "前次現貨收盤至本次截止的已公開資料",
+        "只看最後一晚；重複累計同一報酬；直接提高收盤係數",
+        "模型修正紀錄!10",
+        "與最近可交易夜盤R18並存；不把每次週一都當特殊長假。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R09",
+        "事件Surprise與市場共識",
+        "統計假說",
+        "候選（待驗證）",
+        "候選比較公布值相對事前共識／定價差；結果公布前只可用事件日曆及事前分布，結果公布後Surprise只供後續預測或更新。",
+        "發布前／發布後分版本",
+        "當時可得的共識、公布值與跨市場價格",
+        "用尚未發布的Surprise預測當日盤前",
+        "模型修正紀錄!11",
+        "時間對齊由R02控制；Surprise與價格反應分開。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R10",
+        "現貨Gap校準與夜盤基差／背離",
+        "統計假說",
+        "候選（待驗證）",
+        "候選以夜盤報酬、明確基準的期現基差、SOX/ADR、前日報酬及連休累積資訊校準現貨Gap；同向與背離均作特徵，不硬定同向加權、背離縮Gap。首30分鐘下探不當作Gap命中。",
+        "盤前",
+        "截止前行情；合約、換月、參考價與現貨前收",
+        "夜盤點數直接換算現貨Gap；盤中低點冒充開盤",
+        "模型修正紀錄!13；模型修正紀錄!14；模型修正紀錄!20；模型修正紀錄!23；模型修正紀錄!41；V1_改善提案!2；V1_改善提案!6；V1_改善提案!8；V1_改善提案!11",
+        "整併多次Gap提案；不固定提高或降低夜盤權重。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R11",
+        "產品映射與固定股票池",
+        "統計假說",
+        "候選（待驗證）",
+        "先固定股票池與成分；DRAM、NOR、NAND/控制器、HDD，及ABF、CCL、AI各池分開保存。海外產品重疊度及公司催化僅為候選特徵；完整同時點收盤才能計精確等權。",
+        "盤前定池；盤後驗證",
+        "截止前產業／公司資訊與正式成分股價格",
+        "SOX代替全產業；依結果換成分；缺價用盤中價補",
+        "模型修正紀錄!18；模型修正紀錄!36；模型修正紀錄!38；模型修正紀錄!42；模型修正紀錄!51",
+        "資料完整性可先落實；分池預測增益與係數仍待測。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R12",
+        "前日急跌、續跌與反彈雙情境",
+        "統計假說",
+        "候選（待驗證）",
+        "候選同時估計早盤續跌與開盤即低點反彈，前日型態及隔夜訊號均為特徵；上探、下探分別計分且可同時成立。不因上一日勝負立即改方向或機率。",
+        "盤前／盤中分版本",
+        "歷史路徑、截止前夜盤；更新時點以前分鐘K",
+        "急跌後必反彈或必續跌；反覆單日調高反方向權重",
+        "模型修正紀錄!19；模型修正紀錄!29；模型修正紀錄!34；模型修正紀錄!45；模型修正紀錄!54",
+        "整併10/14、10/16、10/21、10/28；重複錯誤作追加樣本。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R13",
+        "金融／塑化／航運輪動與擁擠",
+        "統計假說",
+        "候選（待驗證）",
+        "各產業絕對與相對TAIEX報酬分別建模；前日超額、漲幅及risk-off為候選交互特徵。不將金融固定視為避險，也不預設前日漲逾5%必回吐。",
+        "盤前／盤中分版本",
+        "歷史類股、截止前利率／公司事件",
+        "前日領漲就推續強；失敗隔天便固定押反轉",
+        "模型修正紀錄!21；模型修正紀錄!24；模型修正紀錄!31；模型修正紀錄!33；模型修正紀錄!39",
+        "撤除金融+1%/電子-1%與前日+5%等未驗證硬門檻。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R14",
+        "首30分鐘時間戳與門檻證據",
+        "資料與評分規範",
+        "已採用（紀錄規範）",
+        "首30分鐘一律用事先定義的09:00–09:30有時戳資料。時窗內單點跨門檻可證明該門檻達成，不能當作精確極值；無完整時窗不得證明未達門檻。正式全日最低=開盤可證下探為零，正式全日最高=開盤可證上探為零。",
+        "盤後驗證／盤中更新",
+        "正式分鐘K或有時戳報價；經核對的全日邊界",
+        "全日極值代替早盤極值；缺資料直接判失敗",
+        "模型修正紀錄!43",
+        "資料不足維持待核實；精確極值與門檻命中分開。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R15",
+        "固定評分口徑與中性帶",
+        "指標與評分規範",
+        "已採用（紀錄規範）",
+        "Gap、Close/前收、Close/Open、振幅、CLV與High-to-Close分別計算；保留原始硬門檻。中性帶、方向分類與敏感度須事先指定，不能追溯改判勝負；H=L時CLV記NA。",
+        "盤前定義；盤後評分",
+        "同時點完整正式OHLC與原始門檻",
+        "四捨五入後判區間；事後新增中性帶把錯誤改命中",
+        "模型修正紀錄!40；模型修正紀錄!52",
+        "新增口徑僅對未來版本生效，歷史原始評分保留。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R16",
+        "快照雜湊、盤前落檔與回讀",
+        "資料完整性規範",
+        "已採用（紀錄規範）",
+        "分別保存generated_at、persisted_at、target_date、cutoff及canonical hash；盤前落檔後回讀確認。延遲補登、重建與通過完整性檢查的盤前快照分層評估；失敗原件保留。",
+        "盤前落檔／盤後稽核",
+        "原始快照、時間戳與雜湊紀錄",
+        "把生成成功當作已保存；以重建資料冒充可稽核基準",
+        "V1_改善提案!5；V1_改善提案!10；V1_改善提案!13",
+        "整併V1三次完整性提案；本次未驗證GitHub程式與排程落地。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R17",
+        "海外行情close／last與來源核對",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "海外行情記交易日、時區、最後時間、正式close或盤中last類型及來源；正式收盤與盤中幅度分開；來源衝突未釐清前不輸入相應特徵。錯誤衍生特徵另建修正版，原始預測保留。",
+        "盤前資料檢查",
+        "可核對的正式行情與原始來源",
+        "盤中-2.3%當正式收盤；以資料錯誤直接歸因模型",
+        "模型修正紀錄!44",
+        "10/21先處理SOX來源／類型問題，再評估模型增益。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R18",
+        "最近可交易夜盤與新鮮度",
+        "資料規範",
+        "已採用（紀錄規範）",
+        "週一或休市後讀取最近實際交易夜盤，保存session日期、close時間、合約、參考價及資料距今時間；缺交易時段與抓取失敗分開記錄。",
+        "盤前",
+        "截止前最近可交易夜盤",
+        "假定週末沒有可用夜盤；無條件提高Trend-Day機率",
+        "模型修正紀錄!16",
+        "修補輸入遺漏；趨勢權重是否提高另由R01/R08/R10驗證。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "管理規範已在本試算表整併；不代表完成歷史數據或程式校驗。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R19",
+        "盤初selloff條件分類",
+        "統計假說",
+        "候選（待驗證）",
+        "以更新時點前的Open-to-Low、OTC、廣度等候選特徵比較selloff警示與基準；不直接採用>1%或>2%門檻，不以收盤才知道的『開盤即全日最高』作09:30輸入。",
+        "盤中更新",
+        "截至更新時點的分鐘K與市場廣度",
+        "全日高低點偷渡早盤；用警示命中改判盤前預測",
+        "模型修正紀錄!27；模型修正紀錄!32",
+        "10/13與10/15整併；依R14取得可稽核分鐘資料。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "R20",
+        "Close盤中更新與尾盤接受度",
+        "統計假說",
+        "候選（待驗證）",
+        "候選在固定09:30或事前指定更新時點，使用當時已知VWAP、廣度、回升與權值同步性預測剩餘時段；尾盤更新另定時點。全日CLV及最終集合競價僅為結果或次日歷史特徵。",
+        "盤中更新；次日歷史特徵",
+        "更新時點以前資料；前日完整行情",
+        "全日CLV預測當日收盤；13:30成交結果用於08:50特徵",
+        "模型修正紀錄!30；模型修正紀錄!37；V1_改善提案!3",
+        "盤前版本與更新版本各自保存、各自評分，不覆蓋原始快照。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "僅有表內觀察；未見本提案完整三折walk-forward／獨立樣本外結果。",
+        "未核驗；本次只優化試算表規則與追溯欄位。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ]
+    ]
+  },
+  "v0_corrections_original": {
+    "range": "'模型修正紀錄'!A1:T3",
+    "majorDimension": "ROWS",
+    "values": [
+      [
+        "更新日期",
+        "訊號/假設",
+        "原權重/規則",
+        "驗證樣本",
+        "觀察結果",
+        "錯誤類型",
+        "統一後規則／決策（現行）",
+        "權重決策（現行）",
+        "適用條件",
+        "備註",
+        "規則ID",
+        "目前決策",
+        "規則類型",
+        "適用時點",
+        "原修正後規則（歷史保留）",
+        "原權重調整（歷史保留）",
+        "合併／衝突處理",
+        "採用前驗證",
+        "主表版本",
+        "整理日期"
+      ],
+      [
+        "2026/09/22",
+        "隔夜科技強勢→台股突破力道",
+        "偏多但以開高震盪為主，獲利了結風險權重較高",
+        "9/22：SOX +4.29%、TSMC ADR +2.41%、台指夜盤+728點；現貨開盤+262後最高+882.69創新高",
+        "完整收盤資料推翻早盤初判：雖開盤+262、最高+882.69創高，但終場僅+81.33且收當日最低；強隔夜訊號主要解釋開盤gap，不能直接推論全天趨勢延續。",
+        "早盤覆盤造成權重錯估；完整日內資料顯示趨勢延續規則過度擬合早盤",
+        "【已採用（紀錄規範）；R01】Open、Close/前收與Close/Open分別鎖定目標並評分，允許共享截止前的SOX、ADR、期貨訊號；不把隔夜利多等同全天續漲，也不把其對Close的影響固定設為零。",
+        "僅統一紀錄與評分規範；本次不改模型數值係數。",
+        "隔夜科技大漲、夜盤明顯領先現貨，尤其接近/突破歷史高點時。",
+        "9/22完整OHLC：47,981.04／48,601.53／47,800.17／47,800.17。此規則取代早盤時建立的「三強訊號→趨勢延續主情境」初步結論。",
+        "R01",
+        "已採用（紀錄規範）",
+        "預測與評分規範",
+        "盤前；盤中更新另存",
+        "SOX/TSMC ADR/台指夜盤強勢用來提高「開高」機率；是否趨勢延續必須等現貨09:15–09:30確認。若創高後高點回撤>50%、跌破開盤區或VWAP、核心權值轉弱，切換為沖高回落/均值回歸情境。",
+        "降低隔夜訊號對「收盤方向/趨勢日」的直接權重；提高現貨盤中確認權重。",
+        "規則分離是評分要求；隔夜訊號對Close的係數仍待驗證。",
+        "檢查欄位、公式、來源、時間戳及可重現性；資料修正與模型選模分開。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ],
+      [
+        "2026/09/22",
+        "個股當日公司催化需覆蓋產業beta",
+        "聯發科僅以SOX與既有2nm手機晶片題材評估，預期IC設計強度低於AI伺服器",
+        "9/22聯發科當日發布Dimensity CX C10 Max並切入高階Googlebook/AI PC；盤中最高5,480創高，遠強於台積電",
+        "漏掉開盤前新增公司事件，導致相對強度預測錯誤。",
+        "資訊遺漏＋權重錯估",
+        "【候選（待驗證）；R03】候選比較公司新增催化、事件經過時間、事前已反映漲幅對後續報酬的影響；不預設新利多必漲或舊催化必失效。當日相對強弱只供盤中版本更新。",
+        "不直接調整數值權重；保留候選，待同資訊集樣本外驗證。",
+        "核心權值股與高權重產業龍頭",
+        "避免只依前一晚全球beta推論當日領漲排序。",
+        "R03",
+        "候選（待驗證）",
+        "統計假說",
+        "盤前／盤中分版本",
+        "盤前最後一輪必查核心權值股當日公告/新品/法說/客戶事件；若有新增重大催化，重新評分個股與子產業相對強度。",
+        "提高當日公司級催化權重",
+        "9/22新催化、9/23衰減與9/24盤中再評估整併；衰減率不先指定。",
+        "先完成資料與時間戳校驗；固定同一資訊集、基準模型、主評分與參數範圍，再做三折walk-forward及獨立樣本外比較，保存每fold/失敗日/成本與資源、參數、基準差與結果；不通過維持候選，不以單日勝負調參。",
+        "2026-10-29.v1",
+        "2026-10-29"
+      ]
+    ]
+  },
+  "v0_today_original": null,
+  "v0_rules_sha256": "47f8bf913168905143b8839a7e0526e03ce6442155990bbe8b465cca7fde5d7a",
+  "v0_extracted_at": "2026-11-25 00:57:42 UTC",
+  "v0_write_actions": [],
+  "v0_scope": [
+    "每日預測與覆盤!A1:A1000 (date-only scan)",
+    "每日預測與覆盤!A608:P625 (empty)",
+    "每日預測與覆盤!A608:B650 (empty)",
+    "模型規則主表!A1:P21",
+    "模型修正紀錄!A1:T3"
+  ],
+  "adopted_recordkeeping_rules": [
+    "R01",
+    "R02",
+    "R04",
+    "R14",
+    "R15",
+    "R16",
+    "R17",
+    "R18"
+  ],
+  "candidate_rules_not_adopted_as_verified_weights": [
+    "R03",
+    "R06",
+    "R10",
+    "R12",
+    "R13"
+  ],
+  "repo_sources": {
+    "README.md": {
+      "sha": "bb8a631f0b5e41ed66e4db08bfc3c89e00c3ac61"
+    },
+    "AGENTS.md": {
+      "sha": "ee10da2f44adc69268c7f7e66dd8931d95c93628"
+    },
+    "CODEX_HANDOFF.md": {
+      "sha": "07d703d3b307cd0d0eb358df2ce39142b9b1ae13"
+    },
+    "PROJECT_STATUS.md": {
+      "sha": "8ef47c0e2b37a7bdff2a89373dd627d541276991"
+    },
+    "config/features.yaml": {
+      "sha": "c9552c952e59cded043ada6eecea8773460988ef"
+    },
+    "schemas/prediction_snapshot.schema.json": {
+      "sha": "77edf088921c9ae8556d707a7abb5f42c627935c"
+    },
+    "src/tw_scenario/models.py": {
+      "sha": "b512fc39335cba97c7f0cf76ee67e01b74fecbe1"
+    },
+    "src/tw_scenario/snapshot.py": {
+      "sha": "9a8f8c57d2da8c7b702420edc9c1ea7bd9f8830b"
+    },
+    "docs/methodology/RESEARCH_DESIGN.md": {
+      "sha": "e9a84e2017233ff1506add30acd84ef6a085dde2"
+    },
+    "docs/methodology/KPI_FRAMEWORK.md": {
+      "sha": "456953eda9f9f8b57440087cadcaa142e3f322ad"
+    },
+    "docs/methodology/ERROR_TAXONOMY.md": {
+      "sha": "cc5236ef26a723ff8112aa36a74e48ec1814f072"
+    }
+  },
+  "sources": [
+    {
+      "id": "calendar",
+      "url": "https://www.twse.com.tw/zh/trading/holiday.html",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "year": 2026,
+        "date": "2026-11-25",
+        "weekday": "Wednesday",
+        "listed_holiday": false
+      },
+      "availability_basis": "Fresh TWSE115 annual calendar; Wednesday not a listed holiday. No emergency closure found; no target-day prices used.",
+      "status": "accepted"
+    },
+    {
+      "id": "night",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketExcel?marketCode=1",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "exchange_date": "2026-11-25",
+        "contract": "TX202612",
+        "start": "2026-11-24T15:00:00+08:00",
+        "end": "2026-11-25T05:00:00+08:00",
+        "open": 40772,
+        "high": 40900,
+        "low": 37730,
+        "last": 38482,
+        "change": -1842,
+        "reported_pct": -4.57,
+        "volume": 95642
+      },
+      "availability_basis": "Official completed night table, availability independently corroborated by UDN07:33:30 and FTNN08:40 publications before08:50.",
+      "status": "accepted"
+    },
+    {
+      "id": "prior_tx",
+      "url": "https://www.taifex.com.tw/cht/3/futDailyMarketExcel?commodity_id=TX",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "exchange_date": "2026-11-24",
+        "contract": "TX202612",
+        "session": "08:45-13:45",
+        "open": 40124,
+        "high": 40324,
+        "low": 39966,
+        "last": 40324,
+        "settlement": 40324,
+        "day_volume": 18862
+      },
+      "availability_basis": "Official completed prior-day table. Same contract and LAST denominator; last equals settlement today. No11/25 daytime price admitted.",
+      "status": "accepted"
+    },
+    {
+      "id": "us_timed",
+      "url": "https://news.cnyes.com/news/id/6671173",
+      "published_at": "2026-11-25T06:05:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "trade_date": "2026-11-24",
+        "nasdaq_close": 23733.54,
+        "nasdaq_pct": -1.48,
+        "sp500_close": 7201.09,
+        "sp500_pct": -0.5,
+        "dow_close": 50018.7,
+        "dow_pct": 0.85,
+        "sox_close": 8832.5,
+        "sox_reported_pct": -7.88,
+        "nvda_pct": -5.86,
+        "micron_pct": -10.97
+      },
+      "availability_basis": "Fresh timestamped closing recap; cash session ended05:00 Taipei. Prices are US11/24, not Taiwan11/25 observations.",
+      "status": "accepted"
+    },
+    {
+      "id": "us_crosscheck",
+      "url": "https://money.udn.com/money/story/123398/9900086?from=edn_editorrelated_story",
+      "published_at": "2026-11-25T07:16:42+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "nasdaq_close": 23733.54,
+        "nasdaq_pct": -1.48,
+        "sp500_close": 7201.09,
+        "sp500_pct": -0.5,
+        "dow_close": 50018.7,
+        "dow_pct": 0.85
+      },
+      "availability_basis": "Visible search excerpt publication; independent closing values corroborate.",
+      "status": "accepted"
+    },
+    {
+      "id": "adr_night",
+      "url": "https://money.udn.com/money/amp/story/123398/9900102",
+      "published_at": "2026-11-25T07:33:30+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "tsm_adr_close": 349.2,
+        "tsm_adr_table_pct": -3.96,
+        "tsmc_cash_previous_close": 2230,
+        "tx_night_last": 38482,
+        "tx_change": -1842,
+        "sox_close": 8832.5,
+        "sox_change": -755.55,
+        "sox_pct": -7.88
+      },
+      "availability_basis": "Timestamped fresh search excerpt/table, corroborated FTNN08:40. Article numeric formatting typo38482 retained as normalized official matching value. Exact ADR percentage quarantined due competing-3.91 source.",
+      "status": "accepted"
+    },
+    {
+      "id": "ftnn",
+      "url": "https://www.ftnn.com.tw/news/599334",
+      "published_at": "2026-11-25T08:40:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "sox_pct": -7.88,
+        "tsm_adr_pct": -3.96,
+        "tx_night_last": 38482,
+        "tx_change": -1842,
+        "previous_taiex_gain_points": 3310.46
+      },
+      "availability_basis": "Published08:40, within08:50; article body only. Related-story widgets excluded.",
+      "status": "accepted"
+    },
+    {
+      "id": "adr_conflict",
+      "url": "https://ec.ltn.com.tw/article/breakingnews/5652311",
+      "published_at": "2026-11-25T06:36:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "tsm_adr_pct": -3.91,
+        "tsm_adr_close": 349.2,
+        "nasdaq_pct": -1.48,
+        "sox_pct": -7.88
+      },
+      "availability_basis": "LTN and Newtalk07:13 report-3.91 vs UDN/FTNN-3.96. Close349.20 and negative direction corroborated; exact percentage not a mechanical feature.",
+      "status": "quarantined_exact_return"
+    },
+    {
+      "id": "sox_primary",
+      "url": "https://indexes.nasdaqomx.com/index/Overview/SOX",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "as_of": "2026-11-24",
+        "last": 8832.5,
+        "net_change": -763.24,
+        "displayed_pct": 0.0
+      },
+      "availability_basis": "Official net change differs from timestamped media-755.55 and displayed percentage0 inconsistent. Exact daily return null; corroborated level and negative sector direction only.",
+      "status": "quarantined_exact_return"
+    },
+    {
+      "id": "twse_prior",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=html&type=ALLBUT0999",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "date": "2026-11-24",
+        "close": 40122.35,
+        "change": 3310.46,
+        "return_pct": 8.99,
+        "stock_up": 1053,
+        "stock_down": 26,
+        "stock_flat": 6,
+        "stock_limit_up": 335,
+        "stock_limit_down": 4,
+        "turnover_all_securities_twd": 432559877529
+      },
+      "availability_basis": "Official dated previous-day EOD report. Price/gain corroborated timed morning reports. Breadth exact historical publication minute unarchived; descriptive metadata only, exact breadth feature null.",
+      "status": "accepted"
+    },
+    {
+      "id": "otc_prior",
+      "url": "https://ww2.money-link.com.tw/RealtimeNews/NewsContent.aspx?SN=6370344001",
+      "published_at": "2026-11-24T14:08:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "otc_close": 293.23,
+        "turnover_yi_twd": 531.01,
+        "corroborated_return_pct": 8.24
+      },
+      "availability_basis": "Timestamped prior-day closing dispatch verifies level; return corroborated dated market tables, not a target-day quote.",
+      "status": "accepted"
+    },
+    {
+      "id": "fx_official",
+      "url": "https://www.cbc.gov.tw/tw/lp-645-1-1-60.html",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "date": "2026-11-24",
+        "usd_twd_close": 32.939,
+        "prior_date": "2026-11-23",
+        "prior_close": 32.895
+      },
+      "availability_basis": "CBC dates and16:00-17:00 publication convention, independently corroborated CNA11/24 16:04.",
+      "status": "accepted"
+    },
+    {
+      "id": "fx_timed",
+      "url": "https://www.cna.com.tw/news/afe/202611240185.aspx",
+      "published_at": "2026-11-24T16:04:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "usd_twd_close": 32.939,
+        "twd_depreciation_ntd": 0.044
+      },
+      "availability_basis": "Visible publication timestamp before cutoff; no11/25 live FX quote used.",
+      "status": "accepted"
+    },
+    {
+      "id": "rates_primary",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value_month=202611&type=daily_treasury_yield_curve",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "date": "2026-11-24",
+        "ten_year_par_pct": 4.91,
+        "prior_ten_year_par_pct": 4.92,
+        "two_year_par_pct": 4.63
+      },
+      "availability_basis": "Official dated par-yield table; exact release minute unarchived. Different from market quote4.932%. Keep exact delta out of features rather than blending methodologies.",
+      "status": "accepted"
+    },
+    {
+      "id": "rates_timed",
+      "url": "https://www.moneydj.com/funddj/ya/yp050000.djhtm?a=D8159225-8B7C-4257-97AA-9EA5887F921A",
+      "published_at": "2026-11-25T06:55:37+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "ny_late_ten_year_market_pct": 4.932,
+        "two_year_market_pct": 4.691,
+        "thirty_year_market_pct": 5.315
+      },
+      "availability_basis": "Visible timestamp; market yield not same instrument/time as official par yield. Source distinction preserved, no single exactdelta inferred.",
+      "status": "accepted"
+    },
+    {
+      "id": "oil_timed",
+      "url": "https://www.ftvnews.com.tw/news/detail/2026B25W0065",
+      "published_at": "2026-11-25T06:21:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "brent_close_usd": 88.41,
+        "brent_change_usd": 1.73,
+        "brent_reported_pct": 2.0,
+        "wti_close_usd": 81.39,
+        "wti_change_usd": 2.32,
+        "wti_reported_pct": 2.93,
+        "contract_months": null
+      },
+      "availability_basis": "Fresh timestamped article excerpt; TVB06:53 corroborates rebound direction. Full open inaccessible. Months unspecified and prior-series basis not reconciled; exact oil-return feature null.",
+      "status": "accepted"
+    },
+    {
+      "id": "dell_company",
+      "url": "https://investors.delltechnologies.com/news-events/press-releases/detail/1665/dell-technologies-delivers-third-quarter-fiscal-2027-financial-results",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "issuer": "Dell Technologies",
+        "event": "FY2027Q3 results announced after11/24 US cash session"
+      },
+      "availability_basis": "Primary issuer indexed release, full open inaccessible; CMoney06:10 independently discusses released results. Use occurrence and potential sector differentiation only; no precise financial figure or surprise input.",
+      "status": "accepted"
+    },
+    {
+      "id": "dell_timed",
+      "url": "https://cmnews.com.tw/article/cmoneyairesearcher-e1bb9334-e853-11f1-8747-ec4e41508444",
+      "published_at": "2026-11-25T06:10:00+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "event": "Dell reported quarterly results; report characterizes results and outlook as strong"
+      },
+      "availability_basis": "Time-verified background, not a blanket positive signal for all Taiwan ODMs; primary numeric reconciliation not completed.",
+      "status": "accepted"
+    },
+    {
+      "id": "events",
+      "url": "https://money.udn.com/money/story/5607/9900079?from=edn_newest_index",
+      "published_at": "2026-11-25T06:59:19+08:00",
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "calendar": [
+          "Taiwan business-climate survey",
+          "Taiwan corporate briefings including Taiwan Cement/Chang Hwa Bank",
+          "US Q3 GDP revision",
+          "US October PCE",
+          "Fed Beige Book"
+        ]
+      },
+      "availability_basis": "Visible timestamp. Calendar occurrence only, no unreleased result or consensus surprise; BeigeBook calendar timezone not independently reconciled so no precise same-date release-time claim.",
+      "status": "accepted"
+    },
+    {
+      "id": "pce_primary",
+      "url": "https://bea.gov/news/2026/personal-income-and-outlays-september-2026",
+      "published_at": null,
+      "observed_at": "2026-11-25T08:59:32+08:00",
+      "facts": {
+        "prior_release_date": "2026-10-29",
+        "announced_next_release": "2026-11-25 08:30 EST",
+        "taipei_next_release": "2026-11-25T21:30:00+08:00"
+      },
+      "availability_basis": "Official earlier BEA release explicitly announces next publication, before this cutoff. No November25 actual data read or used.",
+      "status": "accepted"
+    }
+  ],
+  "features": {
+    "taifex_night_return_pct": -4.567999206427931,
+    "sox_return_pct": null,
+    "nasdaq_return_pct": -1.48,
+    "tsmc_adr_return_pct": null,
+    "usd_twd_return_pct": 0.13375892992855132,
+    "us10y_delta_bps": null,
+    "oil_return_pct": null,
+    "tsmc_weight_proxy": null,
+    "top10_weight_concentration": null,
+    "previous_day_breadth_ratio": null,
+    "previous_day_otc_return_pct": 8.24,
+    "macro_event_count_high_impact": null,
+    "tsmc_event_flag": null,
+    "major_company_event_count": null,
+    "ex_dividend_weight_points": null,
+    "catalyst_age_hours": null,
+    "previous_day_stock_return_pct": 8.99,
+    "previous_day_relative_volume": null
+  },
+  "quantification": {
+    "method": "Independent subjective analyst scenario, not fitted/calibrated; no yesterday prediction or quantitative result consulted.",
+    "scenario_probabilities": {
+      "bull": 0.15,
+      "base": 0.5,
+      "bear": 0.35
+    },
+    "scenario_terminal_buckets_bps": {
+      "bull": "return>0",
+      "base": "-350<=return<=0",
+      "bear": "return<-350"
+    },
+    "scenario_close_centers_bps": {
+      "bull": 50.0,
+      "base": -200.0,
+      "bear": -500.0
+    },
+    "expected_open_gap_bps": -350.0,
+    "expected_close_return_bps": -267.5,
+    "arithmetic": "0.15*50+0.50*(-200)+0.35*(-500)=-267.5bp versus previous TAIEX close40122.35.",
+    "open_method": "Uncalibrated analyst-350bp cash-gap center informed by same-contract night-4.568% and Nasdaq-1.48%; no direct copying of1842 futures points or fitted shrinkage claim.",
+    "direction_neutral_band_bps": 10,
+    "breadth_definition": "TWSE stock UP/(UP+DOWN), flat excluded; down<50%, exactly50%flat. Not equal-weight return.",
+    "intraday_regime_status": "range is an unvalidated path hypothesis, not a prediction derived from daily OHLC; no high/low ordering asserted.",
+    "probability_status": "Subjective terminal-return bucket weights, not calibrated hit rates or trading instructions."
+  },
+  "conflicts": [
+    {
+      "field": "TSM ADR return",
+      "UDN_FTNN": -3.96,
+      "LTN_Newtalk": -3.91,
+      "close_agreed": 349.2,
+      "resolution": "Exact return null; negative direction and agreed close only."
+    },
+    {
+      "field": "SOX",
+      "media_change": -755.55,
+      "official_display_change": -763.24,
+      "official_display_pct": 0.0,
+      "resolution": "Exact return null, agreed level8832.50 and qualitative sector weakness only."
+    },
+    {
+      "field": "UST10y",
+      "official_par_pct": 4.91,
+      "late_market_pct": 4.932,
+      "resolution": "Different measures/time; do not infer one delta, feature null."
+    },
+    {
+      "field": "oil",
+      "months": null,
+      "resolution": "No rollover-safe same-month return verified; exact feature null."
+    }
+  ],
+  "limitations": [
+    "Generated after08:50; not a timely formal premarket sample even if persisted before09:00. Actual generated_at is not backdated. No11/25 daytime行情 or post08:50 publication used.",
+    "No V0 same-date original found in bounded hypothesis area and full date-column scan; no previous-day hypothesis substituted. Full consulted rules/correction ranges preserved.",
+    "README describes newer08:30/08:40 OHLC and TimesFM/Ridge/night_carry research; this run executes none of those models and does not replace or claim their output. Current user legacy08:50 request is a separate cohort.",
+    "SOX/ADR exact returns, weights/concentration, ex-dividend points, relative volume, complete macro/company event counts and exact catalyst age unverified; missing meansnull, notzero.",
+    "Some historical official tables have observation date but no independently archived release minute; descriptive metadata only where no timed corroboration. Previous-day breadth mechanical input remainsnull.",
+    "Europe/Asia full coverage and Dell detailed primary financial reconciliation incomplete. Calendar outcomes not yet released are not features.",
+    "Hash proves consistency, not historical availability or before-cutoff existence; GitHub created_at provides real persistence evidence. V0, research ledger, model code, PR and schedules unchanged."
+  ],
+  "tool_errors": [
+    {
+      "operation": "TAIFEX default day open",
+      "raw_error": "Failed to fetch https://www.taifex.com.tw/cht/3/futDailyMarketExcel: (400) Timeout fetching",
+      "resolution": "Official commodity_id=TX endpoint succeeded and explicitly dated11/24."
+    },
+    {
+      "operation": "FTV full open",
+      "raw_error": "URL https://www.ftvnews.com.tw/news/detail/2026B25W0065 is not accessible via this tool.",
+      "resolution": "Timestamped search excerpts retained; oil exact feature excluded."
+    },
+    {
+      "operation": "Dell primary open",
+      "raw_error": "URL https://investors.delltechnologies.com/news-events/press-releases/detail/1665/dell-technologies-delivers-third-quarter-fiscal-2027-financial-results is not accessible via this tool.",
+      "resolution": "Primary indexed existence plus06:10 secondary only; no detailed numeric feature."
+    },
+    {
+      "operation": "UDN calendar open",
+      "raw_error": "URL https://money.udn.com/money/amp/story/5607/9900079 is not accessible via this tool.",
+      "resolution": "Fresh timestamped search article body, plus BEA primary calendar corroboration."
+    }
+  ],
+  "persistence": {
+    "mode": "create_only",
+    "manifest_path": "data/manifests/2026-11-25.json",
+    "prediction_path": "predictions/2026-11-25.json",
+    "persisted_at": "Use resulting GitHub commitcreated_at; no backdating."
+  }
+}
