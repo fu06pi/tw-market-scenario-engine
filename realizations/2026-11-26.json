@@ -1,0 +1,169 @@
+{
+  "trading_date": "2026-11-26",
+  "previous_close": 38195.43,
+  "open": 38435.99,
+  "high": 39459.95,
+  "low": 38435.99,
+  "close": 39151.81,
+  "turnover": 837652988083,
+  "turnover_scope": "TWSE MI_INDEX inclusive total(1~15), not regular-session headline",
+  "turnover_regular_twd_rounded": 817467000000,
+  "breadth_up": 971,
+  "breadth_down": 83,
+  "breadth_flat": 32,
+  "breadth_scope": "TWSE stocks column; exclude flat from ratio",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-26T15:21:51.634838+08:00",
+  "intraday_summary": {
+    "first30_end": [
+      "09:30:00",
+      39107.02
+    ],
+    "high_time": "12:34:15",
+    "low_time": "09:00:05",
+    "above_open_samples": 3239,
+    "below_open_samples": 0,
+    "vwap": null,
+    "intraday_stock_breadth": null
+  },
+  "sector_return_pct": {
+    "電子工業類指數": 2.39,
+    "金融保險類指數": 2.52
+  },
+  "source_manifest": [
+    {
+      "id": "twse_market",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261126&type=ALLBUT0999",
+      "trading_date": "2026-11-26",
+      "fetched_at": "2026-11-26T07:19:58.485335+00:00",
+      "response_sha256": "d7bda5f107cb96932c39751c05a4a14218321612592f84ec7cb93c05bd697b67",
+      "extract": {
+        "index_row": [
+          "發行量加權股價指數",
+          "39,151.81",
+          "<p style ='color:red'>+</p>",
+          "956.38",
+          "2.50",
+          ""
+        ],
+        "breadth_fields": [
+          "類型",
+          "整體市場",
+          "股票"
+        ],
+        "breadth_rows": [
+          [
+            "上漲(漲停)",
+            "7,814(262)",
+            "971(57)"
+          ],
+          [
+            "下跌(跌停)",
+            "1,871(99)",
+            "83(3)"
+          ],
+          [
+            "持平",
+            "413",
+            "32"
+          ],
+          [
+            "未成交",
+            "28,887",
+            "1"
+          ],
+          [
+            "無比價",
+            "3,953",
+            "1"
+          ]
+        ],
+        "inclusive_turnover_twd": 837652988083,
+        "sector_return_pct": {
+          "電子工業類指數": 2.39,
+          "金融保險類指數": 2.52
+        }
+      }
+    },
+    {
+      "id": "twse_5second_index",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_5MINS_INDEX?response=json&date=20261126",
+      "trading_date": "2026-11-26",
+      "fetched_at": "2026-11-26T07:20:05.665561+00:00",
+      "response_sha256": "8492827c60ca154eccd3d5cb73141213e3a440fda29c6d747a29a8999a691cb0",
+      "total_rows": 3241,
+      "rows_used": 3240,
+      "interval_seconds": 5,
+      "filter": "Exclude09:00:00 previous-close reference; use09:00:05 through13:30:00 inclusive.",
+      "first": [
+        "09:00:05",
+        38435.99
+      ],
+      "last": [
+        "13:30:00",
+        39151.81
+      ],
+      "high": [
+        "12:34:15",
+        39459.95
+      ],
+      "low": [
+        "09:00:05",
+        38435.99
+      ],
+      "first30_end": [
+        "09:30:00",
+        39107.02
+      ]
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611260133.aspx",
+      "published_at": "2026-11-26T13:45:00+08:00",
+      "verified_at": "2026-11-26T15:21:51.634838+08:00",
+      "extract": {
+        "open": 38435.99,
+        "high": 39459.95,
+        "low": 38435.99,
+        "close": 39151.81,
+        "regular_turnover_twd_rounded": 817467000000,
+        "breadth_reported": [
+          984,
+          84,
+          41
+        ]
+      },
+      "scope_note": "Use TWSE stocks column971/83/32 for target; CNA984/84/41 has a different universe. Regular-session rounded turnover differs from inclusive total."
+    },
+    {
+      "id": "cna_drivers",
+      "url": "https://www.cna.com.tw/news/afe/202611260136.aspx",
+      "published_at": "2026-11-26T13:52:00+08:00",
+      "updated_at": "2026-11-26T13:59:00+08:00",
+      "verified_at": "2026-11-26T15:21:51.634838+08:00",
+      "extract": {
+        "drivers": [
+          "301調查結果緩解疑慮",
+          "PCB載板散熱被動元件反攻"
+        ],
+        "tsmc_close": 2145,
+        "tsmc_return_pct": -0.23,
+        "honhai_return_pct": 4.84,
+        "delta_return_pct": 6.16
+      },
+      "attribution_note": "Reported explanations, not causal coefficients."
+    },
+    {
+      "id": "cna_pre_cutoff_tariff_context",
+      "url": "https://www.cna.com.tw/news/ahel/202611265001.aspx",
+      "published_at": "2026-11-26T07:45:00+08:00",
+      "updated_at": "2026-11-26T07:54:00+08:00",
+      "verified_at": "2026-11-26T15:21:51.634838+08:00",
+      "extract": {
+        "context": "對台301建議稅率15%不疊加MFN，與日韓歐盟等同最低稅率級別"
+      },
+      "timing_note": "Published before08:50 according to live page; no archived point-in-time copy. This is post-close coverage audit only, never added to frozen prediction features."
+    }
+  ]
+}
