@@ -1,0 +1,120 @@
+{
+  "trading_date": "2026-11-27",
+  "generated_at": "2026-11-27T01:00:00Z",
+  "data_cutoff_at": "2026-11-27T08:50:00+08:00",
+  "model_version": "v1.analyst-scenarios.reconstructed.2026-11-27",
+  "feature_version": "1.0-asof0850-partial-holiday-aware",
+  "prompt_version": "legacy-v1-asof-reconstruction-2026-11-27",
+  "data_manifest_hash": "06afaa9e2cd72c3ffe8f0c5944a02b39ad9c45adcc0deac3a939f8b5198a469d",
+  "scenarios": {
+    "bull": 0.3,
+    "base": 0.45,
+    "bear": 0.25
+  },
+  "targets": {
+    "open_direction": "flat",
+    "close_direction": "flat",
+    "intraday_regime": "range",
+    "breadth_direction": "up",
+    "expected_open_gap_bps": 3,
+    "expected_close_return_bps": 4.5
+  },
+  "narrative": {
+    "market_view": "延遲補建reconstructed/late_generated；美股感恩節休市無新現貨收盤，夜盤近乎持平；前日廣度修復與台幣升值支持承接，但外資仍賣超，主情境區間整理。此為未校準legacy主觀情境，非TimesFM/Ridge預測，非準時正式樣本。",
+    "open_hypothesis": "平盤附近開出，情境加權expected_open_gap_bps=+3bp（+0.03%），在±5bp中性帶內，open_direction=flat；不把TX夜盤或期現價差直接套成現貨gap。",
+    "intraday_hypothesis": "range為主：反彈承接與上檔調節交錯，尚不足以確認趨勢延續；此路徑為待驗證假說，沒有引入今日盤中價格。",
+    "close_hypothesis": "情境加權收盤相對前收39151.81為+4.5bp（+0.045%），close_direction=flat（±5bp）。Base收盤+10bp不是整體加權預期，Close/Open另評。",
+    "breadth_hypothesis": "上市股票上漲/(上漲+下跌)預期>50%，breadth_direction=up；昨日971/1054約92.13%不代表今日必維持同強度，也不是等權報酬。",
+    "bull_script": "30%：權值與中小型延續承接，09:30後在開盤及VWAP上方、指數較前收+50bp以上且上漲比率>60%；假設open+60bp、close+150bp。純條件腳本，未經樣本外驗證。",
+    "base_script": "45%：平盤開出，市場缺少新美股現貨指引，反彈與獲利調節互抵，區間整理；假設open0bp、close+10bp。不是量縮或低波動保證。",
+    "bear_script": "25%：前日反彈承接中斷，09:30後低於前收-50bp及VWAP且上漲比率<40%；假設open-60bp、close-180bp，轉弱勢下行。"
+  },
+  "key_drivers": [
+    "TX202612夜收39492對同約前日日盤最後39455約+0.0938%，對結算價0%；兩種基準分開。",
+    "美股與美債11/26感恩節休市：沒有新Nasdaq/SOX/TSMC ADR現貨收盤或美債delta，不填0，也不重複昨日訊號。",
+    "前日TAIEX+2.50%、股票上漲971下跌83；台積電現貨-0.23%與其他族群反彈分化，不能由單一權值替代廣度。",
+    "USD/TWD由33.126降32.947，但外資前日仍賣超491.81億元，匯率修復不是外資已轉買證據。",
+    "東京核心CPI2.9%已於台北07:30發布；台灣景氣及成長預測、金控法說、神達除權息是當日事件，不加入未公布結果；油價衝突僅列風險。"
+  ],
+  "invalidation_conditions": [
+    "若實際TAIEX開盤gap超過±5bp，open_direction=flat不命中；不能以首30分鐘回平替代開盤判定。",
+    "若09:30後持續在開盤及VWAP上方、較前收>+50bp且股票上漲比率>60%，range主劇本失效偏bull；只另存更新，不改本檔。",
+    "若09:30後跌至前收-50bp以下、在VWAP下且上漲比率<40%，range主劇本失效偏bear；條件需有時戳證據。",
+    "若收盤報酬超出[-5,+5]bp，close flat不命中；股票上漲比率<=50%則breadth up不命中。"
+  ],
+  "v0_references": [
+    {
+      "trading_date": "2026-10-29",
+      "item": "R01",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A2:P2",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "a7cfe6967062dce611214dcefde11b8773bb02f1a2d77b874c4b8c32fe00011b"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R02",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A3:P3",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "44a8cccd2a5e6b728effb63bf35b04e4d7e056259c73ce2961420be145822447"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R04",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A5:P5",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "7c843480cfbb8a68864c81850c27f260b581e9efb525995f7636a09ec5331ffd"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R14",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A15:P15",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "4ec738793084068f69c0e9ef558797037c40108ee5d99283e16d53fa4c22706f"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R15",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A16:P16",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "e24516948c17416f70979b8d7be75e8f21658868178a45cf1995eb30e652914c"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R16",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A17:P17",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "def7f7cb63ca366b5da62d16c1173c9d279eb043913a76e8416539f677c3abd8"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R17",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A18:P18",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "d15bb93f933d6ae3675895dada1061defb0e11158bd15ca52af0cd252d9d3672"
+    },
+    {
+      "trading_date": "2026-10-29",
+      "item": "R18",
+      "note": "僅採記錄與評分規範，不作已驗證權重；完整列保存於manifest。",
+      "source_row": "模型規則主表!A19:P19",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "e7fcd560a66e6c9d159f2b5daa891fdc0207358b4e5a61f3613f1f97ff3770d7"
+    },
+    {
+      "trading_date": "2026-09-22",
+      "item": "R01修正沿革",
+      "note": "Open、Close/前收、Close/Open分開評分；未據單日調參。",
+      "source_row": "模型修正紀錄!A2:T2",
+      "extracted_at": "2026-11-27T01:00:00Z",
+      "content_hash": "2f1b541e00d435efa240472bba15a61367ab2e7dfd34300783fba16196400c6e"
+    }
+  ],
+  "snapshot_hash": "82970e49ffee26f061ac0d1653e53b724c11590f426c3301f6a44586a6f6a390"
+}
