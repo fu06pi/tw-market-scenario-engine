@@ -1,0 +1,163 @@
+{
+  "trading_date": "2026-11-27",
+  "previous_close": 39151.81,
+  "open": 39168.57,
+  "high": 39495.41,
+  "low": 38890.53,
+  "close": 39308.08,
+  "turnover": 681609604843,
+  "turnover_scope": "TWSE MI_INDEX inclusive total(1~15), not regular-session headline",
+  "turnover_regular_twd_rounded": 666069000000,
+  "breadth_up": 438,
+  "breadth_down": 551,
+  "breadth_flat": 97,
+  "breadth_scope": "TWSE stock column, exclude flat from ratio",
+  "otc_return_pct": null,
+  "heavyweight_contribution_points": {},
+  "observed_at": "2026-11-27T15:15:58.939334+08:00",
+  "intraday_summary": {
+    "complete_series_available": false,
+    "qualitative_sequence": "Early rally, drop below previous close, rebound towards day high, pullback then TSMC-assisted closing gain.",
+    "vwap": null,
+    "intraday_stock_breadth": null,
+    "extreme_times": null,
+    "basis": "CNA09:15/11:39/13:53 dated reports, not inferred solely from daily OHLC."
+  },
+  "sector_return_pct": {
+    "電子工業類指數": 0.7,
+    "金融保險類指數": -1.03
+  },
+  "source_manifest": [
+    {
+      "id": "twse_market",
+      "url": "https://www.twse.com.tw/exchangeReport/MI_INDEX?response=json&date=20261127&type=ALLBUT0999",
+      "trading_date": "2026-11-27",
+      "fetched_at": "2026-11-27T07:13:53.689320+00:00",
+      "response_sha256": "9a85ec888c6a9cb3bbfbc604eed91e5fad54b7c5d7d4401d02e17cba9f6918d3",
+      "extract": {
+        "index_row": [
+          "發行量加權股價指數",
+          "39,308.08",
+          "<p style ='color:red'>+</p>",
+          "156.27",
+          "0.40",
+          ""
+        ],
+        "breadth_fields": [
+          "類型",
+          "整體市場",
+          "股票"
+        ],
+        "breadth_rows": [
+          [
+            "上漲(漲停)",
+            "4,102(78)",
+            "438(20)"
+          ],
+          [
+            "下跌(跌停)",
+            "4,891(104)",
+            "551(5)"
+          ],
+          [
+            "持平",
+            "992",
+            "97"
+          ],
+          [
+            "未成交",
+            "29,764",
+            "1"
+          ],
+          [
+            "無比價",
+            "2,878",
+            "1"
+          ]
+        ],
+        "inclusive_turnover_twd": 681609604843,
+        "sector_return_pct": {
+          "電子工業類指數": 0.7,
+          "金融保險類指數": -1.03
+        }
+      }
+    },
+    {
+      "id": "cna_close",
+      "url": "https://www.cna.com.tw/news/afe/202611270102.aspx",
+      "published_at": "2026-11-27T13:47:00+08:00",
+      "verified_at": "2026-11-27T15:15:58.939334+08:00",
+      "extract": {
+        "open": 39168.57,
+        "high": 39495.41,
+        "low": 38890.53,
+        "close": 39308.08,
+        "regular_turnover_twd_rounded": 666069000000,
+        "breadth_reported": [
+          447,
+          561,
+          103
+        ]
+      },
+      "scope_note": "OHLC uses high-credibility same-day CNA report; close independently matches TWSE. CNA breadth447/561/103 differs from official stock subset438/551/97; use TWSE for target. Inclusive turnover differs from regular-session headline."
+    },
+    {
+      "id": "cna_drivers",
+      "url": "https://www.cna.com.tw/news/afe/202611270105.aspx",
+      "published_at": "2026-11-27T13:53:00+08:00",
+      "verified_at": "2026-11-27T15:15:58.939334+08:00",
+      "extract": {
+        "context": [
+          "感恩節美股休市",
+          "選前觀望",
+          "年線反壓",
+          "台積電尾盤助攻"
+        ],
+        "tsmc_close": 2180,
+        "tsmc_change": 35,
+        "tsmc_return_pct": 1.63
+      },
+      "attribution_note": "Reported explanations, not identified causal coefficients."
+    },
+    {
+      "id": "cna_intraday_early",
+      "url": "https://www.cna.com.tw/news/afe/202611270029.aspx",
+      "published_at": "2026-11-27T09:15:00+08:00",
+      "updated_at": "2026-11-27T09:24:00+08:00",
+      "verified_at": "2026-11-27T15:15:58.939334+08:00",
+      "extract": {
+        "path": "早盤漲逾200點後壓回平盤震盪"
+      }
+    },
+    {
+      "id": "cna_intraday_middle",
+      "url": "https://www.cna.com.tw/news/afe/202611270059.aspx",
+      "published_at": "2026-11-27T11:39:00+08:00",
+      "updated_at": "2026-11-27T11:54:00+08:00",
+      "verified_at": "2026-11-27T15:15:58.939334+08:00",
+      "extract": {
+        "path": "早盤翻黑跌破38900後反彈至39495附近；年線附近反壓後漲勢收斂",
+        "at_1133_index_approx": 39371,
+        "at_1133_otc_return_pct": -1.29
+      },
+      "scope_note": "Time-stamped dispatch supports qualitative price sequence, not complete five-second data or closing OTC return."
+    }
+  ],
+  "source_errors": [
+    {
+      "operation": "TWSE MI_5MINS_INDEX original and type=ALL",
+      "error": "HTTP307 Temporary Redirect",
+      "status": "failed_after_retry"
+    },
+    {
+      "operation": "TWSE rwd/zh/indicesReport/MI_5MINS_INDEX",
+      "error": "HTTP307 Temporary Redirect",
+      "status": "failed"
+    },
+    {
+      "operation": "web open MI_5MINS_INDEX",
+      "error": "URL not accessible via tool",
+      "status": "failed"
+    }
+  ]
+}
